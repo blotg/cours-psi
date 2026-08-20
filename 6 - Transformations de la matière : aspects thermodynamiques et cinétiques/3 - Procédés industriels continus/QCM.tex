@@ -1,0 +1,126 @@
+\element{Débits}{
+  \begin{questionmult}{debitMolaire}\bareme{haut=2,p=0}
+    Le débit molaire de l'espèce A
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{se mesure en \unit{mol.s^{-1}}}
+        \bonne{$=[A] D_V$}
+        \mauvaise{est le même en entrée et en sortie d'un RPAC}
+        \mauvaise{est le même en entrée et en sortie d'un réacteur piston}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\element{Débits}{
+  \begin{questionmult}{debitMassique}\bareme{haut=2,p=0}
+    Le débit massique de l'espèce A
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{se mesure en \unit{kg.s^{-1}}}
+        \bonne{$=[A] D_V M_A$}
+        \mauvaise{est le même en entrée et en sortie d'un RPAC}
+        \mauvaise{est le même en entrée et en sortie d'un réacteur piston}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{Débits}{cyclic}
+
+\element{bilanMatière}{
+  \begin{question}{bilanMatière}\bareme{1}
+    Le bilan de matière d'une espèce A dans un réacteur continu à l'état stationnaire s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$F_{A,sortie}-F_{A,entrée}=\nu_A \frac{d \xi}{dt}$}
+        \mauvaise{$F_{A,entrée}-F_{A,sortie}=\nu_A \frac{d \xi}{dt}$}
+        \mauvaise{$F_{A,sortie}-F_{A,entrée}=\nu_A \frac{1}{V} \frac{d \xi}{dt}$}
+        \mauvaise{$F_{A,entrée}-F_{A,sortie}=\nu_A \frac{1}{V} \frac{d \xi}{dt}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{tauxConversion}{
+  \begin{question}{defTauxConversion}\bareme{1}
+    Le taux de conversion d'une espèce A dans un réacteur continu est défini par
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$X_A=\frac{F_{A,entrée}-F_{A,sortie}}{F_{A,entrée}}$}
+        \mauvaise{$X_A=\frac{F_{A,sortie}-F_{A,entrée}}{F_{A,entrée}}$}
+        \mauvaise{$X_A=\frac{F_{A,entrée}-F_{A,sortie}}{F_{A,sortie}}$}
+        \mauvaise{$X_A=\frac{F_{A,sortie}-F_{A,entrée}}{F_{A,sortie}}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{tauxConversion}{
+  \begin{question}{tauxConversionConcentration}\bareme{1}
+    La concentration de sortie d'une espèce A dans un réacteur continu est liée à sa concentration d'entrée par la relation
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$[A]_{sortie}=[A]_{entrée}(1-X_A)$}
+        \mauvaise{$[A]_{sortie}=[A]_{entrée}(1+X_A)$}
+        \mauvaise{$[A]_{sortie}=[A]_{entrée}\frac{1}{1-X_A}$}
+        \mauvaise{$[A]_{sortie}=[A]_{entrée}\frac{1}{1+X_A}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{tauxConversion}{cyclic}
+
+\element{RPAC}{
+  \begin{questionmult}{RPAC1}\bareme{haut=2,p=0}
+    Pour un RPAC
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{La concentration interne est la même que la concentration d'entrée.}
+        \bonne{$\tau = \frac{V}{D_V}$}
+        \bonne{Les grandeurs internes sont uniformes.}
+        \bonne{$D_V ([A]_{entrée}-[A]_{sortie}) +R_A V = 0$}
+        \mauvaise{Il est plus efficace qu'un réacteur piston pour une réaction d'ordre positive.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\element{RPAC}{
+  \begin{questionmult}{RPAC2}\bareme{haut=2,p=0}
+    Pour un RPAC
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{La concentration interne est la même que la concentration de sortie.}
+        \mauvaise{$\tau = \frac{D_V}{V}$}
+        \bonne{Les grandeurs internes sont uniformes.}
+        \mauvaise{$D_V ([A]_{sortie}-[A]_{entrée}) +R_A V = 0$}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{RPAC}{cyclic}
+
+\element{RP}{
+  \begin{questionmult}{RP1}\bareme{haut=2,p=0}
+    Pour un réacteur piston
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{Deux tranches de fluide échangent de la matière.}
+        \mauvaise{$d[A] = v(x) d\tau$}
+        \mauvaise{Les grandeurs internes sont uniformes.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\element{RP}{
+  \begin{questionmult}{RPP2}\bareme{haut=2,p=0}
+    Pour un réacteur piston
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{Deux tranches de fluide n'échangent pas de matière.}
+        \bonne{$d[A] = \nu_A v(x) d\tau$}
+        \bonne{Les grandeurs internes varient avec la position.}
+        \bonne{Il est plus efficace qu'un RPAC pour une réaction d'ordre positive.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{RP}{cyclic}
+

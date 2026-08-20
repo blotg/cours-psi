@@ -1,0 +1,3 @@
+- À l’aide d’un langage de programmation, simuler l’évolution temporelle d’un signal généré par un oscillateur.
+- À l’aide d’un langage de programmation, résoudre l’équation de la diffusion thermique à une dimension par une méthode des différences finies dérivée de la méthode d’Euler explicite de résolution des équations différentielles ordinaires.
+- À l’aide d’un langage de programmation, simuler la propagation d’un paquet d’ondes dans un milieu dispersif et visualiser le phénomène d’étalement.

@@ -1,0 +1,28 @@
+#import "@local/prepa:0.1.0": *
+
+  - Énoncer et exploiter les principes de la thermodynamique pour une transformation élémentaire.
+  - Utiliser avec rigueur les notation $d$ et $delta$ en leur attachant une signification.
+  - Décrire les trois modes de transfert thermique.
+  - Exprimer le flux thermique comme le flux du vecteur $va(j_Q)$ à travers une surface orientée.
+  - Énoncer l’hypothèse de l’équilibre thermodynamique local.
+  - Utiliser les champs scalaires intensifs (volumiques ou massiques) associés à des grandeurs extensives de la thermodynamique.
+  - Énoncer et utiliser la loi de Fourier.
+  - Citer quelques ordres de grandeur de conductivité thermique dans les conditions usuelles : air, eau, béton, acier.
+  - Établir, pour un milieu évoluant à volume constant, l’équation locale traduisant le premier principe dans le cas d’un problème ne dépendant que d’une seule coordonnée d’espace en coordonnées cartésiennes, cylindriques ou sphériques.
+  - Utiliser une généralisation admise en géométrie quelconque à l’aide de l’opérateur divergence et son expression fournie.
+  - Établir l’équation de diffusion thermique avec ou sans terme source.
+  - Analyser une équation de diffusion en ordre de grandeur pour relier des échelles caractéristiques spatiale et temporelle.
+  - Relier l’équation de diffusion à l’irréversibilité temporelle du phénomène.
+  - Exploiter la continuité du flux thermique.
+  - Exploiter la continuité de la température pour un contact thermique parfait.
+  - Utiliser la relation de Newton (fournie) à l’interface solide-fluide.
+  - Définir la notion de résistance thermique par analogie avec l’électrocinétique et énoncer les conditions d’application de l’analogie.
+  - Établir l'expression de la résistance thermique d’un cylindre calorifugé latéralement.
+  - Exploiter des associations de résistances thermiques en série ou en parallèle.
+  - Mettre en évidence un temps caractéristique d’évolution de la température.
+  - Justifier l’ARQS.
+  - Établir l’analogie avec un circuit électrique RC.
+  - Établir la relation de dispersion des ondes thermiques en géométrie unidirectionnelle.
+  - Mettre en évidence le déphasage lié à la propagation.
+  - Établir une distance caractéristique d’atténuation.
+  - #compétence-numérique À l’aide d’un langage de programmation, résoudre l’équation de la diffusion thermique à une dimension par une méthode des différences finies dérivée de la méthode d’Euler explicite de résolution des équations différentielles ordinaires.

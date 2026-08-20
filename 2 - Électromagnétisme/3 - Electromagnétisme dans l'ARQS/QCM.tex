@@ -1,0 +1,117 @@
+\element{EM3.Maxwell}{
+  \begin{questionmult}{Maxwell}\bareme{haut=2,p=0}
+    Les équations de Maxwell s'écrivent, dans l'ARQS magnétique
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\text{div}\vv{E}=\frac{\rho}{\epsilon_0}$}
+        \bonne{$\text{div}\vv{B}=0$}
+        \bonne{$\vv{\text{rot}}\vv{E}=-\frac{\partial B}{\partial t}$}
+        \bonne{$\vv{\text{rot}}\vv{B}=\mu_0\vv{j}$}
+        \mauvaise{$\vv{\text{rot}}\vv{B}=\mu_0\vv{j}+\mu_0\epsilon_0\frac{\partial E}{\partial t}$}
+        \mauvaise{$\vv{\text{rot}}\vv{B}=-\frac{\partial E}{\partial t}$}
+        \mauvaise{$\vv{\text{rot}}\vv{E}=0$}
+        \mauvaise{$\text{div}\vv{B}=\frac{\rho}{\epsilon_0}$}
+        \mauvaise{$\text{div}\vv{E}=0$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{EM3.Maxwell}{cyclic}
+
+
+\element{EM3.Lenz-Faraday}{
+  \begin{questionmult}{Lenz-Faraday}\bareme{haut=2,p=0}
+    La loi de Lenz-Faraday
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{s'écrit $e=-\frac{\partial \Phi}{\partial t}$}
+        \bonne{s'utilise en convension générateur}
+        \bonne{se démontre à partir de l'équation de Maxwell-Faraday}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{EM3.Lenz-Faraday}{cyclic}
+
+
+\element{EM3.bobine}{
+  \begin{question}{energieBobine}\bareme{1}
+    L'énergie stockée dans une bobine s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{1}{2}LI^2$}
+        \mauvaise{$LI$}
+        \mauvaise{$\frac{1}{2}LI$}
+        \mauvaise{$LI^2$}
+        \mauvaise{$\frac{1}{2\mu_0}B^2$}
+        \mauvaise{$\frac{1}{2\mu_0}B$}
+        \mauvaise{$\frac{1}{2}\mu_0B^2$}
+        \mauvaise{$\frac{1}{2}\mu_0B$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM3.bobine}{
+  \begin{question}{fluxBobine}\bareme{1}
+    Le flux magnétique dans une bobine s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$\frac{1}{2}LI^2$}
+        \bonne{$LI$}
+        \mauvaise{$\frac{1}{2}LI$}
+        \mauvaise{$LI^2$}
+        \mauvaise{$\frac{1}{2\mu_0}B^2$}
+        \mauvaise{$\frac{1}{2\mu_0}B$}
+        \mauvaise{$\frac{1}{2}\mu_0B^2$}
+        \mauvaise{$\frac{1}{2}\mu_0B$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM3.bobine}{
+  \begin{question}{fluxBobine}\bareme{1}
+    La densité volumique d'énergie magnétique s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$\frac{1}{2}LI^2$}
+        \mauvaise{$LI$}
+        \mauvaise{$\frac{1}{2}LI$}
+        \mauvaise{$LI^2$}
+        \bonne{$\frac{1}{2\mu_0}B^2$}
+        \mauvaise{$\frac{1}{2\mu_0}B$}
+        \mauvaise{$\frac{1}{2}\mu_0B^2$}
+        \mauvaise{$\frac{1}{2}\mu_0B$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{EM3.bobine}{cyclic}
+
+\element{EM3.mutuelle}{
+  \begin{question}{fluxMutuelle}\bareme{1}
+    Le flux reçu \textbf{par} un bobine 1 en inductance mutuelle avec une bobine 2 est
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$L_1I_1+MI_2$}
+        \mauvaise{$L_2I_2+MI_1$}
+        \mauvaise{$L_2I_2$}
+        \mauvaise{$L_2I_1+MI_1$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM3.mutuelle}{
+  \begin{question}{energieMutuelle}\bareme{1}
+    L'énergie stockée dans deux bobine en interaction est
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{1}{2}L_1I_1^2+\frac{1}{2}L_2I_2^2+MI_1I_2$}
+        \mauvaise{$\frac{1}{2}L_1I_1^2+\frac{1}{2}L_2I_2^2+\frac{1}{2}MI_1I_2$}
+        \mauvaise{$L_1I_1^2+L_2I_2^2+MI_1I_2$}
+        \mauvaise{$\frac{1}{2}L_1I_2+\frac{1}{2}L_2I_1+MI_1I_2$}
+        \mauvaise{$L_1I_2+L_2I_1+MI_1I_2$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{EM3.mutuelle}{cyclic}

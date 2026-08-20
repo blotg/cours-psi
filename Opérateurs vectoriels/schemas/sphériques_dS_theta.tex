@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=0.7;
+      \t=30;
+      \f=45;
+      \dr=0.4;
+      \dt=30;
+      \df=40;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f)},{sin(\f)},0)}]
+      \draw (\t:\r) coordinate (A) arc (\t:{\t+\dt}:\r) coordinate (B) node[midway, below left] {$r.d\theta$} --++ ({\t+\dt}:\dr) arc ({\t+\dt}:\t:{\r+\dr}) -- (A) node[midway, left] {$dr$};
+      \draw[dotted] (0:{\r+\dr}) arc (0:90:{\r+\dr});
+      \fill ({\t+\dt/2}:{\r+\dr/2}) circle (0.4pt);
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={(\r+\dr/2)*cos(\t+\dt/2)}]
+      \draw[dotted] ({(\r+\dr/2)*sin(\t+\dt/2)},0) arc (0:90:{(\r+\dr/2)*sin(\t+\dt/2)});
+      \draw[dashed] (\f:{(\r+\dr/2)*sin(\t+\dt/2)}) --++ ({\f+90}:0.1) coordinate (Z);
+      \draw[->] (Z) --++ ({\f+90}:0.3) node[below right] {$\vv{dS}$};
+    \end{scope}
+    \draw[dotted] (0,0,0) -- (A);
+    \draw[dotted] (0,0,0) -- (B);
+  \end{tikzpicture}

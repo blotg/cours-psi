@@ -1,0 +1,13 @@
+    \begin{tikzpicture}[
+      x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+      scale=3,
+      >=latex]
+      \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+      \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+      \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+      \fill (0.7,0.7,0.7) circle (0.7pt);
+      \draw[dashed] (0.7,0.7,0.7) node[above right] {$M$} -- (0,0,0.7) node[left] {$z$};
+      \draw[dashed] (0.7,0.7,0.7) -- (0.7,0.7,0);
+      \draw[dashed] (0.7,0.7,0) -- (0.7,0,0) node[left] {$x$};
+      \draw[dashed] (0.7,0.7,0) -- (0,0.7,0) node[above] {$y$};
+    \end{tikzpicture}

@@ -1,0 +1,113 @@
+\element{pdf}{
+  \begin{questionmult}{pdf}\bareme{haut=2,p=0}
+    Une particule de fluide
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{est un système mésoscopique}
+        \bonne{contient en moyenne un un nombre de molécules constant}
+        \bonne{suit le mouvement du fluide}
+        \mauvaise{est un système microscopique}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+
+\element{deriveePart}{
+  \begin{question}{deriveePart}\bareme{1}
+    La dérivée particulaire s'écrit
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\frac{\partial }{\partial t}+(\vv{v}.\vv{\text{grad}})$}
+        \mauvaise{$\frac{\partial }{\partial t}+\text{div}\vv{v}$}
+        \mauvaise{$\frac{\partial }{\partial t}-\text{div}\vv{v}$}
+        \mauvaise{$\frac{\partial }{\partial t}+(\vv{\text{grad}})$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{constantes}{
+  \begin{questionmult}{constantes}\bareme{haut=2,p=0}
+    Quelles valeurs sont correctes (unités comprises)
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\mu_{air}=\SI{1e3}{kg}$}
+        \mauvaise{$\mu_{eau}=\SI{1e3}{g}$}
+        \bonne{$\nu_{eau}=\SI{1e-6}{m^2.s^{-1}}$}
+        \mauvaise{$\nu_{air}=\SI{1e-3}{Pl}$}
+        \bonne{$\eta_{eau}=\SI{1e3}{Pa.s}$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{debitMassique}{
+  \begin{question}{debitMassique}
+    Le débit massique se calcule avec
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\iint_S\mu\vv{v}.\vv{dS}$}
+        \mauvaise{$\iint_S\vv{v}.\vv{dS}$}
+        \mauvaise{$\int_C \vv{v}.\vv{dS}$}
+        \mauvaise{$\iiint_V\vv{v}.\vv{dS}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{hydrostatique}{
+  \begin{question}{hydrostatique}
+    L'équation fondamentale de l'hydrostatique s'écrit (axe $z$ ascendant)
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\vv{\text{grad}}P=\mu\vv{g}$}
+        \mauvaise{$\vv{\text{grad}}P=-\mu\vv{g}$}
+        \mauvaise{$\text{div}P=\mu\vv{g}$}
+        \mauvaise{$\text{div}P=-\mu\vv{g}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{tangentielle}{
+  \begin{questionmult}{tangentielle}\bareme{haut=2,p=0}
+    $\vv{\delta F}=\eta \frac{\partial \vv{v}}{\partial y}dS$
+    % \begin{multicols}{5}
+      \begin{reponses}
+        \mauvaise{est la force de pression élémentaire}
+        \mauvaise{est une force normale}
+        \mauvaise{est la force exercée par une particule en $z$ sur une particule en $z+dz$}
+        \mauvaise{est adaptée quand la vitesse est dirigée est selon $y$}
+        \mauvaise{est une force conservative}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+
+\element{vitesseDebitante}{
+  \begin{questionmult}{vitesseDebitante}\bareme{haut=2,p=0}
+    La vitesse débitante
+    % \begin{multicols}{1}
+      \begin{reponses}
+        \mauvaise{se mesure en \SI{}{m^3.s^{-1}}}
+        \bonne{est $\frac{D_v}{S}$}
+        \mauvaise{est le maximum de la vitesse sur une section}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+
+\element{reynolds}{
+  \begin{questionmult}{reynolds}\bareme{haut=2,p=0}
+    À bas Reynolds
+    % \begin{multicols}{1}
+      \begin{reponses}
+        \bonne{la diffusion est prépondérante sur la convection}
+        \bonne{le régime est laminaire}
+        \mauvaise{les forces de frottements sont quadratiques}
+        \bonne{$\Delta P=R_H D_v$}
+        \mauvaise{le coefficient de trainée est indépendant du nombre de Reynolds}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}

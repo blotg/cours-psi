@@ -1,0 +1,9 @@
+ - Expliciter des conditions aux limites à une interface pour une onde sonore.
+ - Établir les expressions des coefficients de transmission et de réflexion en amplitude de surpression, en amplitude de vitesse ou en puissance dans le cas d’une onde plane progressive sous incidence normale.
+ - Relier l’adaptation des impédances au transfert maximal de puissance.
+ - Interpréter le vecteur densité de courant surfacique comme un modèle pour décrire un déplacement de charges à travers un domaine d’épaisseur faible devant l’échelle de description.
+ - Utiliser les relations de passage des champs magnétique et électrique fournies.
+ - Exploiter la continuité de la composante tangentielle du champ électrique pour justifier l’existence d’une onde réfléchie et calculer celle-ci.
+ - Établir l’expression du champ électromagnétique de l’onde réfléchie et du vecteur densité de courant surfacique.
+ - Calculer le coefficient de réflexion en puissance.
+ - Déterminer la pression de radiation à l’aide de l’expression fournie de la force de Laplace.

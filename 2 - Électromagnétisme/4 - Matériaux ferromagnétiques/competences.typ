@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.0": *
+
+- Décrire, à partir d’une formule fournie exprimant le champ d’un dipôle magnétique, le champ créé par un aimant à grande distance et représenter qualitativement les lignes de champ magnétique.
+- Utiliser les expressions fournies de l’énergie  potentielle, de la résultante et du moment.
+- Décrire qualitativement l’évolution d’un dipôle magnétique dans un champ magnétique extérieur.
+- Établir l’expression du magnéton de Bohr dans le cadre du modèle de Bohr.
+- Définir le champ d’aimantation d’un milieu magnétique.
+- Associer à une distribution d’aimantation une densité volumique de courants liés équivalente, l’expression étant admise.
+- Définir le vecteur excitation magnétique.
+- Écrire l’équation de Maxwell-Ampère dans un milieu magnétique.
+- Interpréter qualitativement que les sources de l’excitation magnétique sont les courants électriques libres, et que celles de champ magnétique sont les courants électriques libres et l’aimantation.
+- Représenter l’allure des cycles d’hystérésis (excitation magnétique, aimantation) et (excitation magnétique, champ magnétique) d’un milieu ferromagnétique.
+- Distinguer milieu dur et milieu doux ; citer des exemples de matériaux.
+- Modéliser un milieu doux par une relation constitutive linéaire.
+- Définir la perméabilité relative et donner un ordre de grandeur.
+- Décrire l’allure des lignes de champ dans un circuit magnétique en admettant que les lignes de champ sortent orthogonalement à l’interface dans un entrefer.
+- Exprimer le champ magnétique produit dans l’entrefer d’un électroaimant.
+- Établir l’expression de l’inductance propre de la bobine à noyau.
+- Vérifier l’expression de l’énergie magnétique : $cal(E)_"mag"=integral.triple (B^2)/(2 mu_0 mu_r)dd(tau)$.
+- Exprimer le lien entre l’aire du cycle hystérésis et la puissance moyenne absorbée.
+- Décrire les différents termes de pertes d’une bobine à noyau : pertes fer par courants de Foucault et par hystérésis, pertes cuivre.

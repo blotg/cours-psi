@@ -1,0 +1,69 @@
+\element{operateurs.1}{
+  \begin{questionmult}{grad}\bareme{haut=2,p=0}
+    $\vec{\text{grad}}f=$
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$\frac{\partial f}{\partial x}\vec{e_x}+\frac{\partial f}{\partial y}\vec{e_y}+\frac{\partial f}{\partial z}\vec{e_z}$}
+        \mauvaise{$\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}+\frac{\partial f}{\partial z}$}
+        \mauvaise{$\frac{\partial^2 f}{\partial x^2}\vec{e_x}+\frac{\partial^2 f}{\partial y^2}\vec{e_y}+\frac{\partial^2 f}{\partial z^2}\vec{e_z}$}
+        \mauvaise{$\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}$}
+        \bonne{$\begin{pmatrix}\frac{\partial f}{\partial x}\\\frac{\partial f}{\partial y}\\\frac{\partial f}{\partial z}\end{pmatrix}$}
+        \mauvaise{$\begin{pmatrix}\frac{\partial^2 f}{\partial x^2}\\\frac{\partial^2 f}{\partial y^2}\\\frac{\partial^2 f}{\partial z^2}\end{pmatrix}$}
+        \bonne{$\vec{\nabla}f$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{operateurs.1}{cyclic}
+
+\element{operateurs.2}{
+  \begin{questionmult}{div}\bareme{haut=2,p=0}
+    $\text{div}\begin{pmatrix}A_x\\A_y\\A_z\end{pmatrix}=$
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\frac{\partial A_x}{\partial x}\vec{e_x}+\frac{\partial A_y}{\partial y}\vec{e_y}+\frac{\partial A_z}{\partial z}\vec{e_z}$}
+        \bonne{$\frac{\partial A_x}{\partial x}+\frac{\partial A_y}{\partial y}+\frac{\partial A_z}{\partial z}$}
+        \mauvaise{$\frac{\partial^2 A_x}{\partial x^2}\vec{e_x}+\frac{\partial^2 A_y}{\partial y^2}\vec{e_y}+\frac{\partial^2 A_z}{\partial z^2}\vec{e_z}$}
+        \mauvaise{$\frac{\partial^2 A_x}{\partial x^2}+\frac{\partial^2 A_y}{\partial y^2}+\frac{\partial^2 A_z}{\partial z^2}$}
+        \mauvaise{$\begin{pmatrix}\frac{\partial A_x}{\partial x}\\\frac{\partial A_y}{\partial y}\\\frac{\partial A_z}{\partial z}\end{pmatrix}$}
+        \mauvaise{$\begin{pmatrix}\frac{\partial^2 A_x}{\partial x^2}\\\frac{\partial^2 A_y}{\partial y^2}\\\frac{\partial^2 A_z}{\partial z^2}\end{pmatrix}$}
+        \bonne{$\vec{\nabla}.\begin{pmatrix}A_x\\A_y\\A_z\end{pmatrix}$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{operateurs.2}{cyclic}
+
+\element{operateurs.3}{
+  \begin{questionmult}{laplacienScalaire}\bareme{haut=2,p=0}
+    $\Delta f=$
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\frac{\partial f}{\partial x}\vec{e_x}+\frac{\partial f}{\partial y}\vec{e_y}+\frac{\partial f}{\partial z}\vec{e_z}$}
+        \mauvaise{$\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}+\frac{\partial f}{\partial z}$}
+        \mauvaise{$\frac{\partial^2 f}{\partial x^2}\vec{e_x}+\frac{\partial^2 f}{\partial y^2}\vec{e_y}+\frac{\partial^2 f}{\partial z^2}\vec{e_z}$}
+        \bonne{$\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}$}
+        \mauvaise{$\begin{pmatrix}\frac{\partial f}{\partial x}\\\frac{\partial f}{\partial y}\\\frac{\partial f}{\partial z}\end{pmatrix}$}
+        \mauvaise{$\begin{pmatrix}\frac{\partial^2 f}{\partial x^2}\\\frac{\partial^2 f}{\partial y^2}\\\frac{\partial^2 f}{\partial z^2}\end{pmatrix}$}
+        \mauvaise{$\vec{\text{grad}}(\text{div}f)$}
+        \bonne{$\text{div}(\vec{\text{grad}}f)$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{operateurs.3}{cyclic}
+
+\element{operateurs.4}{
+  \begin{question}{greenOstrogradski}\bareme{1}
+    Théorème de Green-Ostrogradski :
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\iiint_V \text{div}\vec{A} dV=\oiint_S \vec{A}.\vec{dS}$}
+        \mauvaise{$\iiint_V \vec{\text{grad}}f dV=\oiint_S f \vec{dS}$}
+        \mauvaise{$\iiint_V \vec{A} dV=\oiint_S \text{div}\vec{A} \vec{dS}$}
+        \mauvaise{$\iiint_V f dV=\oiint_S \vec{\text{grad}}f .\vec{dS}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{operateurs.4}{cyclic}

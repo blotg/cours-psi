@@ -1,0 +1,32 @@
+#import "@local/prepa:0.1.0": *
+
+- Définir la particule de fluide comme un système mésoscopique de masse constante.
+- Distinguer vitesse microscopique et vitesse mésoscopique.
+- Définir une ligne de courant, un tube de courant.
+- Associer la dérivée particulaire du vecteur vitesse à l’accélération de la particule de fluide qui passe en un point.
+- Citer et utiliser l’expression de l’accélération avec le terme convectif sous la forme $(va(v) dot grad) va(v)$.
+- Citer des ordres de grandeur des masses volumiques de l’eau et de l’air dans les conditions usuelles.
+- Définir le débit massique et l’écrire comme le flux du vecteur $mu va(v)$ à travers une surface orientée.
+- Énoncer l’équation locale traduisant la conservation de la masse.
+- Exploiter la conservation du débit massique le long d’un tube de courant.
+- Définir le débit volumique et l’écrire comme le flux de $va(v)$ à travers une surface orientée.
+- Définir un écoulement incompressible et homogène par un champ de masse volumique constant et uniforme et relier cette propriété à la conservation  du volume pour un système fermé.
+- Exploiter la conservation du débit volumique le long d’un tube de courant indéformable.
+- Identifier la force de pression comme étant une action normale à la surface.
+- Utiliser l’équivalent volumique des actions de pression $-grad P$.
+- Exprimer l’évolution de la pression avec l’altitude   dans les cas d’un fluide incompressible et de l’atmosphère isotherme dans le modèle du gaz parfait.
+- Relier l’expression de la force surfacique de viscosité au profil de vitesse dans le cas d’un écoulement parallèle.
+- Citer l’ordre de grandeur de la viscosité de l’eau.
+- Exploiter la condition d’adhérence à l’interface fluide-solide.
+- Décrire les différents régimes d’écoulement (laminaire et turbulent).
+- Relier le débit volumique à la vitesse débitante.
+- Décrire qualitativement les deux modes de transfert de quantité de mouvement : convection et diffusion.
+- Interpréter le nombre de Reynolds comme le rapport d’un temps caractéristique de diffusion de quantité de mouvement sur un temps caractéristique de convection.
+- Évaluer le nombre de Reynolds et l’utiliser pour caractériser le régime d'écoulement.
+- Dans le cas d’un écoulement à bas nombre de Reynolds, établir la loi de Hagen-Poiseuille et en déduire la résistance hydraulique.
+- Exploiter le graphe de la chute de pression en fonction du nombre de Reynolds, pour un régime d’écoulement quelconque.
+- Exploiter un paramétrage adimensionné permettant de transposer des résultats expérimentaux ou numériques sur des systèmes similaires réalisés à des échelles différentes.
+- Associer une gamme de nombre de Reynolds à un modèle de traînée linéaire ou un modèle quadratique.
+- Pour les écoulements à grand nombre de Reynolds, décrire qualitativement la notion de couche limite.
+- Définir et orienter les forces de portance et de traînée.
+- Exploiter les graphes de $C_x$ et $C_z$ en fonction de l’angle d’incidence.

@@ -1,0 +1,183 @@
+\element{EM1.inv}{
+  \begin{questionmult}{invarianceBoule}\bareme{haut=2,p=0}
+    En coordonnées sphériques, le champ électrique créé par une boule uniformément chargée à l'origine du repère dépend de
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$r$}
+        \mauvaise{$\theta$}
+        \mauvaise{$\phi$}
+        \mauvaise{$x$}
+        \mauvaise{$y$}
+        \mauvaise{$z$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\element{EM1.inv}{
+  \begin{questionmult}{invarianceCylindre}\bareme{haut=2,p=0}
+    En coordonnées cylindriques, le champ électrique créé par un cylindre infini uniformément chargé dont l'axe est confondu avec $(Oz)$ dépend de
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$r$}
+        \mauvaise{$\theta$}
+        \mauvaise{$\phi$}
+        \mauvaise{$x$}
+        \mauvaise{$y$}
+        \mauvaise{$z$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{EM1.inv}{cyclic}
+
+
+
+
+\element{EM1.sym}{
+  \begin{question}{symetrieBoule}\bareme{1}
+    En coordonnées sphériques, le champ électrique créé par une boule uniformément chargée à l'origine du repère est dirigé selon
+    \begin{multicols}{6}
+      \begin{reponses}
+        \bonne{$\vv{e_r}$}
+        \mauvaise{$\vv{e_\theta}$}
+        \mauvaise{$\vv{e_\phi}$}
+        \mauvaise{$\vv{e_x}$}
+        \mauvaise{$\vv{e_y}$}
+        \mauvaise{$\vv{e_z}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM1.sym}{
+  \begin{question}{symetrieCylindre}\bareme{1}
+    En coordonnées cylindriques, le champ électrique créé par un cylindre infini uniformément chargé dont l'axe est confondu avec $(Oz)$ est dirigé selon
+    \begin{multicols}{6}
+      \begin{reponses}
+        \bonne{$\vv{e_r}$}
+        \mauvaise{$\vv{e_\theta}$}
+        \mauvaise{$\vv{e_\phi}$}
+        \mauvaise{$\vv{e_x}$}
+        \mauvaise{$\vv{e_y}$}
+        \mauvaise{$\vv{e_z}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{EM1.sym}{cyclic}
+
+
+
+\element{EM1.surfGauss}{
+  \begin{question}{surfaceGaussCylindre}\bareme{1}
+    En coordonnées cylindriques, le champ créé par un cylindre uniformément chargée s'écrit $\vv{E}=E(r)\vv{e_r}$. La surface de Gauss adaptée à l'étude est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{Un disque}
+        \mauvaise{Un cercle}
+        \mauvaise{Une sphère}
+        \mauvaise{Un cube}
+        \bonne{Un cylindre fermé (avec ses deux extrémités)}
+        \mauvaise{Un cylindre ouvert (sans ses deux extrémités)}
+        \mauvaise{Une boule}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM1.surfGauss}{
+  \begin{question}{surfaceGaussBoule}\bareme{1}
+    En coordonnées sphériques, le champ créé par une boule uniformément chargée s'écrit $\vv{E}=E(r)\vv{e_r}$. La surface de Gauss adaptée à l'étude est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{Un disque}
+        \mauvaise{Un cercle}
+        \bonne{Une sphère}
+        \mauvaise{Un cube}
+        \mauvaise{Un cylindre fermé (avec ses deux extrémités)}
+        \mauvaise{Un cylindre ouvert (sans ses deux extrémités)}
+        \mauvaise{Une boule}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{EM1.surfGauss}{cyclic}
+
+
+
+
+\element{EM1.Quint}{
+  \begin{question}{QintBouleInt}\bareme{1}
+    La charge contenue dans une surface de Gauss sphérique de rayon $r\leq R$ entourant une boule de rayon $R$ uniformément chargé de densité volumique de charge $\rho$ est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$\frac{4}{3}\pi r^3$}
+        \mauvaise{$\frac{4}{3}\pi R^3$}
+        \mauvaise{$4\pi r^2$}
+        \mauvaise{$4\pi R^2$}
+        \mauvaise{$4\pi r^3$}
+        \mauvaise{$4\pi R^3$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM1.Quint}{
+  \begin{question}{QintCylindreInt}\bareme{1}
+    La charge contenue dans une surface de Gauss cylindrique de rayon $r\leq R$ et de hauteur $h$ entourant un cylindre infiniment haut, de rayon $R$ uniformément chargé de densité volumique de charge $\rho$ est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$\pi r^2h\rho$}
+        \mauvaise{$\pi R^2 h \rho$}
+        \mauvaise{$2\pi R^2 h \rho$}
+        \mauvaise{$2\pi r^2 h \rho$}
+        \mauvaise{$2\pi R h \rho$}
+        \mauvaise{$2\pi r h \rho$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM1.Quint}{
+  \begin{question}{QintBouleInt}\bareme{1}
+    La charge contenue dans une surface de Gauss sphérique de rayon $r\geq R$ entourant une boule de rayon $R$ uniformément chargé de densité volumique de charge $\rho$ est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$\frac{4}{3}\pi R^3\rho$}
+        \mauvaise{$\frac{4}{3}\pi r^3\rho$}
+        \mauvaise{$4\pi r^2\rho$}
+        \mauvaise{$4\pi R^2\rho$}
+        \mauvaise{$4\pi r^3\rho$}
+        \mauvaise{$4\pi R^3\rho$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{EM1.Quint}{
+  \begin{question}{QintCylindreExt}\bareme{1}
+    La charge contenue dans une surface de Gauss cylindrique de rayon $r\geq R$ et de hauteur $h$ entourant un cylindre infiniment haut, de rayon $R$ uniformément chargé de densité volumique de charge $\rho$ est
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\pi r^2h\rho$}
+        \bonne{$\pi R^2 h \rho$}
+        \mauvaise{$2\pi R^2 h \rho$}
+        \mauvaise{$2\pi r^2 h \rho$}
+        \mauvaise{$2\pi R h \rho$}
+        \mauvaise{$2\pi r h \rho$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{EM1.Quint}{cyclic}
+
+\element{EM1.EPlan}{
+  \begin{question}{EPlan}\bareme{1}
+    Le champ électrique créé par un plan uniformément chargé, de densité surfacique de charge $\sigma$ s'écrit $\vv{E}=E(z)\vv{e_z}$. On choisi comme surface de Gauss un cylindre de rayon $R$, de hauteur $2z$, symétrique par rapport au plan. Le champ électrique est symétrique par rapport au plan. Le champ électrique s'écrit, en supposant $z>0$
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\frac{Q_{\text{int}}}{\pi R^2\epsilon_0}\vv{e_z}$}
+        \bonne{$\frac{Q_{\text{int}}}{2\pi R^2\epsilon_0}\vv{e_z}$}
+        \mauvaise{$\frac{Q_{\text{int}}}{\epsilon_0}\vv{e_z}$}
+        \mauvaise{$\frac{Q_{\text{int}}}{\pi R\epsilon_0}\vv{e_z}$}
+        \mauvaise{$\frac{Q_{\text{int}}}{2\pi R\epsilon_0}\vv{e_z}$}
+        \mauvaise{$\frac{Q_{\text{int}}}{\frac{4}{3}\pi R^2\epsilon_0}\vv{e_z}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}

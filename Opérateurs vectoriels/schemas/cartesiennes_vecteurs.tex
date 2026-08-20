@@ -1,0 +1,12 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \fill (0.7,0.7,0.7) coordinate (A) node[above left] {$M$} circle (0.7pt);
+    \draw[->] (A) --++ (0.5,0,0) node[below right] {$\vv{u_x}$};
+    \draw[->] (A) --++ (0,0.5,0) node[above right] {$\vv{u_y}$};
+    \draw[->] (A) --++ (0,0,0.5) node[above right] {$\vv{u_z}$};
+  \end{tikzpicture}

@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+  x= {(-0.4cm,-0.4cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+  >=latex]
+  \draw[->] (0,0,0) -- (2,0,0) node[below left] {$x$};
+  \draw[->] (0,0,0) -- (0,2,0) node[below] {$y$};
+  \draw[->] (0,0,0) -- (0,0,2) node[right] {$z$};
+  \begin{scope}[canvas is plane={O(0,0,0)x(0.414,-0.414,0)y(0,0,1)}]
+    \draw[very thick] (1,1) -- (1,-1) -- (-1,-1) -- (-1,1) -- cycle;
+    \begin{scope}[decoration={markings,mark=at position 0.5 with {\arrow{>}}}]
+      \draw[postaction=decorate] (-1,1) -- (1,1) node[midway,above] {$I$};
+    \end{scope}
+  \end{scope}
+  \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,1,0)}]
+    \draw[->] (0,0) node[circ] {} -- (45:2) node[above] {$\vec{n}$};
+    \draw[->] (1,0) arc (0:45:1) node[midway, below] {$\theta$};
+  \end{scope}
+\end{tikzpicture}

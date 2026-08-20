@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=0.8;
+      \t=45;
+      \z=0.5;
+      \dt=30;
+      \dz=0.4;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is xy plane at z={\z+\dz}]
+      \draw[dotted] (0,0) -- (\t:\r) coordinate (A);
+      \draw[dotted] (0,0) -- ({\t+\dt}:\r) coordinate (B);
+      \draw (A) arc (\t:{\t+\dt}:\r) node[midway, above left] {$r.d\theta$};
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z=\z]
+      \draw[dotted] (0,0) -- (\t:\r) coordinate (C);
+      \draw[dotted] (0,0) -- ({\t+\dt}:\r) coordinate (D);
+      \draw (C) arc (\t:{\t+\dt}:\r) coordinate (H);
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={\z+\dz/2}]
+      \draw[->] ({\t+\dt/2}:\r) --++ ({\t+\dt/2}:0.4) node[above right] {$\vv{dS}$};
+    \end{scope}
+    \draw (A) -- (C) node[midway, left] {$dz$};
+    \draw (B) -- (D);
+  \end{tikzpicture}

@@ -1,0 +1,3 @@
+- Transposer la fonction de transfert opérationnelle dans les domaines fréquentiel (fonction de transfert harmonique) ou temporel (équation différentielle).
+- Étudier la stabilité d’un système d’ordre 1 à partir des signes des coefficients de l’équation différentielle ou de la fonction de transfert.
+- Étudier la stabilité d’un système d’ordre 2 à partir des signes des coefficients de l’équation différentielle ou de la fonction de transfert.

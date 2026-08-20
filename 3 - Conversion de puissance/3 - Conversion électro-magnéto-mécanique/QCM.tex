@@ -1,0 +1,179 @@
+\element{CONV3.MSconstitution}{
+  \begin{question}{MSconstitutionRotor}\bareme{1}
+    Combien de circuits distinct sont enroulés sur le rotor d'une machine synchrone diphasée ?:
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$1$}
+        \mauvaise{$2$}
+        \mauvaise{$3$}
+        \mauvaise{Un grand nombre}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV3.MSconstitution}{
+  \begin{question}{MSconstitutionStator}\bareme{1}
+    Combien de circuits distinct sont enroulés sur le stator d'une machine synchrone diphasée ?:
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$2$}
+        \mauvaise{$1$}
+        \mauvaise{$3$}
+        \mauvaise{Un grand nombre}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV3.MSconstitution}{cyclic}
+
+\element{CONV3.synchronisme}{
+  \begin{question}{synchronisme1}\bareme{1}
+    La condition de synchronisme stipule que que si la pulsation du champ glissant et la vitesse angulaire sont différents,
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{le couple exercé sur le rotor par le champ magnétique est en moyenne nul.}
+        \mauvaise{le couple exercé sur le rotor par le champ magnétique est en nul à chaque instant.}
+        \mauvaise{la machine synchrone se comporte comme un générateur (alternateur).}
+        \mauvaise{le rotor est immobile.}
+      \end{reponses}
+    % \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV3.synchronisme}{cyclic}
+
+\element{CONV3.MailleMS}{
+  \begin{question}{MailleMSAlternateur}\bareme{1}
+    En fonctionnement alternateur, la loi des mailles sur une phase s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\underline{E_\text{em}} = R\underline{I}+L\omega\underline{I}+\underline{U}$}
+        \mauvaise{$E_\text{cem,eff} = RI_\text{eff}+L\omega I_\text{eff}+U_\text{eff}$}
+        \mauvaise{$\underline{E_\text{cem}} = R\underline{I}+L\omega\underline{I}+\underline{U}$}
+        \mauvaise{$E_\text{em,eff} = RI_\text{eff}+L\omega I_\text{eff}+U_\text{eff}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV3.MailleMS}{
+  \begin{question}{MailleMSMoteur}\bareme{1}
+    En fonctionnement moteur, la loi des mailles sur une phase s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\underline{U} = R\underline{I}+L\omega\underline{I}+\underline{E_\text{cem}}$}
+        \mauvaise{$U_\text{eff} = RI_\text{eff}+L\omega I_\text{eff}+E_\text{cem,eff}$}
+        \mauvaise{$\underline{U} = R\underline{I}+L\omega\underline{I}+\underline{E_\text{em}}$}
+        \mauvaise{$U_\text{eff} = RI_\text{eff}+L\omega I_\text{eff}+E_\text{em,eff}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV3.MailleMS}{cyclic}
+
+
+\element{CONV3.MSsignes}{
+  \begin{questionmult}{MSsigneMoteur}\bareme{haut=2,p=0}
+    Pour un moteur synchrone, 
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{Le champ glissant est en avance sur le champ rotorique.}
+        \mauvaise{L'angle de pilotage est plus grand que $\pi/2$.}
+        \mauvaise{Le couple électromagnétique est négatif.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\element{CONV3.MSsignes}{
+  \begin{questionmult}{MSsigneAlt}\bareme{haut=2,p=0}
+    Pour un alternateur, 
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{Le champ glissant est en avance sur le champ rotorique.}
+        \mauvaise{L'angle de pilotage est plus petit que $\pi/2$.}
+        \bonne{Le couple électromagnétique est négatif.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{CONV3.MSsignes}{cyclic}
+
+\element{CONV3.constContinu}{
+  \begin{questionmult}{constContinu}\bareme{haut=2,p=0}
+    Dans une machine à courant continu,
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{la condition de synchronisme est toujours vérifiée.}
+        \bonne{il y a une unique circuit statorique.}
+        \mauvaise{Les circuit magnétiques sont faits avec des matériaux ferromagnétiques durs.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\element{CONV3.constContinu}{
+  \begin{questionmult}{ballaisColl}\bareme{haut=2,p=0}
+    Le système balais-collecteurs
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{assurer la condition de synchronisme.}
+        \bonne{alimenter le circuit rotorique formant un angle de $\pi/2$ par rapport au champ statorique.}
+        \bonne{maximiser le couple électromagnétique.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{CONV3.constContinu}{cyclic}
+
+\element{CONV3.Couple}{
+  \begin{question}{CoupleContinu}\bareme{1}
+    Pour une machine à courant continu, le couple électromagnétique s'écrit
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\Gamma_\text{em}=\Phi_0I_r$}
+        \mauvaise{$\Gamma_\text{em}=\frac{I_r}{\Phi_0}$}
+        \mauvaise{$\Gamma_\text{em}=\Phi_0E_{cem}$}
+        \mauvaise{$\Gamma_\text{em}=\frac{E_{cem}}{\Phi_0}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV3.Couple}{
+  \begin{question}{IContinu}\bareme{1}
+    Pour une machine à courant continu, le courant induit s'écrit
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$I_r=\frac{\Gamma_\text{em}}{\Phi_0}$}
+        \mauvaise{$I_r=\Phi_0\Gamma_\text{em}$}
+        \mauvaise{$I_r=\frac{\Omega}{\Phi_0}$}
+        \mauvaise{$I_r=\Phi_0\Omega$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV3.Couple}{cyclic}
+
+\element{CONV3.Omega}{
+  \begin{question}{OmegaContinu}\bareme{1}
+    Pour une machine à courant continu, la vitesse angulaire s'écrit
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\Omega=\frac{E_{cem}}{\Phi_0}$}
+        \mauvaise{$\Omega=\Phi_0I_r$}
+        \mauvaise{$\Omega=\frac{I_r}{\Phi_0}$}
+        \mauvaise{$\Omega=\Phi_0E_{cem}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV3.Omega}{
+  \begin{question}{EcemContinu}\bareme{1}
+    Pour une machine à courant continu, la force contre-électromotrice s'écrit
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$E_{cem}=\Phi_0\Omega$}
+        \mauvaise{$E_{cem}=\frac{\Omega}{\Phi_0}$}
+        \mauvaise{$E_{cem}=\Phi_0\Gamma_\text{em}$}
+        \mauvaise{$E_{cem}=\frac{\Gamma_\text{em}}{\Phi_0}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV3.Omega}{cyclic}

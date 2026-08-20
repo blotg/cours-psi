@@ -1,0 +1,71 @@
+\element{fEtat}{
+  \begin{questionmult}{enthalpie}\bareme{haut=2,p=0}
+    L'enthalpie
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{se note $H$}
+        \bonne{$=U+PV$}
+        \mauvaise{A pour variables naturelles $T$ et $P$.}
+        \mauvaise{Est constante pour une isobare isotherme}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\element{fEtat}{
+  \begin{questionmult}{enthalpieG}\bareme{haut=2,p=0}
+    L'enthalpie libre
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{se note $G$}
+        \mauvaise{$=U+PV+TS$}
+        \bonne{A pour variables naturelles $T$ et $P$.}
+        \mauvaise{Est constante pour une isobare adiabatique.}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{fEtat}{cyclic}
+
+\element{potChim}{
+  \begin{questionmult}{potChim}\bareme{haut=2,p=0}
+    Le potentiel chimique
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{dépend de la température et de la pression.}
+        \mauvaise{est égal à l'enthalpie molaire.}
+        \mauvaise{$=\mu^\circ-RT\ln(a)$}
+        \bonne{est le même pour deux phases coexistant à l'équilibre.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+
+\element{enthalpieGReaction}{
+  \begin{questionmult}{enthalpieGReaction}\bareme{haut=2,p=0}
+    L'enthalpie libre de réaction $\Delta_rG$
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{Se mesure en $J$.}
+        \mauvaise{$=RT\ln\frac{K^\circ}{Q}$}
+        \mauvaise{est positive lorsque la réaction va dans le sens direct.}
+        \bonne{est nulle lorsque la réaction est à l'équilibre.}
+        \mauvaise{est positive pour une réaction endothermique.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+
+\element{vantHoff}{
+  \begin{questionmult}{vantHoff}\bareme{haut=2,p=0}
+    Selon la relation de Van't Hoff,
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{d\ln K^\circ}{dT}=\frac{\Delta_rH^\circ}{RT^2}$}
+        \mauvaise{l'équilibre d'une réaction exothermique se déplace dans le sens direct lorsque la température augmente.}
+        \bonne{l'équilibre d'une réaction endothermique se déplace dans le sens inverse lorsque la température diminue.}
+        \bonne{il vaut mieux effectuer la synthèse d'une réaction exothermique à basse température.}
+        \mauvaise{le système chimique évolue dans le sens qui amplifie les variations de température (loi de Le Chatelier).}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}

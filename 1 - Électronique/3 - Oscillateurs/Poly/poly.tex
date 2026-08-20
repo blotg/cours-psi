@@ -1,0 +1,30 @@
+%!TeX program = lualatex
+
+\documentclass{poly}
+
+\theme{Électronique 3}
+\titre{Oscillateurs}
+
+\begin{document}
+\maketitle{}
+
+\part{Compétences}
+\input{1 - competences.tex}
+
+\clearpage \part{Résumé du cours}
+\booltrue{notes}
+\begin{paracol}[1]*{2}
+    \begin{leftcolumn}
+    \input{2 - cours.tex}
+    \end{leftcolumn}
+    \begin{rightcolumn}
+    \end{rightcolumn}
+\end{paracol}
+
+\clearpage \boolfalse{notes} \part{Méthodes}
+\input{3 - methodes.tex}
+
+\clearpage \part{TD}
+\input{4 - TD.tex}
+
+\end{document}

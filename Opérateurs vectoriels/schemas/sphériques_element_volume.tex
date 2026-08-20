@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=4,
+    >=latex]
+    \tikzmath{
+      \r=0.7;
+      \t=30;
+      \f=45;
+      \dr=0.4;
+      \dt=40;
+      \df=40;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is xy plane at z={\r*cos(\t)}]
+      \draw[dashed, teal] (\f:{\r*sin(\t)}) coordinate (A) arc (\f:{\f+\df}:{\r*sin(\t)}) coordinate (E) node[midway, below right] {\textcolor{teal}{$r\sin(\theta)d\phi$}};
+      \draw[dotted] (0,0) -- (\f:{(\r+\dr)*sin(\t)});
+      \draw[dotted] (0,0) -- ({\f+\df}:{(\r)*sin(\t)});
+      \draw[->] (\f:{0.3*sin(\t)}) arc (\f:{\f+\df}:{0.3*sin(\t)}) node[midway, above left] {$d\phi$};
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={\r*cos(\t+\dt)}]
+      \draw[dashed] (\f:{\r*sin(\t+\dt)}) coordinate (C) arc (\f:{\f+\df}:{\r*sin(\t+\dt)}) coordinate (G);
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={(\r+\dr)*cos(\t)}]
+      \draw (\f:{(\r+\dr)*sin(\t)}) coordinate (B) arc (\f:{\f+\df}:{(\r+\dr)*sin(\t)}) coordinate (F);
+      %\draw[dotted] (0:{\r+\dr)*sin(\t)}) arc (0:90:{\r+\dr)*sin(\t)});
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={(\r+\dr)*cos(\t+\dt)}]
+      \draw (\f:{(\r+\dr)*sin(\t+\dt)}) coordinate (D) arc (\f:{\f+\df}:{(\r+\dr)*sin(\t+\dt)}) coordinate (H);
+    \end{scope}
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f)},{sin(\f)},0)}]
+      \draw[blue] (\t:\r) arc (\t:{\t+\dt}:\r) node[midway, above right] {\textcolor{blue}{$r.d\theta$}};
+      \draw (\t:{\r+\dr}) arc (\t:{\t+\dt}:{\r+\dr});
+      %\draw[dotted] (0:{\r+\dr}) arc (0:90:{\r+\dr});
+      \draw[->] (\t:0.3) arc (\t:{\t+\dt}:0.3) node[midway, above right] {$d\theta$};
+    \end{scope}
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f+\df)},{sin(\f+\df)},0)}]
+      \draw[dashed] (\t:\r) arc (\t:{\t+\dt}:\r);
+      \draw (\t:{\r+\dr}) arc (\t:{\t+\dt}:{\r+\dr});
+    \end{scope}
+    \draw[dotted] (0,0,0) -- (A) node[midway, above left] {r};
+    \draw[dotted] (0,0,0) -- (C);
+    \draw[dotted] (0,0,0) -- (E);
+    \draw[dotted] (0,0,0) -- (G);
+    \draw[red] (A) -- (B) node[midway, right] {\textcolor{red}{$dr$}};
+    \draw (C) -- (D);
+    \draw[dashed] (E) -- (F);
+    \draw[dashed] (G) -- (H);
+  \end{tikzpicture}

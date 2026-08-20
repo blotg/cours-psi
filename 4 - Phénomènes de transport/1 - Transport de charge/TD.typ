@@ -1,0 +1,12 @@
+#import "@local/prepa:0.1.0": *
+
+#show: TD.with(infos: yaml("infos.yml"))
+
+#include "exercices/Resistance of a holed cylinder.typ"
+#include "exercices/Effet Hall.typ"
+#include "exercices/Cables HT.typ"
+#include "exercices/Paratonnerre.typ"
+#include "exercices/Magnéto-résistance.typ"
+#include "exercices/Résistance carbone.typ"
+#include "exercices/bruit thermique.typ"
+#include "exercices/tableau cables.typ"

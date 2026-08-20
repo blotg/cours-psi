@@ -1,0 +1,10 @@
+- Établir la compatibilité des équations de Maxwell avec la conservation de la charge.
+- Simplifier les équations de Maxwell et l’équation de conservation de la charge dans l’ARQS en admettant que les courants de déplacement sont négligeables.
+- Étendre le domaine de validité des expressions des champs magnétiques obtenues en régime stationnaire.
+- Relier la circulation du champ électrique à la dérivée temporelle du flux magnétique.
+- Décrire la géométrie des courants de Foucault dans le cas d’un conducteur cylindrique soumis à un champ magnétique parallèle à son axe, uniforme et oscillant.
+- Exprimer la puissance dissipée par effet Joule en négligeant le champ propre et expliquer le rôle du feuilletage.
+- Exprimer l’énergie magnétique d’une bobine seule ou de deux bobines couplées en fonction des coefficients d’inductance et des intensités.
+- Déterminer, à partir de l’expression de l’énergie magnétique, l’expression de la densité volumique d’énergie magnétique dans le cas d’une bobine modélisée par un solénoïde long.
+- Citer l’expression de la densité volumique d’énergie magnétique.
+- Établir, dans le cas de deux bobines couplées, l’inégalité $M^2 <= L_1 L_2$.

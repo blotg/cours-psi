@@ -1,0 +1,79 @@
+\element{vitesses}{
+  \begin{question}{vphi}\bareme{1}
+    La vitesse de phase est définie comme
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\frac{\omega}{\Re{\underline{k}}}$}
+        \mauvaise{$\frac{1}{\Im{\underline{k}}}$}
+        \mauvaise{$\frac{\omega}{\underline{k}}$}
+        \mauvaise{$\frac{d\omega}{d\Re{\underline{k}}}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{vitesses}{
+  \begin{question}{vg}\bareme{1}
+    La vitesse de groupe est définie comme
+    \begin{multicols}{4}
+      \begin{reponses}
+        \mauvaise{$\frac{\omega}{\Re{\underline{k}}}$}
+        \mauvaise{$\frac{1}{\Im{\underline{k}}}$}
+        \mauvaise{$\frac{\omega}{\underline{k}}$}
+        \bonne{$\frac{d\omega}{d\Re{\underline{k}}}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{vitesses}{
+  \begin{question}{vg}\bareme{1}
+    La profondeur de peau est définie comme
+    \begin{multicols}{4}
+      \begin{reponses}
+        \mauvaise{$\frac{\omega}{\Re{\underline{k}}}$}
+        \bonne{$\frac{1}{\Im{\underline{k}}}$}
+        \mauvaise{$\frac{\omega}{\underline{k}}$}
+        \mauvaise{$\frac{d\omega}{d\Re{\underline{k}}}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{vitesses}{cyclic}
+
+\element{equations}{
+  \begin{questionmult}{dAlembert}\bareme{haut=2,p=0}
+    Une équation de d'Alembert
+    %\begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{s'écrit $\frac{\partial^2 y}{\partial x^2}+\frac{1}{c^2}\frac{\partial^2y}{\partial t^2}=0$}
+        \mauvaise{est dispersive}
+        \mauvaise{a pour relation de dispersion $\underline{k}^2=-j\frac{\omega}{D}$}
+      \end{reponses}
+    %\end{multicols}
+  \end{questionmult}
+}
+\element{equations}{
+  \begin{questionmult}{diffusion}\bareme{haut=2,p=0}
+    Une équation de diffusion
+    %\begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{s'écrit $\frac{\partial^2 y}{\partial t^2}+D\frac{\partial^2y}{\partial x^2}=0$}
+        \bonne{est dispersive}
+        \mauvaise{a pour relation de dispersion $k^2=\frac{\omega^2}{c^2}$}
+      \end{reponses}
+    %\end{multicols}
+  \end{questionmult}
+}
+
+\element{dispersif}{
+  \begin{questionmult}{dispersif}\bareme{haut=2,p=0}
+    Dans un milieu dispersif,
+    %\begin{multicols}{2}
+      \begin{reponses}
+        \bonne{Toutes les fréquences ne se propagnent pas à la même vitesse.}
+        \bonne{Les paquets d'onde se déforment en se propageant.}
+        \mauvaise{La relation de dispersion s'écrit $\omega = k c$ pour les ondes se propageant dans le sens des $x$ croissants.}
+        \mauvaise{L'équation de propagation est forcément non-linéaire.}
+      \end{reponses}
+    %\end{multicols}
+  \end{questionmult}
+}

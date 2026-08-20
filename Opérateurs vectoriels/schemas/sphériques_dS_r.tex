@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=0.9;
+      \t=30;
+      \f=45;
+      \dr=0;
+      \dt=40;
+      \df=40;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is xy plane at z={(\r+\dr)*cos(\t)}]
+      \draw (\f:{(\r+\dr)*sin(\t)}) coordinate (B) arc (\f:{\f+\df}:{(\r+\dr)*sin(\t)}) coordinate (F) node[midway, above] {$r.\sin(\theta).d\phi$};
+      \draw[dotted] (0:{\r+\dr)*sin(\t)}) arc (0:90:{\r+\dr)*sin(\t)});
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={(\r+\dr)*cos(\t+\dt)}]
+      \draw (\f:{(\r+\dr)*sin(\t+\dt)}) coordinate (D) arc (\f:{\f+\df}:{(\r+\dr)*sin(\t+\dt)}) coordinate (H);
+    \end{scope}
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f)},{sin(\f)},0)}]
+      \draw (\t:{\r+\dr}) arc (\t:{\t+\dt}:{\r+\dr}) node[midway, below left] {$r.d\theta$};
+      \draw[dotted] (0:{\r+\dr}) arc (0:90:{\r+\dr});
+    \end{scope}
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f+\df)},{sin(\f+\df)},0)}]
+      \draw (\t:{\r+\dr}) arc (\t:{\t+\dt}:{\r+\dr});
+    \end{scope}
+    \begin{scope}[canvas is plane={O(0,0,0)x(0,0,1)y({cos(\f+\df/2)},{sin(\f+\df/2)},0)}]
+      \draw[->] ({\t+\dt/2}:{\r+\dr}) --++ ({\t+\dt/2}:0.4) node[right] {$\vv{dS}$};
+    \end{scope}
+    \draw[dotted] (0,0,0) -- (B);
+    \draw[dotted] (0,0,0) -- (D);
+    \draw[dotted] (0,0,0) -- (F);
+    \draw[dotted] (0,0,0) -- (H);
+  \end{tikzpicture}

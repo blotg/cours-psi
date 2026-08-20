@@ -1,0 +1,92 @@
+\element{1.5.1}{
+  \begin{question}{modulationAmplitude}\bareme{1}
+    Un signal modulé en amplitude s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$s(t)=A(t)\cos(2\pi ft+\phi)$}
+        \mauvaise{$s(t)=A\cos(2\pi f(t)t+\phi)$}
+        \mauvaise{$s(t)=A\cos(2\pi ft+\phi(t))$}
+        \mauvaise{$s(t)=A\cos(2\pi f(t)+\phi)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{1.5.1}{
+  \begin{question}{modulationFréquence}\bareme{1}
+    Un signal modulé en fréquence s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$s(t)=A(t)\cos(2\pi ft+\phi)$}
+        \bonne{$s(t)=A\cos(2\pi f(t)t+\phi)$}
+        \mauvaise{$s(t)=A\cos(2\pi ft+\phi(t))$}
+        \mauvaise{$s(t)=A\cos(2\pi f(t)+\phi)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{1.5.1}{
+  \begin{question}{modulationPhase}\bareme{1}
+    Un signal modulé en phase s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$s(t)=A(t)\cos(2\pi ft+\phi)$}
+        \mauvaise{$s(t)=A\cos(2\pi f(t)t+\phi)$}
+        \bonne{$s(t)=A\cos(2\pi ft+\phi(t))$}
+        \mauvaise{$s(t)=A\cos(2\pi f(t)+\phi)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{1.5.1}{cyclic}
+
+\element{1.5.2}{
+  \begin{questionmult}{demodulation}\bareme{haut=2,p=0}
+    Parmi les opérations ci-dessous, lesquelles sont effectuées pour retrouver le signal modulant avec la démodulation synchrone ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{La multiplication par la porteuse}
+        \mauvaise{La multiplication par le signal à transmettre}
+        \bonne{Un filtrage passe-haut}
+        \bonne{Un filtrage passe-bas}
+        \mauvaise{Un filtrage passe-bande}
+        \mauvaise{La soustraction de la porteuse}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.5.3}{
+  \begin{questionmult}{spectre}\bareme{haut=1,p=0}
+    On module en amplitude un signal $s(t)=A\cos(2\pi f t)$ par une porteuse $s_p(t)=A_p\cos(2\pi f_pt)$.
+    Parmi les fréquences suivantes, lesquelles sont présentent dans le spectre du signal modulé ?
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$f_p$}
+        \bonne{$f_p-f$}
+        \bonne{$f_p+f$}
+        \mauvaise{$0$}
+        \mauvaise{$2f_p$}
+        \mauvaise{$2f$}
+        \mauvaise{$2f_p-f$}
+        \mauvaise{$2f_p+f$}
+        \mauvaise{$f$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.5.4}{
+  \begin{question}{formuleTrigo}\bareme{1}
+    $\cos(a)\cos(b)=$
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{\cos(a+b)+\cos(a-b)}{2}$}
+        \mauvaise{$\frac{\cos(a+b)-\cos(a-b)}{2}$}
+        \mauvaise{$\cos(\frac{a+b}{2})+\cos(\frac{a-b}{2})$}
+        \mauvaise{$\cos(\frac{a+b}{2})-\cos(\frac{a-b}{2})$}
+        \mauvaise{$\sin(a)\sin(b)-\cos(a)\sin(b)$}
+        \mauvaise{$\cos(a)\sin(b)-\sin(a)\sin(b)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}

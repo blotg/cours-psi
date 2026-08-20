@@ -1,0 +1,125 @@
+\element{Conservation}{
+  \begin{question}{conservationCharge}\bareme{1}
+    L'équation locale de conservation de la charge s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{\partial \rho}{\partial t}=-div\vec{j}$}
+        \mauvaise{$\frac{\partial \rho}{\partial t}=\vec{grad}\vec{j}$}
+        \mauvaise{$\frac{\partial \vec{j}}{\partial x}=\vec{grad}\vec{\rho}$}
+        \mauvaise{$\frac{\partial \vec{j}}{\partial x}=div\vec{\rho}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{unites}{
+  \begin{questionmult}{uniteJ}\bareme{haut=2,p=0}
+    Le vecteur densité de courant électrique se mesure en
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{\SI{}{A.m^{-2}}}
+        \mauvaise{\SI{}{A.m^{-3}}}
+        \mauvaise{\SI{}{A.m^2}}
+        \mauvaise{\SI{}{A.m^3}}
+        \mauvaise{\SI{}{C.s^{-1}}}
+        \mauvaise{\SI{}{C.m^{-1}}}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\element{unites}{
+  \begin{questionmult}{uniteRho}\bareme{haut=2,p=0}
+    La densité volumique de charge se mesure en
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{\SI{}{C.m^{-3}}}
+        \mauvaise{\SI{}{A.m^3}}
+        \mauvaise{\SI{}{A.s^{-1}.m^{-3}}}
+        \mauvaise{\SI{}{C.m^{3}}}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{unites}{cyclic}
+
+\element{relations}{
+  \begin{questionmult}{relations}\bareme{haut=2,p=0}
+    Parmi ces relations, lesquelles sont correctes lorsque tous les porteurs de charge sont identiques ?
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\vv{j}=nq\vv{v}$}
+        \bonne{$\vv{j}=\rho_\text{libre}\vv{v}$}
+        \bonne{$\rho=nq$}
+        \mauvaise{$\vv{j}=n\vv{v}$}
+        \mauvaise{$n=\rho q$}
+        \mauvaise{$\rho_\text{libre}=-\rho$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{relations}{cyclic}
+
+\element{Ohm}{
+  \begin{question}{ohmLocale}\bareme{1}
+    La loi d'Ohm locale s'écrit s'écrit (avec $\gamma$ la conductivité électrique)
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$\vec{E}=\gamma\vec{j}$ avec $\gamma$ en \SI{}{\ohm.m^{-1}}}
+        \bonne{$\vec{j}=\gamma\vec{E}$ avec $\gamma$ en \SI{}{S.m^{-1}}}
+        \mauvaise{$\vec{j}=\gamma\vec{E}$ avec $\gamma$ en \SI{}{S.m}}
+        \mauvaise{$\vec{E}=\gamma\vec{j}$ avec $\gamma$ en \SI{}{\ohm.m^}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{puissance}{
+  \begin{questionmult}{puissanceJouleLocale}\bareme{haut=2,p=0}
+    La puissance volumique dissipée par effet Joule
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{Se transforme en chaleur}
+        \bonne{S'écrit $\vec{j}.\vec{E}$}
+        \bonne{Se mesure en \SI{}{W.m^{-3}}}
+        \mauvaise{N'existe que dans les isolants}
+        \mauvaise{Est nulle dans les métaux}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{densite}{
+  \begin{question}{densiteCu}\bareme{1}
+    Le cuivre a pour masse volumique $\mu=\SI{9}{g.cm^{-3}}$ et comme masse molaire $M=\SI{60}{g.mol^{-1}}$. On donne $\mathcal{N}_a=\SI{6e23}{u.s.i.}$. Sans calculatrice, calculer la densité particulaire.
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{\SI{9e28}{u.s.i.}}
+        \mauvaise{\SI{9e25}{u.s.i.}}
+        \mauvaise{\SI{3e26}{u.s.i.}}
+        \mauvaise{\SI{4e18}{u.s.i.}}
+        \mauvaise{\SI{9e-22}{u.s.i.}}
+        \mauvaise{\SI{1e-29}{u.s.i.}}
+        \mauvaise{\SI{3e27}{u.s.i.}}
+        \mauvaise{\SI{3e28}{u.s.i.}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{densite}{
+  \begin{question}{densiteSi}\bareme{1}
+    Le silicium a pour masse volumique $\mu=\SI{2}{g.cm^{-3}}$ et comme masse molaire $M=\SI{30}{g.mol^{-1}}$. On donne $\mathcal{N}_a=\SI{6e23}{u.s.i.}$. Sans calculatrice, calculer la densité particulaire.
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{\SI{4e28}{u.s.i.}}
+        \mauvaise{\SI{4e25}{u.s.i.}}
+        \mauvaise{\SI{9e18}{u.s.i.}}
+        \mauvaise{\SI{1e22}{u.s.i.}}
+        \mauvaise{\SI{1e-22}{u.s.i.}}
+        \mauvaise{\SI{3e-29}{u.s.i.}}
+        \mauvaise{\SI{1e-19}{u.s.i.}}
+        \mauvaise{\SI{3e-26}{u.s.i.}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{densite}{cyclic}

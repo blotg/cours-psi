@@ -1,0 +1,22 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \a=0.7;
+      \d=0.4;
+      \b=\a+\d;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \draw (\b,\a,\a) -- (\b,\b,\a) -- (\b,\b,\b) -- (\b,\a,\b) -- cycle;
+    \draw (\b,\a,\b) -- (\a,\a,\b) -- (\a,\b,\b) -- (\b,\b,\b);
+    \draw (\a,\b,\b) -- (\a,\b,\a) -- (\b,\b,\a);
+    \draw[dashed] (\b,\a,\a) -- (\a,\a,\a) -- (\a,\a,\b);
+    \draw[dashed] (\a,\a,\a) -- (\a,\b,\a);
+    \draw (\b,{\a+\d/2},\a) node[below] {$dy$};
+    \draw (\b,\a,{\a+\d/2}) node[left] {$dz$};
+    \draw ({\a+\d/2},\b,\a) node[below right] {$dx$};
+    \draw (\a,\b,\b) node[above right] {$dV$};
+  \end{tikzpicture}

@@ -1,0 +1,183 @@
+\element{CONV2.modele}{
+  \begin{questionmult}{modeleTransfoIdeal}\bareme{haut=2,p=0}
+    Quelles sont les hypothèses du modèle du transformateur idéal ?
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{Les pertes cuivre sont négligées.}
+        \bonne{Les pertes par courant de Foucault sont négligées.}
+        \bonne{Les pertes par hystérésis sont négligées.}
+        \bonne{Le matériau ferromagnétique est doux hors saturation.}
+        \bonne{Les lignes de champ sont parfaitement canalysées.}
+        \bonne{Le champ magnétique est uniforme dans le circuit magnétique.}
+        \mauvaise{Le champ magnétique est stationnaire dans le circuit magnétique.}
+        \mauvaise{Le matériau ferromagnétique est doux et saturé.}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{CONV2.modele}{cyclic}
+
+
+\element{CONV2.loisTransfor}{
+  \begin{question}{transfoTensions}\bareme{1}
+    Le loi de transformation sur les tensions primaire $v_1$ et secondaire $v_2$ s'écrit :
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$v_2(t)=mv_1(t)$}
+        \mauvaise{$v_2(t)=-mv_1(t)$}
+        \mauvaise{$v_1(t)=mv_2(t)$}
+        \mauvaise{$v_1(t)=-mv_2(t)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV2.loisTransfor}{
+  \begin{question}{transfoCourants}\bareme{1}
+    Le loi de transformation sur les courants primaire $i_1$ et secondaire $i_2$ s'écrit :
+    \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{$i_2(t)=mi_1(t)$}
+        \mauvaise{$i_2(t)=-mi_1(t)$}
+        \mauvaise{$i_1(t)=mi_2(t)$}
+        \bonne{$i_1(t)=-mi_2(t)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV2.loisTransfor}{cyclic}
+
+
+\element{CONV2.TransfertImpedance}{
+  \begin{question}{secondaireVersPrimaine}\bareme{1}
+    Lorsqu'on ramène le secondaire au primaire,
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{les impédences sont divisées par $m^2$ et les tensions par $m$.}
+        \mauvaise{les impédences sont multipliées par $m^2$ et les tensions par $m$.}
+        \mauvaise{les impédences sont divisées par $m$ et les tensions par $m^2$.}
+        \mauvaise{les impédences sont multipliées par $m$ et les tensions par $m^2$.}
+      \end{reponses}
+    % \end{multicols}
+  \end{question}
+}
+\element{CONV2.TransfertImpedance}{
+  \begin{question}{primaireVersSecondaire}\bareme{1}
+    Lorsqu'on ramène le primaire au secondaire,
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \mauvaise{les impédences sont divisées par $m^2$ et les tensions par $m$.}
+        \bonne{les impédences sont multipliées par $m^2$ et les tensions par $m$.}
+        \mauvaise{les impédences sont divisées par $m$ et les tensions par $m^2$.}
+        \mauvaise{les impédences sont multipliées par $m$ et les tensions par $m^2$.}
+      \end{reponses}
+    % \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV2.TransfertImpedance}{cyclic}
+
+\makeatletter
+\tikzoption{canvas is plane}[]{\@setOxy#1}
+\def\@setOxy O(#1,#2,#3)x(#4,#5,#6)y(#7,#8,#9)%
+  {\def\tikz@plane@origin{\pgfpointxyz{#1}{#2}{#3}}%
+   \def\tikz@plane@x{\pgfpointxyz{#4}{#5}{#6}}%
+   \def\tikz@plane@y{\pgfpointxyz{#7}{#8}{#9}}%
+   \tikz@canvas@is@plane
+  }
+\makeatother
+
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+\element{CONV2.pertes}{
+  \begin{question}{pertesFoucault}\bareme{1}
+    On considère un transformateur constitué d'un circuit magnétique torique d'axe de révolution $(Oz)$ sur lequel sont bobinés un enroulement primaire et un enroulement secondaire. Pour réduire les pertes par courants de Foucault, il faut
+    \begin{center}
+      \begin{tikzpicture}[
+        x= {(1cm,0cm)}, z={(0cm,1cm)}, y={(0cm,0.4cm)},
+        >=latex]
+        \begin{scope}[decoration={markings,mark=at position 1 with {\arrow{>}}}]
+          \draw[thick, postaction=decorate] (0,0,-2) -- (0,0,1.5) node[below right] {$Oz$};
+        \end{scope}
+        \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,1,0)}]
+          \draw (0,0) circle (1);
+          \draw (0,0) circle (2);
+        \end{scope}
+        \begin{scope}[canvas is plane={O(0,0,-1)x(1,0,-1)y(0,1,-1)}]
+          \draw (2,0) arc (0:-180:2);
+          \draw[dashed] (0,0) circle (1);
+          \draw[dashed] (2,0) arc (0:180:2);
+        \end{scope}
+        \draw (2,0,0) -- (2,0,-1);
+        \draw (-2,0,0) -- (-2,0,-1);
+        \draw[dashed] (1,0,0) -- (1,0,-1);
+        \draw[dashed] (-1,0,0) -- (-1,0,-1);
+        \begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow{>}}}]
+          \draw[thick, postaction=decorate] (1,0,0) -- (2,0,0) node[midway, above] {$i$};
+        \end{scope}
+        \draw[very thick] (2,0,0)  -- (2,0,-1) -- (1,0,-1) -- (1,0,0) -- cycle;
+        \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,0,1)}]
+          \draw[->,>=latex] (3,0) --++ (0.5,0) node[below] {$\vv{e_r}$};
+          \draw[->,>=latex] (3,0) --++ (0,0.5) node[right] {$\vv{e_z}$};
+          \draw (3,0) circle (0.1);
+          \draw (3,0) ++ (45:.1) --++ (-135:.2);
+          \draw (3,0) ++ (-45:.1) --++ (135:.2);
+          \draw (3,0) node[left] {$\vv{e_\theta}$};
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{découper le circuit magnétique en feuillets selon des plans orthogonaux à $\vv{e_z}$.}
+        \mauvaise{découper le circuit magnétique en feuillets selon des plans orthogonaux à $\vv{e_\theta}$.}
+        \mauvaise{utiliser un matériau ferromagnétique doux.}
+        \mauvaise{réaliser les enroulements primaire et secondaire avec un bon isolant électrique.}
+      \end{reponses}
+    % \end{multicols}
+  \end{question}
+}
+% \element{CONV2.pertes}{
+%   \begin{question}{pertesHysteresis}\bareme{1}
+%     On considère un transformateur constitué d'un circuit magnétique torique d'axe de révolution $(Oz)$ sur lequel sont bobinés un enroulement primaire et un enroulement secondaire. Pour réduire les pertes par hystérésis, il faut
+%     \begin{center}
+%       \begin{tikzpicture}[
+%         x= {(1cm,0cm)}, z={(0cm,1cm)}, y={(0cm,0.4cm)},
+%         >=latex]
+%         \begin{scope}[decoration={markings,mark=at position 1 with {\arrow{>}}}]
+%           \draw[thick, postaction=decorate] (0,0,-2) -- (0,0,1.5) node[below right] {$Oz$};
+%         \end{scope}
+%         \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,1,0)}]
+%           \draw (0,0) circle (1);
+%           \draw (0,0) circle (2);
+%         \end{scope}
+%         \begin{scope}[canvas is plane={O(0,0,-1)x(1,0,-1)y(0,1,-1)}]
+%           \draw (2,0) arc (0:-180:2);
+%           \draw[dashed] (0,0) circle (1);
+%           \draw[dashed] (2,0) arc (0:180:2);
+%         \end{scope}
+%         \draw (2,0,0) -- (2,0,-1);
+%         \draw (-2,0,0) -- (-2,0,-1);
+%         \draw[dashed] (1,0,0) -- (1,0,-1);
+%         \draw[dashed] (-1,0,0) -- (-1,0,-1);
+%         \begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow{>}}}]
+%           \draw[thick, postaction=decorate] (1,0,0) -- (2,0,0) node[midway, above] {$i$};
+%         \end{scope}
+%         \draw[very thick] (2,0,0)  -- (2,0,-1) -- (1,0,-1) -- (1,0,0) -- cycle;
+%         \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,0,1)}]
+%           \draw[->,>=latex] (3,0) --++ (0.5,0) node[below] {$\vv{e_r}$};
+%           \draw[->,>=latex] (3,0) --++ (0,0.5) node[right] {$\vv{e_z}$};
+%           \draw (3,0) circle (0.1);
+%           \draw (3,0) ++ (45:.1) --++ (-135:.2);
+%           \draw (3,0) ++ (-45:.1) --++ (135:.2);
+%           \draw (3,0) node[left] {$\vv{e_\theta}$};
+%         \end{scope}
+%       \end{tikzpicture}
+%     \end{center}
+%     % \begin{multicols}{2}
+%       \begin{reponses}
+%         \bonne{découper le circuit magnétique en feuillets selon des plans orthogonaux à $\vv{e_z}$.}
+%         \mauvaise{découper le circuit magnétique en feuillets selon des plans orthogonaux à $\vv{e_\theta}$.}
+%         \mauvaise{utiliser un matériau ferromagnétique doux.}
+%         \mauvaise{réaliser les enroulements primaire et secondaire avec un bon isolant électrique.}
+%       \end{reponses}
+%     % \end{multicols}
+%   \end{question}
+% }
+\setgroupmode{CONV2.pertes}{cyclic}

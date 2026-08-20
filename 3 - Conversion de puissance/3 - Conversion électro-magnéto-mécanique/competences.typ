@@ -1,0 +1,30 @@
+#import "@local/prepa:0.1.0": *
+
+- Exprimer l’énergie magnétique d’un enroulement enlaçant un circuit magnétique présentant un entrefer variable.
+- Calculer la force électromagnétique s’exerçant sur une partie mobile en translation en appliquant l’expression fournie $F = pdv(E,x))_i$.
+- Sur l’exemple du relais, expliquer le fonctionnement d’un contacteur électromagnétique.
+- Décrire la structure d’un moteur synchrone diphasé et bipolaire : rotor, stator, induit, inducteur.
+- Exprimer, pour une machine de perméabilité infinie à entrefer constant, le champ magnétique dans l’entrefer généré par une spire passant dans deux encoches opposées.
+- Expliquer qualitativement comment obtenir un champ dont la dépendance angulaire est sinusoïdale dans l’entrefer en associant plusieurs spires décalées.
+- Justifier l’existence d’un champ glissant statorique lorsque les deux phases sont alimentées en quadrature.
+- Justifier l’existence d’un champ glissant rotorique associé à la rotation de l’inducteur.
+- Exprimer l’énergie magnétique totale stockée dans l’entrefer en fonction de la position angulaire du rotor.
+- Calculer le moment électromagnétique s’exerçant sur le rotor en exploitant l’expression fournie $Gamma=pdv(E,theta)$.
+- Justifier la condition de synchronisme entre le champ statorique et le champ rotorique afin d’obtenir un moment moyen non nul.
+- Discuter qualitativement la stabilité du système en fonction du déphasage entre les deux champs glissants.
+- Expliquer la difficulté du démarrage et du contrôle de la vitesse d’un moteur synchrone.
+- Établir les équations électriques vérifiées par les phases de l’induit en admettant les expressions des coefficients d’inductance ; donner les représentations de Fresnel associées.
+- Justifier, à l’aide d’un bilan énergétique où seules les pertes cuivre sont envisagées, l’égalité entre la puissance électrique absorbée par les $f_"cém"$ et la puissance mécanique fournie.
+- Décrire les conditions d’utilisation de la machine synchrone en alternateur.
+- Citer des exemples d’application de la machine synchrone.
+- Décrire la structure d’un moteur à courant continu bipolaire à excitation séparée : rotor, stator, induit, inducteur.
+- Expliquer, par analogie avec le moteur synchrone, que le collecteur établit le synchronisme entre le champ statorique stationnaire et le champ rotorique quelle que soit la position angulaire du rotor.
+- Citer l’expression du moment du couple $Gamma = Phi i$ et établir l’expression de la force contre-électromotrice induite $e = Phi Omega$ par un argument de conservation énergétique.
+- Décrire qualitativement les pertes existant dans une machine réelle : pertes cuivre, pertes fer, pertes mécaniques.
+- Établir les équations électrique et mécanique.
+- Tracer la caractéristique $(Omega, Gamma)$ à tension d’induit constante.
+- Analyser le démarrage d’un moteur entrainant une charge mécanique exerçant un moment $-f Omega$.
+- \faSignLanguage Mettre en œuvre un moteur à courant continu.
+- Décrire les conditions d’utilisation de la machine à courant continu en génératrice.
+- Choisir des conventions d’orientation adaptées.
+- Citer des exemples d’application de la machine à courant continu.

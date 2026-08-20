@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \a=0.5;
+      \d=0.4;
+      \b=\a+\d;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \draw (0,\a,\a) -- (0,\a,\b) -- (0,\b,\b) node[midway,above] {$dy$} -- (0,\b,\a) node[midway,right] {$dz$} -- cycle;
+    \draw[->] (0,{\a+\d/2},{\a+\d/2}) --++ (1,0,0) node[midway,below right] {$\vv{dS}$};
+  \end{tikzpicture}

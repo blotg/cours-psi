@@ -1,0 +1,91 @@
+\element{1.2.1}{
+  \begin{questionmult}{ALI}\bareme{haut=2,p=0}
+    Pour un ALI idéal, on a
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\epsilon\approx 0$}
+        \bonne{$i_+\approx i_- \approx 0$}
+        \mauvaise{$s=\pm V_{\text{sat}}$}
+        \mauvaise{$S(p)=\frac{H_0}{1-\tau p}\mathcal{E}(p)$}
+        \mauvaise{Le système est nécessairement stable}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.2.2}{
+  \begin{questionmult}{ALIStable}\bareme{haut=2,p=0}
+    Pour un ALI idéal, en fonctionnement stable, on a
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$\epsilon\approx 0$}
+        \bonne{$i_+\approx i_- \approx 0$}
+        \mauvaise{$s=\pm V_{\text{sat}}$}
+        \mauvaise{$S(p)=\frac{H_0}{1-\tau p}\mathcal{E}(p)$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\element{1.2.2}{
+  \begin{questionmult}{ALISnstable}\bareme{haut=2,p=0}
+    Pour un ALI idéal, en fonctionnement instable, on a
+    \begin{multicols}{3}
+      \begin{reponses}
+        \mauvaise{$\epsilon\approx 0$}
+        \bonne{$i_+\approx i_- \approx 0$}
+        \bonne{$s=\pm V_{\text{sat}}$}
+        \mauvaise{$S(p)=\frac{H_0}{1-\tau p}\mathcal{E}(p)$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{1.2.2}{cyclic}
+
+\element{1.2.3}{
+  \begin{questionmult}{stabiliteMontage}\bareme{haut=2,p=0}
+    Parmi les montages suivants, lesquels sont stables ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{%
+          \begin{circuitikz}[scale=0.7,transform shape]%suiveur
+            \draw (0,0) node[en amp] (ALI) {};
+            \draw (ALI.+) --++ (-1,0) node[left] {$V_e$};
+            \draw (ALI.-) -|++ (0,1) -| (ALI.out) --++ (0.5,0) node[right] {$V_s$};
+          \end{circuitikz}
+        }
+        \bonne{%
+          \begin{circuitikz}[scale=0.7,transform shape]%ANI
+            \draw (0,0) node[en amp] (ALI) {};
+            \draw (ALI.+) -|++ (-0,-0.7) node[ground] {};
+            \draw (ALI.-) to[R=$R_1$] ++ (-3,0) node[left] {$V_e$};
+            \draw (ALI.-) --++ (0,1.5) to[R=$R_2$] ++ (2.5,0) |- (ALI.out) --++ (0.5,0) node[right] {$V_s$};
+          \end{circuitikz}
+        }
+        \bonne{%
+          \begin{circuitikz}[scale=0.7,transform shape]%intégrateur
+            \draw (0,0) node[en amp] (ALI) {};
+            \draw (ALI.+) -|++ (-0,-0.7) node[ground] {};
+            \draw (ALI.-) to[R=$R$] ++ (-3,0) node[left] {$V_e$};
+            \draw (ALI.-) --++ (0,1.5) to[C=$C$] ++ (2.5,0) |- (ALI.out) --++ (0.5,0) node[right] {$V_s$};
+          \end{circuitikz}
+        }
+        \mauvaise{%
+          \begin{circuitikz}[scale=0.7,transform shape]%comparateur
+            \draw (0,0) node[en amp,yscale=-1] (ALI) {};
+            \draw (ALI.-) --++ (-0.2,0) to[V_<=$V_0$] ++ (0,-1.5) node[ground] {};
+            \draw (ALI.+) --++ (-0.7,0) node[left] {$V_e$};
+            \draw (ALI.out) --++ (0.7,0) node[right] {$V_s$};
+          \end{circuitikz}
+        }
+        \mauvaise{%
+          \begin{circuitikz}[scale=0.7,transform shape]%CH
+            \draw (0,0) node[en amp] (ALI) {};
+            \draw (ALI.-) node[left] {$V_e$} ;
+            \draw (ALI.+) to[R=$R_1$] ++ (-3,0) -|++ (-0,-0.7) node[ground] {};
+            \draw (ALI.+) --++ (0,-1.5) to[R=$R_2$] ++ (2.5,0) |- (ALI.out) --++ (0.5,0) node[right] {$V_s$};
+          \end{circuitikz}
+        }
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}

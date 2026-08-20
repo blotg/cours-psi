@@ -1,0 +1,100 @@
+\element{CONV1.ValeurMoyenne}{
+  \begin{questionmult}{valeurMOyenneNulle}\bareme{haut=2,p=0}
+    Parmi les signaux suivants, lesquels ont une valeur moyenne nulle ? $A$, $B$ et $\omega$ sont non nuls.
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$A\cos(\omega t + \phi)$}
+        \bonne{$A\sin(\omega t)$}
+        \mauvaise{$A\cos^2(\omega t + \phi)$}
+        \mauvaise{$A\cos(\omega t + \phi)+B$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+\setgroupmode{CONV1.ValeurMoyenne}{cyclic}
+
+
+\element{CONV1.ValeurEfficace}{
+  \begin{question}{valeurEfficaceDef}\bareme{1}
+    La valeur efficace d'un signal $s$ est
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\sqrt{\left\langle s^2(t)\right\rangle}$}
+        \mauvaise{$\left\langle\sqrt{ s^2(t)}\right\rangle$}
+        \mauvaise{$\left\langle\sqrt{ s(t)}\right\rangle^2$}
+        \mauvaise{$\left\langle \sqrt{ s(t)}^2\right\rangle$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV1.ValeurEfficace}{
+  \begin{question}{valeurEfficaceSqrt2}\bareme{1}
+    Quelle affirmation est correcte ?
+      \begin{reponses}
+        \bonne{La valeur efficace d'un signal sinusoïdal d'amplitude $S$ est $\frac{S}{\sqrt{2}}$.}
+        \mauvaise{La valeur efficace d'un signal périodique d'amplitude $S$ est $\frac{S}{\sqrt{2}}$.}
+        \mauvaise{La valeur efficace d'un signal périodique de valeur moyenne $S$ est $\frac{S}{\sqrt{2}}$.}
+        \mauvaise{La valeur efficace d'un signal périodique d'amplitude $S$ et de valeur moyenne nulle est $\frac{S}{\sqrt{2}}$.}
+      \end{reponses}
+  \end{question}
+}
+\setgroupmode{CONV1.ValeurEfficace}{cyclic}
+
+
+\element{CONV1.Dipole}{
+  \begin{question}{conensateur}\bareme{1}
+    Un condensateur de capacité \SI{470}{\mu F} est alimenté par une tension périodique de valeur efficace \SI{230}{V}. Quelle puissance moyenne reçoit-il ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\SI{0}{W}}
+        \mauvaise{\SI{113}{MW}}
+        \mauvaise{\SI{25}{mW}}
+        \mauvaise{\SI{9}{nW}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV1.Dipole}{
+  \begin{question}{resistor}\bareme{1}
+    Un résistor de résistance \SI{100}{\ohm} est alimenté par une tension périodique de valeur efficace \SI{230}{V}. Quelle puissance moyenne reçoit-il ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\SI{529}{W}}
+        \mauvaise{\SI{0}{W}}
+        \mauvaise{\SI{5}{MW}}
+        \mauvaise{\SI{2}{mW}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV1.Dipole}{cyclic}
+
+
+
+\element{CONV1.Impedance}{
+  \begin{question}{impedance}\bareme{1}
+    On modélise un appareil branché au secteur par une impédance $Z = \SI{20}{\ohm} + \complexqty[print-complex-unity]{10i}{\ohm}$. La puissance moyenne qu’il reçoit.
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\SI{2100}{W}}
+        \mauvaise{\SI{3500}{W}}
+        \mauvaise{\SI{9}{W}}
+        \mauvaise{\SI{1100}{W}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{CONV1.Impedance}{
+  \begin{question}{impedance}\bareme{1}
+    On modélise un appareil électroménager branché au secteur de \SI{2100}{W} par une impédance $Z = \SI{20}{\ohm} + \complexqty[print-complex-unity]{10i}{\ohm}$. Calculer le courant efficace le traversant.
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\SI{10}{A}}
+        \mauvaise{\SI{105}{A}}
+        \mauvaise{\SI{98}{mA}}
+        \mauvaise{\SI{9}{mA}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{CONV1.Impedance}{cyclic}

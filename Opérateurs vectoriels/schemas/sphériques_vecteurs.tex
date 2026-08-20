@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=0.9;
+      \t=50;
+      \p=65;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is plane={O(0,0,0)x({cos(\t)},{sin(\t)},0)y(0,0,1)}]
+      \draw[dotted] (0,0) -- (\p:\r) coordinate (A) node[left] {$M$};
+      \draw[->] (A) --++ (\p:0.4) node[above] {$\vv{u_r}$};
+      \draw[->] (A) --++ ({\p-90}:0.4) node[left] {$\vv{u_\theta}$};
+      \draw[dotted] (\r,0) arc (0:90:\r);
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z={\r*sin(\p)}]
+      \draw[->] (A) --++ ({\t+90}:0.4) node[below] {$\vv{u_\phi}$};
+      \draw[dotted] ({\r*cos(\p)},0) arc (0:90:{\r*cos(\p)});
+    \end{scope}
+  \end{tikzpicture}

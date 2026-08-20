@@ -1,0 +1,148 @@
+\exercice{Oscillateur à filtre RLC}
+\enonce{
+On considère le montage suivant, constitué d'un montage amplificateur non-inverseur et d'un filtre RLC-série.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) node[en amp, yscale=-1] (ALI) {};
+    \draw (ALI.-) --++ (0,-1.7) to[R=$R_1$] ++ (0,-2) node[ground] {};
+    \draw (ALI.-) ++ (0,-1.7) to[R=$R_2$] ++ (2.2,0) -| (ALI.out) to[L=$L$] ++ (2,0) to[R=$r$] ++ (2,0) to[C=$C$] ++ (2,0) coordinate (sortie) to[R=$R$] ++ (0,-4.035) node[ground] {};
+    \draw (sortie) --++ (0,2) -| (ALI.+);
+    \draw[<-,>=latex] (sortie) ++ (1,0) --++ (0,-4.035) node[midway, right] {$s$};
+    \draw[<-,>=latex] (ALI.out) ++ (0.2,-0.1) --++ (0,-3.935) node[midway, right] {$e$};
+  \end{circuitikz}
+\end{center}}
+\begin{enumerate}
+    \question{Déterminer la fonction de transfert $H(p)=\dfrac{S(p)}{E(p)}$ du filtre RLC-série.}
+      [Déterminer l'impédance équivalente de $L$, $r$ et $C$ en série puis utiliser un pont diviseur de tension.]
+    \question{Donner la fonction de transfert du montage amplificateur non-inverseur.}
+    \question{À quelle condition observe-t-on des oscillations quasi-sinusoïdales ?}
+      [Utiliser les deux fonctions de transfert des questions précédentes.]
+      [Remplacer $E(p)$ dans la fonction de transfert du filtre en utilisant la fonction de transfer de l'amplificateur non-inverseur puis éliminer $E(p)$]
+      [Éliminer les traits de fraction puis prendre la partie réelle et la partie imaginaire.]
+    \question{Quelle est l'amplitude de $e(t)$ ? Quelle est celle de $s(t)$ ?}
+      [Qu'est-ce qui limite l'amplitude des oscillations ?]
+      [Quelle est l'amplitude maximale de la tension de sortie d'un ALI ?]
+      [Utiliser une des fonctions de transfert pour relier les amplitudes de $s$ et de $e$.]
+    \question{Laquelle de ces deux tensions est la << plus sinusoïdale >> ?}
+      [Est-ce le filtre passe bande ou l'ALI qui a tendance à "purifier" le spectre ?]
+    \question{À quelle condition les oscillations démarrent-elles ?}
+      [Établir une équation différentielle portant sur $e$ ou $s$.]
+      [Combiner les fonctions de transfert pour éliminer $E$ ou $S$, supprimer les traits de fraction puis passer en temporel.]
+\end{enumerate}
+
+\exercice{Oscillateur à décharge de condensateur}
+\enonce{
+On étudie le circuit suivant, où $R_1=\SI{100}{k\ohm}$, $R_2=\SI{10}{k\ohm}$, $R_3=\SI{10}{k\ohm}$ et $C=\SI{10}{nF}$.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) node[en amp] (ALI) {};
+    \draw (ALI.+) --++ (0,-1.7) to[R=$R_2$] ++ (0,-2) node[ground] {};
+    \draw (ALI.+) --++ (0,-1.7) to[R=$R_1$] ++ (2.2,0) -| (ALI.out);
+    \draw (ALI.out) node[above] {$V_s$} to[R=$R_3$,*-*] ++ (2,0) coordinate (sortie) to[C=$C$] ++ (0,-4.035) node[ground] {};
+    \draw (sortie) node[right] {$V_-$} --++ (0,2) -| (ALI.-);
+  \end{circuitikz}
+\end{center}}
+\begin{enumerate}
+    \question{Identifier le filtre passif inclus dans ce montage. Quelle est sa fonction de transfert ? Quelle est l'équation différentielle associée ?}
+      [Le montage est constitué d'un comparateur à hystérésis et d'un filtre qu'il s'agit d'identifier.]
+      [Le filtre RC-série est-il un filtre passe-haut ou passe-bas ? Quelle est la forme canonique d'une fonction de transfer de ce type ?]
+    \question{Résoudre cette équation différentielle en supposant $V_s$ constant.}
+    \question{Quel montage de l'ALI reconnait-on dans ce montage ? Donner sa caractéristique $(V_s,V_-)$.}
+      [En cas d'hésitation entre comparateur à hystérésis positif et négatif, regarder où se fait l'entrée.]
+    \question{En supposant qu'à $t=0$, $V_s=+V_\text{sat}$ et $V_-=$, tracer $V_-(t)$ et $V_s(t)$.}
+      [Tracer $V_-(t)$ en supposant que $V_s(t)=+V_\text{sat}$. Jusqu'à quand ce tracé reste-t-il valable ?]
+      [À quelle condition $V_s$ passe-t-il de $+V_\text{sat}$ à $-V_\text{sat}$ ?]
+    \question{Que vaut la période des signaux produits ?}
+      [Déterminer la demi-période, c'est-à-dire le temps nécessaire pour que $V_-$ passe de $\frac{R_2}{R_1+R_2}V_\text{sat}$ à $\frac{R_2}{R_1+R_2}V_\text{sat}$.]
+      [Résoudre complètement (constante comprise) l'équation différentielle vérifiée par $V_-$ sur une demi période. On pourra appeler $t_1$ le début de cette demi-période et $t_2$ sa fin.]
+\end{enumerate}
+
+\exercice{Oscillateur à résistance négative}
+\enonce{
+On considère le montage ci-dessous, appelé montage à résistance négative. On \textbf{suppose} l'ALI en fonctionnement stable.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) node[en amp, yscale=-1] (ALI) {};
+    \draw (ALI.-) --++ (0,-1.7) to[R=$R_1$] ++ (0,-2) node[ground] {};
+    \draw (ALI.-) ++ (0,-1.7) to[R=$R_1$] ++ (2.2,0) -| (ALI.out);
+    \draw (ALI.+) --++ (0,1.7) to[R=$R$] ++ (2.2,0) -| (ALI.out);
+    \draw (ALI.+) to[short, i<=$i$] ++ (-1,0) coordinate (entree);
+    \draw[<-,>=latex] (entree) ++ (0,-0.1) --++ (0,-4.26) coordinate (masse) node[midway, left] {$u$};
+    \draw (masse) node[ground] {};
+  \end{circuitikz}
+\end{center}}
+\begin{enumerate}
+    \question{Déterminer une relation entre la tension $u$ et la tension de sortie de l'ALI.}
+      [Le montage est-il stable ? Que peut-on dire de l'entrée différentielle $\epsilon$ ?]
+      [À l'aide d'un pont diviseur de tension entre les résistances $R_1$ et d'une loi des mailles, relier l'entrée différentielle $\epsilon$ à $u$ et la sortie de l'ALI.]
+    \question{En utilisant la loi d'Ohm, en déduire l'impédance d'entrée du montage $Z_e=\frac{\underline{u}}{\underline{i}}$.}
+      [Écrire la loi d'Ohm dans la résistance $R$.]
+      [Utiliser la fonction de transfer de la question précédente pour éliminer la tension de sortie de l'ALI dans la loi d'Ohm.]
+\end{enumerate}
+
+\enonce{
+Ce montage, qui se comporte comme une <<résistance négative>>, est placée dans le circuit suivant où $R_1=\SI{10}{k\ohm}$ et $r=\SI{10}{k\ohm}$.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) to[short, i<=$i$] ++ (-1,0) coordinate (entree) to[R, l_=$r$] ++ (-2,0) to[C, l_=$C$] ++ (0,-2) to[L, l_=$L$] ++ (0,-2) --++ (3,0) to[R,l=$Z_e$] (0,0);
+    \draw[<-,>=latex] (entree) ++ (0,-0.1) --++ (0,-3.8) node[midway, left] {$u$};
+  \end{circuitikz}
+\end{center}
+}
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \question{Déterminer une équation différentielle sur $i$.}
+    [Appliquer la loi des mailles et utiliser les caractéristiques de différents composants.]
+    [Dériver la loi des mailles et utiliser que $u_L=-L\frac{di}{dt}$, $i_c=-C\frac{di}{dt}$, $u_r=-Ri$ et $u=Z_ei$.]
+  \question{Sous quelles conditions sur la valeur de $R$ les oscillations démarrent-elles ?}
+    [A quelle condition les solutions de l'équation différentielle précédente divergent-elles ?]
+\end{enumerate}
+
+\exercice{Hartley oscillator}
+\enonce{
+First, we will study the electronic filter below, named Hartley filter.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) to[R=$R$, -*] (2,0) node[above] {$A$} to[C=$C$] (2,-2) node[ground] {};
+    \draw (2,0) to[L=$L$] (4,0) to[L=$L$] (4,-2) node[ground] {};
+    \draw[<-, >=latex] (0,-0.1) -- (0,-2) node[midway, left] {$e$};
+    \draw (0,-2) node[ground] {};
+    \draw[<-, >=latex] (5,0) -- (5,-2) node[midway, right] {$s$};
+  \end{circuitikz}
+\end{center}}
+\begin{enumerate}
+    \question{Using Kirchhoff's nodal rule in $A$, express its potential as a function of the voltages $e$ and $s$.}
+      [Si la relation des nœuds en tension n'est pas connue, appliquer la loi des nœuds et remplacer chaque courant en faisant apparaitre une tension grâce à la loi d'Ohm (en complexes) dans $R$, $L$ et $C$.]
+    \question{Ascertain $s$ as a function of the potential in $A$ thanks to the voltage diviser law. With the help of the previous question, determine the transfer function of the Hartley filter.}
+\end{enumerate}
+
+\enonce{
+The complete Hartley oscillator's electrical schema is shown below.
+\begin{center}
+  \begin{circuitikz}
+    \draw (0,0) node[en amp, yscale=-1] (ALI) {};
+    \draw (ALI.-) --++ (0,-1.7) to[R=$R_1$] ++ (0,-2) node[ground] {};
+    \draw (ALI.-) --++ (0,-1.7) to[R=$R_2$] ++ (2.2,0) -| (ALI.out);
+    \draw (ALI.out) to[R=$R$, -*] ++ (2,0) to[C=$C$] ++ (0,-4.035) node[ground] {};
+    \draw (ALI.out) ++ (2,0) to[L=$L$] ++ (2,0) coordinate (sortie) to[L=$L$] ++ (0,-4.035) node[ground] {};
+    \draw[<-,>=latex] (sortie) ++ (1,0) --++ (0,-4) node[midway, right] {$s$};
+    \draw[<-,>=latex] (ALI.out) ++ (0.2,-0.1) --++ (0,-4) node[midway, right] {$e$};
+    \draw (sortie) --++ (0,2) -| (ALI.+);
+  \end{circuitikz}
+\end{center}}
+\begin{enumerate}\setcounter{enumi}{2}
+    \question{Which operational amplifier assembly can be recognized ? Give its transfer function without any demonstration.}
+      [Pour reconnaitre le montage à ALI, celui-ci est-il stable ou instable ? L'entrée est-elle "côté" borne inverseuse ou  non-inverseuse ?]
+    \question{Under which condition do the oscillations \textbf{start} ?}
+      [Obtenir une équation différentielle portant sur $s$ ou sur $e$.]
+      [Transformer la fonction de transfert du filtre de Hartley en une équation différentielle sur $s$ et $e$. Remplacer l'un des deux en utilisant la relation entrée-sortie d'un amplificateur non-inverseur.]
+      [Les solutions de l'équation différentielle doivent-elles converger ou diverger pour que les oscillations démarrent.]
+    \question{How sinusoidal oscillations can be obtained ? What will be their frequency ?}
+      [En partant de la fonction de transfert du filtre de Hartley, éliminer $E$ et $S$.]
+      [Éliminer les fractions de l'équation ainsi obtenue et en prendre partie réelle et partie imaginaire.]
+    \question{What is the amplitude of $e$ ? What is the one of $s$ ?}
+      [Quelles sont les amplitudes de $e$ et $s$ ?]
+      [Qu'est-ce qui limite l'amplitude des oscillations ?]
+    \question{Which voltage will be the most sinusoidal ?}
+      [Est-ce l'amplificateur non-inverseur ou le filtre de Hartley qui "purifie" le spectre de son entrée ?]
+\end{enumerate}

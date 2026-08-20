@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.0": *
+
+- Citer des exemples illustrant la nécessité d’une conversion de puissance électrique.
+- Décrire l’architecture générale d’un convertisseur électronique de puissance : générateur, récepteur, processeur de puissance utilisant des interrupteurs électroniques, commande des fonctions de commutation.
+- Décrire la caractéristique idéale courant-tension de la diode.
+- Décrire la caractéristique idéale courant-tension du transistor.
+- Définir les notions de sources de courant et de tension.
+- Expliquer le rôle des condensateurs et des bobines comme éléments de stockage d’énergie assurant le lissage de la tension ou de l’intensité à haute fréquence.
+- Caractériser les sources par leur réversibilité en tension, en intensité, en puissance et citer des exemples.
+- Citer les règles d’interconnexions entre les sources.
+- Expliquer le fonctionnement d’une cellule élémentaire à deux interrupteurs assurant le transfert d’énergie entre une source de courant et une source de tension.
+- Tracer des chronogrammes.
+- Exploiter le fait que la moyenne d’une dérivée est nulle en régime périodique établi.
+- Calculer des moyennes de fonctions affines par morceaux.
+- Utiliser un bilan de puissance moyenne pour établir des relations entre les tensions et les intensités.
+- Justifier le choix des fonctions de commutation pour un hacheur série assurant l’alimentation d’un moteur à courant continu à partir d’un générateur idéal de tension continue.
+- Exprimer les valeurs moyennes des signaux.
+- Calculer l’ondulation en intensité dans l’approximation d’un hachage haute fréquence réalisant une intensité affine par morceaux.
+- Décrire la structure en pont à quatre interrupteurs et les séquences de commutation permises pour un onduleur.
+- Étudier, pour un générateur de tension continue et une charge (R,L), la réalisation d’une intensité quasi-sinusoïdale par modulation de largeur d’impulsion.
+- #compétence-TP Mettre en œuvre un convertisseur statique.

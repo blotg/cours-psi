@@ -1,0 +1,215 @@
+\section{Les oscillateurs}
+
+Un oscillateur est un montage électronique délivrant un signal périodique.La fréquence peut généralement être réglée via le choix des composants.
+
+Deux grandes familles d'oscillateurs existent :
+\begin{itemize}
+  \item les oscillateurs quasi-sinusoïdaux produisent des signaux proches de sinusoïdes
+  \item les oscillateurs à relaxation produisent des signaux créneaux ou triangulaires
+\end{itemize}
+
+Les oscillateurs sont souvent des systèmes bouclés.
+
+\section{Oscillateur quasi-sinusoïdal : l'oscillateur de Wien}
+\subsection{Montage de l'oscillateur de Wien}
+
+Les oscillateurs quasi-sinusoïdaux sont très souvent constitués
+\begin{itemize}
+  \item d'un amplificateur
+  \item d'un filtre passe-bande
+\end{itemize}
+
+Pour le filtre de Wien, le filtre passe-bande est un filtre de Wien et l'amplificateur est un amplificateur non-inverseur.
+
+\formule{Montage de l'oscillateur de Wien}[]{\schema{}{5cm}}[%
+\begin{itemize}
+  \item $v_1(t)$ est la sortie de l'amplificateur non-inverseur et l'entrée du filtre de Wien (en \unit{V})
+  \item $v_2(t)$ est l'entrée de l'amplificateur non-inverseur et la sortie du filtre de Wien (en \unit{V})
+\end{itemize}][o]
+
+\flashcard{Montage de l'oscillateur de Wien.}{}
+
+\formule{Schéma bloc}[%
+  \begin{itemize}
+    \item la circuit est dans l'ARQS
+    \item la fréquence est dans la bande passante de l'amplificateur non-inverseur
+    \item l'ALI est en régime linéaire
+  \end{itemize}]{\schema{}{4cm}}[%
+  \begin{itemize}
+    \item $R_1$, $R_2$ et $R$ sont des résistances (en \unit{\ohm})
+    \item $C$ est la capacité des condensateurs (en \unit{F})
+    \item $V_1(p)$ est la sortie de l'amplificateur non-inverseur et l'entrée du filtre de Wien (en \unit{V})
+    \item $V_2(p)$ est l'entrée de l'amplificateur non-inverseur et la sortie du filtre de Wien (en \unit{V})
+  \end{itemize}
+  ][][o]
+
+\colle{Citer le montage et établir le schéma-bloc de l'oscillateur de Wien.}
+
+\subsection{Condition d'oscillation et fréquence des oscillations}
+
+\formule{Condition d'oscillation}[%
+  \begin{itemize}
+    \item la circuit est dans l'ARQS
+    \item la fréquence est dans la bande passante de l'amplificateur non-inverseur
+    \item l'ALI est en régime linéaire
+  \end{itemize}]{Des oscillations sinusoïdales existent ssi $R_2=2R_1$}[%
+  \begin{itemize}
+    \item $R_1$ et $R_2$ sont les résistances de l'amplificateur non-inverseur (en \unit{\ohm})
+  \end{itemize}][][o]
+
+\formule{Pulsation des oscillations sinusoïdales}[%
+  \begin{itemize}
+    \item la circuit est dans l'ARQS
+    \item la fréquence est dans la bande passante de l'amplificateur non-inverseur
+    \item l'ALI est en régime linéaire
+    \item la condition d'oscillation est vérifiée
+  \end{itemize}]{$$\omega=\frac{1}{RC}$$}[%
+  \begin{itemize}
+    \item $R$ est la résistance des résistors dans le filtre de Wien (en \unit{\ohm})
+    \item $C$ est la capacité des condensateurs dans le filtre de Wien (en \unit{F})
+  \end{itemize}][][o]
+
+De manière générale, un oscillateur quasi-sinusoïdal composé d'un filtre passe-bande et d'un amplificateur oscille à la pulsation caractéristique du filtre passe-bande si les conditions d'oscillation sont vérifiées.
+
+\colle{Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition d’existence d’oscillations sinusoïdales ainsi que leur fréquence.}
+
+\subsection{Démarrage des oscillations}
+
+Si le système est stable et que les tensions sont initialement nulles, rien ne se passe. Pour que des oscillations démarrent, le système bouclé doit être instable\footnote{C'est le système bouclé qui doit être instable. Chacun des deux systèmes qui le composent sont stables.}.
+
+\formule{Condition de démarrage des oscillations}[
+  \begin{itemize}
+    \item la circuit est dans l'ARQS
+    \item la fréquence est dans la bande passante de l'amplificateur non-inverseur
+    \item l'ALI est en régime linéaire
+  \end{itemize}
+]
+{Les oscillations démarrent ssi $R_2>2R_1$}
+[
+  \begin{itemize}
+    \item $R_1$ et $R_2$ sont les résistances de l'amplificateur non-inverseur (en \unit{\ohm})
+  \end{itemize}
+][][o]
+
+La condition d'existence d'oscillations sinusoïdales apparait comme un cas limite de cette inégalité.
+
+\subsection{Saturation de l'ALI}
+
+S'il n'y avait pas la saturation de l'ALI, l'amplitude des oscillations continuerait à augmenter indéfiniment. C'est la saturation de l'ALI qui fixe l'amplitude des oscillations.
+
+\formule{Amplitude des tensions}[
+  \begin{itemize}
+    \item la circuit est dans l'ARQS
+    \item la fréquence est dans la bande passante de l'amplificateur non-inverseur
+    \item l'ALI est en régime linéaire
+    \item la condition d'oscillation est vérifiée
+  \end{itemize}
+]
+{$v_1$ a pour amplitude $V_{sat}$\\$v_2$ a pour amplitude $\frac{V_{sat}}{3}$}
+[
+  \begin{itemize}
+    \item $v_1(t)$ la sortie de l'amplificateur non inverseur et l'entrée du filtre de Wien (en \unit{V})
+    \item $v_1(t)$ l'entrée de l'amplificateur non inverseur et la sortie du filtre de Wien (en \unit{V})
+    \item $V_\text{sat}$ la tension de saturation de l'ALI ($\approx\SI{15}{V}$) (en \unit{V})
+  \end{itemize}
+][][o]
+
+La saturation de l'ALI est un phénomène non linéaire, qui modifie donc les spectres de $v_1$ et $v_2$. Expérimentalement, on observe que plus $R_2-2R_1$ est grand, plus les spectres comportent d'harmoniques et moins les signaux sont sinusoïdaux.
+
+$v_2$ est <<plus sinusoïdal>> que $v_1$ car c'est la sortie du filtre passe-bande, qui diminue l'amplitude relative des harmoniques.
+
+\colle{Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition de démarrage des oscillations et établir l’amplitude des oscillations sinusoïdales pour les deux tensions.}
+
+\section{Oscillateur à relaxation}
+\subsection{Montage de l'oscillateur à relaxation}
+L'oscillateur à relaxation est constitué d'un comparateur à hystérésis positif et d'un intégrateur.
+
+\formule{Montage de l'oscillateur à relaxation}[]{\schema{}{5cm}}
+[
+  \begin{itemize}
+    \item $u(t)$ est la sortie du comparateur à hystérésis positif et l'entrée de l'intégrateur (en \unit{V})
+    \item $v(t)$ est l'entrée du comparateur à hystérésis positif et la sortie de l'intégrateur (en \unit{V})
+  \end{itemize}
+]
+
+\flashcard{Montage de l'oscillateur à relaxation.}{}
+
+\formule{Caractéristique du comparateur à hystérésis positif}[]{\schema{}{5cm}}
+[
+  \begin{itemize}
+    \item $u(t)$ est la sortie du comparateur à hystérésis positif (en \unit{V})
+    \item $v(t)$ est l'entrée du comparateur à hystérésis positif (en \unit{V})
+  \end{itemize}
+][][o]
+
+\formule{Fonction intégrateur}
+[
+  \begin{itemize}
+    \item le circuit est dans l'ARQS
+    \item l'ALI est en régime linéaire
+  \end{itemize}
+]
+{
+  $$v(t)=v_0-\frac{1}{RC}\int_0^t u(x)dx$$
+}
+[
+  \begin{itemize}
+    \item $v(t)$ est la sortie de l'intégrateur (en \unit{V})
+    \item $u(t)$ est l'entrée de l'intégrateur (en \unit{V})
+    \item $R$ est la résistance du résistor (en \unit{\ohm})
+    \item $C$ est la capacité du condensateur (en \unit{F})
+    \item $v_0=v(t=0)$ est la valeur initiale de $v$ (en \unit{V})
+  \end{itemize}
+][][o]
+
+\colle{Citer le montage de l’oscillateur à relaxation et établir l'équation différentielle du montage intégrateur et la caractéristique du montage comparateur à hystérésis positif.}
+
+\subsection{Signaux de sortie}
+
+\formule{Alure des signaux de sortie}
+[
+  \begin{itemize}
+    \item le circuit est dans l'ARQS
+    \item l'ALI de l'intégrateur est en régime linéaire
+    \item la période est très grande devant la durée de commutation de l'ALI
+  \end{itemize}
+]
+{\schema{}{4cm}}
+[
+  \begin{itemize}
+    \item $V_{sat}$ est la tension de saturation des ALI (en \unit{V})
+    \item $R_1$ et $R_2$ les résistances des résistors du comparateur à hystérésis positif (en \unit{\ohm})
+    \item $u(t)$ est la sortie du comparateur à hystérésis positif et l'entrée de l'intégrateur (en \unit{V})
+    \item $v(t)$ est l'entrée du comparateur à hystérésis positif et la sortie de l'intégrateur (en \unit{V})
+  \end{itemize}
+][o][o]
+
+\subsection{Période d'oscillation}
+
+\formule{Période d'oscillation de l'oscillateur à relaxaton}
+[
+  \begin{itemize}
+    \item le circuit est dans l'ARQS
+    \item l'ALI de l'intégrateur est en régime linéaire
+    \item la période est très grande devant la durée de commutation de l'ALI
+  \end{itemize}
+]
+{$$T=4\frac{R_1}{R_2}RC$$}
+[
+  \begin{itemize}
+    \item $R_1$ et $R_2$ les résistances des résistors du comparateur à hystérésis positif (en \unit{\ohm})
+    \item $R$ la résistance du résistor de l'intégrateur (en \unit{\ohm})
+    \item $C$ la capacité du condensateur de l'intégrateur (en \unit{F})
+  \end{itemize}
+][o][o]
+
+Cette expression est valable tant que la période est très grande devant la durée de commutation de l'ALI.
+\schema{Influence de la vitesse de balayage sur le signal créneau.}{4cm}
+
+\application{Déterminer la durée de commuation de l'ALI.}
+
+\colle{L'équation différentielle de l'intégrateur et la caractéristique du comparateur à hystérésis étant données, établir la forme des signaux dans un oscillateur à relaxation et leur période.}
+
+\subsection{Choix de $R_1$ et $R_2$}
+
+$v(t)$ étant la sortie de l'ALI, $v\in [-V_{sat},V_{sat}]$. Pour que la commutation ait lieu, il faut que $\frac{R_1}{R_2}V_{sat}<V_{sat}$, i.e. que $R_1<R_2$.

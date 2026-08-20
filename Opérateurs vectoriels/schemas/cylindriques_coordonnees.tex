@@ -1,0 +1,22 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=1.1;
+      \t=45;
+      \z=0.7;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is xy plane at z=\z]
+      \draw[dashed] (0,0) node[left] {$z$} -- (\t:\r) coordinate (A) node[midway, above right] {$r$} node[above right] {$M$};
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z=0]
+      \draw[dashed] (0,0) -- (\t:\r) coordinate (B);
+      \draw[->] (0.3,0) arc (0:\t:0.3) node[midway, below] {$\theta$};
+    \end{scope}
+    \fill (A) circle (0.7pt);
+    \draw[dashed] (A) -- (B);
+  \end{tikzpicture}

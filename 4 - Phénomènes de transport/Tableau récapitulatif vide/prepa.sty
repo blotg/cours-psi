@@ -1,0 +1,44 @@
+\RequirePackage{luatextra}% encodage
+%\RequirePackage[utf8]{inputenc}% pour avoir un fichier UTF-8 (inutile avec LuaLaTex)
+\RequirePackage{polyglossia}% écrire en français
+\setmainlanguage{french}
+\RequirePackage{geometry}% pour réduire les marges
+\RequirePackage{tasks}% pour des listes sur plusieurs colonnes
+\RequirePackage{pifont}% pour des caractères spéciaux avec \ding{}
+\RequirePackage{fancyhdr}% pour l'entête
+\RequirePackage{wrapfig}% pour les figures flotante dans le texte
+\RequirePackage{graphicx}% pour includegraphics
+\RequirePackage[table]{xcolor}
+\RequirePackage{amsmath}% pour des commandes de maths
+\RequirePackage{siunitx}% pour la commande SI
+\RequirePackage{unicode-math}
+	\sisetup{locale = FR}
+\RequirePackage{titlesec}% pour mettre en forme les titres
+\RequirePackage[version=4]{mhchem}% pour les formules chimiques avec \ce{}
+\RequirePackage{enumitem}% pour mettre en fonrme enumerate
+%\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\pgfplotsset{samples=5000}
+\RequirePackage[european, cuteinductors]{circuitikz}% pour faire des schéma électroniques
+\usetikzlibrary{3d,calc,math}
+\RequirePackage{subcaption}
+\RequirePackage{placeins}% pour utiliser \FloatBarrier
+\RequirePackage{mhchem}% pour mettre en forme de la chimie
+\RequirePackage{filecontents}% pour les données des graphes
+\RequirePackage{tabularx}
+\makeatletter
+\tikzoption{canvas is plane}[]{\@setOxy#1}
+\def\@setOxy O(#1,#2,#3)x(#4,#5,#6)y(#7,#8,#9)%
+  {\def\tikz@plane@origin{\pgfpointxyz{#1}{#2}{#3}}%
+   \def\tikz@plane@x{\pgfpointxyz{#4}{#5}{#6}}%
+   \def\tikz@plane@y{\pgfpointxyz{#7}{#8}{#9}}%
+   \tikz@canvas@is@plane
+  }
+\makeatother
+% Pour utiliser \begin{scope}[canvas is plane={O(1,0,0)x(1,1,0)y(1,0,1)}]
+\RequirePackage{esvect}
+\newcommand{\grad}{\vv{\text{grad}}}
+\newcommand{\rot}{\vv{\text{rot}}}
+\newcommand{\divv}{\text{div}}
+\endinput

@@ -1,0 +1,1 @@
+- ferromagnétique idéal déf (µ infini)

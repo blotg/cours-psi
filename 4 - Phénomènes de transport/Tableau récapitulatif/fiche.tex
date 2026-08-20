@@ -1,0 +1,86 @@
+\documentclass{autre}
+
+\title{Analogies entre les différentes grandeurs transportée}
+\date{}
+
+\begin{document}
+  \maketitle{}\thispagestyle{empty}
+
+  \renewcommand{\tabularxcolumn}[1]{>{\small}m{#1}}
+  \newcolumntype{C}{>{\centering\arraybackslash}X}
+  \noindent
+  \begin{tabularx}{\textwidth}{| X | C | C | C | C | C | C |}
+    \hline
+    Grandeur conservative &
+    Charge &
+    Chaleur &
+    Particules &
+    Masse &
+    Volume &
+    Quantité de mouvement suivant $\vv{u}_x$\\
+    \hline
+    Unité de la grandeur &
+    $$\SI{}{C}$$ &
+    \SI{}{J} &
+    sans &
+    \SI{}{kg} &
+    \SI{}{m^3} &
+    \SI{}{kg.m.s^{-1}}\\
+    \hline
+    \vspace{1em}Grandeur par unité de volume et son unité\vspace{1em} &
+    $\rho$ (\SI{}{C.m^{-3}}) &
+    $\mu u$ (\SI{}{J.m^{-3}}) &
+    $n$ (\SI{}{m^{-3}}) &
+    $\mu$ (\SI{}{kg.m^{-3}}) &
+    \cellcolor{gray} &
+    $\mu\vv{v}$ (\SI{}{kg.m^{-2}.s^{-1}})\\
+    \hline
+    Vecteur densité de courant et son unité &
+    $$\vv{j}_\text{élec}=nq\vv{v}$$ ($\SI{}{C.m^{-2}.s^{-1}}=\SI{}{A.m^{-2}}$) &
+    $$\vv{j}_\text{Q}$$ ($\SI{}{J.m^{-2}.s^{-1}}=\SI{}{W.m^{-2}}$) &
+    $$\vv{j}_\text{n}$$ ($\SI{}{m^{-2}s^{-1}}$) &
+    $$\vv{j}_m=\mu\vv{v}$$ ($\SI{}{kg.m^{-2}.s^{-1}}$) &
+    $$\vv{j}_V=\vv{v}$$ ($\SI{}{m^3.m^{-2}.s^{-1}}=\SI{}{m.s^{-1}}$) &
+    $$\vv{j}_{p,\text{conv}}=\mu v\vv{v}$$ $$\vv{j}_{p,\text{diff}}$$ ($\SI{}{kg.m.s^{-1}.m^{-2}.s^{-1}}=\SI{}{kg.m^{-1}.s^{-2}}$) \\
+    \hline
+    Débit et son unité &
+    $$I=\iint\vv{j}_{élec}.\vv{dS}$$ ($\SI{}{C.s^{-1}}=\SI{}{A}$) &
+    $$\varphi=\iint\vv{j}_{Q}.\vv{dS}$$ ($\SI{}{J.s^{-1}}=\SI{}{W}$) &
+    $$\Phi=\iint\vv{j}_{n}.\vv{dS}$$ ($\SI{}{s^{-1}}$) &
+    $$D_m=\iint\mu\vv{v}.\vv{dS}$$ ($\SI{}{kg.s^{-1}}$) &
+    $$D_V=\iint\vv{v}.\vv{dS}$$ ($\SI{}{m^3.s^{-1}}$) &
+    $$F=\iint\vv{j}_{p}.\vv{dS}$$ ($\SI{}{kg.m.s^{-1}.s^{-1}}=\SI{}{N}$) \\
+    \hline
+    Équation locale de conservation de la grandeur et son origine &
+    $$\frac{\partial \rho}{\partial t} = -\text{div} \vv{j}_\text{élec}$$ &
+    Premier principe : $$\mu\frac{\partial u}{\partial t} = -\text{div} \vv{j}_\text{th} + \mathcal{P}_V$$ &
+    $$\frac{\partial n}{\partial t} = -\text{div} \vv{j}_\text{n} + a$$ &
+    $$\dfrac{\partial \mu}{\partial t} = -\divv(\vv{j}_m)$$ &
+    \cellcolor{gray} &
+    Théorème de la résultante cinétique \\
+    \hline
+    Équation de conservation \textbf{en régime stationnaire} (locale et globale) &
+    $$\divv(\vv{j}_\text{élec}) = 0$$ $$\oiint\vv{j}_\text{élec}.\vv{dS}=0$$ Le courant est le même sur chaque section d'un tube de courant.&
+    $$\divv(\vv{j}_\text{Q}) = 0$$ $$\oiint\vv{j}_\text{th}.\vv{dS}=0$$ Le flux thermique est le même sur chaque section d'un tube de courant.&
+    $$\divv(\vv{j}_\text{n}) = 0$$ $$\oiint\vv{j}_\text{n}.\vv{dS}=0$$ Le débit de particules est le même sur chaque section d'un tube de courant.&
+    $$\divv(\mu\vv{v}) = 0$$ $$\oiint\mu\vv{v}.\vv{dS}=0$$ Le débit massique est le même sur chaque section d'un tube de courant.&
+    Si l'écoulement est \textbf{homogène} et \textbf{incompressible} $$\divv(\vv{v}) = 0$$ $$\oiint\vv{v}.\vv{dS}=0$$ Le débit volumique est le même sur chaque section d'un tube de courant.&
+    \cellcolor{gray} \\
+    \hline
+    Vecteur densité de courant comme grandient &
+    $$\vv{j}_\text{élec} = \gamma \vv{E} = -\gamma \grad V$$ &
+    $$\vv{j}_\text{Q} = -\lambda \grad T$$ &
+    $$\vv{j}_\text{n} = -D \grad n$$ &
+    \cellcolor{gray} &
+    \cellcolor{gray} &
+    $$\vv{j}_{p,\text{diff,}} = -\nu\grad(\mu v)$$ \\
+    \hline
+    Équation de diffusion (sans terme source) &\cellcolor{gray} &
+    $$\frac{\partial T}{\partial t} - \frac{\lambda}{\mu c_V}\Delta T = 0$$ &
+    $$\frac{\partial n}{\partial t} - D\Delta n = 0$$ &
+    \cellcolor{gray} &
+    \cellcolor{gray} &
+    \cellcolor{gray} \\
+    \hline
+  \end{tabularx}
+\end{document}

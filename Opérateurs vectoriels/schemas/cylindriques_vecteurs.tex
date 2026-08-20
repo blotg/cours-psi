@@ -1,0 +1,19 @@
+\begin{tikzpicture}[
+    x= {(-0.353cm,-0.353cm)}, z={(0cm,1cm)}, y={(1cm,0cm)},
+    scale=3,
+    >=latex]
+    \tikzmath{
+      \r=1.1;
+      \t=45;
+      \z=0.7;
+      }
+    \draw[->] (0,0,0) -- (1,0,0) node[below left] {$\vv{u_x}$};
+    \draw[->] (0,0,0) -- (0,1,0) node[below right] {$\vv{u_y}$};
+    \draw[->] (0,0,0) -- (0,0,1) node[above left] {$\vv{u_z}$};
+    \begin{scope}[canvas is xy plane at z=\z]
+      \draw[dotted] (0,0) -- (\t:\r);
+      \draw[->] (\t:\r) coordinate (A) node[below left] {$M$} --++ (\t:0.4) node[below right] {$\vv{u_r}$};
+      \draw[->] (A) --++ ({\t+90}:0.4) node[right] {$\vv{u_\theta}$};
+    \end{scope}
+    \draw[->] (A) --++ (0,0,0.4) node[above] {$\vv{u_z}$};
+  \end{tikzpicture}

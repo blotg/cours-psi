@@ -1,0 +1,41 @@
+\element{schemaEuler}{
+  \begin{question}{schemaEuler}\bareme{1}
+    Pour un problème d'Euler $y'=f(y,t)$, le schéma d'Euler s'écrit
+    \begin{multicols}{3}
+      \begin{reponses}
+        \bonne{$y_{i+1}=y_i+\Delta t f(y_i,t)$}
+        \mauvaise{$y_{i+1}=y_i+\frac{1}{\Delta t} f(y_i,t)$}
+        \mauvaise{$y_{i+1}=y_i+\frac{1}{\Delta t} f(y_{i+1},t)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{problemeEuler}{
+  \begin{questionmult}{problemenEuler}\bareme{haut=1,p=0}
+    Parmi les équations différentielles suivantes, lesquelles peuvent être mises sous forme de problème d'Euler ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\frac{du}{dt}=-\frac{1}{\tau}u$}
+        \bonne{$\frac{d\vv{v}}{dt}=\vv{g}-\frac{k}{m}\vv{v}$}
+        \bonne{$m\frac{d^2x}{dt}=-kv^2$}
+        \bonne{$m\frac{d^2\vv{OM}}{dt}=-k\vv{v}+m\vv{g}$}
+        \bonne{$a\frac{d^3y}{dt^3}+b\frac{d^2y}{dt^2}+c\frac{dy}{dt}+dy=e$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{diffusionEuler}{
+  \begin{question}{diffusionEuler}\bareme{1}
+    Pour résoudre numériquement l'équation de la chaleur, $\frac{\partial^2 T}{\partial x^2}$ peut être approché par 
+    \begin{multicols}{4}
+      \begin{reponses}
+        \bonne{$\frac{T_{i,j+1}-2T_{i,j}+T_{i,j}}{\Delta x^2}$}
+        \mauvaise{$\frac{T_{i,j+1}-T_{i,j}+T_{i,j}}{2\Delta x^2}$}
+        \mauvaise{$\frac{T_{i,j+1}-T_{i,j}}{\Delta x}$}
+        \mauvaise{$\frac{T_{i,j+1}+T_{i,j}}{2\Delta x}$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}

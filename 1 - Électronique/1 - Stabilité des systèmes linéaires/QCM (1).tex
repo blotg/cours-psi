@@ -1,0 +1,50 @@
+\element{1.1.1}{
+  \begin{question}{tempLaplace}\bareme{2}
+    Un système linéaire a pour fonction de transfert $H(p)=\frac{A}{1+\tau p}$, où $A$ et $\tau$ sont des constantes.
+
+    Quelle est l'équation différentielle liant l'entrée $e(t)$ à la sortie $s(t)$ de ce système linéaire ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$s(t)+\tau\frac{ds}{dt} = Ae(t)$}
+        \mauvaise{$s(t)-\tau\frac{ds}{dt} = Ae(t)$}
+        \mauvaise{$e(t)+\tau\frac{de}{dt} = As(t)$}
+        \mauvaise{$e(t)-\tau\frac{de}{dt} = As(t)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
+\element{1.1.2}{
+  \begin{questionmult}{stabiliteTemp}\bareme{mz=2}
+    Un système linéaire d'entrée $e(t)$ et de sortie $s(t)$ est régi l'équation différentielle suivante $$A_0 e(t) + A_1 \frac{de}{dt} = B_0 s(t) +B_1 \frac{ds}{dt} + B_2 \frac{d^2 s}{dt^2}$$ Les coefficients $A_0$, $A_1$, $A_2$, $B_0$, $B_1$ et $B_2$ sont des constantes.
+
+    À quelle(s) condition(s) ce système linéaire est-il stable ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$B_0$, $B_1$ et $B_2$ sont de même signe}
+        \mauvaise{$A_0$, $A_1$ et $A_2$ sont de même signe}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.1.3}{
+    \begin{questionmult}{stabiliteLaplace}\bareme{haut=2,p=0}
+    Parmi les fonctions de transfert ci-dessous, laquelle (lesquelles) décrit(vent) un système stable ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$H =\dfrac{1+2\tau p}{1+2\tau p+ (\tau p)^2}$}
+        \bonne{$H =\dfrac{1-2\tau p}{1+2\tau p+ (\tau p)^2}$}
+        \mauvaise{$H =\dfrac{1+2\tau p}{1+2\tau p- (\tau p)^2}$}
+        \mauvaise{$H =\dfrac{1+2\tau p}{1-2\tau p- (\tau p)^2}$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+% \element{1.1.4}{
+%     \begin{question}{demo}
+%     Démontrer le critère de stabilité en fonction du signe des coefficients pour un système d'ordre 1 à coefficients constants défini par l'équation différentielle $A e(t) = B_0s(t) + B_1\frac{ds}{dt}$
+%     \AMCOpen{lines=5}{\mauvaise[F]{f}\bareme{0}\mauvaise[P]{p}\bareme{2}\bonne[J]{j}\bareme{4}}
+%   \end{question}
+% }

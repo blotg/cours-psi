@@ -1,0 +1,27 @@
+\begin{tikzpicture}[
+  x= {(1cm,0cm)}, z={(0cm,1cm)}, y={(0cm,0.4cm)},
+  >=latex]
+  \begin{scope}[decoration={markings,mark=at position 0.92 with {\arrow{>}}}]
+    \draw[thick, postaction=decorate] (0,0,-2) -- (0,0,1.5) node[below right] {$I(t)$};
+  \end{scope}
+  \begin{scope}[canvas is plane={O(0,0,0)x(1,0,0)y(0,1,0)}]
+    \draw (0,0) circle (1);
+    \draw (0,0) circle (2);
+  \end{scope}
+  \begin{scope}[canvas is plane={O(0,0,-1)x(1,0,-1)y(0,1,-1)}]
+    \draw (2,0) arc (0:-180:2);
+    \draw[dashed] (0,0) circle (1);
+    \draw[dashed] (2,0) arc (0:180:2);
+  \end{scope}
+  \draw (2,0,0) -- (2,0,-1);
+  \draw (-2,0,0) -- (-2,0,-1);
+  \draw[dashed] (1,0,0) -- (1,0,-1);
+  \draw[dashed] (-1,0,0) -- (-1,0,-1);
+  \begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow{>}}}]
+    \draw[thick, postaction=decorate] (1,0,0) -- (2,0,0) node[midway, above] {$i$};
+  \end{scope}
+  \draw[very thick] (2,0,0)  -- (2,0,-1) -- (1,0,-1) -- (1,0,0) -- cycle;
+  \draw[<->] (-1,0,0) -- (-2,0,0) node[midway, above] {$a$};
+  \draw[<->] (-2.2,0,0) -- (-2.2,0,-1) node[midway, left] {$a$};
+  \draw[<->] (0,0,0) -- (-1,0,0) node[midway, above] {$b$};
+\end{tikzpicture}
