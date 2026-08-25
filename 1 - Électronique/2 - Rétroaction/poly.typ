@@ -6,4 +6,4 @@
 #include "compétences.typ"; <compétences>
 #include "cours.typ"; <cours>
 #include "méthodes.typ"; <méthodes>
-#include "TD.typ"; <TD>
+#include "../2 - Rétroaction/TD.typ"; <TD>

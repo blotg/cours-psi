@@ -17,3 +17,6 @@
 *.swp
 .goutputstream-*
 .DS_Store
+
+# Editor preferences
+.vscode/

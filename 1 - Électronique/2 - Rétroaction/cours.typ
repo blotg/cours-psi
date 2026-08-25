@@ -328,3 +328,11 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
 ]
 
 #question-de-colle("Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.")
+
+= Annexe : extrait de la notice du TL081
+
+#figure(
+    image("images/datasheet.pdf", page: 3, width: 100%),
+    caption: "Notice du TL081 - caractéristiques électriques (page 3)",
+)
+
