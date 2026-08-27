@@ -240,7 +240,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
         caption: [Spectre (schématique) du signal audio $v_e$.],
     )
 
-    Le spectre de $v_s$ comporte alors, en plus de la raie à $f_p=qty("520","kHz")$, deux bandes latérales, images du spectre de $v_e$, entre #qty("500", "kHz") et #qty("520", "kHz") d'une part, et entre #qty("520", "kHz") et #qty("540", "kHz") d'autre part :
+    Le spectre de $v_s$ comporte alors, en plus de la raie à $f_p=qty("520","kHz")$, deux bandes latérales, images du spectre de $v_e$, entre #qty("500", "kHz") et #qty("519980", "Hz") d'une part, et entre #qty("520020", "Hz") et #qty("540", "kHz") d'autre part :
 
     #figure(
         canvas({
