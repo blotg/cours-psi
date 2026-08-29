@@ -1,28 +1,11 @@
 #import "@local/prepa:0.1.1": *
 
-
-
-// TODO
-/*
-ALI idéal
-
-#flashcard(
-    recto: "Comment étudier un montage avec ALI stable",
-    verso: "Si l'ALI est idéal, alors $epsilon = 0$.",
-)
-// \flashcard{Comment étudier un montage avec ALI instable}{Si $\epsilon > 0$ alors $s(t)=V_{sat}$ ; si $\epsilon < 0$ alors $s(t)=-V_{sat}$.}
-*/
-
-
-
-
-
 #show: cours.with(infos: yaml("infos.yml"))
 
 #let grandeurs = (
     "A(p)": (signification: "la fonction de transfert de l'ALI", unité: "sans unité"),
     "S(p)": (signification: "la sortie de l'ALI", unité: unit("V")),
-    "epsilon(p)": (signification: "l'entrée différentielle de l'ALI", unité: unit("V")),
+    "epsilon": (signification: "l'entrée différentielle de l'ALI", unité: unit("V")),
     "A_0": (signification: "le gain statique de l'ALI", unité: "sans unité"),
     "tau": (signification: "le temps de réponse de l'ALI", unité: unit("s")),
     "e": (signification: "l'entrée du montage", unité: unit("V")),
@@ -55,7 +38,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
 #encadré(
     titre: "Fonction de transfert de l'ALI",
     hypothèses: "Le régime est linéaire",
-    grandeurs: sub-dictionary(grandeurs, ("A(p)", "S(p)", "epsilon(p)", "A_0", "tau")),
+    grandeurs: sub-dictionary(grandeurs, ("A(p)", "S(p)", "epsilon", "A_0", "tau")),
     connaitre: true,
 )[
     $
@@ -122,6 +105,46 @@ Le modèle présenté dans la partie précédente a des limites.
     "Décrire le modèle de l'ALI en précisant les ordres de grandeurs du gain statique et du temps de réponse, ainsi que ses limitations.",
 )
 
+== Modèle de l'ALI idéal
+
+Dans le modèle de l'ALI idéal, le gain statique est infini et le temps de réponse est nul.
+
+Dans le modèle de l'ALI idéal, deux régimes existent :
+- le régime saturé où la sortie vaut $V_"sat"$ ou $-V_"sat"$
+- le régime linéaire où l'entrée différentielle est nulle
+
+#encadré(
+    titre: "Comportement de l'ALI idéal",
+    hypothèses: (
+        "L'ALI est idéal (gain statique infini et temps de réponse nul)",
+    ),
+    grandeurs: sub-dictionary(grandeurs, ("epsilon", "s", "V_\"sat\"")),
+)[
+    #grid(
+        columns: (1fr, 1fr),
+        [
+            #set align(center)
+            *Régime saturé*\
+            si $epsilon > 0$ alors $s(t)=V_"sat"$\
+            si $epsilon < 0$ alors $s(t)=-V_"sat"$
+        ],
+        [
+            #set align(center)
+            *Régime linéaire*
+            $ epsilon = 0 $
+        ],
+    )
+]
+
+#flashcard(
+    recto: "Fonctionnement de l'ALI idéal en régime sature",
+    verso: "si $epsilon > 0$ alors $s(t)=V_\"sat\"$\\ si $epsilon < 0$ alors $s(t)=-V_\"sat\"$",
+)
+#flashcard(
+    recto: "Fonctionnement de l'ALI idéal en régime linéaire",
+    verso: "$epsilon = 0$",
+)
+
 = L'ALI dans un montage avec rétroaction négative.
 #{
     grandeurs.insert("S(p)", (signification: "la sortie du montage", unité: unit("V")))
@@ -181,7 +204,7 @@ Le montage étudié dans cette partie est couramment utilisé pour amplifier des
         "circuit dans l'ARQS",
         "ALI en régime linéaire",
     ),
-    grandeurs: sub-dictionary(grandeurs, ("S(p)", "E(p)", "epsilon(p)", "A_0", "tau", "R_1", "R_2")),
+    grandeurs: sub-dictionary(grandeurs, ("S(p)", "E(p)", "epsilon", "A_0", "tau", "R_1", "R_2")),
     savoir-faire: true,
 )[
     #schéma(hauteur: 7cm)
@@ -199,7 +222,7 @@ La plupart des montages utilisant un ALI sont des systèmes bouclés comportant 
         [$R_1$" et $R_2$ sont du même ordre de grandeur.],
     ),
     savoir-faire: true,
-    grandeurs: sub-dictionary(grandeurs, ("H(p)", "S(p)", "E(p)", "epsilon(p)", "A_0", "tau", "R_1", "R_2")),
+    grandeurs: sub-dictionary(grandeurs, ("H(p)", "S(p)", "E(p)", "epsilon", "A_0", "tau", "R_1", "R_2")),
 )[
     $
         H(p) = (1+R_1/R_2) / (1+ (1+R_1/R_2) tau/A_0 p)
@@ -221,7 +244,7 @@ Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différe
         "Il y a une rétroaction négative"
     ),
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("epsilon(p)",)),
+    grandeurs: sub-dictionary(grandeurs, ("epsilon",)),
 )[
     Le système est généralement stable et $epsilon$ est faible.
 ]
@@ -273,6 +296,10 @@ Le produit gain bande-passante $H_0 times Delta omega = A_0/tau$ ne dépend que 
 
 Il est parfois nécessaire d'associer plusieurs filtres en cascade. Il est alors nécessaire que chaque filtre ne perturbe pas celui placé en amont et ne soit pas facilement perturbé par celui placé en aval. Pour cela, on cherche à concevoir des filtres ayant une impédance d'entrée élevée et une impédance de sortie faible.
 
+== Étude de l'amplificateur non-inverseur avec un ALI idéal
+La présence d'une rétroaction négative stabilisant le montage permet de supposer l'ALI en régime linéaire. Si l'ALI est idéal, la fonction de transfert du montage amplificateur non-inverseur peut être déterminée simplement.
+
+#application[Déterminer la fonction de transfert de l'amplificateur non-inverseur en supposant l'ALI idéal.]
 
 = L'ALI dans un montage avec rétroaction positive : le comparateur à hystérésis négatif.
 == Présentation du montage
@@ -354,7 +381,10 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
     "Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.",
 )
 
-= Annexe : extrait de la notice du TL081
+#pagebreak()
+#show: appendix
+
+= Extrait de la notice du TL081
 
 #figure(
     image("images/datasheet.pdf", page: 3, width: 100%),
