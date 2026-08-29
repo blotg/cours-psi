@@ -47,6 +47,11 @@ L'ALI est un composant électronique actif#footnote[Un composant actif est un co
 == Modèle de l'ALI
 L'entrée différentielle est la différence de potentiel entre l'entrée non-inverseuse et l'entrée inverseuse : $epsilon=V_+-V_-$.
 
+#manipulation(titre: "Découverte expérimentale de l'ALI")[
+    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions réglable et dont la sortie va à un ALI alimenté en #qty("15", "V") et #qty("-15", "V") et on observe la tension de sortie sur un oscilloscope.
+    #schéma(hauteur: 4cm)
+]
+
 #encadré(
     titre: "Fonction de transfert de l'ALI",
     hypothèses: "Le régime est linéaire",
@@ -59,6 +64,10 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
 ]
 
 La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible pour la plupart des applications et le gain est très élevé et ne peut pas être réglé. L'ALI ne peut donc pas être utilisé seul. On utilise l'ALI dans des montages permettant de surmonter ces limitations.
+
+#manipulation(titre: "Saturation de l'ALI")[
+    On reprend la manipulation précédente et on augmente l'amplitude du GBF.
+]
 
 #encadré(
     titre: "Saturation",
@@ -87,6 +96,10 @@ La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible po
 
 == Limitations du modèle de l'ALI
 Le modèle présenté dans la partie précédente a des limites.
+
+#manipulation(titre: "Vitesse de balayage")[
+    On reprend le montage précédent et on remplace le signal sinusoïdal par un signal créneau.
+]
 
 / Vitesse de balayage: La dérivée de la tension de sortie est bornée à une valeur appelée *vitesse de balayage* (slew rate en anglais). La tension de sortie ne peut pas croitre ou décroitre plus rapidement que la vitesse de balayage.
 
@@ -234,6 +247,11 @@ Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différe
     Calculer la bande passante d'un amplificateur non-inverseur ayant un gain de $100$ réalisé avec un ALI utilisé en TP.
 ]
 
+#manipulation(titre: "Amplificateur non-inverseur")[
+    On réalise le montage de l'amplificateur non-inverseur et en place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope.
+    #schéma(hauteur: 3cm)
+]
+
 La bande passante de l'amplificateur non-inverseur est considérablement plus grande que celle de l'ALI. Le gain de l'amplificateur non-inverseur peut être réglé par les résistances $R_1$ et $R_2$. Ceci pallie les défauts de l'ALI comme amplificateur.
 
 Le produit gain bande-passante $H_0 times Delta omega = A_0/tau$ ne dépend que de l'ALI. Pour cette raison, le produit gain bande-passante figure sur la notice de l'ALI (_gain-bandwidth product_).
@@ -314,6 +332,11 @@ Pour décrire le fonctionnement du comparateur à hystérésis, on représente s
     #schéma(hauteur: 5cm)
 ]
 
+#manipulation(titre: "Cycle d’hystérésis expérimental")[
+    On réalise le montage du comparateur à hystérésis négatif et on place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope en mode XY.
+    #schéma(hauteur: 3cm)
+]
+
 == Fonction mémoire
 En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du système ne dépend pas que de l'état actuel de l'entrée mais aussi de son état passé.
 
@@ -327,7 +350,9 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
     - $e in [-R_1 / (R_1+R_2) V_"sat", R_1 / (R_1+R_2) V_"sat"]$ conserve la valeur précédente de la sortie (effet mémoire)
 ]
 
-#question-de-colle("Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.")
+#question-de-colle(
+    "Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.",
+)
 
 = Annexe : extrait de la notice du TL081
 
