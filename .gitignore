@@ -1,0 +1,26 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# Typst build cache
+*.typstcache/
+
+# Editor / OS backups & temp files
+*~
+*.swp
+.goutputstream-*
+.DS_Store
+
+# Editor preferences
+.vscode/
+
+# Copies nominatives / par place — contiennent des données élèves
+*à imprimer*.pdf
+fascicules/
