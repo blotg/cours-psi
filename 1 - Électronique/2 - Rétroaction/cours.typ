@@ -30,8 +30,20 @@ L'ALI est un composant électronique actif#footnote[Un composant actif est un co
 == Modèle de l'ALI
 L'entrée différentielle est la différence de potentiel entre l'entrée non-inverseuse et l'entrée inverseuse : $epsilon=V_+-V_-$.
 
-#manipulation(titre: "Découverte expérimentale de l'ALI")[
-    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions réglable et dont la sortie va à un ALI alimenté en #qty("15", "V") et #qty("-15", "V") et on observe la tension de sortie sur un oscilloscope.
+#manipulation(
+    titre: "Découverte expérimentale de l'ALI",
+    matériel: (
+        "GBF",
+        "Oscilloscope",
+        "Alimentation symétrique +15V",
+        "Breadboard \"Rétroaction\"",
+        "3 adaptateurs BNC/babane",
+        "3 cables rouges",
+        "3 cables noirs",
+        "Caméra pour projection",
+    ),
+)[
+    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions et dont la sortie va à un ALI alimenté en #qty("15", "V") et #qty("-15", "V") et on observe la tension de sortie sur un oscilloscope.
     #schéma(hauteur: 4cm)
 ]
 
