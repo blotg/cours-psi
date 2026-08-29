@@ -13,7 +13,15 @@
 }
 
 #let appendix(body) = {
-    set heading(numbering: "A.1", supplement: [Annexe])
+    set heading(
+        numbering: (..n) => {
+            let n = n.pos()
+            // Dans un cours/poly, `offset: 1` préfixe un niveau fantôme (0) : on l'ignore.
+            if n.len() > 1 and n.first() == 0 { n = n.slice(1) }
+            numbering("A.1", ..n)
+        },
+        supplement: [Annexe],
+    )
     counter(heading).update(0)
     show heading: it => {
         set align(center)
