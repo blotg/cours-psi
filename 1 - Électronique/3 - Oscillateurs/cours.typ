@@ -63,7 +63,7 @@ Pour le filtre de Wien, le filtre passe-bande est un filtre de Wien et l'amplifi
     grandeurs: sub-dictionary(grandeurs, ("v_1", "v_2")),
     connaitre: true,
 )[
-    #schéma(hauteur: 8cm)
+    #carreaux(8cm)
 ]
 
 #flashcard(
@@ -112,7 +112,7 @@ Le fonctionnement des parties de l'oscillateur de Wien peut être représenté p
         "l'ALI est en régime linéaire",
     ),
 )[
-    #schéma(hauteur: 5cm)
+    #carreaux(5cm)
 ]
 
 #question-de-colle("Schématiser le montage et établir le schéma-bloc de l'oscillateur de Wien.")
@@ -177,6 +177,43 @@ Si le système est stable et que les tensions sont initialement nulles, rien ne 
 
 La condition d'existence d'oscillations sinusoïdales apparait comme un cas limite de cette inégalité.
 
+#manipulation(
+    titre: "Démarrage des oscillations",
+    matériel: (
+        "oscilloscope",
+        "alim. sym.",
+        "breadboard \"Oscillateurs\"",
+        "boite à décades de résistances",
+        "2 adaptateurs banane-BNC",
+        "caméra de projection sur pied"
+    )
+)[
+    On réalise le montage de l'oscillateur de Wien avec une résistance $R_2$ réglable. On cherche les valeurs de $R_2$ pour lesquelles des oscillations apparaissent spontanément. On mesure la fréquence des oscillations dans le cas limite.
+    #figure(
+        zap.circuit({
+            import zap: *
+            import draw: *
+            opamp("ALI", (0, 0), invert: true)
+            resistor("R2", (-1.5, -1.5), (1.5, -1.5), label: (content: $R_2$, anchor: "south"), variable: true)
+            resistor("R1", (-1.5, -1.5), (-1.5, -4), label: qty("10", "kO"))
+            swire("R1.in", "ALI.minus", axis: "y")
+            swire("ALI.out", "R2.out")
+            frame("G1", "R1.out")
+
+            resistor("Rs", (3, 0), (5, 0), label: qty("10", "kO"))
+            capacitor("Cs", (5, 0), (7, 0), label: qty("100", "nF"))
+            resistor("Rp", (7, -0), (7, -3), label: (content: qty("10", "kO"), anchor: "south"))
+            capacitor("Cp", (8.5, 0), (8.5, -3), label: qty("100", "nF"))
+            frame("GR", "Rp.out")
+            frame("GC", "Cp.out")
+            wire("Cs.out", "Cp.in")
+
+            wire("ALI.out", "Rs.in")
+            swire("Cp.in", (rel: (2, 0)), (rel: (-2, 1.3), to: "ALI.plus"), "ALI.plus", axis: "y")
+        }),
+    )
+]
+
 == Saturation de l'ALI
 S'il n'y avait pas la saturation de l'ALI, l'amplitude des oscillations continuerait à augmenter indéfiniment tant que la condition de démarrage des oscillations reste vérifiée. C'est la saturation de l'ALI qui fixe l'amplitude des oscillations.
 
@@ -214,7 +251,7 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
     grandeurs: sub-dictionary(grandeurs, ("u", "v")),
     connaitre: true,
 )[
-    #schéma(hauteur: 7cm)
+    #carreaux(7cm)
 ]
 
 #flashcard(
@@ -260,7 +297,7 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
         "le circuit est dans l'ARQS",
     ),
 )[
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 #encadré(
@@ -297,7 +334,35 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
         "la période est très grande devant la durée de commutation de l'ALI",
     ),
 )[
-    #schéma(hauteur: 4cm)
+    #carreaux(4cm)
+]
+
+#manipulation(titre: "Forme des signaux de sortie")[
+    On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=qty("22","kO")$
+    #figure(
+        zap.circuit({
+            import zap: *
+            import draw: *
+            opamp("ALI", (0, 0), invert: true)
+            resistor("R2", (-2, 1.5), (2, 1.5), label: $R_2$, variable: true)
+            resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: qty("10", "kO"))
+            frame("G1", (rel: (-.5, -.5), to: "ALI.minus"))
+            swire("G1", "ALI.minus", axis: "y")
+            swire("ALI.out", "R2.out")
+            swire("R2.in", "ALI.plus", axis: "y")
+
+            opamp("ALI2", (8, 0))
+            resistor("R", (rel: (-1, 0), to: "ALI2.minus"), (rel: (-3, 0)), label: qty("10", "kO"))
+            capacitor("C", (6, 2), (10, 2), label: qty("100", "nF"))
+            frame("G2", (rel: (-.5, -.5), to: "ALI2.plus"))
+            swire("G2", "ALI2.plus", axis: "y")
+            swire("ALI2.out", "C.out")
+            swire("C.in", "ALI2.minus", axis: "y")
+
+            swire("ALI.out", "R.out")
+            swire("ALI2.out", (11, 3), (rel: (-0.3, 0), to: "R1.out"), "R1.out")
+        }),
+    )
 ]
 
 == Période d'oscillation
@@ -339,4 +404,8 @@ La tension $v(t)$ étant la sortie de l'ALI, $v in [-V_"sat",V_"sat"]$. Si cette
 
 #application[
     Tracer les chronogrammes de $u(t)$ et $v(t)$ dans le cas où $R_1 > R_2$. On supposera qu'initialement, $u(0) = -V_"sat"$ et $v(0) = 0$.
+]
+
+#manipulation(titre: "Condition d'oscillation")[
+    On reprend le montage précédent et on change la valeur de $R_2$.
 ]
