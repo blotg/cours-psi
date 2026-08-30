@@ -268,6 +268,20 @@
     )
 }
 
+// Zone quadrillée seule (tracé à main levée, croquis…), sur toute la largeur.
+// `hauteur` : hauteur de la zone. `bordure` : entoure la zone d'un filet.
+#let carreaux(hauteur, bordure: false) = [#block(
+        width: 100%,
+        height: hauteur,
+        above: _écart,
+        below: _écart,
+        radius: _rayon,
+        stroke: if bordure { _filet },
+        clip: true,
+        breakable: false,
+        place(center + horizon, rect(width: 100%, height: 100%, fill: _quadrillage, stroke: none)),
+    ) <carreaux>]
+
 // -- Blocs d'activité ---------------------------------------------------
 
 #let application(titre: "", contenu) = _bloc(
@@ -280,7 +294,7 @@
 
 #let exemple(titre: "", contenu) = _bloc("Exemple", contenu, titre: titre, étiquette-de: <exemple>)
 
-#let manipulation(titre: "", contenu) = _bloc(
+#let manipulation(titre: "", matériel: (), contenu) = _bloc(
     "Manipulation",
     contenu,
     titre: titre,

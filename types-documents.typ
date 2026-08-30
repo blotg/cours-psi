@@ -210,11 +210,13 @@
         set heading(numbering: "1.")
         it
     }
-    if "élève" in sys.inputs {
-        [#set align(right); *#sys.inputs.at("élève")*#if "binôme" in sys.inputs [ (avec #sys.inputs.at("binôme"))]]
-    } else {
-        hide[#set align(right); *Prénom Nom* (avec Prénom Nom)]
-    }
+    if "élève" in sys.inputs [
+        #set align(right)
+        *#sys.inputs.at("élève")*
+        #if "binôme" in sys.inputs [
+            (avec #sys.inputs.at("binôme"))
+        ]
+    ]
 
     [*#align(center, text(17pt)[#titre-doc])* <titre>]
     doc
