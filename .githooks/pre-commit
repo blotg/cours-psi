@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+# Recompile les PDF (cours / TD / poly) des chapitres dont une source
+# apparait dans le commit en cours, et les ajoute au commit.
+#
+# - Ne recompile QUE des PDF deja suivis par git (jamais de nouveau fichier).
+# - Une modif sous prepa/ => tous les chapitres sont recompiles.
+# - Un chapitre qui ne compile pas : simple avertissement, le commit continue
+#   (son PDF garde l'ancienne version).  Pour annuler le commit dans ce cas :
+#       git config hooks.typstStrict true
+#   Contourner le hook entierement :  git commit --no-verify
+#
+# Activation (une fois par clone) :  git config core.hooksPath .githooks
+#
+# Prerequis : `typst` dans le PATH.
+
+export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"   # sortie PDF reproductible
+
+# core.quotePath=false : chemins accentues en clair (sinon "\303\251"...)
+git() { command git -c core.quotePath=false "$@"; }
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+# Fichiers Ajoutes / Copies / Modifies / Renommes dans l'index
+changed=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -n "$changed" ] || exit 0
+
+# Extensions dont depend un rendu
+ext_rx='\.(typ|ya?ml|csv|json|txt|dat|png|jpe?g|svg|gif|webp|bmp|tiff?)$'
+
+# --- Dossiers-chapitres a recompiler --------------------------------------
+if printf '%s\n' "$changed" | grep -qE '^prepa/'; then
+    dirs=$(git ls-files '*/cours.typ' '*/poly.typ' | sed 's#/[^/]*$##' | sort -u)
+else
+    dirs=$(
+        printf '%s\n' "$changed" | grep -E "$ext_rx" | while IFS= read -r f; do
+            d=${f%/*}
+            while [ "$d" != "$f" ] && [ -n "$d" ]; do
+                if [ -e "$d/cours.typ" ] || [ -e "$d/poly.typ" ]; then
+                    printf '%s\n' "$d"
+                    break
+                fi
+                f=$d
+                d=${d%/*}
+            done
+        done | sort -u
+    )
+fi
+[ -n "$dirs" ] || exit 0
+
+# --- Compilation ---------------------------------------------------------
+fail=0
+IFS='
+'
+for d in $dirs; do
+    for base in cours TD poly; do
+        [ -f "$d/$base.typ" ] || continue
+        git ls-files --error-unmatch "$d/$base.pdf" >/dev/null 2>&1 || continue
+
+        printf '  typst  %s/%s.typ\n' "$d" "$base"
+        if ( cd "$d" && typst compile --diagnostic-format short "$base.typ" ); then
+            git add "$d/$base.pdf"
+        else
+            fail=1
+        fi
+    done
+done
+
+if [ "$fail" -ne 0 ]; then
+    if [ "$(git config --bool hooks.typstStrict 2>/dev/null)" = true ]; then
+        printf '\n  Compilation typst en echec -- commit annule (hooks.typstStrict).\n'
+        printf '  Corrige, ou : git commit --no-verify\n\n'
+        exit 1
+    fi
+    printf '\n  Avertissement : PDF non regeneres pour les chapitres ci-dessus.\n'
+    printf '  Le commit continue avec leurs versions precedentes.\n\n'
+fi
+exit 0

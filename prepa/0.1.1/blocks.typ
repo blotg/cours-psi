@@ -41,7 +41,43 @@
     }
 }
 
+// -- Blocs référençables ------------------------------------------------
+// Chaque type de bloc numéroté est une figure(kind: …) : un label posé sur
+// l'appel (ex. #manipulation(...)[...] <ma-manip>) devient alors
+// référençable avec @ma-manip, qui affiche « Supplément N » (lien cliquable),
+// exactement comme pour un heading numéroté.
+#let _genres-blocs = (
+    "encadré",
+    "schéma",
+    "application",
+    "exemple",
+    "manipulation",
+    "préparatoire",
+    "matériel",
+)
+// Ces figures n'ont ni légende ni mise en page propre : elles ne servent
+// qu'au compteur et à la référence. align(start) annule le centrage que
+// figure() applique par défaut à son contenu ; l'apparence redevient
+// entièrement celle de _boite ci-dessous.
+//
+// À appliquer une fois dans la mise en page du document (fait par
+// init-document) : une règle `show` au niveau module ne se propage pas
+// à travers `import`, d'où cette fonction.
+#let styles-blocs(doc) = {
+    show figure: it => if type(it.kind) == str and it.kind in _genres-blocs {
+        align(start, it.body)
+    } else {
+        it
+    }
+    doc
+}
+
+// Numéro (au sens de figure(kind: genre)) du bloc en cours de construction,
+// formaté selon `format` (cf. numbering(), ex. "1" ou "I").
+#let _numéro-bloc(genre, format: "1") = context numbering(format, ..counter(figure.where(kind: genre)).get())
+
 // Enveloppe : rectangle fermé arrondi = bandeau + corps.
+// `genre` (avec `supplement`) rend la boîte référençable : voir ci-dessus.
 #let _boite(
     bandeau,
     corps,
@@ -50,8 +86,10 @@
     inset-corps: (x: _inset-x, y: 0.6em),
     breakable: true,
     écart: _écart,
-    étiquette: <bloc>,
-) = [#block(
+    genre: none,
+    supplement: none,
+) = {
+    let boîte = block(
         breakable: breakable,
         width: 100%,
         above: écart,
@@ -72,15 +110,18 @@
             )
             block(width: 100%, above: 0pt, fill: fond-corps, inset: inset-corps, corps)
         },
-    ) #étiquette]
+    )
+    if genre != none { figure(kind: genre, supplement: supplement, numbering: "1", caption: none, boîte) } else { boîte }
+}
 
 // Bloc courant : bandeau standard + corps.
-#let _bloc(intitulé, corps, titre: none, marqueur: none, noir: false, fond-corps: none, étiquette-de: <bloc>) = _boite(
+#let _bloc(intitulé, corps, titre: none, marqueur: none, noir: false, fond-corps: none, genre: none, supplement: none) = _boite(
     _bandeau(intitulé, titre: titre, marqueur: marqueur, noir: noir),
     corps,
     noir: noir,
     fond-corps: fond-corps,
-    étiquette: étiquette-de,
+    genre: genre,
+    supplement: supplement,
 )
 
 // -- Questions ---------------------------------------------------------------
@@ -119,7 +160,7 @@
         )) <coups-de-pouce>]
 }
 
-#let entourage() = {
+#let entourage(graine: "") = {
     let L = (
         "ma grand-mère",
         "mon grand-père",
@@ -138,10 +179,15 @@
         "mon chien",
         "mon chat",
     )
-    context {
-        let n = counter(heading).get().sum() + datetime.today().year() * 36500 + datetime.today().ordinal() * 100
-        return L.at(calc.rem(n, L.len()))
+    // Choix déterministe à partir du titre de l'exercice (hachage type
+    // « polynomial rolling hash »). Pas d'aléa d'horloge : la compilation
+    // reste reproductible et deux exercices distincts tombent sur des
+    // personnes bien réparties dans la liste.
+    let n = 0
+    for octet in array(bytes(repr(graine))) {
+        n = calc.rem(n * 31 + octet, 2147483647)
     }
+    L.at(calc.rem(n, L.len()))
 }
 
 #let exercice(
@@ -155,7 +201,7 @@
     #numQuestion.update(0)
     #heading(depth: 1, [
         #if explique [
-            #text(font: "Noto Emoji", emoji.bubble.speech.r) J'explique à #entourage() :
+            #text(font: "Noto Emoji", emoji.bubble.speech.r) J'explique à #entourage(graine: titre) :
         ]
         #if ouvert {
             text(font: "Noto Emoji", emoji.face.think)
@@ -177,19 +223,11 @@
     #body
 ]
 
-// -- Compteurs de démonstration / manipulation ------------------------------
+// -- Marqueur « savoir-faire » (bout de bandeau des encadrés) --------------
+// Un simple pictogramme, sans numéro : le numéro du bloc est désormais dans
+// le bandeau lui-même (cf. _numéro-bloc et les fonctions de bloc plus bas).
 
-#let compteur-demo = counter("démonstration")
-#let demo() = [
-    #compteur-demo.step()
-    $text(font: "D050000L", "-")^#context compteur-demo.display()$
-]
-
-#let compteur-manip = counter("manipulation")
-#let manip() = [
-    #compteur-manip.step()
-    $text(font: "Noto Emoji", #emoji.hands.raised)^#context compteur-manip.display("I")$
-]
+#let demo() = text(font: "D050000L", "-")
 
 // -- Encadré de cours ------------------------------------------------------
 
@@ -235,12 +273,14 @@
     }
 
     _bloc(
-        if titre != "" { titre } else { "À retenir" },
+        [Point clé #_numéro-bloc("encadré")],
         corps,
+        titre: if titre != "" { titre },
         marqueur: marqueur,
         noir: true,
         fond-corps: _fond-encadré,
-        étiquette-de: <encadré>,
+        genre: "encadré",
+        supplement: "point clé",
     )
 }
 
@@ -255,7 +295,7 @@
     let vide = contenu.pos().len() == 0
     if hauteur == auto and vide { hauteur = 6cm }
     _boite(
-        _bandeau("Schéma", titre: if titre != "" { titre }),
+        _bandeau([Schéma #_numéro-bloc("schéma")], titre: if titre != "" { titre }),
         block(clip: true, width: 100%, height: hauteur, {
             if quadrillage == true or (quadrillage == auto and vide) {
                 place(center + horizon, rect(width: 100%, height: 100%, fill: _quadrillage))
@@ -264,7 +304,8 @@
         }),
         inset-corps: 0pt,
         breakable: false,
-        étiquette: <schéma>,
+        genre: "schéma",
+        supplement: "schéma",
     )
 }
 
@@ -285,24 +326,40 @@
 // -- Blocs d'activité ---------------------------------------------------
 
 #let application(titre: "", contenu) = _bloc(
-    "Application",
+    [Application #_numéro-bloc("application")],
     contenu,
     titre: titre,
-    marqueur: demo(),
-    étiquette-de: <application>,
+    marqueur: text(font: "D050000L", "-"),
+    genre: "application",
+    supplement: "application",
 )
 
-#let exemple(titre: "", contenu) = _bloc("Exemple", contenu, titre: titre, étiquette-de: <exemple>)
+#let exemple(titre: "", contenu) = _bloc(
+    [Exemple #_numéro-bloc("exemple")],
+    contenu,
+    titre: titre,
+    genre: "exemple",
+    supplement: "exemple",
+)
 
 #let manipulation(titre: "", matériel: (), contenu) = _bloc(
-    "Manipulation",
+    [Manipulation #_numéro-bloc("manipulation")],
     contenu,
     titre: titre,
-    marqueur: manip(),
-    étiquette-de: <manipulation>,
+    marqueur: text(font: "Noto Emoji", emoji.hands.raised),
+    genre: "manipulation",
+    supplement: "manipulation",
 )
 
-#let préparatoire(contenu) = _bloc("Travail préparatoire", contenu, noir: true, étiquette-de: <préparatoire>)
+// préparatoire et matériel : uniques dans un document, donc pas de numéro
+// affiché dans le bandeau (mais restent référençables : @label => « … 1 »).
+#let préparatoire(contenu) = _bloc(
+    "Travail préparatoire",
+    contenu,
+    noir: true,
+    genre: "préparatoire",
+    supplement: "travail préparatoire",
+)
 
 #let lien(url) = {
     import "@preview/tiaoma:0.3.0": qrcode
@@ -328,7 +385,8 @@
                 #list(..items)
             ]),
         ),
-        étiquette-de: <matériel>,
+        genre: "matériel",
+        supplement: "matériel",
     )
 }
 
@@ -351,25 +409,38 @@
     )
 }
 
-#let évaluation(appel-prof: false, barème: (), rotation: true, contenu) = {
-    context if (
-        not rotation
-            or "numéro-copie" not in sys.inputs
-            or calc.rem(int(sys.inputs.at("numéro-copie")), i-évaluation.final().first()) == i-évaluation.get().first()
-    ) {
-        _bloc(
-            if appel-prof { "Appel prof — Évaluation" } else { "Évaluation" },
-            if barème == () { contenu } else {
-                grid(
-                    columns: (1fr, auto),
-                    column-gutter: 1.4em,
-                    contenu,
-                    block(stroke: (left: _filet), inset: (left: 1em), _barème(barème)),
-                )
-            },
-            noir: true,
-            étiquette-de: <évaluation>,
-        )
+// Pas de genre/figure ici (donc pas référençable par @label), à la différence
+// des autres blocs : la rotation entre copies exige que le pas du compteur
+// reste un statement top-level inconditionnel, incompatible avec figure().
+//
+// Rotation : chaque évaluation occupe `nombre` créneaux consécutifs (défaut
+// 1) ; la copie n° k reçoit l'évaluation dont le créneau contient
+// k modulo (total des créneaux). `nombre` > 1 ⇒ une même évaluation est
+// proposée à plusieurs binômes.
+#let évaluation(appel-prof: false, barème: (), rotation: true, nombre: 1, contenu) = {
+    assert(type(nombre) == int and nombre >= 1, message: "évaluation : `nombre` doit être un entier ≥ 1")
+    context {
+        let total = i-évaluation.final().first()
+        let copie = if "numéro-copie" in sys.inputs {
+            calc.rem(int(sys.inputs.at("numéro-copie")), total)
+        }
+        let début = i-évaluation.get().first()
+        if not rotation or copie == none or (début <= copie and copie < début + nombre) {
+            _bloc(
+                if appel-prof { "Appel prof — Évaluation" } else { "Évaluation" },
+                if barème == () { contenu } else {
+                    grid(
+                        columns: (1fr, auto),
+                        column-gutter: 1.4em,
+                        contenu,
+                        block(stroke: (left: _filet), inset: (left: 1em), _barème(barème)),
+                    )
+                },
+                noir: true,
+                // Vue « prof » (sans --input numéro-copie) : poids de rotation.
+                marqueur: if copie == none { $#nombre / #total$ },
+            )
+        }
     }
-    i-évaluation.step()
+    i-évaluation.update(n => n + nombre)
 }

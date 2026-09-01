@@ -15,6 +15,7 @@
     show link: underline
     import "lib.typ": *
     set-round(mode: "figures")
+    show: styles-blocs
     doc
 }
 
@@ -197,7 +198,7 @@
     doc
 }
 
-#let TP(numéro: none, titre: none, date: datetime.today(), liste-élèves: none, doc) = {
+#let TP(numéro: none, titre: none, date: datetime.today(), doc) = {
     let titre-doc = "TP"
     if numéro != none {
         titre-doc = titre-doc + [ #numéro]

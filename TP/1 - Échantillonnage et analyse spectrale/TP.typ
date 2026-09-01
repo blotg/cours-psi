@@ -2,11 +2,10 @@
 
 #show: TP.with(
     titre: "Échantillonnage et analyse spectrale",
-    liste-élèves: "../élèves.csv",
 )
 
 #préparatoire[
-    Lire l'introduction, le début de la partie #ref(<partie>, supplement: none) et faire l'application #context compteur-demo.at(<application-à-préparer>).first().
+    Lire l'introduction, le début de la partie #ref(<partie>, supplement: none) et faire l'application #ref(<application-à-préparer>, supplement: none).
 ]
 
 #matériel(
@@ -143,8 +142,7 @@ L'acquisition est réglée par 3 nombres :
 
 #application[
     Quelle relation lie ces 3 nombres ?
-]
-#metadata(none)<application-à-préparer>
+]<application-à-préparer>
 
 On a donc 2 "degrés de liberté" sur l'acquisition. Lorsqu'on change un des trois paramètres dans le logiciel d'acquisition, un des deux autres est nécessairement modifié.
 
