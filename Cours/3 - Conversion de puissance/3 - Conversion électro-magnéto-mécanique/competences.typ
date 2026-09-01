@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Exprimer l’énergie magnétique d’un enroulement enlaçant un circuit magnétique présentant un entrefer variable.
 - Calculer la force électromagnétique s’exerçant sur une partie mobile en translation en appliquant l’expression fournie $F = pdv(E,x))_i$.

@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Définir la particule de fluide comme un système mésoscopique de masse constante.
 - Distinguer vitesse microscopique et vitesse mésoscopique.

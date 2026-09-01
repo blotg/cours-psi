@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 #exercice(
   titre: "Mutual inductance between a wire and a frame",

@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Citer les hypothèses du transformateur idéal.
 - Établir les lois de transformation des tensions et des courants du transformateur idéal, en respectant l’algébrisation associée aux bornes homologues.

@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Exploiter un schéma de procédé légendé pour identifier les différentes opérations unitaires.
 - Identifier un procédé discontinu ou continu.

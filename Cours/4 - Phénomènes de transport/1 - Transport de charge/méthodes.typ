@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Déterminer la résistance d'un conducteur électrique
 + Déterminer la relation entre $va(j)$ et $va(E)$.

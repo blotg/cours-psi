@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Définir un système fermé approprié pour réaliser un bilan de grandeur extensive.
 - Exprimer les principes de la thermodynamique pour un écoulement stationnaire sous la forme.

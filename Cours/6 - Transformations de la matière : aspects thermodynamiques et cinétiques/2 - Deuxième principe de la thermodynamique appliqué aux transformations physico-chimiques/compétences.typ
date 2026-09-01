@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Justifier que l’enthalpie libre est le potentiel thermodynamique adapté à l’étude des transformations isothermes, isobares et spontanées.
 - Exprimer l’entropie créée en fonction de la variation d’enthalpie libre.

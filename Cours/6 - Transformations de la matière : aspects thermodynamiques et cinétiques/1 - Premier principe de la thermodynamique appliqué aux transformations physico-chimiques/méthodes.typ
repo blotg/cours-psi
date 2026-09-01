@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Déterminer l'enthalpie standard de réaction à partir de données thermodynamiques
 + Compléter la table : $standard(Delta_f H)=0$ pour les corps simples dans leur état standard.

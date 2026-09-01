@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": full-poly
+#import "@local/prepa:0.1.1": full-poly
 
 #let infos = yaml("infos.yml")
 #show: full-poly.with(infos: infos)

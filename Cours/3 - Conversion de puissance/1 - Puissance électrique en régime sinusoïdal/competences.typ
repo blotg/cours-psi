@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Définir le facteur de puissance, faire le lien avec la représentation des tensions et des courants sur un diagramme de Fresnel.
 - Citer et exploiter la relation $P = U_"eff" I_"eff" cos phi$.

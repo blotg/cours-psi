@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Transformer un système ouvert $Sigma^0$ en système fermé
 

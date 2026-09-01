@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Identifier le caractère linéaire d'une équation aux dérivées partielles.
 - Établir la relation de dispersion.

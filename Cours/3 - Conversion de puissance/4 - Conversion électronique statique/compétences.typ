@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Citer des exemples illustrant la nécessité d’une conversion de puissance électrique.
 - Décrire l’architecture générale d’un convertisseur électronique de puissance : générateur, récepteur, processeur de puissance utilisant des interrupteurs électroniques, commande des fonctions de commutation.

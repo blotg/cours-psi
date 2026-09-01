@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Représenter la loi des mailles sur un diagramme de Fresnel
 + Écrire la loi des mailles en utilisant les notations complexes.

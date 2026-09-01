@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Appliquer le théorème de la résultante cinétique à une particule de fluide
 + Faire le bilan des forces

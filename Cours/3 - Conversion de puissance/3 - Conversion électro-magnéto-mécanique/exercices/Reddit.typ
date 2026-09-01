@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
     titre: "Diy motor isn't working, what is the problem with it ?",

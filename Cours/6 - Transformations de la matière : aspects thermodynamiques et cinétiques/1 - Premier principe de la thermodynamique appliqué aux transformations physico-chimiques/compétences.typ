@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Déterminer l'enthalpie standard de réaction à l'aide de tables de données thermodynamiques.
 - Associer le signe de l’enthalpie standard de réaction au caractère endothermique ou exothermique de la réaction.

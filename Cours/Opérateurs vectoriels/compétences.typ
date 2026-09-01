@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Relier le gradient à la différentielle d’un champ scalaire à $t$ fixé.
 - Exprimer les composantes du gradient en coordonnées cartésiennes.

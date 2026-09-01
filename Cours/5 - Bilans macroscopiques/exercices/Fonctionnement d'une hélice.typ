@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
     titre: "Fonctionnement d'une hélice",

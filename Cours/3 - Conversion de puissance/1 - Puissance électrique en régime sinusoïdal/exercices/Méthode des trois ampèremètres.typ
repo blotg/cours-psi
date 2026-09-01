@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
     titre: "Méthode des trois ampèremètres",
@@ -13,10 +13,10 @@ Les grandeurs $i(t)$, $i_1(t)$ et $i_2(t)$ sont sinusoïdales de valeurs efficac
     zap.circuit({
         import zap: *
 
-        ampermeter("A", (0, 0), (2, 0), i: $i(t)$)
-        ampermeter("A1", "A.out", (rel: (0, -2)), i: (content: $i_1(t)$, anchor: "east", label-distance: 15pt))
+        ammeter("A", (0, 0), (2, 0), i: $i(t)$)
+        ammeter("A1", "A.out", (rel: (0, -2)), i: (content: $i_1(t)$, anchor: "east", label-distance: 15pt))
         resistor("Z", "A1.out", (rel: (0, -2)), label: $underline(Z)$)
-        ampermeter("A2", (4, 0), (rel: (0, -2)), i: (content: $i_2(t)$, anchor: "east", label-distance: 15pt))
+        ammeter("A2", (4, 0), (rel: (0, -2)), i: (content: $i_2(t)$, anchor: "east", label-distance: 15pt))
         resistor("R", "A2.out", (rel: (0, -2)), label: $R$)
         wire("R.out", (0, -4))
         wire("A.out", "A2.in")

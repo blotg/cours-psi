@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Citer les deux modes de transfert de particules.
 - Exprimer le débit de particules comme le flux du vecteur $va(j_N)$ à travers une surface orientée.

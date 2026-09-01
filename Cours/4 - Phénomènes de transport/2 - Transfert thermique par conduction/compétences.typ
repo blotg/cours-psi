@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
   - Énoncer et exploiter les principes de la thermodynamique pour une transformation élémentaire.
   - Utiliser avec rigueur les notation $d$ et $delta$ en leur attachant une signification.

@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Décrire, à partir d’une formule fournie exprimant le champ d’un dipôle magnétique, le champ créé par un aimant à grande distance et représenter qualitativement les lignes de champ magnétique.
 - Utiliser les expressions fournies de l’énergie  potentielle, de la résultante et du moment.

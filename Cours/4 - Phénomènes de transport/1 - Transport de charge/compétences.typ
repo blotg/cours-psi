@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 - Passer d’une description microscopique (porteurs de charges, vitesse des porteurs) aux grandeurs mésoscopiques $rho$ et $va(j)$.
 - Écrire l'intensité comme le flux du vecteur densité de courant électrique à travers une surface orientée.

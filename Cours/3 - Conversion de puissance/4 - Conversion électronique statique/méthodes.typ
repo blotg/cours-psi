@@ -1,4 +1,4 @@
-#import "@local/prepa:0.1.0": *
+#import "@local/prepa:0.1.1": *
 
 = Lister les états des interrupteurs
 Pour $N$ interrupteurs, il y a $2^N$ états possibles. Pour les lister, on peut compter en binaire, chaque bit représentant l'état d'un interrupteur : 
