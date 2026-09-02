@@ -1,12 +1,15 @@
 #!/bin/sh
 #
 # Recompile les PDF (cours / TD / poly / TP) des chapitres dont une source
-# apparait dans le commit en cours, et les ajoute au commit.
+# apparait dans le commit en cours.
 #
-# - Ne recompile QUE des PDF deja suivis par git (jamais de nouveau fichier).
+# - Les PDF produits sont des artefacts de build : ils sont ignores par git
+#   (cf. .gitignore) et ne sont donc PAS ajoutes au commit. Le hook sert a les
+#   garder a jour sur le disque et a verifier que tout compile encore.
+# - Un PDF est (re)genere qu'il existe deja ou non.
 # - Une modif sous prepa/ => tous les chapitres sont recompiles.
-# - Un chapitre qui ne compile pas : simple avertissement, le commit continue
-#   (son PDF garde l'ancienne version).  Pour annuler le commit dans ce cas :
+# - Un chapitre qui ne compile pas : simple avertissement, le commit continue.
+#   Pour annuler le commit dans ce cas :
 #       git config hooks.typstStrict true
 #   Contourner le hook entierement :  git commit --no-verify
 #
@@ -55,15 +58,9 @@ IFS='
 for d in $dirs; do
     for base in cours TD poly TP; do
         [ -f "$d/$base.typ" ] || continue
-        git ls-files --error-unmatch "$d/$base.pdf" >/dev/null 2>&1 || continue
-        [ -f "$d/$base.pdf" ] || continue   # PDF absent du disque (supprime volontairement) : on n'y touche pas
 
         printf '  typst  %s/%s.typ\n' "$d" "$base"
-        if ( cd "$d" && typst compile --diagnostic-format short "$base.typ" ); then
-            git add "$d/$base.pdf"
-        else
-            fail=1
-        fi
+        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" ) || fail=1
     done
 done
 
@@ -74,6 +71,6 @@ if [ "$fail" -ne 0 ]; then
         exit 1
     fi
     printf '\n  Avertissement : PDF non regeneres pour les chapitres ci-dessus.\n'
-    printf '  Le commit continue avec leurs versions precedentes.\n\n'
+    printf '  Le commit continue (les sources, elles, sont bien commitees).\n\n'
 fi
 exit 0

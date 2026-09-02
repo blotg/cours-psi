@@ -20,3 +20,11 @@
 
 # Editor preferences
 .vscode/
+
+# PDF produits a partir des sources typst (regeneres par le hook pre-commit).
+# Les autres PDF (datasheet, sujets de DM, corriges scannes, documents
+# fournis...) restent suivis par git.
+cours.pdf
+TD.pdf
+poly.pdf
+TP.pdf
