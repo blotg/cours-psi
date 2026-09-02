@@ -1,12 +1,20 @@
 #import "@local/prepa:0.1.1": *
 
 #show: TP.with(
-    titre: "Échantillonnage et analyse spectrale",
+    titre: "Filtre de Wien",
 )
 
 #préparatoire()[
-    Lire l'énoncé du TP et ses annexes et effectuer l'@application-calcul-RC, l'@application-GdB-Python
+    Lire l'énoncé du TP et ses annexes et effectuer l'@application-calcul-RC et l'@application-GdB-Python.
 ]
+
+#matériel(
+    groupe: (
+       "GBF et oscilloscope",
+       "platine d'essai et fils de connexion",
+       "résistances et condensateurs disponibles dans la salle de TP",
+    ),
+)
 
 #évaluation(
     appel-prof: true,
@@ -22,13 +30,14 @@
 
 = Introduction
 
-L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert.
+L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert afin de la confronter à son expression théorique.
 
 = Réalisation et étude préliminaire
 
 Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP de sorte que
-- sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
-- sa résistance soit comprise entre #qty("2", "kΩ") et #qty("20", "kΩ").
++ sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
++ sa résistance doit être très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","mO")) ;
++ son impédance d'entrée à haute fréquence doit être suffisamment grande pour ne pas faire saturer en courant l'ALI.
 
 #application()[
     Choisir des valeurs pour $R$ et $C$.
@@ -38,11 +47,10 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 
 #évaluation(
     barème: (
-        ([les valeurs de ], 2),
-        ([les signaux prennent toute la place], 2),
-        ([on voit quelques périodes], 2),
-        ([critère sur l'amplitude], 2),
-        ([estimation de la fréquence], 2),
+        ([critère 1], 3),
+        ([critère 2], 2),
+        ([critère 3], 3),
+        ([incertitude sur $f_0$], 2),
     ),
 )[
     Choix des valeurs de $R$ et $C$ et calcul de l'incertitude sur la fréquence caractéristique $f_0$.
@@ -88,10 +96,10 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 
 = Tracé et analyse du diagramme de Bode
 
-Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point par point réalisé à l'aide du GBF et de l'oscilloscope. Les tracés seront réalisés avec Python grâce à la bibliothèque pyplot, notamment la fonction `semilogx` de la bibliothèque `matplotlib.pyplot` qui fait le tracé avec les abscisses en échelle logarithmique. La fonction `semilogx` prend les mêmes arguments que la fonction `plot` à la place de laquelle elle s'utilise.
+Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point par point réalisé à l'aide du GBF et de l'oscilloscope. Les tracés seront réalisés avec Python grâce à la bibliothèque pyplot, notamment la fonction `semilogx` de la bibliothèque `matplotlib.pyplot` qui fait le tracé avec les abscisses en échelle logarithmique (voir @annexe-fonctions-python).
 
 #application()[
-    Expliquer pourquoi in est nécessaire de mesurer également l'amplitude de la tension d'entrée, issue du GBF, plutôt que de lire sa valeur sur l'écran de celui-ci.
+    Expliquer pourquoi il est préférable de mesurer également l'amplitude de la tension d'entrée, issue du GBF, plutôt que de lire sa valeur sur l'écran de celui-ci.
 ]
 
 #manipulation()[
@@ -120,7 +128,7 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
 )[
     L'enseignant dérègle l'oscilloscope et le binôme le re-règle sans utiliser le bouton auto-scale.
 
-    Le binôme montre ensuite comment mesure les grandeurs d'intérêt.
+    Le binôme montre ensuite comment il mesure les grandeurs d'intérêt.
 ]
 
 #évaluation(appel-prof: true, barème: (
@@ -133,7 +141,7 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
     L'enseignant regarde les courbes.
 ]
 
-L'analyse manuelle du diagramme de Bode ne peut être faite qu'à partir des asymptotes. Dans ce TP, comme les données sont numérisées, on peut faire des traitements plus avancés et notamment une régression sur les données expérimentales.
+L'analyse manuelle du diagramme de Bode ne peut être faite qu'à partir des asymptotes. Dans ce TP, comme les données sont numérisées, on peut faire des traitements plus avancés et notamment un ajustement de la fonction de transfert théorique sur les données expérimentales.
 
 Pour cela, il est nécessaire de définir en Python la fonction de Bode théorique du filtre de Wien.
 
@@ -151,17 +159,12 @@ Pour cela, il est nécessaire de définir en Python la fonction de Bode théoriq
 
 Pour vérifier l'adéquation entre les diagrammes de Bode théorique et expérimental, et pour déterminer les paramètres $A$, $f_0$ et $Q$, on peut effectuer un ajustement (_fit_ en anglais), c'est-à-dire chercher la courbe théorique passant au plus près des points expérimentaux.
 
-Pour cela, on utilisera la fonction `curve_fit` de la bibliothèque `scipy.optimize`. Celle-ci prend en arguments
-- la fonction à ajuster (son premier argument doit être l'abscisse et les suivants les paramètres à ajuster),
-- la liste des abscisses des points expérimentaux,
-- la liste des ordonnées des points expérimentaux,
-- un paramètre optionnel `bounds` (tuple ou liste de tuples) qui correspond aux bornes inférieure et supérieure des paramètres à ajuster (par exemple, avec `bounds=(0,np.inf)`, les paramètres seront contraints à être positifs).
-Elle renvoie un tuple dont le premier élément est la liste des valeurs optimales des paramètres de la fonction.
+On utilisera la fonction `curve_fit` de la bibliothèque `scipy.optimize` (voir @annexe-fonctions-python).
 
 #manipulation()[
     Écrire des instructions Python permettant d'effectuer l'ajustement de la fonction définie à l'@application-GdB-Python.
 
-    Les instructions devront afficher les valeurs optimales des paramètres $A$, $f_0$ et $Q$.
+    Les instructions devront afficher les valeurs des paramètres $A$, $f_0$ et $Q$ pour lesquelles la fonction de transfert théorique passe au plus près des points expérimentaux.
 ]
 
 Pour savoir si l'ajustement est correct, il est d'usage de tracer sur le même graphique les points expérimentaux et la courbe théorique obtenue avec les paramètres optimaux.
@@ -171,12 +174,12 @@ Pour savoir si l'ajustement est correct, il est d'usage de tracer sur le même g
 ]
 
 = Prise en compte des incertitudes
-Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs expérimentales, une estimation des incertitudes est indispensable. Reprendre une mesure faite sur l'oscilloscope.
+Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs expérimentales nécessite une estimation des incertitudes.
 
 #manipulation()[
-    Estimer l'incertitude relative sur la mesure du retard sur l'oscilloscope. On généralisera cette valeur à tous les points de mesure.
+    Estimer l'incertitude *relative* sur la mesure du retard sur l'oscilloscope. On généralisera cette valeur à tous les points de mesure.
 
-    Estimer l'incertitude absolue sur la mesure de l'amplitude sur l'oscilloscope. On généralisera cette valeur à tous les points de mesure.
+    Estimer l'incertitude *absolue* sur la mesure de l'amplitude sur l'oscilloscope. On généralisera cette valeur à tous les points de mesure.
 ]
 #évaluation(
     barème: (
@@ -185,7 +188,7 @@ Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs
         ([estimation précise], 3),
     ),
 )[
-    Présenter le calcul des incertitudes expérimentales sur l'amplitude.
+    Présenter la démarche d'estimation des incertitudes expérimentales sur l'amplitude.
 ]
 #évaluation(
     barème: (
@@ -194,7 +197,7 @@ Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs
         ([estimation précise], 3),
     ),
 )[
-    Présenter le calcul des incertitudes expérimentales sur le retard.
+    Présenter la démarche d'estimation des incertitudes expérimentales sur le retard.
 ]
 
 Il reste alors à propager cette incertitude sur la fréquence caractéristique $f_0$, le facteur de qualité $Q$ et sur $A$. On utilisera pour cela la méthode de Monte-Carlo.
@@ -213,7 +216,7 @@ Il est maintenant possible de conclure sur l'adéquation des valeurs attendues a
 
 #show: appendix
 
-= Fonctions Python utiles dans ce TP
+= Fonctions Python utiles dans ce TP<annexe-fonctions-python>
 
 #cheatsheet-python(
     (
