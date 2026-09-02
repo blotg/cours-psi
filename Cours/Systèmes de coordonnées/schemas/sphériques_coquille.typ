@@ -15,7 +15,7 @@
 
   content((0,0,0), block-circle(radius: 2pt, fill:black) )
 
-  on-yz(x:0, {
+  on-zy(x:0, {
     circle((0, 0), radius: r+dr)
     circle((0, 0), radius: r, stroke:(dash: "dashed"))
   })

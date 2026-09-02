@@ -30,7 +30,7 @@ The mass is lifted at a constant speed $v_0$.
             import cetz.draw: *
             vsource("E0", (0, 0), (0, 2), u: $E_0$)
             resistor("r", (0, 2), (0, 4), label: $r_0$)
-            wire((0, 4), (2, 4), i: $i$)
+            fil((0, 4), (2, 4), i: $i$)
             resistor("r", (2, 4), (2, 2))
             vsource("E", (2, 0), (2, 2), u: $E$)
             wire((0, 0), (2, 0))

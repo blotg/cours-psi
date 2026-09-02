@@ -7,7 +7,7 @@
 On s'intéresse à une pompe à chaleur utilisée pour chauffer une habitation. La pompe à chaleur fonctionne en faisant circuler du propane dans un circuit fermé. Le propane (noté R290 et dont le diagramme $(P,h)$ est donné ci-dessous) passe successivement dans un compresseur, un condenseur situé dans l'habitation, un détendeur, puis un évaporateur situé à l'extérieur de l'habitation avant de revenir au compresseur.
 
 #figure(
-    image("/images/R290.pdf"),
+    image("../images/R290.pdf"),
     placement: auto,
 )
 
@@ -47,7 +47,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     Pour la sortie de l'évaporateur, (#qty("5", "bar") et #qty("10", "Celsius")), on place le point à l'intersection de l'isotherme #qty("10", "Celsius") et de l'isobare #qty("5", "bar").
 
     #figure(
-        image("/images/R290 - corrigé.pdf"),
+        image("../images/R290 - corrigé.pdf"),
     )
 ]
 

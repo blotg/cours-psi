@@ -11,7 +11,7 @@
 
 En France, le réseau électrique a une tension efficace de #qty("230", "V") et une fréquence de #qty("50", "Hz"). En Corée du Sud, la tension efficace est de #qty("220", "V") et la fréquence de #qty("60", "Hz").
 
-Un appareil modélisé par une bobine réelle consomme #qty(P, "W") et a un facteur de puissance de #qty(scientifique(cos-phi, 2), "") en France.
+Un appareil modélisé par une bobine réelle consomme #qty(P, "W") et a un facteur de puissance de #num(scientifique(cos-phi, 2)) en France.
 
 #question(
     coups-de-pouce: (
@@ -46,7 +46,7 @@ Un appareil modélisé par une bobine réelle consomme #qty(P, "W") et a un fact
     #let cos-phi-2 = R / calc.sqrt(calc.pow(R, 2) + calc.pow((L * 2 * calc.pi * 60), 2))
     $
         cos(phi) & = R/sqrt(R^2+(L omega)^2) \
-                 & = #qty(scientifique(cos-phi-2, 2), "")
+                 & = #num(scientifique(cos-phi-2, 2))
     $
     La puissance consommée est
     #let P2 = calc.pow(220, 2) * calc.pow(cos-phi-2, 2) / R

@@ -23,12 +23,12 @@
   line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
   
   // Point M
-  on-yz(x:x,{
+  on-zy(x:x,{
     line((y, z+dz), (y,z), (y+dy,z), stroke: (dash: "dashed"))
     line((y, z+dz), (y+dy,z+dz), (y+dy,z))
     content((y+dy,z+dz), anchor: "south-west", padding: 0.1, $dd(V)$)
   })
-  on-yz(x:x+dx,{
+  on-zy(x:x+dx,{
     rect((y,z), (y+dy,z+dz))
     content((y,z+dz/2), anchor: "north", padding: 0.1, [$dd(y)$])
     content((y+dy/2,z), anchor: "east", padding: 0.1, [$dd(z)$])

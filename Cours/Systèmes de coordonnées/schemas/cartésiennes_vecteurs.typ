@@ -21,7 +21,7 @@
   
   // Point M
   let M = (x, y, z)
-  on-yz(x:x,{
+  on-zy(x:x,{
     circle((y,z), radius: 0.02, fill: black)
     content((y,z), anchor: "south-west", padding: 0.1, [$M$])}
   )

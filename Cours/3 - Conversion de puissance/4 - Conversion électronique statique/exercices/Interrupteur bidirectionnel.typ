@@ -13,7 +13,7 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
         thyristor("Q", (0, 1), (2, 1), i:$i_T$)
         wire((0, 0), (0, 1))
         wire((2, 0), (2, 1))
-        wire((-1, 0.5), (0, 0.5), i: $i$)
+        fil((-1, 0.5), (0, 0.5), i: $i$)
         wire((2, 0.5), (3, 0.5))
     }),
 )

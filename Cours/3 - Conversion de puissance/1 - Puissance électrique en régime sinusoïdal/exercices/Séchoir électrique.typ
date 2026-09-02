@@ -34,7 +34,6 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
             wire("V.out", "R.in")
             wire("R.out", "V.in")
             wire("V.out", "r.in")
-            wire("r.out", "L.in")
             wire("L.out", "V.in")
         }),
     )

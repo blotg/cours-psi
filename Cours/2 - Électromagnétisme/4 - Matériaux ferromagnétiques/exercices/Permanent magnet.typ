@@ -97,7 +97,7 @@
     ][
         #let mu0 = 4 * calc.pi * 1e-7
         #let pente = -m * mu0 / g
-        On trace la droite de pente $-(m mu_0)/g = qty(#scientifique(pente, 1), "")$ sur la courbe. Elle coupe le cycle d"hystérésis en deux points de coordonnées opposées : $B_m= plus.minus qty("0.05", "T")$ et $H_m = plus.minus qty("4e1", "A/m")$.
+        On trace la droite de pente $-(m mu_0)/g = num(#scientifique(pente, 1))$ sur la courbe. Elle coupe le cycle d"hystérésis en deux points de coordonnées opposées : $B_m= plus.minus qty("0.05", "T")$ et $H_m = plus.minus qty("4e1", "A/m")$.
     ]
 
     #question(coups-de-pouce: (

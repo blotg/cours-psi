@@ -13,7 +13,7 @@
         resistor("r", (5, 0), (5, 2.5), label: $r$, u: (content: $u_r$, anchor: "south"))
         inductor("L", (5, 2.5), (5, 5), label: $L$, variant: "ieee")
         wire((0, 0), (5, 0))
-        wire((3, 5), (5, 5), i: $i_s$)
+        fil((3, 5), (5, 5), i: $i_s$)
     }),
 )
 
@@ -62,7 +62,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interru
                 resistor("r", (5, 0), (5, 2.5), label: $r$, u: (content: $u_r$, anchor: "south"))
                 inductor("L", (5, 2.5), (5, 5), label: $L$, variant: "ieee")
                 wire((0, 0), (5, 0))
-                wire((3, 5), (5, 5), i: $i_s$)
+                fil((3, 5), (5, 5), i: $i_s$)
             }),
         ],
         figure[
@@ -75,7 +75,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interru
                 resistor("r", (5, 0), (5, 2.5), label: $r$, u: (content: $u_r$, anchor: "south"))
                 inductor("L", (5, 2.5), (5, 5), label: $L$, variant: "ieee")
                 wire((0, 0), (5, 0))
-                wire((3, 5), (5, 5), i: $i_s$)
+                fil((3, 5), (5, 5), i: $i_s$)
             }),
         ],
     )

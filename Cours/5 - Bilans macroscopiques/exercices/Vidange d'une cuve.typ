@@ -8,7 +8,7 @@
 Un agriculteur souhaite vidanger une cuve cubique d'un mètre cube remplie d'eau par un robinet situé en bas.
 
 #figure(
-    image("/images/cuve.jpg", width: 7cm),
+    image("../images/cuve.jpg", width: 7cm),
 )
 
 #question(

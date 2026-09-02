@@ -115,6 +115,28 @@
 }
 
 #import "@preview/modpattern:0.2.0": modpattern
-#let hachure(taille, décalage: 90%) = modpattern((taille, taille))[
+#let hachure(taille, décalage: 90%) = modpattern(size: (taille, taille))[
     #move(dx: décalage, line(start: (0%, 100%), end: (100%, 0%)))
 ]
+
+// Fil de circuit avec décoration de courant.
+//
+// zap 0.6.0 plante sur `wire(..., i: …)` dès que le fil est aligné sur un axe :
+// la décoration s'appuie sur un rectangle nommé « symbol » tracé entre line.50%
+// et line.51%, donc plat — et un rectangle plat n'a pas d'ancre de bord (« does
+// not have a border for anchor '0deg' »). `fil` retrace ce rectangle autour du
+// milieu du fil. Sans `i:`, c'est exactement `zap.wire`.
+#let fil(..params, i: none, name: none) = {
+    if i == none { return zap.wire(name: name, ..params) }
+    cetz.draw.group(name: name, {
+        zap.wire(name: "fil", ..params)
+        cetz.draw.anchor("in", "fil.in")
+        cetz.draw.anchor("out", "fil.out")
+        cetz.draw.hide(cetz.draw.rect(
+            (rel: (-0.01, -0.01), to: ("fil.in", 50%, "fil.out")),
+            (rel: (0.01, 0.01), to: ("fil.in", 50%, "fil.out")),
+            name: "symbol",
+        ))
+        zap.current(i)
+    })
+}

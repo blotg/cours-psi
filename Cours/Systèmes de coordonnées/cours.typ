@@ -1,4 +1,5 @@
 #import "@local/prepa:0.1.1": *
+#import "@preview/oasis-align:0.3.3": oasis-align
 
 #let infos = yaml("infos.yml")
 #show: cours.with(infos: infos)

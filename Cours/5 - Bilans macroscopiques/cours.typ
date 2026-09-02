@@ -24,7 +24,7 @@
     "v": (signification: "le champ de vitesse", unité: unit("m/s")),
     "va(p)": (signification: "la quantité de mouvement du système", unité: unit("kg.m/s")),
     "va(F)_\"ext\"": (signification: "les forces extérieures appliquées au système", unité: unit("N")),
-    "va(L)_O": (signification: "le moment cinétique par rapport au point O", unité: unit("kg.m^2/s")),
+    "va(L)_O": (signification: "le moment cinétique par rapport au point O", unité: unit("kg m^2/s")),
     "va(M)_O(va(F))_\"ext\"": (
         signification: "le moment des forces extérieures par rapport au point O",
         unité: unit("N.m"),

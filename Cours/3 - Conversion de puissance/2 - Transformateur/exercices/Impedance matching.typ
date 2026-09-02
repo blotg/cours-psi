@@ -16,7 +16,7 @@ A voltage generator gives a sinusoidal voltage $e$ to the primary of a transform
         resistor("R1", "e.out", "transfo.P+", label: $R_1$, i: $i$)
         wire("e.in", "transfo.P-")
         resistor("R2", (3, 1), (3, -1), label: $R_2$)
-        wire("R2.in", "transfo.S+", i: $i_2$)
+        fil("R2.in", "transfo.S+", i: $i_2$)
         wire("transfo.S-", "R2.out")
         line((-1.5, -.9), (-1.5, 0.9), mark: (end: ">", fill: black), name: "v1", stroke: 0.6pt)
         content("v1.mid", $v_1$, anchor: "east", padding: 0.1)
@@ -42,7 +42,7 @@ A voltage generator gives a sinusoidal voltage $e$ to the primary of a transform
             vsource("e", (-2, -2), (-2, 0), u: $m e$)
             resistor("R1", "e.out", (0, 0), label: $m^2 R_1$)
             resistor("R2", (0,-2), "R1.out", u:(content:$v_2$, anchor:"south"))
-            wire("e.in", "R2.in", i: $i_2$)
+            fil("e.in", "R2.in", i: $i_2$)
         })
     ]
     $ v_2=m e R_2/(m^2 R_1 + R_2) $

@@ -24,7 +24,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
             vsource("e", (0, 0), (0, 2), u: $e$)
             resistor("r", (0, 2), (0, 4), label: $r$)
             inductor("L", (0, 4), (0, 6), label: $L$, variant: "ieee")
-            wire((0, 6), (3, 6), i: $i$)
+            fil((0, 6), (3, 6), i: $i$)
             resistor("Rc", (3, 6), (3, 0), label: $R_c$, u: (content: $u$, anchor: "south-west"))
             wire((3, 0), (0, 0))
         }),

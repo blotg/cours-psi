@@ -12,7 +12,7 @@ Le chauffe-eau ci-dessous peut soutirer une puissance électrique maximale de #q
 #grid(
     columns: (1fr, 1fr),
     align: horizon,
-    figure(image("/images/chauffe-eau-2.jpg", width: 70%)), figure(image("/images/chauffe-eau-1.jpg")),
+    figure(image("../images/chauffe-eau-2.jpg", width: 70%)), figure(image("../images/chauffe-eau-1.jpg")),
 )
 
 Le débit d'eau dans une douche est typiquement compris entre #qty("12", "L/min") et #qty("20", "L/min").

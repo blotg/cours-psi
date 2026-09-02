@@ -11,7 +11,7 @@ Cette détente est faire de façon adiabatique au travers d'un étranglement ét
 L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
 
 #figure(
-    image("/images/P-h-air.png", width: 100%),
+    image("../images/P-h-air.png", width: 100%),
     caption: [Diagramme (P,h) de l'air.],
     placement: auto,
 )

@@ -11,7 +11,7 @@ On a planté des bulbes de lys à une quinzaine de centimètres dans du terreau 
 #let D = 1e-7
 #let d = 0.15
 
-#image("/images/graphique_infoclimat.fr_quimper.svg")
+#image("../images/graphique_infoclimat.fr_quimper.svg")
 
 #question(
     coups-de-pouce: (),

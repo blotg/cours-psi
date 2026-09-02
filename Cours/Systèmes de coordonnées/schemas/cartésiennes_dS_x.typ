@@ -23,7 +23,7 @@
   line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
   
   // Point M
-  on-yz(x:x,{
+  on-zy(x:x,{
     rect((y,z), (y+dy,z+dz))
     content((y,z+dz/2), anchor: "north", padding: 0.1, $dd(y)$)
     content((y+dy/2,z), anchor: "east", padding: 0.1, $dd(z)$)
