@@ -1,0 +1,43 @@
+#import "@local/prepa:0.1.1": *
+
+- Établir l'équation d'onde dans le cas d'une corde infiniment souple dans l'approximation des petits mouvements transverses.
+- Identifier une équation de d'Alembert.
+- Exprimer la célérité en fonction des paramètres du milieu.
+- Citer des exemples de solutions de l'équation de d'Alembert unidimensionnelle.
+- Établir la relation de dispersion à partir de l'équation de d'Alembert.
+- Utiliser la notation complexe.
+- Définir le vecteur d'onde, la vitesse de phase.
+- Décomposer une onde stationnaire en ondes progressives, une onde progressive en ondes stationnaires.
+- Justifier et exploiter des conditions aux limites.
+- Définir et décrire les modes propres.
+- Construire une solution quelconque par superposition de modes propres.
+- Associer mode propre et résonance en régime forcé.
+- Décrire un câble coaxial par un modèle à constantes réparties sans perte.
+- Établir les équations de propagation dans un câble coaxial sans pertes modélisé comme un milieu continu caractérisé par une inductance linéique et une capacité linéique.
+- Établir l'expression de l'impédance caractéristique d'un câble coaxial.
+- #compétence-TP Étudier la réflexion en amplitude de tension pour une impédance terminale nulle, infinie ou résistive.
+- Classer les ondes sonores par domaines fréquentiels.
+- Justifier les hypothèses de l'approximation acoustique par des ordres de grandeur.
+- Écrire les équations locales linéarisées : conservation de la masse, équation thermodynamique, équation de la dynamique.
+- Établir l'équation de propagation de la surpression formulée avec l'opérateur laplacien.
+- Exprimer la célérité en fonction de la température pour un gaz parfait.
+- Citer les ordres de grandeur de la célérité pour l'air et pour l'eau.
+- Utiliser les expressions admises du vecteur densité de courant énergétique et de la densité volumique d'énergie associés à la propagation de l'onde.
+- Définir l'intensité sonore et le niveau d'intensité sonore.
+- Citer quelques ordres de grandeur de niveaux d'intensité sonore.
+- Décrire le caractère longitudinal de l'onde sonore.
+- Discuter de la validité du modèle de l'onde plane en relation avec le phénomène de diffraction.
+- Utiliser le principe de superposition des ondes planes progressives harmoniques.
+- Établir et utiliser l'impédance acoustique définie comme le rapport de la surpression sur le débit volumique ou comme le rapport de la surpression sur la vitesse.
+- Commenter l'expression fournie de la surpression générée par une sphère pulsante : atténuation géométrique, structure locale.
+- #compétence-TP Mettre en œuvre une détection synchrone pour mesurer une vitesse par décalage Doppler.
+- Identifier les différents termes de l'équation locale de Poynting.
+- Exprimer la puissance rayonnée à travers une surface à l'aide du vecteur de Poynting.
+- Citer les domaines du spectre des ondes électromagnétiques et leur associer des applications.
+- Établir les équations de propagation.
+- Établir la relation entre le vecteur champ électrique, le vecteur champ magnétique et le vecteur d'onde.
+- Associer la direction du vecteur de Poynting et la direction de propagation de l'onde.
+- Associer le flux du vecteur de Poynting à un flux de photons en utilisant la relation d'Einstein-Planck.
+- Citer quelques ordres de grandeur de flux énergétiques surfaciques moyens (laser hélium-néon, flux solaire).
+- Identifier l'expression d'une onde électromagnétique plane progressive polarisée rectilignement.
+- #compétence-TP Utiliser des polariseurs et étudier quantitativement la loi de Malus.
