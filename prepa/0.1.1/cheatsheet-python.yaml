@@ -25,53 +25,52 @@ imports-from:
 #                 $…$ et le code `…` sont donc permis). Un habillage \[ … \]
 #                 facultatif protège un « [ » initial de l'analyseur YAML.
 commandes:
-
   numpy.linspace:
-    exemple: 'x = np.linspace(début: float, fin: float, nombre_de_points: int) -> array'
+    exemple: "x = np.linspace(début: float, fin: float, nombre_de_points: int) -> array"
     commentaire: tableau de points régulièrement espacés entre `début` et `fin` (bornes incluses)
 
   numpy.arange:
-    exemple: 't = np.arange(début: float, fin: float, pas: float) -> array'
+    exemple: "t = np.arange(début: float, fin: float, pas: float) -> array"
     commentaire: tableau de points de `début` (inclus) à `fin` (exclu), espacés de `pas`
 
   numpy.logspace:
-    exemple: 'f = np.logspace(début: float, fin: float, nombre_de_points: int) -> array'
+    exemple: "f = np.logspace(début: float, fin: float, nombre_de_points: int) -> array"
     commentaire: \[comme `linspace`, mais les points sont espacés logarithmiquement entre $10^"début"$ et $10^"fin"$\]
 
   numpy.pi:
-    exemple: np.pi
+    exemple: np.pi -> float
     commentaire: \[constante $pi approx 3.14159$\]
 
   numpy.array:
-    exemple: 'a = np.array(objet: list) -> array'
+    exemple: "a = np.array(objet: list) -> array"
     commentaire: convertit une liste (ou une liste de listes) en tableau numpy
 
   numpy.zeros:
-    exemple: 'z = np.zeros(n: int) -> array'
+    exemple: "z = np.zeros(n: int) -> array"
     commentaire: tableau de `n` zéros ; passer un tuple `(lignes, colonnes)` pour un tableau 2D
 
   numpy.abs:
-    exemple: 'm = np.abs(x: array) -> array'
+    exemple: "m = np.abs(x: array) -> array"
     commentaire: valeur absolue terme à terme (module si `x` est complexe)
 
   numpy.fft.rfft:
-    exemple: 'tf = np.fft.rfft(signal: array) -> array'
+    exemple: "tf = np.fft.rfft(signal: array) -> array"
     commentaire: transformée de Fourier d'un signal réel ; renvoie des amplitudes complexes
 
   numpy.fft.rfftfreq:
-    exemple: 'freqs = np.fft.rfftfreq(n: int, Te: float) -> array'
+    exemple: "freqs = np.fft.rfftfreq(n: int, Te: float) -> array"
     commentaire: fréquences (en Hz) associées à `rfft`, pour `n` points échantillonnés à la période `Te`
-  
+
   numpy.random.normal:
-    exemple: 
-      - 'x = np.random.normal(moyenne: float, écart_type: float) -> float'
-      - 'x = np.random.normal(moyennes: array, écarts_types: array) -> array'
+    exemple:
+      - "x = np.random.normal(moyenne: float, écart_type: float) -> float"
+      - "x = np.random.normal(moyennes: array, écarts_types: array) -> array"
     commentaire: valeurs aléatoires suivant une loi normale (gaussienne) distribuée autour de `moyenne` avec un écart-type `écart_type`
 
   matplotlib.pyplot.plot:
     exemple:
       - plt.plot(x, y)
-      - 'plt.plot(x, y, format: str)'
+      - "plt.plot(x, y, format: str)"
     commentaire: trace `y` en fonction de `x` ; `format` (ex. `"r+"`, `"g-"`) fixe couleur et style
 
   matplotlib.pyplot.semilogx:
@@ -79,15 +78,15 @@ commandes:
     commentaire: comme `plot`, avec l'axe des abscisses en échelle logarithmique
 
   matplotlib.pyplot.xlabel:
-    exemple: 'plt.xlabel(texte: str)'
+    exemple: "plt.xlabel(texte: str)"
     commentaire: légende de l'axe des abscisses
 
   matplotlib.pyplot.ylabel:
-    exemple: 'plt.ylabel(texte: str)'
+    exemple: "plt.ylabel(texte: str)"
     commentaire: légende de l'axe des ordonnées
 
   matplotlib.pyplot.title:
-    exemple: 'plt.title(texte: str)'
+    exemple: "plt.title(texte: str)"
     commentaire: titre du graphique
 
   matplotlib.pyplot.grid:
@@ -103,5 +102,7 @@ commandes:
     commentaire: efface le graphique courant (pour tracer un nouveau graphique dans la même fenêtre)
 
   scipy.optimize.curve_fit:
-    exemple: 'popt, pcov = curve_fit(f: fonction, xdata: array, ydata: array, p0: list) -> tuple'
-    commentaire: ajuste les paramètres de `f` (dont le premier argument est l'abscisse) aux données ; `popt` = paramètres optimaux, `p0` = valeurs initiales (facultatif)
+    exemple:
+      - "curve_fit(f: fonction, xdata: array, ydata: array) -> tuple"
+      - "popt, pcov = curve_fit(f: fonction, xdata: array, ydata: array, p0: list, bounds=(0, np.inf): tuple)"
+    commentaire: "ajuste les paramètres de `f` (dont le premier argument est l'abscisse) aux données ; `popt` : paramètres optimaux, `p0` : estimation initiale des valeurs des paramètres (facultatif), `bounds` : bornes sur les paramètres (facultatif)"
