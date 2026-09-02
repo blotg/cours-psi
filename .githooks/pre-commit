@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Recompile les PDF (cours / TD / poly) des chapitres dont une source
+# Recompile les PDF (cours / TD / poly / TP) des chapitres dont une source
 # apparait dans le commit en cours, et les ajoute au commit.
 #
 # - Ne recompile QUE des PDF deja suivis par git (jamais de nouveau fichier).
@@ -30,13 +30,13 @@ ext_rx='\.(typ|ya?ml|csv|json|txt|dat|png|jpe?g|svg|gif|webp|bmp|tiff?)$'
 
 # --- Dossiers-chapitres a recompiler --------------------------------------
 if printf '%s\n' "$changed" | grep -qE '^prepa/'; then
-    dirs=$(git ls-files '*/cours.typ' '*/poly.typ' | sed 's#/[^/]*$##' | sort -u)
+    dirs=$(git ls-files '*/cours.typ' '*/poly.typ' '*/TP.typ' | sed 's#/[^/]*$##' | sort -u)
 else
     dirs=$(
         printf '%s\n' "$changed" | grep -E "$ext_rx" | while IFS= read -r f; do
             d=${f%/*}
             while [ "$d" != "$f" ] && [ -n "$d" ]; do
-                if [ -e "$d/cours.typ" ] || [ -e "$d/poly.typ" ]; then
+                if [ -e "$d/cours.typ" ] || [ -e "$d/poly.typ" ] || [ -e "$d/TP.typ" ]; then
                     printf '%s\n' "$d"
                     break
                 fi
@@ -53,9 +53,10 @@ fail=0
 IFS='
 '
 for d in $dirs; do
-    for base in cours TD poly; do
+    for base in cours TD poly TP; do
         [ -f "$d/$base.typ" ] || continue
         git ls-files --error-unmatch "$d/$base.pdf" >/dev/null 2>&1 || continue
+        [ -f "$d/$base.pdf" ] || continue   # PDF absent du disque (supprime volontairement) : on n'y touche pas
 
         printf '  typst  %s/%s.typ\n' "$d" "$base"
         if ( cd "$d" && typst compile --diagnostic-format short "$base.typ" ); then
