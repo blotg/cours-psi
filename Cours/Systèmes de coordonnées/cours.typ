@@ -1,5 +1,4 @@
 #import "@local/prepa:0.1.1": *
-#import "@preview/oasis-align:0.3.3": oasis-align
 
 #let infos = yaml("infos.yml")
 #show: cours.with(infos: infos)
@@ -228,7 +227,7 @@ Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,pi[$ et $phi 
 Les vecteurs de base dépendent du point considéré. La base est donc appelée base mobile.
 
 #figure[
-    #oasis-align(
+    #grid(columns: 2,
         include "schemas/sphériques_coordonnées.typ",
         include "schemas/sphériques_vecteurs.typ"
     )

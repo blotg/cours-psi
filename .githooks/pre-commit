@@ -19,6 +19,15 @@
 
 export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"   # sortie PDF reproductible
 
+# Documents produits a partir d'une source typst du meme nom, dans un dossier
+# de chapitre ou de TP. Ce sont eux (et eux seuls) que le hook recompile.
+# (une par ligne : IFS vaut newline au moment de la boucle)
+docs='cours
+TD
+poly
+TP
+évaluation'
+
 # core.quotePath=false : chemins accentues en clair (sinon "\303\251"...)
 git() { command git -c core.quotePath=false "$@"; }
 
@@ -33,13 +42,15 @@ ext_rx='\.(typ|ya?ml|csv|json|txt|dat|png|jpe?g|svg|gif|webp|bmp|tiff?)$'
 
 # --- Dossiers-chapitres a recompiler --------------------------------------
 if printf '%s\n' "$changed" | grep -qE '^prepa/'; then
-    dirs=$(git ls-files '*/cours.typ' '*/poly.typ' '*/TP.typ' | sed 's#/[^/]*$##' | sort -u)
+    dirs=$(git ls-files '*/cours.typ' '*/poly.typ' '*/TP.typ' '*/évaluation.typ' \
+        | sed 's#/[^/]*$##' | sort -u)
 else
     dirs=$(
         printf '%s\n' "$changed" | grep -E "$ext_rx" | while IFS= read -r f; do
             d=${f%/*}
             while [ "$d" != "$f" ] && [ -n "$d" ]; do
-                if [ -e "$d/cours.typ" ] || [ -e "$d/poly.typ" ] || [ -e "$d/TP.typ" ]; then
+                if [ -e "$d/cours.typ" ] || [ -e "$d/poly.typ" ] || [ -e "$d/TP.typ" ] \
+                    || [ -e "$d/évaluation.typ" ]; then
                     printf '%s\n' "$d"
                     break
                 fi
@@ -56,7 +67,7 @@ fail=0
 IFS='
 '
 for d in $dirs; do
-    for base in cours TD poly TP; do
+    for base in $docs; do
         [ -f "$d/$base.typ" ] || continue
 
         printf '  typst  %s/%s.typ\n' "$d" "$base"

@@ -28,3 +28,10 @@ cours.pdf
 TD.pdf
 poly.pdf
 TP.pdf
+évaluation.pdf
+
+# PDF derives des precedents par un outil externe (pypdf pour l'imposition du
+# poly, 2-up pour la fiche d'evaluation) : artefacts eux aussi, mais le hook ne
+# sait pas les regenerer -- le script n'est pas dans le depot.
+poly-imprimable.pdf
+évaluation x2.pdf
