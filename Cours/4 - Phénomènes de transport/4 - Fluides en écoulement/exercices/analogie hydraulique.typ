@@ -20,6 +20,6 @@ On introduit souvent l'électricité en continu en faisant une analogie avec l'h
 
     La résistance électrique est similaire à un rétrécissement dans le tuyau qui ralentit l'eau. Une grande résistance (un tuyau étroit) réduit le débit d'eau pour une même différence de hauteur (tension), tandis qu'une petite résistance (un tuyau large) permet un plus grand débit.
     #figure(
-        image("/images/water-analogy.png")
+        image("images/water-analogy.png")
     )
 ]

@@ -1,4 +1,5 @@
 #import "@local/prepa:0.1.1": *
+#import "@preview/wrap-it:0.1.1": wrap-content
 
 #show: exercice.with(
     titre: "Thérémine",

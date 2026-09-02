@@ -10,7 +10,7 @@ Les résistances à film de carbone (qui sont celles utilisées en travaux prati
 
 #grid(
     columns: (1fr, 1fr),
-    image("/images/résistance carbone.jpg", width: 100%), image("/images/résistance échelle.jpg", width: 100%),
+    image("images/résistance carbone.jpg", width: 100%), image("images/résistance échelle.jpg", width: 100%),
 )
 
 

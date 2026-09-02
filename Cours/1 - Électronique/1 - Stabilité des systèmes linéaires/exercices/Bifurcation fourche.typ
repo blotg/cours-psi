@@ -136,7 +136,7 @@ On souhaite maintenant explorer de façon plus exhaustive l'influence de $r$ sur
     plt.show()
     ```
     #figure(
-        image("/images/fourche.svg", height: 8cm),
+        image("images/fourche.svg", height: 8cm),
     )
     La forme de la courbe ressemble à une fourche.
 ]

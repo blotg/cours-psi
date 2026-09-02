@@ -10,7 +10,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 #grid(
     columns: (50%, 50%),
     align: (center, center),
-    image("/images/panneau.jpg", width: 100%),
+    image("images/panneau.jpg", width: 100%),
     canvas({
         import cetz.draw: *
         rect((-3, 0), (3, -3), fill: black.lighten(80%), stroke: none)

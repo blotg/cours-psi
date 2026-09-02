@@ -1,6 +1,6 @@
 #import "@preview/physica:0.9.6": *
-// #import "@preview/typsium:0.3.1": ce
-#import "@preview/whalogen:0.3.0": ce
+#import "@preview/typsium:0.3.2": ce
+// #import "@preview/whalogen:0.3.0": ce
 #import "@preview/unify:0.7.1": *
 
 #let div = math.class(

@@ -388,6 +388,7 @@ Cette relation est mise à profit pour mesurer le champ magnétique et tracer le
 
 Cette relation est mise à profit pour mesurer l'excitation magnétique et tracer le cycle d'hystérésis.
 
+#import "@preview/wrap-it:0.1.1": wrap-content
 #wrap-content(align: right)[
     #lien("https://upload.wikimedia.org/wikipedia/commons/8/81/Power_Transformer_Over-Excitation.gif")
 ][
@@ -450,7 +451,7 @@ La présence d'un milieu ferromagnétique au cœur de la bobine induit des perte
     ),
     grandeurs: grandeurs,
 )[
-    $ angle.l cal(P)_"hystérésis" angle.r = V f cal(A) $
+    $ mean( cal(P)_"hystérésis" ) = V f cal(A) $
 ]
 
 #question-de-colle(

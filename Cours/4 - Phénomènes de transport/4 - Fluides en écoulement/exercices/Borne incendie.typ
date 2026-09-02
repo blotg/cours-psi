@@ -9,10 +9,10 @@
 #grid(
     columns: (1fr, 2fr),
     figure(
-        image("/images/poteau incendie.jpg", height: 5cm),
+        image("images/poteau incendie.jpg", height: 5cm),
     ),
     figure(
-        image("/images/citerne souple incendie.jpg", height: 5cm),
+        image("images/citerne souple incendie.jpg", height: 5cm),
     ),
 )
 

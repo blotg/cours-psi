@@ -17,7 +17,7 @@ Les coordonnées d'un point sont notées $x in RR$, $y in RR$ et $z in RR$
 Les vecteurs de base sont les mêmes en tout point de l'espace.
 
 #figure[
-    #oasis-align(
+    #grid(columns: 2,
         include("schemas/cartésiennes_coordonnées.typ"),
         include("schemas/cartésiennes_vecteurs.typ")
     )

@@ -10,7 +10,7 @@ Les amortisseurs de Stockbridge sont utilisés pour réduire les vibrations dans
 #figure(
     grid(
         columns: (1fr,) * 2,
-        image("/images/Stockbridge1.jpeg", height: 5cm), image("/images/Stockbridge2.png", height: 5cm),
+        image("images/Stockbridge1.jpeg", height: 5cm), image("images/Stockbridge2.png", height: 5cm),
     ),
 )
 

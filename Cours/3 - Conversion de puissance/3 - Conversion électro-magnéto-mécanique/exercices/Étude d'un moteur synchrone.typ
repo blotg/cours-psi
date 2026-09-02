@@ -205,7 +205,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     En divisant la deuxième équation par la première, on obtient :
     $ tan(phi) = (L omega I_N) / E $
     D'où :
-    $ phi = atan((L omega I_N) / E) = #qty("33","deg") $
+    $ phi = arctan((L omega I_N) / E) = #qty("33","deg") $
 
     En remplaçant $phi$ dans la première équation, on trouve :
     $ V = E / cos(phi) = #qty(scientifique(E / calc.cos(calc.atan((L * pulsation * I) / E)), 2), "V") $

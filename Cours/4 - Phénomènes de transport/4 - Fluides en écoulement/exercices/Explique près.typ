@@ -6,7 +6,7 @@
 )
 
 #figure(
-    image("/images/allures.svg", width: 5cm),
+    image("images/allures.svg", width: 5cm),
 )
 
 #question(

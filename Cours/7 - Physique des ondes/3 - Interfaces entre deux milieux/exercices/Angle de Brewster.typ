@@ -162,7 +162,7 @@ On envoie de la lumière non polarisée sur l'interface à un angle d'incidence 
 ]
 
 #figure(
-    image("/images/Brewster.jpg", width: 18cm),
+    image("images/Brewster.jpg", width: 18cm),
     caption: "Sur la photo de gauche, aucun filtre n'est présent sur l'objectif de l'appareil photo. Sur la photo de droite, un filtre polarisant est présent sur l'objectif de l'appareil photo."
 )
 
