@@ -9,7 +9,7 @@ On s'intéresse au montage suivant, appelé montage comparateur simple. L'ALI es
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(content: (padding: .4em))
         opamp("ALI", (0, 0), invert: true)
         vsource("V", (rel: (-1, 0), to: "ALI.minus"), (rel: (0, -2)), u: (content: $V_0$, anchor: "south-west"))

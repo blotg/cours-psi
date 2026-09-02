@@ -7,7 +7,7 @@ Une clarinette est modélisée par un tuyau de section $S$ et de longueur $l$ co
 Le musicien injecte une onde sonore plane : il s'établit une onde stationnaire de surpression $P_1(x, t) = A_0 cos(omega t) cos(k x)$.
 
 #figure(canvas({
-  import draw: *
+  import cetz.draw: *
   line((-1, 0), (10, 0), stroke: (dash: "dash-dotted"), mark: (end: "stealth"))
   content((10, 0), anchor: "west", padding: 0.2em, $x$)
   line((8, 0.5), (0, 0.5), (0, -0.5), (8, -0.5), stroke: 1.2pt)

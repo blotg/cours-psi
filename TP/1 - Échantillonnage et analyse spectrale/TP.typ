@@ -57,7 +57,7 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
     En supposant que la roue tourne dans le sens horaire, compléter les schémas ci-dessous en représentant la position du trait sur la roue.
 
     #let roues(N: 1, divisions: 1) = {
-        import draw: *
+        import cetz.draw: *
         let sep = 3
         let portion = 20deg
         for i in array.range(0, N) {
@@ -80,7 +80,7 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             scale(0.6)
             roues(N: 9, divisions: 8)
         }),
@@ -89,7 +89,7 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             scale(0.6)
             roues(N: 5, divisions: 4 / 3)
         }),

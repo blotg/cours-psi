@@ -45,7 +45,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (3, 0), mark: (end: ">>", fill: black), name: "RI")
             line((3, 0), (3, 2), mark: (end: ">>", fill: black), name: "jXI")
             line((0, 0), (3, 2), mark: (end: ">>", fill: black), name: "E")
@@ -106,7 +106,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (4, 3), mark: (end: ">>", fill: black), name: "V")
             line((4, 3), (4, 6), mark: (end: ">>", fill: black), name: "jXI")
             line((0, 0), (4, 6), mark: (end: ">>", fill: black), name: "E")

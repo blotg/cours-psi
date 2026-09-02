@@ -9,7 +9,7 @@ On considère un cylindre creux plongé dans un champ magnétique uniforme et st
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         projection-de-face()
         on-xy(z: 0, {
             circle((0, 0), radius: 1)

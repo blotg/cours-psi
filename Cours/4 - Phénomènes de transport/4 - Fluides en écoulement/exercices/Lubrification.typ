@@ -8,7 +8,7 @@ Le but de cet exercice est de comprendre l'intérêt de la lubrification. On con
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line((0, 0), (4, 0))
         line((0, 0), (4.5, 0), mark: (end: ">>", fill: black))
         content((), $ex$, anchor: "west", padding: .4em)
@@ -68,7 +68,7 @@ Dans un premier temps, on étudie le contact sec entre le pavé et la surface. L
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         rect((0, 0), (4, .5), fill: black.lighten(70%), stroke: none)
         line((0, 0), (4.5, 0), mark: (end: ">>", fill: black))
         content((), $ex$, anchor: "west", padding: .4em)

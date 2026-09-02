@@ -28,7 +28,7 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
     Lorsque le transistor est bloqué, $i_T = 0$. L'interrupteur bidirectionnel se comporte comme une diode idéale en convention inverse. Sa caractéristique est donc :
     #figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))
@@ -53,7 +53,7 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
     L'interrupteur bidirectionnel se comporte alors comme un fil. Sa caractéristique est donc :
     #figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))

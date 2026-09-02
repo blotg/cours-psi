@@ -9,7 +9,7 @@ On s'intéresse au métabolisme de l'éthanol ($M=qty("46","g/mol")$) par corps 
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         content((-2.5, 0), ce("CH_3CH_2OH"), name: "E", padding: .3)
         content((2.5, 0), ce("CH_3CHO"), name: "A", padding: .3)
         line("E", "A", mark: (end: ">>", fill: black))

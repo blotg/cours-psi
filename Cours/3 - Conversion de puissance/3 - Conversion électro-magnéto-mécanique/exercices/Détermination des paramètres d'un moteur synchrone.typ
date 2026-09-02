@@ -30,7 +30,7 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             inductor("L", (0, 0), (3, 0), variant: "ieee", label: $L$, i: $underline(I)$)
             vsource("E", (3, -3), (3, 0), u: $underline(E)$)
             wire((0, -3), (3, -3))

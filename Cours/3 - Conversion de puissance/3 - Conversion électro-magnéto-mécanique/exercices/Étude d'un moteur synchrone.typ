@@ -54,7 +54,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     La loi des mailles s'écrit $V=E + R I + j L omega I$.
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (4, 0), mark: (end: ">>", fill: black), name: "E")
             line((4, 0), (5, 0), mark: (end: ">>", fill: black), name: "RI")
             line((5, 0), (5, 3), mark: (end: ">>", fill: black), name: "LwI")
@@ -102,7 +102,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     $ underline(V) = underline(E) + j L omega underline(I) $
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (30deg, 4), mark: (end: ">>", fill: black), name: "E")
             line("E.end", (rel: (0, 3)), mark: (end: ">>", fill: black), name: "LwI")
             line((0, 0), "LwI.end", mark: (end: ">>", fill: black), name: "V")
@@ -183,7 +183,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (0deg, 4), mark: (end: ">>", fill: black), name: "E")
             line("E.end", (rel: (0, 3)), mark: (end: ">>", fill: black), name: "LwI")
             line((0, 0), "LwI.end", mark: (end: ">>", fill: black), name: "V")

@@ -1,6 +1,3 @@
-#import "helper-functions.typ": *
-#import "@preview/wrap-it:0.1.1": wrap-content // ré-exporté pour les documents
-
 // =============================================================================
 //  Thème « titré » — boîtes fermées à bandeau
 //  Chaque bloc est un rectangle fermé (filet 0,6 pt, coins légèrement
@@ -258,7 +255,16 @@
             text(size: 0.92em, style: "italic", fill: _gris)[Hypothèse : #hypothèses.first()]
             parbreak()
         } else if hypothèses.len() > 1 {
-            text(size: 0.92em, style: "italic", fill: _gris)[Hypothèses : #list(..hypothèses)]
+            let mi = calc.ceil(hypothèses.len() / 2)
+            text(size: 0.92em, style: "italic", fill: _gris)[
+                Hypothèses :
+                #grid(
+                    columns: (1fr, 1fr),
+                    column-gutter: 1.2em,
+                    list(..hypothèses.slice(0, mi)),
+                    list(..hypothèses.slice(mi)),
+                )
+            ]
         }
         contenu
         if grandeurs != (:) {

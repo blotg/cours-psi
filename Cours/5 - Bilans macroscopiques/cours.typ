@@ -274,7 +274,7 @@ Il est possible de faire des bilans de moment cinétique en écrivant le théor�
         figure(image("images/Pelton 1.jpg", width: 100%)),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 let R = 2
                 let r = 0.2
                 merge-path(

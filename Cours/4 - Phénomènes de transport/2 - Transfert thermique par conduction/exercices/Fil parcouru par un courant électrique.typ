@@ -29,7 +29,7 @@ On se placera en coordonnées cylindriques et on supposera le régime stationnai
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         circle((0, 0), radius: 1, fill: black.lighten(70%))
         line((0, 1), (10, 1))
         line((0, -1), (10, -1))

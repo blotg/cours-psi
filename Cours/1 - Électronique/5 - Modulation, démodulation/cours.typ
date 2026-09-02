@@ -43,7 +43,7 @@
                     plot.add(modulante, domain: (0, tmax), samples: 800, style: (stroke: blue))
                 },
             )
-            draw.set-origin((0, -3.2))
+            cetz.draw.set-origin((0, -3.2))
             plot.plot(
                 size: (7, 1.8),
                 axis-style: "scientific",

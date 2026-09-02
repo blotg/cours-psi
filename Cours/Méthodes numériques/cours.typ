@@ -30,7 +30,7 @@ Les équations différentielle d'ordre supérieur peuvent être mises sous la fo
 
 #figure[
     #canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: (thickness: 0.5pt))
         set-style(content: (padding: .1))
         import plot: *

@@ -8,7 +8,7 @@ Un matériau ferromagnétique est destiné à réaliser la carcasse d'un transfo
 #figure[
     #zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
 
         transformateur("transfo", (0, 0))
         vsource("e", (-4, -1), (-4, 1), u: $e$)

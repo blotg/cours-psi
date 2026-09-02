@@ -224,7 +224,7 @@ Un rétrécissement d'un tube de champ s'accompagne donc d'une augmentation de l
 #application[
     Tracer des lignes de champ électrique sur les cartes d'équipotentielles suivantes.
     #figure(canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: 0.7pt)
         // charge ponctuelle : équipotentielles circulaires
         for (rad, lab) in ((0.45, "15 V"), (0.95, "10 V"), (1.8, "5 V"), (3.0, "0 V")) {
@@ -242,7 +242,7 @@ Un rétrécissement d'un tube de champ s'accompagne donc d'une augmentation de l
 #application[
     Tracer des équipotentielles sur la carte de lignes de champ suivante.
     #figure(canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: 0.8pt)
         for (y0, y1) in ((1, 3.2), (0.5, 1.6), (0, 0), (-0.5, -1.6), (-1, -3.2)) {
             bezier((0, y0), (8, y1), (3.5, y0), (5, y1), mark: (pos: 0.55, end: "stealth"))
@@ -253,7 +253,7 @@ Un rétrécissement d'un tube de champ s'accompagne donc d'une augmentation de l
 #application[
     Déterminer la valeur, la direction et le sens du champ électrique aux points $M_1$ et $M_2$ à l'aide de la carte des équipotentielles.
     #figure(canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: 0.7pt)
         let xs = (0, 0.2, 0.4, 0.6, 1.0, 1.3, 1.7, 2.2, 2.8, 3.5, 4.4, 5.4, 6.4, 7.4, 8.4, 9.4)
         let labs = (0, 5, 10, 15)

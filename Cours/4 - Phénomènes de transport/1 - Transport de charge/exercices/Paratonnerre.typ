@@ -12,7 +12,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
     align: (center, center),
     image("/images/panneau.jpg", width: 100%),
     canvas({
-        import draw: *
+        import cetz.draw: *
         rect((-3, 0), (3, -3), fill: black.lighten(80%), stroke: none)
         arc((-1.5, 0), radius: 1.5, start: -180deg, stop: 0deg, fill: black.lighten(50%))
         content((3, -3), [sol], anchor: "south-east", padding: .7em)

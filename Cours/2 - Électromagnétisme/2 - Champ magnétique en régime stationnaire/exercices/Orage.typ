@@ -12,7 +12,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
   Les électrons sont des particules chargées en mouvement dans le champ magnétique créé par le courant : ils subissent la partie magnétique de la force de Lorentz $va(f) = (-e) va(v) and va(B)$.
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     // conduit
     line((-0.6, -2), (-0.6, 2), stroke: gray)
     line((0.6, -2), (0.6, 2), stroke: gray)

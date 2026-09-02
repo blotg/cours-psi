@@ -10,7 +10,7 @@ The potential $V$ is supposed to depend only of $r$.
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         projection-de-face()
         on-xy(z: 0, {
             circle((0, 0), radius: 1)

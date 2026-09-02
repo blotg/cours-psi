@@ -41,7 +41,7 @@ $ grad f = pdv(f, r) va(e_r) + 1/r pdv(f, theta) va(e_theta) + 1/(r sin theta) p
   $E$ croît linéairement de $0$ à $E(R) = Q/(4 pi epsilon_0 R^2)$, puis décroît en $1/r^2$. $V$ est une parabole décroissante de $V(0) = (3 Q)/(8 pi epsilon_0 R)$ à $V(R) = Q/(4 pi epsilon_0 R)$, puis décroît en $1/r$. $E$ est continu, $V$ est continu et de dérivée continue.
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     let R = 2.0
     // E(r)
     let E(r) = if r < R { r / R } else { calc.pow(R / r, 2) }
@@ -58,7 +58,7 @@ $ grad f = pdv(f, r) va(e_r) + 1/r pdv(f, theta) va(e_theta) + 1/(r sin theta) p
   }))
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     let R = 2.0
     let V(r) = if r < R { (3 * R * R - r * r) / (2 * R * R * R) } else { 1 / r }
     plot.plot(

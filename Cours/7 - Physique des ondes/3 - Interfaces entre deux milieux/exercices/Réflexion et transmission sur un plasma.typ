@@ -10,7 +10,7 @@ On étudie le champ transmis $underline(va(E_t))= underline(E_(t,0))e^(i(omega t
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         rect((0, -2), (4, 2), fill: black.lighten(80%), stroke: none)
         line((0, -2), (0, 2))
         content((2, 1.5), "plasma")

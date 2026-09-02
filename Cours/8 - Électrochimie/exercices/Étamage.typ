@@ -6,7 +6,7 @@
 L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boîtes de conserve). Une expérience est menée à $25 degree upright("C")$ sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
 
 #figure(canvas({
-  import draw: *
+  import cetz.draw: *
   // cuve
   line((-2.4, 0), (-2.4, -3.2), (2.4, -3.2), (2.4, 0), stroke: 1pt)
   line((-2.4, -1), (2.4, -1), stroke: (paint: gray))
@@ -61,7 +61,7 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
   Courbes $i$–$E$ : la branche de réduction de #ce("Sn^2+") part de $E^circ(cpl("Sn^2+", "Sn")) = qty("-0.14", "V")$ (couple rapide) et présente un palier de diffusion (#ce("Sn^2+") est un soluté). La branche d'oxydation de #ce("Sn") part aussi de $qty("-0.14", "V")$, sans palier (l'électrode elle-même est le réactif). Le dégagement de #ce("H2") débute vers $E_"eq"(cpl("H+", "H2")) + eta_c = 0 - 0.40 = qty("-0.40", "V")$, sans palier (#ce("H+") abondant à pH $0$).
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     line((-4, 0), (4, 0), mark: (end: "stealth"))
     content((4, 0), anchor: "west", padding: 0.2em, $E$)
     line((0, -2), (0, 2.4), mark: (end: "stealth"))

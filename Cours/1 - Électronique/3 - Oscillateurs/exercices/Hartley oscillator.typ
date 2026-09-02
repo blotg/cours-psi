@@ -10,7 +10,7 @@ First, we will study the electronic filter below, named Hartley filter.
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         resistor("R", (-3, 0), (0, 0), label: $R$)
         content("R.in", $e$, anchor: "east", padding: .4em)
@@ -34,7 +34,7 @@ First, we will study the electronic filter below, named Hartley filter.
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             set-style(padding: .4em)
             resistor("R", (-3, 0), (0, 0), label: $R$, i: $i_R$)
             content("R.in", $e$, anchor: "east", padding: .4em)
@@ -93,7 +93,7 @@ The complete Hartley oscillator's electrical schema is shown below.
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0), invert: true)
         resistor("R1", (-1.5, -1.5), (-1.5, -4), label: $R_1$)

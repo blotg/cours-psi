@@ -1,4 +1,3 @@
-#import "@preview/cetz:0.5.2": draw
 #import "@preview/cetz:0.5.2"
 #import "@preview/cetz-plot:0.1.4": chart, plot
 #import "@preview/zap:0.6.0"
@@ -8,51 +7,12 @@
 }
 
 #let projection-cabinet() = {
-    draw.set-transform(((-calc.sqrt(1 / 8), 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
+    cetz.draw.set-transform(((-calc.sqrt(1 / 8), 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
 }
 
 #let projection-de-face() = {
-    draw.set-transform(((0, 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
+    cetz.draw.set-transform(((0, 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
 }
-
-
-// #let ampermeter(name, node, ..params) = {
-//     import "@preview/zap:0.6.0": component, interface
-
-//     // Custom styling properties
-//     let custom-style = (
-//         radius: 0.53,
-//     )
-//     let draw(ctx, position, style) = {
-//         interface(
-//             (-custom-style.radius, -custom-style.radius),
-//             (custom-style.radius, custom-style.radius),
-//             io: position.len() < 2,
-//         )
-//         cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
-//         cetz.draw.content((), "A")
-//     }
-//     component("ampermeter", name, node, draw: draw, ..params)
-// }
-
-// #let voltmeter(name, node, ..params) = {
-//     import "@preview/zap:0.6.0": component, interface
-
-//     // Custom styling properties
-//     let custom-style = (
-//         radius: 0.53,
-//     )
-//     let draw(ctx, position, style) = {
-//         interface(
-//             (-custom-style.radius, -custom-style.radius),
-//             (custom-style.radius, custom-style.radius),
-//             io: position.len() < 2,
-//         )
-//         cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
-//         cetz.draw.content((), "V")
-//     }
-//     component("voltmeter", name, node, draw: draw, ..params)
-// }
 
 #let transformateur(
     name,

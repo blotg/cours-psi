@@ -9,7 +9,7 @@ On considère le montage suivant, appelé montage amplificateur inverseur. L'ALI
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         opamp("ALI", (0, 0))
         resistor("R2", (0, 1.7), label: $R_2$)
         resistor("R1", (rel: (-1.5, 0), to: "ALI.minus"), label: $R_1$)

@@ -9,7 +9,7 @@ On s'intéresse à une conduite présentant un élargissement brutal, comme le m
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         merge-path(
             {
                 line((2, 1), (2, 2), (10, 2))
@@ -79,7 +79,7 @@ On néglige l'influence de la gravité.
     On considère la ligne de courant la plus haute.
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             merge-path(
                 {
                     line((2, 1), (2, 2), (10, 2))

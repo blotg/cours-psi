@@ -15,7 +15,7 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line(
             (9, 0.1),
             (9, -0.1),

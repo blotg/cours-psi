@@ -9,7 +9,7 @@ On considère le montage suivant, appelé montage intégrateur. L'ALI est suppos
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         opamp("ALI", (0, 0))
         capacitor("C", (0, 1.7), label: $C$)
         resistor("R", (rel: (-1.5, 0), to: "ALI.minus"), label: $R$)

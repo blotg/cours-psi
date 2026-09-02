@@ -106,7 +106,7 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
     On imagine le cycle suivant
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             content(
                 (-3.5, 0),
                 [

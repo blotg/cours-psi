@@ -9,7 +9,7 @@ Les pertes dans un câble coaxial sont prises en compte considérant la résista
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         resistor("r", (0, 0), (2.5, 0), label: $r dd(x)$)
         inductor("L", (2.5, 0), (5, 0), label: $Lambda dd(x)$, variant: "ieee")
         resistor("g", (5, 0), (5, -2.5), label: $1/(g dd(x))$)

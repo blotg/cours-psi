@@ -6,7 +6,7 @@
 #figure[
     #zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
 
         transformateur("transfo", (0, 0), borne-homologue-secondaire-inversée: true)
         vsource("e", (-5, -1), (-5, 1), u: $e$)
@@ -35,7 +35,7 @@
     #figure[
         #zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
 
             vsource("e", (-5, -1), (-5, 1), u: $e$)
             resistor("R1", (-2, -1), (-2, 1), label: (content: $R_1$, anchor: "south"), u: $v_1$)

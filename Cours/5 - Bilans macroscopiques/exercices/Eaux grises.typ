@@ -12,7 +12,7 @@ Les eaux usées issues d'une douche ou d'un bain contiennent une quantité impor
     align: horizon,
     figure(image("/images/canalisation echangeur eau.jpg", width: 100%)),
     figure(canvas({
-        import draw: *
+        import cetz.draw: *
         rect((0.01, -0.15), (7.99, 1.65), fill: hachure(7pt), stroke: none)
         rect((0, 0), (8, 1.5), fill: white, stroke: none)
         line((0, 0), (8, 0))

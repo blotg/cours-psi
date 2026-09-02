@@ -20,7 +20,7 @@ Les Thérémines analogiques sont constitués de deux oscillateurs identiques. L
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             set-style(stroke: .5pt)
 
             rect((0, 3), (5, 6), name: "O1")

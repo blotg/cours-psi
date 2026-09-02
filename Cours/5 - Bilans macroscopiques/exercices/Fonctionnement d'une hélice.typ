@@ -10,7 +10,7 @@ On considère un tube de courant possédant la symétrie de révolution autour d
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         bezier((5, 0), (5, 1), (4.85, 0), (4.85, 1))
         bezier((5, 0), (5, 1), (5.15, 0), (5.15, 1))
         bezier((5, 0), (5, -1), (4.85, 0), (4.85, -1))
@@ -79,7 +79,7 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             bezier((5, 0), (5, 1), (4.85, 0), (4.85, 1))
             bezier((5, 0), (5, 1), (5.15, 0), (5.15, 1))
             bezier((5, 0), (5, -1), (4.85, 0), (4.85, -1))

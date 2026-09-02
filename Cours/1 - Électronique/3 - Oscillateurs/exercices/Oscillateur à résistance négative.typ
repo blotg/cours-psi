@@ -9,7 +9,7 @@ On considère le montage ci-dessous, appelé montage à résistance négative. O
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0), invert: true)
         resistor("R1a", (-1.5, -1.5), (-1.5, -4), label: $R_1$)
@@ -81,7 +81,7 @@ Ce montage, qui se comporte comme une « résistance négative », est placé da
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         wire((0, 0), (-1, 0))
         line((-0.7, 0), (-0.3, 0), mark: (end: ">", fill: black))

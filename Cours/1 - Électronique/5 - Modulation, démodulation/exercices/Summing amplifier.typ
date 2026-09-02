@@ -9,7 +9,7 @@ In the previous exercise, we have seen the necessity for a summing system in ord
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0))
         resistor("R", (-1.5,1.5), (1.5,1.5), label: $R$)
@@ -109,7 +109,7 @@ In the previous exercise, we have seen the necessity for a summing system in ord
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             set-style(padding: .4em)
             opamp("ALI2", (0, 0))
             resistor(

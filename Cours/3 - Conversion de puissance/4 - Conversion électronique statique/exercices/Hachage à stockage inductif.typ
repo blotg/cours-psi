@@ -49,7 +49,7 @@ Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la so
         columns: (1fr, 1fr),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), stroke: black, mark: (end: ">>", fill: black))
                 content((), $u_1$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), stroke: black, mark: (end: ">>", fill: black))
@@ -60,7 +60,7 @@ Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la so
         ),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), stroke: black, mark: (end: ">>", fill: black))
                 content((), $u_2$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), stroke: black, mark: (end: ">>", fill: black))

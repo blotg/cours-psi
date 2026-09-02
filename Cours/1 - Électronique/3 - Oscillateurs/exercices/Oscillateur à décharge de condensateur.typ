@@ -10,7 +10,7 @@ On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0))
         resistor("R2", (-1.5, -1.5), (-1.5, -4), label: $R_2$)
@@ -78,7 +78,7 @@ On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$
 
     #figure(
         canvas({
-            draw.set-style(axes: (shared-zero: false))
+            cetz.draw.set-style(axes: (shared-zero: false))
             let th = 0.8
             plot.plot(
                 size: (10, 6),
@@ -95,7 +95,7 @@ On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$
                 y-label: $V_s$,
                 {
                     plot.annotate(resize: false, {
-                        import draw: *
+                        import cetz.draw: *
                         line((-1.9, 1), (th, 1))
                         // basculement +Vsat -> -Vsat au seuil haut
                         line((th, 1), (th, -1), mark: (end: ">>", fill: black))

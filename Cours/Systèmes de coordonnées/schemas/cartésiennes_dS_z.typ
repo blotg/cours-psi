@@ -2,7 +2,7 @@
 #import "@local/prepa:0.1.1": *
 
 #canvas({
-  import draw: *
+  import cetz.draw: *
   
   // Coordonnées du point M
   let x = 0.8

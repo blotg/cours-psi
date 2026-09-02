@@ -121,7 +121,7 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 ][
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             content(
                 (-2.5, 0),
                 [

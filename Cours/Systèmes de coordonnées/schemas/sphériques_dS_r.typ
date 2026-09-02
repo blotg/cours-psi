@@ -2,7 +2,7 @@
 
 #canvas({
   let block-circle = circle
-  import draw: *
+  import cetz.draw: *
   
   // Coordonnées du point M
   let r = 0.8

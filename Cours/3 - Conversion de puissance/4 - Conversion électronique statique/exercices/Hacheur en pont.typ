@@ -188,7 +188,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
         columns: (1fr, 1fr, 1fr, 1fr),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u_1$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))
@@ -199,7 +199,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
         ),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u_2$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))
@@ -210,7 +210,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
         ),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u_3$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))
@@ -221,7 +221,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
         ),
         figure(
             canvas({
-                import draw: *
+                import cetz.draw: *
                 line((-1, 0), (1, 0), mark: (end: ">>", fill: black))
                 content((), $u_4$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))

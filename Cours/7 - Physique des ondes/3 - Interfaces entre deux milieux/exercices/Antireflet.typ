@@ -9,7 +9,7 @@ On réalise un traitement antireflet sur un verre d'indice de réfraction $n = 1
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line((0, 0), (0, 4), stroke: 2pt)
         line((4, 0), (4, 4), stroke: 2pt)
         line((-4, 0), (8, 0), mark: (end: ">>", fill: black))

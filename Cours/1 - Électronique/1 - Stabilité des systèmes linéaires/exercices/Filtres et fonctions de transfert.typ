@@ -16,7 +16,7 @@
 
     #figure(zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
 
         capacitor("C", (0, 0), (3, 0), label: $C$)
         resistor("R", (3, 0), (3, -3), label: (content: $R$, anchor: "south"))
@@ -37,7 +37,7 @@
         *Haute fréquence*
         #figure(zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
 
             wire((0, 0), (3, 0))
             resistor("R", (3, 0), (3, -3), label: (content: $R$, anchor: "south"))
@@ -52,7 +52,7 @@
         *Basse fréquence*
         #figure(zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
 
             switch("C", (0, 0), (3, 0))
             resistor("R", (3, 0), (3, -3), label: (content: $R$, anchor: "south"))
@@ -68,7 +68,7 @@
 
     #figure(zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
 
         resistor("R", (0, 0), (3, 0), label: $R$)
         inductor("L", (3, 0), (3, -3), label: (content: $L$, anchor: "south"))
@@ -87,7 +87,7 @@
         *Haute fréquence*
         #figure(zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
 
             resistor("R", (0, 0), (3, 0), label: $R$)
             switch("L", (3, 0), (3, -3), label: (content: $L$, anchor: "south"))
@@ -102,7 +102,7 @@
         *Basse fréquence*
         #figure(zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
 
             resistor("R", (0, 0), (3, 0), label: $R$)
             wire((3, 0), (3, -3))

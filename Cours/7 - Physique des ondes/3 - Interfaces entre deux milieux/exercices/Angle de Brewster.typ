@@ -9,7 +9,7 @@ On étudie une OPPH électromagnétique polarisée rectilignement qui arrive sur
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line((-3, 0), (3, 0), stroke: 2pt, mark: (end: ">>", fill: black))
         content((), $x$, anchor: "south", padding: .4em)
         content((-2.5, 0), $n_1$, anchor: "south", padding: .4em)
@@ -138,7 +138,7 @@ Dans la suite, on s'intéresse à l'angle d'incidence pour lequel l'onde réflé
     On part de $sin(theta_i) = n_2/sqrt(n_1^2 + n_2^2)$. Cette relation peut s'interpréter géométriquement.
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0), (3, 0), (3, 2), (0, 0))
             content((1.5, 0), $n_1$, anchor: "north", padding: .4em)
             content((3, 1), $n_2$, anchor: "west", padding: .4em)

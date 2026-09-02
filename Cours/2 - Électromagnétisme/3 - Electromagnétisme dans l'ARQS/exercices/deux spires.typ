@@ -7,7 +7,7 @@
 
 #figure[
   #canvas({
-    import draw: *
+    import cetz.draw: *
     set-style(stroke: (thickness: 0.5pt))
     set-style(content: (padding: .1))
     circle( (0,0), radius: 1, stroke: (thickness: 1pt))
@@ -44,7 +44,7 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
 
 #figure[
   #canvas({
-    import draw: *
+    import cetz.draw: *
     set-style(stroke: (thickness: 0.5pt))
     set-style(content: (padding: .1))
     circle( (0,0), radius: 1, stroke: (thickness: 1pt))

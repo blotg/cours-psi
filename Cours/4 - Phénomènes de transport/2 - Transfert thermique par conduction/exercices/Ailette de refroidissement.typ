@@ -18,7 +18,7 @@ On émet les hypothèses suivantes :
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         let x = 1
         let y = 6
         let z = 0.3

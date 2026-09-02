@@ -103,7 +103,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 
     #figure[
         #canvas({
-            import draw: *
+            import cetz.draw: *
             // Axes
             line((-1, 0), (2.5, 0), mark: (end: ">>", fill: black))
             content((), anchor: "north", $Re(underline(Z))$, padding: 0.1)

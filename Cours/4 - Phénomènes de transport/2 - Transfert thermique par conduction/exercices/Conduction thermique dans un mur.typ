@@ -12,7 +12,7 @@ L'étude s'intéresse au régime stationnaire.
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line((-2, 1.5), (-2, -1.5))
         line((0, 1.5), (0, -1.5))
         line((2, 1.5), (2, -1.5))
@@ -94,7 +94,7 @@ L'étude s'intéresse au régime stationnaire.
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             resistor("Rc1", (0, 0), (2.5, 0), label: $R_"th,conv"$, i: (content: $Phi$, anchor: "north-west"))
             resistor("Rp", (2.5, 0), (5, 0), label: $R_"th,pierre"$)
             resistor("Rl", (5, 0), (7.5, 0), label: $R_"th,laine"$)

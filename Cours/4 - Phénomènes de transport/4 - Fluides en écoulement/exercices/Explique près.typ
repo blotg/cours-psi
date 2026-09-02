@@ -24,7 +24,7 @@
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             scale(200%)
             group({
                 rotate(45deg)

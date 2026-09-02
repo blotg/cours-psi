@@ -53,7 +53,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     On considère le cycle suivant
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             content(
                 (-2.5, 0),
                 [
@@ -137,7 +137,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     On considère le cycle suivant
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             content(
                 (-2.5, 0),
                 [

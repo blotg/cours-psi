@@ -178,7 +178,7 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         content(
             (0, 0),
             [
@@ -255,7 +255,7 @@ Pour une transformation adiabatique, la variation d'enthalpie est nulle.
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         content(
             (0, 0),
             [

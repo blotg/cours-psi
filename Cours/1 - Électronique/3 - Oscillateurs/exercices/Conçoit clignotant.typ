@@ -26,7 +26,7 @@
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
             resistor("R2", (-2, 1.5), (2, 1.5), label: qty("22", "kO"))
             resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: qty("10", "kO"))

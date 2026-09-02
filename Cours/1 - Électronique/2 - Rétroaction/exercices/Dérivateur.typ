@@ -9,7 +9,7 @@ On s'intéresse au montage suivant, appelé montage dérivateur. L'ALI est suppo
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         opamp("ALI", (0, 0))
         resistor("R", (0, 1.7), label: $R$)
         capacitor("C", (rel: (-1.5, 0), to: "ALI.minus"), label: $C$)

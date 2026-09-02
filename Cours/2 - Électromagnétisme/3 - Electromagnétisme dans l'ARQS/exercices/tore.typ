@@ -7,7 +7,7 @@ On considère un tore de rayon interne $R$, de section carrée de côté $a$, su
 
 #figure[
   #canvas({
-    import draw: *
+    import cetz.draw: *
     set-style(stroke: (thickness: 0.5pt))
     set-style(content: (padding: .1))
     ortho(x:25deg, y:0deg, z:0deg, {

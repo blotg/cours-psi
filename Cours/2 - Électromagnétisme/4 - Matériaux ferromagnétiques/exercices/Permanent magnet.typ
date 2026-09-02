@@ -6,7 +6,7 @@
 
     #figure[
         #canvas({
-            import draw: *
+            import cetz.draw: *
             line((0, 0.3), (0, 1.5))
             arc((), start: 0deg, stop: 90deg, radius: 0.5)
             line((), (-1.5, 2))

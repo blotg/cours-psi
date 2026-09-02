@@ -14,7 +14,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         projection-cabinet()
         let e = .7
         let l = 3

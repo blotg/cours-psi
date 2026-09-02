@@ -8,7 +8,7 @@ On considère une machine thermique ouverte dans laquelle circule lentement et h
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         line((0, 0.5), (2, .5), (2, 1.5), (6, 1.5), (6, 0.5), (8, 0.5))
         line((0, -0.5), (2, -.5), (2, -1.5), (6, -1.5), (6, -0.5), (8, -0.5))
         line((0, 0), (1, 0), mark: (end: ">>", fill: black))
@@ -45,7 +45,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         rect((1.8, 1.7), (6.2, -3.7), fill: hachure(10pt), stroke: none)
         rect((2, 1.5), (6, -3.5), fill: white, stroke: none)
         rect((0, 0.5), (8, -0.5), fill: white, stroke: none)

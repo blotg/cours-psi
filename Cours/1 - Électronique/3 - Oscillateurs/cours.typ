@@ -192,7 +192,7 @@ La condition d'existence d'oscillations sinusoïdales apparait comme un cas limi
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
             resistor("R2", (-1.5, -1.5), (1.5, -1.5), label: (content: $R_2$, anchor: "south"), variable: true)
             resistor("R1", (-1.5, -1.5), (-1.5, -4), label: qty("10", "kO"))
@@ -342,7 +342,7 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
             resistor("R2", (-2, 1.5), (2, 1.5), label: $R_2$, variable: true)
             resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: qty("10", "kO"))

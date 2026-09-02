@@ -8,7 +8,7 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         projection-cabinet()
         on-xy(z: 0.5, {
             rect((-1, 0), (1, 4))

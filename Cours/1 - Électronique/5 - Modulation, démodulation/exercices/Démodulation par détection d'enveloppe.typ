@@ -10,7 +10,7 @@ On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi 
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         diode("D", (0, 0), (2.2, 0), label: $D$, variant: "ieee")
         resistor("R", "D.out", (rel: (0, -2.5)), label: (content: $R$, anchor: "south"))

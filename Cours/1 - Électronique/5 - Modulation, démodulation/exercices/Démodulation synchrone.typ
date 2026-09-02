@@ -40,7 +40,7 @@
                     )
                 }
                 plot.annotate(resize: false, {
-                    import draw: *
+                    import cetz.draw: *
                     for (f, h, lbl) in lignes {
                         line((f, 0), (f, h), mark: (end: ">>", fill: black), stroke: red)
                         content((f, 0), lbl, anchor: "north", padding: .2em)
@@ -55,7 +55,7 @@ On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une port
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: .5pt)
         rect((0, -1), (3.4, 1), name: "M")
         content("M", align(center, [Multiplieur \ $(s=k times e_1 times e_2)$]))

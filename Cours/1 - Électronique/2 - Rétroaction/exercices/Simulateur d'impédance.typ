@@ -10,7 +10,7 @@ On s'intéresse au montage suivant. L'ALI est supposé idéal. Le montage est *s
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0), invert: true)
         resistor("Rp2", (-1.5, -1.5), (-1.5, -4), label: $2R'$)

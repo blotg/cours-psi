@@ -31,7 +31,7 @@ On s'intéresse à un cable en aluminium (de masse volumique $qty("2.7", "g/cm^3
 
     #figure(
         canvas({
-            import draw: *
+            import cetz.draw: *
             bezier((0, 0), (2, 1), (60deg, 1))
             circle((0, 0), radius: .05, fill: black)
             line((0, 0), (0, -0.5), stroke: 2pt)

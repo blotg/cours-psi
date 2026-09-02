@@ -30,7 +30,7 @@ Données : $E^circ(cpl("Pb^2+", "Pb")) = qty("-0.13", "V")$, $E^circ(cpl("Cu^2+"
   Le système évolue au #strong[potentiel mixte] $E_m$ tel que $abs(i_"anodique") = abs(i_"cathodique")$, c'est-à-dire à l'intersection de la branche d'oxydation $ce("Cu") -> ce("Cu^2+")$ et de la branche de réduction $ce("Ag+") -> ce("Ag")$. Ces deux branches sont raides et sans surtension (couples rapides) : à $E_m$ (compris entre $qty("0.34", "V")$ et $qty("0.80", "V")$) le courant est notable. La réaction est donc #strong[rapide].
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     line((-1, 0), (5, 0), mark: (end: "stealth")); content((5, 0), anchor: "west", $E$)
     line((0, -1.6), (0, 1.6), mark: (end: "stealth")); content((0, 1.6), anchor: "south", $i$)
     // Cu -> Cu2+ (anodique) départ x=1.2

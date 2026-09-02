@@ -13,7 +13,7 @@ Données : rayon du solénoïde $R = qty("5", "cm")$, nombre de spires $N = 100$
   Calculer la composante horizontale du champ magnétique terrestre.
 ][
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     line((-2.4, 0), (2.4, 0), stroke: (dash: "dashed"))
     // champ terrestre horizontal (direction initiale de l'aiguille)
     line((0, 0), (2, 0), mark: (end: "stealth"), stroke: 1pt)

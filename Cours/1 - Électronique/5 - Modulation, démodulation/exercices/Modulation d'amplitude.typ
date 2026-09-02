@@ -43,7 +43,7 @@ On module le signal $v_e (t)$ (appelé signal modulant) en amplitude avec la por
 
 #figure(
     canvas({
-        import draw: *
+        import cetz.draw: *
         set-style(stroke: .5pt)
         rect((0, -1), (3.4, 1), name: "M")
         content("M", align(center, [Multiplieur \ $(s=k times e_1 times e_2)$]))
@@ -93,7 +93,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
             columns: 2,
             column-gutter: 1em,
             canvas({
-                draw.set-style(axes: (shared-zero: false))
+                cetz.draw.set-style(axes: (shared-zero: false))
                 plot.plot(
                     size: (6, 3.2),
                     axis-style: "school-book",
@@ -121,7 +121,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                 )
             }),
             canvas({
-                draw.set-style(axes: (shared-zero: false))
+                cetz.draw.set-style(axes: (shared-zero: false))
                 plot.plot(
                     size: (6, 3.2),
                     axis-style: "school-book",
@@ -185,7 +185,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                 y-label: [Amplitude],
                 {
                     plot.annotate(resize: false, {
-                        import draw: *
+                        import cetz.draw: *
                         line((3, 0), (3, 2.5), mark: (end: ">>", fill: red), stroke: red)
                         line((1.7, 0), (1.7, 1), mark: (end: ">>", fill: red), stroke: red)
                         line((4.3, 0), (4.3, 1), mark: (end: ">>", fill: red), stroke: red)
@@ -230,7 +230,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                         style: (stroke: red),
                     )
                     plot.annotate(resize: false, {
-                        import draw: *
+                        import cetz.draw: *
                         content((0.5, 0), num("20"), anchor: "north", padding: .2em)
                         content((4.5, 0), num("20000"), anchor: "north", padding: .2em)
                     })
@@ -270,7 +270,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                         style: (stroke: red),
                     )
                     plot.annotate(resize: false, {
-                        import draw: *
+                        import cetz.draw: *
                         line((3, 0), (3, 2.5), mark: (end: ">>", fill: red), stroke: red)
                         content((0, 2.5), $A_p$, anchor: "east", padding: .2em)
                         content((1, 0), $500$, anchor: "north", padding: .2em)

@@ -9,7 +9,7 @@ On considère le montage suivant, constitué d'un montage amplificateur non-inve
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0), invert: true)
         resistor("R1", (-1.5, -1.5), (-1.5, -4), label: $R_1$)

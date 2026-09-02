@@ -9,7 +9,7 @@ On considère le montage ci-dessous, appelé montage suiveur. L'ALI est supposé
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         opamp("ALI", (0, 0))
         wire("ALI.plus", (rel: (-1, 0)), label: "$V_e$")
         swire("ALI.minus", (rel: (-0.5, 1)), (rel: (0.5, 0), to: "ALI.out"), "ALI.out", (rel: (1, 0)))

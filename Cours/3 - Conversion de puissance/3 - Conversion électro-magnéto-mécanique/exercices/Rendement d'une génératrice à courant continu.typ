@@ -20,7 +20,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     #figure(
         zap.circuit({
             import zap: *
-            import draw: *
+            import cetz.draw: *
             vsource("e", (0, 0), (0, 2), u: $e$)
             resistor("r", (0, 2), (0, 4), label: $r$)
             inductor("L", (0, 4), (0, 6), label: $L$, variant: "ieee")

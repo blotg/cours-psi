@@ -8,7 +8,7 @@ Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur u
   Faire un schéma du système.
 ][
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     // vue en coupe dans un plan méridien
     rect((1.4, -0.6), (2.6, 0.6))
     rect((-2.6, -0.6), (-1.4, 0.6))

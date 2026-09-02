@@ -12,7 +12,7 @@ $ H(p)=S(p)/epsilon(p)=A_0/(1+tau p) $
 #figure(
     zap.circuit({
         import zap: *
-        import draw: *
+        import cetz.draw: *
         set-style(padding: .4em)
         opamp("ALI", (0, 0))
         resistor("R", (-1.5, -1.5), (-1.5, -4), label: $R$)

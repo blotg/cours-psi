@@ -39,7 +39,7 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
   Ces deux branches ne se recouvrent pas : l'oxydation exige $E > qty("-0.94", "V")$, la réduction de #ce("H+") exige $E < qty("-1.11", "V")$. Entre les deux, le courant est négligeable. La corrosion est donc quasi nulle : pas de dégagement gazeux. Le potentiel de la tôle se situe dans l'intervalle $[-1.11 ; -0.94]$ V, où $i approx 0$. (De plus, à $"pH" = 6$, #ce("H+") est très dilué : sa réduction est en outre limitée par un palier de diffusion très bas.)
 
   #figure(canvas({
-    import draw: *
+    import cetz.draw: *
     line((-3.4, 0), (2, 0), mark: (end: "stealth")); content((2, 0), anchor: "west", $E$)
     line((0, -1.6), (0, 1.6), mark: (end: "stealth")); content((0, 1.6), anchor: "south", $i$)
     // Zn -> Zn2+ départ x = -0.9 (E=-0.94)

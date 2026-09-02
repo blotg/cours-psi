@@ -6,7 +6,7 @@
 
 #figure[
   #canvas({
-    import draw: *
+    import cetz.draw: *
     set-style(stroke: (thickness: 0.5pt))
     set-style(content: (padding: .1))
     line( (0,1), (8,1) )
