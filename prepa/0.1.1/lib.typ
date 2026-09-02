@@ -7,4 +7,5 @@
 #import "format.typ":*
 #import "cetz.typ": *
 #import "diagbox.typ": *
+#import "cheatsheet.typ": *
 

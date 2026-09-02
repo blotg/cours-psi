@@ -10,7 +10,7 @@
 
 #évaluation(
     appel-prof: true,
-    barème:(
+    barème: (
         ([les manipulations faites sont précisément décrites], 3),
         ([les observations et résultats bruts sont consignés (papier, informatique, .. )], 2),
         ([les traitements, calculs, ... sont explicités], 2),
@@ -37,7 +37,7 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 ]<application-calcul-RC>
 
 #évaluation(
-    barème:(
+    barème: (
         ([les valeurs de ], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
@@ -58,7 +58,7 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 
 #évaluation(
     appel-prof: true,
-    barème:(
+    barème: (
         ([les signaux ne défile pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
@@ -73,7 +73,7 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 
 #évaluation(
     appel-prof: true,
-    barème:(
+    barème: (
         ([les signaux ne défile pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
@@ -110,7 +110,7 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
 
 #évaluation(
     appel-prof: true,
-    barème:(
+    barème: (
         ([les signaux ne défile pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
@@ -123,15 +123,13 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
     Le binôme montre ensuite comment mesure les grandeurs d'intérêt.
 ]
 
-#évaluation(appel-prof: true,
-    barème:(
-        ([courbe du gain en dB], 2),
-        ([courbe de la phase], 2),
-        ([titre], 2),
-        ([axes], 2),
-        ([points non reliés], 2),
-    ),
-)[
+#évaluation(appel-prof: true, barème: (
+    ([courbe du gain en dB], 2),
+    ([courbe de la phase], 2),
+    ([titre], 2),
+    ([axes], 2),
+    ([points non reliés], 2),
+))[
     L'enseignant regarde les courbes.
 ]
 
@@ -181,7 +179,7 @@ Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs
     Estimer l'incertitude absolue sur la mesure de l'amplitude sur l'oscilloscope. On généralisera cette valeur à tous les points de mesure.
 ]
 #évaluation(
-    barème:(
+    barème: (
         ([estimation présente], 3),
         ([estimation pertinente], 4),
         ([estimation précise], 3),
@@ -190,7 +188,7 @@ Conclure sur la compatibilité ou non entre les valeurs attendues et les valeurs
     Présenter le calcul des incertitudes expérimentales sur l'amplitude.
 ]
 #évaluation(
-    barème:(
+    barème: (
         ([estimation présente], 3),
         ([estimation pertinente], 4),
         ([estimation précise], 3),
@@ -216,3 +214,7 @@ Il est maintenant possible de conclure sur l'adéquation des valeurs attendues a
 #show: appendix
 
 = Fonctions Python utiles dans ce TP
+
+#cheatsheet-python(
+    ("plt.plot", "matplotlib.pyplot.semilogx", "plt.xlabel", "plt.ylabel", "plt.title", "plt.show", "scipy.optimize.curve_fit", "np.pi", "numpy.linspace", "np.logspace"),
+)

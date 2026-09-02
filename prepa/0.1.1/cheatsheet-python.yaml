@@ -1,0 +1,97 @@
+# Base de données de l'aide-mémoire Python, générée par #cheatsheet-python(...).
+# À enrichir au fil des besoins.
+
+# Bibliothèques dont l'usage est abrégé dans les documents (import … as …).
+# Les commandes de ces modules s'affichent sous leur forme courte suivie d'un
+# appel de note ¹²³… ; l'import correspondant est rappelé sous le tableau.
+# On peut appeler #cheatsheet-python() avec la forme courte OU complète :
+# "np.linspace" et "numpy.linspace" pointent vers la même entrée.
+abréviations:
+  numpy: np
+  matplotlib.pyplot: plt
+
+# Fonctions importées individuellement (from <module> import <nom>).
+# Forme courte = le nom seul ("curve_fit") ; forme complète = "module.nom".
+imports-from:
+  scipy.optimize:
+    - curve_fit
+
+# Commandes. Clé = nom canonique complet (module.fonction).
+#   exemple     : une chaîne, ou une liste de chaînes (un ou plusieurs exemples).
+#                 Forme conseillée : une signature typée
+#                 « résultat = fonction(arg: type, …) -> type ».
+#                 À mettre entre apostrophes dès qu'elle contient « : ».
+#   commentaire : courte phrase, évaluée comme du balisage Typst (les maths
+#                 $…$ et le code `…` sont donc permis). Un habillage \[ … \]
+#                 facultatif protège un « [ » initial de l'analyseur YAML.
+commandes:
+
+  numpy.linspace:
+    exemple: 'x = np.linspace(début: float, fin: float, nombre_de_points: int) -> array'
+    commentaire: tableau de points régulièrement espacés entre `début` et `fin` (bornes incluses)
+
+  numpy.arange:
+    exemple: 't = np.arange(début: float, fin: float, pas: float) -> array'
+    commentaire: tableau de points de `début` (inclus) à `fin` (exclu), espacés de `pas`
+
+  numpy.logspace:
+    exemple: 'f = np.logspace(début: float, fin: float, nombre_de_points: int) -> array'
+    commentaire: \[comme `linspace`, mais les points sont espacés logarithmiquement entre $10^"début"$ et $10^"fin"$\]
+
+  numpy.pi:
+    exemple: omega = 2 * np.pi * f
+    commentaire: \[constante $pi approx 3.14159$\]
+
+  numpy.array:
+    exemple: 'a = np.array(objet: list) -> array'
+    commentaire: convertit une liste (ou une liste de listes) en tableau numpy
+
+  numpy.zeros:
+    exemple: 'z = np.zeros(n: int) -> array'
+    commentaire: tableau de `n` zéros ; passer un tuple `(lignes, colonnes)` pour un tableau 2D
+
+  numpy.abs:
+    exemple: 'm = np.abs(x: array) -> array'
+    commentaire: valeur absolue terme à terme (module si `x` est complexe)
+
+  numpy.fft.rfft:
+    exemple: 'tf = np.fft.rfft(signal: array) -> array'
+    commentaire: transformée de Fourier rapide d'un signal réel ; renvoie des amplitudes complexes
+
+  numpy.fft.rfftfreq:
+    exemple: 'freqs = np.fft.rfftfreq(n: int, Te: float) -> array'
+    commentaire: fréquences (en Hz) associées à `rfft`, pour `n` points échantillonnés à la période `Te`
+
+  matplotlib.pyplot.plot:
+    exemple:
+      - plt.plot(x, y)
+      - 'plt.plot(x, y, format: str)'
+    commentaire: trace `y` en fonction de `x` ; `format` (ex. `"r+"`, `"g-"`) fixe couleur et style
+
+  matplotlib.pyplot.semilogx:
+    exemple: plt.semilogx(x, y)
+    commentaire: comme `plot`, avec l'axe des abscisses en échelle logarithmique
+
+  matplotlib.pyplot.xlabel:
+    exemple: 'plt.xlabel(texte: str)'
+    commentaire: légende de l'axe des abscisses
+
+  matplotlib.pyplot.ylabel:
+    exemple: 'plt.ylabel(texte: str)'
+    commentaire: légende de l'axe des ordonnées
+
+  matplotlib.pyplot.title:
+    exemple: 'plt.title(texte: str)'
+    commentaire: titre du graphique
+
+  matplotlib.pyplot.grid:
+    exemple: plt.grid()
+    commentaire: affiche une grille sur le graphique
+
+  matplotlib.pyplot.show:
+    exemple: plt.show()
+    commentaire: affiche la fenêtre graphique, une fois tous les tracés effectués
+
+  scipy.optimize.curve_fit:
+    exemple: 'popt, pcov = curve_fit(f: fonction, xdata: array, ydata: array, p0: list) -> tuple'
+    commentaire: ajuste les paramètres de `f` (dont le premier argument est l'abscisse) aux données ; `popt` = paramètres optimaux, `p0` = valeurs initiales (facultatif)
