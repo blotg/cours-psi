@@ -5,7 +5,7 @@
 #let grandeurs = (
     "U": (signification: "l'énergie interne", unité: unit("J")),
     "T": (signification: "la température", unité: unit("K")),
-    "S": (signification: "l'entropie", unité: unit("J.K^{-1}")),
+    "S": (signification: "l'entropie", unité: unit("J/K")),
     "P": (signification: "la pression", unité: unit("Pa")),
     "V": (signification: "le volume", unité: unit("m^3")),
     "H": (signification: "l'enthalpie", unité: unit("J")),
