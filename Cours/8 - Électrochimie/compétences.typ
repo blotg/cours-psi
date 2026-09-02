@@ -1,0 +1,30 @@
+#import "@local/prepa:0.1.1": *
+
+- Citer et exploiter la relation entre l'enthalpie libre de réaction et les potentiels des couples mis en jeu dans une réaction d'oxydoréduction.
+- Déterminer l'enthalpie libre standard d'une réaction d'oxydoréduction à partir des potentiels standard des couples.
+- Déterminer la valeur du potentiel standard d'un couple d'oxydoréduction à partir de données thermodynamiques.
+- Décrire le montage à trois électrodes permettant de tracer des courbes courant-potentiel.
+- Relier vitesse de réaction électrochimique et intensité du courant.
+- Identifier le caractère lent ou rapide d'un système à partir des courbes courant-potentiel.
+- Identifier les espèces électroactives pouvant donner lieu à une limitation en courant par diffusion.
+- Identifier des paliers de diffusion limite sur des relevés expérimentaux.
+- Relier, à l'aide de la loi de Fick, l'intensité du courant de diffusion limite à la concentration du réactif et à la surface immergée de l'électrode.
+- Tracer l'allure de courbes courant-potentiel de branches d'oxydation ou de réduction à partir de données fournies, de potentiels standard, concentrations et surpotentiels.
+- #compétence-TP Tracer et exploiter des courbes courant-potentiel.
+- Établir l'inégalité reliant la variation d'enthalpie libre et le travail électrique.
+- Relier la tension à vide d'une pile et l'enthalpie libre de la réaction modélisant son fonctionnement.
+- Déterminer la capacité électrique d'une pile.
+- Exploiter les courbes courant-potentiel pour rendre compte du fonctionnement d'une pile électrochimique et tracer sa caractéristique.
+- Citer les paramètres influençant la résistance interne d'une pile électrochimique.
+- Exploiter les courbes courant-potentiel pour rendre compte du fonctionnement d'un électrolyseur et prévoir la valeur de la tension minimale à imposer.
+- Exploiter les courbes courant-potentiel pour justifier les contraintes (purification de la solution électrolytique, choix des électrodes) dans la recharge d'un accumulateur.
+- Déterminer la masse de produit formé pour une durée et des conditions données d'électrolyse.
+- Déterminer un rendement faradique à partir d'informations fournies concernant le dispositif étudié.
+- #compétence-TP Étudier le fonctionnement d'une pile ou d'un électrolyseur pour effectuer des bilans de matière et des bilans électriques.
+- Positionner un potentiel de corrosion sur un tracé de courbes courant-potentiel.
+- Interpréter le phénomène de corrosion uniforme d'un métal ou de deux métaux en contact en utilisant des courbes courant-potentiel ou d'autres données expérimentales, thermodynamiques et cinétiques.
+- Déterminer une vitesse de corrosion.
+- Citer des facteurs favorisant la corrosion.
+- Exploiter des tracés de courbes courant-potentiel pour expliquer qualitativement la qualité de la protection par un revêtement métallique et le fonctionnement d'une anode sacrificielle.
+- Interpréter le phénomène de passivation sur une courbe courant-potentiel.
+- #compétence-TP Mettre en évidence le phénomène de corrosion et les facteurs l'influençant.
