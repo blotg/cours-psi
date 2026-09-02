@@ -1,0 +1,24 @@
+#import "@local/prepa:0.1.1": *
+
+- Exploiter les symétries et invariances d'une distribution de charges pour en déduire des propriétés du champ électrique.
+- Citer les équations de Maxwell-Gauss et Maxwell-Faraday en régime variable et en régime stationnaire.
+- Relier l'existence du potentiel scalaire électrique au caractère irrotationnel du champ électrique.
+- Exprimer une différence de potentiel comme une circulation du champ électrique.
+- Associer l'évasement des tubes de champ à l'évolution de la norme du champ électrique en dehors des sources.
+- Représenter les lignes de champ connaissant les surfaces équipotentielles et inversement.
+- Évaluer la valeur d'un champ électrique à partir d'un réseau de surfaces équipotentielles.
+- Établir l'équation de Poisson reliant le potentiel à la densité volumique de charge.
+- Énoncer et appliquer le théorème de Gauss.
+- Établir le champ électrique et le potentiel créés par une charge ponctuelle, une distribution de charge à symétrie sphérique, une distribution de charge à symétrie cylindrique.
+- Exploiter le théorème de superposition.
+- Utiliser le modèle de la distribution surfacique de charge.
+- Établir le champ électrique créé par un plan infini uniformément chargé en surface.
+- Établir la relation entre l'énergie potentielle d'une charge ponctuelle et le potentiel.
+- Appliquer le théorème de l'énergie cinétique à une particule chargée dans un champ électrique.
+- Établir les analogies entre les champs électrique et gravitationnel.
+- #compétence-TP Décrire qualitativement le phénomène d'influence électrostatique.
+- Déterminer l'expression du champ d'un condensateur plan en négligeant les effets de bord.
+- Déterminer l'expression de la capacité.
+- Prendre en compte la permittivité du milieu dans l'expression de la capacité.
+- Déterminer l'expression de la densité volumique d'énergie électrique dans le cas du condensateur plan à partir de celle de l'énergie du condensateur.
+- Citer l'expression de la densité volumique d'énergie électrique.
