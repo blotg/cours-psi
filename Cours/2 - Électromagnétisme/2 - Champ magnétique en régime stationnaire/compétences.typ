@@ -1,0 +1,5 @@
+ - Énoncer les équations de Maxwell-Ampère et Maxwell-Thomson en régime variable et en régime stationnaire.
+ - Exploiter la conservation du flux magnétique et ses conséquences sur les lignes de champ magnétique.
+ - Énoncer et appliquer le théorème d'Ampère.
+ - Établir l'expression du champ magnétique créé par un fil épais et infini, par un solénoïde infini en admettant que le champ extérieur est nul, et par une bobine torique.
+ - Exprimer les forces de Laplace s'exerçant sur un conducteur filiforme et sur une distribution volumique de courant.
