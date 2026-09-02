@@ -108,11 +108,22 @@
             block(width: 100%, above: 0pt, fill: fond-corps, inset: inset-corps, corps)
         },
     )
-    if genre != none { figure(kind: genre, supplement: supplement, numbering: "1", caption: none, boîte) } else { boîte }
+    if genre != none { figure(kind: genre, supplement: supplement, numbering: "1", caption: none, boîte) } else {
+        boîte
+    }
 }
 
 // Bloc courant : bandeau standard + corps.
-#let _bloc(intitulé, corps, titre: none, marqueur: none, noir: false, fond-corps: none, genre: none, supplement: none) = _boite(
+#let _bloc(
+    intitulé,
+    corps,
+    titre: none,
+    marqueur: none,
+    noir: false,
+    fond-corps: none,
+    genre: none,
+    supplement: none,
+) = _boite(
     _bandeau(intitulé, titre: titre, marqueur: marqueur, noir: noir),
     corps,
     noir: noir,
@@ -137,24 +148,24 @@
     if corrigé != none {
         // Style volontairement à part : un simple filet gris à gauche.
         [#block(
-                breakable: true,
-                width: 100%,
-                above: 0.7em,
-                below: 0.9em,
-                stroke: (left: 1.5pt + luma(65%)),
-                inset: (left: 0.9em, top: 0.15em, bottom: 0.15em),
-                corrigé,
-            ) <correction>]
+            breakable: true,
+            width: 100%,
+            above: 0.7em,
+            below: 0.9em,
+            stroke: (left: 1.5pt + luma(65%)),
+            inset: (left: 0.9em, top: 0.15em, bottom: 0.15em),
+            corrigé,
+        ) <correction>]
     }
     import "symboles.typ" as symboles
     for c in coups-de-pouce {
         let _ = eval(c, mode: "markup", scope: dictionary(symboles))
     }
     context [#metadata((
-            exercice: counter(heading).get().sum(),
-            question: numQuestion.get().first(),
-            coups-de-pouce: coups-de-pouce,
-        )) <coups-de-pouce>]
+        exercice: counter(heading).get().sum(),
+        question: numQuestion.get().first(),
+        coups-de-pouce: coups-de-pouce,
+    )) <coups-de-pouce>]
 }
 
 #let entourage(graine: "") = {
@@ -210,10 +221,14 @@
         #text(fill: _gris)[#for _ in range(difficulté) { sym.star.filled }]
     ]) <titre-exercice>
     #if ouvert [
-        #text(fill: _gris)[_Cet exercice est un problème ouvert. Il nécessite de prendre des initiatives et de faire des choix dans la modélisation. Des approximations et des estimations sont souvent nécessaires pour arriver à une solution._]
+        #text(
+            fill: _gris,
+        )[_Cet exercice est un problème ouvert. Il nécessite de prendre des initiatives et de faire des choix dans la modélisation. Des approximations et des estimations sont souvent nécessaires pour arriver à une solution._]
     ]
     #if explique [
-        #text(fill: _gris)[_Le but de cet exercice est de vous faire expliquer un concept/phénomène avec des mots simples et courants (pas de vocabulaire technique ou scientifique) à une personne de votre entourage. Tachez de faire simple et court, utilisez des analogies avec des choses connues. Vous pouvez vous inspirer de #link("https://www.youtube.com/@MT180_fr", "Ma thèse en 180 secondes"). Profitez-en pour prendre des nouvelles !_]
+        #text(
+            fill: _gris,
+        )[_Le but de cet exercice est de vous faire expliquer un concept/phénomène avec des mots simples et courants (pas de vocabulaire technique ou scientifique) à une personne de votre entourage. Tachez de faire simple et court, utilisez des analogies avec des choses connues. Vous pouvez vous inspirer de #link("https://www.youtube.com/@MT180_fr", "Ma thèse en 180 secondes"). Profitez-en pour prendre des nouvelles !_]
     ]
     #show <question>: it => if ouvert or explique { strong(it) } else { it }
     #show <numéro-question>: it => if ouvert or explique {} else { it }
@@ -233,7 +248,13 @@
     let items = ()
     for (clé, valeur) in grandeurs {
         let unité = if "unité" in valeur and valeur.unité != none [ (#valeur.unité)]
-        items.push([#eval(clé, mode: "math", scope: dictionary(symboles)) #eval(valeur.signification, mode: "markup", scope: dictionary(symboles))#unité])
+        items.push([#eval(clé, mode: "math", scope: dictionary(symboles)) #if type(valeur.signification) == str {
+                eval(
+                    valeur.signification,
+                    mode: "markup",
+                    scope: dictionary(symboles),
+                )
+            } else { valeur.signification } #unité])
     }
     items.join([ ; ])
 }
@@ -261,8 +282,7 @@
                 #grid(
                     columns: (1fr, 1fr),
                     column-gutter: 1.2em,
-                    list(..hypothèses.slice(0, mi)),
-                    list(..hypothèses.slice(mi)),
+                    list(..hypothèses.slice(0, mi)), list(..hypothèses.slice(mi)),
                 )
             ]
         }
@@ -318,16 +338,16 @@
 // Zone quadrillée seule (tracé à main levée, croquis…), sur toute la largeur.
 // `hauteur` : hauteur de la zone. `bordure` : entoure la zone d'un filet.
 #let carreaux(hauteur, bordure: false) = [#block(
-        width: 100%,
-        height: hauteur,
-        above: _écart,
-        below: _écart,
-        radius: _rayon,
-        stroke: if bordure { _filet },
-        clip: true,
-        breakable: false,
-        place(center + horizon, rect(width: 100%, height: 100%, fill: _quadrillage, stroke: none)),
-    ) <carreaux>]
+    width: 100%,
+    height: hauteur,
+    above: _écart,
+    below: _écart,
+    radius: _rayon,
+    stroke: if bordure { _filet },
+    clip: true,
+    breakable: false,
+    place(center + horizon, rect(width: 100%, height: 100%, fill: _quadrillage, stroke: none)),
+) <carreaux>]
 
 // -- Blocs d'activité ---------------------------------------------------
 
@@ -438,8 +458,7 @@
                     grid(
                         columns: (1fr, auto),
                         column-gutter: 1.4em,
-                        contenu,
-                        block(stroke: (left: _filet), inset: (left: 1em), _barème(barème)),
+                        contenu, block(stroke: (left: _filet), inset: (left: 1em), _barème(barème)),
                     )
                 },
                 noir: true,
