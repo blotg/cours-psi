@@ -216,5 +216,18 @@ Il est maintenant possible de conclure sur l'adéquation des valeurs attendues a
 = Fonctions Python utiles dans ce TP
 
 #cheatsheet-python(
-    ("plt.plot", "matplotlib.pyplot.semilogx", "plt.xlabel", "plt.ylabel", "plt.title", "plt.show", "scipy.optimize.curve_fit", "np.pi", "numpy.linspace", "np.logspace"),
+    (
+        "plt.clf",
+        "plt.plot",
+        "matplotlib.pyplot.semilogx",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.title",
+        "plt.show",
+        "scipy.optimize.curve_fit",
+        "np.pi",
+        "numpy.linspace",
+        "np.logspace",
+        "np.random.normal",
+    ),
 )
