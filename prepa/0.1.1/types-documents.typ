@@ -198,7 +198,7 @@
     doc
 }
 
-#let TP(numéro: none, titre: none, date: datetime.today(), doc) = {
+#let TP(numéro: none, titre: none, date: datetime.today(), liste-élèves: none, doc) = {
     let titre-doc = "TP"
     if numéro != none {
         titre-doc = titre-doc + [ #numéro]

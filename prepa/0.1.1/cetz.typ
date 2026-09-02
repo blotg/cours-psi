@@ -16,44 +16,43 @@
 }
 
 
+// #let ampermeter(name, node, ..params) = {
+//     import "@preview/zap:0.6.0": component, interface
 
-#let ampermeter(name, node, ..params) = {
-    import "@preview/zap:0.6.0": component, interface
+//     // Custom styling properties
+//     let custom-style = (
+//         radius: 0.53,
+//     )
+//     let draw(ctx, position, style) = {
+//         interface(
+//             (-custom-style.radius, -custom-style.radius),
+//             (custom-style.radius, custom-style.radius),
+//             io: position.len() < 2,
+//         )
+//         cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
+//         cetz.draw.content((), "A")
+//     }
+//     component("ampermeter", name, node, draw: draw, ..params)
+// }
 
-    // Custom styling properties
-    let custom-style = (
-        radius: 0.53,
-    )
-    let draw(ctx, position, style) = {
-        interface(
-            (-custom-style.radius, -custom-style.radius),
-            (custom-style.radius, custom-style.radius),
-            io: position.len() < 2,
-        )
-        cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
-        cetz.draw.content((), "A")
-    }
-    component("ampermeter", name, node, draw: draw, ..params)
-}
+// #let voltmeter(name, node, ..params) = {
+//     import "@preview/zap:0.6.0": component, interface
 
-#let voltmeter(name, node, ..params) = {
-    import "@preview/zap:0.6.0": component, interface
-
-    // Custom styling properties
-    let custom-style = (
-        radius: 0.53,
-    )
-    let draw(ctx, position, style) = {
-        interface(
-            (-custom-style.radius, -custom-style.radius),
-            (custom-style.radius, custom-style.radius),
-            io: position.len() < 2,
-        )
-        cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
-        cetz.draw.content((), "V")
-    }
-    component("voltmeter", name, node, draw: draw, ..params)
-}
+//     // Custom styling properties
+//     let custom-style = (
+//         radius: 0.53,
+//     )
+//     let draw(ctx, position, style) = {
+//         interface(
+//             (-custom-style.radius, -custom-style.radius),
+//             (custom-style.radius, custom-style.radius),
+//             io: position.len() < 2,
+//         )
+//         cetz.draw.circle((0, 0), radius: custom-style.radius, fill: white, ..style)
+//         cetz.draw.content((), "V")
+//     }
+//     component("voltmeter", name, node, draw: draw, ..params)
+// }
 
 #let transformateur(
     name,
@@ -62,7 +61,7 @@
     borne-homologue-secondaire-inversée: false,
     ..params,
 ) = {
-    import "@preview/zap:0.6.0": component, interface
+    import "@preview/zap:0.6.0": symbol, interface
 
     // Custom styling properties
     let custom-style = (
@@ -135,11 +134,11 @@
             )
         }
     }
-    component("transformateur", name, node, draw: draw, ..params)
+    symbol("transformateur", name, node, draw: draw, ..params)
 }
 
 #let thyristor(name, node, ..params) = {
-    import "@preview/zap:0.6.0": component, interface
+    import "@preview/zap:0.6.0": symbol, interface
 
     // Custom styling properties
     let custom-style = ()
@@ -152,7 +151,7 @@
         zap.diode("D", (-0.5, 0), (0.5, 0))
         cetz.draw.line((0.23, 0.11), (rel: (45deg, 0.3)), stroke: 0.8pt)
     }
-    component("thyristor", name, node, draw: draw, ..params)
+    symbol("thyristor", name, node, draw: draw, ..params)
 }
 
 #import "@preview/modpattern:0.2.0": modpattern
