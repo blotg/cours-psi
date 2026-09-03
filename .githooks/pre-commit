@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# Recompile les PDF (cours / TD / poly / TP) des chapitres dont une source
-# apparait dans le commit en cours.
+# Recompile les documents (cours / TD / poly / TP / evaluation) des chapitres
+# dont une source apparait dans le commit en cours.
 #
-# - Les PDF produits sont des artefacts de build : ils sont ignores par git
-#   (cf. .gitignore) et ne sont donc PAS ajoutes au commit. Le hook sert a les
-#   garder a jour sur le disque et a verifier que tout compile encore.
-# - Un PDF est (re)genere qu'il existe deja ou non.
+# - Tout est produit dans <chapitre>/build/, ignore par git (cf. .gitignore) :
+#   rien n'est donc ajoute au commit. Le hook sert a garder ces documents a
+#   jour sur le disque et a verifier que les sources compilent encore.
+# - Un document est (re)genere qu'il existe deja ou non.
 # - Une modif sous prepa/ => tous les chapitres sont recompiles.
 # - Un chapitre qui ne compile pas : simple avertissement, le commit continue.
 #   Pour annuler le commit dans ce cas :
@@ -18,6 +18,9 @@
 # Prerequis : `typst` dans le PATH.
 
 export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"   # sortie PDF reproductible
+
+# Dossier de sortie, relatif au dossier du chapitre (ignore par git).
+OUT=build
 
 # Documents produits a partir d'une source typst du meme nom, dans un dossier
 # de chapitre ou de TP. Ce sont eux (et eux seuls) que le hook recompile.
@@ -71,7 +74,9 @@ for d in $dirs; do
         [ -f "$d/$base.typ" ] || continue
 
         printf '  typst  %s/%s.typ\n' "$d" "$base"
-        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" ) || fail=1
+        # typst ne cree pas le dossier de sortie
+        mkdir -p "$d/$OUT" || { fail=1; continue; }
+        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" "$OUT/$base.pdf" ) || fail=1
     done
 done
 

@@ -21,17 +21,8 @@
 # Editor preferences
 .vscode/
 
-# PDF produits a partir des sources typst (regeneres par le hook pre-commit).
-# Les autres PDF (datasheet, sujets de DM, corriges scannes, documents
-# fournis...) restent suivis par git.
-cours.pdf
-TD.pdf
-poly.pdf
-TP.pdf
-évaluation.pdf
-
-# PDF derives des precedents par un outil externe (pypdf pour l'imposition du
-# poly, 2-up pour la fiche d'evaluation) : artefacts eux aussi, mais le hook ne
-# sait pas les regenerer -- le script n'est pas dans le depot.
-poly-imprimable.pdf
-évaluation x2.pdf
+# Documents produits (cours.pdf, poly.pdf, TD.pdf, flashcards.apkg...) : un
+# dossier build/ par chapitre, regenere par le hook pre-commit. Les PDF qui ne
+# sont pas produits ici (datasheet, sujets et corriges de DM, corriges scannes,
+# documents fournis...) vivent a la racine du chapitre et restent suivis.
+build/
