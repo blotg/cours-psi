@@ -21,6 +21,13 @@
     )
 }
 
+// cours.typ et TD.typ se compilent seuls ou inclus dans le poly. Inclus,
+// c'est le poly qui met le document en place : ils ne doivent alors poser ni
+// page, ni titre, ni logotype. Ce garde l'évite en amont — plutôt que de
+// laisser init-document s'appliquer deux fois et de masquer après coup ce qui
+// en déborde, ce qui obligeait à tenir une liste d'étiquettes à jour.
+#let inclus-dans-le-poly() = state("racine").get() == "full-poly"
+
 // `logotype` : bandeau d'en-tête sur la première page. À couper pour les
 // documents qui ne sont pas des feuilles de cours — la planche de
 // flashcards, les pages quadrillées — où il tomberait au travers.
@@ -52,14 +59,10 @@
         // hauteur explicitement réservée ci-dessous, et le titre remonte
         // d'autant. Les titres les plus longs occupent toute la largeur sur
         // deux lignes : le logotype ne peut pas se mettre à côté d'eux.
-        //
-        // Étiqueté pour que full-poly puisse le masquer : cours.typ réapplique
-        // init-document quand il est inclus dans le poly. Le bloc porte
-        // l'étiquette pour que l'espace réservé disparaisse avec l'image.
-        [#block[
+        block[
             #place(top + left, dy: -montée, image("logos/Logotype noir.svg", width: largeur))
             #v(hauteur - montée)
-        ] <logotype>]
+        ]
     }
     doc
 }
@@ -178,10 +181,19 @@
         }
     }
     show <cours>: it => {
-        show <titre>: it => {}
-        show <logotype>: it => {}
+        // Le résumé du cours est isolé entre deux sauts de page. C'était
+        // jusqu'ici un effet de bord : cours.typ réappliquait init-document,
+        // dont le `set page` coupait la page à l'entrée comme à la sortie de
+        // sa portée. Le garde ayant supprimé cette double application, les
+        // deux coupures deviennent explicites.
+        //
+        // Celle de sortie est ici, et non au début de <méthodes>, parce que
+        // <méthodes> ne produit rien quand méthodes.typ est vide : la section
+        // Exercices perdrait alors son début de page.
+        pagebreak(weak: true)
         set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
         it
+        pagebreak(weak: true)
     }
     show <méthodes>: it => {
         if it != [] {
@@ -207,40 +219,38 @@
 
 #let TD(infos: (:), avec-corrigé: true, doc) = {
     let titre = infos.at("titre", default: "")
-    let révisions-sup = infos.at("révisions-sup", default: ())
-    let cahier-entrainement = infos.at("cahier-entrainement", default: ())
-    let cahier-entrainement-sup = infos.at("cahier-entrainement-sup", default: ())
-    context if state("racine").get() != "full-poly" {
-        set heading(numbering: "1.")
-        show: init-document.with(titre: titre)
-        [*#align(center, text(17pt)[#titre TD])* <titre>]
-        show <correction>: it => if avec-corrigé { it } else {}
+    context if inclus-dans-le-poly() {
         doc
     } else {
+        show: init-document.with(titre: titre)
+        set heading(numbering: "1.")
+        show <correction>: it => if avec-corrigé { it } else {}
+        align(center, text(17pt)[*#titre TD*])
         doc
     }
 }
 
 #let cours(infos: (:), doc) = {
     let titre = infos.at("titre", default: "")
-    let révisions-sup = infos.at("révisions-sup", default: ())
-    let cahier-entrainement = infos.at("cahier-entrainement", default: ())
-    let cahier-entrainement-sup = infos.at("cahier-entrainement-sup", default: ())
-    show: init-document.with(titre: titre)
-    show: it => {
-        set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
-        it
+    let corps = {
+        text(size: 17pt, [*Résumé du cours*])
+        context [#metadata(here().page()) <première-page-cours>]
+        doc
+        context [#metadata(here().page()) <dernière-page-cours>]
     }
-    [*#align(center, text(17pt)[#titre])* <titre>]
-    text(size: 17pt, [*Résumé du cours*])
-    context [#metadata(here().page()) <première-page-cours>]
-    doc
-    context [#metadata(here().page()) <dernière-page-cours>]
+    context if inclus-dans-le-poly() {
+        corps
+    } else {
+        show: init-document.with(titre: titre)
+        set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
+        align(center, text(17pt)[*#titre*])
+        corps
+    }
 }
 
 #let programme-de-colle(date: datetime.today(), doc) = {
     show: init-document.with(titre: "Programme de colle")
-    [*#align(center, text(17pt)[Programme de colle de la semaine du #date.display("[day]/[month]/[year]")])* <titre>]
+    align(center, text(17pt)[*Programme de colle de la semaine du #date.display("[day]/[month]/[year]")*])
     doc
 }
 
@@ -265,7 +275,7 @@
         ]
     ]
 
-    [*#align(center, text(17pt)[#titre-doc])* <titre>]
+    align(center, text(17pt)[*#titre-doc*])
     doc
 }
 
