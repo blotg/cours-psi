@@ -9,9 +9,10 @@
 #   rien n'est donc ajoute au commit. Le hook sert a garder ces documents a
 #   jour sur le disque et a verifier que les sources compilent encore.
 # - Un document est (re)genere qu'il existe deja ou non.
-# - Les flashcards Anki et la copie des DM sont faites dans la foulee par
-#   `python3 -m outils`, si les dependances sont installees (cf.
-#   outils/README.md).
+# - Ce qui se tire du cours plutot que d'une source propre (DM recopies,
+#   flashcards Anki et planche a decouper, liste des manipulations) est
+#   produit dans la foulee par `python3 -m outils build`, si les dependances
+#   sont installees (cf. outils/README.md).
 # - Une modif sous prepa/ => tous les chapitres sont recompiles.
 # - Un chapitre qui ne compile pas : simple avertissement, le commit continue.
 #   Pour annuler le commit dans ce cas :
@@ -97,7 +98,7 @@ for d in $dirs; do
     done
 done
 
-# --- Flashcards Anki et DM ------------------------------------------------
+# --- DM, flashcards, manipulations ----------------------------------------
 # On prefere le venv du depot, sinon le python du systeme.
 PY=""
 if [ -x outils/.venv/bin/python ]; then
@@ -113,14 +114,12 @@ if [ -n "$PY" ] && [ -d outils ]; then
 $d"
     done
     if [ -n "$chapitres" ]; then
-        for commande in dm flashcards; do
-            # shellcheck disable=SC2086
-            printf '%s' "$chapitres" | sed '/^$/d' | tr '\n' '\0' \
-                | xargs -0 "$PY" -m outils "$commande" || {
-                    printf '\n  Avertissement : `outils %s` a echoue.\n' "$commande"
-                    printf '  Dependances :  outils/.venv/bin/pip install -r outils/requirements.txt\n\n'
-                }
-        done
+        # shellcheck disable=SC2086
+        printf '%s' "$chapitres" | sed '/^$/d' | tr '\n' '\0' \
+            | xargs -0 "$PY" -m outils build || {
+                printf '\n  Avertissement : `outils build` a echoue.\n'
+                printf '  Dependances :  outils/.venv/bin/pip install -r outils/requirements.txt\n\n'
+            }
     fi
 fi
 

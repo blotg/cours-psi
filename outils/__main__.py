@@ -6,23 +6,41 @@ from datetime import date
 from pathlib import Path
 
 
-def _flashcards(args) -> int:
+def _pour_chaque(dossiers, étapes) -> int:
+    """Applique des étapes à chaque chapitre, en rapportant sans s'arrêter.
+
+    Les étapes partagent le même objet `Chapitre`, donc la même requête
+    `typst query` sur le cours : l'interroger coûte plus que tout le reste.
+    """
     from .chapitre import Chapitre
 
     code = 0
-    for dossier in args.chapitres:
+    for dossier in dossiers:
         chapitre = Chapitre(dossier)
-        try:
-            fichier = chapitre.flashcards()
-        except Exception as e:  # noqa: BLE001 - on rapporte et on continue
-            print(f"  flashcards  {dossier} : {e}", file=sys.stderr)
-            code = 1
-            continue
-        if fichier is None:
-            print(f"  flashcards  {dossier} : aucune flashcard")
-        else:
-            print(f"  flashcards  {fichier}")
+        for nom, produire in étapes:
+            try:
+                produits = produire(chapitre)
+            except Exception as e:  # noqa: BLE001 - on rapporte et on continue
+                print(f"  {nom:<13} {dossier} : {e}", file=sys.stderr)
+                code = 1
+                continue
+            if not produits:
+                print(f"  {nom:<13} {dossier} : rien à produire")
+            for fichier in produits:
+                print(f"  {nom:<13} {fichier}")
     return code
+
+
+#: Les documents qu'un chapitre tire de son cours, hors compilation directe.
+ÉTAPES = (
+    ("DM", lambda c: c.DM()),
+    ("flashcards", lambda c: [p for p in (c.flashcards(), c.flashcards_imprimables()) if p]),
+    ("manipulations", lambda c: [c.liste_des_manipulations()]),
+)
+
+
+def _étapes(*noms):
+    return lambda args: _pour_chaque(args.chapitres, [e for e in ÉTAPES if e[0] in noms])
 
 
 def _imprimable(args) -> int:
@@ -34,20 +52,6 @@ def _imprimable(args) -> int:
             print(f"  imprimable  {Chapitre(dossier).poly_imprimable(quadrillage=args.quadrillage)}")
         except Exception as e:  # noqa: BLE001
             print(f"  imprimable  {dossier} : {e}", file=sys.stderr)
-            code = 1
-    return code
-
-
-def _dm(args) -> int:
-    from .chapitre import Chapitre
-
-    code = 0
-    for dossier in args.chapitres:
-        try:
-            for fichier in Chapitre(dossier).DM():
-                print(f"  DM          {fichier}")
-        except Exception as e:  # noqa: BLE001
-            print(f"  DM          {dossier} : {e}", file=sys.stderr)
             code = 1
     return code
 
@@ -84,9 +88,17 @@ def main(argv: list[str] | None = None) -> int:
     parseur = argparse.ArgumentParser(prog="python3 -m outils", description=__doc__)
     sous = parseur.add_subparsers(dest="commande", required=True)
 
-    p = sous.add_parser("flashcards", help="paquet Anki d'un ou plusieurs chapitres")
+    p = sous.add_parser("build", help="tout ce qu'un chapitre tire de son cours")
     p.add_argument("chapitres", nargs="+", type=Path)
-    p.set_defaults(fonction=_flashcards)
+    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations"))
+
+    p = sous.add_parser("flashcards", help="paquet Anki et planche à découper")
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.set_defaults(fonction=_étapes("flashcards"))
+
+    p = sous.add_parser("manipulations", help="liste des manipulations et du matériel")
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.set_defaults(fonction=_étapes("manipulations"))
 
     p = sous.add_parser("imprimable", help="poly en fascicule A3, prêt à imprimer")
     p.add_argument("chapitres", nargs="+", type=Path)
@@ -100,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sous.add_parser("dm", help="copie les DM et leurs corrigés dans build/")
     p.add_argument("chapitres", nargs="+", type=Path)
-    p.set_defaults(fonction=_dm)
+    p.set_defaults(fonction=_étapes("DM"))
 
     p = sous.add_parser("tp", help="fascicules de TP personnalisés par binôme")
     p.add_argument("sujet", type=Path)

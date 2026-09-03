@@ -26,16 +26,28 @@ même produits, seules les flashcards et la copie des DM manquent.
 Depuis la racine du dépôt :
 
 ```sh
-python3 -m outils flashcards "Cours/8 - Électrochimie"      # flashcards - Électrochimie.apkg
+python3 -m outils build "Cours/8 - Électrochimie"           # DM + flashcards + manipulations
+python3 -m outils flashcards "Cours/8 - Électrochimie"      # .apkg et planche .pdf
+python3 -m outils manipulations "Cours/8 - Électrochimie"   # manipulations - Électrochimie.pdf
+python3 -m outils dm "Cours/8 - Électrochimie"              # DM 1 - Électrochimie.pdf, ...
 python3 -m outils imprimable "Cours/8 - Électrochimie"      # poly-imprimable - Électrochimie.pdf
 python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - Électrochimie.pdf
-python3 -m outils dm "Cours/8 - Électrochimie"              # DM 1 - Électrochimie.pdf, ...
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
 ```
 
-`flashcards`, `imprimable` et `dm` acceptent plusieurs chapitres à la suite.
+Toutes ces commandes acceptent plusieurs chapitres à la suite.
+
+`build` est ce qu'appelle le hook : il enchaîne `dm`, `flashcards` et
+`manipulations` sur un même objet `Chapitre`, donc une seule requête
+`typst query` par chapitre — c'est de loin le poste le plus cher.
+
+`flashcards` produit deux fichiers : le paquet Anki (`.apkg`) et une planche à
+découper (`.pdf`), quatre cartes A6 par page A4. Les rectos d'un groupe de
+quatre occupent une page et leurs versos la suivante, en miroir horizontal :
+imprimée en recto-verso avec **retournement sur le bord long**, chaque carte a
+bien son verso derrière son recto.
 
 `imprimable` produit par défaut un **fascicule A3 paysage** : deux pages A4 par
 face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
@@ -54,6 +66,11 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 | `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
 | `qcm_cam.py` | questions au format QCMCam |
 
+Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
+depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
+flashcards et la liste des manipulations. Les données leur arrivent en JSON par
+`--input données`.
+
 ## D'où viennent les données
 
 Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
@@ -64,6 +81,7 @@ Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
 | `<flashcard>` | `cours.typ` | `flashcards` |
 | `<question-de-colle>` | `cours.typ` | `colles` |
 | `<coups-de-pouce>` | `TD.typ` | `Chapitre.coups_de_pouce` |
+| `<manipulation>` | `cours.typ` | `manipulations` |
 | `titre-court` (infos.yml) | — | nom des documents produits |
 | `DM` (infos.yml) | — | `dm` |
 | `<première-page-cours>`, `<dernière-page-cours>`, `<première-page>`, `<dernière-page>` | `poly.typ` | `imprimable` |

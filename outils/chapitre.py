@@ -1,5 +1,6 @@
 """Un chapitre du cours : ses sources typst et les documents qu'on en tire."""
 
+import json
 import re
 from functools import cached_property
 from pathlib import Path
@@ -13,7 +14,11 @@ from . import typst
 SORTIE = "build"
 
 #: Documents compilés directement depuis une source du même nom.
-DOCUMENTS = ("cours", "TD", "poly", "TP")
+DOCUMENTS = ("cours", "TD", "poly", "TP", "évaluation")
+
+#: Gabarits typst des documents construits à partir de données extraites
+#: du cours (et non d'une source propre au chapitre).
+GABARITS = Path(__file__).resolve().parent.parent / "gabarits"
 
 
 class Chapitre:
@@ -80,6 +85,11 @@ class Chapitre:
                 questions.append([])
             questions[x["question"] - 1] += x["coups-de-pouce"]
         return liste
+
+    @cached_property
+    def manipulations(self) -> list[dict]:
+        """Manipulations du cours : titre et matériel, dans l'ordre du document."""
+        return self.métadonnées("<manipulation>", "cours")
 
     @cached_property
     def questions_de_colle(self) -> list[str]:
@@ -162,6 +172,41 @@ class Chapitre:
                 copyfile(source, cible)
                 produits.append(cible)
         return produits
+
+    def _depuis_gabarit(self, gabarit: str, cible: Path, données: dict) -> Path:
+        """Compile un gabarit de `gabarits/` avec des données en `--input`.
+
+        Le JSON passe par la ligne de commande plutôt que par un fichier
+        temporaire : ça évite d'avoir à élargir la racine typst au dépôt.
+        """
+        typst.compile_fichier(
+            GABARITS / f"{gabarit}.typ",
+            cible,
+            entrées={"données": json.dumps(données, ensure_ascii=False)},
+        )
+        return cible
+
+    def flashcards_imprimables(self) -> Path | None:
+        """Les flashcards en A6, quatre par page, à imprimer en recto-verso.
+
+        None s'il n'y a aucune carte dans le chapitre.
+        """
+        cartes = self.métadonnées("<flashcard>", "cours")
+        if not cartes:
+            return None
+        return self._depuis_gabarit(
+            "flashcards",
+            self.fichier("flashcards"),
+            {"titre": self.titre(inline=True), "cartes": cartes},
+        )
+
+    def liste_des_manipulations(self) -> Path:
+        """La liste des manipulations du chapitre et le matériel à sortir."""
+        return self._depuis_gabarit(
+            "manipulations",
+            self.fichier("manipulations"),
+            {"titre": self.titre(inline=True), "manipulations": self.manipulations},
+        )
 
     def poly_imprimable(self, quadrillage: bool = False) -> Path:
         """Le poly mis en forme pour l'impression.

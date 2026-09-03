@@ -368,14 +368,19 @@
     supplement: "exemple",
 )
 
-#let manipulation(titre: "", matériel: (), contenu) = _bloc(
-    [Manipulation #_numéro-bloc("manipulation")],
-    contenu,
-    titre: titre,
-    marqueur: text(font: "Noto Emoji", emoji.hands.raised),
-    genre: "manipulation",
-    supplement: "manipulation",
-)
+// `matériel` n'apparait pas dans le bloc : il alimente la liste des
+// manipulations, tirée du document par `typst query ... <manipulation>`.
+#let manipulation(titre: "", matériel: (), contenu) = {
+    [#metadata((titre: titre, matériel: matériel)) <manipulation>]
+    _bloc(
+        [Manipulation #_numéro-bloc("manipulation")],
+        contenu,
+        titre: titre,
+        marqueur: text(font: "Noto Emoji", emoji.hands.raised),
+        genre: "manipulation",
+        supplement: "manipulation",
+    )
+}
 
 // préparatoire et matériel : uniques dans un document, donc pas de numéro
 // affiché dans le bandeau (mais restent référençables : @label => « … 1 »).
