@@ -23,11 +23,20 @@
 // Ordre des cases sur la page des versos : miroir horizontal de 0 1 / 2 3.
 #let _miroir = (1, 0, 3, 2)
 
-#show: init-document.with(titre: "Flashcards — " + données.titre, logotype: false)
+// La planche est une grille pleine page : ni marge, ni numéro, ni pied — il
+// tomberait au travers des cartes, et la mention de licence n'a pas de sens
+// sur des cartes découpées. Le message du cas vide, lui, est un document
+// ordinaire. Tout se décide ici : redéfinir la page après coup ouvrirait une
+// page blanche.
+#let vide = cartes.len() == 0
 
-// Pas de pied de page : il tomberait au travers des cartes. La mention de
-// licence n'a pas de sens ici, les cartes sont découpées.
-#set page(paper: "a4", margin: 0pt, numbering: none, footer: none)
+#show: init-document.with(
+    titre: "Flashcards — " + données.titre,
+    logotype: vide,
+    marge: if vide { 2cm } else { 0pt },
+    numérotation: none,
+    pied: if vide { auto } else { none },
+)
 #set text(size: 11pt)
 #set par(justify: false)
 
@@ -77,8 +86,7 @@
     })
 )
 
-#if cartes.len() == 0 [
-    #set page(margin: 2cm)
+#if vide [
     #align(center + horizon, emph[Aucune flashcard dans ce chapitre.])
 ] else {
     for (n, groupe) in cartes.chunks(4).enumerate() {

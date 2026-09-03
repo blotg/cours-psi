@@ -31,7 +31,24 @@
 // `logotype` : bandeau d'en-tête sur la première page. À couper pour les
 // documents qui ne sont pas des feuilles de cours — la planche de
 // flashcards, les pages quadrillées — où il tomberait au travers.
-#let init-document(titre: "", logotype: true, doc) = {
+// C'est ICI, et nulle part ailleurs, que la page se règle.
+//
+// Un `set page` posé après coup par un document coupe la page dès qu'il change
+// un réglage : le contenu repart alors sur une nouvelle feuille, en laissant
+// la première à moitié vide. Le piège a coûté trois bugs — les deux sauts de
+// page fantômes autour du résumé dans le poly, et la page blanche en tête de
+// la liste des manipulations. D'où ces paramètres : un document qui veut une
+// autre page la demande, il ne l'écrase pas.
+#let init-document(
+    titre: "",
+    logotype: true,
+    format: "a4",
+    marge: (x: 1cm, top: 1cm, bottom: 2cm),
+    numérotation: "1",
+    fond: none,
+    pied: auto, // auto : le pied commun ; none : aucun ; sinon, le contenu donné
+    doc,
+) = {
     set document(title: titre)
     set text(font: "New Computer Modern", lang: "fr")
     show raw: set text(font: "New Computer Modern Mono")
@@ -40,11 +57,12 @@
     set par(justify: true)
     set text(size: 11pt)
     set page(
-        paper: "a4",
-        margin: (x: 1cm, top: 1cm, bottom: 2cm),
-        numbering: "1",
+        paper: format,
+        margin: marge,
+        numbering: numérotation,
+        background: fond,
         footer-descent: 40%,
-        footer: pied-de-page,
+        footer: if pied == auto { pied-de-page } else { pied },
     )
     show link: underline
     import "lib.typ": *
@@ -279,20 +297,17 @@
     doc
 }
 
+// Feuille A5 à coller dans le cahier de laboratoire : pas de numéro de page,
+// et pas de logotype — le pied porte déjà le logo, et la place est comptée.
 #let évaluation-TP(doc) = {
-    set document(title: "Évaluation des TP")
-    set text(font: "New Computer Modern", lang: "fr")
-    show raw: set text(font: "New Computer Modern Mono")
-    set par(justify: true)
-    set text(size: 10pt)
-    set page(
-        paper: "a5",
-        margin: (x: 1cm, top: 1cm, bottom: 1.4cm),
-        numbering: none,
-        footer-descent: 40%,
-        footer: pied-de-page,
+    show: init-document.with(
+        titre: "Évaluation des TP",
+        logotype: false,
+        format: "a5",
+        marge: (x: 1cm, top: 1cm, bottom: 1.4cm),
+        numérotation: none,
     )
-    show link: underline
+    set text(size: 10pt)
     show heading: set text(size: 12pt)
     align(center, text(size: 15pt, [*Évaluation du compte-rendu*]))
     doc
