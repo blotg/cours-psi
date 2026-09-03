@@ -1,0 +1,3 @@
+genanki>=0.13   # paquets Anki (.apkg)
+pypdf>=5        # assemblage des PDF (poly imprimable, fascicules de TP)
+PyYAML>=6       # infos.yml et sortie de `typst query`

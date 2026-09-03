@@ -26,3 +26,7 @@
 # sont pas produits ici (datasheet, sujets et corriges de DM, corriges scannes,
 # documents fournis...) vivent a la racine du chapitre et restent suivis.
 build/
+
+# environnements virtuels python
+.venv/
+__pycache__/
