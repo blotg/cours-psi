@@ -13,7 +13,7 @@
     grid(
         columns: (1fr, auto, 1fr),
         align: (left + horizon, center + horizon, right + horizon),
-        [#box(image("logos/Logo noir.svg", height: 6mm)) Lycée Brizeux],
+        [#box(image("logos/Logo noir.svg", height: 8mm)) Lycée Brizeux],
         // Un document sans numérotation (la fiche d'évaluation) garde un
         // pied de page, mais sans numéro.
         if page.numbering != none { counter(page).display() },
@@ -21,7 +21,10 @@
     )
 }
 
-#let init-document(titre: "", doc) = {
+// `logotype` : bandeau d'en-tête sur la première page. À couper pour les
+// documents qui ne sont pas des feuilles de cours — la planche de
+// flashcards, les pages quadrillées — où il tomberait au travers.
+#let init-document(titre: "", logotype: true, doc) = {
     set document(title: titre)
     set text(font: "New Computer Modern", lang: "fr")
     show raw: set text(font: "New Computer Modern Mono")
@@ -40,6 +43,13 @@
     import "lib.typ": *
     set-round(mode: "figures")
     show: styles-blocs
+    if logotype {
+        // Étiqueté pour que full-poly puisse le masquer : cours.typ réapplique
+        // init-document quand il est inclus dans le poly, comme il en
+        // réapplique le titre.
+        [#align(center, image("logos/Logotype noir.svg", width: 34mm)) <logotype>]
+        v(-0.2em)
+    }
     doc
 }
 
@@ -158,6 +168,7 @@
     }
     show <cours>: it => {
         show <titre>: it => {}
+        show <logotype>: it => {}
         set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
         it
     }

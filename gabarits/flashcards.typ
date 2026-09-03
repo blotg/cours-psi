@@ -23,7 +23,7 @@
 // Ordre des cases sur la page des versos : miroir horizontal de 0 1 / 2 3.
 #let _miroir = (1, 0, 3, 2)
 
-#show: init-document.with(titre: "Flashcards — " + données.titre)
+#show: init-document.with(titre: "Flashcards — " + données.titre, logotype: false)
 
 // Pas de pied de page : il tomberait au travers des cartes. La mention de
 // licence n'a pas de sens ici, les cartes sont découpées.

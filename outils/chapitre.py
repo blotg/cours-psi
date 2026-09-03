@@ -260,7 +260,7 @@ class Chapitre:
 
 _SOURCE_QUADRILLAGE = """
 #import "@local/prepa:0.1.1": *
-#show: init-document.with(titre: "{titre}")
+#show: init-document.with(titre: "{titre}", logotype: false)
 #set page(numbering: none, background: rect(width: 100%, height: 100%, stroke: none, fill: tiling(size: (5mm, 5mm))[
     #place(line(start: (0%, 0%), end: (100%, 0%), stroke: 0.5pt + rgb("#CCCCCC")))
     #place(line(start: (0%, 0%), end: (0%, 100%), stroke: 0.5pt + rgb("#CCCCCC")))
