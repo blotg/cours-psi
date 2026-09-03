@@ -25,7 +25,9 @@
 
 #show: init-document.with(titre: "Flashcards — " + données.titre)
 
-#set page(paper: "a4", margin: 0pt, numbering: none)
+// Pas de pied de page : il tomberait au travers des cartes. La mention de
+// licence n'a pas de sens ici, les cartes sont découpées.
+#set page(paper: "a4", margin: 0pt, numbering: none, footer: none)
 #set text(size: 11pt)
 #set par(justify: false)
 

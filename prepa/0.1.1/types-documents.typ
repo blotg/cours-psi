@@ -1,3 +1,26 @@
+// Pied de page commun à tous les documents : identité de l'établissement,
+// licence du contenu, numéro de page.
+//
+// Le logo appartient au lycée : il identifie le document, il n'est pas couvert
+// par la licence CC BY-NC qui s'applique au contenu (cf. LICENCE.md). D'où la
+// séparation visuelle entre le bloc de gauche et la mention de licence.
+#let pied-de-page = context {
+    set text(size: 7.5pt, fill: luma(45%))
+    // init-document souligne les liens ; dans un pied de page c'est du bruit.
+    show underline: it => it.body
+    // Colonnes latérales de même largeur : le numéro tombe au milieu de la
+    // page, et non au milieu de ce qui reste entre les deux mentions.
+    grid(
+        columns: (1fr, auto, 1fr),
+        align: (left + horizon, center + horizon, right + horizon),
+        [#box(image("logos/Logo noir.svg", height: 6mm)) Lycée Brizeux],
+        // Un document sans numérotation (la fiche d'évaluation) garde un
+        // pied de page, mais sans numéro.
+        if page.numbering != none { counter(page).display() },
+        link("https://creativecommons.org/licenses/by-nc/4.0/deed.fr")[CC BY-NC 4.0],
+    )
+}
+
 #let init-document(titre: "", doc) = {
     set document(title: titre)
     set text(font: "New Computer Modern", lang: "fr")
@@ -10,7 +33,8 @@
         paper: "a4",
         margin: (x: 1cm, top: 1cm, bottom: 2cm),
         numbering: "1",
-        footer-descent: 50%,
+        footer-descent: 40%,
+        footer: pied-de-page,
     )
     show link: underline
     import "lib.typ": *
@@ -231,8 +255,10 @@
     set text(size: 10pt)
     set page(
         paper: "a5",
-        margin: (x: 1cm, top: 1cm, bottom: 1cm),
+        margin: (x: 1cm, top: 1cm, bottom: 1.4cm),
         numbering: none,
+        footer-descent: 40%,
+        footer: pied-de-page,
     )
     show link: underline
     show heading: set text(size: 12pt)

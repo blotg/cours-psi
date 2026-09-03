@@ -36,17 +36,19 @@ Résumé lisible : <https://creativecommons.org/licenses/by-nc/4.0/deed.fr>
 
 ## Attribution
 
-    © Guillaume
+    © Guillaume Blot-Teyssedre
 
 Pour un document repris ou adapté, l'attribution attendue est le nom de
 l'auteur, le titre du document et un lien vers ce dépôt.
 
 ## Ce qui n'est couvert par aucune des deux
 
-Le logo et le logotype du lycée (`Logo *.svg`, `Logotype *.svg`) appartiennent à
-l'établissement. Ils sont présents pour identifier les documents, non pour être
+Le logo et le logotype du lycée ([`prepa/0.1.1/logos/`](prepa/0.1.1/logos))
+appartiennent à l'établissement. Ils sont présents pour identifier les
+documents — le pied de page les porte sur chaque feuille — non pour être
 réutilisés : les reprendre suppose l'accord du lycée, et ils ne suivent pas la
-licence CC BY-NC des documents où ils figurent.
+licence CC BY-NC des documents où ils figurent, ni l'EUPL du paquet qui les
+héberge.
 
 De même, les énoncés d'origine externe (concours, ouvrages) cités dans les
 exercices restent la propriété de leurs auteurs.
