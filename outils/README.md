@@ -19,7 +19,7 @@ outils/.venv/bin/pip install -r outils/requirements.txt
 
 Le hook `pre-commit` utilise ce venv s'il existe, sinon le `python3` du système.
 Sans les dépendances, il se contente d'un avertissement : les PDF sont quand
-même produits, seules les flashcards manquent.
+même produits, seules les flashcards et la copie des DM manquent.
 
 ## Ligne de commande
 
@@ -29,12 +29,13 @@ Depuis la racine du dépôt :
 python3 -m outils flashcards "Cours/8 - Électrochimie"      # flashcards - Électrochimie.apkg
 python3 -m outils imprimable "Cours/8 - Électrochimie"      # poly-imprimable - Électrochimie.pdf
 python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - Électrochimie.pdf
+python3 -m outils dm "Cours/8 - Électrochimie"              # DM 1 - Électrochimie.pdf, ...
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
 ```
 
-`flashcards` et `imprimable` acceptent plusieurs chapitres à la suite.
+`flashcards`, `imprimable` et `dm` acceptent plusieurs chapitres à la suite.
 
 `imprimable` produit par défaut un **fascicule A3 paysage** : deux pages A4 par
 face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
@@ -63,6 +64,8 @@ Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
 | `<flashcard>` | `cours.typ` | `flashcards` |
 | `<question-de-colle>` | `cours.typ` | `colles` |
 | `<coups-de-pouce>` | `TD.typ` | `Chapitre.coups_de_pouce` |
+| `titre-court` (infos.yml) | — | nom des documents produits |
+| `DM` (infos.yml) | — | `dm` |
 | `<première-page-cours>`, `<dernière-page-cours>`, `<première-page>`, `<dernière-page>` | `poly.typ` | `imprimable` |
 
 On interrogue toujours le document le moins cher qui contient l'information :

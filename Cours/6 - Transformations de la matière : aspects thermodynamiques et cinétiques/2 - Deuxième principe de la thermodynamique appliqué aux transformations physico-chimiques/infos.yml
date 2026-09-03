@@ -10,4 +10,6 @@ cahier-entrainement:
   - "28.8"
   - "28.12"
   - "28.16"
-DM: []
+DM:
+  - énoncé: DM/DM 1.pdf
+    corrigé: DM/DM 1 - corrigé.pdf

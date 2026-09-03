@@ -10,6 +10,6 @@ cahier-entrainement:
   - 5.8
 cahier-entrainement-sup: []
 révisions-sup: []
-DMs:
-  - sujet: DM/DM 1.pdf
+DM:
+  - énoncé: DM/DM 1.pdf
     corrigé: DM/DM 1 - corrigé.pdf

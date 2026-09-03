@@ -3,6 +3,7 @@
 import re
 from functools import cached_property
 from pathlib import Path
+from shutil import copyfile
 
 import yaml
 
@@ -85,14 +86,16 @@ class Chapitre:
         return self.métadonnées("<question-de-colle>", "cours")
 
     @cached_property
-    def DMs(self) -> list[dict]:
-        """Sujets et corrigés de DM, chemins rendus absolus."""
-        dms = self.infos.get("DMs") or []
-        for dm in dms:
-            for clé in ("sujet", "corrigé"):
-                if dm.get(clé):
-                    dm[clé] = self.chemin / dm[clé]
-        return dms
+    def DMs(self) -> list[dict[str, Path]]:
+        """Énoncés et corrigés de DM déclarés dans infos.yml, chemins résolus.
+
+        Chaque entrée est un dictionnaire `{"énoncé": ..., "corrigé": ...}`,
+        le corrigé pouvant manquer.
+        """
+        return [
+            {clé: self.chemin / valeur for clé, valeur in dm.items()}
+            for dm in self.infos.get("DM") or []
+        ]
 
     # -- Documents produits ----------------------------------------------
 
@@ -140,6 +143,25 @@ class Chapitre:
             list(zip(faces[::2], faces[1::2])),
             self.fichier("flashcards", "apkg"),
         )
+
+    def DM(self) -> list[Path]:
+        """Met les DM et leurs corrigés dans build/, sous le nommage commun.
+
+        Les DM sont encore des PDF écrits à la main : une copie suffit. Quand
+        ils passeront à typst, seul le corps de cette méthode changera — le
+        reste de la chaîne (nommage, hook, site) n'a pas à le savoir.
+        """
+        produits = []
+        for dm in self.DMs:
+            for source in dm.values():
+                if not source.is_file():
+                    print(f"  DM absent   {source}")
+                    continue
+                cible = self.fichier(source.stem)
+                cible.parent.mkdir(parents=True, exist_ok=True)
+                copyfile(source, cible)
+                produits.append(cible)
+        return produits
 
     def poly_imprimable(self, quadrillage: bool = False) -> Path:
         """Le poly mis en forme pour l'impression.

@@ -17,5 +17,7 @@ cahier-entrainement:
   - "21.12"
   - "21.13"
 DM:
-  - sujet: DM/DM 1.pdf
+  - énoncé: DM/DM 1.pdf
     corrigé: DM/DM 1 - corrigé.pdf
+  - énoncé: DM/DM 2.pdf
+    corrigé: DM/DM 2 - corrigé.pdf

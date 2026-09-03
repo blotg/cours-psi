@@ -38,6 +38,20 @@ def _imprimable(args) -> int:
     return code
 
 
+def _dm(args) -> int:
+    from .chapitre import Chapitre
+
+    code = 0
+    for dossier in args.chapitres:
+        try:
+            for fichier in Chapitre(dossier).DM():
+                print(f"  DM          {fichier}")
+        except Exception as e:  # noqa: BLE001
+            print(f"  DM          {dossier} : {e}", file=sys.stderr)
+            code = 1
+    return code
+
+
 def _tp(args) -> int:
     from .tp import TP
 
@@ -83,6 +97,10 @@ def main(argv: list[str] | None = None) -> int:
         "en regard de chaque page de cours",
     )
     p.set_defaults(fonction=_imprimable)
+
+    p = sous.add_parser("dm", help="copie les DM et leurs corrigés dans build/")
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.set_defaults(fonction=_dm)
 
     p = sous.add_parser("tp", help="fascicules de TP personnalisés par binôme")
     p.add_argument("sujet", type=Path)
