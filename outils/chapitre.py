@@ -121,18 +121,32 @@ class Chapitre:
             self.sortie / "flashcards.apkg",
         )
 
-    def poly_imprimable(self) -> Path:
-        """Le poly avec une page quadrillée en regard de chaque page de cours,
-        pour une impression recto-verso où l'on écrit face au texte."""
+    def poly_imprimable(self, quadrillage: bool = False) -> Path:
+        """Le poly mis en forme pour l'impression.
+
+        Par défaut, un fascicule A3 paysage : deux pages A4 par face, à
+        imprimer en recto-verso (retournement sur le bord court) puis à plier.
+
+        Avec `quadrillage`, l'autre mise en page : le poly A4 tel quel, avec
+        une page quadrillée en regard de chaque page de cours pour écrire face
+        au texte.
+        """
+        poly = self.poly()
+        if poly is None:
+            raise FileNotFoundError(f"{self.chemin}/poly.typ est introuvable")
+        if quadrillage:
+            return self._poly_quadrillé(poly)
+        from .pdf import fascicule
+
+        return fascicule(poly, self.sortie / "poly-imprimable.pdf")
+
+    def _poly_quadrillé(self, poly: Path) -> Path:
         from tempfile import TemporaryDirectory
 
         from pypdf import PdfWriter
 
-        poly = self.poly()
-        if poly is None:
-            raise FileNotFoundError(f"{self.chemin}/poly.typ est introuvable")
         s = self.signets
-        cible = self.sortie / "poly-imprimable.pdf"
+        cible = self.sortie / "poly-quadrillé.pdf"
 
         with TemporaryDirectory() as tmp:
             quadrillage = Path(tmp) / "quadrillage.pdf"

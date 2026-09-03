@@ -19,8 +19,9 @@ même produits, seules les flashcards manquent.
 Depuis la racine du dépôt :
 
 ```sh
-python3 -m outils flashcards "Cours/8 - Électrochimie"    # build/flashcards.apkg
-python3 -m outils imprimable "Cours/8 - Électrochimie"    # build/poly-imprimable.pdf
+python3 -m outils flashcards "Cours/8 - Électrochimie"      # build/flashcards.apkg
+python3 -m outils imprimable "Cours/8 - Électrochimie"      # build/poly-imprimable.pdf (fascicule A3)
+python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # build/poly-quadrillé.pdf
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
@@ -28,15 +29,21 @@ python3 -m outils qcm questions.yaml dates/
 
 `flashcards` et `imprimable` acceptent plusieurs chapitres à la suite.
 
+`imprimable` produit par défaut un **fascicule A3 paysage** : deux pages A4 par
+face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
+`--quadrillage` donne l'autre mise en page : le poly A4 tel quel, avec une page
+quadrillée en regard de chaque page de cours (pour écrire face au texte).
+
 ## Modules
 
 | Module | Rôle |
 |---|---|
 | `typst.py` | appels à `typst compile` / `typst query`, rendu HTML d'un fragment |
 | `chapitre.py` | un chapitre : ses métadonnées et les documents qu'on en tire |
+| `pdf.py` | imposition de PDF (mise en fascicule A3) |
 | `anki.py` | écriture d'un paquet `.apkg` |
 | `programme_de_colle.py` | programme de colle hebdomadaire (en typst) |
-| `tp.py` | fascicules de TP personnalisés par binôme, imposés en A3 |
+| `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
 | `qcm_cam.py` | questions au format QCMCam |
 
 ## D'où viennent les données

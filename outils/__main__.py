@@ -31,7 +31,7 @@ def _imprimable(args) -> int:
     code = 0
     for dossier in args.chapitres:
         try:
-            print(f"  imprimable  {Chapitre(dossier).poly_imprimable()}")
+            print(f"  imprimable  {Chapitre(dossier).poly_imprimable(quadrillage=args.quadrillage)}")
         except Exception as e:  # noqa: BLE001
             print(f"  imprimable  {dossier} : {e}", file=sys.stderr)
             code = 1
@@ -74,8 +74,14 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_flashcards)
 
-    p = sous.add_parser("imprimable", help="poly avec pages quadrillées en vis-à-vis")
+    p = sous.add_parser("imprimable", help="poly en fascicule A3, prêt à imprimer")
     p.add_argument("chapitres", nargs="+", type=Path)
+    p.add_argument(
+        "--quadrillage",
+        action="store_true",
+        help="au lieu du fascicule : poly A4 avec une page quadrillée "
+        "en regard de chaque page de cours",
+    )
     p.set_defaults(fonction=_imprimable)
 
     p = sous.add_parser("tp", help="fascicules de TP personnalisés par binôme")
