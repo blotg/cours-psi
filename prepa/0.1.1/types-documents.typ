@@ -13,7 +13,7 @@
     grid(
         columns: (1fr, auto, 1fr),
         align: (left + horizon, center + horizon, right + horizon),
-        [#box(image("logos/Logo noir.svg", height: 8mm)) Lycée Brizeux],
+        image("logos/Logo noir.svg", height: 8mm),
         // Un document sans numérotation (la fiche d'évaluation) garde un
         // pied de page, mais sans numéro.
         if page.numbering != none { counter(page).display() },
@@ -44,11 +44,22 @@
     set-round(mode: "figures")
     show: styles-blocs
     if logotype {
+        let largeur = 30mm
+        let hauteur = largeur * 592.873 / 969.344 // proportions du SVG
+        let montée = 8mm // ce dont il déborde dans la marge haute (10 mm)
+
+        // Le logotype est placé, donc hors du flux : il ne prend que la
+        // hauteur explicitement réservée ci-dessous, et le titre remonte
+        // d'autant. Les titres les plus longs occupent toute la largeur sur
+        // deux lignes : le logotype ne peut pas se mettre à côté d'eux.
+        //
         // Étiqueté pour que full-poly puisse le masquer : cours.typ réapplique
-        // init-document quand il est inclus dans le poly, comme il en
-        // réapplique le titre.
-        [#align(center, image("logos/Logotype noir.svg", width: 34mm)) <logotype>]
-        v(-0.2em)
+        // init-document quand il est inclus dans le poly. Le bloc porte
+        // l'étiquette pour que l'espace réservé disparaisse avec l'image.
+        [#block[
+            #place(top + left, dy: -montée, image("logos/Logotype noir.svg", width: largeur))
+            #v(hauteur - montée)
+        ] <logotype>]
     }
     doc
 }

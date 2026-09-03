@@ -17,8 +17,7 @@ La bibliothèque typst, les outils et l'automatisation sont sous
 
 L'EUPL est une licence copyleft : une œuvre dérivée distribuée doit l'être sous
 la même licence ou l'une de celles listées en appendice (GPL, AGPL, MPL, EPL,
-CeCILL…). Elle a la particularité d'exister en 23 versions linguistiques
-également authentiques, dont le français.
+CeCILL…).
 
 ## Le cours et ses documents : CC BY-NC 4.0
 
