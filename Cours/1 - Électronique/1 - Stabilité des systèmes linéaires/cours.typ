@@ -44,16 +44,14 @@ Un système linéaire est un système continu dont la sortie dépend linéaireme
 #encadré(
     titre: "Équation différentielle régissant la tension dans un circuit RC",
     savoir-faire: true,
-    hypothèses: (
-        "le circuit est dans l'ARQS",
-        schéma(hauteur: 2cm),
-    ),
+    hypothèses: "le circuit est dans l'ARQS",
     grandeurs: (
         "s(t)": (signification: "tension aux bornes du condensateur", unité: unit("V")),
         "e(t)": (signification: "tension en entrée du circuit", unité: unit("V")),
     )
         + sub-dictionary(grandeurs, ("R", "C")),
 )[
+    #carreaux(2cm)
     $
         dv(s, t) + 1/(R C) s(t)= 1/(R C) e(t)
     $
@@ -64,10 +62,7 @@ Un système linéaire est un système continu dont la sortie dépend linéaireme
 #encadré(
     titre: "Fonction de transfert régissant la tension dans un circuit RC",
     savoir-faire: true,
-    hypothèses: (
-        "le circuit est dans l'ARQS",
-        schéma(hauteur: 2cm),
-    ),
+    hypothèses: "le circuit est dans l'ARQS",
     grandeurs: (
         "S(p)": (
             signification: "grandeur de Laplace associée à la tension aux bornes du condensateur",
@@ -77,6 +72,7 @@ Un système linéaire est un système continu dont la sortie dépend linéaireme
     )
         + sub-dictionary(grandeurs, ("R", "C", "p")),
 )[
+    #carreaux(2cm)
     $
         p S(p) + 1/(R C) S(p)= 1/(R C) E(p)
     $
