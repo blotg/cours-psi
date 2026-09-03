@@ -13,7 +13,7 @@
 
 // -- Réglages partagés -------------------------------------------------------
 
-#let _gris = luma(45%)
+#let _gris = luma(35%)
 #let _filet = 0.6pt + luma(20%)
 #let _fond-bandeau = luma(90%)
 #let _fond-bandeau-noir = black

@@ -10,7 +10,7 @@
 // note (¹, ², …) ; les imports correspondants sont rappelés en fin d'aide-mémoire.
 
 #let _données = yaml("cheatsheet-python.yaml")
-#let _gris-cs = luma(45%)
+#let _gris-cs = luma(35%)
 
 // nom (abrégé ou complet) -> (canonique, court, stmt)
 //   abrév       : module -> alias        (import module as alias  ->  alias.fonction)
