@@ -36,6 +36,7 @@ def _pour_chaque(dossiers, étapes) -> int:
     ("DM", lambda c: c.DM()),
     ("flashcards", lambda c: [p for p in (c.flashcards(), c.flashcards_imprimables()) if p]),
     ("manipulations", lambda c: [c.liste_des_manipulations()]),
+    ("imprimable", lambda c: [c.poly_imprimable()]),
 )
 
 
@@ -90,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sous.add_parser("build", help="tout ce qu'un chapitre tire de son cours")
     p.add_argument("chapitres", nargs="+", type=Path)
-    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations"))
+    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations", "imprimable"))
 
     p = sous.add_parser("flashcards", help="paquet Anki et planche à découper")
     p.add_argument("chapitres", nargs="+", type=Path)

@@ -26,7 +26,7 @@ même produits, seules les flashcards et la copie des DM manquent.
 Depuis la racine du dépôt :
 
 ```sh
-python3 -m outils build "Cours/8 - Électrochimie"           # DM + flashcards + manipulations
+python3 -m outils build "Cours/8 - Électrochimie"           # tout ce qui suit, en une passe
 python3 -m outils flashcards "Cours/8 - Électrochimie"      # .apkg et planche .pdf
 python3 -m outils manipulations "Cours/8 - Électrochimie"   # manipulations - Électrochimie.pdf
 python3 -m outils dm "Cours/8 - Électrochimie"              # DM 1 - Électrochimie.pdf, ...
@@ -39,9 +39,9 @@ python3 -m outils qcm questions.yaml dates/
 
 Toutes ces commandes acceptent plusieurs chapitres à la suite.
 
-`build` est ce qu'appelle le hook : il enchaîne `dm`, `flashcards` et
-`manipulations` sur un même objet `Chapitre`, donc une seule requête
-`typst query` par chapitre — c'est de loin le poste le plus cher.
+`build` est ce qu'appelle le hook : il enchaîne `dm`, `flashcards`,
+`manipulations` et `imprimable` sur un même objet `Chapitre`, donc une seule
+requête `typst query` par chapitre — c'est de loin le poste le plus cher.
 
 `flashcards` produit deux fichiers : le paquet Anki (`.apkg`) et une planche à
 découper (`.pdf`), quatre cartes A6 par page A4. Les rectos d'un groupe de

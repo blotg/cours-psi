@@ -11,9 +11,11 @@
 #let données = json(bytes(sys.inputs.données))
 #let manipulations = données.at("manipulations", default: ())
 
+// La page vient d'init-document et n'est surtout pas redéfinie ici : changer
+// la marge après coup ouvre une nouvelle page, et le logotype resterait seul
+// sur la première.
 #show: init-document.with(titre: "Manipulations — " + données.titre)
 
-#set page(paper: "a4", margin: 2cm, numbering: "1/1")
 #set par(justify: true)
 
 #align(center)[
