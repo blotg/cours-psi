@@ -149,12 +149,12 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
         "Le système est du 1er ordre.",
     ),
 )[
-    Le système est stable si les 2 coefficients du dénominateur sont de même signe.
+    Le système est stable si les 2 coefficients du dénominateur de sa fonction de transfert sont de même signe.
 ]
 
 #flashcard(
     recto: "Critère de stabilité d'un système d'ordre 1",
-    verso: "Le système est stable si les 2 coefficients du dénominateur sont de même signe.",
+    verso: "Le système est stable si les 2 coefficients du dénominateur de sa fonction de transfert sont de même signe.",
 )
 
 
@@ -195,12 +195,12 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
         "Le système est du 2ème ordre.",
     ),
 )[
-    Le système est stable si les 3 coefficients du dénominateur sont de même signe.
+    Le système est stable si les 3 coefficients du dénominateur de sa fonction de transfert sont de même signe.
 ]
 
 #flashcard(
     recto: "Critère de stabilité d'un système d'ordre 2",
-    verso: "Le système est stable si les 3 coefficients du dénominateur sont de même signe.",
+    verso: "Le système est stable si les 3 coefficients du dénominateur de sa fonction de transfert sont de même signe.",
 )
 
 #question-de-colle("Montrer qu'un système d'ordre 2 est stable si et seulement si les 3 coefficients de la fonction de transfert sont de même signe. Un seul des 3 cas (discriminant positif, nul ou négatif) sera traité, au choix du colleur.")
