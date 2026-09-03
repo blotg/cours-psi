@@ -3,7 +3,9 @@
 # Recompile les documents (cours / TD / poly / TP / evaluation) des chapitres
 # dont une source apparait dans le commit en cours.
 #
-# - Tout est produit dans <chapitre>/build/, ignore par git (cf. .gitignore) :
+# - Tout est produit dans <chapitre>/build/, sous le nom « <type> - <titre
+#   court>.pdf » (le titre court vient de infos.yml). Ce dossier est ignore
+#   par git (cf. .gitignore) :
 #   rien n'est donc ajoute au commit. Le hook sert a garder ces documents a
 #   jour sur le disque et a verifier que les sources compilent encore.
 # - Un document est (re)genere qu'il existe deja ou non.
@@ -36,6 +38,17 @@ TP
 
 # core.quotePath=false : chemins accentues en clair (sinon "\303\251"...)
 git() { command git -c core.quotePath=false "$@"; }
+
+# Titre court d'un chapitre, tel qu'il apparait dans le nom des documents
+# produits : le champ `titre-court` de son infos.yml. A defaut (les TP n'ont
+# pas d'infos.yml), le nom du dossier prive de son prefixe de classement,
+# « 2 - Filtre de Wien » donnant « Filtre de Wien ».
+titre_court() {
+    tc=$(sed -n 's/^titre-court:[[:space:]]*//p' "$1/infos.yml" 2>/dev/null | head -1 \
+        | sed -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'\$/\1/" -e 's/[[:space:]]*$//')
+    [ -n "$tc" ] || tc=$(basename "$1" | sed 's/^[0-9]*[[:space:]]*-[[:space:]]*//')
+    printf '%s' "$tc"
+}
 
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
@@ -73,13 +86,14 @@ fail=0
 IFS='
 '
 for d in $dirs; do
+    tc=$(titre_court "$d")
     for base in $docs; do
         [ -f "$d/$base.typ" ] || continue
 
-        printf '  typst  %s/%s.typ\n' "$d" "$base"
+        printf '  typst  %s/%s/%s - %s.pdf\n' "$d" "$OUT" "$base" "$tc"
         # typst ne cree pas le dossier de sortie
         mkdir -p "$d/$OUT" || { fail=1; continue; }
-        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" "$OUT/$base.pdf" ) || fail=1
+        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" "$OUT/$base - $tc.pdf" ) || fail=1
     done
 done
 

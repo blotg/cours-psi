@@ -21,7 +21,7 @@ from os import makedirs
 from os.path import dirname, join
 from tempfile import TemporaryDirectory
 
-from .chapitre import SORTIE
+from .chapitre import Chapitre
 from .pdf import fascicule
 from .typst import compile_fichier
 
@@ -138,10 +138,10 @@ class TP:
         """Compile le sujet sans personnalisation (ni ``élève`` ni ``numéro-copie``).
 
         C'est le PDF « de référence » du sujet. Par défaut il est écrit dans
-        ``build/TP.pdf``, à côté des autres documents produits.
+        ``build/TP - <titre court>.pdf``, à côté des autres documents produits.
         """
         if destination is None:
-            destination = join(dirname(self.sujet), SORTIE, "TP.pdf")
+            destination = str(Chapitre(dirname(self.sujet)).fichier("TP"))
         compile_fichier(self.sujet, destination)
         return destination
 
@@ -159,7 +159,7 @@ class TP:
 
         Args:
             destination: chemin du PDF final. Par défaut,
-                ``<dossier du sujet>/build/TP - à imprimer.pdf``.
+                ``<dossier du sujet>/build/TP à imprimer - <titre court>.pdf``.
 
         Les fascicules individuels (A4 et A3) sont produits dans un dossier
         temporaire, supprimé en fin de traitement : seul le PDF final est
@@ -168,7 +168,7 @@ class TP:
         from pypdf import PdfReader, PdfWriter
 
         if destination is None:
-            destination = join(dirname(self.sujet), SORTIE, "TP - à imprimer.pdf")
+            destination = str(Chapitre(dirname(self.sujet)).fichier("TP à imprimer"))
 
         final = PdfWriter()
         with TemporaryDirectory() as dossier:

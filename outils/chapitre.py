@@ -1,5 +1,6 @@
 """Un chapitre du cours : ses sources typst et les documents qu'on en tire."""
 
+import re
 from functools import cached_property
 from pathlib import Path
 
@@ -32,6 +33,17 @@ class Chapitre:
     def titre(self, inline: bool = False) -> str:
         titre = self.infos.get("titre", self.chemin.name).strip()
         return titre.replace("\n", " : ") if inline else titre
+
+    @cached_property
+    def titre_court(self) -> str:
+        """Nom court du chapitre, qui sert à nommer les documents produits.
+
+        Il vient de `titre-court` dans infos.yml. À défaut — les TP n'ont pas
+        d'infos.yml — on retombe sur le nom du dossier privé de son préfixe de
+        classement : « 2 - Filtre de Wien » donne « Filtre de Wien ».
+        """
+        court = self.infos.get("titre-court")
+        return str(court).strip() if court else re.sub(r"^\d+\s*-\s*", "", self.chemin.name)
 
     def _toutes_métadonnées(self, document: str) -> list[dict]:
         """Métadonnées d'un document, en une requête typst (mise en cache)."""
@@ -88,12 +100,20 @@ class Chapitre:
     def sortie(self) -> Path:
         return self.chemin / SORTIE
 
+    def fichier(self, type_de_document: str, extension: str = "pdf") -> Path:
+        """Où atterrit un document produit : `build/<type> - <titre court>.<ext>`.
+
+        Le type vient en tête pour qu'un dossier de téléchargements regroupe
+        les documents de même nature plutôt que ceux d'un même chapitre.
+        """
+        return self.sortie / f"{type_de_document} - {self.titre_court}.{extension}"
+
     def document(self, nom: str) -> Path | None:
         """Compile `<nom>.typ` vers `build/<nom>.pdf`. None si la source manque."""
         source = self.chemin / f"{nom}.typ"
         if not source.is_file():
             return None
-        cible = self.sortie / f"{nom}.pdf"
+        cible = self.fichier(nom)
         typst.compile_fichier(source, cible)
         return cible
 
@@ -118,7 +138,7 @@ class Chapitre:
         return anki.écrit_paquet(
             self.titre(inline=True),
             list(zip(faces[::2], faces[1::2])),
-            self.sortie / "flashcards.apkg",
+            self.fichier("flashcards", "apkg"),
         )
 
     def poly_imprimable(self, quadrillage: bool = False) -> Path:
@@ -138,7 +158,7 @@ class Chapitre:
             return self._poly_quadrillé(poly)
         from .pdf import fascicule
 
-        return fascicule(poly, self.sortie / "poly-imprimable.pdf")
+        return fascicule(poly, self.fichier("poly-imprimable"))
 
     def _poly_quadrillé(self, poly: Path) -> Path:
         from tempfile import TemporaryDirectory
@@ -146,7 +166,7 @@ class Chapitre:
         from pypdf import PdfWriter
 
         s = self.signets
-        cible = self.sortie / "poly-quadrillé.pdf"
+        cible = self.fichier("poly-quadrillé")
 
         with TemporaryDirectory() as tmp:
             quadrillage = Path(tmp) / "quadrillage.pdf"

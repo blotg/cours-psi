@@ -1,7 +1,14 @@
 # Outils
 
 Production des documents du cours à partir des sources typst.
-Tout ce qui est produit atterrit dans `<chapitre>/build/`, ignoré par git.
+Tout ce qui est produit atterrit dans `<chapitre>/build/`, ignoré par git,
+sous le nom `<type> - <titre court>.<ext>`.
+
+Le titre court vient du champ `titre-court` de l'`infos.yml` du chapitre ; à
+défaut — les TP n'en ont pas — c'est le nom du dossier privé de son préfixe de
+classement (`2 - Filtre de Wien` donne `Filtre de Wien`). Le type vient en tête
+pour qu'un dossier de téléchargements regroupe les documents de même nature
+plutôt que ceux d'un même chapitre.
 
 ## Installation
 
@@ -19,9 +26,9 @@ même produits, seules les flashcards manquent.
 Depuis la racine du dépôt :
 
 ```sh
-python3 -m outils flashcards "Cours/8 - Électrochimie"      # build/flashcards.apkg
-python3 -m outils imprimable "Cours/8 - Électrochimie"      # build/poly-imprimable.pdf (fascicule A3)
-python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # build/poly-quadrillé.pdf
+python3 -m outils flashcards "Cours/8 - Électrochimie"      # flashcards - Électrochimie.apkg
+python3 -m outils imprimable "Cours/8 - Électrochimie"      # poly-imprimable - Électrochimie.pdf
+python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - Électrochimie.pdf
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
