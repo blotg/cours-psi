@@ -43,7 +43,7 @@ Deux câbles coaxiaux différents, d'impédances caractéristiques $Z_1$ et $Z_2
 
 #question(
     coups-de-pouce: (
-        "La tension et le courant sont continus à l'interface entre les deux cables."
+        "La tension et le courant sont continus à l'interface entre les deux câbles."
     ),
 )[
     Quelles sont les 2 conditions aux limites en $x=0$ ? En déduire deux relations entre $underline(u_(i,0))$, $underline(u_(r,0))$ et $underline(u_(t,0))$.

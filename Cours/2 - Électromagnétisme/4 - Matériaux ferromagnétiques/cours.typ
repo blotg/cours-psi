@@ -52,9 +52,9 @@ Une spire circulaire parcourue par un courant produit un champ magnétique carac
     verso: "$va(cal(M))=i va(S)$",
 )
 
-Si on fait tendre vers $0$ le rayon d'une spire circulaire en gardant constant son moment magnétique, on obtient un dipole magnétique.
+Si on fait tendre vers $0$ le rayon d'une spire circulaire en gardant constant son moment magnétique, on obtient un dipôle magnétique.
 
-Le dipole magnétique est un système ponctuel. Le dipole magnétique est le plus simple système ayant un moment magnétique.
+Le dipôle magnétique est un système ponctuel. Le dipôle magnétique est le plus simple système ayant un moment magnétique.
 
 #grid(
     columns: 3,
@@ -73,10 +73,10 @@ Le dipole magnétique est un système ponctuel. Le dipole magnétique est le plu
     ),
 )
 
-Les champs magnétiques créés par une spire, un dipole magnétique et un aimant sont similaires lorsqu'on se place suffisamment loin du système.
+Les champs magnétiques créés par une spire, un dipôle magnétique et un aimant sont similaires lorsqu'on se place suffisamment loin du système.
 
 #encadré(
-    titre: "Champ magnétique créé par un dipole magnétique",
+    titre: "Champ magnétique créé par un dipôle magnétique",
     grandeurs: grandeurs,
     hypothèses: (
         [Le moment magnétique est orienté selon $va(e_z)$.],
@@ -93,7 +93,7 @@ Les champs magnétiques créés par une spire, un dipole magnétique et un aiman
 ]
 
 #encadré(
-    titre: "Équation des lignes de champ magnétique créées par un dipole magnétique",
+    titre: "Équation des lignes de champ magnétique créées par un dipôle magnétique",
     grandeurs: grandeurs,
     hypothèses: (
         [Le moment magnétique est orienté selon $va(e_z)$.],
@@ -105,20 +105,20 @@ Les champs magnétiques créés par une spire, un dipole magnétique et un aiman
 ]
 
 #application[
-    Tracer l'allure des lignes de champ magnétique créées par un dipole magnétique.
+    Tracer l'allure des lignes de champ magnétique créées par un dipôle magnétique.
 ]
 
 #application[
-    À l'aide de Python, tracer l'allure des lignes de champ magnétique créées par un dipole magnétique.
+    À l'aide de Python, tracer l'allure des lignes de champ magnétique créées par un dipôle magnétique.
 ]
 
 #question-de-colle(
-    "Le champ magnétique créé par un dipole magnétique étant fourni, déterminer l'équation des lignes de champ puis tracer leur allure.",
+    "Le champ magnétique créé par un dipôle magnétique étant fourni, déterminer l'équation des lignes de champ puis tracer leur allure.",
 )
 
 == Champ créé par un aimant
 
-Si on se place suffisamment loin, le champ créé par un aimant, par une spire et par un dipole magnétique sont similaire. On définit le moment magnétique d'un aimant comme le moment magnétique du dipole magnétique ayant le même champ magnétique à grande distance
+Si on se place suffisamment loin, le champ créé par un aimant, par une spire et par un dipôle magnétique sont similaire. On définit le moment magnétique d'un aimant comme le moment magnétique du dipôle magnétique ayant le même champ magnétique à grande distance
 
 #application[
     Déterminer la norme du champ magnétique à la surface de la terre à Quimper ($47°59'N, 4°05'O$). On donne $cal(M)_"Terre"=qty("7.7e22", "A/.m^2")$ et $R_"Terre"=qty("6400", "km")$.
@@ -266,7 +266,7 @@ Dans les milieux magnétiques, l'équation de Maxwell-Thomson est inchangée don
 
 = Milieux ferromagnétiques
 == Présentation
-Un matériau ferromagnétique est un matériau dans lequel les dipoles magnétiques (de spin, orbital, ...) ont tendance à s'aligner sur le champ magnétique extérieur. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croient avec l'excitation magnétique $va(H)$.
+Un matériau ferromagnétique est un matériau dans lequel les dipôles magnétiques (de spin, orbital, ...) ont tendance à s'aligner sur le champ magnétique extérieur. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croient avec l'excitation magnétique $va(H)$.
 
 Un matériau ferromagnétique canalise les lignes de champ magnétique. Lorsque des lignes de champ sortent d'un matériau ferromagnétique, elles sortent perpendiculairement à l'interface.
 
@@ -289,7 +289,7 @@ Pour un matériau ferromagnétique, le champ magnétique $va(B)$ et l'aimantatio
 
 #schéma(titre: "Cycle d'hystérésis")[#box(height: 5cm)]
 
-L'aimantation peut saturer, ce qui correspond à un état où tous les dipoles magnétiques sont orientés dans le même sens que l'excitation magnétique $va(H)$.
+L'aimantation peut saturer, ce qui correspond à un état où tous les dipôles magnétiques sont orientés dans le même sens que l'excitation magnétique $va(H)$.
 
 L'aimantation rémanente et le champ magnétique rémanent sont l'aimantation et le champ magnétique subsistant lorsque l'excitation magnétique est nul.
 

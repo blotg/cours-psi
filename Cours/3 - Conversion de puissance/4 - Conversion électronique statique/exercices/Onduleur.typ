@@ -84,7 +84,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10"
             "Fermé", "Fermé", "Ouvert", "Ouvert",
         ),
     )
-    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et $u=0$. La puissance reçue et la puissance délivrée sont nulle. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
+    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et $u=0$. La puissance reçue et la puissance délivrée sont nulles. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
 
     Les deux états retenus sont donc
     #figure(
@@ -206,7 +206,7 @@ On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
 
     - `i1` est le début de la période de la MLI. C'est l'indice du moment auquel $K_1$ et $K_3$ se ferment et $K_2$ et $K_4$ s'ouvrent.
     - `i2` est la fin de la première partie de la période de la MLI, c'est-à-dire le moment où les interrupteurs $K_1$ et $K_3$ s'ouvrent et $K_2$ et $K_4$ se ferment. Il dépend du rapport cyclique `alpha[i]`.
-    - `i3` est la fin de la période de la MLI, c'est-à-dire le moment où les interrupteurs $K_2$ et $K_4$ s'ouvrent et $K_2$ et $K_4$ se ferment.
+    - `i3` est la fin de la période de la MLI, c'est-à-dire le moment où les interrupteurs $K_2$ et $K_4$ s'ouvrent et $K_1$ et $K_3$ se ferment.
 ]
 
 #question(

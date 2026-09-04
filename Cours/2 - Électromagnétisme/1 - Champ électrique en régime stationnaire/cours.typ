@@ -456,7 +456,7 @@ Lorsque l'espace entre les armatures est occupé par un isolant, il faut prendre
 #question-de-colle("Établir le champ électrique entre les armatures d'un condensateur plan. En déduire la capacité. Généraliser au cas où l'isolant entre les armatures n'est pas du vide.")
 
 #application[
-    Un condensateur céramique de capacité $qty("470", "pF")$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $qty("1", "µm")$. Déterminer le diamètre des armatures.
+    Un condensateur céramique de capacité $qty("470", "pF")$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $qty("1", "um")$. Déterminer le diamètre des armatures.
 ]
 
 == Aspect énergétique

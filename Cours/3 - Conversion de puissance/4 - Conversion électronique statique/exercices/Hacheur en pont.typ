@@ -81,7 +81,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
             "Fermé", "Fermé", "Ouvert", "Ouvert",
         ),
     )
-    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et $u=0$. La puissance reçue et la puissance délivrée sont nulle. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
+    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et $u=0$. La puissance reçue et la puissance délivrée sont nulles. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
 
     Les deux états retenus sont donc
     #figure(

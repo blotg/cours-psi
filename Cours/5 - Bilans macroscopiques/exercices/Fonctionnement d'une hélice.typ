@@ -64,7 +64,7 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
 #question(
     coups-de-pouce: (
         "Quelles sont les trois forces s'appliquant sur le système ?",
-        "Les 3 forces sont les deux forces de pression et la force $\vv{F}$.",
+        "Les 3 forces sont les deux forces de pression et la force $va(F)$.",
         "Justifier que le débit volumique se conserve. En déduire une relation entre $v$ et $v'$.",
     ),
 )[

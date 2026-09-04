@@ -17,7 +17,7 @@ The mass is lifted at a constant speed $v_0$.
     coups-de-pouce: (
         "Écrire une équation électrique et une équation mécanique et utiliser les relations entre grandeurs mécaniques et électriques pour une machine à courant continu.",
         "Pour l'équation électrique, écrire la loi des mailles dans le circuit électrique équivalent de l'induit.",
-        "Pour l'équation mécanique, écrire le théorème du moment cinétique au système masse + cable + poulie + rotor.",
+        "Pour l'équation mécanique, écrire le théorème du moment cinétique au système masse + câble + poulie + rotor.",
     ),
 )[
     Ascertain the current $i$ and the voltage $E_0$ delivered by the generator as a function of $M$, $g$, $a$, $Phi_0$, $f$, $r$, $r_0$.

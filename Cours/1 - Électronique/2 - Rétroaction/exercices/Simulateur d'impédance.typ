@@ -98,5 +98,5 @@ On s'intéresse au montage suivant. L'ALI est supposé idéal. Le montage est *s
         = R (1+2 j R C omega)
         = R + j 2 R^2 C omega
     $
-    Ce dipole est équivalent à une bobine réelle dont la résistance serait $R$ et l'inductance serait $2 R^2 C$
+    Ce dipôle est équivalent à une bobine réelle dont la résistance serait $R$ et l'inductance serait $2 R^2 C$
 ]

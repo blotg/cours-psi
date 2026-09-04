@@ -40,7 +40,7 @@ On cherche à calculer numériquement l'inductance mutuelle entre deux spires ci
   Le plan contenant les deux spires est un plan de symétrie de la distribution de courant. Donc le champ magnétique dans ce plan est perpendiculaire à ce plan, c'est-à-dire selon $va(e_z)$.
 ]
 
-On peut approximer le champ magnétique créé par la spire 1, parcourue par un courant $I_1$ par celui d'un dipole magnétique : $B_1=mu_0/(4 pi) (pi R^2 I_1)/(r_1^3)$, où $r_1$ est la distance au centre de la spire 1.
+On peut approximer le champ magnétique créé par la spire 1, parcourue par un courant $I_1$ par celui d'un dipôle magnétique : $B_1=mu_0/(4 pi) (pi R^2 I_1)/(r_1^3)$, où $r_1$ est la distance au centre de la spire 1.
 
 #figure[
   #canvas({

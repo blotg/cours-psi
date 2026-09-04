@@ -22,7 +22,7 @@
     "F_\"ém\"": (signification: "la force électromagnétique s'exerçant sur la partie mobile", unité: unit("N")),
     "cal(E)": (signification: "l'énergie magnétique dans le système", unité: unit("J")),
     "e": (signification: "l'épaisseur de l'entrefer", unité: unit("m")),
-    "theta": (signification: "la seconde coordonnée du point en coordonnées cartésiennes", unité: unit("rad")),
+    "theta": (signification: "la seconde coordonnée du point en coordonnées cylindriques", unité: unit("rad")),
     "I_s": (
         signification: "la valeur efficace du courant dans chacun des deux enroulements statoriques",
         unité: unit("A"),
@@ -117,7 +117,7 @@ Le contacteur électromécanique en translation est utilisé pour fabriquer un r
     $ L=(mu_0 mu_r N^2S)/(l_"fixe"+l_"mobile"+2 mu_r x) $
 ]
 
-== Énergie et forces électromagnétique
+== Énergie et forces électromagnétiques
 
 #encadré(
     titre: "Force électromagnétique",
@@ -162,7 +162,7 @@ La force électromagnétique est toujours attractive. La force électromagnétiq
 )
 
 #application[
-    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. On donne $i=qty("20", "mA")$, $mu_r=num("1e5")$, $N=num("2000")$, $S=qty("4", "cm^2")$, $l_"fixe"+l_"mobile"=qty("30", "cm")$.
+    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=qty("5", "um")$. On donne $i=qty("20", "mA")$, $mu_r=num("1e5")$, $N=num("2000")$, $S=qty("4", "cm^2")$, $l_"fixe"+l_"mobile"=qty("30", "cm")$.
 ]
 
 = Machine synchrone
@@ -225,7 +225,7 @@ Un circuit statorique est constitué de plusieurs spires décalées dans l'espac
 
 #schéma(titre: [Champ statorique créé par 3 spires d'*un* circuit statorique])[#box(height: 4cm)]
 
-Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitudes en quadrature de phase $i_1=I sqrt(2) cos(omega t)$ et $i_2=I sqrt(2) cos(omega t+pi/2)$.
+Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I sqrt(2) cos(omega t)$ et $i_2=I sqrt(2) cos(omega t+pi/2)$.
 
 #encadré(
     titre: [Champ glissant statorique],
@@ -342,7 +342,7 @@ On s'intéresse au régime permanent, dans lequel le rotor tourne à une vitesse
 ]
 
 #question-de-colle(
-    "Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) va(e)_r$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) va(e)_r$ et la formule $Gamma_\"ém\"=lr(pdv(E,theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.",
+    "Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) va(e)_r$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) va(e)_r$ et la formule $Gamma_\"ém\"=lr(pdv(cal(E),theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.",
 )
 
 La condition $Omega = omega$ est appelée condition de synchronisme. Dans une machine synchrone, pour avoir un couple non nul, il est indispensable que la rotation du rotor soit synchrone avec la rotation du champ glissant.
@@ -444,7 +444,7 @@ La loi des mailles peut être représentée sur un diagramme de Fresnel#footnote
 
 == Rendement et puissance
 
-Le moteur synchrone reçoit de la puissance sous forme électrique. Une partie est dissipée par effet Joule, le reste est transformée en puissance électromagnétique puis en puissance mécanique.
+Le moteur synchrone reçoit de la puissance sous forme électrique. Une partie est dissipée par effet Joule, le reste est transformé en puissance électromagnétique puis en puissance mécanique.
 
 #encadré(
     titre: "Transfert de puissance électrique - mécanique",
@@ -478,7 +478,7 @@ Si les courants dans les deux circuits induits sont identiques, on dit que l'alt
 
 Si l'alternateur est équilibré, les relations vues précédemment sont valables en fonctionnement alternateur comme en fonctionnement moteur.
 
-On définit la force électromotrice $-E_1$ l'opposé de la force contre-électromotrice.
+On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-électromotrice.
 
 #schéma(titre: "Schéma équivalent et diagramme de Fresnel en fonctionnement générateur")[#box(height: 4cm)]
 
@@ -512,7 +512,7 @@ Les enroulements rotorique et statorique sont parcourus par des courants continu
 
 #schéma(titre: "Schéma en couple d'une machine à courant continu")[#box(height: 3cm)]
 
-Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de poles.
+Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
 Dans une machine à excitation séparée, les circuits rotoriques et statoriques sont séparés.
 
@@ -523,7 +523,7 @@ Par analogie avec la machine synchrone, l'interaction entre le champ induit et l
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
-        [La machine est diphasée et bipolaire.],
+        [La machine est bipolaire à excitation séparée.],
         [Le circuit statorique est alimenté par un courant $I_e$.],
         [Le circuit rotorique est alimenté par un courant continu $I_r$.],
         [Le rotor tourne à une vitesse angulaire constante.],
@@ -544,8 +544,8 @@ Le lien ci-dessous mène à une animation illustrant le fonctionnement du systè
 #lien("https://youtu.be/LAtPHANEfQo?feature=shared")
 
 #flashcard(
-    recto: "Rôle du système balais-collecteur",
-    verso: "Alimenter le circuit rotorique formant un angle $\pi/2$ avec le stator afin d'assurer la condition de synchronisme et maximiser le couple électromagnétique.",
+    recto: "Rôle du système balais-collecteurs",
+    verso: "Alimenter le circuit rotorique formant un angle $pi/2$ avec le stator afin d'assurer la condition de synchronisme et maximiser le couple électromagnétique.",
 )
 
 #grid(
@@ -659,7 +659,7 @@ Il est possible de déduire de ce modèle la caractéristique couple-vitesse ang
 Le moteur à courant continu n'a pas besoin d'aide pour démarrer, c'est même là que son couple est le plus important. En revanche, ce couple important se traduit aussi par un courant important, qu'il peut être souhaitable de limiter.
 
 #application[
-    On considère un moteur dont le rotor est lié à une hélice de bateau subissant un frottement fluide de couple $-f Omega$ mais pas de frottements solides. On note $J$ le moment d'inertie du système {rotor + hélice} Déterminer 4 relations liant les grandeurs électriques ($E_"cém"$ et $I_r$) et mécaniques ($Gamma$ et $Omega$).
+    On considère un moteur dont le rotor est lié à une hélice de bateau subissant un frottement fluide de couple $-f Omega$ mais pas de frottements solides. On note $J$ le moment d'inertie du système {rotor + hélice}. Déterminer 4 relations liant les grandeurs électriques ($E_"cém"$ et $I_r$) et mécaniques ($Gamma$ et $Omega$).
 ]
 
 #application[

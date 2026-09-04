@@ -41,12 +41,12 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 
 #question(
     coups-de-pouce: (
-        "Le séchoir est-il un dipole inductif ou capacitif ? Le courant est-il en avance ou en retard sur la tension ?",
+        "Le séchoir est-il un dipôle inductif ou capacitif ? Le courant est-il en avance ou en retard sur la tension ?",
     ),
 )[
     Tracer les chronogrammes de $u(t)$ et $i(t)$ pour les trois modes de fonctionnement, $i(t)$ représentant le courant total.
 ][
-    Quel que soit le mode, le dipole global est inductif. Le courant sera donc en retard sur la tension.
+    Quel que soit le mode, le dipôle global est inductif. Le courant sera donc en retard sur la tension.
 
     Plus $R$ est grand, moins de courant y passe dont plus l'amplitude du courant est faible.
 

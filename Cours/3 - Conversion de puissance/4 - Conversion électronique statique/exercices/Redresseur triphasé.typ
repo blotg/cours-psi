@@ -56,7 +56,7 @@ On s'intéresse à un redresseur triphasé représenté ci-dessous.
 
 On peut montrer de la même manière que $V_- = min(u_1, u_2, u_3)$.
 
-En pratique, les tensions $u_1$, $u_2$ et $u_3$ sont des tensions sinusoïdales déphasées de $2\pi/3$ les unes par rapport aux autres, de valeur efficace $U$ :
+En pratique, les tensions $u_1$, $u_2$ et $u_3$ sont des tensions sinusoïdales déphasées de $2 pi/3$ les unes par rapport aux autres, de valeur efficace $U$ :
 $
 u_1(t) &= sqrt(2) U sin(omega t)\
 u_2(t) &= sqrt(2) U sin(omega t - 2pi/3)\

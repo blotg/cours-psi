@@ -183,7 +183,7 @@ Ces champs n'ont un sens que pour les grandeurs intensives car ils dépendraient
         [énergie interne massique $u$ (#unit("J/kg"))],
         [énergie interne volumique $u_V$ (#unit("J/m^3"))],
 
-        [masse $m$ (#unit("kg"))], [], [masse volumique $\mu$ (#unit("kg/m^3"))],
+        [masse $m$ (#unit("kg"))], [], [masse volumique $mu$ (#unit("kg/m^3"))],
         [entropie $S$ (#unit("J/K"))],
         [entropie massique $s$ (#unit("J/K/kg"))],
         [entropie volumique $s_V$ (#unit("J/K/m^3"))],
@@ -581,33 +581,3 @@ On peut faire une analogie entre l'électrocinétique et la thermique.
         [$R C pdv(u, t) + u = E$],
     ),
 )
-
-// \section{Ondes thermiques}
-// Des ondes peuvent être solution de l'équation de la diffusion thermique.
-// L'équation de la diffusion thermique est linéaire\footnote{Une équation est linéaire si pour tous $f$ et $g$ solution de l'équation ,$\lambda f+\mu g$ est aussi solution.}
-// Pour toutes les équations linéaires, on s'intéresse aux solutions sinusoïdales.
-
-// \formule{%
-//   Solutions sinusoïdales de l'équation de la diffusion thermique}[%
-//   \begin{itemize}
-//     \item en l'absence de terme source
-//     \item le système est à l'équilibre thermodynamique local
-//     \item le système est incompressible et macroscopiquement immobile
-//     \item la température de dépend que de la coordonnée cartésienne $x$
-//     \item le système est latéralement calorifugé
-//   \end{itemize}]{%
-//   $$T(x,t)=T_0+\Theta_0\cos\left(\omega t-\frac{x}{\delta}\right) e^{-\frac{x}{\delta}}$$}[%
-//   \begin{itemize}
-//     \item $T(x,t)$ la température du système à l'instant $t$ et à l'abscisse $x$ (\unit{K})
-//     \item $T_0$ la valeur moyenne de la température (\unit{K})
-//     \item $\Theta_0$ l'amplitude des variations de température (\unit{K})
-//     \item $\omega$ la pulsation (\unit{rad.s^{-1}})
-//     \item $\delta=\sqrt{\frac{2D_\text{th}}{\omega}}$ la profondeur de peau (\unit{m})
-//     \item $D_\text{th}=\frac{\lambda}{\mu C_V}$ le coefficient de diffusion thermique (\unit{m^2.s^{-1}})
-//   \end{itemize}\schema{}{3cm}][][o]
-
-// L'amplitude des ondes thermiques diminue quand elles se propagent (terme en $e^{-\frac{x}{\delta}}$). La relation qui relie la pulsation spatiale ($\frac{1}{\delta}$) et $\omega$ s'appelle la relation de dispersion.
-
-// Pour une distance supérieure à quelques fois la profondeur de peau, la température est quasiment égale à $T_0$.
-
-// \application{Pour un sol de diffusivité thermique $D_\text{th}=\SI{2e-7}{m^2.s^{-1}}$, déterminer la profondeur de peau pour une période de \SI{1}{jour} et pour une période de \SI{1}{an}.}

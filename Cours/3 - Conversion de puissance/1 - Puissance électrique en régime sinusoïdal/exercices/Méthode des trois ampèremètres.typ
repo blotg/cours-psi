@@ -30,7 +30,7 @@ Les grandeurs $i(t)$, $i_1(t)$ et $i_2(t)$ sont sinusoïdales de valeurs efficac
         "Écrire les expressions temporelles de $i_1(t)$ et $i_2(t)$. Quelle est la définition de la valeur efficace ?",
     ),
 )[
-    Exprimer le facteur de puissance $cos phi_1$ du dipole $underline(Z)$ en fonction de $I_1$, $I_2$ et $I$.
+    Exprimer le facteur de puissance $cos phi_1$ du dipôle $underline(Z)$ en fonction de $I_1$, $I_2$ et $I$.
 ][
     $ i(t) = i_1(t) + i_2(t) $
     $

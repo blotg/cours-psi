@@ -72,7 +72,7 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 
 #let Dm = 1 / 0.8 * 15 / 1e3 / 60
 #question[
-    Quel est la masse volumique de l'air arrivant au plongeur ? Calculer le débit massique d'air dans le système de détente.
+    Quelle est la masse volumique de l'air arrivant au plongeur ? Calculer le débit massique d'air dans le système de détente.
 ][
     L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume masse d'environ #qty("0.8", "m^3/kg"), soit une masse molaire de
     $

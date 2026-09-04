@@ -5,7 +5,7 @@
 - Relier, pour un signal proportionnel à $exp(j(omega t-underline(k)x))$, la partie réelle de $underline(k)$ à la vitesse de phase et la partie imaginaire de $underline(k)$ à une dépendance spatiale de l’amplitude.
 - Déterminer la vitesse de groupe.
 - Associer la vitesse de groupe à la propagation de l’enveloppe du paquet d’ondes.
-- \faLaptop À l’aide d’un langage de programmation, simuler la propagation d’un paquet d’ondes dans un milieu dispersif et visualiser le phénomène d’étalement.
+- #compétence-numérique À l’aide d’un langage de programmation, simuler la propagation d’un paquet d’ondes dans un milieu dispersif et visualiser le phénomène d’étalement.
 - Énoncer et exploiter la relation entre les ordres de grandeur de la durée temporelle d’un paquet d’onde et la largeur fréquentielle de son spectre.
 - Pour une onde dans un conducteur ohmique :
     - Identifier une analogie formelle avec les phénomènes de diffusion.

@@ -21,7 +21,7 @@ Dans les trains à sustentation magnétique, le train lévite au-dessus des rail
     #let i = (B * l) / (mu0 * N)
     Pour obtenir un champ magnétique de #qty("4", "T"), il faut un courant $i = (B l)/(mu_0 N) = #qty(scientifique(i, 1), "A")$.
 
-    Pour illustrer à quel point ce courant est grand pour un cable de #qty("2", "mm") de diamètre, on va calculer le temps que mettrait ce cable à fondre sous l'effet de l'échauffement par effet Joule. Pour ce faire, on néglige tout échange thermique avec l'extérieur.
+    Pour illustrer à quel point ce courant est grand pour un câble de #qty("2", "mm") de diamètre, on va calculer le temps que mettrait ce câble à fondre sous l'effet de l'échauffement par effet Joule. Pour ce faire, on néglige tout échange thermique avec l'extérieur.
 
     La résistance du fil est $R = l/(gamma S)$, la puissance dissipée par effet Joule est $P = R i^2 = l/(gamma S) ((B l)/(mu_0 N))^2 = (4l)/(gamma pi d^2)((B l)/(mu_0 N))^2$.
 

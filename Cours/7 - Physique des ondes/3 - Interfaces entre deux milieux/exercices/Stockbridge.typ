@@ -5,7 +5,7 @@
     ouvert: true,
 )
 
-Les amortisseurs de Stockbridge sont utilisés pour réduire les vibrations dans les câbles dues au vent, notamment ceux des ponts suspendus ou des lignes haute tension. Ils se comportent comme des amortisseurs et exercent une force verticale $F = - alpha v$ sur le cable où $v$ est la vitesse verticale du cable.
+Les amortisseurs de Stockbridge sont utilisés pour réduire les vibrations dans les câbles dues au vent, notamment ceux des ponts suspendus ou des lignes haute tension. Ils se comportent comme des amortisseurs et exercent une force verticale $F = - alpha v$ sur le câble où $v$ est la vitesse verticale du câble.
 
 #figure(
     grid(
@@ -14,7 +14,7 @@ Les amortisseurs de Stockbridge sont utilisés pour réduire les vibrations dans
     ),
 )
 
-On s'intéresse à un cable en aluminium (de masse volumique $qty("2.7", "g/cm^3")$) de section #qty("500", "mm^2") sur lequel on veut installer un amortisseur de Stockbridge pour éliminer les vibrations. On suppose que le cable est tendu par une force de #qty("1000", "N").
+On s'intéresse à un câble en aluminium (de masse volumique $qty("2.7", "g/cm^3")$) de section #qty("500", "mm^2") sur lequel on veut installer un amortisseur de Stockbridge pour éliminer les vibrations. On suppose que le câble est tendu par une force de #qty("1000", "N").
 
 
 #question()[
@@ -27,7 +27,7 @@ On s'intéresse à un cable en aluminium (de masse volumique $qty("2.7", "g/cm^3
             underline(y_r) = underline(y_(r,0)) e^(i(omega t - k x))
         )
     $
-    La condition aux limites s'obtient en appliquant le théorème de la résultante cinétique à une portion de cable très courte au niveau de l'amortisseur de Stockbridge. On trouve
+    La condition aux limites s'obtient en appliquant le théorème de la résultante cinétique à une portion de câble très courte au niveau de l'amortisseur de Stockbridge. On trouve
 
     #figure(
         canvas({

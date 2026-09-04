@@ -33,7 +33,7 @@ La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
         "La pression partielle est la pression du gaz multiplié par la fraction molaire $P_i=P_\"tot\" (n_i)/(n_\"tot,gaz\")$",
     ),
 )[
-    Exprimer les quotients réactionnels en fonction de la pression totale $P_"tot"$, de la pression standard $P^circ$, des quantités de matières initiales $n_0(ce("CH4"))$ et $n_0(ce("H2O"))$ et des avancements $xi_1$ et $xi_2$.
+    Exprimer les quotients réactionnels en fonction de la pression totale $P_"tot"$, de la pression standard $P^circ$, des quantités de matière initiales $n_0(ce("CH4"))$ et $n_0(ce("H2O"))$ et des avancements $xi_1$ et $xi_2$.
 ][
     $
         Q_1 = product a_i^(nu_i) = (P(ce("CO (g)")) P(ce("H2 (g)"))^3) / (P(ce("CH4 (g)")) P(ce("H2O (g)")) (P^circ)^2)

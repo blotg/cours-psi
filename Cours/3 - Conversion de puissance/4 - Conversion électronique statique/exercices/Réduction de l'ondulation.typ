@@ -20,7 +20,7 @@ On commande un moteur à courant continu d'inductance propre #qty("10", "mH") et
     Quelle inductance de lissage faut-il ajouter en sortie du hacheur pour que l'ondulation du courant ne dépasse jamais #qty("100", "mA") ?
 ][
     #let ondulation-max = 100e-3
-    On note $E'$ la force contre-électromotrice du moteur. et $alpha$ le rapport cyclique. On considère le transistor fermée entre $0$ et $alpha T$ et ouvert entre $alpha T$ et $T$, la loi des mailles donne
+    On note $E'$ la force contre-électromotrice du moteur et $alpha$ le rapport cyclique. On considère le transistor fermé entre $0$ et $alpha T$ et ouvert entre $alpha T$ et $T$, la loi des mailles donne
     $
         u_L = cases(
             E-E' " si " 0 < t < alpha T,

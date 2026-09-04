@@ -83,9 +83,9 @@ La norme prévoir une chute de tension maximale de #qty("3", "%").
 
     La résistance d'un câble de longueur est d'autant plus grande que sa section est petite (un gros câble laisse mieux passer le courant) et que sa longueur est grande (plus le courant a de distance à parcourir, plus il y a de pertes).
 
-    La chute de tension dans le câble est d'autant plus grande que la puissance soutirée est grande (car le courant électrique sera plus grand) et que la résistance est faible (un cable bon conducteur aura moins de pertes).
+    La chute de tension dans le câble est d'autant plus grande que la puissance soutirée est grande (car le courant électrique sera plus grand) et que la résistance est faible (un câble bon conducteur aura moins de pertes).
 
-    La longueur du cable si on ne veut pas une chute de tension trop grande est donc limitée par deux facteurs :
+    La longueur du câble si on ne veut pas une chute de tension trop grande est donc limitée par deux facteurs :
     - la puissance soutirée : plus elle est grande, plus la longueur doit être petite pour limiter les pertes.
     - la section du câble : plus elle est faible, plus la résistance est grande et plus il y aura de pertes.
 ]

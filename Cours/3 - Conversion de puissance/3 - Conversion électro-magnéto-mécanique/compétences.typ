@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 - Exprimer l’énergie magnétique d’un enroulement enlaçant un circuit magnétique présentant un entrefer variable.
-- Calculer la force électromagnétique s’exerçant sur une partie mobile en translation en appliquant l’expression fournie $F = pdv(E,x))_i$.
+- Calculer la force électromagnétique s’exerçant sur une partie mobile en translation en appliquant l’expression fournie $F = lr(pdv(cal(E), x) \))_i$.
 - Sur l’exemple du relais, expliquer le fonctionnement d’un contacteur électromagnétique.
 - Décrire la structure d’un moteur synchrone diphasé et bipolaire : rotor, stator, induit, inducteur.
 - Exprimer, pour une machine de perméabilité infinie à entrefer constant, le champ magnétique dans l’entrefer généré par une spire passant dans deux encoches opposées.
@@ -9,7 +9,7 @@
 - Justifier l’existence d’un champ glissant statorique lorsque les deux phases sont alimentées en quadrature.
 - Justifier l’existence d’un champ glissant rotorique associé à la rotation de l’inducteur.
 - Exprimer l’énergie magnétique totale stockée dans l’entrefer en fonction de la position angulaire du rotor.
-- Calculer le moment électromagnétique s’exerçant sur le rotor en exploitant l’expression fournie $Gamma=pdv(E,theta)$.
+- Calculer le moment électromagnétique s’exerçant sur le rotor en exploitant l’expression fournie $Gamma = lr(pdv(cal(E), theta_r) \))_i$.
 - Justifier la condition de synchronisme entre le champ statorique et le champ rotorique afin d’obtenir un moment moyen non nul.
 - Discuter qualitativement la stabilité du système en fonction du déphasage entre les deux champs glissants.
 - Expliquer la difficulté du démarrage et du contrôle de la vitesse d’un moteur synchrone.
@@ -24,7 +24,7 @@
 - Établir les équations électrique et mécanique.
 - Tracer la caractéristique $(Omega, Gamma)$ à tension d’induit constante.
 - Analyser le démarrage d’un moteur entrainant une charge mécanique exerçant un moment $-f Omega$.
-- \faSignLanguage Mettre en œuvre un moteur à courant continu.
+- #compétence-TP Mettre en œuvre un moteur à courant continu.
 - Décrire les conditions d’utilisation de la machine à courant continu en génératrice.
 - Choisir des conventions d’orientation adaptées.
 - Citer des exemples d’application de la machine à courant continu.

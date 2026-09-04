@@ -114,9 +114,9 @@ On pourrait penser utiliser un montage un potentiomètre pour faire varier la te
 Ce système remplit son rôle mais il consomme de l'énergie.
 
 === Deuxième idée : utiliser un composant ne recevant pas de puissance
-Afin d'avoir un bon rendement, on peut envisager d'utiliser un dipole ne recevant pas de puissance ($u=0$ ou $i=0$).
+Afin d'avoir un bon rendement, on peut envisager d'utiliser un dipôle ne recevant pas de puissance ($u=0$ ou $i=0$).
 
-Un dipole ne recevant jamais de puissance est un interrupteur.
+Un dipôle ne recevant jamais de puissance est un interrupteur.
 
 #schéma(titre: "Caractéristique d'un interrupteur", hauteur: 3cm)
 
@@ -194,21 +194,21 @@ Afin d'améliorer le générateur de Thévenin, on peut lui associer en parallè
 
 Si la capacité du condensateur est suffisamment grande#footnote[Précisément, si $R C >> Delta t$.], la tension aux bornes de la source est quasiment constante.
 
-On appelle *dipole de type source de tension* un dipole qui présente à ses bornes une capacité de forte valeur. La tension aux bornes d'un dipole de type source de tension varie peu autour de sa valeur moyenne.
+On appelle *dipôle de type source de tension* un dipôle qui présente à ses bornes une capacité de forte valeur. La tension aux bornes d'un dipôle de type source de tension varie peu autour de sa valeur moyenne.
 
-#schéma(titre: "Exemples de dipoles de type source de tension", hauteur: 3cm)
+#schéma(titre: "Exemples de dipôles de type source de tension", hauteur: 3cm)
 
 #exemple[
-    Les piles et les batteries sont des dipoles de type source de tension.
+    Les piles et les batteries sont des dipôles de type source de tension.
 ]
 
 == Dipole de type source de courant
-Par analogie avec la partie précédente, un *dipole de type source de courant* est un dipole qui présente, en série, une inductance de forte valeur. Le courant dans un dipole de type source de courant varie peu autour de sa valeur moyenne.
+Par analogie avec la partie précédente, un *dipôle de type source de courant* est un dipôle qui présente, en série, une inductance de forte valeur. Le courant dans un dipôle de type source de courant varie peu autour de sa valeur moyenne.
 
-#schéma(titre: "Exemples de dipoles de type source de courant", hauteur: 3cm)
+#schéma(titre: "Exemples de dipôles de type source de courant", hauteur: 3cm)
 
 #exemple[
-    Les machines à courant continu, et les machines synchrones sont des dipoles de type source de courant.
+    Les machines à courant continu, et les machines synchrones sont des dipôles de type source de courant.
 ]
 
 == Réversibilité des sources
@@ -254,7 +254,7 @@ Il est possible de connecter directement une source de tension et une source de 
 == Structure d'un convertisseur direct
 Un *convertisseur direct*  est un convertisseur ne comportant que des interrupteurs.
 
-Un convertisseur direct s'utilise nécessairement entre un dipole de type source de tension et un dipole de type source de courant.
+Un convertisseur direct s'utilise nécessairement entre un dipôle de type source de tension et un dipôle de type source de courant.
 
 #application[
     En distinguant les cas, montrer qu'il n'est pas possible de concevoir un convertisseur direct ne comportant qu'un seul interrupteur.
@@ -480,7 +480,7 @@ Pour avoir une présentation alternative en sortie, on choisi un rapport cycliqu
 #question-de-colle("Schématiser la structure d'un onduleur. Lister les états pour les interrupteurs et dire s'ils sont possibles et ceux qui sont retenus.")
 
 == Utilisation avec une charge R-L
-L'onduleur peut être utilisé pour alimenter un dipole inductif modélisé par une charge R-L.
+L'onduleur peut être utilisé pour alimenter un dipôle inductif modélisé par une charge R-L.
 
 #schéma(titre: "Onduleur alimentant une charge R-L", hauteur: 3cm)
 #application[

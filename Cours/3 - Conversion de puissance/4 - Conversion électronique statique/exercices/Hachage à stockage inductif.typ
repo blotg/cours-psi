@@ -21,14 +21,14 @@ Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la so
 
 #question(
     coups-de-pouce: (
-        "La bobine est-elle un dipole de type source de tension ou source de courant ?",
+        "La bobine est-elle un dipôle de type source de tension ou source de courant ?",
     ),
 )[
     Montrer que la commande des deux interrupteurs doit être complémentaire (ni ouverts ni fermés tous les deux en même temps).
 ][
     Si les deux interrupteurs sont fermés simultanément, les sours de tensions sont en parallèle, chacune essayant d'imposer sa tension. Ce n'est pas un état possible.
 
-    Si les deux interrupteurs sont ouverts simultanément, la bobine se retrouve en circuit ouvert. Or le courant dans une bobine ne peut pas être discontinu. On peut aussi justifier en disant que, la bobine étant un dipole de type source de courant, elle ne peut pas être en circuit ouvert.
+    Si les deux interrupteurs sont ouverts simultanément, la bobine se retrouve en circuit ouvert. Or le courant dans une bobine ne peut pas être discontinu. On peut aussi justifier en disant que, la bobine étant un dipôle de type source de courant, elle ne peut pas être en circuit ouvert.
 
     Les deux seuls états possibles sont donc : $K_1$ fermé et $K_2$ ouvert, ou $K_1$ ouvert et $K_2$ fermé. Les interrupteurs sont donc complémentaires.
 ]
@@ -212,6 +212,6 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
     or $U = (1-alpha)/alpha U'$ et $I' = (1-alpha)/alpha I$ donc
     $ eta = P'/P = 1 $
 
-    C'est logique car on n'utilise que des dipoles ne consommant pas de puissance en moyenne (interrupteurs idéaux et bobine).
+    C'est logique car on n'utilise que des dipôles ne consommant pas de puissance en moyenne (interrupteurs idéaux et bobine).
 ]
 

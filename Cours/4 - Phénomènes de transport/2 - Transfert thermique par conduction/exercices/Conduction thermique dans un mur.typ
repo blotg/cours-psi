@@ -29,7 +29,7 @@ L'étude s'intéresse au régime stationnaire.
 
 #question(
     coups-de-pouce: (
-        "A quelle condition $\vv{j}$ est-il continu ?",
+        "A quelle condition $va(j)$ est-il continu ?",
         "A quelle condition $T$ est-il continu ?",
     ),
 )[

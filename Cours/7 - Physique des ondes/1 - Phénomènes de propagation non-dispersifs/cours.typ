@@ -116,7 +116,7 @@ Dans le modèle à constantes réparties sans pertes, on étudie une portion mé
 #question-de-colle("Établir l'équation aux dérivées partielles vérifiée par une onde de tension dans un câble coaxial, en précisant les hypothèses et approximations effectuées.")
 
 #application[
-    Calculer la vitesse de propagation d'une onde dans un câble coaxial de capacité linéique $qty("40", "pF/m")$ et d'inductance linéique $qty("0.4", "µH/m")$.
+    Calculer la vitesse de propagation d'une onde dans un câble coaxial de capacité linéique $qty("40", "pF/m")$ et d'inductance linéique $qty("0.4", "uH/m")$.
 ]
 
 == Ondes sonores

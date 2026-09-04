@@ -3,19 +3,19 @@
 #show: cours.with(infos: yaml("infos.yml"))
 
 #let grandeurs = (
-    v_1: (signification: "Tension aux bornes du primaire", unité: unit("V")),
-    v_2: (signification: "Tension aux bornes du secondaire", unité: unit("V")),
-    i_1: (signification: "Courant dans le primaire", unité: unit("A")),
-    i_2: (signification: "Courant dans le secondaire", unité: unit("A")),
-    N_1: (signification: "Nombre de spires de l'enroulement primaire", unité: "sans unité"),
-    N_2: (signification: "Nombre de spires de l'enroulement secondaire", unité: "sans unité"),
-    m: (signification: "$=N_2/N_1$ Rapport de transformation", unité: "sans unité"),
-    p_1: (signification: "Puissance électrique *reçue* au primaire", unité: unit("W")),
-    p_2: (signification: "Puissance électrique *fournie* au secondaire", unité: unit("W")),
+    v_1: (signification: "la tension aux bornes du primaire", unité: unit("V")),
+    v_2: (signification: "la tension aux bornes du secondaire", unité: unit("V")),
+    i_1: (signification: "le courant dans le primaire", unité: unit("A")),
+    i_2: (signification: "le courant dans le secondaire", unité: unit("A")),
+    N_1: (signification: "le nombre de spires de l'enroulement primaire", unité: "sans unité"),
+    N_2: (signification: "le nombre de spires de l'enroulement secondaire", unité: "sans unité"),
+    m: (signification: "$=N_2/N_1$ le rapport de transformation", unité: "sans unité"),
+    p_1: (signification: "la puissance électrique reçue au primaire", unité: unit("W")),
+    p_2: (signification: "la puissance électrique fournie au secondaire", unité: unit("W")),
 )
 
 = Présentation du transformateur
-Le transformateur est constitué d'un circuit magnétique sans entrefer sur lequel sont enroulé deux enroulements appelés primaire et secondaire.
+Le transformateur est constitué d'un circuit magnétique sans entrefer sur lequel sont enroulés deux bobinages appelés primaire et secondaire.
 
 #schéma(titre: "Transformateur")[#box(height: 4cm)]
 
@@ -141,12 +141,12 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 
     Les tensions sont multipliées par $m$.
 
-    Les courants sont multipliées par $1/m$.
+    Les courants sont multipliés par $1/m$.
 ]
 
 #flashcard(
     recto: "Primaire vu du secondaire",
-    verso: "Les impédances sont multipliées par $m^2$.\nLes tensions sont multipliées par $m$.\nLes courants sont multipliées par $1/m$.",
+    verso: "Les impédances sont multipliées par $m^2$.\nLes tensions sont multipliées par $m$.\nLes courants sont multipliés par $1/m$.",
 )
 
 #application[Déterminer la tension aux bornes de la résistance $R_2$ dans le montage ci-dessous en fonction de $m$, $e$, $R_1$ et $R_2$.
@@ -178,16 +178,16 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 
     Les tensions sont divisées par $m$.
 
-    Les courants sont divisées par $1/m$.
+    Les courants sont divisés par $1/m$.
 ]
 
 #flashcard(
     recto: "Ramener le secondaire au primaire",
-    verso: "Les impédances sont divisées par $m^2$.\nLes tensions sont divisées par $m$.\nLes courants sont divisées par $1/m$.",
+    verso: "Les impédances sont divisées par $m^2$.\nLes tensions sont divisées par $m$.\nLes courants sont divisés par $1/m$.",
 )
 
 #question-de-colle(
-    "Démontrer les schémas équivalents pour ramener le primaire au secondaire et le primaire au secondaire.",
+    "Démontrer les schémas équivalents pour ramener le primaire au secondaire et le secondaire au primaire.",
 )
 
 #application[Déterminer le courant au primaire dans le montage ci-dessous en fonction de $e$, $m$, $R_1$ et $R_2$.
@@ -217,7 +217,7 @@ Un transformateur réel comporte des pertes par courants de Foucault. Pour les l
 
 Pertes par hystérésis et pertes par courant de Foucault sont regroupées sous le terme "pertes fer".
 
-#question-de-colle("Citer les types de pertes existantes dans unn transformateur réel et des moyens pour les limiter.")
+#question-de-colle("Citer les types de pertes existantes dans un transformateur réel et des moyens pour les limiter.")
 
 = Applications du transformateur
 == Isolement
@@ -230,10 +230,8 @@ Le transformateur d'isolement sert à isoler électriquement deux parties d'un c
 ]
 
 == Transport du courant à haute tension
-Afin de limiter les pertes par effet Joule lors du transport, on utilise une tension aussi élevée que possible. Pour ce faite, un transformateur augment la tension en sortie de centrale de production et un transformateur abaisse la tension avant de la distribuer au client.
+Afin de limiter les pertes par effet Joule lors du transport, on utilise une tension aussi élevée que possible. Pour ce faire, un transformateur augmente la tension en sortie de centrale de production et un transformateur abaisse la tension avant de la distribuer au client.
 
-#question-de-colle("Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.")
+#exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #qty("400","kV").]
 
-#exemple[Le réseau Très Haute Tension qui transporte le courant sur des longues distance a une tension de #qty("400","kV").]
-
-#application[Par combien divise-t-on les pertes par effet Joule dans les cables en utilisant une tension de #qty("20","kV") (ligne moyenne tension) plutôt que de #qty("230","V") ?]
+#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #qty("20","kV") (ligne moyenne tension) plutôt que de #qty("230","V") ?]

@@ -36,7 +36,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interru
 
     La diode et le transistor ne peuvent pas être passants simultanément car la source de tension $E$ serait court-circuitée.
 
-    La diode et le transistor ne peuvent pas être bloqués simultanément car le courant dans l'inductance $L$ ne pourrait pas se maintenir, or le courant ne peut pas s'annuler brutalement dans une inductance. On peut aussi le justifiant en disant que le dipole r-L est un dipole de type source de courant qui ne peut donc pas être en circuit ouvert.
+    La diode et le transistor ne peuvent pas être bloqués simultanément car le courant dans l'inductance $L$ ne pourrait pas se maintenir, or le courant ne peut pas s'annuler brutalement dans une inductance. On peut aussi le justifiant en disant que le dipôle r-L est un dipôle de type source de courant qui ne peut donc pas être en circuit ouvert.
 
     / Sur $[0,alpha T[$: le transistor est passant, donc la diode est *bloquée*.
     / Sur $[alpha T,T[$: le transistor est bloqué, donc la diode est *passante*.

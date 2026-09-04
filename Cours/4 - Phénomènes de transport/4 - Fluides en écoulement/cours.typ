@@ -108,7 +108,7 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 
 #flashcard(
     recto: "Masse volumique de l'eau et de l'air",
-    verso: "$ mu_\"eau\" = qty(\"1e3\", \"kg/m^3\") $ $\mu_\"air\"=qty(\"1\", \"kg/m^3\")$",
+    verso: "$ mu_\"eau\" = qty(\"1e3\", \"kg/m^3\") $ $mu_\"air\"=qty(\"1\", \"kg/m^3\")$",
 )
 
 #encadré(
