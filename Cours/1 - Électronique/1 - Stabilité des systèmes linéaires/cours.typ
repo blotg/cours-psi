@@ -127,7 +127,7 @@ Une forte ressemblance entre les 2 équations précédentes peut être remarqué
 == Présentation
 Un système stable a une sortie bornée si son entrée est bornée#footnote[En pratique, un système instable a sa sortie en saturation car elle ne peut pas augmenter ou diminuer indéfiniment.].
 
-== Système du premier ordre
+== Système d'ordre 1
 
 #encadré(
     titre: "Influence du numérateur",
@@ -146,7 +146,7 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
     connaitre: true,
     hypothèses: (
         "Le système est linéaire.",
-        "Le système est du 1er ordre.",
+        "Le système est d'ordre 1.",
     ),
 )[
     Le système est stable si les 2 coefficients du dénominateur de sa fonction de transfert sont de même signe.
@@ -192,7 +192,7 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
     connaitre: true,
     hypothèses: (
         "Le système est linéaire.",
-        "Le système est du 2ème ordre.",
+        "Le système est d'ordre 2.",
     ),
 )[
     Le système est stable si les 3 coefficients du dénominateur de sa fonction de transfert sont de même signe.

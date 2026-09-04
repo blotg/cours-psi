@@ -2,10 +2,7 @@ titre: |
   Physique des ondes 2
   Phénomènes de propagation linéaires : absorption et dispersion
 titre-court: Ondes 2
-DM: 
-  - énoncé: DM/DM 1.pdf
-    corrigé: DM/DM 1 - corrigé.pdf
-cahier-entrainement: 
+cahier-entrainement:
   - "8.9"
   - "8.10"
   - "8.11"
@@ -25,3 +22,6 @@ cahier-entrainement:
   - "24.13"
   - "24.14"
   - "24.16"
+DM:
+  - énoncé: DM/DM 1.pdf
+    corrigé: DM/DM 1 - corrigé.pdf

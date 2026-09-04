@@ -15,7 +15,7 @@ Le ciment est modélisé par la seule espèce : #ce("[Ca3SiO5](s)"). La réactio
     block: true,
 ) <equation1>
 
-L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélange $m_1 = #qty("228,0", "g")$ de ciment et $m_2 = #qty("90,0", "g")$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = qty("15.0", "Celsius")$.
+L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélange $m_1 = #qty("228.0", "g")$ de ciment et $m_2 = #qty("90.0", "g")$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = qty("15.0", "Celsius")$.
 
 #let M_Ca3SiO5 = 3 * 40.0 + 28.0 + 5 * 16.0
 #let M_H2O = 2 * 1.00 + 16.0

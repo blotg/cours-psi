@@ -70,7 +70,7 @@ Pour le filtre de Wien, le filtre passe-bande est un filtre de Wien et l'amplifi
     recto: "Montage de l'oscillateur de Wien.",
     verso: "
     #import \"@preview/zap:0.6.0\"
-    #import \"@preview/cetz:0.5.1\": draw
+    #import \"@preview/cetz:0.5.2\": draw
     #figure(
         zap.circuit({
             import zap: *
@@ -180,12 +180,12 @@ La condition d'existence d'oscillations sinusoïdales apparait comme un cas limi
 #manipulation(
     titre: "Démarrage des oscillations",
     matériel: (
-        "oscilloscope",
-        "alim. sym.",
-        "breadboard \"Oscillateurs\"",
-        "boite à décades de résistances",
-        "2 adaptateurs banane-BNC",
-        "caméra de projection sur pied"
+        "Oscilloscope",
+        "Alimentation symétrique +15V",
+        "Breadboard \"Oscillateurs\"",
+        "Boite à décades de résistances",
+        "2 adaptateurs BNC/banane",
+        "Caméra pour projection"
     )
 )[
     On réalise le montage de l'oscillateur de Wien avec une résistance $R_2$ réglable. On cherche les valeurs de $R_2$ pour lesquelles des oscillations apparaissent spontanément. On mesure la fréquence des oscillations dans le cas limite.
@@ -258,7 +258,7 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
     recto: "Montage de l'oscillateur à relaxation.",
     verso: "
     #import \"@preview/zap:0.6.0\"
-    #import \"@preview/cetz:0.5.1\": draw
+    #import \"@preview/cetz:0.5.2\": draw
     #figure(
         zap.circuit({
             import zap: *

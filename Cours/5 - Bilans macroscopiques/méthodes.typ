@@ -5,7 +5,7 @@
 + On définit $delta Sigma_1$ le système qui rentre dans $Sigma^0$ entre $t$ et $t+dd(t)$. On définit $delta Sigma_2$ le système qui sort de $Sigma^0$ entre $t$ et $t+dd(t)$.
 + On définit le système fermé $Sigma^*$ tel que $Sigma^*(t) = Sigma^0(t) union delta Sigma_1$.
 + Comme $Sigma^*$ est fermé par définition, à l'instant $t+dd(t)$, $Sigma^*(t+dd(t)) = Sigma^0(t+dd(t)) union delta Sigma_2$.
-Comme $Sigma^*$ est fermé, on peut lui appliquer les bilans connus pour les systèmes fermés (1er et 2ème principes de la thermodynamique, TRC, TMC, ...).
+Comme $Sigma^*$ est fermé, on peut lui appliquer les bilans connus pour les systèmes fermés (premier et deuxième principes de la thermodynamique, TRC, TMC, ...).
 
 = Faire un bilan d'une grandeur additive sur un système ouvert en régime stationnaire
 

@@ -88,8 +88,8 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
 ]
 
 #question()[
-    À quelle température doit-on opérer pour avoir un coefficient de dissociation $alpha = #num("0,05")$ sous la pression totale $P = qty("1", "bar")$ ?
-    Même question pour $alpha = #num("0,95")$.
+    À quelle température doit-on opérer pour avoir un coefficient de dissociation $alpha = #num("0.05")$ sous la pression totale $P = qty("1", "bar")$ ?
+    Même question pour $alpha = #num("0.95")$.
 
     Comparer ces valeurs au regard du signe de l'enthalpie de réaction.
 ][
@@ -108,11 +108,11 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
     #let R = 8.314
     #let a = 0.05
     #let T1 = DrH / (DrS - R * calc.ln(calc.pow((4 * a) / (1 + 3 * a), 4) * (1 + 3 * a) / (1 - a)))
-    Pour $alpha = #num("0,05")$, on trouve $T approx #qty(scientifique(T1, 2), "K")$.
+    Pour $alpha = #num("0.05")$, on trouve $T approx #qty(scientifique(T1, 2), "K")$.
 
     #let a = 0.95
     #let T2 = DrH / (DrS - R * calc.ln(calc.pow((4 * a) / (1 + 3 * a), 4) * (1 + 3 * a) / (1 - a)))
-    Pour $alpha = #num("0,95")$, on trouve $T approx #qty(scientifique(T2, 2), "K")$.
+    Pour $alpha = #num("0.95")$, on trouve $T approx #qty(scientifique(T2, 2), "K")$.
 
     La réaction est endothermique, son équilibre est donc déplacé dans le sens direct en augmentant la température, ce qui est cohérent avec le fait que le coefficient de dissociation augmente avec la température.
 ]

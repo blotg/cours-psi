@@ -45,7 +45,7 @@ La plupart des théorèmes de physique connus ne s'appliquent pas aux systèmes 
 == Système fermé
 Un système fermé est un système n'échangeant pas de matière avec l'extérieur.
 
-#exemple[TRC, TMC, TEC, TEM, TPC, 1er et 2nd principes, ne s'appliquent qu'à des systèmes fermés.]
+#exemple[TRC, TMC, TEC, TEM, TPC, premier et deuxième principes, ne s'appliquent qu'à des systèmes fermés.]
 
 #exemple[Une solution dans un bécher, l'eau dans le circuit primaire d'une centrale nucléaire, ...]
 

@@ -26,9 +26,9 @@ On peut représenter l’ensemble de la chaine d’acquisition ainsi :
 
 #évaluation(
     barème: (
-        ([Signification des réglages Latis], 2),
-        ([Comment choisir les réglages Latis], 2),
-        ([Tracé spectre Latis], 2),
+        ([Signification des réglages LatisPro], 2),
+        ([Comment choisir les réglages LatisPro], 2),
+        ([Tracé spectre LatisPro], 2),
         ([Tracé spectre Python], 2),
         ([Fiche qui donne envie d'être lue], 2),
     ),
@@ -205,9 +205,9 @@ On pourra utiliser les fonctions #link("https://numpy.org/doc/stable/reference/g
 
 #show: appendix
 
-= Tracé de spectre avec LATIS-Pro<annexe-spectre-latis-pro>
+= Tracé de spectre avec LatisPro<annexe-spectre-latis-pro>
 
-Pour tracer le spectre avec LATIS-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, LATIS-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
+Pour tracer le spectre avec LatisPro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, LatisPro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
 
 #figure(
     grid(
@@ -215,5 +215,5 @@ Pour tracer le spectre avec LATIS-Pro, il faut cliquer sur "Traitements" puis "C
         align: horizon,
         image("images/capture latis menu.png", width: 70%), image("images/capture latis.png", width: 70%),
     ),
-    caption: [Fenêtre de calcul du spectre avec LATIS-Pro],
+    caption: [Fenêtre de calcul du spectre avec LatisPro],
 )

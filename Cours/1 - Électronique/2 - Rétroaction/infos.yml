@@ -2,12 +2,7 @@ titre: |
   Électronique 2
   Rétroaction
 titre-court: Électronique 2
-DM: 
-  - énoncé: "DM/DM 1.pdf"
-    corrigé: "DM/DM 1 - corrigé.pdf"
-  - énoncé: "DM/DM 2.pdf"
-    corrigé: "DM/DM 2 - corrigé.pdf"
-cahier-entrainement: 
+cahier-entrainement:
   - "16.1"
   - "16.2"
   - "16.3"
@@ -30,3 +25,8 @@ cahier-entrainement:
   - "17.8"
   - "17.9"
   - "17.10"
+DM:
+  - énoncé: DM/DM 1.pdf
+    corrigé: DM/DM 1 - corrigé.pdf
+  - énoncé: DM/DM 2.pdf
+    corrigé: DM/DM 2 - corrigé.pdf

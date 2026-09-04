@@ -11,8 +11,8 @@
 #matériel(
     groupe: (
        "GBF et oscilloscope",
-       "platine d'essai et fils de connexion",
-       "résistances et condensateurs disponibles dans la salle de TP",
+       "Platine d'essai et fils de connexion",
+       "Résistances et condensateurs disponibles dans la salle de TP",
     ),
 )
 

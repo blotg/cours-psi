@@ -18,11 +18,6 @@
     $va("rot ")$,
 )
 
-#let rot = math.class(
-    "unary",
-    $va("rot ")$,
-)
-
 #let mean(val) = {
     math.lr({
         math.chevron.l

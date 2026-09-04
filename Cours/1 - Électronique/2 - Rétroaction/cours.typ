@@ -158,7 +158,7 @@ Dans le modèle de l'ALI idéal, deux régimes existent :
     verso: "$epsilon = 0$",
 )
 
-= L'ALI dans un montage avec rétroaction négative.
+= L'ALI dans un montage avec rétroaction négative
 #{
     grandeurs.insert("S(p)", (signification: "la sortie du montage", unité: unit("V")))
     grandeurs.insert("E(p)", (signification: "l'entrée du montage", unité: unit("V")))
@@ -314,7 +314,7 @@ La présence d'une rétroaction négative stabilisant le montage permet de suppo
 
 #application[Déterminer la fonction de transfert de l'amplificateur non-inverseur en supposant l'ALI idéal.]
 
-= L'ALI dans un montage avec rétroaction positive : le comparateur à hystérésis négatif.
+= L'ALI dans un montage avec rétroaction positive : le comparateur à hystérésis négatif
 == Présentation du montage
 
 #schéma(titre: "Montage comparateur à hystérésis négatif", hauteur: 5cm)
@@ -345,7 +345,7 @@ Le comparateur à hystérésis est un montage instable. Sa sortie diverge, ou pl
 )
 
 #encadré(
-    titre: "Stabilité d'un montage avec rétroaction positive ou sans rétroaction.",
+    titre: "Stabilité d'un montage avec rétroaction positive ou sans rétroaction",
     hypothèses: (
         "Il y a une rétroaction positive ou pas de rétroaction."
     ),

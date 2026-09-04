@@ -2,10 +2,7 @@ titre: |
   Physique des ondes 3
   Interfaces entre deux milieux
 titre-court: Ondes 3
-DM: 
-  - énoncé: DM/DM 1.pdf
-    corrigé: DM/DM 1 - corrigé.pdf
-cahier-entrainement: 
+cahier-entrainement:
   - "8.15"
   - "8.16"
   - "8.17"
@@ -14,3 +11,6 @@ cahier-entrainement:
   - "23.13"
   - "24.11"
   - "24.12"
+DM:
+  - énoncé: DM/DM 1.pdf
+    corrigé: DM/DM 1 - corrigé.pdf

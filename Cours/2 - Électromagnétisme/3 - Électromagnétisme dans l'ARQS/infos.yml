@@ -1,15 +1,13 @@
 titre: |
   Électromagnétisme 3
-  ARQS Magnétique
+  Électromagnétisme dans l'ARQS
 titre-court: Électromagnétisme 3
 cahier-entrainement:
-  - 5.2
-  - 5.4
-  - 5.5
-  - 5.7
-  - 5.8
-cahier-entrainement-sup: []
-révisions-sup: []
+  - "5.2"
+  - "5.4"
+  - "5.5"
+  - "5.7"
+  - "5.8"
 DM:
   - énoncé: DM/DM 1.pdf
     corrigé: DM/DM 1 - corrigé.pdf

@@ -34,7 +34,7 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=qty("5
 
     On peut en déduire l'admittance totale : $underline(Y_"tot") = underline(Y_1) + underline(Y_2) + underline(Y_L) = #(38 + 57 + 38) - #(50 + 58) j unit("mS")$, puis le déphasage totale :
     $ phi_"tot" = arctan(Im(underline(Y_"tot"))/Re(underline(Y_"tot"))) = arctan(-#(50 + 58)/#(38 + 57 + 38)) = qty("39","deg") $
-    et le facteur de puissance $cos(phi_"tot") = num("0,77")$.
+    et le facteur de puissance $cos(phi_"tot") = num("0.77")$.
 
     Ce facteur de puissance est assez faible, ce qui signifie que l'installation consomme beaucoup de puissance réactive, engendrant des pertes en lignes importantes.
 ]

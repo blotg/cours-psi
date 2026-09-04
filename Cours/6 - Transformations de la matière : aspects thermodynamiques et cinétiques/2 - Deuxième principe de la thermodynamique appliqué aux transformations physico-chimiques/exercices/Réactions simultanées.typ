@@ -7,8 +7,8 @@
 
 On envisage la conversion du méthane par la vapeur d'eau à $T = #qty("900", "K")$, sous une pression totale $P_"tot"$, à partir d'un mélange initial contenant #qty("4.0", "mol") d'eau et #qty("1.0", "mol") de méthane. On doit envisager les deux équilibres chimiques suivants, dans lesquels les constituants sont des gaz parfaits :
 $
-    ce("CH4 (g) + H2O (g) &= CO (g) + 3 H2 (g)") #h(1.5cm) & K^circ_1 = num("1,306") \
-                ce("CO (g) + H2O (g) &= CO2 (g) + H2 (g)") & K^circ_2 = num("2,204")
+    ce("CH4 (g) + H2O (g) &= CO (g) + 3 H2 (g)") #h(1.5cm) & K^circ_1 = num("1.306") \
+                ce("CO (g) + H2O (g) &= CO2 (g) + H2 (g)") & K^circ_2 = num("2.204")
 $
 
 La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
