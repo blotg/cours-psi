@@ -8,7 +8,7 @@ On étudie un point matériel dont l'énergie potentielle dépend de la position
 
 #question(
     coup-de-pouce: (
-        "Quelques formes d'énergie potentielle sont à connaitre. Laquelle est quadratique (c'es-à-dire fait apparaitre un carré) ?",
+        "Quelques formes d'énergie potentielle sont à connaitre. Laquelle est quadratique (c'est-à-dire fait apparaitre un carré) ?",
         "Les énergies potentielles à connaitre sont l'énergie potentielle de pesanteur, l'énergie potentielle élastique et l'énergie potentielle électrostatique.",
     ),
 )[

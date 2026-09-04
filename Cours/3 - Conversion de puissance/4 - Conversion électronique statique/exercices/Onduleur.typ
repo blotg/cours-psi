@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Onduleur alimentant une charge inductive.",
+    titre: "Onduleur alimentant une charge inductive",
     numérique: true,
     difficulté: 1,
 )
@@ -115,7 +115,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10"
 #question(
     coups-de-pouce: (),
 )[
-    On se place entre $t_2$ et $t_3$ , avec $K_1$ et $K_3$ ouverts et $K_2$ et $K_4$ fermés. Quelle est l'équation différentielle vérifiée par le courant $i(t)$ dans la charge ? Quelle est sa solution ? On l'exprimera en fonction de $i(t_2)$.
+    On se place entre $t_2$ et $t_3$, avec $K_1$ et $K_3$ ouverts et $K_2$ et $K_4$ fermés. Quelle est l'équation différentielle vérifiée par le courant $i(t)$ dans la charge ? Quelle est sa solution ? On l'exprimera en fonction de $i(t_2)$.
 ][
     La loi des mailles s'écrit $-E = R i + L dv(i, t)$, soit
     $ dv(i, t) + R/L i = E/L $

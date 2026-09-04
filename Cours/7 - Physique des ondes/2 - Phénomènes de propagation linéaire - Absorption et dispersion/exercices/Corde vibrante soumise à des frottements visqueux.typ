@@ -80,7 +80,7 @@ On étudie une corde vibrante, de longueur $L$, de masse linéique $mu$, attach�
 
 #question(
     coups-de-pouce: (
-        "Compte tenu de l'hypothèse de frottements faibles, quel est le signe du discriminent de l'équation différentielle sur $g$ ?"
+        "Compte tenu de l'hypothèse de frottements faibles, quel est le signe du discriminant de l'équation différentielle sur $g$ ?"
     ),
 )[
     Résoudre l'équation sur $g$. On se placera dans le cas de frottements faibles, et on précisera explicitement l'inégalité qu'implique cette hypothèse. On ne cherchera pas à expliciter les constantes.

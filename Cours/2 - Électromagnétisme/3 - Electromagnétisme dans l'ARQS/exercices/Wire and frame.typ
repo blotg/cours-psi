@@ -39,7 +39,7 @@ We study an infinite electric wire and a conductive frame. The two objects are c
   The chosen Ampère's loop is a circle of radius $r$ centered on the wire axis and oriented along $+va(e_theta)$.
 
   Ampère's theorem writes :
-  $ integral.cont va(B)(M).va(dif l) = 2 pi r B(r) = mu_0 I_"wire" $
+  $ integral.cont va(B)(M).va(dd(l)) = 2 pi r B(r) = mu_0 I_"wire" $
 
   The magnetic field created by the wire at a distance $r$ of its axis is given by :
   $ va(B)(r) = (mu_0 I)/(2 pi r)va(e_theta) $
@@ -47,7 +47,7 @@ We study an infinite electric wire and a conductive frame. The two objects are c
   *Flux of the magnetic field through the frame*
   
   The magnetic flux of the magnetic field created by the wire through the frame is given by :
-  $ Phi_("wire" arrow "frame") = integral.double_S va(B).va(dif S) = integral_(d)^(d+a) B(r) dif r integral_0^b dif z = (mu_0 I b)/(2 pi) ln((d+a)/d) $
+  $ Phi_("wire" arrow "frame") = integral.double_S va(B).va(dd(S)) = integral_(d)^(d+a) B(r) dd(r) integral_0^b dd(z) = (mu_0 I b)/(2 pi) ln((d+a)/d) $
   
   *Mutual inductance*
   

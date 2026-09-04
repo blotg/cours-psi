@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Réduction de l'ondulation.",
+    titre: "Réduction de l'ondulation",
     ouvert: true,
 )
 

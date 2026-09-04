@@ -566,7 +566,7 @@ On peut faire une analogie entre l'électrocinétique et la thermique.
 
         [Résistance],
         [$R_"th" = L/(lambda S)$ #h(1em) (#unit("K/W"))],
-        [$R = L/(gamma S)$ #h(1em) (#unit("ohm"))],
+        [$R = L/(gamma S)$ #h(1em) (#unit("O"))],
 
         [Loi d'Ohm],
         [$T_1 - T_2 = R_"th" Phi$ #h(1em) (#unit("K"))],

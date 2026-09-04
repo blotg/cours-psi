@@ -63,7 +63,7 @@ On peut calculer le spectre du paquet d'onde pour obtenir la liste des $underlin
     from numpy.fft import rfft, irfft, rfftfreq
 
     frequences = rfftfreq(len(t), t[1]-t[0]) # calcul des fréquences de la transformée de Fourier (Hz)
-    pulsations = ... # pulsations (ras/s)
+    pulsations = ... # pulsations (rad/s)
     spectre_x0 = ... # spectre de s(x=0,t) (c'est-à-dire liste des A_i)
 
     plt.figure()
@@ -78,7 +78,7 @@ On peut calculer le spectre du paquet d'onde pour obtenir la liste des $underlin
     from numpy.fft import rfft, irfft, rfftfreq
 
     frequences = rfftfreq(len(t), t[1]-t[0]) # calcul des fréquences de la transformée de Fourier (Hz)
-    pulsations = 2*np.pi*frequences # pulsations (ras/s)
+    pulsations = 2*np.pi*frequences # pulsations (rad/s)
     spectre_x0 = rfft(s_x0) # spectre de s (c'est-à-dire liste des A_i)
 
     plt.figure()

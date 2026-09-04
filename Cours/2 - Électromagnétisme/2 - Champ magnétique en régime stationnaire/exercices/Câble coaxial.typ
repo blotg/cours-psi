@@ -46,7 +46,7 @@ On considère un câble coaxial cylindrique de longueur supposée infinie, const
 ]
 
 #question(coups-de-pouce: (
-  "Choisir le contour de sorte que $va(dif l)$ soit colinéaire à $va(B)$.",
+  "Choisir le contour de sorte que $va(dd(l))$ soit colinéaire à $va(B)$.",
 ))[
   En appliquant le théorème d'Ampère à un contour $cal(C)$ que l'on précisera, donner $B(r)$ pour $r < R_1$, pour $R_1 < r < R_2$ et pour $R_2 < r < R_3$.
 ][

@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Le bruit aigu quand le métro démarre.",
+    titre: "Le bruit aigu quand le métro démarre",
     explique: true,
 )
 

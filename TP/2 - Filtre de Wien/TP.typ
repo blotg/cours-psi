@@ -36,8 +36,8 @@ L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert
 
 Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP de sorte que
 + sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
-+ sa résistance doit être très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","MO")) ;
-+ son impédance d'entrée à haute fréquence doit être suffisamment grande pour ne pas faire saturer en courant l'ALI.
++ sa résistance soit très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","MO")) ;
++ son impédance d'entrée à haute fréquence soit suffisamment grande pour ne pas faire saturer en courant l'ALI.
 
 #application()[
     Choisir des valeurs pour $R$ et $C$.
@@ -67,7 +67,7 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 #évaluation(
     appel-prof: true,
     barème: (
-        ([les signaux ne défile pas], 2),
+        ([les signaux ne défilent pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
         ([critère sur l'amplitude], 2),
@@ -82,7 +82,7 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 #évaluation(
     appel-prof: true,
     barème: (
-        ([les signaux ne défile pas], 2),
+        ([les signaux ne défilent pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
         ([critère sur la phase], 2),
@@ -119,7 +119,7 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
 #évaluation(
     appel-prof: true,
     barème: (
-        ([les signaux ne défile pas], 2),
+        ([les signaux ne défilent pas], 2),
         ([les signaux prennent toute la place], 2),
         ([on voit quelques périodes], 2),
         ([mesure de l'amplitude], 2),
@@ -211,7 +211,7 @@ Il reste alors à propager cette incertitude sur la fréquence caractéristique 
 Il est maintenant possible de conclure sur l'adéquation des valeurs attendues aux valeurs mesurées pour $f_0$, $A$ et $Q$.
 
 #application()[
-    Les valeurs mesurées via l'ajustement des trois paramètres sont-elles cohérentes avec elles calculées à partir des valeurs des composants ? La conclusion sera rédigée après le calcul d'un écart normalisé.
+    Les valeurs mesurées via l'ajustement des trois paramètres sont-elles cohérentes avec celles calculées à partir des valeurs des composants ? La conclusion sera rédigée après le calcul d'un écart normalisé.
 ]
 
 #show: appendix

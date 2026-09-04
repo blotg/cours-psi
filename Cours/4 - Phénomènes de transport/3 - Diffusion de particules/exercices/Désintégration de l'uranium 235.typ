@@ -27,7 +27,7 @@ On prend pour condition aux limites $n(r=R)=0$
         "Combien de neutrons sont captés durant $dd(t)$ dans le volume considéré ? Combien sont émis ?",
     ),
 )[
-    En faisant un bilan de neutron sur une volume mésoscopique, démontrer l'équation fondamentale de la neutronique :
+    En faisant un bilan de neutron sur un volume mésoscopique, démontrer l'équation fondamentale de la neutronique :
     $ pdv(n, t) = -div j + (nu-1)/tau n $
 ][
     On fait un bilan de neutrons sur une coquille sphérique de rayon intérieur $r$ et d'épaisseur $dd(r)$.
@@ -86,7 +86,7 @@ On prend pour condition aux limites $n(r=R)=0$
 
 #question(
     coups-de-pouce: (
-        "Distinguer les cas sur le discriminent et utiliser les conditions aux limites pour trouver les constantes.",
+        "Distinguer les cas sur le discriminant et utiliser les conditions aux limites pour trouver les constantes.",
         "La densité particulaire est une grandeur positive et finie.",
     ),
 )[

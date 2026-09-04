@@ -71,9 +71,9 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
 #question(coups-de-pouce: (
   "Utiliser la définition du flux magnétique à travers une surface comme une intégrale.",
 ))[
-  Montrer que le flux du champ magnétique $va(B_1)$ à travers la spire 2 est donné par $Phi_(1 arrow 2) = A integral_0^(2 pi)dif theta_2 integral_0^R dif r_2 r_2/ ((d^2+r_2^2+d r_2 cos theta_2)^(3/2))$
+  Montrer que le flux du champ magnétique $va(B_1)$ à travers la spire 2 est donné par $Phi_(1 arrow 2) = A integral_0^(2 pi)dd(theta_2) integral_0^R dd(r_2) r_2/ ((d^2+r_2^2+d r_2 cos theta_2)^(3/2))$
 ][
-  Le flux du champ magnétique à travers la spire 2 est $ Phi_(1 arrow 2) = integral_("spire" 2) va(B_1) dot va(dif S) = integral_0^(2 pi) dif theta_2 integral_0^R dif r_2 r_2 B_1(r_2, theta_2) $ avec $B_1(r_2, theta_2) = mu_0/(4 pi) (pi R^2 I_1)/(d^2 + r_2^2 + 2 d r_2 cos theta_2)^(3/2)$. On en déduit l'expression demandée avec $A = mu_0/(4) R^2 I_1$.
+  Le flux du champ magnétique à travers la spire 2 est $ Phi_(1 arrow 2) = integral_("spire" 2) va(B_1) dot va(dd(S)) = integral_0^(2 pi) dd(theta_2) integral_0^R dd(r_2) r_2 B_1(r_2, theta_2) $ avec $B_1(r_2, theta_2) = mu_0/(4 pi) (pi R^2 I_1)/(d^2 + r_2^2 + 2 d r_2 cos theta_2)^(3/2)$. On en déduit l'expression demandée avec $A = mu_0/(4) R^2 I_1$.
 ]
 
 La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. Son appel est de la forme ```python dblquad(func, a, b, c, d)```, où ```python func(x,y)``` est la fonction à intégrer pour `x` allant de `a` et `b` et pour `y` allant de `c` à  `d`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.

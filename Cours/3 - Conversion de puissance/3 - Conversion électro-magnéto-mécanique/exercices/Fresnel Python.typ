@@ -5,7 +5,7 @@
     numérique: true,
 )
 
-En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe peut est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.
+En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.
 
 À l'aide de Python, déterminer la tension efficace aux bornes d'un moteur synchrone diphasé dipolaire dans chacun des cas suivants. On sommera les amplitudes complexes résultant de la loi des mailles.
 

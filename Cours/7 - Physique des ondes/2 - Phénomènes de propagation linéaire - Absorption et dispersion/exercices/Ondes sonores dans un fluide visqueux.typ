@@ -54,7 +54,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
     $
         chi_S pdv(P_1, t) = - pdv(v, x)
     $
-    En dérivant l'équation de la question 1 par rapport à $x$ et celle ci par rapport à $t$, on trouve
+    En dérivant l'équation de la question 1 par rapport à $x$ et celle-ci par rapport à $t$, on trouve
     $
         cases(
             rho_0 pdv(v, x, t) = - pdv(P_1, x, 2) + eta pdv(v, x, 3),
@@ -84,7 +84,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
         "Quelle relation relie l'épaisseur de peau avec le nombre d'onde complexe ?"
     ),
 )[
-    L'onde est plane, progressive et harmonique de fréquence $f=qty("1.0e3", "Hz")$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir l'équation de dispersion puis l'épaisseur dont on effectuera l'application numérique pour l'air à #qty("20", "celsius"). On donne la viscosité de l'air $eta = qty("1.85e-5", "Pl")$
+    L'onde est plane, progressive et harmonique de fréquence $f=qty("1.0e3", "Hz")$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir l'équation de dispersion puis l'épaisseur dont on effectuera l'application numérique pour l'air à #qty("20", "Celsius"). On donne la viscosité de l'air $eta = qty("1.85e-5", "Pl")$
 ][
     En complexe l'équation d'onde donne
     $

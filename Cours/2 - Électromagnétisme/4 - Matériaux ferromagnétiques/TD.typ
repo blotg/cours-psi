@@ -5,6 +5,6 @@
 
 #include "exercices/Pince ampère-métrique.typ";
 #include "exercices/Permanent magnet.typ";
-#include "exercices/disque dur.typ";
-#include "exercices/boussole.typ"
+#include "exercices/Disque dur.typ";
+#include "exercices/Boussole.typ"
 // TODO: ajouter un exercice numérique : mesure de cycle d'hystérésis

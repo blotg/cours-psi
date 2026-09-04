@@ -100,7 +100,7 @@ Une forte ressemblance entre les 2 équations précédentes peut être remarqué
 
 #flashcard(
     recto: "À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine fréquentiel (ou de Fourier) ?",
-    verso: "$1/(i omega)$, $i omega$ et $(i omega)^2$ respectivement",
+    verso: "$1/(j omega)$, $j omega$ et $(j omega)^2$ respectivement",
 )
 #flashcard(
     recto: "À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine de Laplace ?",

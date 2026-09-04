@@ -42,7 +42,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
   Exprimer le vecteur densité volumique de courant $va(j)$.
 ][
   $va(j)$ est uniforme et dirigé selon $va(e_z)$. Le courant total est le flux de $va(j)$ à travers une section :
-  $ I = integral.double va(j) dot va(dif S) = j pi a^2 quad => quad va(j) = I/(pi a^2) va(e_z) $
+  $ I = integral.double va(j) dot va(dd(S)) = j pi a^2 quad => quad va(j) = I/(pi a^2) va(e_z) $
 ]
 
 #question(coups-de-pouce: (
@@ -57,7 +57,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
 
   #strong[Contour d'Ampère.] On choisit le cercle $cal(C)$ de rayon $r = a$, d'axe $(O z)$, orienté selon $va(e_theta)$.
 
-  #strong[Théorème d'Ampère.] $ integral.cont_(cal(C)) va(B) dot va(dif l) = 2 pi a B(a) = mu_0 I_"enlacé" = mu_0 I $
+  #strong[Théorème d'Ampère.] $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = 2 pi a B(a) = mu_0 I_"enlacé" = mu_0 I $
   d'où, au bord du conduit,
   $ va(B)(a) = (mu_0 I)/(2 pi a) va(e_theta) $
 

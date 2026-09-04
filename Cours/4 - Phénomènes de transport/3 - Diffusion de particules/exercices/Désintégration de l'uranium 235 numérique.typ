@@ -23,7 +23,7 @@ On prend pour condition aux limites $forall t, (t,r=R)=0$
         "Combien de neutrons sont captés durant $dd(t)$ dans le volume considéré ? Combien sont émis ?",
     ),
 )[
-    En faisant un bilan de neutron sur une volume mésoscopique, démontrer l'équation aux dérivées partielles vérifiée par $n$ :
+    En faisant un bilan de neutron sur un volume mésoscopique, démontrer l'équation aux dérivées partielles vérifiée par $n$ :
     $
         pdv(n, t) = D/r^2 pdv(, r) (r^2 pdv(n, r)) + (nu-1)/tau n
     $

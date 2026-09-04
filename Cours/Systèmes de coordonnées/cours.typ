@@ -44,7 +44,7 @@ L'élément de volume a pour volume $dd(V)=dd(x) dot dd(y) dot dd(z)$.
 )
 
 #figure[
-    #include("schemas/cartésiennes_element_volume.typ")
+    #include "schemas/cartésiennes_element_volume.typ"
 ]
 
 #application[
@@ -108,8 +108,8 @@ Les vecteurs de base dépendent du point considéré. La base est donc appelée 
 )
 
 #figure[
-    // #include("schemas/cylindriques_coordonnées.typ")
-    #include("schemas/cylindriques_vecteurs.typ")
+    // #include "schemas/cylindriques_coordonnées.typ"
+    #include "schemas/cylindriques_vecteurs.typ"
 ]
 
 #application[
@@ -135,7 +135,7 @@ L'élément de volume a pour volume $dd(V)=dd(r) dot r dot dd(theta) dot dd(z)$.
 )
 
 #figure[
-    #include("schemas/cylindriques_element_volume.typ")
+    #include "schemas/cylindriques_element_volume.typ"
 ]
 
 #application[
@@ -197,7 +197,7 @@ Lorsque le problème étudié est invariant par rotation selon $theta$, il peut 
 Une coquille cylindrique est un volume infinitésimal contenu entre deux cylindres concentriques de rayons $r$ et $r+dd(r)$.
 
 #figure[
-    #include("schemas/cylindriques_coquille.typ")
+    #include "schemas/cylindriques_coquille.typ"
 ]
 
 L'aire intérieure de la coquille est $2 pi r h$, son aire extérieure est $2 pi (r+dd(r)) h$ et son volume est $ dd(V)= pi (r+dd(r))^2 h - pi r^2 h = pi h (r^2+2r dd(r) + dd(r)^2 - r^2) approx 2 pi r h dd(r) $
@@ -256,7 +256,7 @@ Le vecteur $va(O M)$ s'exprime comme $va(O M)=r va(e_r)$.
 L'élément de volume a pour volume $dd(V)=r^2 sin(theta) dot dd(r) dot dd(theta) dot dd(phi)$.
 
 #figure[
-    #include("schemas/sphériques_element_volume.typ")
+    #include "schemas/sphériques_element_volume.typ"
 ]
 
 #flashcard(
@@ -318,7 +318,7 @@ Lorsque le problème étudié est invariant par rotation selon $theta$ et $phi$,
 Une coquille sphérique est un volume infinitésimale contenu entre deux sphères concentriques de rayons $r$ et $r+dd(r)$.
 
 #figure[
-    #include("schemas/sphériques_coquille.typ")
+    #include "schemas/sphériques_coquille.typ"
 ]
 
 L'aire intérieure de la coquille est $4 pi r^2$, son aire extérieure est $4 pi (r+dd(r))^2$ et son volume est $ dd(V)= 4/3 pi (r+dd(r))^3 - 4/3 pi r^3 = 4/3 pi (r^3 + 3r^2 dd(r) + 3r dd(r)^3 + dd(r)^3-r^3) approx 4 pi ^2 dd(r) $

@@ -81,7 +81,7 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
 )[
     En déduire la différence de potentiel existant entre les faces $x=-a/2$ et $x=a/2$. L'exprimer en fonction de $I$ et d'un paramètre qu'on notera $R_"Hall"$ et dont on donnera l'unité.
 ][
-    On souhaite passer d'une relation locale à une relation globale. Comme $I=integral.double va(j) dot va(dd(S))$, on intègre selon $x$ et $z$ pour faire apparaître $I$.
+    On souhaite passer d'une relation locale à une relation globale. Comme $I=integral.double va(j) dot va(dd(S))$, on intègre selon $x$ et $z$ pour faire apparaitre $I$.
     $
         integral_(z=-b/2)^(b/2) integral_(x=-a/2)^(a/2) E_x dd(x) dd(z) &= integral_(z=-b/2)^(b/2) integral_(x=-a/2)^(a/2) 1/(n e) j B dd(x) dd(z) \
         b integral_(-a/2)^(a/2) -pdv(V, x) dd(x) &= B/(n e) integral.double j dd(S) \

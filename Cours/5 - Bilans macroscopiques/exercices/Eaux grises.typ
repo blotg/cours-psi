@@ -195,6 +195,6 @@ Tp = solution.y[1]
     ```python
     Delta_t = 24 * 3600 # s
     E = Dp * c * (Tp[-1] - Tp[0]) * Delta_t # J
-    print(f"Energie économisée sur une journée : {E} J = {E / 1000 / 3600} kW h")
+    print(f"Énergie économisée sur une journée : {E} J = {E / 1000 / 3600} kW h")
     ```
 ]

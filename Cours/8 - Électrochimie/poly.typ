@@ -5,4 +5,5 @@
 
 #include "compétences.typ"; <compétences>
 #include "cours.typ"; <cours>
+// #include "méthodes.typ"; <méthodes>
 #include "TD.typ"; <TD>

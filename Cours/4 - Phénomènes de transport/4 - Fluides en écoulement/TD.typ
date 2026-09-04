@@ -2,11 +2,11 @@
 
 #show: TD.with(infos: yaml("infos.yml"))
 
-#include "exercices/troposphère.typ"
+#include "exercices/Troposphère.typ"
 #include "exercices/Lubrification.typ"
 #include "exercices/Conduite plate.typ"
 #include "exercices/Distribution d'eau potable.typ"
-#include "exercices/analogie hydraulique.typ"
+#include "exercices/Analogie hydraulique.typ"
 #include "exercices/Borne incendie.typ"
 #include "exercices/Chute d'une bille dans un fluide.typ"
 #include "exercices/Chute d'une bille dans un fluide peu visqueux.typ"

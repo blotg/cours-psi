@@ -40,21 +40,21 @@ Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur u
   #strong[Contour d'Ampère.] On choisit le cercle $cal(C)$ d'axe $(O z)$, de rayon $r$, passant par $M$ et orienté selon $va(e_theta)$.
 
   #strong[Théorème d'Ampère.]
-  $ integral.cont_(cal(C)) va(B) dot va(dif l) = 2 pi r B(r, z) = mu_0 I_"enlacé" $
+  $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = 2 pi r B(r, z) = mu_0 I_"enlacé" $
   Le contour enlace les $n$ spires, chacune parcourue par $I$ : $I_"enlacé" = n I$ à l'intérieur du tore (et $0$ à l'extérieur). Donc $B$ ne dépend pas de $z$ et
   $ va(B) = (mu_0 n I)/(2 pi r) va(e_theta) $
 ]
 
 #question(coups-de-pouce: (
   "Sur quelles variables intégrer, et entre quelles bornes ?",
-  "Un élément de surface orienté selon $va(e_theta)$ s'écrit $dif r dif z$.",
+  "Un élément de surface orienté selon $va(e_theta)$ s'écrit $dd(r) dd(z)$.",
 ))[
   Déterminer le flux $Phi$ du champ magnétique à travers la surface d'#emph[une] spire, dont la normale est orientée dans le sens du champ.
 ][
-  Une spire est un carré de côté $a$ situé dans un plan méridien, entre $r = R - a/2$ et $r = R + a/2$ et entre deux cotes distantes de $a$. Sa normale est $va(e_theta)$, donc $va(dif S) = dif r dif z va(e_theta)$ :
+  Une spire est un carré de côté $a$ situé dans un plan méridien, entre $r = R - a/2$ et $r = R + a/2$ et entre deux cotes distantes de $a$. Sa normale est $va(e_theta)$, donc $va(dd(S)) = dd(r) dd(z) va(e_theta)$ :
   $
-    Phi = integral.double va(B) dot va(dif S)
-    = integral_0^a dif z integral_(R - a/2)^(R + a/2) (mu_0 n I)/(2 pi r) dif r
+    Phi = integral.double va(B) dot va(dd(S))
+    = integral_0^a dd(z) integral_(R - a/2)^(R + a/2) (mu_0 n I)/(2 pi r) dd(r)
     = (mu_0 n I a)/(2 pi) ln((R + a/2)/(R - a/2))
   $
 ]

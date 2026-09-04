@@ -124,7 +124,7 @@ Un dipole ne recevant jamais de puissance est un interrupteur.
 
 Pour faire varier la tension aux bornes du résistor, on ouvre et on ferme périodiquement l'interrupteur.
 
-La puissance arrivant au résistor peut être modulée grace à la *modulation de la largeur d'impulsion* : l'interrupteur est fermé une plus ou moins grande partie du temps.
+La puissance arrivant au résistor peut être modulée grâce à la *modulation de la largeur d'impulsion* : l'interrupteur est fermé une plus ou moins grande partie du temps.
 
 #encadré(
     titre: "Rapport cyclique",

@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Corde vibrante conductrice", difficulté: 2)
 
-On étudie les petits mouvements transverses d'une corde métallique de longueur $L$, de masse linéique $mu$ et de tension $T$, fixée en $x = 0$ et $x = L$. Un point de la corde d'abscisse au repos $x$ se déplace de $z(x, t) va(e_z)$ au passage de l'onde ; la pesanteur est négligée. La corde est parcourue par un courant $i(t) = i_0 cos(omega t)$ et plongée dans un champ magnétique $va(B)(x) = B_0 sin((pi x)/L) va(e_y)$. On rappelle la force de Laplace sur un élément $va(dif l)$ : $va(dif f) = i va(dif l) and va(B)$.
+On étudie les petits mouvements transverses d'une corde métallique de longueur $L$, de masse linéique $mu$ et de tension $T$, fixée en $x = 0$ et $x = L$. Un point de la corde d'abscisse au repos $x$ se déplace de $z(x, t) va(e_z)$ au passage de l'onde ; la pesanteur est négligée. La corde est parcourue par un courant $i(t) = i_0 cos(omega t)$ et plongée dans un champ magnétique $va(B)(x) = B_0 sin((pi x)/L) va(e_y)$. On rappelle la force de Laplace sur un élément $va(dd(l))$ : $va(dd(f)) = i va(dd(l)) and va(B)$.
 
 #question(coups-de-pouce: (
   "Reprendre la démonstration de l'équation de d'Alembert de la corde, avec en plus la force de Laplace.",
@@ -11,13 +11,13 @@ On étudie les petits mouvements transverses d'une corde métallique de longueur
   $ pdv(z, t, 2) - c^2 pdv(z, x, 2) = (i_0 B_0)/mu cos(omega t) sin((pi x)/L) $
   où $c$ est une constante à exprimer.
 ][
-  On isole l'élément de corde compris entre $x$ et $x + dif x$, de masse $mu dif x$. Il subit :
-  - la résultante transverse des tensions, $T pdv(z, x, 2) dif x va(e_z)$ (petits angles) ;
-  - la force de Laplace : $va(dif l) approx dif x va(e_x)$, donc
-    $ va(dif f) = i(t) dif x va(e_x) and B_0 sin((pi x)/L) va(e_y) = i_0 cos(omega t) B_0 sin((pi x)/L) dif x thin va(e_z) $
+  On isole l'élément de corde compris entre $x$ et $x + dd(x)$, de masse $mu dd(x)$. Il subit :
+  - la résultante transverse des tensions, $T pdv(z, x, 2) dd(x) va(e_z)$ (petits angles) ;
+  - la force de Laplace : $va(dd(l)) approx dd(x) va(e_x)$, donc
+    $ va(dd(f)) = i(t) dd(x) va(e_x) and B_0 sin((pi x)/L) va(e_y) = i_0 cos(omega t) B_0 sin((pi x)/L) dd(x) thin va(e_z) $
 
   La relation fondamentale de la dynamique projetée sur $va(e_z)$ donne
-  $ mu dif x pdv(z, t, 2) = T pdv(z, x, 2) dif x + i_0 B_0 cos(omega t) sin((pi x)/L) dif x $
+  $ mu dd(x) pdv(z, t, 2) = T pdv(z, x, 2) dd(x) + i_0 B_0 cos(omega t) sin((pi x)/L) dd(x) $
   soit, en posant $c = sqrt(T/mu)$,
   $ pdv(z, t, 2) - c^2 pdv(z, x, 2) = (i_0 B_0)/mu cos(omega t) sin((pi x)/L) $
 ]

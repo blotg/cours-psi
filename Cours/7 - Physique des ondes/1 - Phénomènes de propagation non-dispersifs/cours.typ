@@ -39,11 +39,11 @@
     "v_phi": (signification: "la vitesse de phase", unité: unit("m/s")),
     "omega_n": (signification: "la $n$-ième pulsation propre", unité: unit("rad/s")),
     "L": (signification: "la distance entre les deux conditions aux limites strictes", unité: unit("m")),
-    "Z_c": (signification: "$= sqrt(Lambda \/ Gamma)$ l'impédance caractéristique du câble", unité: unit("ohm")),
+    "Z_c": (signification: "$= sqrt(Lambda \/ Gamma)$ l'impédance caractéristique du câble", unité: unit("O")),
     "Z_a": (signification: "$= rho_0 c$ l'impédance acoustique", unité: unit("Pa s/m")),
     "u_(i\,0)": (signification: "l'amplitude de l'onde de tension incidente", unité: unit("V")),
     "u_(r\,0)": (signification: "l'amplitude de l'onde de tension réfléchie", unité: unit("V")),
-    "R_t": (signification: "la résistance terminale", unité: unit("ohm")),
+    "R_t": (signification: "la résistance terminale", unité: unit("O")),
     "va(Pi)": (signification: "le vecteur de Poynting", unité: unit("W/m^2")),
     "I": (signification: "l'intensité acoustique", unité: unit("W/m^2")),
     "I_0": (signification: "l'intensité acoustique de référence ($10^(-12)$ W/m²)"),
@@ -374,7 +374,7 @@ La vitesse de phase est la vitesse à laquelle se propage un plan de phase const
 #question-de-colle("Établir la relation de dispersion. Définir la vitesse de phase en justifiant cette définition. Établir la vitesse de phase pour une OPH vérifiant l'équation de d'Alembert.")
 
 === Superposition d'OPH
-L'équation de d'Alembert étant linéaire, toute combinaison linéaire de solutions est solution. Toute onde périodique se décompose en série de Fourier d'OPH, toute onde en intégrale de Fourier d'OPH : connaître la propagation des OPH suffit à connaître celle de n'importe quelle onde.
+L'équation de d'Alembert étant linéaire, toute combinaison linéaire de solutions est solution. Toute onde périodique se décompose en série de Fourier d'OPH, toute onde en intégrale de Fourier d'OPH : connaitre la propagation des OPH suffit à connaitre celle de n'importe quelle onde.
 
 == Ondes stationnaires
 Une onde stationnaire ne se propage pas : la position des sommets et des creux ne varie pas dans le temps. Les points d'amplitude nulle sont les #strong[nœuds], ceux d'amplitude maximale les #strong[ventres].

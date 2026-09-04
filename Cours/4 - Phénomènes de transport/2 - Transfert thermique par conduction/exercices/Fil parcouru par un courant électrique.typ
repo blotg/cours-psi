@@ -60,7 +60,7 @@ On se placera en coordonnées cylindriques et on supposera le régime stationnai
 )[
     Établir l'équation de la diffusion thermique en prenant en compte la puissance produite par effet Joule.
 ][
-    En régime stationnaire, le le premier principe de la thermodynamique sur un cylindre creux de rayon intérieur $r$ et extérieur $r + dd(r)$ de longueur $L$ donne :
+    En régime stationnaire, le premier principe de la thermodynamique sur un cylindre creux de rayon intérieur $r$ et extérieur $r + dd(r)$ de longueur $L$ donne :
 
     $
         dd(U, 2) + cancel(dd(E_c, 2)) = cancel(delta^2 W) + delta^2 Q

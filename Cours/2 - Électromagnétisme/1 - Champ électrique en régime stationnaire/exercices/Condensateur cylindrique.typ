@@ -30,7 +30,7 @@ Un condensateur cylindrique est constitué de deux armatures coaxiales de hauteu
 ))[
   Établir l'expression de la différence de potentiel entre les deux armatures.
 ][
-  $ V(R_1) - V(R_2) = integral_(R_1)^(R_2) va(E) dot va(dif l) = integral_(R_1)^(R_2) Q/(2 pi epsilon_0 h r) dif r = Q/(2 pi epsilon_0 h) ln(R_2/R_1) $
+  $ V(R_1) - V(R_2) = integral_(R_1)^(R_2) va(E) dot va(dd(l)) = integral_(R_1)^(R_2) Q/(2 pi epsilon_0 h r) dd(r) = Q/(2 pi epsilon_0 h) ln(R_2/R_1) $
 ]
 
 #question[

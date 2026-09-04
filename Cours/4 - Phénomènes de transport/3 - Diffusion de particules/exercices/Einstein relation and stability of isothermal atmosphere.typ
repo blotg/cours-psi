@@ -58,7 +58,7 @@ where the axis $O_z$ is vertical and ascending, $z=0$ at see level and $k_B = R 
 )[
     By making an inventory of the particules on a slice of atmosphere in a stationary state, express a relation between $D$, $tau$, $k_B$, $T$ and $m$. This relation is known as Einstein relation.
 ][
-    We study a slice of atmosphere between $z$ and $z + dd(z)$ and of area $S$. In stationary state, the number of particules that enter this slice is equal to the number of particules that exit it :
+    We study a slice of atmosphere between $z$ and $z + dd(z)$ and of area $S$. In stationary state, the number of particles that enter this slice is equal to the number of particles that exit it :
     $
         0 = delta^2 Q = integral.double_S_z va(j_"diff") (z) dot va(dd(S_z)) dd(t) + integral.double_S_(z+dd(z)) va(j_"diff") (z+dd(z)) dot va(dd(S_(z+dd(z)))) dd(t) \ + integral.double_S_z va(j_"mig") (z) dot va(dd(S_z)) dd(t) + integral.double_S_(z+dd(z)) va(j_"diff") (z+dd(z)) dot va(dd(S_(z+dd(z)))) dd(t)\
         = S j_"diff" (z ) dd(t) - S j_"diff" (z + dd(z)) dd(t) + S j_"mig" (z ) dd(t) - S j_"mig" (z + dd(z)) dd(t)\

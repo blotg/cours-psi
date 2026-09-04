@@ -17,6 +17,7 @@
     "Z_e": (signification: "l'impédance d'entrée", unité: unit("O")),
     "U_e": (signification: "la tension d'entrée", unité: unit("V")),
     "I_e": (signification: "le courant d'entrée", unité: unit("A")),
+    "R_e": (signification: "la résistance d'entrée de l'ALI", unité: unit("O")),
 )
 
 = Présentation de l'amplificateur linéaire intégré (ALI)
@@ -38,8 +39,8 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
         "Alimentation symétrique +15V",
         "Breadboard \"Rétroaction\"",
         "3 adaptateurs BNC/banane",
-        "3 cables rouges",
-        "3 cables noirs",
+        "3 câbles rouges",
+        "3 câbles noirs",
         "Caméra pour projection",
     ),
 )[
@@ -78,16 +79,16 @@ La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible po
 )
 #flashcard(
     recto: "Ordre de grandeur du gain statique et du temps de réponse d'un ALI",
-    verso: "$A_0 tilde num(\"e5\")$, $tau tilde num(\"e-2\")$.",
+    verso: "$A_0 tilde num(\"e5\")$, $tau tilde qty(\"e-2\", \"s\")$.",
 )
 
-/ Résistance d'entrée: La résistance d'entrée est très élevée sur les deux entrées. Le courant d'entrée $i_e=e/R$ est donc très faible.
+/ Résistance d'entrée: La résistance d'entrée $R_e$ est très élevée sur les deux entrées. Le courant d'entrée $i_e=e/R_e$ est donc très faible.
 
 #application[
     Déterminer le courant d'entrée pour l'entrée maximale admissible.
 ]
 
-/ Résistance de sortie: La résistance de sortie est très faible. La tension de sortie est donc indépendant du courant de sortie.
+/ Résistance de sortie: La résistance de sortie est très faible. La tension de sortie est donc indépendante du courant de sortie.
 
 == Limitations du modèle de l'ALI
 Le modèle présenté dans la partie précédente a des limites.
@@ -105,7 +106,7 @@ Le modèle présenté dans la partie précédente a des limites.
 / Courant de sortie: Le courant de sortie est borné et peut donc saturer.
 
 #application[
-    Quelle résistance peut-on mettre en sortie de l'ALI utilisé en TP tout en restant sûr que le courant de sortie ne sature pas.
+    Quelle résistance peut-on mettre en sortie de l'ALI utilisé en TP tout en restant sûr que le courant de sortie ne sature pas ?
 ]
 
 #flashcard(
@@ -149,7 +150,7 @@ Dans le modèle de l'ALI idéal, deux régimes existent :
 ]
 
 #flashcard(
-    recto: "Fonctionnement de l'ALI idéal en régime sature",
+    recto: "Fonctionnement de l'ALI idéal en régime saturé",
     verso: "si $epsilon > 0$ alors $s(t)=V_\"sat\"$\\ si $epsilon < 0$ alors $s(t)=-V_\"sat\"$",
 )
 #flashcard(
@@ -231,7 +232,7 @@ La plupart des montages utilisant un ALI sont des systèmes bouclés comportant 
     hypothèses: (
         "circuit dans l'ARQS",
         "ALI en régime linéaire",
-        [$R_1$" et $R_2$ sont du même ordre de grandeur.],
+        [$R_1$ et $R_2$ sont du même ordre de grandeur.],
     ),
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("H(p)", "S(p)", "E(p)", "epsilon", "A_0", "tau", "R_1", "R_2")),
@@ -269,7 +270,7 @@ Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différe
     hypothèses: (
         "Le circuit est dans l'ARQS.",
         "L'ALI est en régime linéaire.",
-        [$R_1$" et $R_2$ sont du même ordre de grandeur.],
+        [$R_1$ et $R_2$ sont du même ordre de grandeur.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("Delta omega", "A_0", "tau", "H_0")),
 )[
@@ -283,7 +284,7 @@ Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différe
 ]
 
 #manipulation(titre: "Amplificateur non-inverseur")[
-    On réalise le montage de l'amplificateur non-inverseur et en place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope.
+    On réalise le montage de l'amplificateur non-inverseur et on place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope.
     #schéma(hauteur: 3cm)
 ]
 
@@ -350,7 +351,7 @@ Le comparateur à hystérésis est un montage instable. Sa sortie diverge, ou pl
     ),
     grandeurs: sub-dictionary(grandeurs, ("V_\"sat\"",)),
 )[
-    Le système est généralement instable et la sortie tend rapidement vers $plus.minus V_"sat"$
+    Le système est généralement instable et la sortie tend rapidement vers $plus.minus V_"sat"$.
 ]
 
 == Cycle d'hystérésis

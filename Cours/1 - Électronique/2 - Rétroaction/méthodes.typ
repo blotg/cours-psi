@@ -14,7 +14,7 @@
 = Résoudre une équation différentielle d’ordre 2 linéaire à coefficients constants
 + Résoudre l'équation homogène :
     - Déterminer le polynôme caractéristique.
-    - Déterminer le signe du discriminent.
+    - Déterminer le signe du discriminant.
         - Si $Delta > 0$ la solution est $K_1e^(r_1 t)+K_2e^(r_2 t)$ où $r_1$ et $r_2$ sont les racines du polynôme caractéristique.
         - Si $Delta=0$ la solution est $(K_1+K_2t)e^(r t)$ où $r$ est la racine du polynôme caractéristique.
         - Si $Delta<0$ la solution est $(K_1 cos(beta t)+K_2 sin(beta t))e^(alpha t)$ où $alpha$ et $beta$ sont respectivement la partie réelle et la partie imaginaire d'une des racines du polynôme caractéristique.

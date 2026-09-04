@@ -12,7 +12,7 @@ La masse volumique d'une planète de rayon $R = qty("6400", "km")$ varie avec la
 ][
   En surface : $mu(R) = mu_0 (1 - a)$.
 
-  Masse totale : $ m = integral_0^R mu(r) 4 pi r^2 dif r = 4 pi mu_0 (R^3/3 - a R^3/5) = 4 pi mu_0 R^3 (1/3 - a/5) $
+  Masse totale : $ m = integral_0^R mu(r) 4 pi r^2 dd(r) = 4 pi mu_0 (R^3/3 - a R^3/5) = 4 pi mu_0 R^3 (1/3 - a/5) $
   d'où $ mu_"moy" = m/((4\/3) pi R^3) = mu_0 (1 - 3a/5) $
 
   Le rapport des deux relations élimine $mu_0$ :
@@ -30,7 +30,7 @@ La masse volumique d'une planète de rayon $R = qty("6400", "km")$ varie avec la
   #strong[Pour $r >= R$ :] $M_"int" = m = mu_"moy" (4/3) pi R^3$, d'où
   $ va(g) = - (cal(G) m)/r^2 va(e_r) = - (4 pi cal(G) mu_"moy" R^3)/(3 r^2) va(e_r) $
 
-  #strong[Pour $r <= R$ :] $ M_"int"(r) = integral_0^r mu_0 (1 - a s^2/R^2) 4 pi s^2 dif s = 4 pi mu_0 (r^3/3 - (a r^5)/(5 R^2)) $
+  #strong[Pour $r <= R$ :] $ M_"int"(r) = integral_0^r mu_0 (1 - a s^2/R^2) 4 pi s^2 dd(s) = 4 pi mu_0 (r^3/3 - (a r^5)/(5 R^2)) $
   d'où
   $ va(g) = - 4 pi cal(G) mu_0 (r/3 - (a r^3)/(5 R^2)) va(e_r) $
 ]

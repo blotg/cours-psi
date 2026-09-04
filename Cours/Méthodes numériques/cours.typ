@@ -44,7 +44,7 @@ Les équations différentielle d'ordre supérieur peuvent être mises sous la fo
             y-label:$y$,
             x-ticks: ((0, $t_i$), (1, $t_(i+1)$)), {
                 add(t => 1-calc.exp(-t), domain: (-0.5, 1.5))
-                add(t => t , domain: (0, 1))
+                add(t => t, domain: (0, 1))
                 add-vline(0, max: 0, style:(stroke:(dash: "dashed")))
                 add-vline(1, max: 1-calc.exp(-1), style: (stroke:(dash: "dashed")))
             add-anchor("yi", (0,0))

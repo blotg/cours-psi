@@ -8,5 +8,5 @@
 #include "exercices/Paratonnerre.typ"
 #include "exercices/Magnéto-résistance.typ"
 #include "exercices/Résistance carbone.typ"
-#include "exercices/bruit thermique.typ"
-#include "exercices/tableau cables.typ"
+#include "exercices/Bruit thermique.typ"
+#include "exercices/Tableau cables.typ"

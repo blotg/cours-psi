@@ -42,7 +42,7 @@
 )
 
 = Les oscillateurs
-Un oscillateur est un montage électronique délivrant un signal périodique.La fréquence peut généralement être réglée via le choix des composants.
+Un oscillateur est un montage électronique délivrant un signal périodique. La fréquence peut généralement être réglée via le choix des composants.
 
 Deux grandes familles d'oscillateurs existent :
 - les oscillateurs quasi-sinusoïdaux produisent des signaux proches de sinusoïdes
@@ -121,12 +121,12 @@ Le schéma-bloc met en évidence le caractère bouclé de l'oscillateur de Wien.
 
 == Condition d'oscillation et fréquence des oscillations
 
-La boucle présente sur le schéma-bloc contraint le signaux pouvant exister dans leur l'oscillateur. De plus, certaines conditions doivent être vérifiées pour que des oscillations sinusoïdales puissent exister.
+La boucle présente sur le schéma-bloc contraint les signaux pouvant exister dans l'oscillateur. De plus, certaines conditions doivent être vérifiées pour que des oscillations sinusoïdales puissent exister.
 
 Comme le système est bouclé, on doit retrouver le signal de départ après un tour de boucle complet. Mathématiquement, cela se traduit par le fait que le produit des fonctions de transfert doit être égal à $1$. Cette condition est appelée critère de Barkhausen.
 
 #encadré(
-    titre: "Condition d'oscillation et pulsation des oscillations sinusoïdales",
+    titre: "Condition d'existence d'oscillations sinusoïdales",
     grandeurs: sub-dictionary(grandeurs, ("R_1, R_2",)),
     savoir-faire: true,
     hypothèses: (
@@ -160,7 +160,7 @@ De manière générale, un oscillateur quasi-sinusoïdal composé d'un filtre pa
 
 == Démarrage des oscillations
 
-Si le système est stable et que les tensions sont initialement nulles, rien ne se passe. Pour que des oscillations démarrent spontanément, le système bouclé doit être instable#footnote[C'est le système bouclé qui doit être instable. Chacun des deux systèmes qui le composent sont stables.].
+Si le système est stable et que les tensions sont initialement nulles, rien ne se passe. Pour que des oscillations démarrent spontanément, le système bouclé doit être instable#footnote[C'est le système bouclé qui doit être instable. Chacun des deux systèmes qui le composent est stable.].
 
 #encadré(
     titre: "Condition de démarrage des oscillations",
@@ -338,7 +338,7 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
 ]
 
 #manipulation(titre: "Forme des signaux de sortie")[
-    On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=qty("22","kO")$
+    On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=qty("22","kO")$.
     #figure(
         zap.circuit({
             import zap: *
@@ -396,7 +396,7 @@ Cette expression est valable tant que la période est très grande devant la dur
 
 == Choix de $R_1$ et $R_2$
 
-La tension $v(t)$ étant la sortie de l'ALI, $v in [-V_"sat",V_"sat"]$. Si cette tension est inférieure à la tension de seuil du comparateur à hystérésis, celui-ci ne commutera jamais et l'oscillateur n'oscillera pas.
+La tension $v(t)$ étant la sortie de l'ALI de l'intégrateur, $v in [-V_"sat",V_"sat"]$. Si cette tension est inférieure à la tension de seuil du comparateur à hystérésis, celui-ci ne commutera jamais et l'oscillateur n'oscillera pas.
 
 #application[
     À quelle condition sur $R_1$ et $R_2$ peut-on observer des oscillations ?

@@ -178,7 +178,7 @@ On retrouve un couple nul lorsque le moment magnétique est aligné avec le cham
     "Établir l'expression du moment magnétique atomique quantifié dans le modèle de Bohr en introduisant le magnéton de Bohr.",
 )
 
-= Equations de Maxwell dans un milieu magnétique
+= Équations de Maxwell dans un milieu magnétique
 == Aimantation
 
 Les particules qui constituent la matière peuvent porter un moment magnétique (moment magnétique orbital des électrons, spin des électrons et des noyaux).
@@ -467,7 +467,7 @@ Pertes par courant de Foucault et pertes par hystérésis sont appelées les *pe
 Des pertes par effet Joule se produisent également dans le bobinage, souvent réalisé en cuivre. Les pertes par effet Joule sont appelées pertes cuivre.
 
 == Circuit magnétique avec entrefer
-Un entrefer est une zone de l'espace vide#footnote[Vide de matériau ferromagnétique.] au sein du circuit magnétique. Un circuit magnétique avec entrefer est appelé un électroaimant car il permet de réaliser un champ magnétique dans une zone de l'espace grace à un courant électrique.
+Un entrefer est une zone de l'espace vide#footnote[Vide de matériau ferromagnétique.] au sein du circuit magnétique. Un circuit magnétique avec entrefer est appelé un électroaimant car il permet de réaliser un champ magnétique dans une zone de l'espace grâce à un courant électrique.
 
 #schéma(titre: "Circuit magnétique avec entrefer")[#box(height: 4cm)]
 

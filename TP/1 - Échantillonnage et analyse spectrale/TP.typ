@@ -10,7 +10,7 @@
 
 #matériel(
     groupe: ("GBF", "Carte d'acquisition campus"),
-    classe: ("Moteur avec roue rouge marquée d'un trait noir", "Alimentation stabilisée", "Stroboscope à lampe Xeon"),
+    classe: ("Moteur avec roue rouge marquée d'un trait noir", "Alimentation stabilisée", "Stroboscope à lampe Xénon"),
 )
 
 = Introduction
@@ -26,8 +26,8 @@ On peut représenter l’ensemble de la chaine d’acquisition ainsi :
 
 #évaluation(
     barème: (
-        ([Signification des réglage Latis], 2),
-        ([Comment choisir les réglage Latis], 2),
+        ([Signification des réglages Latis], 2),
+        ([Comment choisir les réglages Latis], 2),
         ([Tracé spectre Latis], 2),
         ([Tracé spectre Python], 2),
         ([Fiche qui donne envie d'être lue], 2),
@@ -42,9 +42,9 @@ On peut représenter l’ensemble de la chaine d’acquisition ainsi :
 = Première approche du critère de Shannon
 L’échantillonnage est l’opération qui consiste à mesurer un signal en capturant des valeurs à intervalles réguliers.
 
-L’intervalle de mesure s’appelle la période d’échantillonnage, notée $T_e$ . Se pose alors la question de savoir si les échantillons sont représentatifs du signal initial.
+L’intervalle de mesure s’appelle la période d’échantillonnage, notée $T_e$. Se pose alors la question de savoir si les échantillons sont représentatifs du signal initial.
 
-Parfois, dans les vidéos montrant des objets tournant (roues de voiture, pales d'hélicoptère, ...), ceux-ci ne semblent pas tourner pas à la "bonne" vitesse, voire dans le mauvais sens. Cela est du à une inadéquation entre la fréquence de rafraichissement des images (24 images par seconde en général), la vitesse de rotation
+Parfois, dans les vidéos montrant des objets tournant (roues de voiture, pales d'hélicoptère, ...), ceux-ci ne semblent pas tourner à la "bonne" vitesse, voire dans le mauvais sens. Cela est dû à une inadéquation entre la fréquence de rafraichissement des images (24 images par seconde en général), la vitesse de rotation
 et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C6f0tTdba8Y?feature=shared&t=107")
 
 #manipulation(titre: "Roue éclairée par un stroboscope")[
@@ -121,7 +121,7 @@ Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisitio
 #manipulation(titre: "Acquisition correcte")[
     Réaliser une acquisition d'un signal sinusoïdal de fréquence #qty("10", "kHz") produit par un GBF en respectant *largement* le critère de Shannon.
 
-    En tracer le spectre et vérifié que la fréquence observée est bien la fréquence réelle.
+    En tracer le spectre et vérifier que la fréquence observée est bien la fréquence réelle.
 
     Conserver cette acquisition qui resservira par la suite.
 ]
@@ -129,7 +129,7 @@ Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisitio
 #manipulation(titre: "Acquisition incorrecte")[
     Réaliser une acquisition d'un signal sinusoïdal de fréquence #qty("10", "kHz") produit par un GBF en ne respectant pas le critère de Shannon.
 
-    En tracer le spectre et vérifié que la fréquence observée est bien différente de la fréquence réelle.
+    En tracer le spectre et vérifier que la fréquence observée est bien différente de la fréquence réelle.
 ]
 
 Lorsque la fréquence d'échantillonnage n'est pas suffisante, la fréquence mesurée sur le spectre n'est pas la fréquence réelle du signal. On dit qu'il y a *repliement du spectre*.
@@ -148,7 +148,7 @@ On a donc 2 "degrés de liberté" sur l'acquisition. Lorsqu'on change un des tro
 
 
 == Durée d'acquisition et résolution spectrale
-La résolution spectrale (écart de fréquence entre 2 points successifs sur le spectre) est liée à ma durée de l'acquisition.
+La résolution spectrale (écart de fréquence entre 2 points successifs sur le spectre) est liée à la durée de l'acquisition.
 
 #encadré(
     titre: "Résolution spectrale",
@@ -163,7 +163,7 @@ La résolution spectrale (écart de fréquence entre 2 points successifs sur le 
     $
 ]
 
-*Si on veut plus de détails sur le spectre, il faut *acquérir plus longtemps
+*Si on veut plus de détails sur le spectre, il faut acquérir plus longtemps*.
 
 #manipulation(titre: "Lien entre durée d'acquisition et résolution spectrale")[
     Vérifier cette relation sur l'acquisition réalisée précédemment.
@@ -207,7 +207,7 @@ On pourra utiliser les fonctions #link("https://numpy.org/doc/stable/reference/g
 
 = Tracé de spectre avec LATIS-Pro<annexe-spectre-latis-pro>
 
-Pour tracer le spectre avec LATIS-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, LATIS-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne rest alors plus qu'à faire glisser la courbe dont ou souhaite tracer le spectre dans le cadre "Courbe".
+Pour tracer le spectre avec LATIS-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, LATIS-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
 
 #figure(
     grid(

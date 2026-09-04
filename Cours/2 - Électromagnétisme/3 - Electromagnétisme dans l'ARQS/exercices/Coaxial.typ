@@ -75,8 +75,8 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
 ))[
   Déterminer le flux de $va(B)(M)$ à travers une surface rectangulaire $P Q R S$ correspondant à une longueur $l$ du câble, orientée dans le sens de $+va(e_theta)$.
 ][
-  On choisit comme surface élémentaire $dif S = dif r dif z va(e_theta)$. Le flux s'écrit donc :
-  $ Phi = integral.double_S va(B).va(dif S) = integral_(z=0)^(l) integral_(r=a)^(b) (mu_0 I)/(2 pi r) dif r dif z = (mu_0 I l)/(2 pi) ln(b/a) $
+  On choisit comme surface élémentaire $dd(S) = dd(r) dd(z) va(e_theta)$. Le flux s'écrit donc :
+  $ Phi = integral.double_S va(B).va(dd(S)) = integral_(z=0)^(l) integral_(r=a)^(b) (mu_0 I)/(2 pi r) dd(r) dd(z) = (mu_0 I l)/(2 pi) ln(b/a) $
 ])
 
 #question(coups-de-pouce: (

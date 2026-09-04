@@ -138,5 +138,5 @@
 ][
     Les dénominateurs de fonctions de transfert ne comportent que des coefficients positifs, donc les deux circuits sont stables.
 
-    * Remarque : * les circuits passifs sont toujours stables.
+    *Remarque :* les circuits passifs sont toujours stables.
 ]

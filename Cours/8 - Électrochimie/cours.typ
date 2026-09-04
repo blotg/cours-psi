@@ -114,12 +114,12 @@ Une courbe intensité-potentiel représente le courant arrivant à une électrod
 Une courbe mesurée est la somme des courants de toutes les réactions en cours : on ne peut pas savoir expérimentalement à quelle réaction participent les électrons.
 
 === Système rapide et système lent
-Pour certains couples et certaines électrodes, un courant mesurable n'apparaît qu'au-delà d'un écart au potentiel d'équilibre appelé #strong[surpotentiel] (ou surtension) : le système est alors #strong[lent]. Sa valeur dépend du seuil arbitraire de « courant mesurable ».
+Pour certains couples et certaines électrodes, un courant mesurable n'apparait qu'au-delà d'un écart au potentiel d'équilibre appelé #strong[surpotentiel] (ou surtension) : le système est alors #strong[lent]. Sa valeur dépend du seuil arbitraire de « courant mesurable ».
 
 #schéma(titre: "Système rapide et système lent", hauteur: 4cm)
 
 === Paliers de diffusion
-Les solutés sont transportés par diffusion (dans la couche limite), convection (au-delà) et migration (ions, en général négligeable). Lorsque le courant augmente, les réactifs peuvent manquer au voisinage de l'électrode : le courant est alors limité et un #strong[palier de diffusion] apparaît.
+Les solutés sont transportés par diffusion (dans la couche limite), convection (au-delà) et migration (ions, en général négligeable). Lorsque le courant augmente, les réactifs peuvent manquer au voisinage de l'électrode : le courant est alors limité et un #strong[palier de diffusion] apparait.
 
 #schéma(titre: "Palier de diffusion", hauteur: 4cm)
 
@@ -131,7 +131,7 @@ Les solutés sont transportés par diffusion (dans la couche limite), convection
     $ i_"max" = (n cal(F) S D c)/delta $
 ]
 
-#question-de-colle("Expliquer ce qu'est un palier de diffusion et dans quels cas il apparaît. Exprimer la hauteur d'un palier de diffusion en fonction de la concentration et de l'épaisseur de la couche limite.")
+#question-de-colle("Expliquer ce qu'est un palier de diffusion et dans quels cas il apparait. Exprimer la hauteur d'un palier de diffusion en fonction de la concentration et de l'épaisseur de la couche limite.")
 
 Lorsque le réactif ne peut pas manquer (solvant, ou électrode elle-même), il n'y a pas de palier de diffusion.
 
@@ -163,7 +163,7 @@ Un #strong[électrolyseur] convertit de l'énergie électrique en énergie chimi
 On construit la caractéristique d'une pile ou d'un électrolyseur à partir des courbes intensité-potentiel de ses deux électrodes.
 
 #application[
-    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $\{0 ; 0,2 ; qty("0.4", "A")\}$, en faisant apparaître la saturation en courant.
+    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $\{0 ; 0,2 ; qty("0.4", "A")\}$, en faisant apparaitre la saturation en courant.
     #figure(image("images/courbes_i-E_Daniell.png", width: 85%))
 ]
 
@@ -228,7 +228,7 @@ La cinétique se déduit des courbes intensité-potentiel. Oxydation et réducti
 #schéma(titre: "Potentiel de corrosion", hauteur: 5cm)
 
 == Corrosion différentielle
-Elle apparaît quand deux métaux différents sont en contact, ou quand le milieu est inhomogène : c'est une #strong[pile de corrosion]. Oxydation et réduction ont alors lieu à des endroits différents.
+Elle apparait quand deux métaux différents sont en contact, ou quand le milieu est inhomogène : c'est une #strong[pile de corrosion]. Oxydation et réduction ont alors lieu à des endroits différents.
 
 #figure(image("images/i-E Fe Zn.svg", height: 6cm), caption: [Corrosion du zinc en présence de fer.])
 

@@ -2,12 +2,12 @@
 
 #show: TD.with(infos: yaml("infos.yml"))
 
-#include "exercices/suiveur.typ"
+#include "exercices/Suiveur.typ"
 #include "exercices/Explique présence amplificateurs.typ"
 #include "exercices/Amplificateur inverseur.typ"
 #include "exercices/Inventer ampli x2.typ"
 #include "exercices/Montage intégrateur.typ"
-#include "exercices/comparateur simple.typ"
+#include "exercices/Comparateur simple.typ"
 #include "exercices/Dérivateur.typ"
 #include "exercices/Vitesse de balayage et sinus.typ"
 #include "exercices/Simulateur d'impédance.typ"

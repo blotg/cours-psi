@@ -118,7 +118,7 @@ On note $s_i = s(i times Delta)$ ; $v_i = v(i times Delta t)$ ; $s_(p,i) = s_p (
 
     v[0] = 0.1 # petite perturbation initiale
 
-    for i in range(1,N):# Calcul de s et v au cours du temps grace à la méthode d'Euler
+    for i in range(1,N):# Calcul de s et v au cours du temps grâce à la méthode d'Euler
         s[i] = (1+R2/R1)*v[i-1]
         sp[i] = ...
         vp[i] = ...
@@ -148,7 +148,7 @@ On note $s_i = s(i times Delta)$ ; $v_i = v(i times Delta t)$ ; $s_(p,i) = s_p (
 
     v[0] = 0.1 # petite perturbation initiale
 
-    for i in range(1,N):# Calcul de s et v au cours du temps grace à la méthode d'Euler
+    for i in range(1,N):# Calcul de s et v au cours du temps grâce à la méthode d'Euler
         s[i] = (1+R2/R1)*v[i-1]
         sp[i] = (s[i] - s[i-1])/dt
         vp[i] = vp[i-1] + dt*(-3/(R*C)*vp[i-1] - 1/(R*C)**2*v[i-1] + 1/(R*C)*sp[i])

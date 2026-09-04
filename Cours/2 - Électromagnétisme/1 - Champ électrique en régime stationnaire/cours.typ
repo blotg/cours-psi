@@ -47,7 +47,7 @@ $rho(M, t)$ désigne la densité volumique de charge au point $M$ et à l'instan
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("Q", "rho")),
 )[
-    $ Q = integral.triple rho dif V $
+    $ Q = integral.triple rho dd(V) $
 ]
 
 === Distribution surfacique
@@ -58,7 +58,7 @@ $sigma(M, t)$ désigne la densité surfacique de charge au point $M$ et à l'ins
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("Q", "sigma")),
 )[
-    $ Q = integral.double sigma dif S $
+    $ Q = integral.double sigma dd(S) $
 ]
 
 === Distribution linéique
@@ -69,7 +69,7 @@ $lambda(M, t)$ désigne la densité linéique de charge au point $M$ et à l'ins
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("Q", "lambda")),
 )[
-    $ Q = integral lambda dif l $
+    $ Q = integral lambda dd(l) $
 ]
 
 === Distribution ponctuelle
@@ -153,10 +153,10 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
     hypothèses: "En régime stationnaire.",
     grandeurs: sub-dictionary(grandeurs, ("va(E)", "V_A", "V_B")),
 )[
-    $ integral_A^B va(E) dot va(dif l) = V_A - V_B $
+    $ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $
 ]
 
-#flashcard(recto: "Circulation du champ électrique", verso: "$ integral_A^B va(E) dot va(dif l) = V_A - V_B $ (en régime stationnaire)")
+#flashcard(recto: "Circulation du champ électrique", verso: "$ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $ (en régime stationnaire)")
 
 #question-de-colle("Énoncer l'équation de Maxwell-Faraday, en déduire qu'en régime stationnaire $va(E) = - grad V$, puis exprimer la circulation du champ électrique.")
 
@@ -343,10 +343,10 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
     hypothèses: "En régime stationnaire.",
     grandeurs: sub-dictionary(grandeurs, ("S", "va(E)", "Q_text(\"int\")", "epsilon_0")),
 )[
-    $ integral.surf_S va(E) dot va(dif S) = Q_"int"/epsilon_0 $
+    $ integral.surf_S va(E) dot va(dd(S)) = Q_"int"/epsilon_0 $
 ]
 
-#flashcard(recto: "Théorème de Gauss", verso: "$ integral.surf_S va(E) dot va(dif S) = Q_\"int\"/epsilon_0 $")
+#flashcard(recto: "Théorème de Gauss", verso: "$ integral.surf_S va(E) dot va(dd(S)) = Q_\"int\"/epsilon_0 $")
 
 #question-de-colle("Énoncer l'équation de Maxwell-Gauss et démontrer le théorème de Gauss.")
 
@@ -396,10 +396,10 @@ Champ électrique et champ gravitationnel sont analogues.
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("S", "va(g)", "M_text(\"int\")", "cal(G)")),
 )[
-    $ integral.surf_S va(g) dot va(dif S) = - 4 pi cal(G) M_"int" $
+    $ integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_"int" $
 ]
 
-#flashcard(recto: "Théorème de Gauss gravitationnel", verso: "$ integral.surf_S va(g) dot va(dif S) = - 4 pi cal(G) M_\"int\" $")
+#flashcard(recto: "Théorème de Gauss gravitationnel", verso: "$ integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_\"int\" $")
 
 #question-de-colle("Dresser les analogies entre les champs électrique et gravitationnel. Énoncer le théorème de Gauss gravitationnel.")
 

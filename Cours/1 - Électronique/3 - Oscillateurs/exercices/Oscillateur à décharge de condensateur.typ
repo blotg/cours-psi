@@ -155,7 +155,7 @@ On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$
                         return -1 + 1.3 * calc.exp(-(t - th))
                     }
                     let f-vmoins3(t) = {
-                        return return 1 - 1.3 * calc.exp(-(t - 2 * th))
+                        return 1 - 1.3 * calc.exp(-(t - 2 * th))
                     }
                     let f-vs(t) = {
                         let tt = calc.rem(t, 2 * th)

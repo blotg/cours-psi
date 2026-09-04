@@ -13,9 +13,9 @@
     "va(F)": (signification: "la partie magnétique de la force de Lorentz", unité: unit("N")),
     "q": (signification: "la charge de la particule", unité: unit("C")),
     "va(v)": (signification: "la vitesse de la particule chargée", unité: unit("m/s")),
-    "va(dif l)": (signification: "l'élément de longueur orienté dans le sens du courant", unité: unit("m")),
-    "dif V": (signification: "l'élément de volume", unité: unit("m^3")),
-    "va(dif F)": (signification: "la force magnétique subie par l'élément de conducteur", unité: unit("N")),
+    "va(dd(l))": (signification: "l'élément de longueur orienté dans le sens du courant", unité: unit("m")),
+    "dd(V)": (signification: "l'élément de volume", unité: unit("m^3")),
+    "va(dd(F))": (signification: "la force magnétique subie par l'élément de conducteur", unité: unit("N")),
     "cal(C)": (signification: "une courbe fermée orientée"),
     "I_text(\"enlacé\")": (signification: "le courant enlacé par $cal(C)$, compté positivement dans le sens direct", unité: unit("A")),
 )
@@ -31,7 +31,7 @@ $va(j)(M, t)$ désigne le vecteur densité volumique de courant électrique au p
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("I", "va(j)")),
 )[
-    $ I = integral.double va(j) dot va(dif S) $
+    $ I = integral.double va(j) dot va(dd(S)) $
 ]
 
 == Distribution surfacique
@@ -120,12 +120,12 @@ Un fil infiniment fin est parcouru par un courant électrique.
     titre: "Force de Laplace",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: sub-dictionary(grandeurs, ("va(dif F)", "I", "va(dif l)", "va(B)")),
+    grandeurs: sub-dictionary(grandeurs, ("va(dd(F))", "I", "va(dd(l))", "va(B)")),
 )[
-    $ va(dif F) = I va(dif l) and va(B) $
+    $ va(dd(F)) = I va(dd(l)) and va(B) $
 ]
 
-#flashcard(recto: "Force de Laplace sur un élément de fil", verso: "$ va(dif F) = I va(dif l) and va(B) $")
+#flashcard(recto: "Force de Laplace sur un élément de fil", verso: "$ va(dd(F)) = I va(dd(l)) and va(B) $")
 
 #application[
     Dans les rails de Laplace, une barre traversée par un courant $qty("5", "A")$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $qty("10", "cm")$, en présence d'un champ magnétique vertical $qty("3e-2", "T")$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
@@ -138,12 +138,12 @@ Le déplacement des charges est décrit par le vecteur densité volumique de cou
     titre: "Force de Laplace volumique",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: sub-dictionary(grandeurs, ("va(dif F)", "va(j)", "dif V", "va(B)")),
+    grandeurs: sub-dictionary(grandeurs, ("va(dd(F))", "va(j)", "dd(V)", "va(B)")),
 )[
-    $ va(dif F) = (va(j) dif V) and va(B) $
+    $ va(dd(F)) = (va(j) dd(V)) and va(B) $
 ]
 
-#flashcard(recto: "Force de Laplace volumique", verso: "$ va(dif F) = (va(j) dif V) and va(B) $")
+#flashcard(recto: "Force de Laplace volumique", verso: "$ va(dd(F)) = (va(j) dd(V)) and va(B) $")
 
 #question-de-colle("Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.")
 
@@ -205,10 +205,10 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
     hypothèses: "En régime stationnaire.",
     grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(B)", "mu_0", "I_text(\"enlacé\")")),
 )[
-    $ integral.cont_(cal(C)) va(B) dot va(dif l) = mu_0 I_"enlacé" $
+    $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_"enlacé" $
 ]
 
-#flashcard(recto: "Théorème d'Ampère", verso: "$ integral.cont_(cal(C)) va(B) dot va(dif l) = mu_0 I_\"enlacé\" $")
+#flashcard(recto: "Théorème d'Ampère", verso: "$ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_\"enlacé\" $")
 
 #question-de-colle("Citer l'équation de Maxwell-Ampère puis établir le théorème d'Ampère.")
 

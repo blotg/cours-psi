@@ -4,4 +4,4 @@
 #show: TD.with(infos: infos)
 
 #include "exercices/Wien.typ"
-#include "exercices/chaleur.typ"
+#include "exercices/Chaleur.typ"

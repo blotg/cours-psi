@@ -4,7 +4,7 @@
     titre: "Resistance of a holed cylinder",
 )
 
-We study a ohmic conductor which shape is described below in steady state#footnote["Steady state" means "régime stationnaire".]. $gamma$ represents the conductivity of the material, and $V_1$ and $V_2<V_1$ the electrical potentials inside and outside the tube respectively. $I$ is the total current and $va(j)$ the current density vector.
+We study an ohmic conductor whose shape is described below in steady state#footnote["Steady state" means "régime stationnaire".]. $gamma$ represents the conductivity of the material, and $V_1$ and $V_2<V_1$ the electrical potentials inside and outside the tube respectively. $I$ is the total current and $va(j)$ the current density vector.
 
 The potential $V$ is supposed to depend only of $r$.
 

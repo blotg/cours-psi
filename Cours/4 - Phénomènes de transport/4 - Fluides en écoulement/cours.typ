@@ -97,7 +97,7 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 
 == Débit massique
 #encadré(
-    titre: "Masses volumique à connaître",
+    titre: "Masses volumiques à connaitre",
     connaitre: true,
     hypothèses: "Dans les conditions normales de température et de pression",
     grandeurs: sub-dictionary(grandeurs, ("mu",)),

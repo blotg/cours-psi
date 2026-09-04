@@ -50,12 +50,12 @@ Les équations de Maxwell sont compatibles avec l'équation locale de conservati
     savoir-faire: true,
     grandeurs: grandeurs,
 )[
-    $ div va(j)+ (partial rho)/(partial t)=0 $
+    $ div va(j)+ pdv(rho, t)=0 $
 ]
 
 #flashcard(
     recto: "Équation locale de conservation de la charge",
-    verso: "$ div va(j) + (partial rho)/(partial t)=0 $",
+    verso: "$ div va(j) + pdv(rho, t)=0 $",
 )
 #question-de-colle(
     "Énoncer les 4 équations de Maxwell et établir l'équation locale de conservation de la charge.",
@@ -63,18 +63,18 @@ Les équations de Maxwell sont compatibles avec l'équation locale de conservati
 
 == Courants de déplacement
 
-Le terme $epsilon_0 (partial va(E))/(partial t)$ se nomme courant de déplacement. Son unité est $unit("A/m^2")$.
+Le terme $epsilon_0 pdv(va(E), t)$ se nomme courant de déplacement. Son unité est $unit("A/m^2")$.
 
 L'ARQS#footnote[approximation des régimes quasi-stationnaire] magnétique consiste à négliger les courants de déplacement.
 
 #encadré(
-    titre: "Équation de Maxwell dans l'ARQS",
+    titre: "Équations de Maxwell dans l'ARQS",
     connaitre: true,
     hypothèses: ("Dans l'ARQS magnétique",),
     grandeurs: grandeurs,
 )[
     $ div va(E)=rho / epsilon_0 $
-    $ rot va(E)=-(partial va(B))/(partial t) $
+    $ rot va(E)=-pdv(va(B), t) $
     $ div va(B)=0 $
     $ rot va(B) = mu_0 va(j) $
 ]
@@ -82,7 +82,7 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaire] magnétique consi
 #flashcard(
     recto: "Équations de Maxwell dans l'ARQS",
     verso: "$ div va(E)=rho / epsilon_0 $
-        $ rot va(E)=-(partial va(B))/(partial t) $
+        $ rot va(E)=-pdv(va(B), t) $
         $ div va(B)=0 $
         $ rot va(B) = mu_0 va(j) $",
 )
@@ -110,7 +110,7 @@ Dans l'ARQS magnétique, les équation de Maxwell-Thomson et Maxwell-Ampère son
     savoir-faire: true,
     grandeurs: grandeurs,
     hypothèses: ("Dans l'ARQS magnétique",),
-    [ $ integral.cont_cal(C) va(B).va(dif l)=mu_0 I_text("enlacé") $],
+    [ $ integral.cont_cal(C) va(B).va(dd(l))=mu_0 I_text("enlacé") $],
 )
 
 == Principe de l'ARQS
@@ -129,13 +129,13 @@ Dans l'ARQS, le champ magnétique induit le champ électrique.
     savoir-faire: true,
     grandeurs: grandeurs,
     [
-        $ integral.cont_cal(C) va(E).va(dif l)=- (dif Phi)/(dif t) $
+        $ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $
     ],
 )
 
 #flashcard(
     recto: "Circulation du champ électrique dans l'ARQS",
-    verso: "$ integral.cont_cal(C) va(E).va(dif l)=- (dif Phi)/(dif t) $",
+    verso: "$ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $",
 )
 
 Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-Faraday.
@@ -145,13 +145,13 @@ Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-
     connaitre: true,
     grandeurs: grandeurs,
     [
-        $ e=- (dif Phi)/(dif t) $
+        $ e=- dv(Phi, t) $
     ],
 )
 
 #flashcard(
     recto: "Loi de Lenz-Faraday",
-    verso: "$ e=- (dif Phi)/(dif t) $",
+    verso: "$ e=- dv(Phi, t) $",
 )
 
 #application(
@@ -269,7 +269,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
     connaitre: true,
     grandeurs: grandeurs,
     [
-        $ u_L = L (dif i)/(dif t) $
+        $ u_L = L dv(i, t) $
     ],
 )
 
@@ -323,11 +323,11 @@ Lorsque deux bobines sont présentes simultanément, le champ magnétique créé
 
 #flashcard(
     recto: "Flux propre",
-    verso: "$ Phi_(1 arrow 1)= integral.double(S_1) va(B_1).va(dif S) = L_1 i_1 $",
+    verso: "$ Phi_(1 arrow 1)= integral.double(S_1) va(B_1).va(dd(S)) = L_1 i_1 $",
 )
 #flashcard(
     recto: "Flux mutuel",
-    verso: "$ Phi_(2 arrow 1)= integral.double(S_1) va(B_2).va(dif S) = M i_2 $",
+    verso: "$ Phi_(2 arrow 1)= integral.double(S_1) va(B_2).va(dd(S)) = M i_2 $",
 )
 
 L'inductance mutuelle $M$ dépend de la géométrie et de la position relative des deux bobines. Si les bobines sont infiniment éloignées, $M=0$.

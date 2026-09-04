@@ -11,7 +11,7 @@
 
 #question(
     coups-de-pouce: (
-        "Faire un schéma en faisant apparaître les forces en présence sur le voilier.",
+        "Faire un schéma en faisant apparaitre les forces en présence sur le voilier.",
     )
 )[
     Les voiliers sont capables de remonter au vent. Expliquer comment c'est possible.

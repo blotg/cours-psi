@@ -166,7 +166,7 @@ $
     $
         s_"AM" (t) = (1+k s(t)) s_p (t)
     $
-    Le facteur $(1+k s(t))$ est appelé la *modulante* (sans unité).
+    Le facteur $(1+k s(t))$ est appelé l'*enveloppe* (sans unité). Le signal $s(t)$ qui la fait varier est la *modulante*.
 ]
 
 #flashcard(
@@ -308,7 +308,7 @@ La *largeur de bande* est la plage de fréquence occupée par le signal modulé.
 
 La démodulation est l'opération inverse de la modulation. La démodulation permet de retrouver le signal à transmettre à partir du signal modulé.
 
-La démodulation ne peut pas être une opération linéaire, car il faut modifier le spectre pour retrouver celui du signal à transmettre.
+La démodulation ne peut pas être une opération linéaire : un filtre modifie l'amplitude de chaque composante spectrale, mais ne peut pas en *déplacer* la fréquence. Or il faut ramener le spectre situé autour de $f_p$ vers les basses fréquences. Seule une opération non linéaire, ici la multiplication, transpose le spectre.
 
 == Démodulation synchrone
 

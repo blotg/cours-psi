@@ -43,7 +43,7 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
 ][
     On place le point initial sur l'isotherme #qty("20", "Celsius") du diagramme (P,h) à la pression #qty("200", "bar"). On suit l'isenthalpe (verticale sur un diagramme $(P,h)$) vers le bas jusqu'à la pression de sortie (environ #qty("1", "bar")). On se trouve entre les isothermes #qty("0", "Celsius") et #qty("-20", "Celsius"), donc
     $
-        T_s in [#qty("0", "Celsius") , #qty("-20", "Celsius")]
+        T_s in [#qty("0", "Celsius"), #qty("-20", "Celsius")]
     $
 ]
 
