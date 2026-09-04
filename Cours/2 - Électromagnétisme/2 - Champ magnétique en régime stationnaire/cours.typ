@@ -42,7 +42,7 @@ $va(j_S)(M, t)$ désigne le vecteur densité surfacique de courant électrique a
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("I", "va(j_S)")),
 )[
-    $ I = integral va(j_S) dot va(dif l) $
+    $ I = integral va(j_S) dot va(n) dd(l) $
 ]
 
 == Distribution linéique

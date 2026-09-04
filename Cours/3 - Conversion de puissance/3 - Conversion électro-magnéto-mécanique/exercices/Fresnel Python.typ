@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Fonctionnement réversible d'un moteur électrique",
+    titre: "Calculs numériques sur un diagramme de Fresnel",
     numérique: true,
 )
 

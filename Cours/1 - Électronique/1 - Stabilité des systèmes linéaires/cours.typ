@@ -137,7 +137,7 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
         "Le système est linéaire."
     ),
 )[
-    Le numérateur de la fonction de transfert n'influence la stabilité du système.
+    Le numérateur de la fonction de transfert n'influence pas la stabilité du système.
 ]
 
 #encadré(

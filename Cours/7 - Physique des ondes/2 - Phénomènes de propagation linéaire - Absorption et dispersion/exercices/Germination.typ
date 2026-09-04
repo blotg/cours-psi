@@ -23,7 +23,7 @@ On a planté des bulbes de lys à une quinzaine de centimètres dans du terreau 
 
     À une profondeur de #qty("15", "cm"), l'onde de température journalière est atténuée d'un facteur $exp(-d/delta) = #num(scientifique(calc.exp(-d / d1j), 1))$. Les variations journalières de température ne se font donc quasiment pas sentir à cette profondeur.
 
-    On modélise la température en surface par $T(0,t) = -A cos(omega T) + T_0$ avec $A = (19-7)/2 = qty("6", "celsius")$, $T_0 = (19+7)/2 = qty("13", "celsius")$ et $omega = (2 pi)/ T_"année" = #qty(scientifique((2 * calc.pi) / (365 * 24 * 3600), 1), "rad/s")$. L'origine des temps est prise au 1er janvier.
+    On modélise la température en surface par $T(0,t) = - A cos(omega t) + T_0$ avec $A = (19-7)/2 = qty("6", "celsius")$, $T_0 = (19+7)/2 = qty("13", "celsius")$ et $omega = (2 pi)/ T_"année" = #qty(scientifique((2 * calc.pi) / (365 * 24 * 3600), 1), "rad/s")$. L'origine des temps est prise au 1er janvier.
 
     En complexes, cette température devient $underline(T)(0,t) = T_0 - A e^(i omega t)$.
 
@@ -31,7 +31,7 @@ On a planté des bulbes de lys à une quinzaine de centimètres dans du terreau 
 
     La température à la profondeur $d$ est donnée par
     $
-        underline(T)(d,t) = T_0 + - A e^(-k_i d) e^(i (omega t - k_r d))
+        underline(T)(d,t) = T_0 - A e^(k_i d) e^(i (omega t - k_r d))
     $
 
     D'où

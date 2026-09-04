@@ -111,7 +111,7 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
 ]
 
 #application[
-    Quelle fréquence d'échantillonnage minimale faut-il pour représenter correctement un signal audio ? Est-ce cohérent avec la fréquence utilisée par les CD musicaux (#qty("44000", "Hz")) ?
+    Quelle fréquence d'échantillonnage minimale faut-il pour représenter correctement un signal audio ? Est-ce cohérent avec la fréquence utilisée par les CD musicaux (#qty("44100", "Hz")) ?
 ]
 
 = Choix d'une fréquence d'échantillonnage

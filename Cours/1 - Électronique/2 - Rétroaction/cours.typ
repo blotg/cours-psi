@@ -37,7 +37,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
         "Oscilloscope",
         "Alimentation symétrique +15V",
         "Breadboard \"Rétroaction\"",
-        "3 adaptateurs BNC/babane",
+        "3 adaptateurs BNC/banane",
         "3 cables rouges",
         "3 cables noirs",
         "Caméra pour projection",
@@ -237,7 +237,7 @@ La plupart des montages utilisant un ALI sont des systèmes bouclés comportant 
     grandeurs: sub-dictionary(grandeurs, ("H(p)", "S(p)", "E(p)", "epsilon", "A_0", "tau", "R_1", "R_2")),
 )[
     $
-        H(p) = (1+R_1/R_2) / (1+ (1+R_1/R_2) tau/A_0 p)
+        H(p) = (1+R_2/R_1) / (1+ (1+R_2/R_1) tau/A_0 p)
     $
 ]
 

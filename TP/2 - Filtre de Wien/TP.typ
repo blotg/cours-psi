@@ -36,7 +36,7 @@ L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert
 
 Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP de sorte que
 + sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
-+ sa résistance doit être très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","mO")) ;
++ sa résistance doit être très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","MO")) ;
 + son impédance d'entrée à haute fréquence doit être suffisamment grande pour ne pas faire saturer en courant l'ALI.
 
 #application()[
