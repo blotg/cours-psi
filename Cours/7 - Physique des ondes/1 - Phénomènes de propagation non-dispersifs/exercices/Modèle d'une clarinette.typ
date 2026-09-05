@@ -36,12 +36,12 @@ Le musicien injecte une onde sonore plane : il s'établit une onde stationnaire 
 ]
 
 #question(coups-de-pouce: (
-  "Attention : ici $P$ désigne la surpression, pas la pression.",
-  "Condition d'adhérence en $x = 0$, continuité de la pression en $x = l$.",
+  "Attention : $P_1$ désigne la surpression, pas la pression.",
+  "Condition d'impénétrabilité en $x = 0$, continuité de la pression en $x = l$.",
 ))[
   Quelles sont les deux conditions aux limites ?
 ][
-  - En $x = 0$ (paroi rigide) : condition d'adhérence, $v(0, t) = 0$ pour tout $t$. Avec l'expression trouvée, $v(0, t) = 0$ est automatiquement vérifié : c'est un nœud de vitesse (et un ventre de surpression).
+  - En $x = 0$ (paroi rigide) : condition d'impénétrabilité, $v(0, t) = 0$ pour tout $t$. Avec l'expression trouvée, $v(0, t) = 0$ est automatiquement vérifié : c'est un nœud de vitesse (et un ventre de surpression).
   - En $x = l$ (ouverture) : la pression y est égale à la pression atmosphérique, donc la surpression est nulle, $P_1(l, t) = 0$ pour tout $t$.
 ]
 

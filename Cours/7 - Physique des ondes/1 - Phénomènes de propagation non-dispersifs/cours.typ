@@ -2,8 +2,6 @@
 
 #show: cours.with(infos: yaml("infos.yml"))
 
-#let lien(url) = text(size: 0.85em, fill: luma(45%))[Animation : #link(url)]
-
 #let grandeurs = (
     "y(x, t)": (signification: "l'écart à l'équilibre à l'abscisse $x$ et à l'instant $t$", unité: unit("m")),
     "c": (signification: "la célérité de l'onde", unité: unit("m/s")),
@@ -20,7 +18,7 @@
     "rho_1": (signification: "la sur-masse volumique causée par l'onde", unité: unit("kg/m^3")),
     "va(v)_1": (signification: "la vitesse du fluide", unité: unit("m/s")),
     "chi_S": (signification: "le coefficient de compressibilité isentropique", unité: unit("Pa^-1")),
-    "gamma": (signification: "le rapport des capacités thermiques du gaz (sans unité)"),
+    "gamma": (signification: "le rapport des capacités thermiques du gaz", unité: "sans unité"),
     "R": (signification: "la constante des gaz parfaits", unité: unit("J/K/mol")),
     "M": (signification: "la masse molaire du gaz", unité: unit("kg/mol")),
     "va(E)": (signification: "le champ électrique", unité: unit("V/m")),
@@ -46,12 +44,12 @@
     "R_t": (signification: "la résistance terminale", unité: unit("O")),
     "va(Pi)": (signification: "le vecteur de Poynting", unité: unit("W/m^2")),
     "I": (signification: "l'intensité acoustique", unité: unit("W/m^2")),
-    "I_0": (signification: "l'intensité acoustique de référence ($10^(-12)$ W/m²)"),
+    "I_0": (signification: "$= 10^(-12)$ l'intensité acoustique de référence", unité: unit("W/m^2")),
     "I_text(\"dB\")": (signification: "le niveau sonore", unité: unit("dB")),
     "w": (signification: "la densité volumique d'énergie", unité: unit("J/m^3")),
     "va(j)_text(\"élec\")": (signification: "le vecteur densité de courant électrique", unité: unit("A/m^2")),
     "cal(E)": (signification: "l'énergie d'un photon", unité: unit("J")),
-    "h": (signification: "la constante de Planck ($6.63 times 10^(-34)$ J·s)"),
+    "h": (signification: "$= 6.63 times 10^(-34)$ la constante de Planck", unité: unit("J s")),
     "nu": (signification: "la fréquence de l'onde", unité: unit("Hz")),
     "E_0": (signification: "l'amplitude du champ électrique", unité: unit("V/m")),
 )
@@ -416,7 +414,7 @@ Une OPH incidente se réfléchit sur une condition aux limites stricte et donne 
     titre: "Réflexion d'une OPH sur une condition stricte",
     savoir-faire: true,
     hypothèses: (
-        [Onde incidente : OPH $underline(y_i) = Y_(0,i) e^(j(omega t + k x))$.],
+        [Onde incidente : OPH $underline(y_i) = underline(Y_(0,i)) e^(j(omega t + k x))$.],
         [Onde réfléchie : OPH $underline(y_r) = underline(Y_(0,r)) e^(j(omega t - k x))$.],
         [Condition aux limites : $forall t, thin y(0, t) = 0$.],
     ),
@@ -442,8 +440,8 @@ Dans un milieu fini, deux conditions aux limites sont imposées. Si elles sont t
     savoir-faire: true,
     hypothèses: (
         [$y$ est solution d'une équation de d'Alembert.],
+        [Condition stricte en $0$ : $forall t, thin y(0, t) = 0$.],
         [Condition stricte en $L$ : $forall t, thin y(L, t) = 0$.],
-        [Condition imposée en $0$ : $forall t, thin y(0, t) = a_0 cos(omega_0 t)$.],
         [$y$ est cherchée comme superposition d'une OPH incidente et d'une OPH réfléchie.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("omega_n", "c", "L")),
@@ -518,7 +516,7 @@ Lorsque la résistance terminale est égale à l'impédance caractéristique, il
     ),
     grandeurs: sub-dictionary(grandeurs, ("P_1(M, t)", "va(v)_1", "va(n)", "Z_a", "rho_0", "c")),
 )[
-    $ P_1 = Z_a thin va(v) dot va(n) quad "avec" quad Z_a = rho_0 c $
+    $ P_1 = Z_a thin va(v)_1 dot va(n) quad "avec" quad Z_a = rho_0 c $
 ]
 
 #flashcard(recto: "Impédance acoustique", verso: "$ Z_a = rho_0 c $")
@@ -556,10 +554,10 @@ Le vecteur de Poynting est le vecteur densité surfacique de puissance transport
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("va(Pi)", "P_1(M, t)", "va(v)_1")),
 )[
-    $ va(Pi) = P_1 va(v) $
+    $ va(Pi) = P_1 va(v)_1 $
 ]
 
-#flashcard(recto: "Vecteur de Poynting acoustique", verso: "$ va(Pi) = P_1 va(v) $")
+#flashcard(recto: "Vecteur de Poynting acoustique", verso: "$ va(Pi) = P_1 va(v)_1 $")
 
 === Intensité acoustique
 #encadré(
