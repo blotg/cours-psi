@@ -23,12 +23,12 @@
 
 On cherche à calculer numériquement l'inductance mutuelle entre deux spires circulaires coplanaires de même rayon $R$, séparées par une distance $d$. On se place dans le régime quasi-stationnaire.
 
-#question((
+#question(coups-de-pouce: (
   "Quel système de coordonnées est le plus adapté pour étudier ce problème ?",
 ))[
   Déterminer les invariances du champ magnétique créé par une des spires.
 ][
-  La distribution de courant dans la spire 1 est invariante par rotation autour de l'axe perpendiculaire au plan des spires passant par leur centre $O_1$, donc d'après le principe de Curie, le champ magnétique $va(B_1)(r, cancel(theta), z)$.
+  La distribution de courant dans la spire 1 est invariante par rotation autour de l'axe perpendiculaire au plan des spires passant par leur centre $O_1$, donc d'après le principe de Curie, le champ magnétique ne dépend pas de $theta$ : $va(B_1)(r, cancel(theta), z)$.
 ]
 
 #question(coups-de-pouce: (
@@ -60,7 +60,7 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
 ]
 
 #question(coups-de-pouce: (
-  "Décomposer $va(O_1M)$ avec la relation de Chales en fonction de $va(O_1O_2)$ et $va(O_2M)$.",
+  "Décomposer $va(O_1M)$ avec la relation de Chasles en fonction de $va(O_1O_2)$ et $va(O_2M)$.",
   "Quelle relation lie $r_1$ et $va(O_1M)$ ?",
 ))[
   Exprimer $r_1$ en fonction de $r_2$, $theta_2$ et $d$.
@@ -71,12 +71,12 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
 #question(coups-de-pouce: (
   "Utiliser la définition du flux magnétique à travers une surface comme une intégrale.",
 ))[
-  Montrer que le flux du champ magnétique $va(B_1)$ à travers la spire 2 est donné par $Phi_(1 arrow 2) = A integral_0^(2 pi)dd(theta_2) integral_0^R dd(r_2) r_2/ ((d^2+r_2^2+d r_2 cos theta_2)^(3/2))$
+  Montrer que le flux du champ magnétique $va(B_1)$ à travers la spire 2 est donné par $Phi_(1 arrow 2) = A integral_0^(2 pi)dd(theta_2) integral_0^R dd(r_2) r_2/ ((d^2+r_2^2+2 d r_2 cos theta_2)^(3/2))$
 ][
   Le flux du champ magnétique à travers la spire 2 est $ Phi_(1 arrow 2) = integral_("spire" 2) va(B_1) dot va(dd(S)) = integral_0^(2 pi) dd(theta_2) integral_0^R dd(r_2) r_2 B_1(r_2, theta_2) $ avec $B_1(r_2, theta_2) = mu_0/(4 pi) (pi R^2 I_1)/(d^2 + r_2^2 + 2 d r_2 cos theta_2)^(3/2)$. On en déduit l'expression demandée avec $A = mu_0/(4) R^2 I_1$.
 ]
 
-La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. Son appel est de la forme ```python dblquad(func, a, b, c, d)```, où ```python func(x,y)``` est la fonction à intégrer pour `x` allant de `a` et `b` et pour `y` allant de `c` à  `d`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.
+La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. Son appel est de la forme ```python dblquad(func, a, b, c, d)```, où ```python func(x,y)``` est la fonction à intégrer pour `x` allant de `a` à `b` et pour `y` allant de `c` à  `d`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.
 
 #question()[
   Compléter le programme Python sur Capytale (code #link("https://capytale2.ac-paris.fr/web/c/6e41-7604729")[6e41-7604729]) pour calculer numériquement l'inductance mutuelle.
@@ -88,13 +88,14 @@ La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``
   mu_0 = 4e-7 * pi  # Perméabilité du vide en H/m
   R = 1e-2          # Rayon des spires en m
 
-  A = mu_0 / 4 * pi * R**2
-
-  def f(r_2, theta_2):# Fonction à intégrer
-      return r_2 / ((d**2 + r_2**2 + 2 * d * r_2 * cos(theta_2))**(3/2))
+  A = mu_0 / 4 * R**2
 
   def M(d):
-      intégrale, _ = dblquad(f, 0, R, 0, 2 * pi)
+      # dblquad intègre func(y, x) : r_2 est la variable interne
+      def f(r_2, theta_2):
+          return r_2 / ((d**2 + r_2**2 + 2 * d * r_2 * cos(theta_2))**(3/2))
+
+      intégrale, _ = dblquad(f, 0, 2 * pi, 0, R)
       return A * intégrale
   ```
 ]
@@ -105,7 +106,7 @@ La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``
   ```python
   import numpy as np
   import matplotlib.pyplot as plt
-  distances = np.linspace(5*R, 50*R, 100) # Distances en m
+  distances = np.linspace(5*R, 50*R, 20) # Distances en m
   inductances = [M(d) for d in distances] # Calcul des inductances mutuelles
   plt.plot(distances, inductances)
   plt.xlabel('Distance d (m)')

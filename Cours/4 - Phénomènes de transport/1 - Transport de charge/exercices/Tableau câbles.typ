@@ -6,9 +6,9 @@
     explique: true,
 )
 
-Les normes électriques contraignent les longueur et sections des câbles en fonction de l'usage qui en est fait. Le tableau ci-dessous donne les longueurs maximales recommandées pour des câbles en cuivre, en fonction de la puissance maximale soutirée pour une tension de #qty("230", "v").
+Les normes électriques contraignent les longueurs et sections des câbles en fonction de l'usage qui en est fait. Le tableau ci-dessous donne les longueurs maximales recommandées pour des câbles en cuivre, en fonction de la puissance maximale soutirée pour une tension de #qty("230", "V").
 
-La norme prévoir une chute de tension maximale de #qty("3", "%").
+La norme prévoit une chute de tension maximale de #qty("3", "%").
 
 #figure(
     table(
@@ -81,9 +81,9 @@ La norme prévoir une chute de tension maximale de #qty("3", "%").
 ][
     Quand on fait passer un courant dans un câble, il y a une chute de tension due à la résistance du câble.
 
-    La résistance d'un câble de longueur est d'autant plus grande que sa section est petite (un gros câble laisse mieux passer le courant) et que sa longueur est grande (plus le courant a de distance à parcourir, plus il y a de pertes).
+    La résistance d'un câble est d'autant plus grande que sa section est petite (un gros câble laisse mieux passer le courant) et que sa longueur est grande (plus le courant a de distance à parcourir, plus il y a de pertes).
 
-    La chute de tension dans le câble est d'autant plus grande que la puissance soutirée est grande (car le courant électrique sera plus grand) et que la résistance est faible (un câble bon conducteur aura moins de pertes).
+    La chute de tension dans le câble est d'autant plus grande que la puissance soutirée est grande (car le courant électrique sera plus grand) et que la résistance du câble est grande (un câble bon conducteur aura moins de pertes).
 
     La longueur du câble si on ne veut pas une chute de tension trop grande est donc limitée par deux facteurs :
     - la puissance soutirée : plus elle est grande, plus la longueur doit être petite pour limiter les pertes.

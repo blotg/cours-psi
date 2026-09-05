@@ -6,7 +6,7 @@
     difficulté: 1,
 )
 
-On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10", "O")$, $L=#qty("100", "mH")$ et $E = #qty("100", "V")$
+On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10", "O")$, $L=#qty("100", "mH")$ et $E = #qty("100", "V")$.
 
 #figure(
     zap.circuit({
@@ -72,7 +72,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10"
 
     Si $K_1$ et $K_4$ sont ouverts simultanément, la source de courant est en circuit ouvert. De même si $K_2$ et $K_3$ sont ouverts simultanément. Les états correspondants sont barrés en trait plein.
 
-    Les état autorisés sont donc
+    Les états autorisés sont donc
     #figure(
         table(
             columns: (auto,) * 4,
@@ -123,7 +123,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10"
     $ i(t) = (i(t_2) + E/R) e^(-R/L (t - t_2)) - E/R $
 ]
 
-Les interrupteurs $K_1$ et $K_4$ sont fermés entre $t=n T$ et $t=n T + alpha(t) T_"MLI"$, tandis que les interrupteurs $K_2$ et $K_3$ sont fermés entre $t=n T_"MLI" + alpha(t) T_"MLI"$ et $t=(n+1)T_"MLI"$, avec $ alpha(t) = (1 + cos((2 pi)/T t) ) / 2 $
+Les interrupteurs $K_1$ et $K_3$ sont fermés entre $t=n T_"MLI"$ et $t=n T_"MLI" + alpha(t) T_"MLI"$, tandis que les interrupteurs $K_2$ et $K_4$ sont fermés entre $t=n T_"MLI" + alpha(t) T_"MLI"$ et $t=(n+1)T_"MLI"$, avec $ alpha(t) = (1 + cos((2 pi)/T t) ) / 2 $
 
 On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
 
@@ -134,7 +134,7 @@ On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
 )[
     Expliquer les raisons de ce choix de commande.
 ][
-    Le rôle d'un onduleur est de fournir un courant alternatif en sortie. Le rapport cyclique est variable entre $0$ et $1$ de façon sinusoïdale pour obtenir un courant de sortie sinusoïdale.
+    Le rôle d'un onduleur est de fournir un courant alternatif en sortie. Le rapport cyclique est variable entre $0$ et $1$ de façon sinusoïdale pour obtenir un courant de sortie sinusoïdal.
 
     La période $T_"MLI"$ est petite devant la période $T$ du signal de sortie pour que le courant de sortie soit le plus proche possible d'un signal sinusoïdal.
 ]
@@ -190,7 +190,7 @@ On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
         i1 = i
         i2 = i+int(alpha[i]*T_MLI/dt)
         i3 = i+int(T_MLI/dt)
-        i_s[i1:i2] = (i_s[i_1-1] - E/R) * np.exp(-R/L * (temps[i1:i2] - temps[i1])) + E/R # première partie de "période"
+        i_s[i1:i2] = (i_s[i1-1] - E/R) * np.exp(-R/L * (temps[i1:i2] - temps[i1])) + E/R # première partie de "période"
         i_s[i2:i3] = (i_s[i2-1] + E/R) * np.exp(-R/L * (temps[i2:i3] - temps[i2])) - E/R # seconde partie de "période"
     ```
 ]
@@ -200,7 +200,7 @@ On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
         "Que représentent `i1`, `i2` et `i3` ?",
     ),
 )[
-    Expliquer les lignes 12 à 15.
+    Expliquer les lignes 12 à 14.
 ][
     `i` désigne le début de la période de la MLI. Ces débuts sont séparés de `int(T_MLI/dt)`.
 

@@ -7,7 +7,7 @@
 On étudie un point matériel dont l'énergie potentielle dépend de la position $x$ selon la loi $E_p (x) = alpha x^2$.
 
 #question(
-    coup-de-pouce: (
+    coups-de-pouce: (
         "Quelques formes d'énergie potentielle sont à connaitre. Laquelle est quadratique (c'est-à-dire fait apparaitre un carré) ?",
         "Les énergies potentielles à connaitre sont l'énergie potentielle de pesanteur, l'énergie potentielle élastique et l'énergie potentielle électrostatique.",
     ),
@@ -18,7 +18,7 @@ On étudie un point matériel dont l'énergie potentielle dépend de la position
 ]
 
 #question(
-    coup-de-pouce: (
+    coups-de-pouce: (
         "Utiliser un théorème énergétique.",
         "Utiliser le théorème de la puissance mécanique."
     )

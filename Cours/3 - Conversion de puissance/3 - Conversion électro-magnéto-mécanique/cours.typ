@@ -54,7 +54,7 @@
     "u_2": (signification: "la tension aux bornes de l'enroulement statorique 2", unité: unit("V")),
     "i_1": (signification: "le courant dans l'enroulement statorique 1", unité: unit("A")),
     "i_2": (signification: "le courant dans l'enroulement statorique 2", unité: unit("A")),
-    "R_s": (signification: "la résistance de chaque enroulement statorique", unité: unit("Ω")),
+    "R_s": (signification: "la résistance de chaque enroulement statorique", unité: unit("O")),
     "E_1": (
         signification: "$=dv(Phi_1,t)$ la force contre-électromotrice dans l'enroulement statorique 1",
         unité: unit("V"),
@@ -193,8 +193,8 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
 #grid(
     columns: (1fr, 1fr),
     column-gutter: 10pt,
-    figure(image("images/zoe.jpg", height: 5cm), caption: "Stator du moteur synchrone d'une Renault Zoé."),
-    figure(image("images/centrale.jpg", height: 5cm), caption: "Stator d'un alternateur de centrale nucléaire."),
+    figure(image("images/zoe.jpg", height: 5cm), caption: "Stator du moteur synchrone d’une Renault Zoé."),
+    figure(image("images/centrale.jpg", height: 5cm), caption: "Stator d’un alternateur de centrale nucléaire."),
 )
 
 == Champ statorique

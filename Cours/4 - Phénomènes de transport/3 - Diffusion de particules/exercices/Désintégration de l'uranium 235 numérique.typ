@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Désintégration de l'uranium 235",
+    titre: "Désintégration de l'uranium 235 : résolution numérique",
     difficulté: 1,
     numérique: true,
 )

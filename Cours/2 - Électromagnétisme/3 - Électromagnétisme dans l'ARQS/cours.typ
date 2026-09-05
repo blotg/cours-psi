@@ -6,7 +6,7 @@
 #let grandeurs = (
     t: (signification: "le temps", unité: unit("s")),
     j: (signification: "le vecteur densité volumique de courant", unité: unit("A/m^2")),
-    rho: (signification: "la densité volumique de charge", unité: unit("C m^3")),
+    rho: (signification: "la densité volumique de charge", unité: unit("C/m^3")),
     epsilon_0: (signification: "la permittivité diélectrique du vide", unité: unit("F/m")),
     mu_0: (signification: "la perméabilité magnétique du vide", unité: unit("H/m")),
     E: (signification: "le champ électrique", unité: unit("V/m")),
@@ -28,7 +28,7 @@
     L: (signification: "l'inductance propre", unité: unit("H")),
     i: (signification: "l'intensité du courant", unité: unit("A")),
     u_L: (signification: "la tension aux bornes de la bobine", unité: unit("V")),
-    "cal(E)": (signification: "l'énergie stockée ", unité: unit("J")),
+    "cal(E)": (signification: "l'énergie stockée", unité: unit("J")),
     "Phi_1": (signification: "le flux magnétique sur la bobine 1", unité: unit("T m^2")),
     "Phi_(1 arrow 1)": (signification: "le flux propre de la bobine 1", unité: unit("T m^2")),
     "Phi_(2 arrow 1)": (signification: "le flux mutuel induit par la bobine 2 sur la bobine 1", unité: unit("T m^2")),
@@ -65,7 +65,7 @@ Les équations de Maxwell sont compatibles avec l'équation locale de conservati
 
 Le terme $epsilon_0 pdv(va(E), t)$ se nomme courant de déplacement. Son unité est $unit("A/m^2")$.
 
-L'ARQS#footnote[approximation des régimes quasi-stationnaire] magnétique consiste à négliger les courants de déplacement.
+L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique consiste à négliger les courants de déplacement.
 
 #encadré(
     titre: "Équations de Maxwell dans l'ARQS",
@@ -102,7 +102,7 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaire] magnétique consi
 
 == Du régime stationnaire au régime variable
 
-Dans l'ARQS magnétique, les équation de Maxwell-Thomson et Maxwell-Ampère sont les mêmes qu'en stationnaire. Tous les résultats vus dans le chapitre "Champ magnétique en régime stationnaire" restent donc valables.
+Dans l'ARQS magnétique, les équations de Maxwell-Thomson et Maxwell-Ampère sont les mêmes qu'en stationnaire. Tous les résultats vus dans le chapitre "Champ magnétique en régime stationnaire" restent donc valables.
 
 #encadré(
     titre: "Théorème d'Ampère",
@@ -166,7 +166,7 @@ Lorsqu'un cylindre conducteur est placé dans un champ magnétique oscillant, de
     titre: "Courants de Foucault",
     savoir-faire: true,
     hypothèses: (
-        "A l'intérieur du cylindre",
+        "À l'intérieur du cylindre",
         "Dans l'ARQS",
         [Le cylindre est plongé dans un champ magnétique $B=B_0 cos(omega t) va(e_z)$],
     ),
@@ -208,7 +208,7 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
     "Établir l'expression du vecteur densité de courant puis de la puissance dissipée par les courants de Foucault dans un cylindre conducteur placé dans un champ magnétique uniforme et sinusoïdal.",
 )
 
-#application[Le fond d'une casserole en fer ($gamma_ce("Fe")=qty("1e7", "S/m")$) a un rayon de #qty(15, "cm") et une épaisseur de #qty(1, "cm"). La casserole est posée sur un plaque à induction qui emmet un champ magnétique oscillant à la fréquence #qty(20, "kHz"). Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #qty(1, "kW") ?]
+#application[Le fond d'une casserole en fer ($gamma_ce("Fe")=qty("1e7", "S/m")$) a un rayon de #qty(15, "cm") et une épaisseur de #qty(1, "cm"). La casserole est posée sur une plaque à induction qui émet un champ magnétique oscillant à la fréquence #qty(20, "kHz"). Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #qty(1, "kW") ?]
 
 == Intérêt du feuilletage
 
@@ -221,7 +221,7 @@ Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le
         columns: 2,
         image("images/transformateur.jpg"), image("images/rotor.jpg"),
     ),
-    caption: "Transformateur et rotor d'un moteur électrique dont le feuilletage est visible.",
+    caption: "Transformateur et rotor d’un moteur électrique dont le feuilletage est visible.",
 )
 
 = Inductance propre, inductance mutuelle
@@ -233,7 +233,7 @@ Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le
     savoir-faire: true,
     hypothèses: (
         "Les effets de bord sont négligés.",
-        "Le champ magnétique est nul à l'extérieur du solénoïde est nul.",
+        "Le champ magnétique est nul à l'extérieur du solénoïde.",
         "Le solénoïde est assimilé à une succession de spires resserrées et d'espacement constant.",
     ),
     grandeurs: grandeurs,
@@ -285,7 +285,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
     ],
 )
 
-Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 pi R^2 N^2/L i^2$. On peut utiliser cette expression pour exprimer la densité volumique d'énergie magnétique.
+Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 pi R^2 N^2/l i^2$. On peut utiliser cette expression pour exprimer la densité volumique d'énergie magnétique.
 
 #encadré(
     titre: "Densité volumique d'énergie magnétique",
@@ -296,13 +296,13 @@ Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 p
     ),
     grandeurs: grandeurs,
     [
-        $ w=1/2 mu_0 B^2 $
+        $ w=B^2/(2 mu_0) $
     ],
 )
 
 #flashcard(
     recto: "Densité volumique d'énergie magnétique",
-    verso: "$ w=1/2 mu_0 B^2 $",
+    verso: "$ w=B^2/(2 mu_0) $",
 )
 #question-de-colle(
     "Sur l'exemple du solénoïde, établir l'expression de la densité volumique d'énergie magnétique.",
@@ -310,7 +310,7 @@ Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 p
 
 == Inductance mutuelle
 
-Lorsque deux bobines sont présentes simultanément, le champ magnétique créé par l'une peut induite une tension dans l'autre. Ce phénomène s'appelle *induction mutuelle*.
+Lorsque deux bobines sont présentes simultanément, le champ magnétique créé par l'une peut induire une tension dans l'autre. Ce phénomène s'appelle *induction mutuelle*.
 
 #encadré(
     titre: "Flux magnétique",
@@ -351,14 +351,14 @@ En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 
     connaitre: true,
     grandeurs: grandeurs,
     [
-        $ M <= sqrt(L_1 L_2) $
+        $ M^2 <= L_1 L_2 $
     ],
 )
 
 #flashcard(
     recto: "Inégalité vérifiée par l'inductance mutuelle $M$",
-    verso: "$ M<= sqrt(L_1 L_2) $",
+    verso: "$ M^2 <= L_1 L_2 $",
 )
 #question-de-colle(
-    "A partir de l'expression des flux magnétiques, établir l'énergie stockée dans deux bobines en interaction puis établir une inégalité portant sur l'inductance mutuelle et les inductances propres.",
+    "À partir de l'expression des flux magnétiques, établir l'énergie stockée dans deux bobines en interaction puis établir une inégalité portant sur l'inductance mutuelle et les inductances propres.",
 )

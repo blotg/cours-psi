@@ -40,9 +40,9 @@
 
     #let m = 10e-2
     #let g = 1e-3
-    We study a magnetic circuit which section $S$ is constant composed of
+    We study a magnetic circuit whose section $S$ is constant, composed of
     - a magnet of length $m=qty("10", "cm")$ described by its hysteresis cycle given below ;
-    - electrical steel#footnote["fer doux" in French] of length $l_e$ considered linear, homogenous, isotropic, transparent, of infinite magnetic permeability ;
+    - electrical steel#footnote["fer doux" in French] of length $l_e$ considered linear, homogeneous and isotropic, of infinite magnetic permeability ;
     - an air gap of length $g=qty("1", "mm")$.
 
     #figure[
@@ -54,7 +54,7 @@
     #question(coups-de-pouce: (
         "Le cycle d'hystérésis doit-il être fin ou épais ?",
     ))[
-        How does the hysteresis cycle needs to be for a good permanent magnet ? Should a soft or hard material be used ?
+        What should the hysteresis cycle of a good permanent magnet look like ? Should a soft or hard material be used ?
     ][
         A good permanent magnet needs to have a wide hysteresis cycle, in order to keep a high remanent magnetization. A hard magnetic material is thus needed.
     ]
@@ -93,17 +93,17 @@
     #question(coups-de-pouce: (
         "La relation de la question précédente est une fonction linéaire. La représenter graphiquement sur le cycle d'hystérésis.",
     ))[
-        Deduce graphically les values of $B_m$ and $H_m$. How many solutions are there ?
+        Deduce graphically the values of $B_m$ and $H_m$. How many solutions are there ?
     ][
         #let mu0 = 4 * calc.pi * 1e-7
         #let pente = -m * mu0 / g
-        On trace la droite de pente $-(m mu_0)/g = num(#scientifique(pente, 1))$ sur la courbe. Elle coupe le cycle d"hystérésis en deux points de coordonnées opposées : $B_m= plus.minus qty("0.05", "T")$ et $H_m = plus.minus qty("4e1", "A/m")$.
+        On trace la droite de pente $-(m mu_0)/g = num(#scientifique(pente, 1))$ sur la courbe. Elle coupe le cycle d'hystérésis en deux points de coordonnées opposées : $B_m = plus.minus qty("5e-3", "T")$ et $H_m = minus.plus qty("4e1", "A/m")$.
     ]
 
     #question(coups-de-pouce: (
         "Lire graphiquement les intersections entre le cycle d'hystérésis et la droite tracée précédemment.",
     ))[
-        What are the values of $B_e$ and $H_e$ in the air gap ?
+        What are the values of $B_g$ and $H_g$ in the air gap ?
     ][
         $ B_g = B_m $
         $ H_g = -m/g H_m = plus.minus qty("4e3", "A/m") $

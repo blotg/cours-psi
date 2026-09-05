@@ -4,7 +4,7 @@
 Pour $N$ interrupteurs, il y a $2^N$ états possibles. Pour les lister, on peut compter en binaire, chaque bit représentant l'état d'un interrupteur : 
 000, 001, 010, 011, 100, 101, 110, 111.
 
-Une autre façon de le voir est de placer les états dans un tableau. L'état de l'interrupteur $1$ change toute les lignes, celui de l'interrupteur $2$ toutes les deux lignes, etc.
+Une autre façon de le voir est de placer les états dans un tableau. L'état de l'interrupteur $1$ change toutes les lignes, celui de l'interrupteur $2$ toutes les deux lignes, etc.
 
 = Établir une séquence de commutation
 + Lister les états des interrupteurs

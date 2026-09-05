@@ -20,6 +20,7 @@
     "va(j)_\"libre\"": (signification: "le vecteur densité volumique de courant libre", unité: unit("A/m^2")),
     "I_\"libre, enlacé\"": (signification: "le courant libre enlacé", unité: unit("A")),
     "mu": (signification: "$=mu_0 mu_r$ la perméabilité magnétique du matériau", unité: unit("H/m")),
+    "u": (signification: "la tension aux bornes de l'enroulement", unité: unit("V")),
     "N": (signification: "le nombre de spires", unité: "sans unité"),
     "l": (signification: "la longueur du circuit magnétique", unité: unit("m")),
     "L": (signification: "l'inductance propre", unité: unit("H")),
@@ -36,7 +37,7 @@
 )
 
 = Moment magnétique d'un aimant permanent
-== Dipole magnétique
+== Dipôle magnétique
 Une spire circulaire parcourue par un courant produit un champ magnétique caractérisé par son moment magnétique $va(cal(M))$.
 
 #encadré(
@@ -65,7 +66,7 @@ Le dipôle magnétique est un système ponctuel. Le dipôle magnétique est le p
     ),
     figure(
         image(width: 90%, "images/dipole.svg"),
-        caption: "Dipole magnétique",
+        caption: "Dipôle magnétique",
     ),
     figure(
         image(width: 90%, "images/aimant.png"),
@@ -118,14 +119,14 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 
 == Champ créé par un aimant
 
-Si on se place suffisamment loin, le champ créé par un aimant, par une spire et par un dipôle magnétique sont similaire. On définit le moment magnétique d'un aimant comme le moment magnétique du dipôle magnétique ayant le même champ magnétique à grande distance
+Si on se place suffisamment loin, les champs créés par un aimant, par une spire et par un dipôle magnétique sont similaires. On définit le moment magnétique d'un aimant comme le moment magnétique du dipôle magnétique ayant le même champ magnétique à grande distance.
 
 #application[
-    Déterminer la norme du champ magnétique à la surface de la terre à Quimper ($47°59'N, 4°05'O$). On donne $cal(M)_"Terre"=qty("7.7e22", "A/.m^2")$ et $R_"Terre"=qty("6400", "km")$.
+    Déterminer la norme du champ magnétique à la surface de la terre à Quimper ($47°59'N, 4°05'O$). On donne $cal(M)_"Terre"=qty("7.7e22", "A m^2")$ et $R_"Terre"=qty("6400", "km")$.
 ]
 
 == Action subie par un moment magnétique
-Lorsqu'un système possédant un moment magnétique est placé dans champ magnétique extérieur, il subit des actions de sa part.
+Lorsqu'un système possédant un moment magnétique est placé dans un champ magnétique extérieur, il subit des actions de sa part.
 
 #encadré(
     titre: "Énergie potentielle d’interaction entre un système possédant un moment magnétique et un champ magnétique extérieur",
@@ -134,7 +135,7 @@ Lorsqu'un système possédant un moment magnétique est placé dans champ magné
     $ cal(E)_p = - va(cal(M)).va(B)_"ext" $
 ]
 
-L'énergie potentielle est minimales lorsque le moment magnétique est aligné au champ. Un moment magnétique a tendance à s'aligner au champ magnétique.
+L'énergie potentielle est minimale lorsque le moment magnétique est aligné au champ. Un moment magnétique a tendance à s'aligner au champ magnétique.
 
 #encadré(
     titre: "Force subie par un système possédant un moment magnétique",
@@ -153,7 +154,7 @@ L'énergie potentielle est minimales lorsque le moment magnétique est aligné a
 On retrouve un couple nul lorsque le moment magnétique est aligné avec le champ magnétique.
 
 #application[
-    Déterminer la période d'oscillation d'une aiguille de boussole ($va(cal(M))=qty("15", "A m^2") va(e_r)$, $J=qty("1e-4", "kg/m^2")$ selon $va(e_r)$) dans le champ magnétique terrestre. La liaison pivot entre l'aiguille et son support est supposée idéale.
+    Déterminer la période d'oscillation d'une aiguille de boussole ($va(cal(M))=qty("15", "A m^2") va(e_r)$, $J=qty("1e-4", "kg m^2")$ selon $va(e_r)$) dans le champ magnétique terrestre. La liaison pivot entre l'aiguille et son support est supposée idéale.
 ]
 
 #encadré(
@@ -235,7 +236,7 @@ Les effets de l'aimantation sont pris en compte dans les équations de Maxwell �
 )
 
 #question-de-colle(
-    "Définir l'aimantation, les courants liés et l'excitation magnétique et établir l'équation de Maxwell-Ampère valable dans les milieux magnétique.",
+    "Définir l'aimantation, les courants liés et l'excitation magnétique et établir l'équation de Maxwell-Ampère valables dans les milieux magnétiques.",
 )
 
 Les sources de l’excitation magnétique sont donc les courants électriques libres.
@@ -266,7 +267,7 @@ Dans les milieux magnétiques, l'équation de Maxwell-Thomson est inchangée don
 
 = Milieux ferromagnétiques
 == Présentation
-Un matériau ferromagnétique est un matériau dans lequel les dipôles magnétiques (de spin, orbital, ...) ont tendance à s'aligner sur le champ magnétique extérieur. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croient avec l'excitation magnétique $va(H)$.
+Un matériau ferromagnétique est un matériau dans lequel les dipôles magnétiques (de spin, orbital, ...) ont tendance à s'aligner sur le champ magnétique extérieur. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croissent avec l'excitation magnétique $va(H)$.
 
 Un matériau ferromagnétique canalise les lignes de champ magnétique. Lorsque des lignes de champ sortent d'un matériau ferromagnétique, elles sortent perpendiculairement à l'interface.
 
@@ -291,9 +292,9 @@ Pour un matériau ferromagnétique, le champ magnétique $va(B)$ et l'aimantatio
 
 L'aimantation peut saturer, ce qui correspond à un état où tous les dipôles magnétiques sont orientés dans le même sens que l'excitation magnétique $va(H)$.
 
-L'aimantation rémanente et le champ magnétique rémanent sont l'aimantation et le champ magnétique subsistant lorsque l'excitation magnétique est nul.
+L'aimantation rémanente et le champ magnétique rémanent sont l'aimantation et le champ magnétique subsistant lorsque l'excitation magnétique est nulle.
 
-L'excitation coercitive est l'excitation qu'il faut appliquer pour que le champ magnétique et l'aimantation soient nulles#footnote[En toute rigueur, l'excitation magnétique qu'il faut pour avoir $B=0$ n'est pas exactement celle qu'il faut appliquer pour avoir $M=0$, mais elles sont très proches.].
+L'excitation coercitive est l'excitation qu'il faut appliquer pour que le champ magnétique et l'aimantation soient nuls#footnote[En toute rigueur, l'excitation magnétique qu'il faut pour avoir $B=0$ n'est pas exactement celle qu'il faut appliquer pour avoir $M=0$, mais elles sont très proches.].
 
 Un matériau ferromagnétique dur est un matériau ferromagnétique dont le cycle d'hystérésis est large.
 
@@ -303,11 +304,11 @@ Un matériau dur a une grande aimantation rémanente et un grand champ magnétiq
 
 Les matériaux ferromagnétiques durs sont utilisés pour fabriquer des aimants permanents.
 
-#exemple[Le fer et les alliages à base de néodyme sont des matériaux ferromagnétiques durs.]
+#exemple[Les alliages à base de néodyme (NdFeB) et les alnicos sont des matériaux ferromagnétiques durs.]
 
 #flashcard(
     recto: "Matériau ferromagnétique dur",
-    verso: "Cycle d'hystérésis large, grande aimantation rémanente et un grand champ magnétique rémanent. Exemples : fer, alliages au néodyme",
+    verso: "Cycle d'hystérésis large, grande aimantation rémanente et un grand champ magnétique rémanent. Exemples : alliages au néodyme, alnicos",
 )
 
 == Matériaux ferromagnétiques doux
@@ -315,11 +316,11 @@ Un matériau ferromagnétique doux est un matériau ferromagnétique dont le cyc
 
 Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transformateurs et les machines électriques.
 
-#exemple[La ferrite est un matériau ferromagnétique doux.]
+#exemple[Le fer doux et la ferrite sont des matériaux ferromagnétiques doux.]
 
 #flashcard(
     recto: "Matériau ferromagnétique doux",
-    verso: "Cycle d'hystérésis étroit, faible aimantation rémanente et un faible champ magnétique rémanent. Exemples : ferrite",
+    verso: "Cycle d'hystérésis étroit, faible aimantation rémanente et un faible champ magnétique rémanent. Exemples : fer doux, ferrite",
 )
 
 #schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique doux")[#box(height: 3cm)]
@@ -346,7 +347,7 @@ La perméabilité magnétique relative est de l'ordre de $mu_r tilde.op 10^5$.
 = Circuits ferromagnétiques
 == Circuit magnétique sans entrefer
 === Présentation générale
-Un circuit magnétique sans entrefer est constitué d'un matériau ferromagnétique formant une boucle autour duquel est enroulé un fil parcourant par un courant électrique.
+Un circuit magnétique sans entrefer est constitué d'un matériau ferromagnétique formant une boucle autour duquel est enroulé un fil parcouru par un courant électrique.
 
 #schéma(titre: "Circuit magnétique sans entrefer")[#box(height: 4cm)]
 Le matériau guide les lignes de champ, elles ont donc une forme similaire à celle du circuit magnétique. Pour étudier le système, on s'intéresse à une ligne de champ moyenne.
@@ -363,10 +364,10 @@ Le matériau guide les lignes de champ, elles ont donc une forme similaire à ce
     ),
     grandeurs: grandeurs,
 )[
-    $ va(B) = mu va(H) $
+    $ u = N S dv(B, t) $
 ]
 
-Cette relation est mise à profit pour mesurer le champ magnétique et tracer le cycle d'hystérésis.
+Cette relation est mise à profit pour mesurer le champ magnétique et tracer le cycle d'hystérésis : intégrer la tension donne le champ magnétique.
 
 #encadré(
     titre: "Relation excitation magnétique - courant",
@@ -392,7 +393,7 @@ Cette relation est mise à profit pour mesurer l'excitation magnétique et trace
 #wrap-content(align: right)[
     #lien("https://upload.wikimedia.org/wikipedia/commons/8/81/Power_Transformer_Over-Excitation.gif")
 ][
-    Si la tension $e$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant a la même forme que la tension.
+    Si la tension $u$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant a la même forme que la tension.
 ]
 
 == Bobine à noyau ferromagnétique

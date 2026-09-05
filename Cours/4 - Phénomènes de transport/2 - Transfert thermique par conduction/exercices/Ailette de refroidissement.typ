@@ -8,7 +8,7 @@
 
 La performance des puces électroniques utilisées dans les ordinateurs décroit avec leur température. Afin de dissiper une puissance élevée en limitant la température du composant, on installe un dissipateur de chaleur. Ce dissipateur est muni d'ailettes de refroidissement. On étudie une de ces ailettes.
 
-Une ailette de refroidissement en aluminium de conductivité thermique $lambda=qty("205", "W/m/K")$ est fixée en $x=0$ à un corps dont la température $T_0=qty("70", "Celsius")$ est constante est avec lequel le contact thermique est parfait. Elle baigne dans l'air ambiant de température $T_a=qty("20", "Celsius")$. L'ailette est en forme de parallélépipède, d'épaisseur $e=qty("1", "mm")$, de largeur $a=qty("5", "cm")$ et de longueur $l=qty("10", "cm")$.
+Une ailette de refroidissement en aluminium de conductivité thermique $lambda=qty("205", "W/m/K")$ est fixée en $x=0$ à un corps dont la température $T_0=qty("70", "Celsius")$ est constante et avec lequel le contact thermique est parfait. Elle baigne dans l'air ambiant de température $T_a=qty("20", "Celsius")$. L'ailette est en forme de parallélépipède, d'épaisseur $e=qty("1", "mm")$, de largeur $a=qty("5", "cm")$ et de longueur $l=qty("10", "cm")$.
 
 On émet les hypothèses suivantes :
 - le régime étudié est stationnaire
@@ -129,7 +129,7 @@ Pour résoudre l'équation différentielle numériquement, on cherche à la mett
     import matplotlib.pyplot as plt
 
     N = 100
-    lam = 200
+    lam = 205
     e = 1e-3
     h = 10
     a = 5e-2
@@ -207,14 +207,14 @@ On peut maintenant résoudre le problème aux limites en utilisant la fonction `
     coups-de-pouce: (),
 )[
     Justifier que la puissance totale dissipée par l'ailette est donnée par
-    $ P approx integral_(x=0)^L 2 a h(T(x)-T_a) dd(x) $
+    $ P approx integral_(x=0)^l 2 a h(T(x)-T_a) dd(x) $
     Compléter le code Python ci-dessous pour calculer cette puissance. On utilisera la fonction `trapezoid` de la bibliothèque `scipy.integrate` pour effectuer l'intégration numérique. Cette fonction prend en argument un tableau de valeurs de la fonction à intégrer et un tableau des abscisses correspondantes.
     ```python
     P = trapezoid(..., x) # calcul de la puissance dissipée
     print(P)
     ```
 ][
-    La puissance dissipée sur les surfaces avant et arrière (d'aire $l e$) sont négligeables devant celles dissipées sur les surfaces haute et basse (d'aire $l a$) car $a >> e$. Idem pour la surface de droite (d'aire $a e$).
+    La puissance dissipée sur les surfaces avant et arrière (d'aire $l e$) est négligeable devant celle dissipée sur les surfaces haute et basse (d'aire $l a$) car $a >> e$. Idem pour la surface de droite (d'aire $a e$).
 
     La puissance dissipée par l'ailette est donc donnée par
     $

@@ -5,7 +5,7 @@
     explique: true,
 )
 
-Les échographies sont des technique d"imagerie médicale utilisant des ondes sonores pour visualiser l'intérieur du corps humain. Elles sont utilisées pour examiner les organes internes, les tissus mous et les vaisseaux sanguins.
+Les échographies sont des techniques d'imagerie médicale utilisant des ondes sonores pour visualiser l'intérieur du corps humain. Elles sont utilisées pour examiner les organes internes, les tissus mous et les vaisseaux sanguins.
 
 #question()[
     Comment fonctionnent les échographies ?

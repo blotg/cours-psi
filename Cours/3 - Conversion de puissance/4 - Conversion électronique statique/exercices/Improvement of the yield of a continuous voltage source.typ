@@ -45,12 +45,12 @@ The values of the components are $r=#qty("5", "O")$, $R=#qty("10", "O")$, $E=#qt
     For the circuit (a), ascertain the power received by the resistor $R$ and delivered by the generator on each part of the period. Deduce and calculate the yield of the device.
 ][
     / Between $0$ and $alpha T$: $u_R = R/(R+r)E$ so
-    $ p_R = u_r^2/R = R/(R+r)^2 E^2 $
+    $ p_R = u_R^2/R = R/(R+r)^2 E^2 $
     $ p_e =  E^2/(R+r) $
     / Between $alpha T$ and $T$: $u_R = 0$ so $p_R = 0$
     The mean power received by the resistor is therefore $P_R = alpha R/(R+r)^2 E^2$, and the mean power delivered by the source is $P_e = alpha E^2/(R+r)$.
     
-    The yield is therefore $eta = P_R/P_e = R/(R+r) = approx #num(scientifique(2/3,1))$.
+    The yield is therefore $eta = P_R/P_e = R/(R+r) approx #num(scientifique(2/3,1))$.
 ]
 
 #question(

@@ -43,15 +43,15 @@ On s'intéresse à un redresseur triphasé représenté ci-dessous.
 
 #question(
     coups-de-pouce: (
-        "Justifier que parmi les diodes $D_0$, $D_2$ et $D_3$, au moins une est passante.",
+        "Justifier que parmi les diodes $D_0$, $D_1$ et $D_2$, au moins une est passante.",
         "Quelles sont les caractéristiques des diodes bloquées ? Que peut-on dire de la tension à leurs bornes ?",
     )
 )[
     Justifier que $V_+ = max(u_1, u_2, u_3)$.
 ][
-    On s'intéresse au trois diodes $D_0$, $D_2$ et $D_3$. Au moins une de ces diodes est passante, sinon la source de courant est en circuit ouvert.
+    On s'intéresse aux trois diodes $D_0$, $D_1$ et $D_2$. Au moins une de ces diodes est passante, sinon la source de courant est en circuit ouvert.
 
-    Pour les diodes bloquées, la tension à leur bornes, en convention direct, est négative (d'après leur caractéristique), ce qui signifie que pour ces diodes bloquées, $V_+ >= u_...$. Pour la diode passante, $V_+ = u_...$. Ainsi, $V_+$ est égal à la tension maximale des trois tensions d'entrée.
+    Pour les diodes bloquées, la tension à leurs bornes, en convention directe, est négative (d'après leur caractéristique), ce qui signifie que pour ces diodes bloquées, $V_+ >= u_...$. Pour la diode passante, $V_+ = u_...$. Ainsi, $V_+$ est égal à la tension maximale des trois tensions d'entrée.
 ]
 
 On peut montrer de la même manière que $V_- = min(u_1, u_2, u_3)$.

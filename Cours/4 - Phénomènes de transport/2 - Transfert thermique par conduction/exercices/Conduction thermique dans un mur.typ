@@ -4,7 +4,7 @@
     titre: "Conduction thermique dans un mur",
 )
 
-On s'intéresse à un mur de surface $S=qty("30", "m^2")$ qui sépare l'intérieur d'une maison de son extérieur. Le mur est constitué d'une épaisseur $e_p=#qty("30", "cm")$ de pierre de conductivité thermique $lambda_p=qty("2.2", "W/m/K")$ et d'une épaisseur $e_l=qty("15", "cm")$ de laine de verre de de conductivité thermique $lambda_l=qty("0.03", "W/m/K")$.
+On s'intéresse à un mur de surface $S=qty("30", "m^2")$ qui sépare l'intérieur d'une maison de son extérieur. Le mur est constitué d'une épaisseur $e_p=#qty("30", "cm")$ de pierre de conductivité thermique $lambda_p=qty("2.2", "W/m/K")$ et d'une épaisseur $e_l=qty("15", "cm")$ de laine de verre de conductivité thermique $lambda_l=qty("0.03", "W/m/K")$.
 
 L'intérieur de la maison est à une température $T_i=qty("20", "Celsius")$ et l'extérieur à $T_e=qty("5", "Celsius")$. Pour un fluide en contact avec un solide, le vecteur densité de courant thermique $va(j)$ suit la loi de Newton : $va(j)=h(T_s-T_infinity) va(e)$ où $va(e)$ est un vecteur unitaire dirigé du solide vers le fluide, $h=qty("10", "W/m^2/K")$ pour l'air, $T_s$ la température du solide à sa surface et $T_infinity$ la température du fluide loin du solide. Le contact thermique entre la pierre et la laine de verre est parfait.
 
@@ -29,8 +29,8 @@ L'étude s'intéresse au régime stationnaire.
 
 #question(
     coups-de-pouce: (
-        "A quelle condition $va(j)$ est-il continu ?",
-        "A quelle condition $T$ est-il continu ?",
+        "À quelle condition $va(j)$ est-il continu ?",
+        "À quelle condition $T$ est-il continu ?",
     ),
 )[
     Quelles sont les conditions aux limites vérifiées à chaque interface (par $T$ ou par $va(j)$) ?
@@ -76,7 +76,7 @@ L'étude s'intéresse au régime stationnaire.
 ][
     La loi de Newton s'écrit $va(j)=h(T_s-T_infinity) va(e)$. Le flux thermique s'écrit donc $Phi = S j = h S (T_s - T_infinity)$.
 
-    On peut réécrire cette relation sous la forme $T_s - T_infinity = phi/(h S)$.
+    On peut réécrire cette relation sous la forme $T_s - T_infinity = Phi/(h S)$.
 
     On en déduit que la résistance thermique associée au transfert thermique entre le solide et le fluide est $R_"th,conv" = 1/(h S)$.
 ]

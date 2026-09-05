@@ -9,7 +9,7 @@
     "delta W": (signification: "le travail reçu", unité: unit("J")),
     "delta Q": (signification: "la chaleur reçue", unité: unit("J")),
     "cal(S)": (signification: "l'entropie", unité: unit("J/K")),
-    "delta cal(S)_e": (signification: "$=(delta Q)/T_\"ext\"$l'entropie échangée", unité: unit("J/K")),
+    "delta cal(S)_e": (signification: "$=(delta Q)/T_\"ext\"$ l'entropie échangée", unité: unit("J/K")),
     "delta cal(S)_c": (signification: "$>0$ l'entropie créée", unité: unit("J/K")),
     "T_\"ext\"": (signification: "la température extérieure", unité: unit("K")),
     "dd(S)": (signification: "la surface élémentaire", unité: unit("m^2")),
@@ -18,14 +18,14 @@
     "Phi": (signification: "la puissance traversant une surface", unité: unit("W")),
     "lambda": (signification: "la conductivité thermique", unité: unit("W/m/K")),
     "T": (signification: "la température", unité: unit("K")),
-    "u": (signification: "l'énergie interne volumique", unité: unit("J/m^3")),
+    "u": (signification: "l'énergie interne massique", unité: unit("J/kg")),
     "cal(P)_V": (signification: "la puissance volumique convertie en chaleur", unité: unit("W/m^3")),
     "D_\"th\"": (signification: "$=lambda/(mu c_V)$ la diffusivité thermique", unité: unit("m^2/s")),
     "mu": (signification: "la masse volumique", unité: unit("kg/m^3")),
     "c_V": (signification: "la capacité thermique massique à volume constant", unité: unit("J/kg/K")),
     "f": (signification: "une fonction de $x$ quelconque"),
-    "F": (signification: "un ordre de grandeurs des variations de $f$"),
-    "l": (signification: "un ordre de grandeurs de la distance", unité: unit("m")),
+    "F": (signification: "un ordre de grandeur des variations de $f$"),
+    "l": (signification: "un ordre de grandeur de la distance", unité: unit("m")),
     "tau": (signification: "le temps caractéristique de diffusion thermique", unité: unit("s")),
     "cal(T)": (signification: "la durée caractéristique de variation de la température", unité: unit("s")),
     "R_\"th\"": (signification: "la résistance thermique", unité: unit("K/W")),
@@ -68,10 +68,10 @@
 
 La formule de la différentielle d'une fonction de deux variables peut être généralisée pour un nombre quelconque de variables.
 
-Une quantité $A dd(x)+B dd(y)$ est une *forme différentielle*. On note les formes différentielle avec un $delta$ : $delta f=A dd(x)+B dd(y)$. Une quantité $A dd(x)+B dd(y)$ est une différentielle ssi il existe $f$ telle que $dd(f)=A dd(x) + B dd(y)$.
+Une quantité $A dd(x)+B dd(y)$ est une *forme différentielle*. On note les formes différentielles avec un $delta$ : $delta f=A dd(x)+B dd(y)$. Une quantité $A dd(x)+B dd(y)$ est une différentielle ssi il existe $f$ telle que $dd(f)=A dd(x) + B dd(y)$.
 
 #application[
-    Les formes différentielles suivantes sont-elles des sont-elles des différentielles ?
+    Les formes différentielles suivantes sont-elles des différentielles ?
     $ delta f = x dd(x) + y dd(y) $
     $ delta g = y dd(x) + x dd(y) $
 ]
@@ -86,10 +86,10 @@ L'intégrale d'une forme différentielle $integral_((P Q)) delta f$ dépend du c
     On note $W=- integral dd(E_p)$ car pour une force conservative, le travail est indépendant du chemin suivi.
 ]
 
-En physique, les grandeurs notées $dd(f)$ représentent des *variation* infinitésimales.
+En physique, les grandeurs notées $dd(f)$ représentent des *variations* infinitésimales.
 
 #exemple[
-    Entre $t$ et $t+dd(t)$, la température augment de $dd(T)$.
+    Entre $t$ et $t+dd(t)$, la température augmente de $dd(T)$.
 ]
 
 #flashcard(
@@ -147,13 +147,13 @@ La variation d'énergie $dd(E)$ est une petite variation et s'écrit bien avec u
 
 #flashcard(
     recto: "Second principe de la thermodynamique pour une transformation infinitésimale.",
-    verso: "$dd(S)=delta S_e + delta S_c$ avec $delta S_e=(delta Q)/T_\"ext\"$ et $delta S_c >= 0$",
+    verso: "$dd(cal(S))=delta cal(S)_e + delta cal(S)_c$ avec $delta cal(S)_e=(delta Q)/T_\"ext\"$ et $delta cal(S)_c >= 0$",
 )
 
-La variation de d'entropie $dd(cal(S))$ est une petite variation et s'écrit bien avec un $d$. La chaleur $delta Q$, l'entropie échangée $delta cal(S)_e$ et l'entropie créée $delta cal(S)_c$ des petites quantités et s'écrivent bien avec un $delta$.
+La variation d'entropie $dd(cal(S))$ est une petite variation et s'écrit bien avec un $d$. La chaleur $delta Q$, l'entropie échangée $delta cal(S)_e$ et l'entropie créée $delta cal(S)_c$ sont des petites quantités et s'écrivent bien avec un $delta$.
 
 == Équilibre thermodynamique local
-=== Les 3 échèles
+=== Les 3 échelles
 / Échelle microscopique ($tilde qty("e-10", "m")$): C'est l'échelle des molécules du système. Ces molécules sont animées d'un mouvement erratique. Les grandeurs thermodynamiques n'ont pas de sens pour une molécule.
 
 / Échelle macroscopique ($tilde qty("e-2", "m")$): C'est l'échelle des systèmes étudiés dans leur ensemble.\ Si le système est à l'équilibre thermodynamique, on peut définir ses grandeurs thermodynamiques (température, pression, ...) et les étudier comme vu en première année. \ Lorsqu'il y a des transferts thermiques à l'intérieur d'un système, ce système n'est pas à l'équilibre thermodynamique. Certaines des grandeurs thermodynamiques de ce système (température, pression, ...) ne sont donc pas définies.
@@ -162,16 +162,16 @@ La variation de d'entropie $dd(cal(S))$ est une petite variation et s'écrit bie
 
 L'échelle mésoscopique sert
 - pour décrire les systèmes qui ne sont pas à l'équilibre thermodynamique
-- pour passer des propriétés microscopiques au propriétés macroscopiques
+- pour passer des propriétés microscopiques aux propriétés macroscopiques
 
 Les grandeurs extensives associées à un système mésoscopique sont notées avec un $delta$ car ce sont des quantités infinitésimales : $delta U$, $delta V$, ...
 
 === Équilibre thermodynamique local
-Si un système macroscopique peut être découpé en systèmes mésoscopiques qui sont tous à l'équilibre thermodynamique, on dit qu'il y a équilibre thermodynamique local. A l'équilibre thermodynamique local, les grandeurs thermodynamiques sont définies pour les systèmes mésoscopiques.
+Si un système macroscopique peut être découpé en systèmes mésoscopiques qui sont tous à l'équilibre thermodynamique, on dit qu'il y a équilibre thermodynamique local. À l'équilibre thermodynamique local, les grandeurs thermodynamiques sont définies pour les systèmes mésoscopiques.
 
-A l'équilibre thermodynamique local, les grandeurs thermodynamiques sont des champs#footnote[Un champ est une fonction définie sur tous les points de l'espace.]. Par exemple, la température au point $M$ $T(M)$ est définie comme la température d'un système mésoscopique centré sur le point $M$. Cette température existe car à l'équilibre thermodynamique local, tous les systèmes mésoscopiques sont à l'équilibre thermodynamique. De plus, cette température ne dépend pas du choix, arbitraire, du système mésoscopique.
+À l'équilibre thermodynamique local, les grandeurs thermodynamiques sont des champs#footnote[Un champ est une fonction définie sur tous les points de l'espace.]. Par exemple, la température au point $M$ $T(M)$ est définie comme la température d'un système mésoscopique centré sur le point $M$. Cette température existe car à l'équilibre thermodynamique local, tous les systèmes mésoscopiques sont à l'équilibre thermodynamique. De plus, cette température ne dépend pas du choix, arbitraire, du système mésoscopique.
 
-Ces champs n'ont un sens que pour les grandeurs intensives car ils dépendraient du choix du volume mésoscopique. On transforme donc les grandeurs extensives en grandeurs intensives en divisant soit par la masse soit par le volume.
+Ces champs n'ont un sens que pour les grandeurs intensives : pour une grandeur extensive, ils dépendraient du choix, arbitraire, du volume mésoscopique. On transforme donc les grandeurs extensives en grandeurs intensives en divisant soit par la masse soit par le volume.
 
 #figure(
     table(
@@ -295,7 +295,7 @@ Le signe "$-$" dans la loi de Fourier traduit le sens de déplacement de la chal
 
 = Équation de la diffusion thermique
 == Bilan d'énergie
-Le premier principe de la thermodynamique traduit la conservation de l'énergie, c'est-à dire que l'énergie ne peut pas être créée ou détruite, elle ne peut que se transformer d'une forme à l'autre.
+Le premier principe de la thermodynamique traduit la conservation de l'énergie, c'est-à-dire que l'énergie ne peut pas être créée ou détruite, elle ne peut que se transformer d'une forme à l'autre.
 
 #exemple[
     Quand un vélo freine, son énergie mécanique se transforme en énergie thermique.
@@ -305,7 +305,7 @@ Quand une grandeur se conserve, on peut en faire le bilan.
 
 Faire le bilan d'une grandeur dans un système veut dire compter combien de cette grandeur rentre dans ce système et combien y est créée. On ne s'intéresse qu'au flux rentrant car un flux sortant est un flux entrant de sens opposé.
 
-En faisant un bilan sur un volume infinitésimale entre $t$ et $t+d t$, on aboutit à l'équation locale de conservation de l'énergie.
+En faisant un bilan sur un volume infinitésimal entre $t$ et $t+d t$, on aboutit à l'équation locale de conservation de l'énergie.
 
 #encadré(
     titre: "Équation locale de conservation de l'énergie",
@@ -317,7 +317,7 @@ En faisant un bilan sur un volume infinitésimale entre $t$ et $t+d t$, on about
     ),
     grandeurs: sub-dictionary(grandeurs, ("u", "va(j_Q)", "cal(P)_V")),
 )[
-    $ mu pdv(u, t)=-div va(j_Q) + cal(P)_v $
+    $ mu pdv(u, t)=-div va(j_Q) + cal(P)_V $
 ]
 
 #flashcard(
@@ -339,14 +339,14 @@ Lorsqu'on remplace le vecteur densité de courant thermique $va(j_Q)$ grâce à 
     ),
     grandeurs: sub-dictionary(grandeurs, ("T", "D_\"th\"", "cal(P)_V", "mu", "c_V", "lambda")),
 )[
-    $ pdv(T, t) - D_"th" Delta T = cal(P)_v/(mu c_V) $
+    $ pdv(T, t) - D_"th" Delta T = cal(P)_V/(mu c_V) $
 ]
 
 Le coefficient $D_"th"$ est appelé diffusivité thermique ou coefficient de diffusion thermique.
 
 #flashcard(
     recto: "Équation de diffusion thermique.",
-    verso: "$ pdv(T, t) - D_\"th\" Delta T = cal(P)_v/(mu c_V) $",
+    verso: "$ pdv(T, t) - D_\"th\" Delta T = cal(P)_V/(mu c_V) $",
 )
 
 == Analyse en ordres de grandeurs
@@ -374,7 +374,7 @@ Si on analyse en ordres de grandeurs l'équation de diffusion thermique, on peut
     $ tau = (l^2)/(D_"th") $
 ]
 
-Comme la durée caractéristique dépend de $l^2$, l'onde de température ralenti en se propageant : elle met 4 fois plus de temps pour parcourir une distance 2 fois plus grande.
+Comme la durée caractéristique dépend de $l^2$, l'onde de température ralentit en se propageant : elle met 4 fois plus de temps pour parcourir une distance 2 fois plus grande.
 
 #application[
     Si je plonge une cuillère de #qty("20", "cm") en acier ($mu=#qty("8e3", "kg/m^3")$, $c_V=qty("4e2", "J/K/kg")$) dans une casserole d'eau bouillante, quel est l'ordre de grandeur de la durée au bout de laquelle la queue de la cuillère devient chaude ?
@@ -421,7 +421,7 @@ Dans l'ARQS, les grandeurs ne varient pas très vite avec le temps. Dans l'ARQS,
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("l", "D_\"th\"", "cal(T)")),
 )[
-    $ l^2 << D_"th"/cal(T) $
+    $ l^2 << D_"th" cal(T) $
 ]
 
 == Conservation du flux de $va(j_Q)$
@@ -443,7 +443,7 @@ Dans l'ARQS, les grandeurs ne varient pas très vite avec le temps. Dans l'ARQS,
 En régime stationnaire, le flux de chaleur est conservatif.
 
 == Résistance thermique
-Dans l'ARQS, la différence de température entre les extrémités d'un système est proportionnelle avec le flux thermique. Le facteur de proportionnalité s'appelle la *résistance thermique*.
+Dans l'ARQS, la différence de température entre les extrémités d'un système est proportionnelle au flux thermique. Le facteur de proportionnalité s'appelle la *résistance thermique*.
 
 #schéma(titre: "Convention récepteur pour une résistance thermique", hauteur: 3cm)
 
@@ -517,7 +517,7 @@ Si deux résistances thermiques sont en parallèle, elles sont soumises à la m�
 
 #application[
     #add-unit("tog", "tog", "upright(\"tog\")")
-    Déterminer la résistance thermique équivalente d'une gigoteuse de surface #qty("0.5", "m^2") et de #qty("2", "tog")#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un #qty("1", "tog") correspond à #qty("0.1", "m^2 K/W").] et d'un bonnet de surface #qty("400", "cm^2") et de #qty("1", "tog").
+    Déterminer la résistance thermique équivalente d'une gigoteuse de surface #qty("0.5", "m^2") et de #qty("2", "tog")#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un tog correspond à #qty("0.1", "m^2 K/W").] et d'un bonnet de surface #qty("400", "cm^2") et de #qty("1", "tog").
 ]
 
 == Circuit RC thermique
@@ -536,7 +536,7 @@ Le circuit RC thermique correspond à une capacité thermique en contact avec un
         "Le système est à l'équilibre thermodynamique local",
         "Le système est incompressible et macroscopiquement immobile",
         "La température est uniforme dans le système",
-        [a capacité thermique à volume constant $C_V$ est constante.],
+        [La capacité thermique à volume constant $C_V$ est constante.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("T", "T_0", "T_\"ext\"", "R_\"th\"", "C_V")),
 )[
@@ -573,11 +573,11 @@ On peut faire une analogie entre l'électrocinétique et la thermique.
         [$V_1 - V_2 = R I$ #h(1em) (#unit("V"))],
 
         [Capacité],
-        [$c_V$ #h(1em) (#unit("J/K"))],
+        [$C_V$ #h(1em) (#unit("J/K"))],
         [$C$ #h(1em) (#unit("F"))],
 
         [Équation différentielle pour un RC],
-        [$R_"th" c_V pdv(T, t) + T = T_"ext"$],
-        [$R C pdv(u, t) + u = E$],
+        [$R_"th" C_V dv(T, t) + T = T_"ext"$],
+        [$R C dv(u, t) + u = E$],
     ),
 )

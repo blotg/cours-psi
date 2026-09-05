@@ -277,7 +277,7 @@ Un métal parfait est un métal de conductivité électrique infinie.
 
 Dans un métal parfait, la profondeur de peau est nulle. Dans un métal parfait, les champs électrique et magnétique sont nuls.
 
-= Ondes électromagnétiques un plasma
+= Ondes électromagnétiques dans un plasma
 == Le plasma
 
 Un *plasma* est un état de la matière. Dans un plasma, des atomes ou des molécules ont été ionisés. Dans un plasma, il y a des électrons, des cations et éventuellement des espèces neutres. Un plasma est globalement neutre.

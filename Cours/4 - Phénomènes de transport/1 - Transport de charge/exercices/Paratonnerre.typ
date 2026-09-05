@@ -28,12 +28,12 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 
 #question(
     coups-de-pouce: (
-        "Exprimer le courant passant dans une demi sphère dans le sol, de rayon $r$ en fonction de $r$ et $j$. Ce courant dépend-il de $r$ ?",
+        "Exprimer le courant passant dans une demi-sphère dans le sol, de rayon $r$ en fonction de $r$ et $j$. Ce courant dépend-il de $r$ ?",
     ),
 )[
     Justifier que $va(j)$ est à flux conservatif. En déduire la dépendance en $r$ de $va(j)$.
 ][
-    L'énoncé précise que le regime est stationnaire. Dans ce cas, $va(j)$ est à flux conservatif.
+    L'énoncé précise que le régime est stationnaire. Dans ce cas, $va(j)$ est à flux conservatif.
 
     Le courant $I$ traversant une demi-sphère de rayon $r>R$ est donc le même quel que soit $r$ (il ne dépend pas de $r$).
 
@@ -85,7 +85,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 #question(
     coups-de-pouce: (),
 )[
-    Cette résistance ne doit pas dépasse #qty("30", "O"). Déterminer le rayon minimum de la demi-sphère.
+    Cette résistance ne doit pas dépasser #qty("30", "O"). Déterminer le rayon minimum de la demi-sphère.
 ][
 
     $ R=1/(2 pi gamma R_"sol") = #qty(scientifique(R, 2), "m") $
@@ -93,7 +93,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 
 #let I = 300e3
 #question(
-    coup-de-pouce: (),
+    coups-de-pouce: (),
 )[
     Pour un éclair, le courant peut atteindre #qty("300", "kA"). Tracer $V(r)$ et faire l'application numérique de $V(R)$ pour une résistance du sol de #qty("30", "O").
 ][
@@ -128,7 +128,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 #question(
     coups-de-pouce: (
         "Calculer la différence de potentiel maximale admissible entre deux pieds d'un être humain.",
-        "Quelle distance $d$ y a-t-il typiquement entre deux pieds.",
+        "Quelle distance $d$ y a-t-il typiquement entre deux pieds ?",
         "Dans le pire des cas, les pieds sont \"l'un derrière l'autre\" : leurs coordonnées $r$ sont séparées de $d$.",
     ),
 )[

@@ -4,9 +4,9 @@
     titre: "Size of marine mammals",
 )
 
-Marine mammals are warm-blooded animas whose temperature remain constant. To maintain this temperature, exothermal reactions happen in their cells and produce a volumetric power $a$. The total power produced by the mammal is $P$.
+Marine mammals are warm-blooded animals whose temperature remains constant. To maintain this temperature, exothermal reactions happen in their cells and produce a volumetric power $a$. The total power produced by the mammal is $P$.
 
-To simplify, mammals are described as spheres of radius $R$, immersed in immobile water of thermal conductivity $lambda$ and which temperature is $T_infinity$ far away from the animal.
+To simplify, mammals are described as spheres of radius $R$, immersed in immobile water of thermal conductivity $lambda$ and whose temperature is $T_infinity$ far away from the animal.
 
 The problem is supposed to be invariant through a rotation about $theta$ and $phi$.
 
@@ -71,11 +71,11 @@ The problem is supposed to be invariant through a rotation about $theta$ and $ph
 ][
     The thermal flux at the surface of the animal is given by Fourier's law :
     $
-        j_Q (R) = - lambda pdv(T,r) (r=R) = - lambda (T_0 - T_infinity) R / R^2 = - lambda (T_0 - T_infinity) / R
+        j_Q (R) = - lambda pdv(T,r) (r=R) = lambda (T_0 - T_infinity) R / R^2 = lambda (T_0 - T_infinity) / R
     $
     The total power lost by the animal is then :
     $
-        P = - j_Q (R) 4 pi R^2 = 4 pi lambda R (T_0 - T_infinity)
+        P = j_Q (R) 4 pi R^2 = 4 pi lambda R (T_0 - T_infinity)
     $
 ]
 

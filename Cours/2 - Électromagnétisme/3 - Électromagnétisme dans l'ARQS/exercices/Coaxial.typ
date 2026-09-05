@@ -75,9 +75,9 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
 ))[
   Déterminer le flux de $va(B)(M)$ à travers une surface rectangulaire $P Q R S$ correspondant à une longueur $l$ du câble, orientée dans le sens de $+va(e_theta)$.
 ][
-  On choisit comme surface élémentaire $dd(S) = dd(r) dd(z) va(e_theta)$. Le flux s'écrit donc :
+  On choisit comme surface élémentaire $va(dd(S)) = dd(r) dd(z) va(e_theta)$. Le flux s'écrit donc :
   $ Phi = integral.double_S va(B).va(dd(S)) = integral_(z=0)^(l) integral_(r=a)^(b) (mu_0 I)/(2 pi r) dd(r) dd(z) = (mu_0 I l)/(2 pi) ln(b/a) $
-])
+]
 
 #question(coups-de-pouce: (
   "Rappeler la définition de l'inductance propre.",
@@ -97,7 +97,7 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
   Effectuer l'application numérique pour un câble standard, où $l=qty(#scientifique(l,1),"m")$, $a=qty(#scientifique(a,1),"m")$ et $b=qty(#scientifique(b,1),"m")$.
 ][
   #let L = (mu0 * l) / (2 * calc.pi) * calc.log(b / a)
-  On trouve $ L approx qty(#scientifique(L,1),"H/m") $
+  On trouve $ L approx qty(#scientifique(L,1),"H") $
 ]
 
 ]

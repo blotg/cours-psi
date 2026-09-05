@@ -26,11 +26,12 @@
 // Le marqueur (emoji + numéro) suit la couleur du bandeau : noir sur fond
 // clair, blanc sur fond noir.
 #let _bandeau(intitulé, titre: none, marqueur: none, noir: false) = {
+    import "helper-functions.typ": apostrophes
     set text(fill: if noir { white } else { black })
     strong(intitulé)
     if titre != none and titre != "" {
         text(fill: if noir { luma(75%) } else { _gris })[#h(0.4em)#sym.dash.en#h(0.4em)]
-        titre
+        apostrophes(titre)
     }
     if marqueur != none {
         h(1fr)
@@ -141,6 +142,13 @@
 ) = {
     if type(coups-de-pouce) == str { coups-de-pouce = (coups-de-pouce,) }
     assert(type(coups-de-pouce) == array)
+    // `..autres` avale tout argument nommé inconnu sans broncher : sans ce
+    // garde-fou, un `coup-de-pouce:` mal orthographié perd silencieusement ses
+    // coups de pouce, à la compilation comme dans le PDF.
+    assert(
+        autres.named().len() == 0,
+        message: "question() : argument nommé inconnu " + repr(autres.named().keys()),
+    )
     let corrigé = if autres.pos().len() > 0 { autres.pos().first() }
     numQuestion.step()
     parbreak()
@@ -206,6 +214,7 @@
     ouvert: false,
     explique: false,
 ) = [
+    #import "helper-functions.typ": apostrophes
     #numQuestion.update(0)
     #heading(depth: 1, [
         #if explique [
@@ -217,7 +226,7 @@
         #if numérique [
             #text(font: "Noto Emoji", emoji.computer)
         ]
-        #titre
+        #apostrophes(titre)
         #text(fill: _gris)[#for _ in range(difficulté) { sym.star.filled }]
     ]) <titre-exercice>
     #if ouvert [
@@ -260,7 +269,9 @@
 }
 
 #let encadré(titre: "", connaitre: false, savoir-faire: false, hypothèses: (), grandeurs: (:), contenu) = {
+    import "helper-functions.typ": apostrophes
     if type(hypothèses) in (str, content) { hypothèses = (hypothèses,) }
+    hypothèses = hypothèses.map(apostrophes)
 
     let marqueur = none
     if connaitre and savoir-faire {

@@ -63,7 +63,7 @@ On note $va(v) = v_r er + v_theta etheta$.
         va(0) = -e va(E) - e va(v) and va(B_0) - m_e/tau va(v)
     $
     $
-        va(0) = -e E er - e (v_e er + v_theta etheta) and B_0 ez - m_e/tau (v_e er + v_theta etheta)
+        va(0) = -e E er - e (v_r er + v_theta etheta) and B_0 ez - m_e/tau (v_r er + v_theta etheta)
     $
     $
         cases(
@@ -74,15 +74,15 @@ On note $va(v) = v_r er + v_theta etheta$.
     En combinant ces deux équations, on trouve
     $
         cases(
-            v_r = -(e m_e)/(m_e^2+e^2 tau^2 B_0^2) E,
-            v_theta = -(e^2 tau B_0)/(m_e^2 + tau^2 B_0^2) E
+            v_r = -(e m_e tau)/(m_e^2+e^2 tau^2 B_0^2) E,
+            v_theta = -(e^2 tau^2 B_0)/(m_e^2 + e^2 tau^2 B_0^2) E
         )
     $
     Or $j=n (-e) v$, donc
     $
         cases(
-            j_r = (n e^2 m_e)/(m_e^2+e^2 tau^2 B_0^2) E,
-            j_theta = (n e^3 tau B_0)/(m_e^2 + e^2 tau^2 B_0^2) E
+            j_r = (n e^2 m_e tau)/(m_e^2+e^2 tau^2 B_0^2) E,
+            j_theta = (n e^3 tau^2 B_0)/(m_e^2 + e^2 tau^2 B_0^2) E
         )
     $
 ]
@@ -99,10 +99,10 @@ On note $va(v) = v_r er + v_theta etheta$.
       I = integral.double_S_r va(j) dot dd(S) er = 2 pi l r j_r (r)
     $
     $
-        V_1 - V_2 = integral_(R_1)^(R_2) va(E) dot dd(r) er = integral_(R_1)^(R_2) (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e) j_r (r) dd(r)\
-    = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e) integral_(R_1)^(R_2) I/(2 pi l r) dd(r)\
-    = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e) I/(2 pi l) ln(R_2/R_1)
+        V_1 - V_2 = integral_(R_1)^(R_2) va(E) dot dd(r) er = integral_(R_1)^(R_2) (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e tau) j_r (r) dd(r)\
+    = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e tau) integral_(R_1)^(R_2) I/(2 pi l r) dd(r)\
+    = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e tau) I/(2 pi l) ln(R_2/R_1)
      = R I
     $
-    Avec $ R = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e 2 pi l) ln(R_2/R_1) $
+    Avec $ R = (m_e^2 + e^2 tau^2 B_0^2)/(n e^2 m_e tau 2 pi l) ln(R_2/R_1) $
 ]

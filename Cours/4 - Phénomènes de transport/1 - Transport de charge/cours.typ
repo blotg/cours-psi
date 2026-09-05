@@ -44,7 +44,7 @@
 
 = Différentes descriptions de la charge électrique
 == Description macroscopique (OdG : #unit("cm"))
-Certains objects peuvent posséder une charge électrique. La charge électrique se mesure en Coulomb (C).
+Certains objets peuvent posséder une charge électrique. La charge électrique se mesure en Coulomb (C).
 
 #exemple[
     Les armatures des condensateurs possèdent une charge électrique.
@@ -78,14 +78,14 @@ Une troisième échelle, intermédiaire, est nécessaire pour
 - décrire des systèmes pour lesquels la charge et le courant ne sont pas les mêmes partout,
 - passer des propriétés microscopiques des matériaux à leurs propriétés macroscopiques.
 
-L'échelle mésoscopique est très petite devant d'échelle macroscopique.
+L'échelle mésoscopique est très petite devant l'échelle macroscopique.
 
-L'échelle mésoscopique est très grande devant l'échelle microscopique. Un système mésoscopiques contient un grand nombre de porteurs de charge.
+L'échelle mésoscopique est très grande devant l'échelle microscopique. Un système mésoscopique contient un grand nombre de porteurs de charge.
 
 #schéma(titre: "Système mésoscopique", hauteur: 3cm)
 Il y a constamment des particules qui rentrent et qui sortent du système mésoscopique. Comme le système est très grand, les fluctuations dues à l'agitation sont négligeables.
 
-Le système volumique permet de définir des grandeurs locales.
+Le système mésoscopique permet de définir des grandeurs locales.
 
 #encadré(
     titre: "Densité particulaire",
@@ -116,7 +116,7 @@ Le système volumique permet de définir des grandeurs locales.
     $ rho=n q $
 ]
 
-Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer la contributions de chacun : $rho=sum_"types de porteurs de charge" n_i q_i$.
+Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contributions de chacun : $rho=sum_"types de porteurs de charge" n_i q_i$.
 
 #application[
     Le fer $isotope("Fe", z: 26)$ a pour masse volumique $rho=#qty("7.9", "g/cm^3")$ et une masse molaire $M=#qty("56", "g/mol")$. Calculer la densité particulaire de noyaux de fer, la densité particulaire d'électrons et enfin la densité volumique de charge.
@@ -150,16 +150,16 @@ Pour rendre compte du déplacement global des porteurs de charge, on définit le
     hypothèses: (
         "Tous les porteurs de charge libres sont identiques",
     ),
-    grandeurs: sub-dictionary(grandeurs, ("va(j_\"élec\")", "n_\"libre\"", "q", "v", "rho_\"libre\"", "v")),
+    grandeurs: sub-dictionary(grandeurs, ("va(j_\"élec\")", "n_\"libre\"", "q", "v", "rho_\"libre\"")),
 )[
     $ va(j_"élec") = n_"libre" q va(v) = rho_"libre" va(v) $
 ]
 
-Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer la contributions de chacun : $va(j_"élec")= sum_"types de porteurs de charge"n_i q_i va(v)_i= sum_"types de porteurs de charge" rho_i va(v)_i$.
+Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contributions de chacun : $va(j_"élec")= sum_"types de porteurs de charge"n_i q_i va(v)_i= sum_"types de porteurs de charge" rho_i va(v)_i$.
 
 #flashcard(
     recto: "Vecteur densité de courant électrique.",
-    verso: "$va(j_\"élec\") = rho_\"libre\" va(v) = n_\"libre\" q va(v)$}",
+    verso: "$va(j_\"élec\") = rho_\"libre\" va(v) = n_\"libre\" q va(v)$",
 )
 
 == Grandeurs locales et globales
@@ -241,9 +241,9 @@ Les matériaux conducteurs d'électricité sont nombreux.
 #exemple[
     Les solutions ioniques, les plasmas, les semi-conducteurs, les métaux (cuivre, or, acier, bronze, ...) sont des milieux conducteurs.
 ]
-On s'intéressera dans la suite uniquement aux corps simples#footnote[Un corps simple est une substance chimique constituée d'un seul type d'atome.] cristallin métaux et semi-conducteurs. Les résultats pourront être généralisés à tout métal mais *pas* à tout.e conducteur, semi-conducteur ou solution ionique.
+On s'intéressera dans la suite uniquement aux corps simples#footnote[Un corps simple est une substance chimique constituée d'un seul type d'atome.] cristallins, métaux et semi-conducteurs. Les résultats pourront être généralisés à tout métal mais *pas* à tout conducteur, semi-conducteur ou solution ionique.
 
-Un métal est un cristal ionique dans lequel certains électrons de Valence sont libres de se déplacer. Les électrons libres de se déplacer sont appelés électrons de conduction et forment la "mer d'électrons" qui transporte la charge macroscopiquement.
+Un métal est un cristal ionique dans lequel certains électrons de valence sont libres de se déplacer. Les électrons libres de se déplacer sont appelés électrons de conduction et forment la "mer d'électrons" qui transporte la charge macroscopiquement.
 
 Le modèle de Drude est un modèle classique du déplacement des électrons dans un cristal. Dans le modèle de Drude, les électrons de conduction ont des mouvements désordonnés dans le réseau cristallin du fait des collisions avec les atomes du réseau. La vitesse de l'électron est aléatoire après la collision et toutes les directions sont équiprobables.
 
@@ -374,8 +374,8 @@ La puissance reçue par l'électron de la part du champ électrique est dissipé
     La vitesse typique des électrons dans un métal est de #qty("e6","m/s"). Calculer le libre parcours moyen d'un électron. Le comparer à la distance interatomique dans un cristal.
 ]
 
-Il semble peu probable qu'un électron puisse voyager aussi longtemps dans le cristal sans subit de choc.
+Il semble peu probable qu'un électron puisse voyager aussi longtemps dans le cristal sans subir de choc.
 
 Le modèle de Drude explique bien la conduction électrique dans les métaux dans les conditions usuelles. Toutefois, le modèle de Drude possède des limites.
 
-Un modèle plus précis devrait prendrait en compte l'interaction entre l'électron et le réseau cristallin de façon quantique.
+Un modèle plus précis devrait prendre en compte l'interaction entre l'électron et le réseau cristallin de façon quantique.

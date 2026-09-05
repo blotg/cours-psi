@@ -18,13 +18,13 @@
     }),
 )
 
-La source d'entrée présente une tension $E>0$ constante, celle de sortie est parcouru par un courant d'intensité $I>0$ constant. $i_e$, $u$, $i_1$, $i_2$, $i_3$ et $i_4$ dépendent du temps.
+La source d'entrée présente une tension $E>0$ constante, celle de sortie est parcourue par un courant d'intensité $I>0$ constant. $i_e$, $u$, $i_1$, $i_2$, $i_3$ et $i_4$ dépendent du temps.
 
 
 #question(
     coups-de-pouce: (
         "Pour dresser la liste des états sans en oublier, on peut s'inspirer du comptage en binaire.",
-        "La source de tension de doit pas être court-circuitée. La source de courant ne doit pas être en circuit ouvert.",
+        "La source de tension ne doit pas être court-circuitée. La source de courant ne doit pas être en circuit ouvert.",
         "Pour que de la puissance soit transférée entre l'entrée et la sortie, il faut que les deux sources soient dans la même maille.",
     ),
 )[
@@ -69,7 +69,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
 
     Si $K_1$ et $K_4$ sont ouverts simultanément, la source de courant est en circuit ouvert. De même si $K_2$ et $K_3$ sont ouverts simultanément. Les états correspondants sont barrés en trait plein.
 
-    Les état autorisés sont donc
+    Les états autorisés sont donc
     #figure(
         table(
             columns: (auto,) * 4,
@@ -97,7 +97,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
 
 #question(
     coups-de-pouce: (
-        "Tracer les caractéristiques des 4 interrupteurs et placer dessus les deux points de fonctionnements correspondant aux deux états retenus.",
+        "Tracer les caractéristiques des 4 interrupteurs et placer dessus les deux points de fonctionnement correspondant aux deux états retenus.",
         "Pour chacun des deux états retenus, indiquer le signe de la tension et du courant pour chaque interrupteur. On veillera à placer les tensions en convention récepteur.",
     ),
 )[
@@ -237,7 +237,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
 #question(
     coups-de-pouce: (),
 )[
-    Le hacheur fonctionne de manière périodique. Les interrupteurs commandés sont fermés sur $[0,alpha T[$ et ouverts sur $[alpha T, T[$. Comment nomme-t-on $alpha$.
+    Le hacheur fonctionne de manière périodique. Les interrupteurs commandés sont fermés sur $[0,alpha T[$ et ouverts sur $[alpha T, T[$. Comment nomme-t-on $alpha$ ?
 ][
     $alpha$ est le rapport cyclique.
 ]
@@ -247,11 +247,11 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
         "Quels sont les ensembles de valeurs que peuvent prendre $U$ et $I_e$ ?",
     ),
 )[
-    Tracer les formes d'onde de l'intensité $i_e$ du courant en entrée et de la tension $u$ en sortie. En déduire les valeurs moyennes $I_e$ et $U$ de $i_e$ et $u$. Quelle est la particularité de ce hacheur.
+    Tracer les formes d'onde de l'intensité $i_e$ du courant en entrée et de la tension $u$ en sortie. En déduire les valeurs moyennes $I_e$ et $U$ de $i_e$ et $u$. Quelle est la particularité de ce hacheur ?
 ][
     Les interrupteurs commandés sont les transistors $K_1$ et $K_3$.
     / Entre 0 et $alpha T$: $i_e=I$ et $u = E$.
-    / Entre 0 et $alpha T$: $i_e=-I$ et $u = -E$.
+    / Entre $alpha T$ et $T$: $i_e=-I$ et $u = -E$.
     On obtient les chronogrammes suivants.
     #grid(
         columns: (1fr, 1fr),

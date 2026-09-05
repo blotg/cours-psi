@@ -17,7 +17,7 @@
     }),
 )
 
-Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la sortie est celle de tension $U'$. $U$ et $U'$ sont des composantes positives, alors que $i$, $i'$, $i_L$ et $u_L$ dépendent du temps ; toutefois l'intensité $i_L$ dans la bobine est toujours positive.
+Dans le convertisseur ci-dessus, l'entrée est la source de tension $U$ et la sortie est celle de tension $U'$. $U$ et $U'$ sont des constantes positives, alors que $i$, $i'$, $i_L$ et $u_L$ dépendent du temps ; toutefois l'intensité $i_L$ dans la bobine est toujours positive.
 
 #question(
     coups-de-pouce: (
@@ -26,7 +26,7 @@ Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la so
 )[
     Montrer que la commande des deux interrupteurs doit être complémentaire (ni ouverts ni fermés tous les deux en même temps).
 ][
-    Si les deux interrupteurs sont fermés simultanément, les sours de tensions sont en parallèle, chacune essayant d'imposer sa tension. Ce n'est pas un état possible.
+    Si les deux interrupteurs sont fermés simultanément, les sources de tension sont en parallèle, chacune essayant d'imposer sa tension. Ce n'est pas un état possible.
 
     Si les deux interrupteurs sont ouverts simultanément, la bobine se retrouve en circuit ouvert. Or le courant dans une bobine ne peut pas être discontinu. On peut aussi justifier en disant que, la bobine étant un dipôle de type source de courant, elle ne peut pas être en circuit ouvert.
 
@@ -70,7 +70,7 @@ Dans le convertisseur ci-contre, l'entrée est la source de tension $U$ et la so
             }),
         ),
     )
-    On reconnait la caractéristique d'un transistor pour $K_1$ et d'une diode en convension directe pour $K_2$.
+    On reconnait la caractéristique d'un transistor pour $K_1$ et d'une diode en convention directe pour $K_2$.
 ]
 
 Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ouvert sur $[alpha T, T]$.
@@ -85,7 +85,7 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
 ][
     / Entre $0$ et $alpha T$: $u_L = U$ (car $K_1$ fermé, $K_2$ ouvert)
     / Entre $alpha T$ et $T$: $u_L = -U'$ (car $K_1$ ouvert, $K_2$ fermé)
-    Le chronogramme de $i_L$ est donc :
+    Le chronogramme de $u_L$ est donc :
     #figure(
         canvas({
             import cetz.draw: *
@@ -104,7 +104,7 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
             )
         }),
     )
-    La tension moyenne aux bornes du bobines est nulle donc
+    La tension moyenne aux bornes de la bobine est nulle donc
     $ (alpha T U - (T-alpha T)U')/T = alpha U - (1-alpha) U' = 0 $
 ]
 

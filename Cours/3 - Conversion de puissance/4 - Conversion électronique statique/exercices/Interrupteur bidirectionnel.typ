@@ -40,8 +40,8 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
 
 #question(
     coups-de-pouce: (
-        "Quel valeurs peuvent prendre $i_T$ lorsque le transistor est passant ? Même question pour $i_D$.",
-        "Quel valeurs peuvent prendre $u$ lorsque le transistor est passant ? Même question pour la diode.",
+        "Quelles valeurs peuvent prendre $i_T$ lorsque le transistor est passant ? Même question pour $i_D$.",
+        "Quelles valeurs peuvent prendre $u$ lorsque le transistor est passant ? Même question pour la diode.",
     ),
 )[
     Lorsque le transistor est passant, tracer la caractéristique de l'interrupteur bidirectionnel.

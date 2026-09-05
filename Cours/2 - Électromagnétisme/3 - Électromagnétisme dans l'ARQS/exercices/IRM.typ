@@ -15,7 +15,7 @@ Lors de l'entrée dans la machine, le patient se déplace à une vitesse d'envir
 
 #question(coups-de-pouce:(
   "On peut modéliser le corps humain par un cylindre dont il faudra estimer les dimensions.",
-  "L'expression de la puissance dissipée par les courants de Foucault dans un cylindre conducteur soumis à un champ magnétique variable devra être a été établie en cours.",
+  "L'expression de la puissance dissipée par les courants de Foucault dans un cylindre conducteur soumis à un champ magnétique variable a été établie en cours.",
   "Bien que le champ magnétique de l'IRM soit stationnaire dans le référentiel de la salle, il varie dans le référentiel du patient en mouvement.",
   "On peut approximer le champ dans le référentiel du patient par un signal sinusoïdal. Estimer la durée nécessaire pour passer du minimum au maximum.",
 ))[

@@ -46,7 +46,7 @@ On se placera en coordonnées cylindriques et on supposera le régime stationnai
         "Utiliser la loi de Fourier et la loi d'Ohm locale.",
     ),
 )[
-    Dans quelle direction de déplace les charges ? Même question pour la chaleur.
+    Dans quelle direction se déplacent les charges ? Même question pour la chaleur.
 ][
     $j_"élec" = - gamma grad V$. Comme $V$ ne dépend que de $z$, $va(j_"élec")$ est dirigé selon $ez$.
 
@@ -162,7 +162,7 @@ On se placera en coordonnées cylindriques et on supposera le régime stationnai
 )[
     Intégrer l'équation de diffusion en régime stationnaire et avec comme condition aux limites la loi de Newton : $va(j_Q) = h (T(R)-T_"air") va(e)$ où $va(e)$ est un vecteur unitaire dirigé vers l'extérieur du fil. Calculer la température de surface du fil et la température maximale atteinte en son sein.
 ][
-    La solution est là-encore de la forme $T(r) = -r^2/4 j_"élec"^2/(lambda gamma) + C_2$.
+    La solution est là encore de la forme $T(r) = -r^2/4 j_"élec"^2/(lambda gamma) + C_2$.
 
     $
         va(j_Q) = - lambda grad T = lambda r/2 j_"élec"^2/(lambda gamma) er

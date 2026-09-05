@@ -4,6 +4,7 @@
 // Le logo appartient au lycée : il identifie le document, il n'est pas couvert
 // par la licence CC BY-NC qui s'applique au contenu (cf. LICENCE.md). D'où la
 // séparation visuelle entre le bloc de gauche et la mention de licence.
+#import "helper-functions.typ": apostrophes
 #let pied-de-page = context {
     set text(size: 7.5pt, fill: luma(45%))
     // init-document souligne les liens ; dans un pied de page c'est du bruit.
@@ -67,6 +68,11 @@
     show link: underline
     import "lib.typ": *
     set-round(mode: "figures")
+    // unify ne connait ni le tour ni l'année : sans ces déclarations,
+    // qty("1500", "tr/min") imprime « 1500 min⁻¹ » et qty("8.9", "an")
+    // n'imprime aucune unité, le tout sans la moindre erreur de compilation.
+    add-unit("tour", "tr", "upright(\"tr\")")
+    add-unit("année", "an", "upright(\"an\")")
     show: styles-blocs
     if logotype {
         let largeur = 30mm
@@ -230,7 +236,7 @@
         it
     }
     context [#metadata(here().page()) <première-page>]
-    align(center, text(17pt)[*#titre*])
+    align(center, text(17pt)[*#apostrophes(titre)*])
     doc
     context [#metadata(here().page()) <dernière-page>]
 }
@@ -243,7 +249,7 @@
         show: init-document.with(titre: titre)
         set heading(numbering: "1.")
         show <correction>: it => if avec-corrigé { it } else {}
-        align(center, text(17pt)[*#titre TD*])
+        align(center, text(17pt)[*#apostrophes(titre) TD*])
         doc
     }
 }
@@ -261,7 +267,7 @@
     } else {
         show: init-document.with(titre: titre)
         set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
-        align(center, text(17pt)[*#titre*])
+        align(center, text(17pt)[*#apostrophes(titre)*])
         corps
     }
 }
@@ -278,7 +284,7 @@
         titre-doc = titre-doc + [ #numéro]
     }
     if titre != none {
-        titre-doc = titre-doc + [ #sym.dash #titre]
+        titre-doc = titre-doc + [ #sym.dash #apostrophes(titre)]
     }
     show: init-document.with(titre: titre)
     show: it => {

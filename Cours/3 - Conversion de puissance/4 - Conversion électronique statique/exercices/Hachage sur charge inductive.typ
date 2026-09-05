@@ -17,9 +17,9 @@
     }),
 )
 
-Le hacheur ci-dessous sert à transférer de la puissance électrique depuis un générateur de tension $E$ continu vers un récepteur inductif de résistance $r$ et d'inductance $L$.
+Le hacheur ci-dessus sert à transférer de la puissance électrique depuis un générateur de tension $E$ continu vers un récepteur inductif de résistance $r$ et d'inductance $L$.
 
-Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=0.3$. On précise $E=#qty("100", "V")$ et $r=#qty("10", "O")$.
+Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kHz")$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=0.3$. On précise $E=#qty("100", "V")$ et $r=#qty("10", "O")$.
 #let RC = 0.3
 #let E = 100
 #let r = 10
@@ -36,7 +36,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interru
 
     La diode et le transistor ne peuvent pas être passants simultanément car la source de tension $E$ serait court-circuitée.
 
-    La diode et le transistor ne peuvent pas être bloqués simultanément car le courant dans l'inductance $L$ ne pourrait pas se maintenir, or le courant ne peut pas s'annuler brutalement dans une inductance. On peut aussi le justifiant en disant que le dipôle r-L est un dipôle de type source de courant qui ne peut donc pas être en circuit ouvert.
+    La diode et le transistor ne peuvent pas être bloqués simultanément car le courant dans l'inductance $L$ ne pourrait pas se maintenir, or le courant ne peut pas s'annuler brutalement dans une inductance. On peut aussi le justifier en disant que le dipôle r-L est un dipôle de type source de courant qui ne peut donc pas être en circuit ouvert.
 
     / Sur $[0,alpha T[$: le transistor est passant, donc la diode est *bloquée*.
     / Sur $[alpha T,T[$: le transistor est bloqué, donc la diode est *passante*.
@@ -87,10 +87,10 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kH")$. L'interru
 
 #question(
     coups-de-pouce: (
-        "A quelle condition le développement limité de l'exponentielle donne-t-il une fonction affine ?",
+        "À quelle condition le développement limité de l'exponentielle donne-t-il une fonction affine ?",
     ),
 )[
-    Résoudre les équations différentielles sur $i_s$, sans chercher à exprimer les constantes. À quelle condition sur les valeurs de $r$, $L$, et $T$, l'évolution du courant dans la charge est-elle affine par morceau ?
+    Résoudre les équations différentielles sur $i_s$, sans chercher à exprimer les constantes. À quelle condition sur les valeurs de $r$, $L$, et $T$, l'évolution du courant dans la charge est-elle affine par morceaux ?
 ][
     / Sur $[0,alpha T[$ : $i_s(t) = A e^(-r/L t) + E/r$.
     / Sur $[alpha T,T[$ : $i_s(t) = B e^(-r/L t)$.

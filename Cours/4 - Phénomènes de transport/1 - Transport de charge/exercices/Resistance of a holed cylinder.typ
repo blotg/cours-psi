@@ -6,7 +6,7 @@
 
 We study an ohmic conductor whose shape is described below in steady state#footnote["Steady state" means "régime stationnaire".]. $gamma$ represents the conductivity of the material, and $V_1$ and $V_2<V_1$ the electrical potentials inside and outside the tube respectively. $I$ is the total current and $va(j)$ the current density vector.
 
-The potential $V$ is supposed to depend only of $r$.
+The potential $V$ is supposed to depend only on $r$.
 
 #figure(
     canvas({
@@ -55,7 +55,7 @@ The potential $V$ is supposed to depend only of $r$.
         "Exprimer le courant à travers un cylindre de rayon $r$ et de hauteur $l$ en fonction de $j$, $l$ et $r$.",
     ),
 )[
-    Why is the flux of $va(j)$ conservative ? By applying this on a cylinders of any radius $r$, deduce that $va(j)=C/r va(e_r)$ where $C$ is a constant that you will express as a function of $I$ and $l$.
+    Why is the flux of $va(j)$ conservative ? By applying this to cylinders of any radius $r$, deduce that $va(j)=C/r va(e_r)$ where $C$ is a constant that you will express as a function of $I$ and $l$.
 ][
     The regime is stationary. Thus, by conservation of charge, the flux of $va(j)$ is conservative. Meaning that the flux of $va(j)$ through the inner cylinder of radius $R_1$ is equal to the flux through any cylinder of radius $r$ between $R_1$ and $R_2$ :
     $

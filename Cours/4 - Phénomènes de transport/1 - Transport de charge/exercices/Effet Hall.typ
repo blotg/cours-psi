@@ -60,7 +60,7 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
 )[
     En régime stationnaire, les lignes de courant sont suivant $ey$. En déduire une expression de la composante $E_x$ du champ électrique suivant $ex$ en fonction de la charge $e$ d'un porteur, de leur densité $n$, de $va(j)$ et de $va(B)$.
 ][
-    Si les lignes de courants sont selon $ey$, comme $va(j)=rho_"mobile" va(v)$, la vitesse est selon $ey$ également.
+    Si les lignes de courant sont selon $ey$, comme $va(j)=rho_"mobile" va(v)$, la vitesse est selon $ey$ également.
     La seconde loi de Newton dans le référentiel du parallèlépipède s'écrit
     $
         m_e dv(va(v), t) = (-e)va(E) + (-e)va(v) and va(B) -m_e/tau va(v)
@@ -85,10 +85,10 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
     $
         integral_(z=-b/2)^(b/2) integral_(x=-a/2)^(a/2) E_x dd(x) dd(z) &= integral_(z=-b/2)^(b/2) integral_(x=-a/2)^(a/2) 1/(n e) j B dd(x) dd(z) \
         b integral_(-a/2)^(a/2) -pdv(V, x) dd(x) &= B/(n e) integral.double j dd(S) \
-        b (V(a/2) - V(-a/2)) &= B/(n e) I \
+        -b (V(a/2) - V(-a/2)) &= B/(n e) I \
     $
     On en déduit la différence de potentiel
-    $ U = V(a/2) - V(-a/2) = B I/(n e b) = R_"Hall" I $
+    $ U = V(-a/2) - V(a/2) = B I/(n e b) = R_"Hall" I $
     avec $ R_"Hall" = B/(n e b) $
 
     $R_"Hall"$ se mesure en #unit("T m^3 /A /s /m"), or l'équation de Maxwell-Faraday nous apprend que $#unit("T/s") = #unit("V/m^2")$. Donc l'unité de $R_"Hall"$ est
@@ -102,11 +102,11 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
 )[
     L'épaisseur du conducteur vaut $b = qty("1", "mm")$.
 
-    Évaluer la valeur de $R_"Hall"$ pour le champ magnétique terrestre dans le cas du cuivre ($M_ce("Cu")=qty("63.5", "g/mol")$ ; $mu_ce("Cu")=qty("8.96", "g/cm^3")$) *puis* d'un semi-conducteur de densité volumique de charges $n=qty("1.6e22", "/m^3")$. Est-il possible d'utiliser ce dispositif pour mesurer le champ magnétique terrestre dans les deux cas ?
+    Évaluer la valeur de $R_"Hall"$ pour le champ magnétique terrestre dans le cas du cuivre ($M_ce("Cu")=qty("63.5", "g/mol")$ ; $mu_ce("Cu")=qty("8.96", "g/cm^3")$) *puis* d'un semi-conducteur de densité particulaire de porteurs $n=qty("1.6e22", "/m^3")$. Est-il possible d'utiliser ce dispositif pour mesurer le champ magnétique terrestre dans les deux cas ?
 ][
     Le champ magnétique terrestre vaut environ $B = qty("5e-5", "T")$.
 
-    #let mu-Cu = 9.96e3
+    #let mu-Cu = 8.96e3
     #let na = 6.02e23
     #let M-Cu = 63.5e-3
     #let n-Cu = mu-Cu * na / M-Cu

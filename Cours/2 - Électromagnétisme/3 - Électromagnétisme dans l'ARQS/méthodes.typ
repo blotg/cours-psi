@@ -1,5 +1,5 @@
 = Déterminer le flux du champ magnétique sur un bobinage
-+ Intégrer le champ magnétique (préalablement déterminé) sur \textbf{une} spire du bobinage pour obtenir le flux magnétique $Phi_(1 "spire")$.
++ Intégrer le champ magnétique (préalablement déterminé) sur *une* spire du bobinage pour obtenir le flux magnétique $Phi_(1 "spire")$.
 + Le flux total est le flux sur une spire multiplié par le nombre de spires $N$ : $Phi = N Phi_(1 "spire")$.
 
 = Déterminer l'inductance propre d'un bobinage

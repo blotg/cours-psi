@@ -20,7 +20,7 @@
   })
 ]
 
-We study an infinite electric wire and a conductive frame. The two objects are coplanar. The bottom of the frame is at a distance $d$ of the wire.
+We study an infinite electric wire and a conductive frame. The two objects are coplanar. The bottom of the frame is at a distance $d$ from the wire.
 
 #question(coups-de-pouce: (
   "Bien que l'inductance mutuelle soit une propriété \"géométrique\", il peut être utile d'introduire le courant passant dans un des conducteurs.",
@@ -32,7 +32,7 @@ We study an infinite electric wire and a conductive frame. The two objects are c
 ][
   *Magnetic field created by the wire*
 
-  The curent distribution is invariant by translation along the wire axis and by rotation around this axis. According to Curie's principle, the same applies to the magnetostatic field $va(B)$. Consequently, $va(B)=va(B)(r)$.
+  The current distribution is invariant by translation along the wire axis and by rotation around this axis. According to Curie's principle, the same applies to the magnetostatic field $va(B)$. Consequently, $va(B)=va(B)(r)$.
 
   By symmetry, the wire is symmetric with respect to the plane passing through point $M$ and perpendicular to $va(e_theta)$ (the plane $(M,va(e_r), va(e_z))$). Consequently, $va(B)(M)$ is directed along $va(e_theta)$.
 
@@ -52,7 +52,7 @@ We study an infinite electric wire and a conductive frame. The two objects are c
   *Mutual inductance*
   
   The mutual inductance between the wire and the frame is given by :
-  $ M = Phi_("wire" arrow "frame")/I = (mu_0 L)/(2 pi) ln((d+a)/d) $
+  $ M = Phi_("wire" arrow "frame")/I = (mu_0 b)/(2 pi) ln((d+a)/d) $
 ]
 
 ]

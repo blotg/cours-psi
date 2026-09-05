@@ -75,3 +75,10 @@
     }
     return d2
 }
+
+// Typst n'applique la correction typographique (' → ’) qu'au markup : une
+// apostrophe placée dans une *chaîne* ressort droite. Les titres, hypothèses et
+// titres d'exercices arrivent ici sous forme de chaînes ; on les corrige au
+// moment de les afficher. Les significations et les flashcards, elles, sont
+// déjà passées par `eval(..., mode: "markup")`, donc rien à faire de ce côté.
+#let apostrophes(x) = if type(x) == str { x.replace("'", "’") } else { x }

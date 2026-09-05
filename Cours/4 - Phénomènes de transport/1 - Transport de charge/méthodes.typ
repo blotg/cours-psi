@@ -2,13 +2,13 @@
 
 = Déterminer la résistance d'un conducteur électrique
 + Déterminer la relation entre $va(j)$ et $va(E)$.
-+ Intégrer cette relation sur une ligne de champ pour faire apparaitre la différence de potentiels.
++ Intégrer cette relation sur une ligne de champ pour faire apparaitre la différence de potentiel.
 + Intégrer cette relation sur une section pour faire apparaitre le courant.
 + On trouve une relation de proportionnalité entre $U$ et $I$. $R$ est le coefficient de proportionnalité.
 
 = Effectuer un bilan des forces sur un porteur de charge
 - Le terme $q va(E)$ est toujours présent.
-- Le terme $q va(B) and va(v)$ est présent dès lors qu'il y a un champ magnétique.
+- Le terme $q va(v) and va(B)$ est présent dès lors qu'il y a un champ magnétique.
 - Comment les interactions entre les porteurs de charge et le réseau cristallin sont-elles modélisées ?
     - Par une force de frottement visqueux $-f va(v)$ pour tenir compte de l'effet moyen des collisions.
     - Par des collisions qui arrivent occasionnellement et entre lesquelles le porteur de charge est libre de se mouvoir.

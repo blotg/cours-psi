@@ -4,7 +4,7 @@
 
 #include "exercices/Resistance of a holed cylinder.typ"
 #include "exercices/Effet Hall.typ"
-#include "exercices/Cables HT.typ"
+#include "exercices/Câbles HT.typ"
 #include "exercices/Paratonnerre.typ"
 #include "exercices/Magnéto-résistance.typ"
 #include "exercices/Résistance carbone.typ"

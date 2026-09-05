@@ -1,11 +1,11 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Magnéto-résistance",
+    titre: "Choix du métal d'une ligne haute tension",
     ouvert: true,
 )
 
-Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1", "O/km"). On cherche à faire en sorte que ces câbles soient le plus léger possible afin de réduire les coûts des pylônes.
+Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1", "O/km"). On cherche à faire en sorte que ces câbles soient les plus légers possible afin de réduire les coûts des pylônes.
 
 #figure(
     table(
@@ -23,7 +23,7 @@ Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1"
         "En déduire la masse linéique pour chaque matériau.",
     ),
 )[
-    Parmi les métaux listés, quel est le plus approprié ?
+    Parmi les matériaux listés, quel est le plus approprié ?
 ][
     La résistance linéique s'écrit
     $ R_l = R/l = (l/(gamma S))/l = 1/(gamma S) $

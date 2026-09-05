@@ -1,11 +1,11 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Couplage thermocinétique",
+    titre: "Métabolisme de l'éthanol",
     ouvert: true,
 )
 
-On s'intéresse au métabolisme de l'éthanol ($M=qty("46","g/mol")$) par corps humain. L'éthanol est transformé en acétaldéhyde dans le fie par l'enzyme alcool déshydrogénase (ADH) selon la réaction suivante :
+On s'intéresse au métabolisme de l'éthanol ($M=qty("46","g/mol")$) par le corps humain. L'éthanol est transformé en acétaldéhyde dans le foie par l'enzyme alcool déshydrogénase (ADH) selon la réaction suivante :
 
 #figure(
     canvas({

@@ -1,13 +1,13 @@
 #import "@local/prepa:0.1.1": *
 
-= Faire un bilan infinitésimale
+= Faire un bilan infinitésimal
 Pour faire un bilan d'une grandeur sur un système infinitésimal :
 + S'assurer que la grandeur est conservative et si besoin, le justifier.
 + Représenter le système.
 + Déterminer les surfaces qui sont traversées par un flux et déterminer leur aire.
 + En déduire le flux net rentrant en multipliant les aires par les vecteurs densité de courant. Attention aux orientations des surfaces !
 + Déterminer le volume du système.
-+ En déduire la grandeur nette "créée" par unité de temps dans la système.
++ En déduire la grandeur nette "créée" par unité de temps dans le système.
 + Écrire l'égalité entre la variation de la grandeur entre $t$ et $t+dd(t)$ d'une part et la grandeur rentrant entre $t$ et $t+dd(t)$ plus la grandeur créée entre $t$ et $t+dd(t)$ d'autre part.
 
 #application[

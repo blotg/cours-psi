@@ -23,7 +23,7 @@ Composante horizontale du champ magnétique terrestre : $B = #qty(scientifique(B
 
 #question(
     coups-de-pouce: (
-        "Faire l'inventaire des moments s'exerçants sur l'aiguille de la boussole.",
+        "Faire l'inventaire des moments s'exerçant sur l'aiguille de la boussole.",
         "Rappeler l'expression du TMC (dans sa version en rotation autour d'un axe fixe).",
         "Montrer que l'équation différentielle régissant le mouvement de l'aiguille est celle d'un oscillateur harmonique et donner l'expression de la période des oscillations.",
         "La vidéo permet d'estimer la période des oscillations. En déduire le moment magnétique de la boussole.",
@@ -47,5 +47,5 @@ Composante horizontale du champ magnétique terrestre : $B = #qty(scientifique(B
 
     La période des oscillations est donc $ T = (2 pi) / omega = 2 pi sqrt(J/(cal(M) B)) $
 
-    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx 3 s$, soit $ cal(M) = 4 pi^2J/(B T^2) approx qty(#scientifique(M, 1), "A m^2") $
+    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx qty("3", "s")$, soit $ cal(M) = 4 pi^2J/(B T^2) approx qty(#scientifique(M, 1), "A m^2") $
 ]

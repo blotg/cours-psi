@@ -36,7 +36,7 @@ Deux phénomènes contribuent à transférer de la masse
     Le transfert par convection a lieu lorsqu'un mouvement macroscopique existe dans un fluide. Les particules présentes dans le fluide sont transportées avec lui.
 
     #exemple[
-        Plancton transporté par les courants marins, particules fines transportées par le courants atmosphériques.]
+        Plancton transporté par les courants marins, particules fines transportées par les courants atmosphériques.]
 
 / Transfert par diffusion:
     #lien("https://www.youtube.com/watch?v=cD3dOlcxVmE")
@@ -47,7 +47,7 @@ Deux phénomènes contribuent à transférer de la masse
         Parfum dans une pièce sans courant d'air, encre dans de l'eau au repos.
     ]
 
-= Vecteur densité de courant de particule et densité particulaire $va(j_N)$
+= Vecteur densité de courant de particule $va(j_N)$ et densité particulaire
 == Définition
 La norme du vecteur densité de courant de particule $va(j_N)$ est le nombre de particules transportées par unité d'aire et de temps.
 
@@ -63,7 +63,7 @@ Le sens et la direction du vecteur densité de courant de particule $va(j_N)$ so
 
 #flashcard(
     recto: "Nombre de particules traversant une surface élémentaire.",
-    verso: "$delta^2 N = delta Phi dd(t) = va(j_N) dot va(dd(S)) dd(t)$",
+    verso: "$delta^2 N = va(j_N) dot va(dd(S)) dd(t)$",
 )
 
 #encadré(
@@ -115,7 +115,7 @@ Le signe "$-$" dans la loi de Fick correspond à un sens de diffusion des zones 
 
 = Équation de diffusion
 == Bilan de particules
-On peut faire le bilan du nombre de particules dans un système : la variation du nombre de particules dans un système est égale au nombre de particule rentrant dans le système plus le nombre de particules créées#footnote[Souvent, les particules ne sont pas créées de rien mais sont le résultat de réactions chimiques ou nucléaires.] dans le système#footnote[On compte négativement les particules qui sortent du système ou qui y sont détruites.].
+On peut faire le bilan du nombre de particules dans un système : la variation du nombre de particules dans un système est égale au nombre de particules rentrant dans le système plus le nombre de particules créées#footnote[Souvent, les particules ne sont pas créées de rien mais sont le résultat de réactions chimiques ou nucléaires.] dans le système#footnote[On compte négativement les particules qui sortent du système ou qui y sont détruites.].
 
 #exemple[
     Dans un hôpital, en une journée, 253 personnes sont rentrées, 243 sont sorties, 5 sont nées et 2 sont décédées. Le nombre de personnes dans l’hôpital a varié de $253-243+5-2=#(253 - 243 + 5 - 2)$.

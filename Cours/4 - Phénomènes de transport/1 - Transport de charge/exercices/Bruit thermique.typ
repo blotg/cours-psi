@@ -114,7 +114,7 @@ Entre $t$ et $t+dd(t)$, l'électron a une probabilité $dd(t)/tau$ de subir une 
                             # l'instant t[i] grâce à la méthode d'Euler
         return v
     ```
-    Sachant que la fonction `random()` renvoie un nombre aléatoire uniformément distribué entre 0 et 1, expliquer la ligne 8.
+    Sachant que la fonction `random()` renvoie un nombre aléatoire uniformément distribué entre 0 et 1, expliquer la ligne 9.
 ][
     La probabilité que l'instruction `random() < dt/tau:` soit vraie est égale à $dd(t)/tau$, ce qui correspond à la probabilité que l'électron subisse une collision entre $t$ et $t+dd(t)$.
 ]
@@ -179,12 +179,12 @@ Entre $t$ et $t+dd(t)$, l'électron a une probabilité $dd(t)/tau$ de subir une 
     Le régime transitoire dure environ #qty("3e-14", "s").
 ]
 
-Le coefficient de variation, aussi appelé écart-type relatif est défini par $C V = sigma/mu$ où $sigma$ est l'écart-type et $mu$ la moyenne.
+Le coefficient de variation, aussi appelé écart-type relatif est défini par $"CV" = sigma/mu$ où $sigma$ est l'écart-type et $mu$ la moyenne.
 
 #question(
     coups-de-pouce: (
         "Quel lien existe-t-il entre un instant $t$ et l'indice `i` correspondant ?",
-        "On peut utiliser le _slincing_ : `I[i:]` renvoie un array numpy contenant les valeurs de `I` à partir de l'indice `i` jusqu'à la fin.",
+        "On peut utiliser le _slicing_ : `I[i:]` renvoie un array numpy contenant les valeurs de `I` à partir de l'indice `i` jusqu'à la fin.",
     ),
 )[
     Calculer le coefficient de variation du courant en régime permanent. L'écart-type peut être calculé avec `np.std()` et la moyenne avec `np.mean()`.

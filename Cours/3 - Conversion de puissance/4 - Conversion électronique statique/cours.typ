@@ -16,14 +16,14 @@
 L'énergie électrique peut se présenter sous plusieurs formes.
 
 == Présentation alternative
-En présentation alternative, le courant et la tension sont de moyenne nulle : $mean(u(t))=0$ et $mean(i(t))=0$. La puissance moyenne peut être non nulle $mean(u(t)i(t))$ peut être non nulle.
+En présentation alternative, le courant et la tension sont de moyenne nulle : $mean(u(t))=0$ et $mean(i(t))=0$. La puissance moyenne $mean(u(t)i(t))$ peut, elle, être non nulle.
 
 #exemple[
     L'électricité produite par les centrales nucléaires et hydroélectriques est produite par des alternateurs, elle est donc en présentation alternative.
 ]
 
 #exemple[
-    L'électricité du secteur et donc reçue par tous les appareils électroménagers est en présentation alternative.
+    L'électricité du secteur, et donc celle reçue par tous les appareils électroménagers, est en présentation alternative.
 ]
 
 == Présentation continue
@@ -37,10 +37,10 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
     Les voitures, électrolyseurs et certains TGV consomment de l'électricité en présentation continue.
 ]
 
-== Ordres de grandeurs
+== Ordres de grandeur
 
 #application[
-    Associer les ordres de grandeurs de puissances et les émissions#footnote[Les émissions de gaz à effets de serre sont exprimés en équivalents #ce("CO2") et calculés sur l'ensemble du cycle de vie.] de #ce("CO2") aux systèmes de production suivants.
+    Associer les ordres de grandeurs de puissances et les émissions#footnote[Les émissions de gaz à effet de serre sont exprimées en équivalents #ce("CO2") et calculés sur l'ensemble du cycle de vie.] de #ce("CO2") aux systèmes de production suivants.
     #let puissances = (
         qty("400", "W"),
         qty("2", "MW"),
@@ -87,7 +87,7 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 == Structure générale
 Un convertisseur électrique statique est constitué d'interrupteurs intégrés dans un circuit de puissance. Les interrupteurs peuvent être commandés par un circuit de commande.
 
-Le circuit de commande fonctionne avec des petites tensions (de l'ordre de #qty("5", "V") et des petits courants (de l'ordre de #qty("10", "mA")).
+Le circuit de commande fonctionne avec des petites tensions (de l'ordre de #qty("5", "V")) et des petits courants (de l'ordre de #qty("10", "mA")).
 
 #schéma(titre: "Structure générale d'un convertisseur", hauteur: 3cm)
 
@@ -103,7 +103,7 @@ Dans cet exemple, on souhaite faire varier la tension aux bornes d'un résistor 
 ]
 
 === Première idée : potentiomètre
-On pourrait penser utiliser un montage un potentiomètre pour faire varier la tension. Un potentiomètre est l'association de deux résistors de résistances $k r_0$ et $(1-k) r_0$ avec $k$ réglable entre $0$ et $1$.
+On pourrait penser à utiliser un potentiomètre pour faire varier la tension. Un potentiomètre est l'association de deux résistors de résistances $k r_0$ et $(1-k) r_0$ avec $k$ réglable entre $0$ et $1$.
 
 #schéma(titre: "Montage avec le potentiomètre", hauteur: 3cm)
 
@@ -130,7 +130,7 @@ La puissance arrivant au résistor peut être modulée grâce à la *modulation 
     titre: "Rapport cyclique",
     connaitre: true,
     hypothèses: (
-        "L'ouverture et la fermeture de l'interrupteur est périodique",
+        "L'ouverture et la fermeture de l'interrupteur sont périodiques",
     ),
     grandeurs: sub-dictionary(grandeurs, ("T", "Delta t_f", "alpha")),
 )[
@@ -161,18 +161,18 @@ Le cahier des charges d'un convertisseur est le suivant.
 
 Un convertisseur électrique statique est constitué d'interrupteurs, de bobines et de condensateurs.
 
-es interrupteurs régulent le flux énergétique.
+Les interrupteurs régulent le flux énergétique.
 
-Les condensateurs et les bobines stockent l'énergie puis la restitue périodiquement. Les condensateurs et les bobines servent à lisser la tension ou le courant.
+Les condensateurs et les bobines stockent l'énergie puis la restituent périodiquement. Les condensateurs et les bobines servent à lisser la tension ou le courant.
 
-= Dipoles de types sources de tension ou de courant
-== Dipoles de type source de tension
+= Dipôles de type source de tension ou de courant
+== Dipôles de type source de tension
 === Source de tension idéale
 Une source de tension idéale produit une tension indépendante du courant. Cette tension peut être continue ou alternative.
 
 #schéma(titre: "Caractéristique d'une source de tension idéale", hauteur: 3cm)
 
-== Générateur de Thévenin
+=== Générateur de Thévenin
 Dans le modèle de Thévenin, le générateur de tension comporte une résistance interne.
 #schéma(titre: "Modèle de Thévenin", hauteur: 3cm)
 #application[
@@ -202,34 +202,34 @@ On appelle *dipôle de type source de tension* un dipôle qui présente à ses b
     Les piles et les batteries sont des dipôles de type source de tension.
 ]
 
-== Dipole de type source de courant
+== Dipôles de type source de courant
 Par analogie avec la partie précédente, un *dipôle de type source de courant* est un dipôle qui présente, en série, une inductance de forte valeur. Le courant dans un dipôle de type source de courant varie peu autour de sa valeur moyenne.
 
 #schéma(titre: "Exemples de dipôles de type source de courant", hauteur: 3cm)
 
 #exemple[
-    Les machines à courant continu, et les machines synchrones sont des dipôles de type source de courant.
+    Les machines à courant continu et les machines synchrones sont des dipôles de type source de courant.
 ]
 
 == Réversibilité des sources
 === Réversibilité en tension
 Une source est *réversible en tension* si, pour un courant donné, la tension à ses bornes peut être positive ou négative.
 #exemple[
-    Dans une machine à courant continu, le couple étant fixé, la machine peut tourner dans un sens ou dans l'autre suivant si elle est en fonctionnement moteur ou générateur. Une machine à courant continu est donc réversible en tension.
+    Dans une machine à courant continu, le couple étant fixé, la machine peut tourner dans un sens ou dans l'autre : la force contre-électromotrice change alors de signe. Une machine à courant continu est donc réversible en tension.
 
     Une source de courant idéale est réversible en tension.
 ]
 
 
-== Réversibilité en courant
-Une source est *réversible en courant* si, pour une tension donnée, le courant la traversant peut être positive ou négative.
+=== Réversibilité en courant
+Une source est *réversible en courant* si, pour une tension donnée, le courant la traversant peut être positif ou négatif.
 #exemple[
-    Dans une machine à courant continu, la vitesse angulaire étant fixée, la machine peut subir un couple moteur ou résistant suivant si elle est en fonctionnement moteur ou générateur. Une machine à courant continu est donc réversible en courant.
+    Dans une machine à courant continu, la vitesse angulaire étant fixée, la machine peut subir un couple moteur ou résistant selon qu'elle fonctionne en moteur ou en générateur. Une machine à courant continu est donc réversible en courant.
     
     Une source de tension idéale est réversible en courant.
 ]
 
-== Réversibilité en puissance
+=== Réversibilité en puissance
 Une source est *réversible en puissance* si la puissance qu'elle reçoit peut être positive ou négative.
 #exemple[
     Une machine à courant continu peut fonctionner en moteur (récepteur de puissance électrique) ou en générateur (générateur de puissance électrique).
@@ -244,15 +244,15 @@ Il n'est pas possible d'associer deux sources de courant en série car chacune v
 
 Il est possible de connecter directement une source de tension et une source de courant.
 
-#schéma(titre: "Interconnection des sources", hauteur: 3cm)
+#schéma(titre: "Interconnexion des sources", hauteur: 3cm)
 
 #flashcard(
-    recto: "Règles d'interconnection des sources",
+    recto: "Règles d'interconnexion des sources",
     verso: "Deux sources de tension ne peuvent pas être en parallèle. Deux sources de courant ne peuvent pas être en série.",
 )
 
 == Structure d'un convertisseur direct
-Un *convertisseur direct*  est un convertisseur ne comportant que des interrupteurs.
+Un *convertisseur direct* est un convertisseur ne comportant que des interrupteurs.
 
 Un convertisseur direct s'utilise nécessairement entre un dipôle de type source de tension et un dipôle de type source de courant.
 
@@ -271,7 +271,7 @@ Un convertisseur direct utilise au minimum deux interrupteurs. Le convertisseur 
 Dans la cellule élémentaire de commutation, les interrupteurs ont un fonctionnement *complémentaire* : lorsqu'un est ouvert, l'autre est fermé.
 
 #question-de-colle(
-    "Montrer qu'un convertisseur direct est constitué d'aux moins 2 interrupteurs. Présenter la cellule élémentaire de commutation et montrer que les interrupteurs ont nécessairement un fonctionnement complémentaire.",
+    "Montrer qu'un convertisseur direct est constitué d'au moins 2 interrupteurs. Présenter la cellule élémentaire de commutation et montrer que les interrupteurs ont nécessairement un fonctionnement complémentaire.",
 )
 
 = Interrupteurs électroniques
@@ -286,7 +286,7 @@ Lorsqu'un interrupteur est fermé, on dit qu'il est *passant*, le courant peut p
 
 Lorsqu'un interrupteur est ouvert, on dit qu'il est *bloqué*, le courant est nul.
 
-Une interrupteur à *commutation spontanée* devient spontanément passant ou bloqué en fonction du courant ou de la tension dans le circuit de puissance.
+Un interrupteur à *commutation spontanée* devient spontanément passant ou bloqué en fonction du courant ou de la tension dans le circuit de puissance.
 
 Un interrupteur à *commutation commandée* peut devenir passant ou bloqué sur commande d'un circuit de commande#footnote[La commande peut se faire en tension, par exemple pour un MOSFET ou en courant, par exemple pour un transistor bipolaire.].
 
@@ -401,7 +401,7 @@ On s'intéresse ici au cas où la source de tension est continue et idéale et l
 
 #schéma(titre: "Moteur à courant continu alimenté par un hacheur", hauteur: 4cm)
 
-On se place dans le cas d'une conduction continue ($i_s(t)>0$). On suppose la vitesse angulaire $Omega$ constante, la force contre-électromotrice $E_"cém"$ est donc constante elle-aussi.
+On se place dans le cas d'une conduction continue ($i_s(t)>0$). On suppose la vitesse angulaire $Omega$ constante, la force contre-électromotrice $E_"cém"$ est donc constante elle aussi.
 
 === Chronogrammes
 
@@ -463,7 +463,7 @@ L'onduleur est un convertisseur prenant en entrée une source de tension continu
     Un onduleur est utilisé dans une voiture électrique pour convertir la tension continue fournie par la batterie en tension alternative utilisable par le moteur synchrone.
 ]
 
-L'onduleur est constitué d'un point à 4 interrupteurs.
+L'onduleur est constitué d'un pont à 4 interrupteurs.
 
 #schéma(titre: "Schéma de l'onduleur", hauteur: 4cm)
 
@@ -475,7 +475,7 @@ Les deux états retenus sont ceux qui permettent de connecter la source à la ch
     
 #schéma(titre: "États utilisés pour un onduleur", hauteur: 4cm)
 
-Pour avoir une présentation alternative en sortie, on choisi un rapport cyclique $alpha=1/2$.
+Pour avoir une présentation alternative en sortie, on choisit un rapport cyclique $alpha=1/2$.
 
 #question-de-colle("Schématiser la structure d'un onduleur. Lister les états pour les interrupteurs et dire s'ils sont possibles et ceux qui sont retenus.")
 

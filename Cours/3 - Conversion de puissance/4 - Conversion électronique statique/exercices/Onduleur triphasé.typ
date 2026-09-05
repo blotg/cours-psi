@@ -7,7 +7,7 @@
 
 Les onduleurs triphasés sont utilisés pour alimenter des moteurs électriques à partir d'une source de tension continue. Ils peuvent par exemple être utilisés dans les voitures électriques où une batterie fournit l'énergie alimentant un moteur triphasé.
 
-Un onduleur triphasé est représenté ci-dessous. Il est alimenté par une source de tension continue et alimente une source de tension triphasée.
+Un onduleur triphasé est représenté ci-dessous. Il est alimenté par une source de tension continue et alimente une source de courant triphasée.
 
 #figure(
     zap.circuit({
@@ -40,7 +40,7 @@ L'objectif de cet exercice est d'étudier la séquence de commutation des interr
 
 #question(
     coups-de-pouce: (
-        "Combien y a-t-il d'états possible pour 1 interrupteur ? Pour 2 ? Pour 3 ?",
+        "Combien y a-t-il d'états possibles pour 1 interrupteur ? Pour 2 ? Pour 3 ?",
     ),
 )[
     Combien d'états y a-t-il au total pour les interrupteurs ?
@@ -48,7 +48,7 @@ L'objectif de cet exercice est d'étudier la séquence de commutation des interr
     Il y a $2^6 = 64$ états possibles.
 ]
 
-Comme il serait trop long de lister ces états la main, on utilise Python pour le faire.
+Comme il serait trop long de lister ces états à la main, on utilise Python pour le faire.
 
 Les états seront listés en s'inspirant du comptage binaire :
 #table(
@@ -64,9 +64,9 @@ Les états seront listés en s'inspirant du comptage binaire :
     coups-de-pouce: (),
 )[
     Justifier que dans le $i$-ème état, l'interrupteur $K_0$ est ouvert si `i%2` vaut `0` et fermé sinon.
-    Justifier que dans le $i$-ème état, l'interrupteur $K_1$ est ouvert si `i//2 % 2` vaut `0` et fermé sinon où $i/2$ désigne le quotient de la division euclidienne de $i$ par 2.
+    Justifier que dans le $i$-ème état, l'interrupteur $K_1$ est ouvert si `i//2 % 2` vaut `0` et fermé sinon où `i//2` désigne le quotient de la division euclidienne de $i$ par 2.
 ][
-    `i%2` donne le chiffres des unités en base 2 de $i$. Si ce chiffre est 0, l'interrupteur $K_0$ est ouvert, sinon il est fermé.
+    `i%2` donne le chiffre des unités en base 2 de $i$. Si ce chiffre est 0, l'interrupteur $K_0$ est ouvert, sinon il est fermé.
     `i//2 % 2` donne le chiffre des deuxièmes positions en base 2 de $i$. Si ce chiffre est 0, l'interrupteur $K_1$ est ouvert, sinon il est fermé.
 ]
 
