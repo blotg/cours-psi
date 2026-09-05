@@ -10,7 +10,7 @@ On étudie une boule de rayon $R$ constituée d'uranium 235.
 
 L'uranium 235 n'a pas un noyau stable, celui-ci peut se fissionner en "captant" un neutron selon la réaction nucléaire
 
-#ce[$""^235_92$U + 1 neutron -> X + Y + $nu$ neutrons]
+#ce[$""^235_92$U] + 1 neutron $->$ #ce("X") + #ce("Y") + $nu$ neutrons
 
 où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu$ est #num("2.5"). Cette réaction a une probabilité $n/tau$ de se produire par unité de temps et de volume.
 
