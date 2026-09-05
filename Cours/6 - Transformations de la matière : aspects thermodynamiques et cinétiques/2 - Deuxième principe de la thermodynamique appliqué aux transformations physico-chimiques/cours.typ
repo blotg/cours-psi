@@ -233,7 +233,7 @@ Bien que les grandeurs extensives $U(S,V,b)$, $H(S,P,n)$ et $G(T,P,n)$ dépenden
 On s'intéresse à un changement d'état d'un corps pur #ce("A ($alpha$) <=> A ($beta$)").
 
 #exemple[
-    #ce("H2O (l) <=> H2O (g)"), #ce("C (graphite) <=> C (diamant)"), ...
+    #ce("H2O(l) <=> H2O(g)"), #ce("C (graphite) <=> C (diamant)"), ...
 ]
 
 #encadré(
@@ -303,8 +303,8 @@ L'entropie molaire est bien plus grande pour un gaz que pour un liquide et pour 
 
 #application[
     Quel est le signe de l'entropie de réaction pour les réactions suivantes ?
-    $ ce("C6H12O6 (s) + 6O2 (g) -> 6 CO2 (g)  + 6 H2O(g)") $
-    $ ce("H2O (l) -> H2O (s)") $
+    #ce("C6H12O6(s)") + 6 #ce("O2(g)") #ce("->") 6 #ce("CO2(g)") + 6 #ce("H2O(g)")
+    $ ce("H2O(l) -> H2O(s)") $
 ]
 
 == Enthalpie libre de réaction
@@ -385,7 +385,7 @@ Cette condition d'évolution peut être reformulée en fonction des valeurs rela
 #question-de-colle("Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.")
 
 #application[
-    Pour la réaction $ce("N2 (g) + 3H2 (g) <=> 2NH3 (g)")$, la constante d'égalité vaut $K^circ = #num("1.6e5")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$ ?
+    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'égalité vaut $K^circ = #num("1.6e5")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$ ?
 ]
 
 = Déplacement d'équilibre
@@ -435,7 +435,7 @@ Dans l'approximation d'Ellingham, $Delta_r G^circ = Delta_r H^circ - T Delta_r S
 Si des réactifs ou des produits sont des gaz, la pression a une influence sur l'équilibre du système. Il est alors possible de déplacer l'équilibre dans un sens ou dans l'autre en modifiant la pression.
 
 #application[
-    Vaut-il mieux travailler à haute ou basse pression pour former #ce("NH3") selon la réaction #ce("N2 (g) + 3H2 (g) <=> 2NH3 (g)") ?
+    Vaut-il mieux travailler à haute ou basse pression pour former #ce("NH3") selon la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)") ?
 ]
 
 La loi de Le Chatelier stipule qu'une augmentation de la pression déplace l'équilibre dans le sens qui diminue le nombre de moles de gaz, et réciproquement. La loi de Le Chatelier est cohérente avec le principe de modération de Le Chatelier.

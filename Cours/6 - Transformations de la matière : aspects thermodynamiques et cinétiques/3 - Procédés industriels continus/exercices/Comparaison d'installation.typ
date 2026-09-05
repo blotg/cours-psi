@@ -5,7 +5,7 @@
 )
 
 Un acide gras insaturé $ce("A")$ est obtenu par saponification d'un ester $ce("E")$ en présence d'un large excès de soude. Cette transformation est modélisée par l'équation
-$ ce("E (aq) + HO- (aq) -> A (aq) + alcool (aq)") $
+$ ce("E(aq) + HO-(aq) -> A(aq) + alcool(aq)") $
 En présence de ce large excès de soude, la vitesse de réaction est du premier ordre par rapport à l'ester, avec une constante de vitesse $k_"app" = qty("6.0E-2", "/min")$.
 
 #question(

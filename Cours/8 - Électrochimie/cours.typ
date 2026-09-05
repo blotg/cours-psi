@@ -202,7 +202,7 @@ La #strong[corrosion] est l'attaque d'un métal par son environnement, qui l'oxy
 == Corrosion uniforme
 La pièce est corrodée de façon homogène sur toute sa surface (solution acide, ou neutre oxygénée).
 
-#exemple[En milieu acide : #ce("Fe(s) + 2 H+(aq) -> Fe^2+(aq) + H2(g)").]
+#exemple[En milieu acide : #ce("Fe(s)") + 2 #ce("H+(aq)") #ce("->") #ce("Fe^2+(aq)") + #ce("H2(g)").]
 
 === Aspect thermodynamique
 On superpose le diagramme potentiel-pH du métal et celui de l'eau. Trois cas :

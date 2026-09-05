@@ -5,7 +5,7 @@
 )
 
 En aéronautique, on envisage de fabriquer des ailes d’avion en matériau composite. Pour éviter toute détérioration à la traversée des zones très orageuses, il est nécessaire que celui-ci soit un conducteur électrique. Un des procédés à l’étude consiste à réaliser un dépôt de nickel par décomposition thermique du nickel carbonyle, suivant la réaction d’équation :
-$ ce("Ni(CO)4 (g) = Ni (s) + 4 CO (g)") $
+#ce("Ni(CO)4(g)") #ce("=") #ce("Ni(s)") + 4 #ce("CO(g)")
 
 On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbonyle gazeux à l’équilibre, aussi le taux d’avancement de la réaction.
 
@@ -18,16 +18,16 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
 ][
     D'après la loi de Hess,
     $
-        Delta_r H^circ = Delta_f H^circ (ce("Ni (s)")) + 4 Delta_f H^circ (ce("CO (g)")) - Delta_f H^circ (ce("Ni(CO)4 (g)"))
+        Delta_r H^circ = Delta_f H^circ (ce("Ni(s)")) + 4 Delta_f H^circ (ce("CO(g)")) - Delta_f H^circ (ce("Ni(CO)4(g)"))
         = #qty(scientifique(DrH, 2), "J/mol")
     $
-    car $Delta_f H^circ (ce("Ni (s)")) = 0$ car c'est un corps simple dans son état standard.
+    car $Delta_f H^circ (ce("Ni(s)")) = 0$ car c'est un corps simple dans son état standard.
 
     $Delta_r H^circ > 0$ donc la réaction est endothermique.
 
     De même,
     $
-        Delta_r S^circ = S^circ_m (ce("Ni (s)")) + 4 S^circ_m (ce("CO (g)")) - S^circ_m (ce("Ni(CO)4 (g)"))
+        Delta_r S^circ = S^circ_m (ce("Ni(s)")) + 4 S^circ_m (ce("CO(g)")) - S^circ_m (ce("Ni(CO)4(g)"))
         = #qty(scientifique(DrS, 2), "J/K/mol")
     $
 
@@ -62,7 +62,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
         columns: 6,
         align: (left,) + (center,) * 5,
         stroke: none,
-        [], ce("Ni(CO)4 (g)"), ce("->"), ce("Ni (s)"), ce("+"), ce("4 CO (g)"),
+        [], ce("Ni(CO)4(g)"), ce("->"), ce("Ni(s)"), ce("+"), [4 #ce("CO(g)")],
         table.hline(),
         [État initial], $n$, [], $0$, [ ], $0$,
         table.hline(),
@@ -73,14 +73,14 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
         columns: 7,
         align: (left,) + (center,) * 6,
         stroke: none,
-        [], ce("Ni(CO)4 (g)"), ce("->"), ce("Ni (s)"), ce("+"), ce("4 CO (g)"), [Total des gaz],
+        [], ce("Ni(CO)4(g)"), ce("->"), ce("Ni(s)"), ce("+"), [4 #ce("CO(g)")], [Total des gaz],
         table.hline(),
         [État final], $n(1-alpha)$, [], $n alpha$, [ ], $4 n alpha$, $n (1 + 3 alpha)$,
     )
 
     La loi de Guldberg et Waage s'écrit
     $
-        K^circ (T) = (a_ce("Ni (s)") a_ce("CO (g)")^4) /a_ce("Ni(CO)4 (g)")
+        K^circ (T) = (a_ce("Ni(s)") a_ce("CO(g)")^4) /a_ce("Ni(CO)4(g)")
         = P_ce("CO")^4 / (P_ce("Ni(CO)4") (P^circ)^3)
         = ( ((4 n alpha) / (n (1 + 3 alpha)) )^4 ) / ( (n (1 - alpha)) / (n (1 + 3 alpha)) ) (P/P^circ)^3
         = ((4 alpha) / (1 + 3 alpha) )^4 (1 +3 alpha) / (1 - alpha) (P/P^circ)^3

@@ -7,8 +7,8 @@
 
 On envisage la conversion du méthane par la vapeur d'eau à $T = #qty("900", "K")$, sous une pression totale $P_"tot"$, à partir d'un mélange initial contenant #qty("4.0", "mol") d'eau et #qty("1.0", "mol") de méthane. On doit envisager les deux équilibres chimiques suivants, dans lesquels les constituants sont des gaz parfaits :
 $
-    ce("CH4 (g) + H2O (g) &= CO (g) + 3 H2 (g)") #h(1.5cm) & K^circ_1 = num("1.306") \
-                ce("CO (g) + H2O (g) &= CO2 (g) + H2 (g)") & K^circ_2 = num("2.204")
+    #ce("CH4(g)") + #ce("H2O(g)") &= #ce("CO(g)") + 3 #ce("H2(g)") #h(1.5cm) & K^circ_1 = num("1.306") \
+    #ce("CO(g)") + #ce("H2O(g)") &= #ce("CO2(g)") + #ce("H2(g)") & K^circ_2 = num("2.204")
 $
 
 La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
@@ -20,11 +20,11 @@ La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
 )[
     Exprimer, lorsque les deux équilibres chimiques sont atteints, la quantité de matière de chaque participant, en fonction de la quantité de matière initiale en méthane $n_0(ce("CH4"))$ et en eau $n_0(ce("H2O"))$ et de l'avancement $xi_1$ (respectivement $xi_2$ ) de la réaction (1) (resp. (2)).
 ][
-    $ n_f (ce("CH4 (g)")) = n_0 (ce("CH4 (g)")) - xi_1 $
-    $ n_f (ce("H2O (g)")) = n_0 (ce("H2O (g)")) - xi_1 - xi_2 $
-    $ n_f (ce("CO (g)")) = xi_1 - xi_2 $
-    $ n_f (ce("H2 (g)")) = 3 xi_1 + xi_2 $
-    $ n_f (ce("CO2 (g)")) = xi_2 $
+    $ n_f (ce("CH4(g)")) = n_0 (ce("CH4(g)")) - xi_1 $
+    $ n_f (ce("H2O(g)")) = n_0 (ce("H2O(g)")) - xi_1 - xi_2 $
+    $ n_f (ce("CO(g)")) = xi_1 - xi_2 $
+    $ n_f (ce("H2(g)")) = 3 xi_1 + xi_2 $
+    $ n_f (ce("CO2(g)")) = xi_2 $
 ]
 
 #question(
@@ -36,32 +36,32 @@ La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
     Exprimer les quotients réactionnels en fonction de la pression totale $P_"tot"$, de la pression standard $P^circ$, des quantités de matière initiales $n_0(ce("CH4"))$ et $n_0(ce("H2O"))$ et des avancements $xi_1$ et $xi_2$.
 ][
     $
-        Q_1 = product a_i^(nu_i) = (P(ce("CO (g)")) P(ce("H2 (g)"))^3) / (P(ce("CH4 (g)")) P(ce("H2O (g)")) (P^circ)^2)
+        Q_1 = product a_i^(nu_i) = (P(ce("CO(g)")) P(ce("H2(g)"))^3) / (P(ce("CH4(g)")) P(ce("H2O(g)")) (P^circ)^2)
     $
     avec
     $
-        P(ce("CH4 (g)")) = P_"tot" (n_0(ce("CH4 (g)")) - xi_1) / n_"tot,gaz"
-        = P_"tot" (n_0(ce("CH4 (g)")) - xi_1) / (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)
+        P(ce("CH4(g)")) = P_"tot" (n_0(ce("CH4(g)")) - xi_1) / n_"tot,gaz"
+        = P_"tot" (n_0(ce("CH4(g)")) - xi_1) / (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)
     $
     $
-        P(ce("H2O (g)")) = P_"tot" (n_0(ce("H2O (g)")) - xi_1 - xi_2) / (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)
+        P(ce("H2O(g)")) = P_"tot" (n_0(ce("H2O(g)")) - xi_1 - xi_2) / (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)
     $
     $
-        P(ce("CO (g)")) = P_"tot" (xi_1 - xi_2) / (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)
+        P(ce("CO(g)")) = P_"tot" (xi_1 - xi_2) / (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)
     $
     $
-        P(ce("H2 (g)")) = P_"tot" (3 xi_1 + xi_2) / (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)
+        P(ce("H2(g)")) = P_"tot" (3 xi_1 + xi_2) / (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)
     $
     $
-        P(ce("CO2 (g)")) = P_"tot" (xi_2) / (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)
+        P(ce("CO2(g)")) = P_"tot" (xi_2) / (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)
     $
     En remplaçant :
     $
-        Q_1 = (P_"tot" / P^circ)^2 ((xi_1 - xi_2) (3 xi_1 + xi_2)^3) / ((n_0(ce("CH4 (g)")) - xi_1) (n_0(ce("H2O (g)")) - xi_1 - xi_2) (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)^2)
+        Q_1 = (P_"tot" / P^circ)^2 ((xi_1 - xi_2) (3 xi_1 + xi_2)^3) / ((n_0(ce("CH4(g)")) - xi_1) (n_0(ce("H2O(g)")) - xi_1 - xi_2) (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)^2)
     $
     On procède de même pour la réaction (2) :
     $
-        Q_2 = (xi_2 (3 xi_1 + xi_2)) / ((xi_1 - xi_2) (n_0(ce("H2O (g)")) - xi_1 - xi_2) )
+        Q_2 = (xi_2 (3 xi_1 + xi_2)) / ((xi_1 - xi_2) (n_0(ce("H2O(g)")) - xi_1 - xi_2) )
     $
 ]
 
@@ -74,8 +74,8 @@ On souhaite obtenir la composition du système à l'équilibre lorsque la pressi
     #set text(size: 10pt)
     $
         cases(
-            (xi_1 - xi_2) (3 xi_1 + xi_2)^3 - K_1^circ (n_0(ce("CH4 (g)")) - xi_1) (n_0(ce("H2O (g)")) - xi_1 - xi_2) (n_0(ce("CH4 (g)")) + n_0(ce("H2O (g)")) + 2 xi_1)^2 = 0,
-            xi_2 (3 xi_1 + xi_2) - K_2 (xi_1 - xi_2) (n_0(ce("H2O (g)")) - xi_1 - xi_2) = 0
+            (xi_1 - xi_2) (3 xi_1 + xi_2)^3 - K_1^circ (n_0(ce("CH4(g)")) - xi_1) (n_0(ce("H2O(g)")) - xi_1 - xi_2) (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)^2 = 0,
+            xi_2 (3 xi_1 + xi_2) - K_2 (xi_1 - xi_2) (n_0(ce("H2O(g)")) - xi_1 - xi_2) = 0
         )
     $
 ][

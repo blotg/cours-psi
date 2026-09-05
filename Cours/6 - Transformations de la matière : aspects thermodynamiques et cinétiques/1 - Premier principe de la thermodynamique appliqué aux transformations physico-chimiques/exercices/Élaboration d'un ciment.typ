@@ -10,7 +10,7 @@ Le ciment est principalement utilisé pour fabriquer le béton qui est un mélan
 
 Le ciment est modélisé par la seule espèce : #ce("[Ca3SiO5](s)"). La réaction à l’origine de la "prise" est simplifiée sous la forme suivante :
 #math.equation(
-    $ce("2 [Ca3SiO5](s) + 6 H2O(l) <=> [Ca3Si2O7, 3H2O](s) + 3 Ca(OH)2(s)")$,
+    [2 #ce("[Ca3SiO5](s)") + 6 #ce("H2O(l)") #ce("<=>") #ce("[Ca3Si2O7, 3H2O](s)") + 3 #ce("Ca(OH)2(s)")],
     numbering: "(1)",
     block: true,
 ) <equation1>
@@ -66,13 +66,13 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
             align: (left,) + (center,) * 7,
             stroke: none,
             [],
-            ce("2 Ca3SiO5(s)"),
+            [2 #ce("Ca3SiO5(s)")],
             ce("+"),
             ce("H2O(l)"),
             ce("->"),
             ce("[Ca3Si2O7, 3H2O](s)"),
             ce("+"),
-            ce("3 Ca(OH)2(s)"),
+            [3 #ce("Ca(OH)2(s)")],
             table.hline(),
             [État initial], table.vline(), $n_1$, [], $n_2$, [], $0$, [], $0$,
             table.hline(),

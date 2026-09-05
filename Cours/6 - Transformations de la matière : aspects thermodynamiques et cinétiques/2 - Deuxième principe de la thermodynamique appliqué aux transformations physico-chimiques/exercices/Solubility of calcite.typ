@@ -4,7 +4,7 @@
     titre: "Solubility of calcite",
 )
 
-We consider the reaction #ce("CaCO3 (s) = Ca^2+ (aq) + CO3^2- (aq)").
+We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
 
 #let DrG = -(-1128.8e3) + (-553.5e3) + (-527.9e3)
 #question(
@@ -14,7 +14,7 @@ We consider the reaction #ce("CaCO3 (s) = Ca^2+ (aq) + CO3^2- (aq)").
 ][
     Hess's law states that
     $
-        Delta_r G^circ = - Delta_f G^circ (ce("CaCO3 (s)")) + Delta_f G^circ (ce("Ca^2+")) + Delta_f G^circ (ce("CO_3^2-"))\
+        Delta_r G^circ = - Delta_f G^circ (ce("CaCO3(s)")) + Delta_f G^circ (ce("Ca^2+")) + Delta_f G^circ (ce("CO_3^2-"))\
         = #qty(scientifique(DrG, 4), "J/mol")
     $
 ]
@@ -42,6 +42,6 @@ The chemical species are solutes in water.
 #table(
     columns: 4,
     align: (left,) + (center,) * 3,
-    [Chemical species], ce("CaCO3 (s)"), ce("Ca^2+"), ce("CO_3^2-"),
+    [Chemical species], ce("CaCO3(s)"), ce("Ca^2+"), ce("CO_3^2-"),
     [$Delta_f G^circ$ (#unit("kJ/mol"))], num("-1128.8"), num("-553.5"), num("-527.9"),
 )

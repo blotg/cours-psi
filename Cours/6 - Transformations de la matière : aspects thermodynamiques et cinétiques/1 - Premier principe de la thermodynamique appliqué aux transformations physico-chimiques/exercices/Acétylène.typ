@@ -10,14 +10,14 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
 #question(
     coups-de-pouce: (
         "Quelles sont les espèces produites par une combustion ?",
-        "Une combustion produit du dioxygène et de l'eau.",
+        "Une combustion produit du dioxyde de carbone et de l'eau.",
     ),
 )[
     Écrire l'équation de la réaction de combustion complète de l'acétylène en présence de dioxygène. Les états physiques des espèces chimiques seront précisés et on prendra un coefficient stœchiométrique relatif égal à $-1$ pour l'acétylène.
 ][
     La réaction de combustion complète de l'acétylène s'écrit :
     $
-        #ce("C2H2 (g) + 5/2 O2 (g) -> 2 CO2 (g) + H2O (g)")
+        #ce("C2H2(g)") + 5\/2 #ce("O2(g)") #ce("->") 2 #ce("CO2(g)") + #ce("H2O(g)")
     $
 ]
 
@@ -31,7 +31,7 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
 ][
     La vaporisation de l'eau a pour équation bilan :
     $
-        #ce("H2O (l) -> H2O (g)")
+        #ce("H2O(l) -> H2O(g)")
     $
     Son enthalpie standard de réaction est $Delta_r H^circ = L_"vap" M_ce("H2O")$. D'après la loi de Hess, elle s'écrit également $Delta_r H^circ = Delta_f H^circ (ce("H2O(g)")) - Delta_f H^circ (ce("H2O(l)"))$.
 
@@ -108,14 +108,14 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 ][
     La variation d'enthalpie du mélange s'écrit
     $
-        Delta H = integral_(T_i)^(T_f) (n_1 c_(p,m)(ce("CO2 (g)"))(T) + n_2 c_(P,m)(ce("H2O (g)"))(T)) dd(T)
+        Delta H = integral_(T_i)^(T_f) (n_1 c_(p,m)(ce("CO2(g)"))(T) + n_2 c_(P,m)(ce("H2O(g)"))(T)) dd(T)
     $
 ]
 
 #question[
     En exhibant un cycle, montrer que la température de flamme $T_f$ d'un mélange de dioxygène et d'acétylène dans les proportions stœchiométriques vérifie l'équation
     $
-        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2 (g)"))(T) + c_(P,m)(ce("H2O (g)"))(T)) dd(T) + Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
     $
 ][
     #figure(
@@ -172,7 +172,7 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 
     La transformation de l'état intermédiaire fictif à l'état final correspond au chauffage du mélange de #ce("CO2") et #ce("H2O") de la température $T_i$ à la température $T_f$, donc
     $
-        Delta H^circ_3 = integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2 (g)"))(T) + n c_(P,m)(ce("H2O (g)"))(T)) dd(T)
+        Delta H^circ_3 = integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T)
     $
 
     L'enthalpie est une fonction d'état, sa variation ne dépend pas du chemin suivi. On en déduit que
@@ -180,17 +180,17 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
         Delta H^circ_1 = Delta H^circ_2 + Delta H^circ_3
     $
     $
-        integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2 (g)"))(T) + n c_(P,m)(ce("H2O (g)"))(T)) dd(T) + n Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T) + n Delta_r H^circ = 0
     $
     soit, en simplifiant par $n$,
     $
-        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2 (g)"))(T) + c_(P,m)(ce("H2O (g)"))(T)) dd(T) + Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
     $
 ]
 
 On note $f$ la fonction définie par
 $
-    f(theta) = integral_(T_i)^(theta) (2 c_(p,m)(ce("CO2 (g)"))(T) + c_(P,m)(ce("H2O (g)"))(T)) dd(theta) + Delta_r H^circ
+    f(theta) = integral_(T_i)^(theta) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(theta) + Delta_r H^circ
 $
 On cherche à évaluer numériquement le zéro de cette fonction, qui correspond à la température de flamme.
 
@@ -198,7 +198,7 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
     Exprimer $f'(theta)$.
 ][
     $
-        f'(theta) = 2 c_(p,m)(ce("CO2 (g)"))(theta) + c_(P,m)(ce("H2O (g)"))(theta)
+        f'(theta) = 2 c_(p,m)(ce("CO2(g)"))(theta) + c_(P,m)(ce("H2O(g)"))(theta)
     $
 ]
 
@@ -236,7 +236,7 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
 #table(
     columns: 5,
     align: (left,) + (center,) * 4,
-    [espèce], ce("C2H2 (g)"), ce("O2 (g)"), ce("CO2 (g)"), ce("H2O (l)"),
+    [espèce], ce("C2H2(g)"), ce("O2(g)"), ce("CO2(g)"), ce("H2O(l)"),
     [$Delta_f H^circ$ (#unit("kJ/mol"))], num("227"), [...], num("-394"), num("-286"),
 )
 
@@ -252,7 +252,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         columns: 8,
         align: (left + horizon,) + (center + horizon,) * 7,
         table.header([], $a_0$, $a_1$, $a_2$, $a_3$, $a_4$, $a_5$, $a_6$),
-        [#ce("CO2 (g)")\ entre #qty("300", "K") et #qty("1000", "K")],
+        [#ce("CO2(g)")\ entre #qty("300", "K") et #qty("1000", "K")],
         num("4.94e4"),
         num("-6.26e2"),
         num("5.30"),
@@ -261,7 +261,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("-7.69e-10"),
         num("2.85e-13"),
 
-        [#ce("CO2 (g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
+        [#ce("CO2(g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
         num("1.18e5"),
         num("-1.79e3"),
         num("8.29"),
@@ -270,7 +270,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("-1.89e-12"),
         num("6.33e-16"),
 
-        [#ce("H2O (g)")\ entre #qty("300", "K") et #qty("1000", "K")],
+        [#ce("H2O(g)")\ entre #qty("300", "K") et #qty("1000", "K")],
         num("-3.95e4"),
         num("5.76e2"),
         num("9.32e-1"),
@@ -279,7 +279,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("4.96e-9"),
         num("-1.34e-12"),
 
-        [#ce("H2O (g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
+        [#ce("H2O(g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
         num("1.03e-6"),
         num("-2.41e3"),
         num("4.65"),

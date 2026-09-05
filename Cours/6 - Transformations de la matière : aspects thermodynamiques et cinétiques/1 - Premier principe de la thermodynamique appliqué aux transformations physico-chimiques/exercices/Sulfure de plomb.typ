@@ -10,7 +10,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 )[
     Remplir les deux cases vides du tableau de données.
 ][
-    Le dioxygène gazeux et le diazote gazeux sont des corps dimples dans leur été standard, leur enthalpie de formation est donc nulle.
+    Le dioxygène gazeux et le diazote gazeux sont des corps simples dans leur état standard, leur enthalpie de formation est donc nulle.
 ]
 
 #question()[
@@ -18,7 +18,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 ][
     L’équation-bilan de la réaction est :
     $
-        ce("PbS (s) + 3/2 O2 (g) -> PbO (s) + SO2 (g)")
+        #ce("PbS(s)") + 3\/2 #ce("O2(g)") #ce("->") #ce("PbO(s)") + #ce("SO2(g)")
     $
 ]
 
@@ -27,12 +27,12 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 #question(
     coups-de-pouce: "Utiliser la loi de Hess.",
 )[
-    Calculer l’enthalpie standard de réaction $standard(Delta_r H)$ à #qty("298", "K") pour la réaction écrite à la question précédente
+    Calculer l’enthalpie standard de réaction $standard(Delta_r H)$ à #qty("298", "K") pour la réaction écrite à la question précédente.
 ][
     La loi de Hess s'écrit
     $
         standard(Delta_r H) = sum nu_i standard(Delta_f H)(ce("X")_i)\
-        = - standard(Delta_f H)(ce("PbS (s)")) - 3/2 standard(Delta_f H)(ce("O_2 (g)")) + standard(Delta_f H)(ce("PbO (s)")) + standard(Delta_f H)(ce("SO2 (g)"))
+        = - standard(Delta_f H)(ce("PbS(s)")) - 3/2 standard(Delta_f H)(ce("O_2(g)")) + standard(Delta_f H)(ce("PbO(s)")) + standard(Delta_f H)(ce("SO2(g)"))
         = #qty(scientifique(DrH, 3), "kJ/mol")
     $
 ]
@@ -48,7 +48,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 )[
     On part d’un mélange #ce("PbS(s) / O2(g)") dans les proportions stœchiométriques, à la température initiale $T_i = qty("298", "K")$. La réaction est menée de façon isobare adiabatique et les capacités thermiques sont supposées indépendantes de la température, calculer la température de flamme (température finale atteinte).
 ][
-    On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans le proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. La réactions est totale donc les réactifs sont tous les deux entièrement consommés.
+    On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans les proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. La réaction est totale donc les réactifs sont tous les deux entièrement consommés.
 
     On considère le cycle suivant
     #figure(
@@ -105,7 +105,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 
     La transformation entre l'état intermédiaire et l'état final est une élévation de température sans transformation chimique. La seconde loi de Joule donne alors
     $
-        Delta H_3^circ = integral_(T_i)^(T_f) (n c_(P,m)(ce("PbO(s)")) + n c_(P,m)(ce("SO2(g)"))] dd(T) = n (c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)"))) (T_f - T_i)
+        Delta H_3^circ = integral_(T_i)^(T_f) (n c_(P,m)(ce("PbO(s)")) + n c_(P,m)(ce("SO2(g)"))) dd(T) = n (c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)"))) (T_f - T_i)
     $
 
     $H$ est une fonction d'état, on a donc $-Delta H_1^circ + Delta H_2^circ + Delta H_3^circ = 0$, soit
@@ -130,9 +130,9 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 )[
     Reprendre le calcul de la question précédente en supposant que le mélange initial est constitué d’air (#qty("80", "%") de diazote et #qty("20", "%") de dioxygène). La quantité d’air ajoutée est juste suffisante pour provoquer la disparition de la totalité de #ce("PbS(s)").
 ][
-    On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans le proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. Dans l'air, il y a 4 fois plus de diazote que de dioxygène, donc la quantité initiale de #ce("N2(g)") est $6 n$.
+    On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans les proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. Dans l'air, il y a 4 fois plus de diazote que de dioxygène, donc la quantité initiale de #ce("N2(g)") est $6 n$.
     
-    La réactions est totale donc les réactifs sont tous les deux entièrement consommés. Le diazote est une espèce spectatrice, sa quantité ne change pas au cours de la réaction.
+    La réaction est totale donc les réactifs sont tous les deux entièrement consommés. Le diazote est une espèce spectatrice, sa quantité ne change pas au cours de la réaction.
 
     On considère le cycle suivant
     #figure(
@@ -203,10 +203,10 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     #let Ti = 298
     #let c_P_m_PbO = 45.8
     #let c_P_m_SO2 = 29.9
-    #let c_P_m_N2 = 29.4
+    #let c_P_m_N2 = 29.1
     #let Tf = Ti - DrH*1000 / (c_P_m_PbO + c_P_m_SO2 + 6 * c_P_m_N2)
     $
-      T_f = T_i - (Delta_r H^circ)/(c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)") + 6 c_(P,m)(ce("N2(g)"))))
+      T_f = T_i - (Delta_r H^circ)/(c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)")) + 6 c_(P,m)(ce("N2(g)")))
       = #qty(scientifique(Tf,3), "K")
     $
 ]

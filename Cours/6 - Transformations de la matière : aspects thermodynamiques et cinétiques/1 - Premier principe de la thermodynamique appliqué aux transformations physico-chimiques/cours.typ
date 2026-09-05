@@ -8,7 +8,7 @@
     "Delta_r Y": (signification: "la grandeur Y de réaction", unité: [unité de $Y$ #unit("/mol")]),
     "T": (signification: "la température", unité: unit("K")),
     "P": (signification: "la pression", unité: unit("Pa")),
-    "nu_i": (signification: "le coefficient stœchiométrique algébrique du i-ème produit", unité: "sans unité"),
+    "nu_i": (signification: "le coefficient stœchiométrique algébrique de la i-ème espèce (négatif pour un réactif)", unité: "sans unité"),
     "Y_m(X_i)": (signification: "la grandeur Y molaire de l'espèce #ce(\"X_i\")", unité: [unité de $Y$ #unit("/mol")]),
     "Delta_f H(X_i)": (signification: "l'enthalpie de formation de l'espèce #ce(\"X_i\")", unité: unit("J/mol")),
     "Delta_r H": (signification: "l'enthalpie de réaction", unité: unit("J/mol")),
@@ -42,14 +42,14 @@ L'état standard de référence est l'état standard à la température de réf�
     Quel est l'état standard de l'eau à #qty("400", "K") ?
 ]
 #application[
-    Quel est l'état standard de référence l'eau ?
+    Quel est l'état standard de référence de l'eau ?
 ]
 #application[
     Quel est l'état standard de référence du chlorure de sodium ?
 ]
 
 == Grandeur de réaction
-Lorsqu'une réaction chimiques se produit, des grandeurs thermodynamiques du système peuvent varier. Les grandeurs de réaction représentent à quel point la grandeur varie lorsque la réaction se produit.
+Lorsqu'une réaction chimique se produit, des grandeurs thermodynamiques du système peuvent varier. Les grandeurs de réaction représentent à quel point la grandeur varie lorsque la réaction se produit.
 
 #encadré(
     titre: "Grandeur de réaction",
@@ -75,7 +75,7 @@ Lorsqu'une réaction chimiques se produit, des grandeurs thermodynamiques du sys
 Une grandeur standard de réaction est une grandeur de réaction pour laquelle on considère chaque constituant du mélange dans son état standard. On note les grandeurs standards avec un $standard("")$.
 
 #encadré(
-    titre: "Grandeur de réaction",
+    titre: "Grandeur standard de réaction",
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("Delta_r Y", "Y_m(X_i)", "nu_i")),
 )[
@@ -83,13 +83,13 @@ Une grandeur standard de réaction est une grandeur de réaction pour laquelle o
 ]
 
 #flashcard(
-    recto: "Entropie standard de réaction",
+    recto: "Grandeur standard de réaction",
     verso: "$ standard(Delta_r Y) = sum nu_i standard(Y_m(X_i)) $",
 )
 
 
 #application[
-    Déterminer l'entropie standard de réaction de #ce("Ni(CO)_4(g) = Ni(s) + 4CO(g)").
+    Déterminer l'entropie standard de réaction de #ce("Ni(CO)_4(g)") #ce("->") #ce("Ni(s)") + 4 #ce("CO(g)").
     #table(
         columns: 4,
         [Espèces chimiques], ce("Ni(CO)_4(g)"), ce("Ni(s)"), ce("CO(g)"),
@@ -100,7 +100,7 @@ Une grandeur standard de réaction est une grandeur de réaction pour laquelle o
 == Loi de Hess
 La loi de Hess est un cas particulier de la formule précédente pour l'enthalpie.
 
-On ne peut pas parler d'enthalpie molaire d'un réactif car l'enthalpie est définie à une constante additive près#footnote[Le premier principe définit l'énergie interne comme une grandeur dont la *variation* est reliée au travail et à la chaleur. L'énergie interne est donc définie à une constante additive près. Comme l'enthalpie est définie à partie de l'énergie interne, l'enthalpie est définie à une constante additive près.]. On choisit alors une "origine" des enthalpies : les corps simples dans leur état standard.
+On ne peut pas parler d'enthalpie molaire d'un réactif car l'enthalpie est définie à une constante additive près#footnote[Le premier principe définit l'énergie interne comme une grandeur dont la *variation* est reliée au travail et à la chaleur. L'énergie interne est donc définie à une constante additive près. Comme l'enthalpie est définie à partir de l'énergie interne, l'enthalpie est définie à une constante additive près.]. On choisit alors une "origine" des enthalpies : les corps simples dans leur état standard.
 
 Un corps simple est un corps constitué d'un seul type d'atome.
 
@@ -120,7 +120,7 @@ La réaction de formation d'une espèce #ce("X") est une réaction dont le seul 
 L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enthalpie standard de réaction $standard(Delta_r H)$ pour la réaction de formation de cette espèce. L'enthalpie standard de formation d'un corps simple dans son état standard est donc nulle.
 
 #flashcard(
-    recto: "Pour quelles expèces l'enthalpie standard de formation est-elle nulle ?",
+    recto: "Pour quelles espèces l'enthalpie standard de formation est-elle nulle ?",
     verso: "Les corps simples dans leur état standard.",
 )
 #application[
@@ -141,7 +141,7 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 )
 
 #application[
-    Calculer l'enthalpie standard de réaction de la combustion du méthane #ce("CH4(g) + 2 O2(g) -> CO2(g) + 2H2O(g)")
+    Calculer l'enthalpie standard de réaction de la combustion du méthane #ce("CH4(g)") + 2 #ce("O2(g)") #ce("->") #ce("CO2(g)") + 2 #ce("H2O(g)")
     #table(
         columns: 4,
         [Espèces chimiques], ce("CH4(g)"), ce("CO2(g)"), ce("H2O(g)"),
@@ -211,7 +211,7 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 )
 
 #encadré(
-    titre: "Variation de l'entropie",
+    titre: "Variation de l'enthalpie",
     hypothèses: (
         "La réaction est isotherme",
         "La réaction est isobare",
@@ -251,7 +251,7 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 == Température de flamme
 La température de flamme est la température atteinte par un système lors d'une réaction adiabatique, isobare.
 
-Pour une transformation adiabatique, la variation d'enthalpie est nulle.
+Pour une transformation adiabatique et isobare, la variation d'enthalpie est nulle.
 
 #figure(
     canvas({
@@ -302,7 +302,7 @@ Pour une transformation adiabatique, la variation d'enthalpie est nulle.
 
 #flashcard(
     recto: "Définition température de flamme",
-    verso: "Température atteinte pour une réaction faire de façon adiabatique."
+    verso: "Température atteinte pour une réaction faite de façon adiabatique et isobare."
 )
 #flashcard(
     recto: "Méthode calcul température de flamme",
