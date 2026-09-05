@@ -15,7 +15,7 @@ Pour chaque réaction, dire si elle est favorisée par une haute ou une basse te
 ]
 
 #question()[
-    $[#ce("N2(g)") + 3 #ce("H2(g)") #ce("=") 2 #ce("NH3(g)")]$ #h(1cm) ($Delta_f H^circ (#ce("NH3(g)")) = #qty("-46", "kJ/mol")$)
+    #ce("N2(g)") + 3 #ce("H2(g)") #ce("=") 2 #ce("NH3(g)") #h(1cm) ($Delta_f H^circ (#ce("NH3(g)")) = #qty("-46", "kJ/mol")$)
 ][
     $Delta_r H^circ = 2 Delta_f H^circ (#ce("NH3(g)")) - Delta_f H^circ (#ce("N2(g)")) - 3 Delta_f H^circ (#ce("H2(g)")) = #qty("-92", "kJ/mol")$ car #ce("N2(g)") et #ce("H2(g)") sont des corps simples dans leur état standard.
 
