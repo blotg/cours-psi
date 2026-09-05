@@ -44,7 +44,7 @@ La largeur de la conduite, dans sa dimension n'apparaissant pas sur le schéma, 
 #question(
     coups-de-pouce: (
         "Attention, pour les eaux grises, l'eau rentre en $x+dd(x)$ et sort en $x$.",
-        "Utiliser la PPI dans sa version en puissance.",
+        "Utiliser le PPI dans sa version en puissance.",
     ),
 )[
     En effectuant un bilan d'énergie sur une section élémentaire $dd(x)$ de l'échangeur, montrer que les températures $T_p(x)$ et $T_g(x)$ de l'eau potable et des eaux grises vérifient le système d'équations différentielles suivant :
@@ -69,7 +69,7 @@ La largeur de la conduite, dans sa dimension n'apparaissant pas sur le schéma, 
     $
 ]
 
-On souhaite exprimer $delta P_x$ en fonction des températures $T_p(x)$ et $T_g(x)$. A chaque interface solide/liquide, la loi de Newton donne lieu à une résistance thermique $1/(h dd(S))$.
+On souhaite exprimer $delta P_x$ en fonction des températures $T_p(x)$ et $T_g(x)$. À chaque interface solide/liquide, la loi de Newton donne lieu à une résistance thermique $1/(h dd(S))$.
 
 #question(
     coups-de-pouce: (

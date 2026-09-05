@@ -59,9 +59,9 @@ On s'intéresse à une conduite présentant un élargissement brutal, comme le m
     }),
 )
 
-On suppose l'écoulement turbulent. Les lignes de courant représentées sont des courbes moyennes. Pour simplifier les calcules, on considère le champ de vitesse uniforme dans le section d'entrée $S_1$.
+On suppose l'écoulement turbulent. Les lignes de courant représentées sont des courbes moyennes. Pour simplifier les calculs, on considère le champ de vitesse uniforme dans la section d'entrée $S_1$.
 
-Bien que le changement de section soit brutal, la section effective de l'écoulement varie lentement. Expérimentalement, on observe que l'écoulement devient quasiment uniforme au delà d'une distance d'environ vingt fois le diamètre $d_2$ de la grande section.
+Bien que le changement de section soit brutal, la section effective de l'écoulement varie lentement. Expérimentalement, on observe que l'écoulement devient quasiment uniforme au-delà d'une distance d'environ vingt fois le diamètre $d_2$ de la grande section.
 
 On note $va(v)_1$ la vitesse en amont de l'écoulement et $va(v)_2$ la vitesse en aval.
 
@@ -130,7 +130,8 @@ On néglige l'influence de la gravité.
 )[
     Au moyen d'un bilan de quantité de mouvement sur un système fermé bien choisi, exprimer la chute de pression $P_1-P_2$ entre l'amont et l'aval en fonction de $mu$, $v_1$ et des sections.
 ][
-    // Expliquer pourquoi P_1 s'applique sur $S_2$
+    D'après la question précédente, la pression vaut $P_1$ dans toute la zone d'eau morte : la pression s'exerce donc bien sur toute la section $S_2$ de la face amont, et non sur la seule section $S_1$.
+
     On définit les systèmes suivants :
     - $Sigma^0$ le système ouvert délimité par les surfaces $S_1$ et $S_2$
     - $delta Sigma_1$ le système franchissant $S_1$ entre les temps $t$ et $t+dd(t)$
@@ -138,7 +139,7 @@ On néglige l'influence de la gravité.
     - le système fermé $Sigma^*$ composé à l'instant $t$ de $Sigma^0(t)union delta Sigma_1$
     $Sigma^*(t+dd(t))$ est donc composé, à l'instant $t+dd(t)$, de $Sigma^0(t+dd(t))union delta Sigma_2$.
 
-    On appliquer le théorème de la quantité de mouvement au système fermé $Sigma^*$ entre les instants $t$ et $t+dd(t)$.
+    On applique le théorème de la quantité de mouvement au système fermé $Sigma^*$ entre les instants $t$ et $t+dd(t)$.
     $
         P_1 S_2 ex - P_2 S_2 ex = dd(va(p^*))/dd(t) = (va(p^*)(t+dd(t)) - va(p^*)(t))/dd(t) = (va(p^0)(t+dd(t)) - va(p^0)(t) + va(p)(delta Sigma_2) - va(p)(delta Sigma_1))/dd(t)\
         = (0 + v_2 delta m_2 ex - v_1 delta m_1 ex)/dd(t)
@@ -165,6 +166,6 @@ On néglige l'influence de la gravité.
     #let pdc = 2*(-x*x + x)
     $
         zeta = (P_2-P_1)/(1/2 mu v_1^2)
-        = 2 (S_1/S_2 - (S_1/S_2)^2) = #pdc
+        = 2 (S_1/S_2 - (S_1/S_2)^2) = #num(pdc)
     $
 ]

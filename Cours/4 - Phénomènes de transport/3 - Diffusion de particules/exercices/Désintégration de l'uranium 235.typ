@@ -27,15 +27,15 @@ On prend pour condition aux limites $n(r=R)=0$
         "Combien de neutrons sont captés durant $dd(t)$ dans le volume considéré ? Combien sont émis ?",
     ),
 )[
-    En faisant un bilan de neutron sur un volume mésoscopique, démontrer l'équation fondamentale de la neutronique :
-    $ pdv(n, t) = -div j + (nu-1)/tau n $
+    En faisant un bilan de neutrons sur un volume mésoscopique, démontrer l'équation fondamentale de la neutronique :
+    $ pdv(n, t) = -div va(j) + (nu-1)/tau n $
 ][
     On fait un bilan de neutrons sur une coquille sphérique de rayon intérieur $r$ et d'épaisseur $dd(r)$.
     $dd(N, 2) = delta^2 N$
     $
         dd(N, 2) = pdv(n, t) dd(V) dd(t)
     $
-    À chaque fois que le réaction se produit, $nu$ neutrons sont émis et un neutron est capté, donc $nu-1$ neutrons supplémentaires apparaissent. Le nombre de réactions dans le volume élémentaire durant $dd(t)$ est $n/tau dd(V) dd(t)$. Donc
+    À chaque fois que la réaction se produit, $nu$ neutrons sont émis et un neutron est capté, donc $nu-1$ neutrons supplémentaires apparaissent. Le nombre de réactions dans le volume élémentaire durant $dd(t)$ est $n/tau dd(V) dd(t)$. Donc
     $
         delta^2 N & = (nu-1)/tau n dd(V) dd(t) + (j(r) 4 pi r^2 - j(r+dd(r)) 4 pi (r+dd(r))^2) dd(t) \
                   & = (nu-1)/tau n dd(V) dd(t) - 4 pi pdv(, r) (r^2 j(r)) dd(r) dd(t) \
@@ -53,15 +53,14 @@ On prend pour condition aux limites $n(r=R)=0$
         "Remplacer $j$ par la loi de Fick dans l'équation obtenue précédemment.",
     ),
 )[
-    On recherche une solution de l'équation ci-dessus sous la forme $N(r,t) = ( f(t)g(r) )/r$. Montrer que $f$ et $g$ vérifient les équations différentielles suivantes :
+    On recherche une solution de l'équation ci-dessus sous la forme $n(r,t) = ( f(t)g(r) )/r$. Montrer que $f$ et $g$ vérifient les équations différentielles suivantes :
     $
         dv(f, t) = K f(t) \
         D dv(g, r, 2) + ( (nu-1)/tau - K ) g(r) = 0 \
     $
     où $K$ est une constante qu'on ne cherchera pas à déterminer pour l'instant.
 ][
-    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er = -D f(t) pdv(, r)g(r)/r$, avec $D$ la diffusivité des neutrons dans l'uranium 235. Donc
-    En replaçant dans l'équation, on trouve
+    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er = -D f(t) pdv(, r)g(r)/r$, avec $D$ la diffusivité des neutrons dans l'uranium 235. En remplaçant dans l'équation, on trouve
     $
         g(r)/r dv(f, t) & = D f(t) 1/r^2 dv(, r) (r^2 dv(g(r)/r, r)) + (nu-1)/tau f(t)g(r)/r \
         g(r)/r dv(f, t) & = D f(t) 1/r^2 dv(, r) (r^cancel(2) 1/cancel(r) dv(g, r) - cancel(r^2)/cancel(r^2)g(r)) + (nu-1)/tau f(t)g(r)/r \
@@ -90,7 +89,7 @@ On prend pour condition aux limites $n(r=R)=0$
         "La densité particulaire est une grandeur positive et finie.",
     ),
 )[
-    Quelles sont les différentes formes de solution pour $g(r)$. Lesquelles sont compatibles avec les conditions aux limites ? Résoudre l'équation différentielle sur $g(r)$.
+    Quelles sont les différentes formes de solution pour $g(r)$ ? Lesquelles sont compatibles avec les conditions aux limites ? Résoudre l'équation différentielle sur $g(r)$.
 ][
     Le discriminant de l'équation caractéristique est
     $
@@ -99,9 +98,9 @@ On prend pour condition aux limites $n(r=R)=0$
     $
     - Si $Delta > 0$, c'est-à-dire si $K > (nu-1)/tau$, les solutions sont de la forme
     $ g(r) = A exp(r sqrt((K-(nu-1)/tau)/D)) + B exp(-r sqrt((K-(nu-1)/tau)/D)) $
-    La condition $n(R)=0$ impose $g(R)=0$, donc $A exp(R sqrt((K-(nu-1)/tau)/D)) + B exp(-R sqrt((K-(nu-1)/tau)/D)) = 0$. Or la première exponentielle diverge pour $r -> +infinity$, donc pour que $g(r)$ reste finie pour tout $r$, il faut que $A=0$. Il en résulte que $B exp(-R sqrt((K-(nu-1)/tau)/D)) = 0$, donc $B=0$. La seule solution est la solution triviale.
-    - Si $Delta = 0$, c'est-à-dire si $K = (nu-1)/tau$, les solutions sont de la forme $g(r) = A + B r$. La condition $g(R)=0$ impose $A + B R = 0$. Pour que $g(r)$ ne diverge pas en $0$, il faut que $B=0$ et donc $A=0$. La seule solution est la solution triviale.
-    - Si $Delta < 0$, c'est-à-dire si $K < (nu-1)/tau$, les solutions sont de la forme $g(r) = A cos(r sqrt(((nu-1)/tau - K)/D)) + B sin(r sqrt(((nu-1)/tau - K)/D))$. La condition $g(R)=0$ impose $A cos(R sqrt(((nu-1)/tau - K)/D)) + B sin(R sqrt(((nu-1)/tau - K)/D)) = 0$. Pour que $g(r)$ reste finie en $0$, il faut que $A=0$. Il en résulte que $B sin(R sqrt(((nu-1)/tau - K)/D)) = 0$. Pour une solution non triviale, il faut que $sin(R sqrt(((nu-1)/tau - K)/D)) = 0$, donc $R sqrt(((nu-1)/tau - K)/D) = k pi$ avec $k in NN^*$. Les valeurs de $k$ différentes de $1$ donnent lieu à des densité particulaires positives.
+    En notant $kappa = sqrt((K-(nu-1)/tau)/D)$, la condition $n(R)=0$ impose $g(R)=0$, soit $A e^(kappa R) + B e^(-kappa R) = 0$. Comme $n = f g slash r$, il faut de plus que $g(0)=0$ pour que la densité reste finie en $r=0$, soit $A+B=0$. Le système impose alors $A(e^(kappa R)-e^(-kappa R))=0$, donc $A=B=0$ : la seule solution est la solution triviale.
+    - Si $Delta = 0$, c'est-à-dire si $K = (nu-1)/tau$, les solutions sont de la forme $g(r) = A + B r$. La condition $g(0)=0$ impose $A=0$, puis $g(R)=0$ impose $B=0$. La seule solution est la solution triviale.
+    - Si $Delta < 0$, c'est-à-dire si $K < (nu-1)/tau$, les solutions sont de la forme $g(r) = A cos(r sqrt(((nu-1)/tau - K)/D)) + B sin(r sqrt(((nu-1)/tau - K)/D))$. La condition $g(0)=0$ impose $A=0$. La condition $g(R)=0$ impose alors $B sin(R sqrt(((nu-1)/tau - K)/D)) = 0$. Pour une solution non triviale, il faut que $sin(R sqrt(((nu-1)/tau - K)/D)) = 0$, donc $R sqrt(((nu-1)/tau - K)/D) = k pi$ avec $k in NN^*$. Les valeurs de $k$ différentes de $1$ donnent lieu à des densités particulaires négatives, donc à écarter.
 
     On en déduit finalement que la seule solution non triviale est obtenue pour $k=1$ :
     $ g(r) = B sin(pi r / R) $
@@ -116,7 +115,7 @@ On prend pour condition aux limites $n(r=R)=0$
 #question(
     coups-de-pouce: (),
 )[
-    Quelle est la forme de la solution de l'équation sur $f(t)$.
+    Quelle est la forme de la solution de l'équation sur $f(t)$ ?
 ][
     L'équation différentielle sur $f(t)$ est $dv(f, t) = K f(t)$. La solution est
     $ f(t) = f(0) exp(K t) $

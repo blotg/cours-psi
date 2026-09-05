@@ -16,14 +16,14 @@ où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu
 
 On se place en coordonnées sphériques, note $n(t,r)$ le nombre de neutrons par unité de volume et $va(j)(t,r)$ le vecteur densité de courant de neutrons.
 
-On prend pour condition aux limites $forall t, (t,r=R)=0$
+On prend pour condition aux limites $forall t, n(t,r=R)=0$
 
 #question(
     coups-de-pouce: (
         "Combien de neutrons sont captés durant $dd(t)$ dans le volume considéré ? Combien sont émis ?",
     ),
 )[
-    En faisant un bilan de neutron sur un volume mésoscopique, démontrer l'équation aux dérivées partielles vérifiée par $n$ :
+    En faisant un bilan de neutrons sur un volume mésoscopique, démontrer l'équation aux dérivées partielles vérifiée par $n$ :
     $
         pdv(n, t) = D/r^2 pdv(, r) (r^2 pdv(n, r)) + (nu-1)/tau n
     $
@@ -33,7 +33,7 @@ On prend pour condition aux limites $forall t, (t,r=R)=0$
     $
         dd(N, 2) = pdv(n, t) dd(V) dd(t)
     $
-    À chaque fois que le réaction se produit, $nu$ neutrons sont émis et un neutron est capté, donc $nu-1$ neutrons supplémentaires apparaissent. Le nombre de réactions dans le volume élémentaire durant $dd(t)$ est $n/tau dd(V) dd(t)$. Donc
+    À chaque fois que la réaction se produit, $nu$ neutrons sont émis et un neutron est capté, donc $nu-1$ neutrons supplémentaires apparaissent. Le nombre de réactions dans le volume élémentaire durant $dd(t)$ est $n/tau dd(V) dd(t)$. Donc
     $
         delta^2 N & = (nu-1)/tau n dd(V) dd(t) + (j(t,r) 4 pi r^2 - j(t,r+dd(r)) 4 pi (r+dd(r))^2) dd(t) \
                   & = (nu-1)/tau n dd(V) dd(t) - 4 pi pdv(, r) (r^2 j(t,r)) dd(r) dd(t) \
@@ -42,8 +42,7 @@ On prend pour condition aux limites $forall t, (t,r=R)=0$
     $
         pdv(n, t) & = (nu-1)/tau n - 1/r^2 pdv(, r) (r^2 j(t,r)) \
     $
-    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er$, avec $D$ la diffusivité des neutrons dans l'uranium 235. Donc
-    En replaçant dans l'équation, on trouve
+    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er$, avec $D$ la diffusivité des neutrons dans l'uranium 235. En remplaçant dans l'équation, on trouve
     $
         pdv(n, t) & = D/r^2 pdv(, r) (r^2 pdv(n, r)) + (nu-1)/tau n \
     $
@@ -118,7 +117,7 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
         "On peut utiliser les fonctions np.linspace et np.zeros de la bibliothèque numpy.",
     ),
 )[
-    Compléter le code Python ci-dessous pour simuler la désintégration de l'uranium 235 dans la boule. On prendra comme condition initiale une densité de neutrons uniforme dans la boule égale à #qty("1e12", "m^3") (sauf aux conditions aux limites où elle est nulle).
+    Compléter le code Python ci-dessous pour simuler la désintégration de l'uranium 235 dans la boule. On prendra comme condition initiale une densité de neutrons uniforme dans la boule égale à #qty("1e12", "/m^3") (sauf aux conditions aux limites où elle est nulle).
     #show raw.where(block: true): numérote-code
     ```python
     import numpy as np
@@ -159,9 +158,9 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
     y[0,1:-1] = 1e12 * r[1:-1] # condition initiale : densité uniforme 
 
     for i in range(0, Nt-1):
+        y[i+1, 0] = 0 # condition aux limites en r=0
+        y[i+1, -1] = 0 # condition aux limites en r=R
         for j in range(1, Nx-1):
-            y[i+1, 0] = 0 # condition aux limites en r=0
-            y[i+1, -1] = 0 # condition aux limites en r=R
             # schéma d'Euler explicite
             y[i+1,j] = y[i,j] + D*dt/dx**2 * (y[i,j+1] - 2*y[i,j] + y[i,j-1]) + (nu-1)/tau * y[i,j] * dt
     ```
@@ -173,20 +172,21 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
         "Penser à calculer la densité de neutrons $n$ à partir de $y$ en utilisant la relation $n = y/r$.",
     ),
 )[
-    Tracer la densité de neutrons en fonction du rayon pour aux instants $t=0$, $t=t_"max"/4$, $t=t_"max"/2$, $t=3 t_"max"/4$ et $t=t_"max"$ où $t_"max"$ est le temps final de la simulation.
+    Tracer la densité de neutrons en fonction du rayon aux instants $t=0$, $t=t_"max"/4$, $t=t_"max"/2$, $t=3 t_"max"/4$ et $t=t_"max"$ où $t_"max"$ est le temps final de la simulation.
 ][
     On peut utiliser le code suivant pour tracer la densité de neutrons en fonction du rayon à différents instants :
     #show raw.where(block: true): numérote-code
     ```python
-    n = y/r # calcul de la densité de neutrons
+    n = np.zeros_like(y)
+    n[:, 1:] = y[:, 1:] / r[1:] # calcul de la densité de neutrons (r[0] = 0)
 
     import matplotlib.pyplot as plt
     plt.figure()
-    plt.plot(r, y[0,:], label=f't={t[0]:.2e} s')
-    plt.plot(r, y[Nt//4,:], label=f't={t[Nt//4]:.2e} s')
-    plt.plot(r, y[Nt//2,:], label=f't={t[Nt//2]:.2e} s')
-    plt.plot(r, y[3*Nt//4,:], label=f't={t[3*Nt//4]:.2e} s')
-    plt.plot(r, y[-1,:], label=f't={t[-1]:.2e} s')
+    plt.plot(r, n[0,:], label=f't={t[0]:.2e} s')
+    plt.plot(r, n[Nt//4,:], label=f't={t[Nt//4]:.2e} s')
+    plt.plot(r, n[Nt//2,:], label=f't={t[Nt//2]:.2e} s')
+    plt.plot(r, n[3*Nt//4,:], label=f't={t[3*Nt//4]:.2e} s')
+    plt.plot(r, n[-1,:], label=f't={t[-1]:.2e} s')
     plt.xlabel('Rayon r (m)')
     plt.ylabel('Densité de neutrons (m$^{-3}$)')
     plt.title("Évolution de la densité de neutrons dans la boule d'uranium 235")
@@ -214,11 +214,11 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
 #question(
     coups-de-pouce: ()
 )[
-    Pour des petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour des grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #qty("5", "cm") près.
+    Pour des petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour des grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #qty("0.5", "cm") près.
 ][
     Pour $R = #num("0.08")$, la densité de neutrons tend vers $0$ avec le temps.
 
     Pour $R = #num("0.09")$, la densité de neutrons croît exponentiellement avec le temps.
 
-    Le rayon critique est situé entre ces deux valeurs. $R_c = #qty("85+-5", "cm")$.
+    Le rayon critique est situé entre ces deux valeurs. $R_c = #qty("8.5+-0.5", "cm")$.
 ]

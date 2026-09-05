@@ -5,7 +5,7 @@
     ouvert: true,
 )
 
-Les chauffes-eaux électriques instantanés permettent de chauffer l'eau à la demande, sans réservoir de stockage.
+Les chauffe-eaux électriques instantanés permettent de chauffer l'eau à la demande, sans réservoir de stockage.
 
 Le chauffe-eau ci-dessous peut soutirer une puissance électrique maximale de #qty("4.4", "kW").
 
@@ -17,7 +17,7 @@ Le chauffe-eau ci-dessous peut soutirer une puissance électrique maximale de #q
 
 Le débit d'eau dans une douche est typiquement compris entre #qty("12", "L/min") et #qty("20", "L/min").
 
-La capacité thermique maintenant de l'eau est $c_p = #qty("4.18", "kJ/kg/K")$.
+La capacité thermique massique de l'eau est $c_p = #qty("4.18", "kJ/kg/K")$.
 
 #question()[
     Ce chauffe-eau est-il adapté pour une douche ?
@@ -39,5 +39,5 @@ La capacité thermique maintenant de l'eau est $c_p = #qty("4.18", "kJ/kg/K")$.
     $
       D_(V,"max") = D_(m,"max")/mu = P_"th" / (mu c_p (T_"sortie" - T_"entrée")) = #qty(scientifique(DV,1), "m^3/s") = #qty(scientifique(DV*60*1000,1), "L/min")
     $
-    Ce qui est suffisant pour une douche.
+    C'est très en deçà des #qty("12", "L/min") à #qty("20", "L/min") d'une douche : ce chauffe-eau ne convient pas. Il pourrait tout au plus alimenter un lavabo.
 ]

@@ -6,9 +6,9 @@
 
 Un détendeur de plongée est un dispositif qui permet de réduire la pression de l'air comprimé contenu dans une bouteille de plongée (#qty("200", "bar")) avant qu'il n'arrive au plongeur.
 
-Cette détente est faire de façon adiabatique au travers d'un étranglement étroit sans pièce mobile.
+Cette détente est faite de façon adiabatique au travers d'un étranglement étroit sans pièce mobile.
 
-L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
+L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal.
 
 #figure(
     image("../images/P-h-air.png", width: 100%),
@@ -19,7 +19,7 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
 #question(
     coups-de-pouce: "Utiliser le premier principe industriel.",
 )[
-    Montrer que la détente de l'air dans le détendeur est isentropique.
+    Montrer que la détente de l'air dans le détendeur est isenthalpique.
 ][
     D'après le premier principe industriel,
     $
@@ -43,7 +43,7 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
 ][
     On place le point initial sur l'isotherme #qty("20", "Celsius") du diagramme (P,h) à la pression #qty("200", "bar"). On suit l'isenthalpe (verticale sur un diagramme $(P,h)$) vers le bas jusqu'à la pression de sortie (environ #qty("1", "bar")). On se trouve entre les isothermes #qty("0", "Celsius") et #qty("-20", "Celsius"), donc
     $
-        T_s in [#qty("0", "Celsius"), #qty("-20", "Celsius")]
+        T_s in [#qty("-20", "Celsius"), #qty("0", "Celsius")]
     $
 ]
 
@@ -53,19 +53,19 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal
     Pour un gaz parfait, l'enthalpie ne dépend que de la température, donc une transformation isenthalpique est aussi isotherme. Or ici, la température diminue fortement lors de la détente, donc l'air ne peut pas être considéré comme un gaz parfait dans ces conditions.
 ]
 
-Ce n'est pas confortable pour un plongeur de respirer un air si froid. Pour paler ce problème, la détente est en réalité réalisée en trois étapes :
+Ce n'est pas confortable pour un plongeur de respirer un air si froid. Pour pallier ce problème, la détente est en réalité réalisée en trois étapes :
 - détente isenthalpique dans un premier détendeur au niveau de la bouteille pour atteindre une pression de #qty("10", "bar"),
 - réchauffage isobare de l'air jusqu'à #qty("20", "Celsius") par échange avec l'eau
 - détente adiabatique dans un second détendeur jusqu'à la pression ambiante au niveau du masque du plongeur.
 
-Toutes les étapes sont faites de façon stationnaires, lentes et horizontales.
+Toutes les étapes sont faites de façon stationnaire, lente et horizontale.
 
 #question[
     Représenter la transformation globale sur le diagramme $(P,h)$. Estimer la température de l'air à la sortie du second détendeur.
 ][
     Le point de départ est le même que précédemment : le point de l'isotherme #qty("20", "Celsius") à la pression #qty("200", "bar"). On descend verticalement jusqu'à la pression #qty("10", "bar") (première détente isenthalpique), puis on se déplace horizontalement vers la droite  jusqu'à l'isotherme #qty("20", "Celsius") (réchauffage isobare), enfin on descend verticalement jusqu'à la pression ambiante (seconde détente isenthalpique).
 
-    A la pression finale, les isotherme sont régulièrement espacées, on peut lire directement la température de l'air à la sortie du second détendeur : elle est d'environ #qty("18", "Celsius").
+    À la pression finale, les isothermes sont régulièrement espacées, on peut lire directement la température de l'air à la sortie du second détendeur : elle est d'environ #qty("18", "Celsius").
 ]
 
 Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante au niveau de son masque.
@@ -74,12 +74,12 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 #question[
     Quelle est la masse volumique de l'air arrivant au plongeur ? Calculer le débit massique d'air dans le système de détente.
 ][
-    L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume masse d'environ #qty("0.8", "m^3/kg"), soit une masse molaire de
+    L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume massique d'environ #qty("0.8", "m^3/kg"), soit une masse volumique de
     $
         mu approx 1/0.8 approx #qty(scientifique(1 / 0.8, 2), "kg/m^3")
     $
     $
-        D_m = mu D_v = #qty(scientifique(Dm, 1), "kg/s")
+        D_m = mu D_V = #qty(scientifique(Dm, 1), "kg/s")
     $
 ]
 

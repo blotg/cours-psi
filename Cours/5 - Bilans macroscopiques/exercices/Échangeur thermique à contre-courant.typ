@@ -25,7 +25,7 @@ On considère une machine thermique ouverte dans laquelle circule lentement et h
 #question(
     coups-de-pouce: (
         "Il s'agit de la démonstration du PPI du cours, avec quelques hypothèses qui simplifient un peu les calculs.",
-        "Le PPI ainsi obtenu doit être multiplié par le débit massique pour faire apparaitre les puissance demandées.",
+        "Le PPI ainsi obtenu doit être multiplié par le débit massique pour faire apparaitre les puissances demandées.",
     ),
 )[
     À l'aide du premier principe de la thermodynamique, établir un lien entre ces deux puissances, $D$ et les enthalpies massiques du fluide en entrée et en sortie.
@@ -83,7 +83,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
 #question(
     coups-de-pouce: (
         "Donner un nom à la puissance allant du gaz vers le fluide.",
-        "Appliquer le PPI en termes de puissances d'une part au gaz et d'autre part au fluides.",
+        "Appliquer le PPI en termes de puissances d'une part au gaz et d'autre part à l'eau.",
         "Utiliser la seconde loi de Joule.",
     ),
 )[
@@ -126,7 +126,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
 ][
     Le second principe pour un système ouvert en écoulement stationnaire s'écrit
     $
-        s_2 - s_1 = s_c + s_c
+        s_2 - s_1 = s_e + s_c
     $
     En multipliant par le débit massique, on obtient
     $
@@ -139,24 +139,23 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
             D_e (s_(2,e) - s_(1,e)) = (delta S_(c,e))/dd(t) + (delta S_(e,e))/dd(t)
         )
     $
-    Or l'entropie échangée reçue par le gaz $delta S_(e,g)$ est celle cédée par l'eau $-delta S_(e,e)$, donc
-    En sommant les deux, on trouve finalement
+    Or l'entropie échangée reçue par le gaz $delta S_(e,g)$ est celle cédée par l'eau $-delta S_(e,e)$. En sommant les deux, on trouve finalement
     $
         (delta S_c)/dd(t) = (delta S_(c,e))/dd(t) + (delta S_(c,g))/dd(t) = D_g (s_(2,g) - s_(1,g)) + D_e (s_(2,e) - s_(1,e))
     $
 ]
 
 #let Delta-s-g = (gamma-air * R) / (M * (gamma-air - 1)) * calc.ln(T-2 / T-1)
-#let Delta-s-e = c * calc.ln(theta-2 / theta-1)
+#let Delta-s-e = c * calc.ln((theta-2 + 273.15) / (theta-1 + 273.15))
 #question(
     coups-de-pouce: (
         "Comment s'écrit la variation d'enthalpie pour une transformation isobare ?",
         "Écrire la seconde loi de Joule.",
         "Exprimer la variation d'entropie massique en fonction de la capacité thermique massique et de la température.",
-        "Pour un gaz parfait, comment la capacité thermique massique à pression constant s'exprime-t-elle en fonction du coefficient de Laplace ?",
+        "Pour un gaz parfait, comment la capacité thermique massique à pression constante s'exprime-t-elle en fonction du coefficient de Laplace ?",
     ),
 )[
-    En utilisant l'identité thermodynamique $dd(H) = T dd(S) + V dd(P)$, montrer que $s_(2,e)-s_(1,e)=c ln(theta_2/theta_1)$ et que $s_(2,g)-s_(1,g)=(gamma R)/(M(gamma-1)) ln T_2/T_1$. Calculer leur valeur.
+    En utilisant l'identité thermodynamique $dd(H) = T dd(S) + V dd(P)$, montrer que $s_(2,e)-s_(1,e)=c ln(T_(2,e)/T_(1,e))$ (températures absolues) et que $s_(2,g)-s_(1,g)=(gamma R)/(M(gamma-1)) ln T_2/T_1$. Calculer leur valeur.
 ][
     Pour une transformation isobare, on a $dd(P)=0$, donc l'identité thermodynamique devient $dd(H) = T dd(S)$. On en déduit que
     $
@@ -169,7 +168,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
     Pour l'eau, on utilise la seconde loi de Joule isobare $dd(H) = c dd(theta)$, ce qui donne
     
     $
-        s_(2,e) - s_(1,e) = integral_(theta_1)^(theta_2) c dd(theta)/theta = c ln(theta_2/theta_1)
+        s_(2,e) - s_(1,e) = integral_(T_(1,e))^(T_(2,e)) c dd(T)/T = c ln(T_(2,e)/T_(1,e))
         = #qty(scientifique(Delta-s-e,2), "J/kg/K")
     $
     Pour le gaz parfait, on utilise la seconde loi de Joule isobare $dd(H) = c_p dd(T)$ avec $c_p = (gamma R)/(M (gamma - 1))$, ce qui donne
@@ -181,7 +180,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
 ]
 
 #question[
-    Quel est le signe de $(delta S_C)/dd(t)$ ? Est-ce conforme avec le second principe de la thermodynamique ?
+    Quel est le signe de $(delta S_c)/dd(t)$ ? Est-ce conforme avec le second principe de la thermodynamique ?
 ][
     En utilisant les valeurs numériques précédentes, on trouve
     #let Delta-S-c = D-g * Delta-s-g + D-e * Delta-s-e

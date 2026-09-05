@@ -23,7 +23,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
 ]
 
 #question()[
-    Quelle est l'unité de $D$.
+    Quelle est l'unité de $D$ ?
 ][
     L'unité de $D$ est #unit("m^2/s").
 ]
@@ -34,6 +34,20 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
     ),
 )[
     Établir l'équation de diffusion de particules en coordonnées sphériques.
+][
+    On fait un bilan de particules sur une coquille sphérique comprise entre $r$ et $r+dd(r)$, de volume $dd(V) = 4 pi r^2 dd(r)$, entre $t$ et $t+dd(t)$. En l'absence de terme source,
+    $
+        pdv(n, t) dd(V) dd(t) & = (j(r) 4 pi r^2 - j(r+dd(r)) 4 pi (r+dd(r))^2) dd(t) \
+                              & = - 4 pi pdv(, r) (r^2 j(r)) dd(r) dd(t)
+    $
+    En divisant par $dd(V) dd(t) = 4 pi r^2 dd(r) dd(t)$,
+    $
+        pdv(n, t) = - 1/r^2 pdv(, r) (r^2 j(r))
+    $
+    La loi de Fick $j = -D pdv(n, r)$ donne alors l'équation de diffusion
+    $
+        pdv(n, t) = D/r^2 pdv(, r) (r^2 pdv(n, r))
+    $
 ]
 
 #question(
@@ -41,7 +55,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
 )[
     Exprimer $Phi$, le nombre de molécules de #ce("O2") qui traversent par unité de temps une sphère de rayon $r$ ($r>R$) en fonction de $j(r)$ et de $r$. Justifier que $Phi$ ne dépend pas du rayon $r$ de la sphère considérée.
 ][
-    Le flux particulaire est $Phi = 4 pi r^2 j(r)$. En régime stationnaire et en l'absence de terme source, le vecteur densité de courant de particules est à flux conservatif, donc $Phi$ est le même sur toute sphère de rayon $r>R$
+    Le flux particulaire est $Phi = 4 pi r^2 j(r)$. En régime stationnaire et en l'absence de terme source, le vecteur densité de courant de particules est à flux conservatif, donc $Phi$ est le même sur toute sphère de rayon $r>R$.
 ]
 
 #question(
@@ -81,14 +95,14 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
 )[
     En étudiant la consommation en #ce("O2") de la bactérie pendant une durée $dd(t)$, exprimer $Phi$ en fonction de $a$, $Na$, de la masse volumique $mu$ de la bactérie et de son rayon $R$.
 ][
-    La masse de la bactérie est $m = 4/3 pi R^3 mu$. Le nombre de molécules de #ce("O2") consommées pendant une durée $dd(t)$ est donc $a m dd(t) Na = a 4/3 pi R^3 mu dd(t) Na$. En regime stationnaire, le dioxygène consommé par la bactérie est égal au dioxygène arrivant à elle. Donc le flux particulaire est
+    La masse de la bactérie est $m = 4/3 pi R^3 mu$. Le nombre de molécules de #ce("O2") consommées pendant une durée $dd(t)$ est donc $a m dd(t) Na = a 4/3 pi R^3 mu dd(t) Na$. En régime stationnaire, le dioxygène consommé par la bactérie est égal au dioxygène arrivant à elle. Donc le flux particulaire est
     $
         Phi = -4/3 a pi R^3 mu Na
     $
 ]
 
 #question[
-    En déduire l'expression de $n_R$. Comment varie $n_R$ en fonction de $R$.
+    En déduire l'expression de $n_R$. Comment varie $n_R$ en fonction de $R$ ?
 ][
     En remplaçant $Phi$ dans l'expression de $n_R$, on obtient
     $
@@ -102,7 +116,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
         "La densité particulaire ne peut pas être négative.",
     ),
 )[
-    Quelle inégalité doit vérifier $n_R$ pour que la bactérie ne suffoque pas. En déduire l'expression du rayon critique $R_c$ d'une bactérie aérobie. Effectuer l'application pour $a=qty("1e-3", "mol/kg/s")$ et sachant que la bactérie une masse volumique comparable a celle de l'eau. Comparer ce résultat à la dimension caractéristique $R=1$ à $qty("10", "um")$ d'une bactérie réelle.
+    Quelle inégalité doit vérifier $n_R$ pour que la bactérie ne suffoque pas ? En déduire l'expression du rayon critique $R_c$ d'une bactérie aérobie. Effectuer l'application pour $a=qty("1e-3", "mol/kg/s")$ et sachant que la bactérie a une masse volumique comparable à celle de l'eau. Comparer ce résultat à la dimension caractéristique $R=1$ à $qty("10", "um")$ d'une bactérie réelle.
 ][
     Pour que la bactérie ne suffoque pas, il faut que $n_R > 0$. Donc
     $

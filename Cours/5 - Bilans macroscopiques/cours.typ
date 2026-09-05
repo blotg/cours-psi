@@ -5,7 +5,7 @@
 #let grandeurs = (
     "delta m_1": (signification: "la masse rentrant dans le système ouvert entre $t$ et $t+dd(t)$", unité: unit("kg")),
     "delta m_2": (signification: "la masse sortant du système ouvert entre $t$ et $t+dd(t)$", unité: unit("kg")),
-    "Delta": (signification: "la différence entre la sortie et l'entrée"),
+    "Delta": (signification: "la différence entre la sortie et l'entrée", unité: "sans unité"),
     "h": (signification: "l'enthalpie massique", unité: unit("J/kg")),
     "e_c": (signification: "l'énergie cinétique massique", unité: unit("J/kg")),
     "e_p": (signification: "l'énergie potentielle massique", unité: unit("J/kg")),
@@ -29,7 +29,7 @@
         signification: "le moment des forces extérieures par rapport au point O",
         unité: unit("N m"),
     ),
-    "O": (signification: "un point fixe", unité: unit("m")),
+    "O": (signification: "un point fixe"),
 )
 
 = Du système ouvert au système fermé
@@ -145,7 +145,7 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
 == Le modèle de l'écoulement parfait
 Un écoulement parfait est un écoulement dans lequel il n'existe aucun phénomène de diffusion (thermique, de quantité de mouvement, ...).
 
-Dans un écoulement parfait, l'évolution d'une particule de fluide est adiabatique, réversible. Dans un écoulement parfait, les particules de fluides ne sont soumises à aucune force de viscosité.
+Dans un écoulement parfait, l'évolution d'une particule de fluide est adiabatique, réversible. Dans un écoulement parfait, les particules de fluide ne sont soumises à aucune force de viscosité.
 
 Le modèle de l'écoulement parfait donne des résultats conformes à l'expérience lorsque le nombre de Reynolds est grand et hors de la couche limite.
 
@@ -188,7 +188,7 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
     verso: "L'écoulement est Parfait, Stationnaire, Incompressible et Homogène.",
 )
 #question-de-colle(
-    "Établir la relation de Bernoulli. Note : $u_e=u_s$ est admis jusqu'au chapitre \"Second principe appliqué aux transformations chimiques\".",
+    "Établir la relation de Bernoulli. Note : $u_e=u_s$ est admis jusqu'au chapitre \"Deuxième principe de la thermodynamique appliqué aux transformations physico-chimiques\".",
 )
 
 La relation de Bernoulli traduit la conservation de l'énergie mécanique volumique.
@@ -217,7 +217,7 @@ La quantité de mouvement est une grandeur conservative. Une force est un débit
 Il est possible de faire des bilans de quantités de mouvement en écrivant le principe fondamental de la dynamique comme une variation de quantité de mouvement.
 
 #encadré(
-    titre: "Formulation du PDF en tant que conservation de quantité de mouvement",
+    titre: "Formulation du PFD en tant que conservation de quantité de mouvement",
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
@@ -230,7 +230,7 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 ]
 
 #flashcard(
-    recto: "PDF formulé sous forme de conservation de quantité de mouvement",
+    recto: "PFD formulé sous forme de conservation de quantité de mouvement",
     verso: "$ va(p)(t+dd(t))-va(p)(t)=sum va(F)_\"ext\" dd(t) $",
 )
 
@@ -239,7 +239,7 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 ]
 
 #question-de-colle(
-    "Traiter l'exemple de la fusée : exprimer la vitesse ne fonction du temps, du débit massique et de la vitesse d'éjection des gaz en sortie de tuyère.",
+    "Traiter l'exemple de la fusée : exprimer la vitesse en fonction du temps, du débit massique et de la vitesse d'éjection des gaz en sortie de tuyère.",
 )
 
 == Bilan de moment cinétique
@@ -266,7 +266,7 @@ Il est possible de faire des bilans de moment cinétique en écrivant le théor�
 )
 
 #application[
-    Les turbines Pelton sont utilisées pour produire de l'électricité dans les centrales hydroélectriques. Elles permettent de convertir l'énergie cinétique de l'eau en travail mécanique avec un bon rendement (de l'ordre de #qty("90", "%")) lorsque les débits sont faibles mais que la pression est importante. Elles sont constituées de plusieurs augets fixées sur une roue. L'eau arrive avec une vitesse $v$ et frappe les augets puis retombe sans vitesse. Relier le couple exercé par la turbine sur l'alternateur au débit massique d'eau $D_m$, à la vitesse d'arrivée de l'eau $v$ et au rayon $R$ de la roue.
+    Les turbines Pelton sont utilisées pour produire de l'électricité dans les centrales hydroélectriques. Elles permettent de convertir l'énergie cinétique de l'eau en travail mécanique avec un bon rendement (de l'ordre de #qty("90", "%")) lorsque les débits sont faibles mais que la pression est importante. Elles sont constituées de plusieurs augets fixés sur une roue. L'eau arrive avec une vitesse $v$ et frappe les augets puis retombe sans vitesse. Relier le couple exercé par la turbine sur l'alternateur au débit massique d'eau $D_m$, à la vitesse d'arrivée de l'eau $v$ et au rayon $R$ de la roue.
 
     #grid(
         columns: (1fr, 1fr),
