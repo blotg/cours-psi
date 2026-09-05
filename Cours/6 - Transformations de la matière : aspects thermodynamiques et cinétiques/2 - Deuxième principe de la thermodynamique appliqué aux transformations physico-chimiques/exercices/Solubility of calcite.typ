@@ -23,7 +23,7 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
 #question(
     coups-de-pouce: (
         "Qu'est-ce que le produit de solubilité ?",
-        "Comment la constante d'équilibre est-elle liée à l'enthalpie de réaction.",
+        "Comment la constante d'équilibre est-elle liée à l'enthalpie libre de réaction ?",
     ),
 )[
     Deduce the solubility product of calcite at room temperature.
@@ -42,6 +42,6 @@ The chemical species are solutes in water.
 #table(
     columns: 4,
     align: (left,) + (center,) * 3,
-    [Chemical species], ce("CaCO3(s)"), ce("Ca^2+"), ce("CO_3^2-"),
+    [Chemical species], ce("CaCO3(s)"), ce("Ca^2+(aq)"), ce("CO3^2-(aq)"),
     [$Delta_f G^circ$ (#unit("kJ/mol"))], num("-1128.8"), num("-553.5"), num("-527.9"),
 )

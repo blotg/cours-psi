@@ -29,8 +29,8 @@ La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
 
 #question(
     coups-de-pouce: (
-        "L'activité d'un gaz est égal à sa pression partielle divisé par la pression standard.",
-        "La pression partielle est la pression du gaz multiplié par la fraction molaire $P_i=P_\"tot\" (n_i)/(n_\"tot,gaz\")$",
+        "L'activité d'un gaz est égale à sa pression partielle divisée par la pression standard.",
+        "La pression partielle est la pression totale multipliée par la fraction molaire $P_i=P_\"tot\" (n_i)/(n_\"tot,gaz\")$",
     ),
 )[
     Exprimer les quotients réactionnels en fonction de la pression totale $P_"tot"$, de la pression standard $P^circ$, des quantités de matière initiales $n_0(ce("CH4"))$ et $n_0(ce("H2O"))$ et des avancements $xi_1$ et $xi_2$.
@@ -75,7 +75,7 @@ On souhaite obtenir la composition du système à l'équilibre lorsque la pressi
     $
         cases(
             (xi_1 - xi_2) (3 xi_1 + xi_2)^3 - K_1^circ (n_0(ce("CH4(g)")) - xi_1) (n_0(ce("H2O(g)")) - xi_1 - xi_2) (n_0(ce("CH4(g)")) + n_0(ce("H2O(g)")) + 2 xi_1)^2 = 0,
-            xi_2 (3 xi_1 + xi_2) - K_2 (xi_1 - xi_2) (n_0(ce("H2O(g)")) - xi_1 - xi_2) = 0
+            xi_2 (3 xi_1 + xi_2) - K_2^circ (xi_1 - xi_2) (n_0(ce("H2O(g)")) - xi_1 - xi_2) = 0
         )
     $
 ][
@@ -91,7 +91,7 @@ On souhaite obtenir la composition du système à l'équilibre lorsque la pressi
 
 #question[
     La fonction `root(f, x0)` de la bibliothèque `scipy.optimize` permet de trouver numériquement la racine d'une fonction `f` en partant d'une valeur initiale `x0`. La fonction `f` peut prendre une liste en argument et retourner une liste de valeurs.
-    `root(f, x0)` renvoie un objet dont l'attribut `x` contient la valeur de la racine trouvée. Compléter le code Python permettant de déterminer la valeur de $x_1$ et $xi_2$. On prendra comme valeurs initiales $xi_1 = 0$ et $xi_2 = 0$.
+    `root(f, x0)` renvoie un objet dont l'attribut `x` contient la valeur de la racine trouvée. Compléter le code Python permettant de déterminer la valeur de $xi_1$ et $xi_2$. On prendra comme valeurs initiales $xi_1 = 0$ et $xi_2 = 0$.
 
     ```python
     from scipy.optimize import root
@@ -109,14 +109,14 @@ On souhaite obtenir la composition du système à l'équilibre lorsque la pressi
     def f(x):
         xi_1, xi_2 = x
         return [
-            (xi_1-xi_2) * (3 * xi_1 + xi_2)**3 - K1 * (n0_H2O - xi_1 - xi_2) * (n0_CH4 - xi_1) * (n0_H2O + n0_CH4 + 2 * xi_1),
+            (xi_1-xi_2) * (3 * xi_1 + xi_2)**3 - K1 * (n0_H2O - xi_1 - xi_2) * (n0_CH4 - xi_1) * (n0_H2O + n0_CH4 + 2 * xi_1)**2,
             xi_2 * (3 * xi_1 + xi_2) - K2 * (xi_1 - xi_2) * (n0_H2O - xi_1 - xi_2)
         ]
     ```
 ]
 
 #question[
-    Calculer et afficher avec Python les quantités de matière de chaque espèce à l'équilibre et la pression totale $P_"tot"$.
+    Calculer et afficher avec Python les quantités de matière de chaque espèce à l'équilibre.
 ][
     ```python
     nf_CH4 = n0_CH4 - xi1

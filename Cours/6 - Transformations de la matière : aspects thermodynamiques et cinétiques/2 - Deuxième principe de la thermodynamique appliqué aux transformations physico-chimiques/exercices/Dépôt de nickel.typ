@@ -7,21 +7,21 @@
 En aéronautique, on envisage de fabriquer des ailes d’avion en matériau composite. Pour éviter toute détérioration à la traversée des zones très orageuses, il est nécessaire que celui-ci soit un conducteur électrique. Un des procédés à l’étude consiste à réaliser un dépôt de nickel par décomposition thermique du nickel carbonyle, suivant la réaction d’équation :
 #ce("Ni(CO)4(g)") #ce("=") #ce("Ni(s)") + 4 #ce("CO(g)")
 
-On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbonyle gazeux à l’équilibre, aussi le taux d’avancement de la réaction.
+On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbonyle gazeux à l’équilibre, aussi appelé taux d’avancement de la réaction.
 
 #let DrH = -111e3 * 4 + 602e3
 #let DrS = 30 + 198 * 4 - 409
 #question(
     coups-de-pouce: "Utiliser la loi de Hess.",
 )[
-    Calculer l’enthalpie standard de réaction $Delta_r H^0$ et l’entropie standard de réaction  $Delta_r S^0$ à #qty("298", "K"). Commenter leur signe.
+    Calculer l’enthalpie standard de réaction $Delta_r H^circ$ et l’entropie standard de réaction $Delta_r S^circ$ à #qty("298", "K"). Commenter leur signe.
 ][
     D'après la loi de Hess,
     $
         Delta_r H^circ = Delta_f H^circ (ce("Ni(s)")) + 4 Delta_f H^circ (ce("CO(g)")) - Delta_f H^circ (ce("Ni(CO)4(g)"))
         = #qty(scientifique(DrH, 2), "J/mol")
     $
-    car $Delta_f H^circ (ce("Ni(s)")) = 0$ car c'est un corps simple dans son état standard.
+    car $Delta_f H^circ (ce("Ni(s)")) = 0$, le nickel solide étant un corps simple dans son état standard.
 
     $Delta_r H^circ > 0$ donc la réaction est endothermique.
 
@@ -51,8 +51,8 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
         "Faire un tableau d'avancement.",
         "Écrire la loi de Guldberg et Waage.",
         "Quelle relation existe-t-il entre la constante d'équilibre et l'enthalpie libre de réaction ?",
-        "L'activité d'un gaz est égal à sa pression partielle divisé par la pression standard.",
-        "La pression partielle est la pression du gaz multiplié par la fraction molaire $P_i=P n_i / n_\"tot,gaz\"$",
+        "L'activité d'un gaz est égale à sa pression partielle divisée par la pression standard.",
+        "La pression partielle est la pression totale multipliée par la fraction molaire $P_i=P n_i / n_\"tot,gaz\"$",
     ),
 )[
     Établir une relation entre $alpha$, la constante d'équilibre $K^circ (T)$ et la pression totale $P$.

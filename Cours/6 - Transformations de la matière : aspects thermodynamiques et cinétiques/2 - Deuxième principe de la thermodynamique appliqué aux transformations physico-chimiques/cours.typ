@@ -22,6 +22,7 @@
     "R": (signification: "la constante des gaz parfaits", unité: unit("J/K/mol")),
     "a": (signification: "l'activité de l'espèce", unité: "sans unité"),
     "Delta_r S": (signification: "l'entropie de réaction", unité: unit("J/K/mol")),
+    "Delta_r S^circ": (signification: "l'entropie standard de réaction", unité: unit("J/K/mol")),
     "nu_i": (signification: "les coefficients stœchiométriques algébriques", unité: "sans unité"),
     "K^circ": (signification: "la constante d'équilibre", unité: "sans unité"),
     "Delta_r G^circ": (signification: "l'enthalpie libre standard de réaction", unité: unit("J/mol")),
@@ -60,7 +61,7 @@ $ dd(f)= lr(pdv(f, x)\))_y dd(x) + lr(pdv(f, y)\))_x dd(y) $
 Par identification, on en déduit que les variables naturelles de la fonction $U$ sont $S$ et $V$. On note $U(S,V)$.
 
 == L'enthalpie $H$
-L'entropie $S$ et le volume $V$ ne sont pas facile à mesurer et à imposer. On introduit donc d'autres potentiels thermodynamiques#footnote[Un potentiel thermodynamique est une fonction d'état qui sert à prévoir l'évolution d'un système.].
+L'entropie $S$ et le volume $V$ ne sont pas faciles à mesurer et à imposer. On introduit donc d'autres potentiels thermodynamiques#footnote[Un potentiel thermodynamique est une fonction d'état qui sert à prévoir l'évolution d'un système.].
 
 #encadré(
     titre: "Définition de l'enthalpie",
@@ -115,7 +116,7 @@ Les variables naturelles de l'enthalpie $H$ sont donc $S$ et $P$. On note $H(S,P
     verso: "$ G = H - T S = U + P V - T S $",
 )
 
-On peut déduire la différentielle de l'enthalpie libre $G$ à partir de la différentielle de l'énergie interne $H$.
+On peut déduire la différentielle de l'enthalpie libre $G$ à partir de la différentielle de l'enthalpie $H$.
 
 #encadré(
     titre: "Variation d'enthalpie libre pour une transformation infinitésimale réversible",
@@ -150,6 +151,7 @@ Les variables naturelles de l'enthalpie libre $G$ sont donc $T$ et $P$. On note 
     savoir-faire: true,
     hypothèses: (
         "Le système est fermé.",
+        "La transformation est isotherme et isobare.",
         "Le seul travail est celui des forces de pression.",
         "Le système est immobile.",
         "Il n'y a pas de transformation chimique.",
@@ -173,7 +175,7 @@ Les potentiels thermodynamiques $U$, $H$ et $G$ sont des grandeurs extensives. O
 Les différentielles des grandeurs molaires ont la même forme que les différentielles des grandeurs extensives.
 
 #encadré(
-    titre: "Différentiels des potentiels thermodynamiques molaires",
+    titre: "Différentielles des potentiels thermodynamiques molaires",
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
@@ -213,7 +215,7 @@ Tout ce qui précède ne s'applique qu'à des systèmes fermés. Pour un systèm
 
 L'étoile \* sert à préciser qu'il s'agit d'une propriété d'un corps pur.
 
-Bien que les grandeurs extensives $U(S,V,b)$, $H(S,P,n)$ et $G(T,P,n)$ dépendent de $n$, les grandeurs molaires associées n'en dépendent pas : $U_m (S_m,V_m)$, $H_m (S_m,P)$, $G_m (T,P)$. Le potentiel chimique d'un corps pur est donc son enthalpie libre molaire.
+Bien que les grandeurs extensives $U(S,V,n)$, $H(S,P,n)$ et $G(T,P,n)$ dépendent de $n$, les grandeurs molaires associées n'en dépendent pas : $U_m (S_m,V_m)$, $H_m (S_m,P)$, $G_m (T,P)$. Le potentiel chimique d'un corps pur est donc son enthalpie libre molaire.
 
 #encadré(
     titre: "Potentiel chimique d'un corps et enthalpie libre molaire",
@@ -226,7 +228,7 @@ Bien que les grandeurs extensives $U(S,V,b)$, $H(S,P,n)$ et $G(T,P,n)$ dépenden
 
 #flashcard(
     recto: "Lien entre potentiel chimique et enthalpie libre molaire",
-    verso: "$ mu = G_m $",
+    verso: "$ mu^* = G_m $",
 )
 
 == Changements d'états
@@ -258,7 +260,7 @@ L'égalité $mu^*_alpha (T,P) = mu^*_beta (T,P)$ est l'équation implicite d'une
 
 #schéma(titre: [Diagramme $(P,T)$ de l'eau], hauteur: 4cm)
 
-#question-de-colle("Définir le potentiel chimique, montrer qu'il s'identifie à l'enthalpie libre molaire puis que le potentiel chimique est le même pour toutes les phases en présences lors d'un changement d'état d'un corps pur. Schématiser le diagramme $(P,T)$ de l'eau.")
+#question-de-colle("Définir le potentiel chimique, montrer qu'il s'identifie à l'enthalpie libre molaire puis que le potentiel chimique est le même pour toutes les phases en présence lors d'un changement d'état d'un corps pur. Schématiser le diagramme $(P,T)$ de l'eau.")
 
 == Potentiel chimique d'une espèce au sein d'un mélange
 Le potentiel chimique d'une espèce au sein d'un mélange dépend de l'activité de cette espèce.
@@ -289,13 +291,13 @@ Comme l'enthalpie libre est une grandeur additive, l'enthalpie libre d'un mélan
 #encadré(
     titre: "Entropie de réaction",
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("Delta_r S", "nu_i", "S_m")),
+    grandeurs: sub-dictionary(grandeurs, ("Delta_r S^circ", "nu_i", "S_m")),
 )[
     $ Delta_r S^circ = sum nu_i S_(m,i)^circ $
 ]
 
 #flashcard(
-    recto: "Entropie de réaction en fonction des entropie molaires",
+    recto: "Entropie standard de réaction en fonction des entropies molaires",
     verso: "$ Delta_r S^circ = sum nu_i S_(m,i)^circ $"
 )
 
@@ -335,7 +337,7 @@ La constante d'équilibre d'une réaction peut être définie à partir de l'ent
     verso: "$ K^circ (T) = exp(- (Delta_r G^circ) / (R T)) $"
 )
 
-L'enthalpie de réaction s'exprime alors en fonction de la constante d'équilibre et du quotient de réaction.
+L'enthalpie libre de réaction s'exprime alors en fonction de la constante d'équilibre et du quotient de réaction.
 
 #encadré(
     titre: "Enthalpie libre de réaction et quotient réactionnel",
@@ -385,7 +387,7 @@ Cette condition d'évolution peut être reformulée en fonction des valeurs rela
 #question-de-colle("Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.")
 
 #application[
-    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'égalité vaut $K^circ = #num("1.6e5")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$ ?
+    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("1.6e5")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$ ?
 ]
 
 = Déplacement d'équilibre

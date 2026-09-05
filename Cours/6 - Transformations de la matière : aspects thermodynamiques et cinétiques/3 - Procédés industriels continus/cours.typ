@@ -27,7 +27,7 @@
     "mu": (signification: "la masse volumique", unité: unit("kg/m^3")),
     "T_s": (signification: "la température en sortie", unité: unit("K")),
     "T_e": (signification: "la température en entrée", unité: unit("K")),
-    "Delta_r H^circ": (signification: "l'enthalpie de réaction", unité: unit("J/mol")),
+    "Delta_r H^circ": (signification: "l'enthalpie standard de réaction", unité: unit("J/mol")),
     "[ce(\"A\")]_e": (signification: "la concentration de l'espèce #ce(\"A\") en entrée", unité: unit("mol/L")),
 )
 
@@ -35,7 +35,7 @@
 == Classification des procédés industriels
 Un réacteur est un appareillage dans lequel se déroule une transformation chimique : des réactifs sont transformés en produits.
 
-Dans un réacteur fermé, le procédé est discontinu : on introduit les réactif en une seule fois et on laisse le système évoluer. C'est ce qu'on fait la grande majorité du temps en TP.
+Dans un réacteur fermé, le procédé est discontinu : on introduit les réactifs en une seule fois et on laisse le système évoluer. C'est ce qu'on fait la grande majorité du temps en TP.
 
 Dans un réacteur ouvert, le procédé est continu : les réactifs sont introduits en continu et les produits sont retirés en continu également. La plupart des procédés industriels utilisent des réacteurs ouverts.
 
@@ -89,7 +89,7 @@ Le débit massique total traversant une section est la somme des débits massiqu
 ]
 
 == Taux de conversion et concentration
-Le taux de conversion $X_ce("A")$ d'un réactif désigne la proportion de la quantité de matière de ce réactif qui a réagit.
+Le taux de conversion $X_ce("A")$ d'un réactif désigne la proportion de la quantité de matière de ce réactif qui a réagi.
 
 #encadré(
     titre: "Taux de conversion",
@@ -158,7 +158,7 @@ Le temps de passage représente le temps moyen qu'un réactif passe dans le réa
 )
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont le loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
+    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
 ]
 
 == Réacteur en écoulement piston
@@ -204,15 +204,15 @@ Dans un réacteur en écoulement piston (RP), le fluide progresse dans le réact
 )
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont le loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
+    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
 ]
 
 == Comparaison RPAC et RP
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont le loi de vitesse est $v=k[ce("(CH3)3CCl")]$. En posant $x=k tau$, montrer que
+    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. En posant $x=k tau$, montrer que
     $
-        X_(ce("(CH3)3CCl"),"RP")/X_(ce("A(CH3)3CCl"),"RPAC") - 1 = 1/x e^(-x) (e^x - 1 - x)
+        X_(ce("(CH3)3CCl"),"RP")/X_(ce("(CH3)3CCl"),"RPAC") - 1 = 1/x e^(-x) (e^x - 1 - x)
     $
     En étudiant le signe de $(e^x-1-x)$ sur $RR^+$, en déduire que le RP a un meilleur taux de conversion qu'un RPAC.
 ]
@@ -260,7 +260,7 @@ L'avancement d'une réaction chimique peut s'accompagner d'un dégagement ou d'u
 )
 
 #application[
-    Certains procédés textiles comme la tanneries, le dégraissage des textiles, ou  la blanchisseries produisent des effluents basiques qu'il est nécessaire de neutraliser avant de les rejeter dans le milieu naturel. Celle-ci peut être faite par ajout d'acide chlorhydrique #ce("HCl") :
+    Certains procédés textiles comme la tannerie, le dégraissage des textiles ou la blanchisserie produisent des effluents basiques qu'il est nécessaire de neutraliser avant de les rejeter dans le milieu naturel. Celle-ci peut être faite par ajout d'acide chlorhydrique #ce("HCl") :
     $
         ce("HCl + HO- -> Cl- + H2O")
     $
@@ -268,5 +268,5 @@ L'avancement d'une réaction chimique peut s'accompagner d'un dégagement ou d'u
 
     Les effluents sont traités dans un réacteur adiabatique. Calculer l'élévation de température lors de cette opération pour des effluents de $pH = num("14")$.
 
-    La capacité thermique massique de l'eau est $c_P = qty("4.18e3", "J/kg/K")$. On supposera que la présence de solutés n'influence pas la capacité thermique massique et la masse volumique que l'eau.
+    La capacité thermique massique de l'eau est $c_P = qty("4.18e3", "J/kg/K")$. On supposera que la présence de solutés n'influence pas la capacité thermique massique et la masse volumique de l'eau.
 ]
