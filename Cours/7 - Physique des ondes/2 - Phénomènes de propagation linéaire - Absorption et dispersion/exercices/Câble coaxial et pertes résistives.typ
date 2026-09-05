@@ -106,7 +106,7 @@ Les pertes dans un câble coaxial sont prises en compte considérant la résista
 #question()[
     On pose $underline(k)=k'+j k''$. Qu'implique le fait que $underline(k)$ soit complexe ?
 ][
-    La partie imaginaire de $underline(k)$ entraîne une décroissance exponentielle de l'amplitude de l'onde au cours de la propagation, ce qui correspond à des pertes résistives dans le câble coaxial.
+    La partie imaginaire de $underline(k)$ entraine une décroissance exponentielle de l'amplitude de l'onde au cours de la propagation, ce qui correspond à des pertes résistives dans le câble coaxial.
 ]
 
 #question(

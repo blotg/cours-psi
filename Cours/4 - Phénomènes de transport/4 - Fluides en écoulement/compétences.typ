@@ -26,7 +26,7 @@
 - Dans le cas d’un écoulement à bas nombre de Reynolds, établir la loi de Hagen-Poiseuille et en déduire la résistance hydraulique.
 - Exploiter le graphe de la chute de pression en fonction du nombre de Reynolds, pour un régime d’écoulement quelconque.
 - Exploiter un paramétrage adimensionné permettant de transposer des résultats expérimentaux ou numériques sur des systèmes similaires réalisés à des échelles différentes.
-- Associer une gamme de nombre de Reynolds à un modèle de traînée linéaire ou un modèle quadratique.
+- Associer une gamme de nombre de Reynolds à un modèle de trainée linéaire ou un modèle quadratique.
 - Pour les écoulements à grand nombre de Reynolds, décrire qualitativement la notion de couche limite.
-- Définir et orienter les forces de portance et de traînée.
+- Définir et orienter les forces de portance et de trainée.
 - Exploiter les graphes de $C_x$ et $C_z$ en fonction de l’angle d’incidence.

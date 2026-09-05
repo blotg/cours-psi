@@ -185,7 +185,7 @@ Dans toute la suite, on se place dans le cas $omega < omega_p$.
     $
         underline(va(E_t)) = underline(E_(t,0)) e^(i omega t) e^(minus.plus sqrt((omega_p^2 - omega^2)/c^2) x) ez
     $
-    La solution $underline(k_p) = - i sqrt((omega_p^2 - omega^2)/c^2)$ correspond à une onde électromagnétique qui croît exponentiellement et diverge quand $x -> infinity$, ce qui est non physique. On choisit donc la solution $underline(k_p) = + i sqrt((omega_p^2 - omega^2)/c^2)$, qui correspond à une onde électromagnétique qui décroît exponentiellement dans le plasma.
+    La solution $underline(k_p) = - i sqrt((omega_p^2 - omega^2)/c^2)$ correspond à une onde électromagnétique qui croît exponentiellement et diverge quand $x -> infinity$, ce qui est non physique. On choisit donc la solution $underline(k_p) = + i sqrt((omega_p^2 - omega^2)/c^2)$, qui correspond à une onde électromagnétique qui décroit exponentiellement dans le plasma.
 ]
 
 #question()[
@@ -244,5 +244,5 @@ Dans toute la suite, on se place dans le cas $omega < omega_p$.
             T = mean(va(Pi_t))/mean(va(Pi_i)) = 0,
         )
     $
-    Le coefficient de réflexion en puissance est égal à 1, ce qui signifie que toute l'énergie de l'onde incidente est réfléchie par le plasma. Le coefficient de transmission en puissance est égal à 0, ce qui signifie qu'aucune énergie de l'onde incidente n'est transmise dans le plasma. Ceci est cohérent avec le fait que l'onde électromagnétique décroît exponentiellement dans le plasma, ce qui empêche toute transmission d'énergie à travers l'interface.
+    Le coefficient de réflexion en puissance est égal à 1, ce qui signifie que toute l'énergie de l'onde incidente est réfléchie par le plasma. Le coefficient de transmission en puissance est égal à 0, ce qui signifie qu'aucune énergie de l'onde incidente n'est transmise dans le plasma. Ceci est cohérent avec le fait que l'onde électromagnétique décroit exponentiellement dans le plasma, ce qui empêche toute transmission d'énergie à travers l'interface.
 ]

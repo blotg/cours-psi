@@ -6,15 +6,15 @@
     difficulté: 1
 )
 
-On lâche sans vitesse initiale une bille sphérique de rayon $R$, de masse $m$, dans un liquide visqueux, de masse volumique $mu$ très faible devant celle de la bille, et de viscosité cinématique $nu$.
+On lâche sans vitesse initiale une bille sphérique de rayon $R$, de masse $m$, dans un fluide peu visqueux, de masse volumique $mu$ très faible devant celle de la bille, et de viscosité cinématique $nu$.
 
-On suppose la pesanteur uniforme, et on note $va(v)(t) = -v(t) ez$ la norme de la vitesse de la bille.
+On suppose la pesanteur uniforme, et on note $va(v)(t) = -v(t) ez$ la vitesse de la bille, $v(t)$ désignant sa norme.
 
 On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"). Dans ce cas, le coefficient de trainée d'une sphère est $C_x = #num("0.47")$.
 
 #question(
     coups-de-pouce: (
-        "Que vaut le maître couple pour une sphère de rayon $R$ ?",
+        "Que vaut le maitre-couple pour une sphère de rayon $R$ ?",
     ),
 )[
     Exprimer la force de frottement fluide sur la bille.
@@ -27,7 +27,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
         "Faire le bilan des forces agissant sur la bille.",
     ),
 )[
-    Établir l'équation différentielle vérifiée par $v(t)$ ?
+    Établir l'équation différentielle vérifiée par $v(t)$.
 ][
     Le théorème de la résultante cinétique appliqué à la bille et projeté sur $ez$ s'écrit
     $
@@ -36,7 +36,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 ]
 
 #question(
-    coups-de-pouce: "Comme se simplifie l'équation différentielle en régime stationnaire ?",
+    coups-de-pouce: "Comment se simplifie l'équation différentielle en régime stationnaire ?",
 )[
     Établir l'expression de la vitesse limite $v_"lim"$ atteinte par la bille.
 ][
@@ -60,7 +60,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
     R = 0.01  # rayon de la bille en m
     m = 0.1   # masse de la bille en kg
     mu = 1    # masse volumique du fluide en kg/m^3
-    Cx = 0.47 # coefficient de traînée
+    Cx = 0.47 # coefficient de trainée
     g = 9.81  # accélération due à la pesanteur en m/s^2
 
     def dvdt(t, v): # renvoie la dérivée de la vitesse
@@ -127,7 +127,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 
     def Fx(v):
         Re = ...
-        Cx = np.interp(Re, Re_exp, Cx_exp) # interpolation du coefficient de traînée à partir des données expérimentales
+        Cx = np.interp(Re, Re_exp, Cx_exp) # interpolation du coefficient de trainée à partir des données expérimentales
         return ...
     ```
 ][

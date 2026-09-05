@@ -38,7 +38,7 @@ $ grad f = pdv(f, r) va(e_r) + 1/r pdv(f, theta) va(e_theta) + 1/(r sin theta) p
 #question[
   Tracer $E(r)$ et $V(r)$ en fonction de $r$.
 ][
-  $E$ croît linéairement de $0$ à $E(R) = Q/(4 pi epsilon_0 R^2)$, puis décroît en $1/r^2$. $V$ est une parabole décroissante de $V(0) = (3 Q)/(8 pi epsilon_0 R)$ à $V(R) = Q/(4 pi epsilon_0 R)$, puis décroît en $1/r$. $E$ est continu, $V$ est continu et de dérivée continue.
+  $E$ croît linéairement de $0$ à $E(R) = Q/(4 pi epsilon_0 R^2)$, puis décroit en $1/r^2$. $V$ est une parabole décroissante de $V(0) = (3 Q)/(8 pi epsilon_0 R)$ à $V(R) = Q/(4 pi epsilon_0 R)$, puis décroit en $1/r$. $E$ est continu, $V$ est continu et de dérivée continue.
 
   #figure(canvas({
     import cetz.draw: *

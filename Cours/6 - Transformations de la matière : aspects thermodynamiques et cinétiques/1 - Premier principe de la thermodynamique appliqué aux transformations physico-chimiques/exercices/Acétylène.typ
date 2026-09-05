@@ -53,7 +53,6 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
     $
         Delta_r H^circ = 2 Delta_f H^circ (ce("CO2(g)")) + 1 Delta_f H^circ (ce("H2O(g)")) - 1 Delta_f H^circ (ce("C2H2(g)")) - 5/2 Delta_f H^circ (ce("O2(g)"))\
         = #qty(scientifique(DrH, 3), "J/mol")
-        DrH
     $
     car l'enthalpie standard de formation du dioxygène est nulle (corps simple dans son état standard).
 ]

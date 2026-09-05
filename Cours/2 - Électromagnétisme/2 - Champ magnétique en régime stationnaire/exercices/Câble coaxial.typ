@@ -67,7 +67,7 @@ On considère un câble coaxial cylindrique de longueur supposée infinie, const
 #question[
   Tracer l'allure du graphe de $B(r)$.
 ][
-  $B$ croît linéairement de $0$ à $(mu_0 I)/(2 pi R_1)$ dans le conducteur central, décroît en $1/r$ entre $R_1$ et $R_2$, puis décroît jusqu'à $0$ en $r = R_3$ ; il est nul au-delà.
+  $B$ croît linéairement de $0$ à $(mu_0 I)/(2 pi R_1)$ dans le conducteur central, décroit en $1/r$ entre $R_1$ et $R_2$, puis décroit jusqu'à $0$ en $r = R_3$ ; il est nul au-delà.
 
   #figure(canvas({
     import cetz.draw: *

@@ -3,7 +3,7 @@
 
 #show: exercice.with(titre: "Étamage", difficulté: 2)
 
-L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boîtes de conserve). Une expérience est menée à $25 degree upright("C")$ sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
+L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boites de conserve). Une expérience est menée à $25 degree upright("C")$ sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
 
 #figure(canvas({
   import cetz.draw: *

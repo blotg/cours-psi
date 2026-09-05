@@ -185,7 +185,7 @@ Un milieu *dispersif* est un milieu dans lequel la vitesse de phase dépend de l
     Déterminer la vitesse de phase d'une OPPH se propageant dans le sens des $x$ croissants dans un milieu vérifiant l'équation de diffusion. Le milieu est-il dispersif ?
 ]
 
-Dans un milieu dispersif, les différentes composantes d'un paquet d'onde se propagent à des vitesses différentes, ce qui entraîne un étalement du paquet d'onde.
+Dans un milieu dispersif, les différentes composantes d'un paquet d'onde se propagent à des vitesses différentes, ce qui entraine un étalement du paquet d'onde.
 
 #lien("https://upload.wikimedia.org/wikipedia/commons/b/b0/Wave_packet_%28dispersion%29.gif")
 

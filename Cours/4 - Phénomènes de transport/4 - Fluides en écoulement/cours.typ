@@ -29,7 +29,7 @@
     "L": (signification: "une longueur caractéristique du problème", unité: unit("m")),
     "va(j_(p,\"conv\"))": (
         signification: "le vecteur densité de courant de quantité de mouvement convectée",
-        unité: unit("kg m/s^2/m^2/s"),
+        unité: unit("kg m/s /m^2/s"),
     ),
     "tau_\"conv\"": (signification: "la durée caractéristique associée à la convection", unité: unit("s")),
     "R_e": (signification: "le nombre de Reynolds", unité: "sans unité"),
@@ -38,22 +38,24 @@
     "l": (signification: "la longueur de la conduite", unité: unit("m")),
     "Delta P": (signification: "la différence de pression entre les extrémités de la conduite", unité: unit("Pa")),
     "R_H": (signification: "la résistance hydraulique", unité: unit("Pa s/m^3")),
-    "F_x": (signification: "la force de traînée", unité: unit("N")),
-    "S_x": (signification: "le maître-couple selon $x$", unité: unit("m^2")),
-    "C_x": (signification: "le coefficient de traînée", unité: "sans unité"),
+    "F_x": (signification: "la force de trainée", unité: unit("N")),
+    "S_x": (signification: "le maitre-couple selon $x$", unité: unit("m^2")),
+    "C_x": (signification: "le coefficient de trainée", unité: "sans unité"),
     "alpha": (signification: "le coefficient de frottement", unité: unit("N s /m")),
     "beta": (signification: "le coefficient de frottement", unité: unit("N s^2/m^2")),
     "F_z": (signification: "la force de portance", unité: unit("N")),
     "C_z": (signification: "le coefficient de portance", unité: "sans unité"),
-    "S_z": (signification: "le maitre couple selon $z$", unité: unit("m^2")),
+    "S_z": (signification: "le maitre-couple selon $z$", unité: unit("m^2")),
     "v_x": (signification: "la vitesse du mobile par rapport au fluide", unité: unit("m/s")),
+    "va(u_x)": (signification: "le vecteur unitaire colinéaire à la vitesse", unité: "sans unité"),
+    "va(u_z)": (signification: "le vecteur unitaire orthogonal à la vitesse", unité: "sans unité"),
 )
 
 = Description de l'écoulement d'un fluide
 Un fluide est un milieu matériel parfaitement déformable. Les liquides et les gaz sont des fluides.
 
 == Notion de particule de fluide
-À l'échelle microscopique, les particules qui composent un fluide sont animés de mouvements erratiques#footnote[Erratique signifie aléatoire, qui vont dans tous les sens.].
+À l'échelle microscopique, les particules qui composent un fluide sont animées de mouvements erratiques#footnote[Erratique signifie aléatoire, qui vont dans tous les sens.].
 
 Il y a deux façons de définir un système mésoscopique :
 
@@ -202,7 +204,7 @@ Le volume n'est pas nécessairement une grandeur conservative.
     Si on compresse une seringue contenant un gaz, son volume diminue.
 ]
 
-Dans un écoulement incompressible, le volume des particules de fluides ne change pas au cours du temps.
+Dans un écoulement incompressible, le volume des particules de fluide ne change pas au cours du temps.
 
 Dans un écoulement homogène, toutes les particules de fluide ont la même masse volumique.
 
@@ -218,7 +220,7 @@ Dans un écoulement incompressible et homogène, la masse volumique $mu$ est uni
 
 #flashcard(
     recto: "Condition à laquelle le volume se conserve",
-    verso: "Régime stationnaire, écoulement incompressible et homogène.",
+    verso: "Écoulement incompressible et homogène.",
 )
 
 #encadré(
@@ -232,7 +234,7 @@ Dans un écoulement incompressible et homogène, la masse volumique $mu$ est uni
 
 = Actions de contact sur un fluide
 == Action normale et tangentielle
-Les forces de contact s'exerçant sur la surface d'une particule de fluide sont proportionnelles à sa surface. Elles peuvent se décompose en
+Les forces de contact s'exerçant sur la surface d'une particule de fluide sont proportionnelles à sa surface. Elles peuvent se décomposer en
 - une composante orthogonale à la surface (normale) appelée force de pression
 - une composante tangentielle à la surface appelée force de viscosité
 
@@ -242,7 +244,7 @@ Les forces de contact s'exerçant sur la surface d'une particule de fluide sont 
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("delta^2 F_P", "P")),
 )[
-    $ va(delta^2 F_P) = P va(dd(S)) $
+    $ va(delta^2 F_P) = - P va(dd(S)) $
 ]
 
 #encadré(
@@ -284,7 +286,7 @@ Les forces de contact s'exerçant sur la surface d'une particule de fluide sont 
     "Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans un fluide homogène et incompressible au repos.",
 )
 #question-de-colle(
-    "Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans l'atmosphère en la supposant isotherme etn assimilant l'air à un gaz parfait.",
+    "Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans l'atmosphère en la supposant isotherme et en assimilant l'air à un gaz parfait.",
 )
 
 #application[
@@ -292,7 +294,7 @@ Les forces de contact s'exerçant sur la surface d'une particule de fluide sont 
 ]
 
 #application[
-    Déterminer le champ de pression dans l'atmosphère la supposant immobile et isotherme et en assimilant l'air à un gaz parfait.
+    Déterminer le champ de pression dans l'atmosphère en la supposant immobile et isotherme et en assimilant l'air à un gaz parfait.
 ]
 
 == Forces tangentielles
@@ -353,7 +355,7 @@ Comme la force ne peut pas diverger, le champ de vitesse est dérivable donc con
 En particulier, la vitesse d'un fluide au voisinage immédiat d'un solide est la vitesse du solide. Cette condition est appelée condition d'adhérence fluide-solide.
 
 #application[
-    Appliquer la loi de la quantité de mouvement sur une particule de fluide soumise aux forces de pression, de viscosité (fluide newtonien) et au poids. Cette équation (simplifiée par $dd(V)$) est appelée équation de Navier-Stockes.
+    Appliquer la loi de la quantité de mouvement sur une particule de fluide soumise aux forces de pression, de viscosité (fluide newtonien) et au poids. Cette équation (simplifiée par $dd(V)$) est appelée équation de Navier-Stokes.
 ]
 
 #application[
@@ -393,7 +395,7 @@ Reynolds a mis en évidence expérimentalement deux régimes d'écoulement.
 
 En fonction du débit, on peut observer
 
-/ le régiment laminaire: dans lequel les lignes de courant sont stationnaires, pour des vitesses débitantes faibles
+/ le régime laminaire: dans lequel les lignes de courant sont stationnaires, pour des vitesses débitantes faibles
 / le régime turbulent: dans lequel les lignes de courant se déforment, pour des vitesses débitantes importantes.
 
 Les deux régimes d'écoulement diffèrent par le mode de transport de quantité de mouvement prépondérant.
@@ -416,7 +418,7 @@ Dans le régime laminaire, la quantité de mouvement est essentiellement transpo
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("tau_\"diff\"", "L", "nu")),
 )[
-    $ tau_"dif" tilde L^2 / nu $
+    $ tau_"diff" tilde L^2 / nu $
 ]
 
 == Transport de quantité de mouvement par convection
@@ -457,7 +459,7 @@ Dans le cas d'un écoulement interne, $L$ désigne le *diamètre* de la conduite
     verso: "$ R_e= (scr(V) L)/nu $",
 )
 
-Dans le cadre d'un écoulement interne à une conduite cylindrique, la longueur caractéristique $d$ est le diamètre de la conduite et l'ordre de grandeur de la vitesse est la vitesse débitante.
+Pour un écoulement interne, l'ordre de grandeur de la vitesse $scr(V)$ est la vitesse débitante.
 
 #application[
     De l'eau à #qty("20", "Celsius") circule dans une conduite de diamètre #qty("5", "cm") et de longueur #qty("30", "m") à la vitesse débitante de #qty("0.1", "m/s"). Calculer le nombre de Reynolds.
@@ -469,7 +471,7 @@ Dans le cadre d'un écoulement interne à une conduite cylindrique, la longueur 
     hypothèses: [le fluide est newtonien],
     grandeurs: sub-dictionary(grandeurs, ("R_e", "tau_\"diff\"", "tau_\"conv\"")),
 )[
-    $ R_e tilde tau_"diff" / tau_"conv"  tilde norm(va(j_(p,"conv"))) / norm(va(j_(p,"conv"))) $
+    $ R_e tilde tau_"diff" / tau_"conv" tilde norm(va(j_(p,"conv"))) / norm(va(j_(p,"diff"))) $
 ]
 
 Expérimentalement, on peut établir le seuil de passage d'un régime laminaire à un régime turbulent.
@@ -535,7 +537,7 @@ Par analogie avec l'électrocinétique, on peut définir la résistance hydrauli
         "L'effet de la gravité est négligé.",
         "L'écoulement est laminaire.",
     ),
-    grandeurs: sub-dictionary(grandeurs, ("Delta P", "R_H", "D_V", "eta", "l", "R", "Delta P")),
+    grandeurs: sub-dictionary(grandeurs, ("Delta P", "R_H", "D_V", "eta", "l", "R")),
 )[
     $ Delta P = R_H D_V $
     avec
@@ -564,13 +566,13 @@ Le maitre-couple (ou surface apparente) est la surface projetée dans une certai
 #schéma(titre: "Maître couple", hauteur: 3cm)
 
 #application[
-    Calculer le maitre couple dans la direction du mouvement pour la voiture ci-dessous. On pourra approximer la voiture à un parallélépipède rectangle pour faire les calculs.
+    Calculer le maitre-couple dans la direction du mouvement pour la voiture ci-dessous. On pourra approximer la voiture à un parallélépipède rectangle pour faire les calculs.
 
     #figure(image("images/voiture.jpg", width: 8cm))
 ]
 
 #encadré(
-    titre: "Force de traînée",
+    titre: "Force de trainée",
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
@@ -578,14 +580,14 @@ Le maitre-couple (ou surface apparente) est la surface projetée dans une certai
         "L'écoulement est stationnaire.",
         "L'objet est en mouvement rectiligne uniforme.",
     ),
-    grandeurs: sub-dictionary(grandeurs, ("F_x", "mu", "v", "S_x", "C_x")),
+    grandeurs: sub-dictionary(grandeurs, ("F_x", "mu", "v", "S_x", "C_x", "va(u_x)")),
 )[
-    $ va(F_x) = - 1/2 mu v^2 S_x C_x va(u) $
+    $ va(F_x) = - 1/2 mu v^2 S_x C_x va(u_x) $
 ]
 
 #flashcard(
-    recto: "Force de traînée",
-    verso: "$ va(F_x) = - 1/2 mu v^2 S_x C_x va(u) $",
+    recto: "Force de trainée",
+    verso: "$ va(F_x) = - 1/2 mu v^2 S_x C_x va(u_x) $",
 )
 
 Le coefficient de trainée dépend de la forme de l'objet et du nombre de Reynolds.
@@ -612,7 +614,7 @@ Pour $R_e<1$, le graphe s'approche d'une droite (en échelle logarithmique) d'é
     $ va(F_x) = - alpha va(v) $
 ]
 #flashcard(
-    recto: "Plage de Reynolds pour une traînée linéaire",
+    recto: "Plage de Reynolds pour une trainée linéaire",
     verso: "$ R_e < 1 $",
 )
 
@@ -632,7 +634,7 @@ Pour $R_e in [num("2000"), num("200000")]$, $C_x$ est constant.
     $ va(F_x) = - beta v^2 va(u) $
 ]
 #flashcard(
-    recto: "Plage de Reynolds pour une traînée quadratique",
+    recto: "Plage de Reynolds pour une trainée quadratique",
     verso: "$R_e in [num(\"2000\"), num(\"200000\")]$",
 )
 
@@ -642,9 +644,9 @@ Sur certains objets, la force de trainée s'accompagne d'une force de portance.
 #encadré(
     titre: "Force de portance",
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("F_z", "mu", "v", "S_z", "C_z")),
+    grandeurs: sub-dictionary(grandeurs, ("F_z", "mu", "v", "S_z", "C_z", "va(u_z)")),
 )[
-    $ va(F_z) = 1/2 mu v^2 S_z C_z va(u) $
+    $ va(F_z) = 1/2 mu v^2 S_z C_z va(u_z) $
 ]
 #exemple[
     Aile d'avion, voile de bateau.

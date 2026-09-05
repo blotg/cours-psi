@@ -21,12 +21,12 @@ Le but de cet exercice est de comprendre l'intérêt de la lubrification. On con
     caption: "Mobile en frottement solide avec son support.",
 )
 
-Dans un premier temps, on étudie le contact sec entre le pavé et la surface. La force de frottement est de type frottement solide. Il obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=qty("10", "km/h")$.
+Dans un premier temps, on étudie le contact sec entre le pavé et la surface. La force de frottement est de type frottement solide. Elle obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=qty("10", "km/h")$.
 
 #question(
     coups-de-pouce: (
         "Calculer la composante normale de la réaction puis utiliser la loi de Coulomb.",
-        "Projeter le théorème de la résultante cinétique sur l'axe verticale pour relier la réaction normale au poids.",
+        "Projeter le théorème de la résultante cinétique sur l'axe vertical pour relier la réaction normale au poids.",
     ),
 )[
     Calculer la valeur numérique de la réaction tangentielle.
@@ -42,7 +42,7 @@ Dans un premier temps, on étudie le contact sec entre le pavé et la surface. L
 #question(
     coups-de-pouce: (
         "Résoudre la projection sur l'axe horizontal du théorème de la résultante cinétique.",
-        "Quel est le temps d'arrêt, c'est-à-dire le temps auquel la vitesse est nulle.",
+        "Quel est le temps d'arrêt, c'est-à-dire le temps auquel la vitesse est nulle ?",
         "La distance d'arrêt correspond à la position du solide au temps d'arrêt.",
     ),
 )[
@@ -52,7 +52,7 @@ Dans un premier temps, on étudie le contact sec entre le pavé et la surface. L
     $ M dv(v, t) = -R_T = - f M g $
     La vitesse s'écrit donc
     $ v(t) = v_0 - f g t $
-    soit $t = (v_0 - v)/(f g)$. Le temps d'arrêt est le temps auquel la vitesse est nul, c'est donc
+    soit $t = (v_0 - v)/(f g)$. Le temps d'arrêt est le temps auquel la vitesse est nulle, c'est donc
     $ t_"arrêt" = v_0 / (f g) $
     La distance parcourue est
     $ x(t) = v_0 t - 1/2 f g t^2 $
@@ -81,7 +81,7 @@ Dans un premier temps, on étudie le contact sec entre le pavé et la surface. L
     caption: "Mobile sur une couche de fluide.",
 )
 
-On introduit maintenant une couche d'huile d'épaisseur $e=#qty("1.0", "mm")$ entre la mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du palet constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bords. La surface du mobile en contact avec l'huile est $S=qty("400", "cm^2")$. Le mobile a une vitesse $v_m=v_0=qty("10", "km/h")$.
+On introduit maintenant une couche d'huile d'épaisseur $e=#qty("1.0", "mm")$ entre le mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du palet constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bords. La surface du mobile en contact avec l'huile est $S=qty("400", "cm^2")$. Le mobile a une vitesse $v_m=v_0=qty("10", "km/h")$.
 
 La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("60e-6", "m^2/s")$.
 #let viscosité = 60e-6 * 0.9e3
@@ -107,7 +107,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
 
 #question(
     coups-de-pouce: (
-        "Utiliser la condition d'adhérence en $z=0$ et $z=e$.",
+        "Utiliser la condition d'adhérence en $y=0$ et $y=e$.",
     ),
 )[
     On admet que la vitesse s'écrit $v(y)=a y+b$. Déterminer $a$ et $b$ en exploitant la description du problème.
@@ -117,7 +117,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
 ]
 
 #question[
-    Donner l'expression de la force surfacique de cisaillement au sein de l'eau.
+    Donner l'expression de la force surfacique de cisaillement au sein de l'huile.
 ][
     La force surfacique de cisaillement est donnée par
     $ (delta^2 F)/dd(S) = eta dv(v, y) = eta v_m/e $
@@ -125,10 +125,10 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
 
 #question(
     coups-de-pouce: (
-        "La force exercée sur le pavé et l'opposé de la force exercée par le pavé sur la couche supérieure de fluide.",
+        "La force exercée sur le pavé est l'opposé de la force exercée par le pavé sur la couche supérieure de fluide.",
     ),
 )[
-    Exprimer la force de frottement à laquelle est soumis la pavé.
+    Exprimer la force de frottement à laquelle est soumis le pavé.
 ][
     La force de frottement est
     #let vm = 10 * 1000 / 3600
@@ -159,7 +159,6 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
     La distance d'arrêt est donc
     #let M = 30
     #let e = 1.0e-3
-    #let viscosité = 60e-3
     #let S = 400e-4
     #let v0 = 10 * 1000 / 3600
     #let d-arrêt = (M * e) / (viscosité * S) * v0

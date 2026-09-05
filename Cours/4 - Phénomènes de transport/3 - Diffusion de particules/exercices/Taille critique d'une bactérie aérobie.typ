@@ -94,7 +94,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
     $
         n_R = -4/3 a pi R^3 mu Na / (4 pi D ) 1/R + c_0 Na = (-a R^2 mu Na) / (3 D ) + c_0 Na
     $
-    Donc $n_R$ décroît quand $R$ augmente.
+    Donc $n_R$ décroit quand $R$ augmente.
 ]
 
 #question(

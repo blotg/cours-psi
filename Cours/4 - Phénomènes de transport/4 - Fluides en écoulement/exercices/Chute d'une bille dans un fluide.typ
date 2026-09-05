@@ -6,7 +6,7 @@
 
 On s'intéresse à une bille d'acier sphérique de rayon $R$, de masse $m$, de masse volumique $rho_"acier" = qty("7850", "kg/m^3")$, de vitesse $va(v)=-v ez$ lâchée sans vitesse initiale dans une éprouvette remplie de glycérine (de masse volumique $rho_"glycérine" = qty("1260", "kg/m^3")$ et de viscosité de l'ordre de $eta tilde qty("e0", "Pa s")$).
 
-Le champ de pesanteur $va(g)$ est uniforme. On pose $g'=(1 - rho_"glycérine"/rho_"acier")$. L'axe $(O z)$ est vertical ascendant.
+Le champ de pesanteur $va(g)$ est uniforme. On pose $g'=g(1 - rho_"glycérine"/rho_"acier")$. L'axe $(O z)$ est vertical ascendant.
 
 L'éprouvette est de diamètre très supérieur à celui de la bille. La force de frottements visqueux exercée par le fluide sur la bille est $va(F) = -6 pi eta R va(v)$.
 
@@ -26,7 +26,7 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
     Le théorème de la résultante cinétique appliqué à la bille et projeté sur $ez$ s'écrit
     $
         m dv(v, t) & = - m g + rho_"glycérine" V g - 6 pi eta R v \
-                   & = - m g + rho_"glycérine" m/rho_"acier" - 6 pi eta R v \
+                   & = - m g + rho_"glycérine" m/rho_"acier" g - 6 pi eta R v \
                    & = - m g' - 6 pi eta R v
     $
     Dans sa forme canonique, cette équation s'écrit
@@ -36,7 +36,7 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
 ]
 
 #question[
-    Calculer la durée caractéristique $tau$ associée à l'équation différentielle pour $R = qty("1.5", "mm")$
+    Calculer la durée caractéristique $tau$ associée à l'équation différentielle pour $R = qty("1.5", "mm")$.
 ][
     La durée caractéristique de l'équation différentielle est
     #let R = 1.5e-3
@@ -154,7 +154,7 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
     )
 #question(
     coups-de-pouce: (
-        "Le nombre de Reynolds croit-il ou décroit-il avec $r$ ?",
+        "Le nombre de Reynolds croît-il ou décroit-il avec $R$ ?",
     ),
 )[
     Calculer le nombre de Reynolds pour la plus grosse sphère. Est-il légitime de considérer des frottements fluides linéaires ?
@@ -162,7 +162,7 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
     #let v = 0.3
     #let R = 1.5e-3
     #let reynolds = v * 2 * R * mv-glycerine / viscosité
-    $ Re = (v D)/nu = (2 v R rho_"glycérine")/eta = #num(scientifique(reynolds, 2)) $
+    $ R_e = (v D)/nu = (2 v R rho_"glycérine")/eta = #num(scientifique(reynolds, 2)) $
 
     $R_e$ est d'autant plus grand que $R$ est grand. Il est plus petit que $1$ pour la plus grande des billes donc il le sera pour toutes les billes. Il est donc légitime de considérer un modèle linéaire des frottements fluides.
 ]

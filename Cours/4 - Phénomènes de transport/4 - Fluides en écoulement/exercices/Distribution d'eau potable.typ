@@ -42,15 +42,15 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
         "Résoudre l'équation fondamentale de l'hydrostatique pour un fluide incompressible.",
     ),
 )[
-    Quelle pression $P_e$ qui peut être attendue au pied du château d'eau, en admettant que le débit de l'eau dans la canalisation soit suffisamment faible pour ne pas impacter la pression ?
+    Quelle pression $P_e$ peut être attendue au pied du château d'eau, en admettant que le débit de l'eau dans la canalisation soit suffisamment faible pour ne pas impacter la pression ?
 ][
     L'équation fondamentale de l'hydrostatique pour un fluide incompressible s'écrit :
-    $ dv(P, z) = - rho g $
-    $ P(z) = - rho g z + "cte" $
-    En $z=h$, on a $P(h) = P_a$ donc $"cte" = P_a + rho g h$. Ainsi,
-    $ P(z) = P_a + rho g (h - z) $
+    $ dv(P, z) = - mu g $
+    $ P(z) = - mu g z + "cte" $
+    En $z=h$, on a $P(h) = P_a$ donc $"cte" = P_a + mu g h$. Ainsi,
+    $ P(z) = P_a + mu g (h - z) $
     En $z=0$, on a donc :
-    $ P_e = P_a + rho g h $
+    $ P_e = P_a + mu g h $
 ]
 
 #question(
@@ -64,10 +64,10 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
     #let U = mv * g * h * S / (8 * calc.pi * viscosité * L)
     La loi de Hagen-Poiseuille s'écrit :
     $ D_V = (pi R^4)/(8 eta L) Delta P $
-    Ici, $Delta P = P_e - P_a = rho g h$ et $S = pi R^2$ d'où $R^4 = S^2/pi^2$, ainsi
-    $ D_V = (S^2)/(8 pi eta L) rho g h $
+    Ici, $Delta P = P_e - P_a = mu g h$ et $S = pi R^2$ d'où $R^4 = S^2/pi^2$, ainsi
+    $ D_V = (S^2)/(8 pi eta L) mu g h $
     Le débit volumique est relié à la vitesse débitante par la relation $D_V = U S$, donc :
-    $ U = D_V/S = (S rho g h)/(8 pi eta L) = #qty(scientifique(U, 1), "m/s") $
+    $ U = D_V/S = (S mu g h)/(8 pi eta L) = #qty(scientifique(U, 1), "m/s") $
 ]
 
 #question[
@@ -75,7 +75,7 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
 ][
     #let Re = (S * mv * g * h * 2 * calc.sqrt(S / calc.pi) * mv) / (8 * calc.pi * viscosité * L * viscosité)
     Le diamètre de la conduite est tel que $S = pi (D/2)^2$, d'où $D = 2 sqrt(S/pi)$
-    $ R_e = (U D)/(nu) = (S rho g h 2 sqrt(S/pi) mu)/(8 pi eta L eta) = #num(scientifique(Re, 1)) $
+    $ R_e = (U D)/(nu) = (S mu g h 2 sqrt(S/pi) mu)/(8 pi eta L eta) = #num(scientifique(Re, 1)) $
 
     $R_e > 2000$, l'écoulement n'est donc pas laminaire, la modélisation précédente n'est pas correcte.
 ]

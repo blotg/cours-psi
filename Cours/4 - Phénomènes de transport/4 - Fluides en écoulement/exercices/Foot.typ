@@ -17,7 +17,7 @@ Dans un premier temps, on ne prend en compte que la gravité.
 )[
     Établir l'équation différentielle vérifiée par la vitesse $va(v)$ du ballon. Exprimer la dérivée de la vitesse.
 ][
-    Le théorème de la résultante cinétique appliqué au ballo, s'écrit
+    Le théorème de la résultante cinétique appliqué au ballon s'écrit
     $
         m dv(va(v), t) = m va(g)
     $
@@ -136,7 +136,7 @@ $m = #qty("145", "g")$
         "Comment s'exprime la force de trainée ?"
     ),
 )[
-    Modifier la fonction `dv_dt` pour inclure la force de traînée.
+    Modifier la fonction `dv_dt` pour inclure la force de trainée.
 
     On pourra utiliser la fonction `np.linalg.norm(v)` pour calculer la norme du vecteur vitesse $v$.
 

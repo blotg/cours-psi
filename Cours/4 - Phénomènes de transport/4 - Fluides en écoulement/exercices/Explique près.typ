@@ -18,9 +18,9 @@
 ][
     Un voilier a une voile en contact de l'air et une dérive, une quille ou la coque en contact avec l'eau.
 
-    Quand une aile d'avion ou une voile de bateau est dans un écoulement d'air ou d'eau, elle est soumise à deux forces principales : la portance, perpendiculaire à la direction de l'écoulement, et la traînée, dans la direction de l'écoulement.
+    Quand une aile d'avion ou une voile de bateau est dans un écoulement d'air ou d'eau, elle est soumise à deux forces principales : la portance, perpendiculaire à la direction de l'écoulement, et la trainée, dans la direction de l'écoulement.
 
-    Le voilier est soumis à quatre forces horizontales : les forces de portance et de traînée exercées par le vent sur la voile, et les forces de portance et de traînée exercées par l'eau sur la dérive.
+    Le voilier est soumis à quatre forces horizontales : les forces de portance et de trainée exercées par le vent sur la voile, et les forces de portance et de trainée exercées par l'eau sur la dérive.
 
     #figure(
         canvas({

@@ -112,7 +112,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
 )[
     Établir le profil de vitesse dans la conduite.
 ][
-    La loi de la quantité de mouvement appliquée à un particule de fluide peut être simplifiée :
+    La loi de la quantité de mouvement appliquée à une particule de fluide peut être simplifiée :
     $
         - pdv(P, y) + eta pdv(v, z, 2) = 0
     $
@@ -168,7 +168,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
     Calculer la résistance hydraulique de cette conduite plate pour $e=qty("1", "mm")$, $L = qty("2", "m")$ et $l = qty("2", "cm")$ et dans laquelle circule de l'eau à #qty("20", "Celsius").
 ][
     $
-        R_h = (Delta P)/D_V
+        R_H = (Delta P)/D_V
     $
     avec $Delta P = P(0) - P(L) = - L pdv(P, y)$
     #let L = 2
@@ -177,7 +177,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
     #let visc = 1e-3
     #let Rh = 12 * L * visc / (l * calc.pow(e, 3))
     $
-        R_h = (12 L eta)/(l e^3) = #qty(scientifique(Rh, 1), "Pa s/m^3")
+        R_H = (12 L eta)/(l e^3) = #qty(scientifique(Rh, 1), "Pa s/m^3")
     $
 ]
 

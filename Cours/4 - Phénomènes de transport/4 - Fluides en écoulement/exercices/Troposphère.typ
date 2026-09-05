@@ -19,7 +19,7 @@ On suppose dans un premier temps que la température est uniforme dans la tropos
     $P V = n R T$ et $n = m / M_"air"$ donnent $mu = P M_"air" / (R T)$.
 
     En remplaçant dans l'équation hydrostatique $dv(P, z) = -mu g$, on obtient l'équation différentielle
-    $ dv(P, z) + (M_"air" g) / (R T) = 0 $
+    $ dv(P, z) + (M_"air" g) / (R T) P = 0 $
 
     En intégrant cette équation, on peut exprimer $P(z)$ en fonction de $z$ :
     $ P(z) = P_0 exp(- (M_"air" g z) / (R T)) $

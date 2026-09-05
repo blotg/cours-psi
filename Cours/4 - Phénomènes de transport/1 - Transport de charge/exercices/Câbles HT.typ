@@ -5,7 +5,7 @@
     ouvert: true,
 )
 
-Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1", "O/km"). On cherche à faire en sorte que ces câbles soient les plus légers possible afin de réduire les coûts des pylônes.
+Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1", "O/km"). On cherche à faire en sorte que ces câbles soient les plus légers possible afin de réduire les couts des pylônes.
 
 #figure(
     table(
