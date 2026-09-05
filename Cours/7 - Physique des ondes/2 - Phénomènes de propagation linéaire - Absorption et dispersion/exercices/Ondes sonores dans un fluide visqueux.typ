@@ -10,7 +10,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
 
 #question(
     coups-de-pouce: (
-        "Reprendre le PDF sur une particule de fluide du cours, en ajoutant cette fois ci la force de viscosité.",
+        "Reprendre le PFD sur une particule de fluide du cours, en ajoutant cette fois ci la force de viscosité.",
         "L'énoncé précise que l'onde se propage selon $x$. Simplifier les opérateurs vectoriels dans ce cas.",
     ),
 )[
@@ -35,7 +35,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
 )[
     Montrer que l'équation d'onde dans ce fluide visqueux s'écrit
     $
-        pdv(P_1, x, 2) - 1/c^2 pdv(P_1, t, 2) = eta pdv(v, x, 3)
+        pdv(P_1, x, 2) - 1/c^2 pdv(P_1, t, 2) = - eta chi_S pdv(, x, 2) pdv(P_1, t)
     $
 ][
     L'équation locale de conservation de la masse s'écrit
@@ -80,11 +80,11 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
 #question(
     coups-de-pouce: (
         "Passer en complexes l'équation d'onde.",
-        "Simplifier l'équation de dispersion compte tenu de l'hypothèse pour obtenir $underline(k)^2 approx omega^2/c^2 e^(j (eta chi_S omega))$.",
+        "Simplifier l'équation de dispersion compte tenu de l'hypothèse pour obtenir $underline(k)^2 approx omega^2/c^2 e^(-j eta chi_S omega)$.",
         "Quelle relation relie l'épaisseur de peau avec le nombre d'onde complexe ?"
     ),
 )[
-    L'onde est plane, progressive et harmonique de fréquence $f=qty("1.0e3", "Hz")$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir l'équation de dispersion puis l'épaisseur dont on effectuera l'application numérique pour l'air à #qty("20", "Celsius"). On donne la viscosité de l'air $eta = qty("1.85e-5", "Pl")$
+    L'onde est plane, progressive et harmonique de fréquence $f=qty("1.0e3", "Hz")$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir la relation de dispersion puis l'épaisseur de peau, dont on effectuera l'application numérique pour l'air à #qty("20", "Celsius"). On donne la viscosité de l'air $eta = qty("1.85e-5", "Pl")$.
 ][
     En complexe l'équation d'onde donne
     $
@@ -123,7 +123,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
 
 #question(
     coups-de-pouce: (
-        "Après avoir parcourue une distance égale à l'épaisseur de peau, par combien est divisée l'amplitude de l'onde ?",
+        "Après avoir parcouru une distance égale à l'épaisseur de peau, par combien est divisée l'amplitude de l'onde ?",
         "À part l'absorption, quel autre phénomène peut être responsable de l'atténuation de l'amplitude d'une onde ?",
     ),
 )[

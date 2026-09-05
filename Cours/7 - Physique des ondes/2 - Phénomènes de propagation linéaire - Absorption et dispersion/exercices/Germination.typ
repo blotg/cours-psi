@@ -36,7 +36,7 @@ On a planté des bulbes de lys à une quinzaine de centimètres dans du terreau 
 
     D'où
     $
-        T(d,t) = T_0 - A e^(-k_i d) cos(omega t - k_r d)
+        T(d,t) = T_0 - A e^(k_i d) cos(omega t - k_r d)
     $
 
     Pour trouver la date de germination, on résout l'équation (en notant $T_g$ la température de germination) :
@@ -47,14 +47,14 @@ On a planté des bulbes de lys à une quinzaine de centimètres dans du terreau 
     #let k-r = calc.sqrt(w / (2 * D))
     #let k-i = -calc.sqrt(w / (2 * D))
     #let d = 0.15
-    #let t = (calc.acos((T-0 - T-g) / (A * calc.exp(-k-i * d))).rad() + k-r * d) / w
+    #let t = (calc.acos((T-0 - T-g) / (A * calc.exp(k-i * d))).rad() + k-r * d) / w
     $
         T(d,t) = T_g\
-        T_0 - A e^(-k_i d) cos(omega t - k_r d) = T_g\
-        cos(omega t - k_r d) = (T_0 - T_g) / (A e^(-k_i d))\
-        omega t - k_r d = arccos((T_0 - T_g) / (A e^(-k_i d)))\
-        t = (arccos((T_0 - T_g) / (A e^(-k_i d))) + k_r d) / omega
-        approx #num(scientifique(t / (24 * 3600), 1))  "jours"\
+        T_0 - A e^(k_i d) cos(omega t - k_r d) = T_g\
+        cos(omega t - k_r d) = (T_0 - T_g) / (A e^(k_i d))\
+        omega t - k_r d = arccos((T_0 - T_g) / (A e^(k_i d)))\
+        t = (arccos((T_0 - T_g) / (A e^(k_i d))) + k_r d) / omega
+        approx #num(scientifique(t / (24 * 3600), 2))  "jours"\
     $
-    La germination commence donc $#num(scientifique(t / (24 * 3600), 1))  "jours"$ après le 1er janvier, soit vers la mi-mars.
+    La germination commence donc $#num(scientifique(t / (24 * 3600), 2))  "jours"$ après le 1er janvier, soit vers le début du mois de mars.
 ]

@@ -4,7 +4,7 @@
     titre: "Câble coaxial et pertes résistives",
 )
 
-Les pertes dans un câble coaxial sont prises en compte considérant la résistance linéique $r$ du conducteur et la conductance linéique $g$ de l'isolant séparant l'âme et le gaine. Le modèle à constantes réparties correspondant est représenté sur le schéma ci-dessous correspondant à une portion de câble de longueur $dd(x)$.
+Les pertes dans un câble coaxial sont prises en compte en considérant la résistance linéique $r$ du conducteur et la conductance linéique $g$ de l'isolant séparant l'âme et la gaine. Le modèle à constantes réparties correspondant est représenté sur le schéma ci-dessous correspondant à une portion de câble de longueur $dd(x)$.
 
 #figure(
     zap.circuit({
@@ -27,7 +27,7 @@ Les pertes dans un câble coaxial sont prises en compte considérant la résista
 
 #question(
     coups-de-pouce: (
-        "Appliquer la loi de nœuds."
+        "Appliquer la loi des nœuds."
     ),
 )[
     Établir une relation entre $u(x,t)$, $i(x,t)$ faisant intervenir $Gamma$ et $g$.

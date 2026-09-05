@@ -10,11 +10,11 @@ L'ADSL utilise des câbles en cuivre pour transmettre les données, tandis que l
 #question()[
     Pourquoi la fibre optique est-elle plus rapide que l'ADSL ?
 ][
-    Si la fibre optique est plus rapide que l'ADSL, ce n'est pas parce que le signal arrive plus vite à destination (les vitesses sont de l'ordre de la vitesse de la lumière dans les deux cas). De toute façon, un temps de trajet plus cours ne changerait que le "ping" (temps mis par un signal pour faire un aller-retour).
+    Si la fibre optique est plus rapide que l'ADSL, ce n'est pas parce que le signal arrive plus vite à destination (les vitesses sont de l'ordre de la vitesse de la lumière dans les deux cas). De toute façon, un temps de trajet plus court ne changerait que le "ping" (temps mis par un signal pour faire un aller-retour).
 
-    Quand on dit que la fibre est plus rapide, cela concerne les débits : le nombre d'information échangé per seconde.
+    Quand on dit que la fibre est plus rapide, cela concerne les débits : le nombre d'informations échangées par seconde.
 
-    Quand un signal se propage, il a tendance à l'étaler. S'il s'étale trop et "bave" sur le signal d'après, les deux signaux peuvent être mélangés et impossible à traiter par le récepteur. Pour éviter cela, on doit espacer les signaux, et ce d'autant plus que qu'ils s'étalent.
+    Quand un signal se propage, il a tendance à s'étaler. S'il s'étale trop et "bave" sur le signal d'après, les deux signaux peuvent être mélangés et impossibles à traiter par le récepteur. Pour éviter cela, on doit espacer les signaux, et ce d'autant plus qu'ils s'étalent.
 
-    Dans une câble en cuivre, les signaux s'étalent beaucoup plus que dans une fibre optique, ce qui oblige à les espacer davantage. On a donc moins de signaux par seconde dans les câbles en cuivre, et donc un débit plus faible.
+    Dans un câble en cuivre, les signaux s'étalent beaucoup plus que dans une fibre optique, ce qui oblige à les espacer davantage. On a donc moins de signaux par seconde dans les câbles en cuivre, et donc un débit plus faible.
 ]

@@ -9,7 +9,7 @@ On étudie une corde vibrante, de longueur $L$, de masse linéique $mu$, attach�
 
 #question(
     coups-de-pouce: (
-        "Reprendre la démonstration de l'équation de d'Alembert du cours en rajoutant la force de frottement fluides."
+        "Reprendre la démonstration de l'équation de d'Alembert du cours en rajoutant la force de frottement fluide."
     ),
 )[
     Établir l'équation d'onde vérifiée par l'onde dans la corde. On introduira les coefficients $c=sqrt(T/mu)$ et $a=alpha/T$.
@@ -18,7 +18,7 @@ On étudie une corde vibrante, de longueur $L$, de masse linéique $mu$, attach�
     $
         mu dd(x) pdv(y, t, 2) ey= va(T_g)(x) + va(T_d)(x+dd(x)) - alpha pdv(y, t) dd(x) ey
     $
-    La troisième li de Newton permet d'écrire $va(T_d)(x)=-va(T_g)(x) =: va(T)(x)$.
+    La troisième loi de Newton permet d'écrire $va(T_d)(x)=-va(T_g)(x) =: va(T)(x)$.
 
     En utilisant la relation de Taylor, on obtient
     $
@@ -28,7 +28,7 @@ On étudie une corde vibrante, de longueur $L$, de masse linéique $mu$, attach�
     $
         va(T) = T cos(theta) ex + T sin(theta) ey approx T ex + T theta(x, t) ey
     $
-    La projection selon $ex$ de la relation précédente donne $pdv(T, x)=0$ (tension constante dans le corde), tandis que la projection selon $ey$ donne
+    La projection selon $ex$ de la relation précédente donne $pdv(T, x)=0$ (tension constante dans la corde), tandis que la projection selon $ey$ donne
     $
         mu pdv(y, t, 2) = T pdv(theta, x) - alpha pdv(y, t)
     $
@@ -85,13 +85,13 @@ On étudie une corde vibrante, de longueur $L$, de masse linéique $mu$, attach�
 )[
     Résoudre l'équation sur $g$. On se placera dans le cas de frottements faibles, et on précisera explicitement l'inégalité qu'implique cette hypothèse. On ne cherchera pas à expliciter les constantes.
 ][
-    Le discriminant de l'équation sur $g$ est $Delta = a^2 c^4 + 4 c^2 K$. L'hypothèse de frottements faibles implique que les solutions sont proches de celles du cas sans frottement, c'est à dire que $a$ est petit devant les autres termes de l'équation. En particulier, on doit avoir $a^2 c^4 << 4 c^2 |K|$, ce qui implique que $Delta approx 4 c^2 K < 0$
+    Le discriminant de l'équation sur $g$ est $Delta = a^2 c^4 + 4 c^2 K$. L'hypothèse de frottements faibles implique que les solutions sont proches de celles du cas sans frottement, c'est-à-dire que $a$ est petit devant les autres termes de l'équation. En particulier, on doit avoir $a^2 c^4 << 4 c^2 |K|$, ce qui implique que $Delta approx 4 c^2 K < 0$
 
-    Les racines du polynôme caractéristique sont $r_(1,2) = -a c^2 / 2 plus.minus j sqrt(-4 c^2 K)$
+    Les racines du polynôme caractéristique sont $r_(1,2) = (-a c^2 plus.minus j sqrt(-4 c^2 K))/2 = -a c^2 / 2 plus.minus j sqrt(-c^2 K)$
 
     Les solutions de l'équation sur $g$ sont alors de la forme
     $
-        g(t) = exp(-(a c^2)/2 t) (C cos(sqrt(-4c^2K) t) + D sin(sqrt(-4c^2K) t))
+        g(t) = exp(-(a c^2)/2 t) (C cos(sqrt(-c^2 K) t) + D sin(sqrt(-c^2 K) t))
     $
 ]
 
