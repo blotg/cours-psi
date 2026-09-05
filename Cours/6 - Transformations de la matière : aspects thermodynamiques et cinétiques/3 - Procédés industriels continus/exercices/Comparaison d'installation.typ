@@ -10,11 +10,11 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
 
 #question(
     coups-de-pouce: (
-        "Relier la vitesse volumique de réaction à la concentration d'ester de deux façons : grâce en faisant intervenir le coefficient stœchiométrique et en utilisant le fait que la réaction est d'ordre 1.",
+        "Relier la vitesse volumique de réaction à la concentration d'ester de deux façons : en faisant intervenir le coefficient stœchiométrique et en utilisant le fait que la réaction est d'ordre 1.",
         "Résoudre l'équation différentielle pour exprimer la concentration d'ester en fonction du temps.",
     ),
 )[
-    Dans un premier temps, on emploi un *réacteur fermé* contenant #qty("40", "L") de mélange homogène. Quelle doit être la durée de l'opération pour obtenir un taux de conversion égal à #qty("98", "%") ?
+    Dans un premier temps, on emploie un *réacteur fermé* contenant #qty("40", "L") de mélange homogène. Quelle doit être la durée de l'opération pour obtenir un taux de conversion égal à #qty("98", "%") ?
 ][
     $
         v = k_"app" [ce("E")] = -dv([ce("E")], t)
@@ -63,6 +63,11 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
         tau = 0.98 / (0.02 k_"app")
         approx #qty(scientifique(tau98, 2), "min")
     $
+    #let V98 = tau98 / 60 * 40
+    Le volume du réacteur s'en déduit par $V = tau D_V$ :
+    $
+        V = tau D_V approx #qty(scientifique(V98, 2), "L")
+    $
 ]
 
 #question(
@@ -72,7 +77,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
         "Exprimer $[ce(\"E\")]_10$ en fonction de $[ce(\"E\")]_0$, $k_\"app\"$ et $tau$.",
     ),
 )[
-    On désire, enfin, traiter #qty("40", "L/h") de solution dans une cascade de $n=10$ réacteur parfaitement agités continus de mêmes dimensions, associés en série. On suppose que le temps de passage est le même dans chaque réacteur. Quels doivent être le temps de passage et le volume total des réacteurs pour obtenir un taux de conversion de #qty("98", "%") ?
+    On désire, enfin, traiter #qty("40", "L/h") de solution dans une cascade de $n=10$ réacteurs parfaitement agités continus de mêmes dimensions, associés en série. On suppose que le temps de passage est le même dans chaque réacteur. Quels doivent être le temps de passage et le volume total des réacteurs pour obtenir un taux de conversion de #qty("98", "%") ?
 ][
     On peut reprendre le résultat précédent entre le réacteur $i$ et le réacteur $i+1$ :
     $
@@ -96,4 +101,10 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     $        tau = ( (1 / 0.02)^(1/10) - 1 ) / k_"app"
         approx #qty(scientifique(tau98, 2), "min")
     $
+    #let Vtot = 10 * tau98 / 60 * 40
+    Chaque réacteur a pour volume $tau D_V$, d'où un volume total
+    $
+        V_"tot" = 10 tau D_V approx #qty(scientifique(Vtot, 2), "L")
+    $
+    soit dix fois moins que le réacteur unique de la question précédente.
 ]

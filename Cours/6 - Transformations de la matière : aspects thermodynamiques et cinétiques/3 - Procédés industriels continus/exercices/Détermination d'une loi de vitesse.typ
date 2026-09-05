@@ -26,11 +26,11 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
         "Faire un tableau d'avancement pour répondre au coup de pouce précédent.",
     ),
 )[
-    Quel est le lien entre $r_ce("NO2")$, la vitesse volumique d'apparition de $ce("NO2")$ et $r$, la vitesse volumique de réaction ?
+    Quel est le lien entre $R_ce("NO2")$, la vitesse volumique d'apparition de $ce("NO2")$ et $v$, la vitesse volumique de réaction ?
 ][
-    $r_ce("NO2") = nu_ce("NO2") r$ d'où
+    $R_ce("NO2") = nu_ce("NO2") v$ d'où
     $
-        r = 1/nu_ce("NO2") r_ce("NO2") = -1/2 r_ce("NO2")
+        v = 1/nu_ce("NO2") R_ce("NO2") = -1/2 R_ce("NO2")
     $
 ]
 
@@ -45,15 +45,15 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
     $ln (([ce("NO2")]_e - [ce("NO2")]_s) / tau) = alpha ln[ce("NO2")]_s + B$.
     Que vaut $alpha$ pour une réaction d'ordre 2 ?
 ][
-    On effectue un bilan de matière sur #ce("NO2") dans en régime permanent :
+    On effectue un bilan de matière sur #ce("NO2") en régime permanent :
     $
-      0 = F_(ce("NO2"),e) - F_(ce("NO2"),s) + V r_ce("NO2") = Q[ce("NO2")]_e - Q[ce("NO2")]_s + V r_ce("NO2")
+      0 = F_(ce("NO2"),e) - F_(ce("NO2"),s) + V R_ce("NO2") = D_V [ce("NO2")]_e - D_V [ce("NO2")]_s + V R_ce("NO2")
     $
-    Si on suppose la réaction d'ordre 2, c'est-à-dire $r = k [ce("NO2")]^2$ donc $r_ce("NO2") = -2 k [ce("NO2")]^2$, on obtient (on rappelle que la concentration en sortie est la concentration dans le réacteur pour un RPAC)
+    Si on suppose la réaction d'ordre 2, c'est-à-dire $v = k [ce("NO2")]^2$ donc $R_ce("NO2") = -2 k [ce("NO2")]^2$, on obtient (on rappelle que la concentration en sortie est la concentration dans le réacteur pour un RPAC)
     $
-        0 = Q[ce("NO2")]_e - Q[ce("NO2")]_s - 2 V k [ce("NO2")]_s^2
+        0 = D_V [ce("NO2")]_e - D_V [ce("NO2")]_s - 2 V k [ce("NO2")]_s^2
     $
-    En remplaçant $V = tau Q$, on obtient
+    En remplaçant $V = tau D_V$, on obtient
     $
         [ce("NO2")]_e - [ce("NO2")]_s = 2 tau k [ce("NO2")]_s^2
     $
@@ -66,7 +66,7 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
 
 #question(
     coups-de-pouce: (
-        "Tracer $ln (([ce(\"NO2\")]_e - [ce(\"NO2\")]_s) / tau)$ en fonction de $ln [ce(\"NO2\")]_s)$. Faire une régression linéaire.",
+        "Tracer $ln (([ce(\"NO2\")]_e - [ce(\"NO2\")]_s) / tau)$ en fonction de $ln [ce(\"NO2\")]_s$. Faire une régression linéaire.",
         "Si le modèle d'une réaction d'ordre 2 est bien vérifié, que doit valoir $r^2$ ? Que doit valoir la pente ?",
     ),
 )[

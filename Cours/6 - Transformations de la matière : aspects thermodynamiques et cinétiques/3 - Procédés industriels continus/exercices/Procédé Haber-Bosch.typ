@@ -12,14 +12,20 @@ $ ce("N2 + 3H2 -> 2NH3") $
 La réaction est réalisée dans un réacteur piston adiabatique de section $S = #qty("5", "cm^2")$, de longueur $L = #qty("6", "m")$ à la pression $P=qty("200", "bar")$.
 
 La vitesse volumique de réaction à la position $x$ dans le réacteur dépend des pressions partielles et s'écrit
-$ r = k(T) (P_ce("N2")P_ce("H2")^3-(P_ce("NH3")^2 P^circ^2)/(K^circ (T))) $
+$ r = k(T) (P_ce("N2")P_ce("H2")^3-(P_ce("NH3")^2 standard(P)^2)/(K^circ (T))) $
 
 On se place dans l'approximation d'Ellingham. L'écoulement est supposé lent et horizontal. Le réacteur ne comporte aucune pièce mobile.
 
 #question(
-    coups-de-pouce: "Énoncer la loi d’Arrhenius",
+    coups-de-pouce: "Énoncer la loi d’Arrhenius.",
 )[
     Exprimer la constante de vitesse de réaction $k(T)$ en fonction de l'énergie d'activation $E_a$ et de la température $T$.
+][
+    La loi d'Arrhenius s'écrit
+    $
+        k(T) = A exp(- E_a / (R T))
+    $
+    où $A$ est le facteur préexponentiel.
 ]
 
 #question(
@@ -48,13 +54,13 @@ On se place dans l'approximation d'Ellingham. L'écoulement est supposé lent et
     DrH = -92.2e3
     DrS = -198
     P = 200e5  # en Pa
-    k0 = 1e-8
+    A = 1e-8   # facteur préexponentiel
     E_a = 160e3  # en J/mol
     def r(F_N2, F_H2, F_NH3, T):
         P_N2 = F_N2 / (F_N2 + F_H2 + F_NH3) * P
         P_H2 = F_H2 / (F_N2 + F_H2 + F_NH3) * P
         P_NH3 = F_NH3 / (F_N2 + F_H2 + F_NH3) * P
-        k = k0 * np.exp(-E_a / (R * T))
+        k = A * np.exp(-E_a / (R * T))
         K = np.exp(- (DrH - T * DrS) / (R * T))
         return k * (P_N2 * P_H2**3 - P_NH3**2 * 1e5**2 / K)
     ```
@@ -72,10 +78,10 @@ On se place dans l'approximation d'Ellingham. L'écoulement est supposé lent et
 ][
     On fait un bilan de matière de #ce("N2") sur une tranche d'épaisseur $dd(x)$ de réacteur en régime stationnaire :
     $
-        0 = F_ce("N2")(x) cancel(dd(t)) - F_ce("N2")(x + dd(x)) cancel(dd(t)) - r(x) dd(v) cancel(dd(t))
+        0 = F_ce("N2")(x) cancel(dd(t)) - F_ce("N2")(x + dd(x)) cancel(dd(t)) - r(x) dd(V) cancel(dd(t))
     $
     $
-        0 = -dv(F_ce("N2"), x) cancel(dd(x)) + r(x) S cancel(dd(x))
+        0 = -dv(F_ce("N2"), x) cancel(dd(x)) - r(x) S cancel(dd(x))
     $
     D'où l'équation demandée
     $

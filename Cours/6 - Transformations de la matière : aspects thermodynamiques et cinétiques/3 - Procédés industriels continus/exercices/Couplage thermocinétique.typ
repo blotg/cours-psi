@@ -8,11 +8,10 @@
 
 Le peroxyde de ditertiobutyle (DTBP) est utilisé comme amorceur radicalaire lors des réactions de polymérisation. Il se décompose selon la réaction chimique
 $
-    #import "@preview/whalogen:0.3.0": ce as ce2
-    #ce2("(CH3)3COOC(CH3)3 -> 2 (CH3)3CO^.")
+    #ce("(CH3)3COOC(CH3)3 -> 2 (CH3)3CO^.")
 $
 
-Cette décomposition est exothermique avec une enthalpie de réaction  $Delta_r H^circ = qty("-150", "kJ/mol")$.
+Cette décomposition est exothermique avec une enthalpie de réaction $Delta_r H^circ = qty("-150", "kJ/mol")$.
 Elle a une loi de vitesse d'ordre 1 avec une constante de vitesse $k$ qui suit la loi d'Arrhenius $k = A exp(-E_a / (R T))$.
 
 On observe ainsi un couplage thermocinétique : la réaction dégage de la chaleur, ce qui augmente la température du système, ce qui accélère la réaction. On cherche à modéliser ce couplage dans un réacteur continu parfaitement agité (RPAC) de volume $V = qty("520", "mL")$.
@@ -31,10 +30,10 @@ La réaction est maintenue à une température $T$ identique à la température 
 )[
     Montrer que $P_"th"$ vérifie l'équation
     $
-        P_"th" = - D_v X [ce("DTBP")]_e Delta_r H^circ
+        P_"th" = - D_V X [ce("DTBP")]_e Delta_r H^circ
     $
 ][
-    Il s'agit de la démonstration du cours, dans le cas particulier où $T_e = T_s$. La puissance $P_"th"$ étant *fournie*, elle est comptée négativement. Ici $nu_ce("DTBP") = -1$
+    Il s'agit de la démonstration du cours, dans le cas particulier où $T_e = T_s$. La puissance $P_"th"$ étant *fournie*, elle est comptée négativement. Ici $nu_ce("DTBP") = -1$.
 ]
 
 #question(
@@ -47,7 +46,7 @@ La réaction est maintenue à une température $T$ identique à la température 
     $
         X = (k tau)/(1 + k tau)
     $
-    où $tau = V / D_v$ est le temps de passage dans le réacteur.
+    où $tau = V / D_V$ est le temps de passage dans le réacteur.
 ][
     Le bilan de matière dans un RPAC en régime stationnaire s'écrit
     $
@@ -55,11 +54,11 @@ La réaction est maintenue à une température $T$ identique à la température 
     $
     avec $[ce("DTBP")]_s = (1-X)[ce("DTBP")]_e$ et $R_ce("DTBP") = -r = - k [ce("DTBP")]_s$ car la réaction est d'ordre 1 de constante de vitesse $k$. On en déduit
     $
-        D_v X [ce("DTBP")]_e = k (1 - X) [ce("DTBP")]_e V
+        D_V X [ce("DTBP")]_e = k (1 - X) [ce("DTBP")]_e V
     $
     d'où
     $
-        X = k (1-X) V / D_v = k (1-X) tau
+        X = k (1-X) V / D_V = k (1-X) tau
     $
     $
         X (1 + k tau) = k tau
@@ -109,6 +108,13 @@ La réaction est maintenue à une température $T$ identique à la température 
     Combien de points de fonctionnement a-t-on dans chacun des cas ? Discuter la stabilité de ces points de fonctionnement dans le dernier cas $tau = qty("800", "s")$.
 ][
     ```python
+    h = 100      # W/m^2/K
+    S = 0.15     # m^2
+    T0 = 300     # K
+    V = 520e-6   # m^3
+    c0 = 1.0     # mol/L, concentration de DTBP en entrée
+    DrH = -150e3 # J/mol
+
     def P1(T):
         return h * S * ( T - T0 )
 
@@ -127,7 +133,7 @@ La réaction est maintenue à une température $T$ identique à la température 
 
     Pour $tau = qty("800", "s")$, il y a trois points d'intersection, donc trois points de fonctionnement possibles.
 
-    On s'intéresse pour commencer au point de fonctionnement à basse température. Si la température augmente légèrement, la puissance fournie au circuit de refroidissement augmente et la puissance fournie par la réaction n'augment quasiment pas. Ainsi la température diminue de nouveau : ce point est stable.
+    On s'intéresse pour commencer au point de fonctionnement à basse température. Si la température augmente légèrement, la puissance fournie au circuit de refroidissement augmente et la puissance fournie par la réaction n'augmente quasiment pas. Ainsi la température diminue de nouveau : ce point est stable.
 
     Pour le point de fonctionnement intermédiaire, si la température augmente légèrement, la puissance fournie au circuit de refroidissement augmente un peu mais la puissance fournie par la réaction augmente beaucoup plus. Ainsi la température continue d'augmenter : ce point est instable.
 
