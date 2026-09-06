@@ -36,6 +36,7 @@ def _pour_chaque(dossiers, étapes) -> int:
     ("DM", lambda c: c.DM()),
     ("flashcards", lambda c: [p for p in (c.flashcards(), c.flashcards_imprimables()) if p]),
     ("manipulations", lambda c: [c.liste_des_manipulations()]),
+    ("diapo", lambda c: [p for p in (c.diapo(),) if p]),
     ("imprimable", lambda c: [c.poly_imprimable()]),
 )
 
@@ -91,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sous.add_parser("build", help="tout ce qu'un chapitre tire de son cours")
     p.add_argument("chapitres", nargs="+", type=Path)
-    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations", "imprimable"))
+    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations", "diapo", "imprimable"))
 
     p = sous.add_parser("flashcards", help="paquet Anki et planche à découper")
     p.add_argument("chapitres", nargs="+", type=Path)
@@ -100,6 +101,10 @@ def main(argv: list[str] | None = None) -> int:
     p = sous.add_parser("manipulations", help="liste des manipulations et du matériel")
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_étapes("manipulations"))
+
+    p = sous.add_parser("diapo", help="diaporama des questions de début de cours")
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.set_defaults(fonction=_étapes("diapo"))
 
     p = sous.add_parser("imprimable", help="poly en fascicule A3, prêt à imprimer")
     p.add_argument("chapitres", nargs="+", type=Path)

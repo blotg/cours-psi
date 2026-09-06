@@ -96,6 +96,11 @@ class Chapitre:
         return self.métadonnées("<question-de-colle>", "cours")
 
     @cached_property
+    def questions_de_début_de_cours(self) -> list[dict]:
+        """QCM d'ouverture de séance : énoncé et réponses, la bonne en tête."""
+        return self.métadonnées("<question-de-début-de-cours>", "cours")
+
+    @cached_property
     def DMs(self) -> list[dict[str, Path]]:
         """Énoncés et corrigés de DM déclarés dans infos.yml, chemins résolus.
 
@@ -198,6 +203,21 @@ class Chapitre:
             "flashcards",
             self.fichier("flashcards"),
             {"titre": self.titre(inline=True), "cartes": cartes},
+        )
+
+    def diapo(self) -> Path | None:
+        """Diaporama des questions de début de cours. None s'il n'y en a pas.
+
+        Le titre part sur deux lignes comme sur la couverture du poly : le
+        gabarit le rend avec `markup()`, qui respecte la coupure du bloc YAML.
+        """
+        questions = self.questions_de_début_de_cours
+        if not questions:
+            return None
+        return self._depuis_gabarit(
+            "diapo",
+            self.fichier("diapo"),
+            {"titre": self.titre(), "questions": questions},
         )
 
     def liste_des_manipulations(self) -> Path:

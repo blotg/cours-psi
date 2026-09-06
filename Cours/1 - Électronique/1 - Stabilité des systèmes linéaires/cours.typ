@@ -140,6 +140,11 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
     Le numérateur de la fonction de transfert n'influence pas la stabilité du système.
 ]
 
+#question-de-début-de-cours(
+    "Pour savoir si une fonction de transfert donne lieu à un fonctionnement stable, il faut regarder",
+    ("son dénominateur", "son numérateur"),
+)
+
 #encadré(
     titre: "Critère de stabilité",
     savoir-faire: true,
@@ -160,6 +165,16 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
 
 #question-de-colle(
     "Montrer qu'un système d'ordre 1 est stable si et seulement si les 2 coefficients de la fonction de transfert sont de même signe.",
+)
+
+#question-de-début-de-cours(
+    "L'équation différentielle $dv(s, t) - 4 s = e$ a-t-elle des solutions bornées ?",
+    ("non", "oui"),
+)
+
+#question-de-début-de-cours(
+    "La fonction de transfert $(2 p - 1)/(4 p + 2)$ correspond-elle à un système stable ?",
+    ("oui", "non"),
 )
 
 #application[Les fonctions de transfert suivantes correspondent-elles à des systèmes stables ?
@@ -204,6 +219,21 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
 )
 
 #question-de-colle("Montrer qu'un système d'ordre 2 est stable si et seulement si les 3 coefficients de la fonction de transfert sont de même signe. Un seul des 3 cas (discriminant positif, nul ou négatif) sera traité, au choix du colleur.")
+
+#question-de-début-de-cours(
+    "L'équation différentielle $dv(s, t, 2) + 4 dv(s, t) - 6 s = dv(e, t) + e$ a-t-elle des solutions stables ?",
+    ("non", "oui"),
+)
+
+#question-de-début-de-cours(
+    "La fonction de transfert $(2 p^2 + 3 p + 5)/(-p^2 + 4)$ correspond-elle à un système stable ?",
+    ("non", "oui"),
+)
+
+#question-de-début-de-cours(
+    "La fonction de transfert $1/(1 + j Q omega/omega_0 - omega^2/omega_0^2)$ correspond-elle à un système stable ?",
+    ("oui", "non"),
+)
 
 #application[
     Les fonctions de transfert suivantes correspondent-elles à des systèmes stables ?
