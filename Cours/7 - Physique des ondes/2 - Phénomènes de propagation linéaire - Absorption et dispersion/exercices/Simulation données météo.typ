@@ -5,12 +5,12 @@
     numérique: true,
 )
 
-Dans le sol, la température vérifie une équation de diffusion de coefficient de diffusion $D approx qty("1e-6", "m^2/s")$. Les données à la surface sont acquises régulièrement par des stations météorologiques. Les données pour Quimper sont disponibles à l'adresse suivante : https://nuage03.apps.education.fr/index.php/s/LgXjiwkxJxcrZmz. Le temps est donné en secondes depuis le 1er janvier 1970 à 00:00:00 UTC. La température est donnée en degrés Celsius. Les mesures sont effectuées toutes les heures.
+Dans le sol, la température vérifie une équation de diffusion de coefficient $D approx qty("1e-6", "m^2/s")$. Les données à la surface sont acquises régulièrement par des stations météorologiques. Les données pour Quimper sont disponibles à l'adresse suivante : https://nuage03.apps.education.fr/index.php/s/LgXjiwkxJxcrZmz. Le temps est donné en secondes depuis le 1er janvier 1970 à 00:00:00 UTC. La température est donnée en degrés Celsius. Les mesures sont effectuées toutes les heures.
 
 On peut importer les données dans Python grâce aux instructions suivantes
 ```python
 import numpy as np
-data = np.load("test.npy")
+data = np.load("températures Quimper.npy")
 t = data[:,0] # temps en secondes
 Tz0 = data[:,1] # température à la surface (en z=0) en degrés Celsius
 ```
@@ -44,7 +44,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
     Le pas de profondeur est donné par $Delta z = 10 / 100 = #qty("0.1", "m")$.
 
     $
-        2 D (Delta t) / (Delta z^2) = #num("1e-6") times #num("3600") / #num("0.1")^2 = #num(scientifique(2 * D * dt / calc.pow(dz, 2), 2)) < 1
+        2 D (Delta t) / (Delta z^2) = 2 times #num("1e-6") times #num("3600") / #num("0.1")^2 = #num(scientifique(2 * D * dt / calc.pow(dz, 2), 2)) < 1
     $
     La condition de stabilité est bien vérifiée.
 ]
@@ -56,12 +56,12 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
         "Si les indices ne correspondent pas à ce que l'on cherche, faire un changement d'indice pour trouver la relation demandée."
     )
 )[
-    Exprimer $T_(i,j)$ en fonction de $T_(i-1,j)$, $T_(i-1,j-1)$, $T_(i-1,j+1)$, D, $Delta x$ et $Delta t$ grâce à la méthode d'Euler explicite.
+    Exprimer $T_(i,j)$ en fonction de $T_(i-1,j)$, $T_(i-1,j-1)$, $T_(i-1,j+1)$, $D$, $Delta z$ et $Delta t$ grâce à la méthode d'Euler explicite.
 ][
     L'équation de diffusion est de la forme $pdv(T, t) = D pdv(T, z, 2)$.
     $
-        T_(i,j+1) = T(t_0, j Delta z) approx T_(i,j) + Delta z pdv(T,z) + (Delta z^2) / 2 pdv(T, z, 2)\
-        T_(i,j-1) = T(t_0, j Delta z) approx T_(i,j) - Delta z pdv(T,z) + (Delta z^2) / 2 pdv(T, z, 2)
+        T_(i,j+1) = T(t_i, (j+1) Delta z) approx T_(i,j) + Delta z pdv(T,z) + (Delta z^2) / 2 pdv(T, z, 2)\
+        T_(i,j-1) = T(t_i, (j-1) Delta z) approx T_(i,j) - Delta z pdv(T,z) + (Delta z^2) / 2 pdv(T, z, 2)
     $
     D'où
     $
@@ -90,10 +90,11 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
 )[
     Compléter le code suivant implémentant la méthode d'Euler explicite pour simuler la température dans le sol.
     ```python
-    Nx = ... # nombre de pas de profondeur
+    Nx = ... # nombre de points de profondeur
     L = 10 # longueur de la colonne de sol simulée (en m)
     x = np.linspace(..., ..., ...) # liste des profondeurs des points simulés (en m)
 
+    Nt = len(t) # nombre d'instants simulés
     T = np.zeros((Nt,Nx)) + Tz0[0] # initialisation de la matrice de température
     dt = 3600 # pas de temps (en s)
     dx = L/(Nx-1) # pas de profondeur (en m)
@@ -113,6 +114,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
     L = 10
     x = np.linspace(0, L, Nx)
 
+    Nt = len(t)
     T = np.zeros((Nt,Nx)) + Tz0[0]
     dt = 3600
     dx = L/(Nx-1)
@@ -144,11 +146,11 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
 
 #question(
     coups-de-pouce: (
-        "On peut commencer par écrire des instructions pour détecter s'il gène pour une profondeur $z_j$.",
+        "On peut commencer par écrire des instructions pour détecter s'il gèle à une profondeur $z_j$.",
         "On parcourt une colonne de `T`. Si tous les éléments sont positifs, alors il ne gèle jamais à cette profondeur. Sinon, il gèle au moins une fois à cette profondeur.",
     )
 )[
-    Écrire une suite d'instruction permettant de calculer à quelle profondeur minimale faut-il enterrer une conduite d'eau pour qu'elle ne subisse pas le gel. 
+    Écrire une suite d'instructions permettant de calculer à quelle profondeur minimale il faut enterrer une conduite d'eau pour qu'elle ne subisse pas le gel. 
 ][
     ```python
     for j in range(Nx):
@@ -156,7 +158,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
         for i in range(Nt):
             if T[i,j] < 0:
                 gèle = True # il gèle au moins une fois à la profondeur x[j]
-                break # on passe au tour de boucle suivant
+                break # inutile de continuer, on passe à la profondeur suivante
         if not gèle: # on a trouvé une profondeur où il ne gèle jamais
             break # on s'arrête, pas la peine d'étudier les profondeurs suivantes
     print(x[j])
@@ -164,7 +166,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
 ]
 
 #question()[
-    Compléter le code ci-dessus pour animer la propagation de l'onde dans un plasma. La fonction `line.set_data` prend les mêmes arguments que la fonction `plot` : les abscisses et les ordonnées des points à tracer.
+    Compléter le code ci-dessous pour animer l'évolution du profil de température dans le sol. La fonction `line.set_data` prend les mêmes arguments que la fonction `plot` : les abscisses et les ordonnées des points à tracer.
 
     ```python
     import matplotlib.animation as animation
@@ -184,7 +186,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
     title = ax.set_title("")
 
     def animate(i):
-        line.set_data(..., ...)  # tracé du profil de température à l'instant initial ti
+        line.set_data(..., ...)  # tracé du profil de température à l'instant ti
         title.set_text(formateDate(t[i]))
         return line, title
 
