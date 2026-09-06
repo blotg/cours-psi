@@ -10,9 +10,9 @@
 
 #matériel(
     groupe: (
-       "GBF et oscilloscope",
-       "Platine d'essai et fils de connexion",
-       "Résistances et condensateurs disponibles dans la salle de TP",
+        "GBF et oscilloscope",
+        "Platine d'essai et fils de connexion",
+        "Résistances et condensateurs disponibles dans la salle de TP",
     ),
 )
 
@@ -34,9 +34,9 @@ L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert
 
 = Réalisation et étude préliminaire
 
-Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP de sorte que
+Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP (voir @annexe-composants) de sorte que
 + sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
-+ sa résistance soit très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1","MO")) ;
++ sa résistance soit très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1", "MO")) ;
 + son impédance d'entrée à haute fréquence soit suffisamment grande pour ne pas faire saturer en courant l'ALI.
 
 #application()[
@@ -47,9 +47,10 @@ Le filtre de Wien sera réalisé avec les composants accessibles dans la salle d
 
 #évaluation(
     barème: (
-        ([critère 1], 3),
-        ([critère 2], 2),
-        ([critère 3], 3),
+        ([composants accessibles dans la salle de TP], 2),
+        ([critère sur la fréquence caractéristique], 2),
+        ([critère la résistance], 2),
+        ([critère l'impédance d'entrée], 2),
         ([incertitude sur $f_0$], 2),
     ),
 )[
@@ -233,4 +234,55 @@ Il est maintenant possible de conclure sur l'adéquation des valeurs attendues a
         "np.logspace",
         "np.random.normal",
     ),
+)
+
+= Composants disponibles dans la salle de TP<annexe-composants>
+
+#figure(
+    {
+        let L = (4.7, 10., 12., 22., 33.)
+        let résistances = ()
+
+        for i in range(5) {
+            for n in L {
+                résistances.push(n * calc.pow(10, i))
+            }
+        }
+
+        import "@preview/zero:0.7.0": *
+        table(
+            columns: 5,
+            // align: right,
+            ..for n in résistances {
+                ([#num(n)],)
+            }
+        )
+    },
+    caption: [Résistances des résistors disponibles dans la salle de TP (en #unit("O"))],
+)
+
+#figure(
+    {
+        let L = (
+            qty("100", "pF"),
+            qty("400", "pF"),
+            qty("1", "nF"),
+            qty("2.2", "nF"),
+            qty("4.7", "nF"),
+            qty("10", "nF"),
+            qty("22", "nF"),
+            qty("100", "nF"),
+            qty("220", "nF"),
+            qty("470", "nF"),
+        )
+
+        import "@preview/zero:0.7.0": *
+        table(
+            columns: 10,
+            ..for n in L {
+                (n,)
+            }
+        )
+    },
+    caption: [Capacité des condensateur disponibles dans la salle de TP],
 )
