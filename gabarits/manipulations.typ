@@ -21,7 +21,7 @@
 #align(center)[
     #text(size: 1.4em, weight: "bold")[Manipulations]
     #linebreak()
-    #text(size: 1.1em, fill: luma(35%))[#données.titre]
+    #text(size: 1.1em, fill: luma(35%))[#markup(données.titre)]
 ]
 #v(1em)
 
@@ -38,11 +38,11 @@
             .enumerate()
             .map(((i, m)) => (
                 [#(i + 1)],
-                if m.titre == "" { emph(text(fill: luma(45%))[sans titre]) } else { m.titre },
+                if m.titre == "" { emph(text(fill: luma(45%))[sans titre]) } else { markup(m.titre) },
                 if m.at("matériel", default: ()).len() == 0 {
                     text(fill: luma(60%))[—]
                 } else {
-                    list(tight: true, ..m.matériel)
+                    list(tight: true, ..m.matériel.map(markup))
                 },
             ))
             .flatten(),
@@ -54,6 +54,6 @@
     #if tout.len() > 0 [
         #v(1.5em)
         #strong[Matériel à sortir]
-        #columns(2, list(tight: true, ..tout))
+        #columns(2, list(tight: true, ..tout.map(markup)))
     ]
 ]

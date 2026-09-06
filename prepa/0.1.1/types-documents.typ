@@ -4,7 +4,7 @@
 // Le logo appartient au lycée : il identifie le document, il n'est pas couvert
 // par la licence CC BY-NC qui s'applique au contenu (cf. LICENCE.md). D'où la
 // séparation visuelle entre le bloc de gauche et la mention de licence.
-#import "helper-functions.typ": apostrophes
+#import "helper-functions.typ": markup
 #let pied-de-page = context {
     set text(size: 7.5pt, fill: luma(45%))
     // init-document souligne les liens ; dans un pied de page c'est du bruit.
@@ -236,7 +236,7 @@
         it
     }
     context [#metadata(here().page()) <première-page>]
-    align(center, text(17pt)[*#apostrophes(titre)*])
+    align(center, text(17pt)[*#markup(titre)*])
     doc
     context [#metadata(here().page()) <dernière-page>]
 }
@@ -249,7 +249,7 @@
         show: init-document.with(titre: titre)
         set heading(numbering: "1.")
         show <correction>: it => if avec-corrigé { it } else {}
-        align(center, text(17pt)[*#apostrophes(titre) TD*])
+        align(center, text(17pt)[*#markup(titre) TD*])
         doc
     }
 }
@@ -267,7 +267,7 @@
     } else {
         show: init-document.with(titre: titre)
         set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
-        align(center, text(17pt)[*#apostrophes(titre)*])
+        align(center, text(17pt)[*#markup(titre)*])
         corps
     }
 }
@@ -284,7 +284,7 @@
         titre-doc = titre-doc + [ #numéro]
     }
     if titre != none {
-        titre-doc = titre-doc + [ #sym.dash #apostrophes(titre)]
+        titre-doc = titre-doc + [ #sym.dash #markup(titre)]
     }
     show: init-document.with(titre: titre)
     show: it => {

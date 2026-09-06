@@ -76,9 +76,18 @@
     return d2
 }
 
-// Typst n'applique la correction typographique (' → ’) qu'au markup : une
-// apostrophe placée dans une *chaîne* ressort droite. Les titres, hypothèses et
-// titres d'exercices arrivent ici sous forme de chaînes ; on les corrige au
-// moment de les afficher. Les significations et les flashcards, elles, sont
-// déjà passées par `eval(..., mode: "markup")`, donc rien à faire de ce côté.
-#let apostrophes(x) = if type(x) == str { x.replace("'", "’") } else { x }
+// Typst ne compose une chaine que telle qu'elle est écrite : ni correction
+// typographique (' → ’, « … », --- → —), ni syntaxe de markup. Les titres, les
+// titres d'exercices et les hypothèses arrivent ici sous forme de chaines ; on
+// les évalue en markup au moment de les afficher, comme le sont déjà les
+// significations, les flashcards, les questions de colle et les coups de pouce.
+// Le scope leur ouvre les symboles du paquet : un titre peut donc contenir
+// $E_c$, #ce("H2O") ou *gras*, au prix d'un antislash devant un # ou une * qui
+// se voudraient littéraux.
+// Les titres de chapitre d'infos.yml sont des blocs YAML de deux lignes (le
+// numéro du chapitre, puis son intitulé) : en markup un simple passage à la
+// ligne n'est qu'une espace, on rétablit donc la coupure ligne par ligne.
+#let markup(x) = if type(x) == str {
+    import "symboles.typ" as symboles
+    x.split("\n").map(l => eval(l, mode: "markup", scope: dictionary(symboles))).join(linebreak())
+} else { x }

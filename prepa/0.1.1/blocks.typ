@@ -26,12 +26,12 @@
 // Le marqueur (emoji + numéro) suit la couleur du bandeau : noir sur fond
 // clair, blanc sur fond noir.
 #let _bandeau(intitulé, titre: none, marqueur: none, noir: false) = {
-    import "helper-functions.typ": apostrophes
+    import "helper-functions.typ": markup
     set text(fill: if noir { white } else { black })
     strong(intitulé)
     if titre != none and titre != "" {
         text(fill: if noir { luma(75%) } else { _gris })[#h(0.4em)#sym.dash.en#h(0.4em)]
-        apostrophes(titre)
+        markup(titre)
     }
     if marqueur != none {
         h(1fr)
@@ -214,7 +214,7 @@
     ouvert: false,
     explique: false,
 ) = [
-    #import "helper-functions.typ": apostrophes
+    #import "helper-functions.typ": markup
     #numQuestion.update(0)
     #heading(depth: 1, [
         #if explique [
@@ -226,7 +226,7 @@
         #if numérique [
             #text(font: "Noto Emoji", emoji.computer)
         ]
-        #apostrophes(titre)
+        #markup(titre)
         #text(fill: _gris)[#for _ in range(difficulté) { sym.star.filled }]
     ]) <titre-exercice>
     #if ouvert [
@@ -269,9 +269,9 @@
 }
 
 #let encadré(titre: "", connaitre: false, savoir-faire: false, hypothèses: (), grandeurs: (:), contenu) = {
-    import "helper-functions.typ": apostrophes
+    import "helper-functions.typ": markup
     if type(hypothèses) in (str, content) { hypothèses = (hypothèses,) }
-    hypothèses = hypothèses.map(apostrophes)
+    hypothèses = hypothèses.map(markup)
 
     let marqueur = none
     if connaitre and savoir-faire {
