@@ -5,6 +5,7 @@
 // par la licence CC BY-NC qui s'applique au contenu (cf. LICENCE.md). D'où la
 // séparation visuelle entre le bloc de gauche et la mention de licence.
 #import "helper-functions.typ": markup
+#import "@preview/ccicons:1.0.1": *
 #let pied-de-page = context {
     set text(size: 7.5pt, fill: luma(45%))
     // init-document souligne les liens ; dans un pied de page c'est du bruit.
@@ -18,7 +19,10 @@
         // Un document sans numérotation (la fiche d'évaluation) garde un
         // pied de page, mais sans numéro.
         if page.numbering != none { counter(page).display() },
-        link("https://creativecommons.org/licenses/by-nc/4.0/deed.fr")[CC BY-NC 4.0],
+        {
+            set text(size: 12pt)
+            link("https://creativecommons.org/licenses/by-nc/4.0/deed.fr")[#cc-by-nc]
+        },
     )
 }
 
