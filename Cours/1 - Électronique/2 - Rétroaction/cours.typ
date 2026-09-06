@@ -45,7 +45,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
     ),
 )[
     On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions et dont la sortie va à un ALI alimenté en #qty("15", "V") et #qty("-15", "V") et on observe la tension de sortie sur un oscilloscope.
-    #schéma(hauteur: 4cm)
+    #carreaux(4cm)
 ]
 
 #encadré(
@@ -220,7 +220,7 @@ Le montage étudié dans cette partie est couramment utilisé pour amplifier des
     grandeurs: sub-dictionary(grandeurs, ("S(p)", "E(p)", "epsilon", "A_0", "tau", "R_1", "R_2")),
     savoir-faire: true,
 )[
-    #schéma(hauteur: 7cm)
+    #carreaux(7cm)
 ]
 
 Ce schéma bloc explicite le caractère bouclé du montage amplificateur non-inverseur. La sortie est renvoyée à l'entrée inverseuse de l'ALI par l'intermédiaire d'un pont diviseur de tension.
@@ -285,7 +285,7 @@ Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différe
 
 #manipulation(titre: "Amplificateur non-inverseur")[
     On réalise le montage de l'amplificateur non-inverseur et on place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope.
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 La bande passante de l'amplificateur non-inverseur est considérablement plus grande que celle de l'ALI. Le gain de l'amplificateur non-inverseur peut être réglé par les résistances $R_1$ et $R_2$. Ceci pallie les défauts de l'ALI comme amplificateur.
@@ -369,12 +369,12 @@ Pour décrire le fonctionnement du comparateur à hystérésis, on représente s
         "La sortie est stabilisée à sa valeur limite.",
     ),
 )[
-    #schéma(hauteur: 5cm)
+    #carreaux(5cm)
 ]
 
 #manipulation(titre: "Cycle d’hystérésis expérimental")[
     On réalise le montage du comparateur à hystérésis négatif et on place en entrée un signal sinusoïdal. On observe la sortie sur un oscilloscope en mode XY.
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 == Fonction mémoire
@@ -385,6 +385,7 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("R_1", "R_2", "V_\"sat\"", "e")),
 )[
+    #set list(spacing: 1.2em)
     - $e < -R_1 / (R_1+R_2) V_"sat"$ force la sortie à $V_"sat"$
     - $e > R_1 / (R_1+R_2) V_"sat"$ force la sortie à $-V_"sat"$
     - $e in [-R_1 / (R_1+R_2) V_"sat", R_1 / (R_1+R_2) V_"sat"]$ conserve la valeur précédente de la sortie (effet mémoire)
