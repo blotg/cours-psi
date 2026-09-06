@@ -155,23 +155,19 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
         "Pour un gaz parfait, comment la capacité thermique massique à pression constante s'exprime-t-elle en fonction du coefficient de Laplace ?",
     ),
 )[
-    En utilisant l'identité thermodynamique $dd(H) = T dd(S) + V dd(P)$, montrer que $s_(2,e)-s_(1,e)=c ln(T_(2,e)/T_(1,e))$ (températures absolues) et que $s_(2,g)-s_(1,g)=(gamma R)/(M(gamma-1)) ln T_2/T_1$. Calculer leur valeur.
+    En utilisant l'identité thermodynamique $dd(H) = T dd(S) + V dd(P)$, montrer que $s_(2,e)-s_(1,e)=c ln(T_(2,e)/T_(1,e))$ (températures absolues) et que $s_(2,g)-s_(1,g)=(gamma R)/(M(gamma-1)) ln(T_2/T_1)$. Calculer leur valeur.
 ][
-    Pour une transformation isobare, on a $dd(P)=0$, donc l'identité thermodynamique devient $dd(H) = T dd(S)$. On en déduit que
+    Pour une transformation isobare, on a $dd(P)=0$, donc l'identité thermodynamique devient $dd(H) = T dd(S)$, soit par unité de masse $dd(s) = dd(h)/T$. En intégrant entre l'état 1 et l'état 2, on obtient
     $
-        dd(S) = dd(H)/T
+        s_2 - s_1 = integral_(1)^(2) dd(h)/T
     $
-    En intégrant entre l'état 1 et l'état 2, on obtient
-    $
-        s_2 - s_1 = integral_(1)^(2) dd(H)/T
-    $
-    Pour l'eau, on utilise la seconde loi de Joule isobare $dd(H) = c dd(theta)$, ce qui donne
+    Pour l'eau, on utilise la seconde loi de Joule isobare $dd(h) = c dd(theta)$, ce qui donne
     
     $
         s_(2,e) - s_(1,e) = integral_(T_(1,e))^(T_(2,e)) c dd(T)/T = c ln(T_(2,e)/T_(1,e))
         = #qty(scientifique(Delta-s-e,2), "J/kg/K")
     $
-    Pour le gaz parfait, on utilise la seconde loi de Joule isobare $dd(H) = c_p dd(T)$ avec $c_p = (gamma R)/(M (gamma - 1))$, ce qui donne
+    Pour le gaz parfait, on utilise la seconde loi de Joule isobare $dd(h) = c_p dd(T)$ avec $c_p = (gamma R)/(M (gamma - 1))$, ce qui donne
     
     $
         s_(2,g) - s_(1,g) = integral_(T_1)^(T_2) (gamma R)/(M (gamma - 1)) dd(T)/T = (gamma R)/(M (gamma - 1)) ln(T_2/T_1)

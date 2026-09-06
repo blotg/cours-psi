@@ -77,7 +77,7 @@ On souhaite exprimer $delta P_x$ en fonction des températures $T_p(x)$ et $T_g(
         "Les résistances sont-elles en série ou en parallèle ?",
     ),
 )[
-    Exprimer la résistance thermique totale entre les deux fluides sur la section $dd(x)$ en fonction de $h$, $dd(S)$, de la conductivité thermique $lambda$ du matériau constituant l'échangeur et de son épaisseur $e$. En déduire l'expression de $delta P_x$ en fonction de $T_p(x)$, $T_g(x)$, $dd(S)$ et de $K = l/(2/h + e/lambda)$.
+    Exprimer la résistance thermique totale entre les deux fluides sur la section $dd(x)$ en fonction de $h$, $dd(S)$, de la conductivité thermique $lambda$ du matériau constituant l'échangeur et de son épaisseur $e$. En déduire l'expression de $delta P_x$ en fonction de $T_p(x)$, $T_g(x)$, $dd(x)$ et de $K = l/(2/h + e/lambda)$.
 ][
     La résistance thermique totale $R_"th"$ entre les deux fluides est la somme des résistances thermiques aux interfaces solide/liquide et de la résistance thermique à travers le matériau de l'échangeur (elles sont en série) :
     $
@@ -181,7 +181,7 @@ Tp = solution.y[1]
 #question(
     coups-de-pouce: "On peut appliquer le PPI sur la conduite d'eau potable en entier.",
 )[
-    Quelle énergie ce système permet-il d'économiser sur une journée de fonctionnement, par rapport à un système sans récupérateur de chaleur ? Cette énergie sera exprimée en #unit("J") puis en #unit("kW h")
+    Quelle énergie ce système permet-il d'économiser sur une journée de fonctionnement, par rapport à un système sans récupérateur de chaleur ? Cette énergie sera exprimée en #unit("J") puis en #unit("kW h").
 ][
     La puissance récupérée par l'eau potable est
     $

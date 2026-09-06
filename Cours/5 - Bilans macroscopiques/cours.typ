@@ -130,7 +130,7 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
     ),
     grandeurs: sub-dictionary(grandeurs, ("Delta", "s", "s_e", "s_c")),
 )[
-    $ Delta (s) = s_e+s_c $
+    $ Delta s = s_e+s_c $
 ]
 
 #question-de-colle(
@@ -138,14 +138,14 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
 )
 #flashcard(
     recto: "Second principe de la thermodynamique pour un système ouvert",
-    verso: "$ Delta (s) = s_e+s_c $",
+    verso: "$ Delta s = s_e+s_c $",
 )
 
 = Conservation de l'énergie dans un écoulement parfait
 == Le modèle de l'écoulement parfait
 Un écoulement parfait est un écoulement dans lequel il n'existe aucun phénomène de diffusion (thermique, de quantité de mouvement, ...).
 
-Dans un écoulement parfait, l'évolution d'une particule de fluide est adiabatique, réversible. Dans un écoulement parfait, les particules de fluide ne sont soumises à aucune force de viscosité.
+Dans un écoulement parfait, l'évolution d'une particule de fluide est adiabatique et réversible : les particules de fluide ne sont soumises à aucune force de viscosité.
 
 Le modèle de l'écoulement parfait donne des résultats conformes à l'expérience lorsque le nombre de Reynolds est grand et hors de la couche limite.
 
@@ -235,7 +235,7 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 )
 
 #application[
-    La fusée Ariane se propulse en éjectant des gaz vers le bas avec un débit de #qty("10", "t/s") et une vitesse de #qty("4000", "m/s"). Ariane pèse #qty("750", "t") dont #qty("620", "t") de carburant. Exprimer la vitesse de la fusée au cours du temps en supposant qu'elle part avec une vitesse nulle au décollage. Quelle est la vitesse de la fusée lorsqu'elle a consommé tout son carburant ?
+    La fusée Ariane se propulse en éjectant des gaz vers le bas avec un débit de #qty("10", "t/s") et une vitesse de #qty("4000", "m/s"). Ariane a une masse de #qty("750", "t") dont #qty("620", "t") de carburant. Exprimer la vitesse de la fusée au cours du temps en supposant qu'elle part avec une vitesse nulle au décollage. Quelle est la vitesse de la fusée lorsqu'elle a consommé tout son carburant ?
 ]
 
 #question-de-colle(

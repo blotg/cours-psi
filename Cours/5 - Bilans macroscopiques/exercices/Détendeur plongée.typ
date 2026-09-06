@@ -25,7 +25,7 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal.
     $
         Delta (h+e_c+e_p) = w_u + q
     $
-    - l'écoulement est lent donc $e_c approx 0$
+    - l'écoulement est lent donc $Delta e_c approx 0$
     - l'écoulement est horizontal donc $Delta e_p approx 0$
     - la détente est adiabatique donc $q = 0$
     - il n'y a pas de travail utile (pas de pièce mobile) donc $w_u = 0$
@@ -99,7 +99,7 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 ][
     En sortie de bouteille, on lit sur le diagramme $(P,h)$ un volume massique d'environ #qty("0.004", "m^3/kg"), soit une masse volumique de
     $
-        mu approx 1 / 0.004 = #qty(scientifique(1 / 0.004, 1), "kg/m^3")
+        mu approx 1 / 0.004 = #qty(scientifique(1 / 0.004, 2), "kg/m^3")
     $
 
     La vitesse débitante est

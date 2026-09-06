@@ -160,12 +160,33 @@ On néglige l'influence de la gravité.
 ]
 
 #question[
-    En déduire le coefficient de perte de charge singulière $zeta$ défini par $P_2 - P_1=zeta 1/2 mu v_1^2$. Effectuer l'application numérique pour $S_2 = 2 S_1$.
+    En déduire le coefficient de récupération de pression $zeta$ défini par $P_2 - P_1=zeta 1/2 mu v_1^2$. Effectuer l'application numérique pour $S_2 = 2 S_1$.
 ][
     #let x = 1/2
     #let pdc = 2*(-x*x + x)
     $
         zeta = (P_2-P_1)/(1/2 mu v_1^2)
         = 2 (S_1/S_2 - (S_1/S_2)^2) = #num(pdc)
+    $
+]
+
+#question(
+    coups-de-pouce: (
+        "La charge est la pression totale $P + 1/2 mu v^2$, et non la seule pression statique.",
+    ),
+)[
+    La pression statique augmente donc à la traversée de l'élargissement. Où est alors la perte de charge ? En déduire le coefficient de perte de charge singulière $zeta_"pdc"$, défini sur la chute de pression totale, et faire l'application numérique.
+][
+    La charge est la pression totale. Sa variation vaut
+    #let x = 1/2
+    #let pdcs = calc.pow(1 - x, 2)
+    $
+        (P_2 + 1/2 mu v_2^2) - (P_1 + 1/2 mu v_1^2)
+        & = mu v_1^2 (S_1/S_2 - (S_1/S_2)^2) + 1/2 mu v_1^2 ((S_1/S_2)^2 - 1) \
+        & = - 1/2 mu v_1^2 (1 - S_1/S_2)^2
+    $
+    Elle est bien négative : la pression statique augmente, mais l'énergie cinétique perdue est plus grande encore, et la différence est dissipée dans la zone d'eau morte. D'où le coefficient de perte de charge, dit de Borda–Carnot,
+    $
+        zeta_"pdc" = (1 - S_1/S_2)^2 = #num(pdcs)
     $
 ]

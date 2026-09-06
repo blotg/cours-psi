@@ -54,7 +54,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
 #question[
     Justifier que la compression dans le compresseur peut être considérée comme réversible.
 ][
-    Le point de départ et d'arrivée de la compression sont sur la même isentropique donc $Delta S =$. De plus, la compression est rapide donc les échanges thermiques sont négligeables, $Q = 0$, d'où l'entropie échangée est nulle. On en déduit $S_c = Delta S - S_e = 0$ : la compression est réversible.
+    Le point de départ et d'arrivée de la compression sont sur la même isentropique donc $Delta S = 0$. De plus, la compression est rapide donc les échanges thermiques sont négligeables, $Q = 0$, d'où l'entropie échangée est nulle. On en déduit $S_c = Delta S - S_e = 0$ : la compression est réversible.
 ]
 
 #let Dh-cond = 270 - 650
@@ -82,7 +82,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
 
 #let Dh-comp = 650 - 590
 #question[
-    Calculer le travail util reçu par le propane dans le compresseur. Quel est la puissance électrique consommée par le compresseur ?
+    Calculer le travail utile reçu par le propane dans le compresseur. Quelle est la puissance électrique consommée par le compresseur ?
 ][
     On utilise la même méthode que précédemment :
     $
@@ -90,7 +90,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     $
     Durant la compression, le PPI donne
     $
-        Delta h_"compression" + cancel(Delta e_c) + cancel(Delta e_p) = cancel(q_c) + w_u
+        Delta h_"compression" + cancel(Delta e_c) + cancel(Delta e_p) = cancel(q) + w_u
     $
     Soit
     $
@@ -106,6 +106,6 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     Calculer l'efficacité, aussi appelée COP (pour Coefficient Of Performance), de la pompe à chaleur. 
 ][
     $
-      e = -Q_c / W_u = q_c / w_u = #num(scientifique(-Dh-cond / Dh-comp, 1))
+      e = -Q_c / W_u = -q_c / w_u = #num(scientifique(-Dh-cond / Dh-comp, 2))
     $
 ]

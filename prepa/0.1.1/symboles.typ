@@ -42,21 +42,31 @@
         return "0"
     }
 
-    let exposant = int(calc.floor(calc.log(calc.abs(nombre), base: 10)))
-    let mantisse = nombre / calc.pow(10.0, exposant)
-    mantisse = calc.round(mantisse, digits: chiffres-significatifs - 1)
-    let n = str(int(calc.round(mantisse, digits: 1)))
-    if chiffres-significatifs > 1 {
-        n += "."
+    // On travaille sur la valeur absolue : sur un négatif, int() tronque vers
+    // zéro (−3,8 donne −3) alors que rem-euclid reste positif (−38 mod 10 = 2),
+    // et les deux conventions se contredisaient : −380 sortait « −3,2e2 ».
+    let signe = if nombre < 0 { "-" } else { "" }
+    let x = calc.abs(nombre)
+
+    let exposant = int(calc.floor(calc.log(x, base: 10)))
+    let mantisse = calc.round(x / calc.pow(10.0, exposant), digits: chiffres-significatifs - 1)
+    // L'arrondi peut porter la mantisse à 10 (9,96 à deux chiffres) : on
+    // remonte alors l'exposant pour la ramener dans [1, 10[.
+    if mantisse >= 10 {
+        mantisse = mantisse / 10
+        exposant += 1
     }
-    for i in range(1, chiffres-significatifs) {
-        n += str(int(calc.rem-euclid(mantisse * calc.pow(10, i), 10)))
-    }
-    if exposant == 0 {
-        return str(n)
+
+    // Les chiffres significatifs sont ceux de mantisse × 10^(c−1), qui compte
+    // exactement c chiffres puisque la mantisse est dans [1, 10[.
+    let chiffres = str(int(calc.round(mantisse * calc.pow(10, chiffres-significatifs - 1))))
+    let n = if chiffres-significatifs > 1 {
+        chiffres.slice(0, 1) + "." + chiffres.slice(1)
     } else {
-        return str(n) + "e" + str(exposant)
+        chiffres
     }
+
+    return signe + n + if exposant == 0 { "" } else { "e" + str(exposant) }
 }
 
 

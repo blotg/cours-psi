@@ -135,7 +135,7 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
 ][
     En égalisant les deux expressions de $va(F)$, on trouve
     $
-        1/2 mu S (v_2^2 - v_1^2) = mu v S (v_2 - v_1)
+        1/2 rho S (v_2^2 - v_1^2) = rho v S (v_2 - v_1)
     $
     soit finalement
     $
@@ -166,9 +166,9 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
     $
         cal(P) = (delta m)/dd(t) (1/2 v_2^2 - 1/2 v_1^2) = D_m (1/2 v_2^2 - 1/2 v_1^2)
     $
-    On peut alors remplacer $F = 1/2 mu S (v_2^2 - v_1^2)$ d'où $(v_2^2/2 - v_1^2/2) = F/(mu S)$ :
+    On peut alors remplacer $F = 1/2 rho S (v_2^2 - v_1^2)$ d'où $(v_2^2/2 - v_1^2/2) = F/(rho S)$ :
     $
-        cal(P) = D_m F/(mu S) = (mu v S)/(mu S) F = v F = va(F) dot va(v)
+        cal(P) = D_m F/(rho S) = (rho v S)/(rho S) F = v F = va(F) dot va(v)
     $
 ]
 
