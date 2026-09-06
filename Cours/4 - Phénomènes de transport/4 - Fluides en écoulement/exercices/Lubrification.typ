@@ -21,7 +21,7 @@ Le but de cet exercice est de comprendre l'intérêt de la lubrification. On con
     caption: "Mobile en frottement solide avec son support.",
 )
 
-Dans un premier temps, on étudie le contact sec entre le pavé et la surface. La force de frottement est de type frottement solide. Elle obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=qty("10", "km/h")$.
+Dans un premier temps, on étudie le contact sec entre le mobile et la surface. La force de frottement est de type frottement solide. Elle obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=qty("10", "km/h")$.
 
 #question(
     coups-de-pouce: (
@@ -81,7 +81,7 @@ Dans un premier temps, on étudie le contact sec entre le pavé et la surface. L
     caption: "Mobile sur une couche de fluide.",
 )
 
-On introduit maintenant une couche d'huile d'épaisseur $e=#qty("1.0", "mm")$ entre le mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du palet constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bords. La surface du mobile en contact avec l'huile est $S=qty("400", "cm^2")$. Le mobile a une vitesse $v_m=v_0=qty("10", "km/h")$.
+On introduit maintenant une couche d'huile d'épaisseur $e=#qty("1.0", "mm")$ entre le mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du mobile constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bord. La surface du mobile en contact avec l'huile est $S=qty("400", "cm^2")$. Le mobile a une vitesse $v_m=v_0=qty("10", "km/h")$.
 
 La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("60e-6", "m^2/s")$.
 #let viscosité = 60e-6 * 0.9e3
@@ -125,10 +125,10 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
 
 #question(
     coups-de-pouce: (
-        "La force exercée sur le pavé est l'opposé de la force exercée par le pavé sur la couche supérieure de fluide.",
+        "La force exercée sur le mobile est l'opposé de la force exercée par le mobile sur la couche supérieure de fluide.",
     ),
 )[
-    Exprimer la force de frottement à laquelle est soumis le pavé.
+    Exprimer la force de frottement à laquelle est soumis le mobile.
 ][
     La force de frottement est
     #let vm = 10 * 1000 / 3600
@@ -136,7 +136,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
     #let S = 400 * 1.0e-4
     #let FT = viscosité * vm / e * S
     $
-        F_T = - (delta^2 F)/dd(S) * S = - eta v_m / e S = #qty(scientifique(FT, 2), "N")
+        F_T = - (delta^2 F)/dd(S) S = - eta v_m / e S = - #qty(scientifique(FT, 2), "N")
     $
 ]
 
@@ -146,7 +146,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
         "La distance d'arrêt peut être définie comme la valeur maximale atteinte par la position.",
     ),
 )[
-    On admet qu'en l'absence d'action de l'opérateur pour maintenir la vitesse constante, l'expression de la vitesse établie précédemment reste valable, mais avec $a$ fonction du temps. Que devient la distance d'arrêt du palet ?
+    On admet qu'en l'absence d'action de l'opérateur pour maintenir la vitesse constante, l'expression de la vitesse établie précédemment reste valable, mais avec $a$ fonction du temps. Que devient la distance d'arrêt du mobile ?
 ][
     La projection du théorème de la résultante cinétique selon $ex$ donne
     $ M dv(v_m, t) = F_T = - eta v_m / e S $

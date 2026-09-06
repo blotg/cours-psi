@@ -57,7 +57,7 @@ L'élément de volume a pour volume $dd(V)=dd(x) dot dd(y) dot dd(z)$.
 )
 
 #application[
-    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $rho=rho_0(1+x y)$.
+    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $mu=mu_0(1+x y)$.
 ]
 
 == Élément de surface

@@ -29,9 +29,9 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 )[
     Établir l'équation différentielle vérifiée par $v(t)$.
 ][
-    Le théorème de la résultante cinétique appliqué à la bille et projeté sur $ez$ s'écrit
+    Le théorème de la résultante cinétique appliqué à la bille s'écrit $m dv(va(v), t) = m va(g) + va(F_x)$. Comme $va(v) = -v ez$, la projection sur $ez$ donne $- m dv(v, t) = -m g + 1/2 mu pi R^2 C_x v^2$, soit
     $
-        m dv(v, t) = -m g + 1/2 mu pi R^2 C_x v^2
+        m dv(v, t) = m g - 1/2 mu pi R^2 C_x v^2
     $
 ]
 
@@ -75,7 +75,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 ][
     ```python
     def dvdt(t, v):
-        return (-m * g + 1/2 * mu * pi * R**2 * Cx * v**2) / m
+        return (m * g - 1/2 * mu * pi * R**2 * Cx * v**2) / m
     ```
 ]
 
@@ -100,12 +100,12 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 )[
     Expliquer pourquoi la modélisation proposée pose problème aux premiers instants du mouvement.
 ][
-    Au début de la chute, la vitesse est très faible, ce qui conduit à un nombre de Reynolds faible. Dans ce régime, le coefficient de frottement n'est pas constant.
+    Au début de la chute, la vitesse est très faible, ce qui conduit à un nombre de Reynolds faible. Dans ce régime, le coefficient de trainée n'est pas constant.
 ]
 
 #question(
     coups-de-pouce: (
-        "On peut utiliser la compréhension de liste : `L[:,:]` par exemple pour prendre toutes les lignes et toutes les colonnes d'un tableau `L`.",
+        "On peut utiliser le découpage (slicing) : `L[:,:]` par exemple pour prendre toutes les lignes et toutes les colonnes d'un tableau `L`.",
         "Rappeler l'expression du nombre de Reynolds en fonction de la vitesse.",
         "Rappeler l'expression de la force de trainée en fonction du coefficient de trainée.",
     ),
@@ -123,7 +123,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
     Re_exp = ... # première colonne de data
     Cx_exp = ... # deuxième colonne de data
 
-    eta = 1.85e-5  # viscosité dynamique de l'ai en Pa.s
+    eta = 1.85e-5  # viscosité dynamique de l'air en Pa.s
 
     def Fx(v):
         Re = ...
@@ -151,7 +151,7 @@ On suppose que le nombre de Reynolds est compris entre #num("2e3") et #num("2e5"
 ][
     ```python
     def dvdt(t, v):
-        return (-m * g + Fx(v)) / m
+        return (m * g - Fx(v)) / m
     ```
     ```python
     import numpy as np

@@ -28,7 +28,7 @@ Un agriculteur souhaite vidanger une cuve cubique d'un mètre cube remplie d'eau
 
     Si on suppose l'écoulement parfait, stationnaire, incompressible et homogène, on peut appliquer le théorème de Bernoulli entre la surface libre de l'eau dans la cuve (point 1) et la sortie du robinet (point 2). On a alors, en négligeant la vitesse de la surface libre par rapport à la vitesse de sortie (ce qui revient à supposer que la section de la cuve est bien plus grande que celle de la vanne),
     $
-        P_1 + mu g h(t) + 0 = P_2 + 0 + 1/2 mu v^2\
+        P_1 + rho g h(t) + 0 = P_2 + 0 + 1/2 rho v^2\
     $
     Ici, $P_1 = P_2 = P_"atm"$, d'où
     $
@@ -57,6 +57,6 @@ Un agriculteur souhaite vidanger une cuve cubique d'un mètre cube remplie d'eau
     #let g = 9.81
     #let tf = 2 * calc.pow(a, 5/2) / (S * calc.sqrt(2 * g))
     $
-      t_f = #qty(scientifique(tf,1), "s") approx #qty(scientifique(tf/60,0), "min")
+      t_f = #qty(scientifique(tf,1), "s") approx #qty(scientifique(tf/60,1), "min")
     $
 ]

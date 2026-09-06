@@ -6,11 +6,11 @@
 
 On s'intéresse à une conduite plate d'épaisseur $e$, de largeur $l>>e$ et de longueur $L$ dans laquelle circule un fluide incompressible et homogène de viscosité dynamique $eta$ et de masse volumique $mu$.
 
-Le champ de vitesse est noté $va(v) = v ey$
+Le champ de vitesse est noté $va(v) = v ey$.
 
 La conduite est délimitée par les plans d'équation $x=l/2$, $x=-l/2$, $z=e/2$ et $z=-e/2$.
 
-Les effets de la gravité sont négligés et on suppose que le gradient de pression est uniforme et selon $ey$
+Les effets de la gravité sont négligés et on suppose que le gradient de pression est uniforme et selon $ey$.
 
 #figure(
     canvas({
@@ -98,9 +98,9 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
         "Utiliser le principe de Curie."
     ),
 )[
-    On suppose l'écoulement laminaire et en régime stationnaire. Les effets de bord sont négligés. Justifier que $va(v)=v(z)ey$
+    On suppose l'écoulement laminaire et en régime stationnaire. Les effets de bord sont négligés. Justifier que $va(v)=v(z) ey$.
 ][
-    En régime stationnaire, le champ de vitesse ne dépend pas du temps. De plus, les effets de bord sont négligés, la situation est donc invariante par translation selon $x$ et $y$. D'après le principe de Curie, il en va de même pour $va(v)$ : $va(v)(z)$.
+    En régime stationnaire, le champ de vitesse ne dépend pas du temps. De plus, les effets de bord sont négligés, la situation est donc invariante par translation selon $x$ et $y$. D'après le principe de Curie, il en va de même pour $va(v)$ : $va(v) = v(z) ey$.
 ]
 
 #question(
@@ -153,7 +153,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
     Exprimer le débit volumique dans la conduite en fonction de $l$, $e$, $eta$ et $pdv(P, y)$.
 ][
     $
-        D_V & = integral_(z=-e/2)^(e/2) integral_(x=-l/2)^(l/2) va(v) dot dd(x) dd(z) ey \
+        D_V & = integral_(z=-e/2)^(e/2) integral_(x=-l/2)^(l/2) va(v) dot ey dd(x) dd(z) \
             & = 1/eta pdv(P, y) l [z^3/6-e^2/8z]_(-e/2)^(e/2) \
             & = 1/eta pdv(P, y) l (e^3/48 - e^3/16 +e^3/48-e^3/16) \
             & = - pdv(P, y) (l e^3)/(12 eta)

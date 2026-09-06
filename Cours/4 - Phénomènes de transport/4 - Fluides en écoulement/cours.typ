@@ -73,7 +73,7 @@ La vitesse en un même point et à des instants différents $va(v)(M,t_1)$ et $v
 Une ligne de courant est une courbe en tout point tangente au vecteur vitesse $va(v)(M,t)$ et orientée dans le même sens.
 #schéma(titre: "Ligne de courant", hauteur: 3cm)
 
-En régime stationnaire, les lignes de courant sont immobiles. En régime stationnaire, les lignes de courant sont les trajectoires des particules de fluide.
+En régime stationnaire, les lignes de courant sont immobiles : elles coïncident alors avec les trajectoires des particules de fluide.
 
 Attention : de manière générale, les lignes de courant ne sont pas forcément les trajectoires des particules de fluide.
 
@@ -101,7 +101,7 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 #encadré(
     titre: "Masses volumiques à connaitre",
     connaitre: true,
-    hypothèses: "Dans les conditions normales de température et de pression",
+    hypothèses: "Dans les conditions normales de température et de pression.",
     grandeurs: sub-dictionary(grandeurs, ("mu",)),
 )[
     - $mu_"eau"=qty("1e3", "kg/m^3")$
@@ -192,7 +192,7 @@ La masse est une grandeur physique conservative.
     connaitre: true,
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("D_m", "mu", "v")),
-    hypothèses: "Le régime est stationnaire",
+    hypothèses: "Le régime est stationnaire.",
 )[
     Le débit massique est le même sur chaque section d'un tube de courant.
 ]
@@ -213,7 +213,7 @@ Dans un écoulement incompressible et homogène, la masse volumique $mu$ est uni
 #encadré(
     titre: "Conservation du volume",
     connaitre: true,
-    hypothèses: ("L'écoulement est incompressible", "L'écoulement est homogène"),
+    hypothèses: ("L'écoulement est incompressible.", "L'écoulement est homogène."),
 )[
     Le volume se conserve.
 ]
@@ -227,7 +227,7 @@ Dans un écoulement incompressible et homogène, la masse volumique $mu$ est uni
     titre: "Conservation du débit volumique",
     connaitre: true,
     savoir-faire: true,
-    hypothèses: ("L'écoulement est incompressible", "L'écoulement est homogène"),
+    hypothèses: ("L'écoulement est incompressible.", "L'écoulement est homogène."),
 )[
     Le débit volumique est le même sur chaque section d'un tube de courant.
 ]
@@ -447,7 +447,7 @@ Le nombre de Reynolds est une grandeur adimensionnée qui sert à comparer l'imp
 #encadré(
     titre: "Nombre de Reynolds",
     connaitre: true,
-    hypothèses: [le fluide est newtonien],
+    hypothèses: [Le fluide est newtonien.],
     grandeurs: sub-dictionary(grandeurs, ("R_e", "L", "scr(V)", "nu")),
 )[
     $ R_e = (scr(V) L)/nu $
@@ -468,7 +468,7 @@ Pour un écoulement interne, l'ordre de grandeur de la vitesse $scr(V)$ est la v
 #encadré(
     titre: "Diffusion vs convection",
     savoir-faire: true,
-    hypothèses: [le fluide est newtonien],
+    hypothèses: [Le fluide est newtonien.],
     grandeurs: sub-dictionary(grandeurs, ("R_e", "tau_\"diff\"", "tau_\"conv\"")),
 )[
     $ R_e tilde tau_"diff" / tau_"conv" tilde norm(va(j_(p,"conv"))) / norm(va(j_(p,"diff"))) $
@@ -480,8 +480,8 @@ Expérimentalement, on peut établir le seuil de passage d'un régime laminaire 
     titre: "Seuil de turbulence",
     connaitre: true,
     hypothèses: (
-        "Le fluide est newtonien",
-        "L'écoulement est interne à une conduite",
+        "Le fluide est newtonien.",
+        "L'écoulement est interne à une conduite.",
     ),
     grandeurs: sub-dictionary(grandeurs, ("R_e",)),
 )[
@@ -549,7 +549,7 @@ Par analogie avec l'électrocinétique, on peut définir la résistance hydrauli
 ]
 
 == Chute de pression pour un écoulement quelconque
-Lorsque l'écoulement n'est pas laminaire, la loi de Hagen-Poiseuille n'est plus vraie. Il est alors nécessaire de s'en remettre aux données expérimentales qui sont résumées sur un diagramme appelé diagramme de Moody.
+Lorsque l'écoulement n'est pas laminaire, la loi de Hagen–Poiseuille n'est plus vraie. Il est alors nécessaire de s'en remettre aux données expérimentales qui sont résumées sur un diagramme appelé diagramme de Moody.
 
 #figure(image("images/Moody.png", width: 100%))
 
@@ -559,11 +559,11 @@ Lorsque l'écoulement n'est pas laminaire, la loi de Hagen-Poiseuille n'est plus
 
 = Écoulement externe incompressible et homogène autour d’un obstacle
 == Force et coefficient de trainée
-Lorsqu'un objet est en mouvement rectiligne uniforme dans un fluide, il subit des forces de pression et de viscosité. La résultante de ces forces, exceptée la poussée d'Archimède, dans la direction du mouvement est appelée trainée.
+Lorsqu'un objet est en mouvement rectiligne uniforme dans un fluide, il subit des forces de pression et de viscosité. La résultante de ces forces, excepté la poussée d'Archimède, dans la direction du mouvement est appelée trainée.
 
 Le maitre-couple (ou surface apparente) est la surface projetée dans une certaine direction.
 
-#schéma(titre: "Maître couple", hauteur: 3cm)
+#schéma(titre: "Maitre-couple", hauteur: 3cm)
 
 #application[
     Calculer le maitre-couple dans la direction du mouvement pour la voiture ci-dessous. On pourra approximer la voiture à un parallélépipède rectangle pour faire les calculs.
@@ -596,7 +596,7 @@ Le coefficient de trainée dépend de la forme de l'objet et du nombre de Reynol
 
 #figure(image("images/Cx_sphere.png", width: 100%))
 
-Le coefficient de trainée de la sphère est tracé en fonction du nombre de Reynolds dans la courbe en annexe. On peut y voir plusieurs parties.
+Le coefficient de trainée de la sphère est tracé ci-dessus en fonction du nombre de Reynolds. On peut y voir plusieurs parties.
 
 === Faible Reynolds
 Pour $R_e<1$, le graphe s'approche d'une droite (en échelle logarithmique) d'équation $C_x=24/R_e$.
@@ -607,7 +607,7 @@ Pour $R_e<1$, le graphe s'approche d'une droite (en échelle logarithmique) d'é
     savoir-faire: true,
     hypothèses: (
         [Le fluide est newtonien.],
-        [$R_e<1$],
+        [$R_e<1$.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("F_x", "alpha", "v")),
 )[
@@ -626,12 +626,12 @@ Pour $R_e in [num("2000"), num("200000")]$, $C_x$ est constant.
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
-        [Le fluide est newtonien],
-        [$R_e in [num("2000"), num("200000")]$],
+        [Le fluide est newtonien.],
+        [$R_e in [num("2000"), num("200000")]$.],
     ),
-    grandeurs: sub-dictionary(grandeurs, ("F_x", "beta", "v")),
+    grandeurs: sub-dictionary(grandeurs, ("F_x", "beta", "v", "va(u_x)")),
 )[
-    $ va(F_x) = - beta v^2 va(u) $
+    $ va(F_x) = - beta v^2 va(u_x) $
 ]
 #flashcard(
     recto: "Plage de Reynolds pour une trainée quadratique",
@@ -654,7 +654,7 @@ Sur certains objets, la force de trainée s'accompagne d'une force de portance.
 
 La force de trainée est colinéaire à la vitesse de l'objet. La force de portance est orthogonale à la vitesse de l'objet.
 
-#schéma(titre: "Traînée, portance et angle d'incidence", hauteur: 5cm)
+#schéma(titre: "Trainée, portance et angle d'incidence", hauteur: 5cm)
 
 La trainée et la portance dépendent de l'angle d'incidence. Les courbes ci-dessous présentent un exemple de dépendance pour une aile d'avion.
 
@@ -663,6 +663,6 @@ La trainée et la portance dépendent de l'angle d'incidence. Les courbes ci-des
 == Couche limite
 Dans un écoulement à haut nombre de Reynolds, où le transport de quantité de mouvement se fait essentiellement par convection, la viscosité du fluide a une influence sur la force subie par un objet. Pour expliquer cet apparent paradoxe, on introduit la couche limite.
 
-Dans un écoulement à haut nombre de Reynolds, il existe des zones où le transport de quantité de mouvement se fait essentiellement par diffusion. Ces zones sont appelées couches limites. Ces zones sont de faible épaisseur et situées à proximité immédiate des objets.
+Il existe en effet, même à haut nombre de Reynolds, des zones où le transport de quantité de mouvement se fait essentiellement par diffusion : ce sont les couches limites, de faible épaisseur et situées à proximité immédiate des objets.
 
 #schéma(titre: "Couche limite", hauteur: 4cm)

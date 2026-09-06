@@ -4,7 +4,7 @@
     titre: "Fonctionnement d'une hélice",
 )
 
-Une hélice animée d'un mouvement de rotation uniforme autour de l'axe $(O x)$ est plongée dans un fluide parfait et homogène, de masse volumique $mu$. L'étude est faite dans le référentiel galiléen $cal(R)$ lié à l'axe de l'hélice. Dans ce référentiel, l'écoulement est stationnaire et incompressible. On néglige l'influence de la pesanteur.
+Une hélice animée d'un mouvement de rotation uniforme autour de l'axe $(O x)$ est plongée dans un fluide parfait et homogène, de masse volumique $rho$. L'étude est faite dans le référentiel galiléen $cal(R)$ lié à l'axe de l'hélice. Dans ce référentiel, l'écoulement est stationnaire et incompressible. On néglige l'influence de la pesanteur.
 
 On considère un tube de courant possédant la symétrie de révolution autour de l'axe $(O x)$ et s'appuyant sur les pales de l'hélice. À partir de ce tube de courant, on définit la surface fermée constituée de la surface latérale du tube de courant, $S_"lat"$ et des sections droites $S_1$ en amont et $S_2$ en aval. La pression à l'extérieur de ce tube de courant est uniforme et égale à $P_a$.
 
@@ -50,13 +50,13 @@ Au voisinage de l'hélice, on considère deux sections $S$ et $S'$ d'aire identi
 Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de pression de part et d'autre de l'hélice.
 
 #question[
-    En utilisant le théorème de Bernoulli, exprimer la pression $P$ en fonction de $P_a$, $mu$, $v_1$ et $v$. Faire de même pour $P'$ en fonction de $P_a$, $mu$, $v_2$ et $v'$.
+    En utilisant le théorème de Bernoulli, exprimer la pression $P$ en fonction de $P_a$, $rho$, $v_1$ et $v$. Faire de même pour $P'$ en fonction de $P_a$, $rho$, $v_2$ et $v'$.
 ][
     L'écoulement est parfait, stationnaire, incompressible et homogène, on peut donc appliquer le théorème de Bernoulli entre $S_1$ et $S$ puis entre $S'$ et $S_2$. Les effets de la pesanteur étant négligés, on trouve :
     $
         cases(
-            P = P_a + 1/2 mu (v_1^2 - v^2),
-            P' = P_a + 1/2 mu (v_2^2 - v'^2)
+            P = P_a + 1/2 rho (v_1^2 - v^2),
+            P' = P_a + 1/2 rho (v_2^2 - v'^2)
         )
     $
 ]
@@ -68,7 +68,7 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
         "Justifier que le débit volumique se conserve. En déduire une relation entre $v$ et $v'$.",
     ),
 )[
-    On note $va(F)$ la résultante des forces exercées par l'hélice sur le fluide. En appliquant le théorème de la résultante cinétique sur un système bien choisi, exprimer $va(F)$ en fonction de $S$, $P$ et $P'$, puis en fonction de $mu$, $S$, $v_1$ et $v_2$.
+    On note $va(F)$ la résultante des forces exercées par l'hélice sur le fluide. En appliquant le théorème de la résultante cinétique sur un système bien choisi, exprimer $va(F)$ en fonction de $S$, $P$ et $P'$, puis en fonction de $rho$, $S$, $v_1$ et $v_2$.
 ][
     On note
     - $Sigma^0$ le système ouvert délimité par les surfaces $S$ et $S'$
@@ -113,7 +113,7 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
     $
     Or en régime stationnaire et pour un écoulement incompressible, le débit volumique se conserve, donc $v S = v' S$, d'où $v = v'$. On en déduit finalement
     $
-        va(F) = S (P' - P) ex = 1/2 mu S (v_2^2 - v_1^2) ex
+        va(F) = S (P' - P) ex = 1/2 rho S (v_2^2 - v_1^2) ex
     $
 ]
 
@@ -122,11 +122,11 @@ Entre $S$ et $S'$, l'écoulement est perturbé, il existe une discontinuité de 
         "Justifier que la résultante des forces de pression est nulle."
     ),
 )[
-    En effectuant un bilan de quantité de mouvement cette fois-ci sur le volume compris entre $S_1$ et $S_2$, établir l'expression de $va(F)$ en fonction de $S$, $mu$, $v$, $v_1$ et $v_2$.
+    En effectuant un bilan de quantité de mouvement cette fois-ci sur le volume compris entre $S_1$ et $S_2$, établir l'expression de $va(F)$ en fonction de $S$, $rho$, $v$, $v_1$ et $v_2$.
 ][
     On procède de la même manière que précédemment, en considérant cette fois le système ouvert délimité par les sections $S_1$ et $S_2$. On trouve :
     $
-        va(F) = D_m (v_2 - v_1) ex = mu v S (v_2 - v_1) ex
+        va(F) = D_m (v_2 - v_1) ex = rho v S (v_2 - v_1) ex
     $
 ]
 

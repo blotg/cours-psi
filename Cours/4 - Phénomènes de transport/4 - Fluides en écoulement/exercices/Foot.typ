@@ -34,7 +34,7 @@ On résout numériquement l'équation différentielle en utilisant la fonction `
 )[
     Compléter le code suivant.
     ```python
-    from scipy.integrate import solve_ivp, trapezoid
+    from scipy.integrate import solve_ivp
     import numpy as np
 
     g = 9.81 # m/s^2
@@ -153,7 +153,7 @@ $m = #qty("145", "g")$
         a = - g * np.array([0,0,1]) - 1/2 * rho * Cx * S / m * np.linalg.norm(v) * v
         return a
     ```
-    Le tir n'est toujours pas cadré, il passe à coté des cages.
+    Le tir n'est toujours pas cadré, il passe à côté des cages.
 ]
 
 Le footballeur a mis de l'effet dans la balle en lui imprimant une rotation de $Omega = #qty("100", "tr/min")$ autour de l'axe $(O z)$. Cette rotation engendre une force de portance appelée force de Magnus et s'exprimant comme $1/2 C rho R^3 va(Omega) and va(v)$ avec $C approx #num(1)$.

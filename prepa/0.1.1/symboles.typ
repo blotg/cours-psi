@@ -31,6 +31,13 @@
 }
 
 #let scientifique(nombre, chiffres-significatifs) = {
+    // Avec 0, calc.round(mantisse, digits: -1) arrondirait la mantisse à la
+    // dizaine : « 3,1e-3 » sortirait « 0e-3 » et « 7,5e0 » sortirait « 10e0 ».
+    assert(
+        chiffres-significatifs >= 1,
+        message: "scientifique() : il faut au moins un chiffre significatif, reçu "
+            + str(chiffres-significatifs),
+    )
     if nombre == 0 {
         return "0"
     }

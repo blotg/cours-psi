@@ -18,7 +18,7 @@
 
 Les poteaux d'incendie doivent pouvoir délivrer un débit de #qty("30", "m^3/h") minimum sous une pression dynamique de #qty("1", "bar") minimum.
 
-Un château d'eau de #qty("20", "m") de haut alimente un village en eau par une conduite en fonte de diamètre intérieur #qty("200", "mm") et de longueur #qty("3", "km") puis par une conduite en fonte de diamètre intérieur #qty("150", "mm") et de longueur #qty("2", "km").
+Un château d'eau de #qty("20", "m") de haut alimente un village en eau par une conduite en fonte de diamètre intérieur #qty("200", "mm") et de longueur #qty("3", "km") puis par une conduite en fonte de diamètre intérieur #qty("150", "mm") et de longueur #qty("2", "km"). La rugosité de la fonte est de #qty("0.15", "mm").
 
 On pourra utiliser le diagramme de Moody du cours.
 
@@ -27,7 +27,7 @@ On pourra utiliser le diagramme de Moody du cours.
         "Calculer le nombre de Reynolds dans chacune des deux conduites.",
         "À l'aide du diagramme de Moody, calculer le coefficient de perte de charge dans chacune des deux conduites.",
         "Calculer la chute de pression dans chacune des deux conduites.",
-        "Quelle relation relie la chute de pression totale aux chutes de pression dans chacune des deux conduites."
+        "Quelle relation relie la chute de pression totale aux chutes de pression dans chacune des deux conduites ?"
     ),
 )[
     Les poteaux d'incendie sont-ils aux normes ou est-il nécessaire d'installer des bassins de stockage supplémentaires dans le village ?
@@ -47,10 +47,10 @@ On pourra utiliser le diagramme de Moody du cours.
     #let L1 = 3e3
     #let DP1 = 8 * xi1 * mv * calc.pow(Dv, 2) * L1 / (calc.pow(D1, 5) * calc.pow(calc.pi, 2))
     $
-        Delta P_1 = (xi_1 mu v^2 L)/(2 D)
-        = (xi_1 mu (D_V/S)^2 L)/(2 D)
-        = (xi_1 mu ((4 D_V)/(pi D^2))^2 L)/(2 D)
-        = (8 xi_1 mu D_V^2 L)/(D^5 pi^2)
+        Delta P_1 = (xi_1 rho v^2 L)/(2 D)
+        = (xi_1 rho (D_V/S)^2 L)/(2 D)
+        = (xi_1 rho ((4 D_V)/(pi D^2))^2 L)/(2 D)
+        = (8 xi_1 rho D_V^2 L)/(D^5 pi^2)
         = #qty(scientifique(DP1, 1), "Pa")
     $
 
@@ -80,7 +80,12 @@ On pourra utiliser le diagramme de Moody du cours.
     $
     En tenant compte de la perte de charge, la pression disponible au niveau des poteaux d'incendie est donc :
     $
-      P_"poteau" = P_"château" - (Delta P_1 + Delta P_2) = #qty(scientifique(Pc - (DP1 + DP2), 1), "Pa") > #qty("1", "bar")
+      P_"poteau" = P_"château" - (Delta P_1 + Delta P_2) = #qty(scientifique(Pc - (DP1 + DP2), 2), "Pa")
+    $
+    La norme porte sur la pression #strong[dynamique], c'est-à-dire la pression relative à l'atmosphère :
+    #let Pdyn = Pc - (DP1 + DP2) - P0
+    $
+      P_"poteau" - P_0 = #qty(scientifique(Pdyn, 2), "Pa") = #qty(scientifique(Pdyn / 1e5, 2), "bar") > #qty("1", "bar")
     $
     Les poteaux d'incendie sont donc aux normes.
 ]

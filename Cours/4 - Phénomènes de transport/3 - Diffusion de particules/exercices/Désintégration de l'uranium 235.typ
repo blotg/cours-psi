@@ -149,8 +149,8 @@ On prend pour condition aux limites $n(r=R)=0$.
     #let mv = 19.1e3
     #let mc = mv * 4/3 * calc.pi * calc.pow(Rc,3)
     $
-        m_c & = rho 4/3 pi R_c^3 \
-            & = rho 4/3 pi (pi sqrt(D tau/(nu-1)))^3 \
+        m_c & = mu 4/3 pi R_c^3 \
+            & = mu 4/3 pi (pi sqrt(D tau/(nu-1)))^3 \
             & = #qty(scientifique(mc,2), "kg")
     $
 ]

@@ -126,15 +126,17 @@ On renonce à l'hypothèse isotherme pour passer à une atmosphère adiabatique.
     $
         T(z) = T_0 - ((gamma - 1)/gamma) (M_"air" g)/R z
     $
-    En remplaçant les valeurs numériques et en prenant $T_0 = #qty("298","K")$ :
+    En remplaçant les valeurs numériques et en prenant $T_0 = #qty("288","K")$ comme plus haut :
     #let gam = 1.4
     #let M-air = 29e-3
     #let g = 9.81
     #let R = 8.314
-    #let T0 = 298
+    #let T0 = 288
     #let z = 11e3
     #let Ttop = T0 - ((gam - 1)/gam) * (M-air * g) / R * z
     $
-        T(qty("11", "km")) = #qty(scientifique(Ttop, 4), "K")
+        T(qty("11", "km")) = #qty(scientifique(Ttop, 3), "K")
     $
+
+    La tropopause est en réalité à #qty("217", "K") environ : le modèle adiabatique sec surestime le refroidissement, l'air réel étant humide.
 ]
