@@ -10,7 +10,7 @@ where the axis $O_z$ is vertical and ascending, $z=0$ at sea level and $k_B = R\
 
 #question(
     coups-de-pouce: (
-        "Attention à ne pas confondre la quantité de matière et la densité particulaire, toutes deux notées fréquemment $n$.",
+        "Be careful not to confuse the amount of substance and the particle density, both of which are commonly written $n$.",
     ),
 )[
     Using the ideal gas law, ascertain the particle density $n(z)$.
@@ -33,11 +33,11 @@ where the axis $O_z$ is vertical and ascending, $z=0$ at sea level and $k_B = R\
 
 #question(
     coups-de-pouce: (
-        "Le modèle proposé ressemble au modèle de Drude. Appliquer la loi de la quantité de mouvement en régime stationnaire.",
-        "Relier la vitesse au vecteur densité de courant de particules.",
+        "The model is close to the Drude model. Apply Newton's second law in the stationary regime.",
+        "Relate the speed to the particle current density vector.",
     ),
 )[
-    The particles that make up air are in motion at microscopic scale. The collisions between particles are modeled with a drag force $va(f)=- m/tau va(v)$ that apply on an average particle. Make an inventory of the forces and deduce the limit speed $va(v)$ of an average particle. Deduce the current density vector $va(j_"mig")$ due to the gravitation.
+    The particles that make up air are in motion at microscopic scale. The collisions between particles are modeled with a drag force $va(f)=- m/tau va(v)$ that applies to an average particle. Make an inventory of the forces and deduce the limit speed $va(v)$ of an average particle. Deduce the current density vector $va(j_"mig")$ due to the gravitation.
 ][
     The forces that apply on an average particle are
     - the weight $va(P)=m va(g)$
@@ -53,7 +53,7 @@ where the axis $O_z$ is vertical and ascending, $z=0$ at sea level and $k_B = R\
 
 #question(
     coups-de-pouce: (
-        "Faire un bilan de particules sur une tranche infinitésimale d'atmosphère. Quatre flux de particules y rentrent : dû à la gravitation et dû à la diffusion, en $z$ et en $z+dd(z)$.",
+        "Take a particle balance on an infinitesimal slice of atmosphere. Four particle fluxes cross it: the diffusion one and the gravitation one, each at $z$ and at $z+dd(z)$.",
     ),
 )[
     By making an inventory of the particles on a slice of atmosphere in a stationary state, express a relation between $D$, $tau$, $k_B$, $T$ and $m$. This relation is known as Einstein relation.

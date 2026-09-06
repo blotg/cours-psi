@@ -11,7 +11,7 @@ L'uranium 235 n'a pas un noyau stable, celui-ci peut se fissionner en "captant" 
 
 #ce[$""^235_92$U] + 1 neutron $->$ #ce("X") + #ce("Y") + $nu$ neutrons
 
-où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu$ est #num("2.5"). Cette réaction a une probabilité $n/tau$ de se produire par unité de temps et de volume.
+où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu$ est #num("2.5"). Le nombre de réactions par unité de temps et de volume vaut $n/tau$.
 
 On se place en coordonnées sphériques, note $n(r,t)$ le nombre de neutrons par unité de volume et $va(j)(r,t)$ le vecteur densité de courant de neutrons.
 
@@ -20,7 +20,7 @@ On donne, en sphériques, pour des grandeurs ne dépendant que de $r$ et de $t$ 
 - $div va(j)=1/r^2 pdv(, r)(r^2j)$
 - $Delta n = 1/r^2pdv(, r)(r^2 pdv(n, r))$
 
-On prend pour condition aux limites $n(r=R)=0$
+On prend pour condition aux limites $n(r=R)=0$.
 
 #question(
     coups-de-pouce: (
@@ -60,7 +60,7 @@ On prend pour condition aux limites $n(r=R)=0$
     $
     où $K$ est une constante qu'on ne cherchera pas à déterminer pour l'instant.
 ][
-    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er = -D f(t) pdv(, r)g(r)/r$, avec $D$ la diffusivité des neutrons dans l'uranium 235. En remplaçant dans l'équation, on trouve
+    La loi de Fick donne $va(j) = -D grad n = -D pdv(n, r) er = -D f(t) pdv(, r)(g(r)/r)$, avec $D$ la diffusivité des neutrons dans l'uranium 235. En remplaçant dans l'équation, on trouve
     $
         g(r)/r dv(f, t) & = D f(t) 1/r^2 dv(, r) (r^2 dv(g(r)/r, r)) + (nu-1)/tau f(t)g(r)/r \
         g(r)/r dv(f, t) & = D f(t) 1/r^2 dv(, r) (r^cancel(2) 1/cancel(r) dv(g, r) - cancel(r^2)/cancel(r^2)g(r)) + (nu-1)/tau f(t)g(r)/r \
@@ -149,8 +149,8 @@ On prend pour condition aux limites $n(r=R)=0$
     #let mv = 19.1e3
     #let mc = mv * 4/3 * calc.pi * calc.pow(Rc,3)
     $
-        m_c & = mu 4/3 pi R_c^3 \
-            & = mu 4/3 pi (pi sqrt(D tau/(nu-1)))^3 \
-            & = #qty(scientifique(mc,1), "kg")
+        m_c & = rho 4/3 pi R_c^3 \
+            & = rho 4/3 pi (pi sqrt(D tau/(nu-1)))^3 \
+            & = #qty(scientifique(mc,2), "kg")
     $
 ]

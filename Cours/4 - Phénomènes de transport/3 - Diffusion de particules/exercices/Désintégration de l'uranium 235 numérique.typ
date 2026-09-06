@@ -12,11 +12,11 @@ L'uranium 235 n'a pas un noyau stable, celui-ci peut se fissionner en "captant" 
 
 #ce[$""^235_92$U] + 1 neutron $->$ #ce("X") + #ce("Y") + $nu$ neutrons
 
-où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu$ est #num("2.5"). Cette réaction a une probabilité $n/tau$ de se produire par unité de temps et de volume.
+où #ce("X") et #ce("Y") sont deux noyaux plus légers. La valeur moyenne de $nu$ est #num("2.5"). Le nombre de réactions par unité de temps et de volume vaut $n/tau$.
 
 On se place en coordonnées sphériques, note $n(t,r)$ le nombre de neutrons par unité de volume et $va(j)(t,r)$ le vecteur densité de courant de neutrons.
 
-On prend pour condition aux limites $forall t, n(t,r=R)=0$
+On prend pour condition aux limites $forall t, n(t,r=R)=0$.
 
 #question(
     coups-de-pouce: (
@@ -140,18 +140,18 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
     y[0,1:-1] = ... # condition initiale : densité uniforme 
 
     for i in range(0, Nt-1):
+        y[i+1, ...] = 0 # condition aux limites en r=0
+        y[i+1, ...] = 0 # condition aux limites en r=R
         for j in range(1, Nx-1):
-            y[i+1, ...] = 0 # condition aux limites en r=0
-            y[i+1, ...] = 0 # condition aux limites en r=R
             # schéma d'Euler explicite
             y[i+1,j] = ...
     ```
 ][
     #show raw.where(block: true): numérote-code
     ```python
-    dx = R / Nx # pas spatial
+    dx = R / (Nx - 1) # pas spatial
 
-    t = np.linspace(0, Nt*dt, Nt) # array contenant tous les instants
+    t = np.arange(Nt) * dt # array contenant tous les instants
     r = np.linspace(0, R, Nx) # array contenant toutes les positions
 
     y = np.zeros( (Nt,Nx) ) # initialisation de la matrice avec des zéros
@@ -179,6 +179,7 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
     ```python
     n = np.zeros_like(y)
     n[:, 1:] = y[:, 1:] / r[1:] # calcul de la densité de neutrons (r[0] = 0)
+    n[:, 0] = n[:, 1] # en r=0, n est finie : on prolonge par continuité
 
     import matplotlib.pyplot as plt
     plt.figure()
@@ -212,13 +213,17 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
 ]
 
 #question(
-    coups-de-pouce: ()
+    coups-de-pouce: (
+        "Le profil initial n'est pas le mode fondamental : il commence par se déformer, ce qui masque la croissance ou la décroissance exponentielle. Il faut donc simuler assez longtemps.",
+    )
 )[
-    Pour des petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour des grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #qty("0.5", "cm") près.
+    Pour de petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour de grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #qty("0.5", "cm") près.
 ][
-    Pour $R = #num("0.08")$, la densité de neutrons tend vers $0$ avec le temps.
+    Avec $N_t = #num("1000")$, la simulation ne dure que quelques nanosecondes : le profil initial $y = n_0 r$ n'est pas le mode fondamental $sin(pi r\/R)$, il se déforme d'abord, et cette relaxation masque complètement la tendance exponentielle près du rayon critique. Il faut allonger la simulation, par exemple `Nt = 20000`.
 
-    Pour $R = #num("0.09")$, la densité de neutrons croît exponentiellement avec le temps.
+    Pour $R = #qty("0.08", "m")$, la densité de neutrons tend vers $0$ avec le temps.
 
-    Le rayon critique est situé entre ces deux valeurs. $R_c = #qty("8.5+-0.5", "cm")$.
+    Pour $R = #qty("0.09", "m")$, la densité de neutrons croît exponentiellement avec le temps.
+
+    Le rayon critique est situé entre ces deux valeurs : $R_c = #qty("8.5+-0.5", "cm")$, en accord avec la valeur analytique $pi sqrt(D tau\/(nu-1)) = #qty("8.4", "cm")$.
 ]

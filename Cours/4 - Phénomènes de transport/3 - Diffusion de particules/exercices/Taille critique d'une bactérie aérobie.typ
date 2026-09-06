@@ -6,11 +6,11 @@
 
 On étudie les conditions de survie d'une bactérie dans un lac de très grande taille à la température $T_0=#qty("297", "K")$. Pour vivre, elle a besoin de consommer le dioxygène dissous dans l'eau au voisinage de sa surface.
 
-La bactérie est modélisée par une boule de centre $O$ fixe, de rayon $R$, de masse volumique $mu$ identique à celle de l'eau.
+La bactérie est modélisée par une boule de centre $O$ fixe, de rayon $R$, de masse volumique $rho$ identique à celle de l'eau.
 
-#add-unit("USI", "USI", "upright(\"U.S.I.\")")
+#add-unit("USI", "USI", "upright(\"USI\")")
 
-On se place en régime stationnaire et on note $n(r)$ la densité particulaire, exprimée en #unit("/m^3"), de #ce("O2") dissous à la distance $r$ de $O$ ($r>R$). La diffusion de #ce("O2") obéit à la loi de Fick avec un coefficient de diffusion de $D=qty("2E-9", "USI")$. Loin de la bactérie, la concentration molaire volumique de #ce("O2") dissous dans le lac vaut $c_0=#qty("0.2", "mol/L")$.
+On se place en régime stationnaire et on note $n(r)$ la densité particulaire, exprimée en #unit("/m^3"), de #ce("O2") dissous à la distance $r$ de $O$ ($r>R$). La diffusion de #ce("O2") obéit à la loi de Fick avec un coefficient de diffusion de $D=qty("2E-9", "USI")$. Loin de la bactérie, la concentration molaire volumique de #ce("O2") dissous dans le lac vaut $c_0=#qty("2.6e-4", "mol/L")$ (c'est la solubilité du dioxygène dans l'eau douce à cette température).
 
 La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On introduit le taux horaire de consommation de #ce("O2") par unité de masse, noté $a$ et mesuré en #unit("mol/kg/s").
 
@@ -93,11 +93,11 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
         "La consommation de #ce(\"O2\") de la bactérie est le flux particulaire d'#ce(\"O2\") arrivant à la bactérie.",
     ),
 )[
-    En étudiant la consommation en #ce("O2") de la bactérie pendant une durée $dd(t)$, exprimer $Phi$ en fonction de $a$, $Na$, de la masse volumique $mu$ de la bactérie et de son rayon $R$.
+    En étudiant la consommation en #ce("O2") de la bactérie pendant une durée $dd(t)$, exprimer $Phi$ en fonction de $a$, $Na$, de la masse volumique $rho$ de la bactérie et de son rayon $R$.
 ][
-    La masse de la bactérie est $m = 4/3 pi R^3 mu$. Le nombre de molécules de #ce("O2") consommées pendant une durée $dd(t)$ est donc $a m dd(t) Na = a 4/3 pi R^3 mu dd(t) Na$. En régime stationnaire, le dioxygène consommé par la bactérie est égal au dioxygène arrivant à elle. Donc le flux particulaire est
+    La masse de la bactérie est $m = 4/3 pi R^3 rho$. Le nombre de molécules de #ce("O2") consommées pendant une durée $dd(t)$ est donc $a m dd(t) Na = a 4/3 pi R^3 rho dd(t) Na$. En régime stationnaire, le dioxygène consommé par la bactérie est égal au dioxygène arrivant à elle. Donc le flux particulaire est
     $
-        Phi = -4/3 a pi R^3 mu Na
+        Phi = -4/3 a pi R^3 rho Na
     $
 ]
 
@@ -106,7 +106,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
 ][
     En remplaçant $Phi$ dans l'expression de $n_R$, on obtient
     $
-        n_R = -4/3 a pi R^3 mu Na / (4 pi D ) 1/R + c_0 Na = (-a R^2 mu Na) / (3 D ) + c_0 Na
+        n_R = -4/3 a pi R^3 rho Na / (4 pi D ) 1/R + c_0 Na = (-a R^2 rho Na) / (3 D ) + c_0 Na
     $
     Donc $n_R$ décroit quand $R$ augmente.
 ]
@@ -120,20 +120,20 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
 ][
     Pour que la bactérie ne suffoque pas, il faut que $n_R > 0$. Donc
     $
-        -a R^2 mu Na / (3 D ) + c_0 Na > 0
+        -a R^2 rho Na / (3 D ) + c_0 Na > 0
     $
     Soit
     $
-        R^2 < 3 D c_0 / (a mu)
+        R^2 < 3 D c_0 / (a rho)
     $
     Donc le rayon critique est
     #let D = 2e-9
-    #let c0 = 0.2 * 1e3
+    #let c0 = 2.6e-4 * 1e3 // en mol/m^3
     #let a = 1e-3
     #let mv = 1e3
     #let Rc = calc.sqrt(3 * D * c0 / (a * mv))
     $
-        R_c = sqrt(3 D c_0 / (a mu)) = #qty(scientifique(Rc, 2), "m")
+        R_c = sqrt(3 D c_0 / (a rho)) = #qty(scientifique(Rc, 2), "m")
     $
-    Les bactéries réelles ont bien un rayon inférieur à ce rayon critique.
+    Les bactéries réelles, de rayon $1$ à #qty("10", "um"), sont bien en dessous de ce rayon critique, mais d'un facteur $4$ à $40$ seulement : c'est l'approvisionnement en dioxygène qui limite la taille des bactéries aérobies.
 ]
