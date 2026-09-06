@@ -18,7 +18,9 @@ On observe ainsi un couplage thermocinétique : la réaction dégage de la chale
 
 On se place dans l'approximation d'Ellingham.
 
-La réaction est maintenue à une température $T$ identique à la température d'entrée grâce à un échangeur thermique dans lequel circule un fluide caloporteur à la température $T_0$. La puissance thermique fournie par le réacteur au fluide caloporteur est donnée par la loi de Newton : $P_"th" = h S (T - T_0)$.
+La réaction est maintenue à une température $T$ identique à la température d'entrée grâce à un échangeur thermique dans lequel circule un fluide caloporteur à la température $T_0$. La puissance thermique fournie par le réacteur au fluide caloporteur est donnée par la loi de Newton : $P_"th" = h S (T - T_0)$, avec $h = qty("100", "W/m^2/K")$ et $S = qty("40", "cm^2")$. Le fluide caloporteur est à $T_0 = qty("300", "K")$ et la concentration de DTBP en entrée vaut $qty("1.0", "mol/L")$.
+
+Attention : $P_"th"$ désigne ici la puissance #strong[fournie] par le réacteur, opposée à celle du cours.
 
 
 
@@ -33,7 +35,7 @@ La réaction est maintenue à une température $T$ identique à la température 
         P_"th" = - D_V X [ce("DTBP")]_e Delta_r H^circ
     $
 ][
-    Il s'agit de la démonstration du cours, dans le cas particulier où $T_e = T_s$. La puissance $P_"th"$ étant *fournie*, elle est comptée négativement. Ici $nu_ce("DTBP") = -1$.
+    Il s'agit de la démonstration du cours, dans le cas particulier où $T_e = T_s$ : la puissance #emph[reçue] par le réacteur vaut $Delta_r H^circ [ce("DTBP")]_e X D_V$, puisque $nu_ce("DTBP") = -1$. La puissance #emph[fournie] au caloporteur en est l'opposée, d'où le résultat — positive, la réaction étant exothermique.
 ]
 
 #question(
@@ -109,10 +111,10 @@ La réaction est maintenue à une température $T$ identique à la température 
 ][
     ```python
     h = 100      # W/m^2/K
-    S = 0.15     # m^2
+    S = 4.0e-3   # m^2, surface du serpentin d'échange
     T0 = 300     # K
     V = 520e-6   # m^3
-    c0 = 1.0     # mol/L, concentration de DTBP en entrée
+    c0 = 1.0e3   # mol/m^3, concentration de DTBP en entrée
     DrH = -150e3 # J/mol
 
     def P1(T):

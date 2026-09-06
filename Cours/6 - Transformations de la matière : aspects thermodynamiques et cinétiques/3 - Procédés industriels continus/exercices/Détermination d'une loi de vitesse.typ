@@ -41,9 +41,9 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
         "Comme la réaction a un unique réactif, son ordre partiel en #ce(\"NO2\") est l'ordre global.",
     ),
 )[
-    Montrer que pour une réaction d'ordre 2, on a
+    Montrer que si la réaction admet un ordre $alpha$ par rapport à #ce("NO2"), alors
     $ln (([ce("NO2")]_e - [ce("NO2")]_s) / tau) = alpha ln[ce("NO2")]_s + B$.
-    Que vaut $alpha$ pour une réaction d'ordre 2 ?
+    Que valent $alpha$ et $B$ dans le cas d'une réaction d'ordre 2 ?
 ][
     On effectue un bilan de matière sur #ce("NO2") en régime permanent :
     $
@@ -97,4 +97,10 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
     k = np.exp(coeffs[1]) / 2
     print("Constante de vitesse k : ", k, " L/mol/s")
     ```
+    Les points sont remarquablement alignés ($r^2 = #num("0.9998")$) et la régression donne une pente de $#num("2.001")$, très proche de la valeur $2$ attendue : les résultats sont bien compatibles avec une cinétique d'ordre 2.
+
+    L'ordonnée à l'origine donne alors
+    $
+        k = e^B / 2 = #qty("3.96e-2", "L/mol/s")
+    $
 ]

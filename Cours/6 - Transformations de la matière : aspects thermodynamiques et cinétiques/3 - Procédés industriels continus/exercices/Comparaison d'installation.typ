@@ -46,11 +46,11 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
 ][
     La conservation de l'ester s'écrit
     $
-        F_(ce("E"), e) - F_(ce("E"), s) -k_"app" [ce("E")] V = 0
+        F_(ce("E"), e) - F_(ce("E"), s) -k_"app" [ce("E")]_s V = 0
     $
     En divisant par le débit volumique $Q$, on obtient
     $
-        [ce("E")]_e - [ce("E")]_s - k_"app" [ce("E")] tau = 0
+        [ce("E")]_e - [ce("E")]_s - k_"app" [ce("E")]_s tau = 0
     $
     d'où
     $

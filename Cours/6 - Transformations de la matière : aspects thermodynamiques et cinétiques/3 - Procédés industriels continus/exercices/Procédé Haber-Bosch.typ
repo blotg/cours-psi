@@ -39,9 +39,9 @@ On se place dans l'approximation d'Ellingham. L'écoulement est supposé lent et
 ][
     $
         cases(
-            P_ce("N_2") = F_ce("N2") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
-            P_ce("H_2") = F_ce("H2") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
-            P_ce("NH_3") = F_ce("NH3") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
+            P_ce("N2") = F_ce("N2") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
+            P_ce("H2") = F_ce("H2") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
+            P_ce("NH3") = F_ce("NH3") / (F_ce("N2") + F_ce("H2") + F_ce("NH3")) P,
         )
     $
     La constante d'équilibre s'écrit
@@ -96,9 +96,13 @@ On se place dans l'approximation d'Ellingham. L'écoulement est supposé lent et
         dv(T, x) = (- r(x) S Delta_r H^circ) / (F_ce("N2")(x) M_ce("N2") c_(P,ce("N2")) + F_ce("H2")(x) M_ce("H2") c_(P,ce("H2")) + F_ce("NH3")(x) M_ce("NH3") c_(P,ce("NH3")))
     $
 ][
-    Le PPI appliqué à une tranche d'épaisseur $dd(x)$ de réacteur en régime stationnaire s'écrit :
+    Le réacteur est adiabatique et sans pièce mobile : le PPI appliqué à une tranche d'épaisseur $dd(x)$ en régime stationnaire annule le flux d'enthalpie total,
     $
-        0 = h(x+dd(x)) - h(x) = c_P (T(x+dd(x)) - T(x)) + dd(xi)/(delta m) Delta_r H^circ
+        0 = (sum_i F_ce("i") M_ce("i") c_(P,ce("i"))) dd(T) + Delta_r H^circ dv(xi, t)
+    $
+    Le premier terme est l'échauffement du mélange à composition figée (seconde loi de Joule, le débit massique de l'espèce $i$ valant $F_ce("i") M_ce("i")$), le second l'effet thermique de la réaction. Sur la tranche, $dv(xi, t) = r(x) S dd(x)$, d'où
+    $
+        dv(T, x) = (- r(x) S Delta_r H^circ) / (F_ce("N2")(x) M_ce("N2") c_(P,ce("N2")) + F_ce("H2")(x) M_ce("H2") c_(P,ce("H2")) + F_ce("NH3")(x) M_ce("NH3") c_(P,ce("NH3")))
     $
 ]
 
@@ -142,7 +146,7 @@ On souhaite déterminer numériquement les profils de débits molaires et de tem
     ```
 ]
 
-Les réactifs sont introduits dans le réacteur dans les proportions stœchiométriques, sans ammoniaque initialement et avec un débit volumique total de #qty("4000", "m^3/h") et une température de $#qty("500", "K")$.
+Les réactifs sont introduits dans le réacteur dans les proportions stœchiométriques, sans ammoniac initialement et avec un débit volumique total de #qty("4000", "m^3/h") et une température de $#qty("500", "K")$.
 
 #question[
     Compléter le code Python suivant pour résoudre numériquement le problème.
@@ -197,7 +201,7 @@ Les réactifs sont introduits dans le réacteur dans les proportions stœchiomé
 *Données*
 - $R = qty("8.314", "J/mol/K")$
 - $E_a = #qty("160", "kJ/mol")$
-- $k_0 = #qty("1e-8", "mol/s/m^3/Pa^4")$
+- $A = #qty("1e-8", "mol/s/m^3/Pa^4")$ le facteur préexponentiel
 - $Delta_r H^circ = #qty("-92.2", "kJ/mol")$
 - $Delta_r S^circ = #qty("-198", "J/mol/K")$
 

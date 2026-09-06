@@ -22,7 +22,7 @@
     ),
     "v": (signification: "$=1/V dv(xi,t)$ la vitesse volumique de réaction", unité: unit("mol/s/L")),
     "S": (signification: "la section du réacteur", unité: unit("m^2")),
-    "P_\"th\"": (signification: "la puissance thermique fournie par le réacteur", unité: unit("W")),
+    "P_\"th\"": (signification: "la puissance thermique reçue par le réacteur", unité: unit("W")),
     "c_P": (signification: "la capacité thermique massique à pression constante", unité: unit("J/K/kg")),
     "mu": (signification: "la masse volumique", unité: unit("kg/m^3")),
     "T_s": (signification: "la température en sortie", unité: unit("K")),
@@ -158,7 +158,7 @@ Le temps de passage représente le temps moyen qu'un réactif passe dans le réa
 )
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
+    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. La réaction est menée dans un #strong[RPAC]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
 ]
 
 == Réacteur en écoulement piston
@@ -204,7 +204,7 @@ Dans un réacteur en écoulement piston (RP), le fluide progresse dans le réact
 )
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
+    On reprend la solvolyse du tert-butylchlorure de l'application précédente, cette fois dans un #strong[réacteur en écoulement piston]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de $k$ et de $tau$. Quel temps de passage faut-il prévoir pour un taux de conversion de #qty("95", "%") ? Comparer au RPAC.
 ]
 
 == Comparaison RPAC et RP
@@ -256,7 +256,7 @@ L'avancement d'une réaction chimique peut s'accompagner d'un dégagement ou d'u
 ]
 
 #question-de-colle(
-    "En effectuant un bilan d'énergie, exprimer la puissance thermique fournie par un réacteur continu parfaitement agité en faisant apparaitre les températures d'entrée et de sortie ainsi que l'enthalpie de réaction.",
+    "En effectuant un bilan d'énergie, exprimer la puissance thermique reçue par un réacteur continu parfaitement agité en faisant apparaitre les températures d'entrée et de sortie ainsi que l'enthalpie de réaction.",
 )
 
 #application[
