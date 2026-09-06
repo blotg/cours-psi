@@ -154,7 +154,6 @@ Les variables naturelles de l'enthalpie libre $G$ sont donc $T$ et $P$. On note 
         "La transformation est isotherme et isobare.",
         "Le seul travail est celui des forces de pression.",
         "Le système est immobile.",
-        "Il n'y a pas de transformation chimique.",
     ),
     grandeurs: sub-dictionary(grandeurs, ("G", "T", "delta S_c")),
 )[
@@ -235,7 +234,7 @@ Bien que les grandeurs extensives $U(S,V,n)$, $H(S,P,n)$ et $G(T,P,n)$ dépenden
 On s'intéresse à un changement d'état d'un corps pur #ce("A ($alpha$) <=> A ($beta$)").
 
 #exemple[
-    #ce("H2O(l) <=> H2O(g)"), #ce("C (graphite) <=> C (diamant)"), ...
+    #ce("H2O(l) <=> H2O(g)"), #ce("C(graphite) <=> C(diamant)"), ...
 ]
 
 #encadré(
@@ -387,7 +386,7 @@ Cette condition d'évolution peut être reformulée en fonction des valeurs rela
 #question-de-colle("Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.")
 
 #application[
-    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("1.6e5")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$ ?
+    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("0.17")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$, sous une pression totale de #qty("200","bar") ?
 ]
 
 = Déplacement d'équilibre
@@ -412,7 +411,7 @@ La loi de Van't Hoff relie la variation de la constante d'équilibre avec la tem
 )
 
 #application[
-    #ce("N2 + 3H2 <=> 2NH3") est une réaction exothermique. Vaut-il mieux faire la réaction à haute ou à basse température pour obtenir davantage de #ce("NH3") ?
+    #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)") est une réaction exothermique. Vaut-il mieux faire la réaction à haute ou à basse température pour obtenir davantage de #ce("NH3") ?
 ]
 
 #question-de-colle("Énoncer la relation de Van't Hoff. Dans quel sens se déplace l'équilibre lorsqu'on augmente/diminue la température pour une réaction exothermique/endothermique (au choix de l'interrogateur) ?")

@@ -7,7 +7,7 @@
 Pour chaque réaction, dire si elle est favorisée par une haute ou une basse température, et par une haute ou une basse pression. On se place dans l'approximation d'Ellingham.
 
 #question()[
-    La combustion incomplète du carbone #ce("C(s)") + 1\/2 #ce("O2(g)") #ce("->") #ce("CO(g)") qui est une réaction exothermique.
+    La combustion incomplète du carbone #ce("C(s)") + 1\/2 #ce("O2(g)") #ce("->") #ce("CO(g)") est une réaction exothermique.
 ][
     La réaction est exothermique, elle est donc favorisée par une basse température.
 

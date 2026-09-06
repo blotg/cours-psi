@@ -8,13 +8,13 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
 
 #let DrG = -(-1128.8e3) + (-553.5e3) + (-527.9e3)
 #question(
-    coups-de-pouce: "Utiliser les enthalpies libres de formation.",
+    coups-de-pouce: "Use the standard Gibbs free energies of formation.",
 )[
     Calculate the standard Gibbs free energy change of reaction for the dissolution of calcite.
 ][
     Hess's law states that
     $
-        Delta_r G^circ = - Delta_f G^circ (ce("CaCO3(s)")) + Delta_f G^circ (ce("Ca^2+")) + Delta_f G^circ (ce("CO_3^2-"))\
+        Delta_r G^circ = - Delta_f G^circ (ce("CaCO3(s)")) + Delta_f G^circ (ce("Ca^2+")) + Delta_f G^circ (ce("CO3^2-"))\
         = #qty(scientifique(DrG, 4), "J/mol")
     $
 ]
@@ -22,8 +22,8 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
 #let K = calc.exp(-DrG / (8.314 * 298))
 #question(
     coups-de-pouce: (
-        "Qu'est-ce que le produit de solubilité ?",
-        "Comment la constante d'équilibre est-elle liée à l'enthalpie libre de réaction ?",
+        "What is a solubility product?",
+        "How is the equilibrium constant related to the Gibbs free energy of reaction?",
     ),
 )[
     Deduce the solubility product of calcite at room temperature.
@@ -31,7 +31,7 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
     The solubility product is given by
     $
         K^circ = exp(- (Delta_r G^circ) / (R T))\
-        = #num(scientifique(K, 4))
+        = #num(scientifique(K, 2))
     $
 ]
 

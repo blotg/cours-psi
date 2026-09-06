@@ -121,7 +121,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
 #table(
     columns: 4,
     align: (left,) + (center,) * 3,
-    [Espèces chimiques], ce("Ni(CO)_4(g)"), ce("Ni(s)"), ce("CO(g)"),
+    [Espèces chimiques], ce("Ni(CO)4(g)"), ce("Ni(s)"), ce("CO(g)"),
     [$Delta_f H^circ$ (#unit("kJ/mol"))], num("-602"), [], num("-111"),
     [$S^circ_m$ (#unit("J/K/mol"))], num("409"), num("30"), num("198"),
 )
