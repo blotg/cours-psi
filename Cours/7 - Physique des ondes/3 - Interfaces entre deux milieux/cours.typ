@@ -42,10 +42,10 @@
 = Cas des ondes sonores
 Lorsque deux fluides non miscibles sont en contact, des ondes sonores peuvent passer d'un à l'autre.
 == Conditions aux limites
-La condition d'adhérence impose une continuité de la vitesse à l'interface.
+Les deux fluides restant en contact, la composante normale de la vitesse est continue à l'interface.
 
 #encadré(
-    titre: "continuité de la pression",
+    titre: "Continuité de la surpression",
     connaitre: true,
     savoir-faire: true,
 )[
@@ -61,8 +61,8 @@ Lorsqu'une onde sonore arrive perpendiculairement à une interface plane, les co
     savoir-faire: true,
     hypothèses: (
         [Une OPPH $underline(P_i)=P_(i,0)e^(j(omega t-k_1 x))$ arrive en incidence normale.],
-        [L'OPPH réfléchie s'écrit $underline(P_r)=underline(P_(r,0))e^(j(omega t+k_1 x))$],
-        [L'OPPH transmise s'écrit $underline(P_t)=underline(P_(t,0))e^(j(omega t-k_2 x))$],
+        [L'OPPH réfléchie s'écrit $underline(P_r)=underline(P_(r,0))e^(j(omega t+k_1 x))$.],
+        [L'OPPH transmise s'écrit $underline(P_t)=underline(P_(t,0))e^(j(omega t-k_2 x))$.],
         [La surface séparant les milieux est plane.],
         [Les fluides ne sont pas miscibles.],
     ),
@@ -79,9 +79,9 @@ Lorsqu'une onde sonore arrive perpendiculairement à une interface plane, les co
 )[
     $
         r_v & =: (v_(r,0))/(v_(i,0)) = (Z_1-Z_2)/(Z_1+Z_2) \
-        r_P & =: (P_(r,0))/(P_(i,0)) = (Z_1-Z_2)/(Z_1+Z_2) \
+        r_P & =: (P_(r,0))/(P_(i,0)) = (Z_2-Z_1)/(Z_1+Z_2) \
         t_v & =: (v_(t,0))/(v_(i,0)) = (2Z_1)/(Z_1+Z_2) \
-        t_P & =: (P_(t,0))/(P_(i,0)) = (2Z_1)/(Z_1+Z_2)
+        t_P & =: (P_(t,0))/(P_(i,0)) = (2Z_2)/(Z_1+Z_2)
     $
 ]
 
@@ -91,8 +91,8 @@ Lorsqu'une onde sonore arrive perpendiculairement à une interface plane, les co
     savoir-faire: true,
     hypothèses: (
         [Une OPPH $underline(P_i)=P_(i,0)e^(j(omega t-k_1 x))$ arrive en incidence normale.],
-        [L'OPPH réfléchie s'écrit $underline(P_r)=underline(P_(r,0))e^(j(omega t+k_1 x))$],
-        [L'OPPH transmise s'écrit $underline(P_t)=underline(P_(t,0))e^(j(omega t-k_2 x))$],
+        [L'OPPH réfléchie s'écrit $underline(P_r)=underline(P_(r,0))e^(j(omega t+k_1 x))$.],
+        [L'OPPH transmise s'écrit $underline(P_t)=underline(P_(t,0))e^(j(omega t-k_2 x))$.],
         [La surface séparant les milieux est plane.],
         [Les fluides ne sont pas miscibles.],
     ),
@@ -108,7 +108,7 @@ Lorsque $Z_1=Z_2$, la puissance transmise est maximale, on dit qu'il y a *adapta
 
 #application[
     Calculer le coefficient de transmission en puissance pour l'interface air-eau.
-    $Z_"air" = qty("4e2","Pa s/m")$ $Z_"eau" = qty("1e6","Pa s/m")$.
+    $Z_"air" = qty("4e2","Pa s/m")$ $Z_"eau" = qty("1.5e6","Pa s/m")$.
 ]
 
 #application[
@@ -117,21 +117,23 @@ Lorsque $Z_1=Z_2$, la puissance transmise est maximale, on dit qu'il y a *adapta
 
 = Cas des ondes électromagnétiques
 == Courant surfacique
-Dans un conducteur ohmique, le champ électrique des ondes électromagnétiques engendre un courant électrique d'après la loi d'Ohm locale. Dans un conducteur ohmique, les ondes électromagnétiques restent en surface et ne pénètrent que de quelques fois la profondeur de peau. Les courants électriques sont donc localisés en surface du conducteur. Lorsque les courants sont répartis à la surface, il est possible de les modéliser par des courants surfacique.
+Dans un conducteur ohmique, le champ électrique des ondes électromagnétiques engendre un courant électrique d'après la loi d'Ohm locale. Ces ondes y restent en surface et ne pénètrent que de quelques fois la profondeur de peau : les courants électriques sont donc localisés en surface du conducteur. Lorsque les courants sont ainsi répartis à la surface, il est possible de les modéliser par des courants surfaciques.
 
 #encadré(
     titre: "Vecteur densité surfacique de courant",
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("I", "va(j_S)"))
 )[
-    $ I=integral_cal(C) va(j_S) dot va(dd(S)) $
+    $ I = integral_cal(C) va(j_S) dot va(n) dd(l) $
+
+    où $cal(C)$ est une courbe tracée sur la surface parcourue par les courants et $va(n)$ le vecteur unitaire normal à $cal(C)$, tangent à cette surface.
 ]
 
 == Relations de passage
-Les composantes des champs magnétique et électrique vérifient des relation de passage aux interfaces entre deux milieux.
+Les composantes des champs magnétique et électrique vérifient des relations de passage aux interfaces entre deux milieux.
 
 #encadré(
-    titre: "Relations de passage sur les champs électrique",
+    titre: "Relations de passage sur le champ électrique",
     grandeurs: sub-dictionary(grandeurs, ("va(E_1)", "va(E_2)", "sigma", "epsilon_0", "va(n)_(1->2)")),
 )[
     $ va(E_2) - va(E_1) = sigma/epsilon_0 va(n)_(1 -> 2) $
@@ -162,7 +164,7 @@ Lorsqu'une onde électromagnétique arrive sur un métal parfait, elle se réfl�
         [L'onde incidente s'écrit $underline(va(E_i))=E_0 e^(j(omega t-k x)) ey$.],
         [L'onde arrive en incidence normale et l'interface est en $x=0$.],
         [Le métal est parfait.],
-        [L'onde réfléchie est une OPPH $underline(va(E_r))=underline(E_{0,r}) e^(j(omega t+k x)) ey$.],
+        [L'onde réfléchie est une OPPH $underline(va(E_r))=underline(E_(0,r)) e^(j(omega t+k x)) ey$.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("va(E_r)", "E_0", "omega", "k")),
 )[
@@ -217,9 +219,11 @@ La réflexion sur un métal parfait engendre une force surfacique sur lui appel�
 
 #encadré(
     titre: "Force de Laplace pour un courant surfacique",
-    grandeurs: sub-dictionary(grandeurs, ("va(delta F)", "va(j_S)", "va(B)", "dd(S)")),
+    grandeurs: sub-dictionary(grandeurs, ("va(delta F)", "va(j_S)", "va(B_1)", "va(B_2)", "dd(S)")),
 )[
-    $ va(delta F) = va(j_S) and va(B) dd(S) $
+    $ va(delta F) = va(j_S) and va(B)_"moy" dd(S) quad "avec" quad va(B)_"moy" = (va(B_1) + va(B_2))/2 $
+
+    Une nappe de courant ne subit pas son propre champ : c'est la moyenne des champs de part et d'autre qui intervient.
 ]
 
 #encadré(
@@ -232,7 +236,7 @@ La réflexion sur un métal parfait engendre une force surfacique sur lui appel�
     ),
     grandeurs: sub-dictionary(grandeurs, ("P", "va(delta F)", "dd(S)", "epsilon_0", "E_0")),
 )[
-    $ P = mean((||va(delta F)||) / dd(S)) = 2 epsilon_0 E_0^2 $
+    $ P = mean((||va(delta F)||) / dd(S)) = epsilon_0 E_0^2 $
 ]
 
 #application[

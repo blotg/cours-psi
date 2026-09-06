@@ -5,7 +5,7 @@
     numérique: true,
 )
 
-On réalise un traitement antireflet sur un verre d'indice de réfraction $n = 1.5$ en déposant une couche d'indice optique $n_c in ]1, n[$ et d'épaisseur $e$ de l'ordre de la centaine de #unit("nm"). Le but de ce traitement est d'annuler la réflexion à dans l'air pour la longueur d'onde $lambda = qty("500", "nm")$ (longueur d'onde pour laquelle l'œil est le plus sensible).
+On réalise un traitement antireflet sur un verre d'indice de réfraction $n = 1.5$ en déposant une couche d'indice optique $n_c in ]1, n[$ et d'épaisseur $e$ de l'ordre de la centaine de #unit("nm"). Le but de ce traitement est d'annuler la réflexion dans l'air pour la longueur d'onde $lambda = qty("550", "nm")$ (longueur d'onde pour laquelle l'œil est le plus sensible en vision diurne).
 
 #figure(
     canvas({
@@ -68,7 +68,7 @@ L'objectif de cet exercice est de déterminer l'épaisseur $e$ et l'indice optiq
     Donner l'expression de l'indice optique en fonction de la vitesse de phase et de la célérité de la lumière dans le vide. En déduire les expressions de $k_i$, $k_c$ et $k_t$ en fonction de $n$, $n_c$, $omega$ et de la célérité de la lumière dans le vide.
 ][
     $
-        n = v_phi / c
+        n = c / v_phi
     $
     On en déduit
     $
@@ -86,10 +86,10 @@ L'objectif de cet exercice est de déterminer l'épaisseur $e$ et l'indice optiq
     On utilise la relation de structure $underline(va(B)) = (va(k) and underline(va(E))) / omega$
     $
         cases(
-            underline(va(B_i)) = omega/c underline(E_(i,0)) e^(i (omega t - k_i x)),
-            underline(va(B_c)) = n_c omega/c underline(E_(c,0)) e^(i (omega t - k_c x)),
-            underline(va(B_c)') = - n_c omega/c underline(E_(c,0) ') e^(i (omega t + k_c x)),
-            underline(va(B_t)) = n omega/c underline(E_(t,0)) e^(i (omega t - k_t x))
+            underline(va(B_i)) = underline(E_(i,0)) / c e^(i (omega t - k_i x)),
+            underline(va(B_c)) = n_c underline(E_(c,0)) / c e^(i (omega t - k_c x)),
+            underline(va(B_c)') = - n_c underline(E_(c,0) ') / c e^(i (omega t + k_c x)),
+            underline(va(B_t)) = n underline(E_(t,0)) / c e^(i (omega t - k_t x))
         )
     $
 ]
@@ -127,18 +127,18 @@ L'objectif de cet exercice est de déterminer l'épaisseur $e$ et l'indice optiq
 #question()[
     Donner une solution de l'équation $M vec(underline(E_(i,0)), underline(E_(c,0)), underline(E_(c,0) '), underline(E_(t,0))) = vec(0, 0, 0, 0)$. En déduire que pour que le traitement antireflet fonctionne, il faut que $det(M) = 0$.
 ][
-    $vec(underline(E_(i,0)), underline(E_(c,0)), underline(E_(c,0) '), underline(E_(t,0))) = vec(0, 0, 0, 0)$ est une solution de l'équation. C'est une solution triviale, avec des ondes identiquement nulles dans les trois milieux. Cette solution est unique si $M$ est inversible, c'est-à-dire sir $det(M) != 0$.
+    $vec(underline(E_(i,0)), underline(E_(c,0)), underline(E_(c,0) '), underline(E_(t,0))) = vec(0, 0, 0, 0)$ est une solution de l'équation. C'est une solution triviale, avec des ondes identiquement nulles dans les trois milieux. Cette solution est unique si $M$ est inversible, c'est-à-dire si $det(M) != 0$.
 
     Pour que le traitement antireflet fonctionne, il faut qu'il existe une solution non triviale, c'est-à-dire que $M$ ne soit pas inversible, c'est-à-dire que $det(M) = 0$.
 ]
 
 #question()[
-    La fonction `np.linalg.det` de la bibliothèque `numpy` permet de calculer le déterminant d'une matrice. Écrire une fonction `D(e,n)` qui renvoie le déterminant de la matrice $M$ en fonction de $e$ et $n_c$.
+    La fonction `np.linalg.det` de la bibliothèque `numpy` permet de calculer le déterminant d'une matrice. Écrire une fonction `D(e,nc)` qui renvoie le déterminant de la matrice $M$ en fonction de $e$ et $n_c$.
 ][
     ```python
     import numpy as np
     n = 1.5
-    lam = 500e-9
+    lam = 550e-9
     c = 3e8
     omega = 2 * np.pi * c / lam
     def D(e,nc):

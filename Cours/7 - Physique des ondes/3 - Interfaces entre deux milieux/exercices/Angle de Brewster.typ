@@ -36,7 +36,7 @@ On étudie une OPPH électromagnétique polarisée rectilignement qui arrive sur
     }),
 )
 
-À l'interface, la composante du champ électrique tangente à l'interface et la composante du champ magnétique normale à l'interface sont continues.
+À l'interface, les composantes du champ électrique et du champ magnétique tangentes à l'interface sont continues.
 
 On note $underline(E_i)$, $underline(E_r)$ et $underline(E_t)$ les amplitudes complexes des champs électriques de l'onde incidente, réfléchie et transmise respectivement.
 
@@ -46,31 +46,31 @@ On suppose que les ondes incidente, réfléchie et transmise ont la même pulsat
     Montrer que les amplitudes complexes vérifient
     $
         cases(
-            cos(theta_i) underline(E_i) + cos(theta_r) underline(E_r) = cos(theta_t) underline(E_t),
-            n_1 cos(theta_i) underline(E_i) - n_1 cos(theta_r) underline(E_r) = n_2 cos(theta_t) underline(E_t)
+            cos(theta_i) underline(E_i) - cos(theta_r) underline(E_r) = cos(theta_t) underline(E_t),
+            n_1 underline(E_i) + n_1 underline(E_r) = n_2 underline(E_t)
         )
     $
 ][
     La relation de structure donne
     $
         cases(
-            underline(va(B_i)) = n_1/c underline(E_i) ey,
-            underline(va(B_r)) = -n_1/c underline(E_r) ey,
-            underline(va(B_t)) = n_2/c underline(E_t) ey
+            underline(va(B_i)) = n_1/c underline(E_i) ez,
+            underline(va(B_r)) = n_1/c underline(E_r) ez,
+            underline(va(B_t)) = n_2/c underline(E_t) ez
         )
     $
     Les relations de continuité donnent
     $
         cases(
             va(E_i) dot ex + va(E_r) dot ex = va(E_t) dot ex,
-            va(B_i) dot ey - va(B_r) dot ey = va(B_t) dot ey
+            va(B_i) dot ez + va(B_r) dot ez = va(B_t) dot ez
         )
     $
-    Soit
+    Or $va(E_r)$ est orienté vers le haut à gauche sur la figure : sa composante suivant $ex$ vaut $- cos(theta_r) underline(E_r)$. Il vient
     $
         cases(
-            cos(theta_i) underline(E_i) + cos(theta_r) underline(E_r) = cos(theta_t) underline(E_t),
-            n_1 cos(theta_i) underline(E_i) - n_1 cos(theta_r) underline(E_r) = n_2 cos(theta_t) underline(E_t)
+            cos(theta_i) underline(E_i) - cos(theta_r) underline(E_r) = cos(theta_t) underline(E_t),
+            n_1 underline(E_i) + n_1 underline(E_r) = n_2 underline(E_t)
         )
     $
 ]

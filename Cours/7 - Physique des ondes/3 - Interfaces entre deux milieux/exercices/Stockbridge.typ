@@ -18,7 +18,7 @@ On s'intéresse à un câble en aluminium (de masse volumique $qty("2.7", "g/cm^
 
 
 #question()[
-    Quel paramètre de l'amortisseur de Stockbridge doit-on choisir pour que les vibrations soient éliminées, c'est -à-dire pour qu'une onde incidente ne donne lieu à aucune onde réfléchie ?
+    Quel paramètre de l'amortisseur de Stockbridge doit-on choisir pour que les vibrations soient éliminées, c'est-à-dire pour qu'une onde incidente ne donne lieu à aucune onde réfléchie ?
 ][
     On modélise les ondes incidente et réfléchie dans la ligne par
     $
@@ -27,7 +27,7 @@ On s'intéresse à un câble en aluminium (de masse volumique $qty("2.7", "g/cm^
             underline(y_r) = underline(y_(r,0)) e^(i(omega t - k x))
         )
     $
-    La condition aux limites s'obtient en appliquant le théorème de la résultante cinétique à une portion de câble très courte au niveau de l'amortisseur de Stockbridge. On trouve
+    La condition aux limites s'obtient en appliquant le théorème de la résultante cinétique à une portion de câble très courte au niveau de l'amortisseur de Stockbridge. En notant $theta$ l'angle que fait le câble avec l'horizontale, on trouve
 
     #figure(
         canvas({

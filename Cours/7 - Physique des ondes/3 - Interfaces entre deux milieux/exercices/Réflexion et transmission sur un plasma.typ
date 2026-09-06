@@ -49,9 +49,9 @@ On étudie le champ transmis $underline(va(E_t))= underline(E_(t,0))e^(i(omega t
 )[
     Déterminer la conductivité complexe du plasma $underline(gamma)$ à la pulsation $omega$ en fonction de $N$, $e$, $m_e$ et $omega$.
 ][
-    Voir cours du chapitres Physique des ondes 2.
+    Voir le cours du chapitre Physique des ondes 2.
     $
-        underline(gamma) = -i (N e^2)(m_e omega)
+        underline(gamma) = -i (N e^2)/(m_e omega)
     $
 ]
 
@@ -77,7 +77,7 @@ On étudie le champ transmis $underline(va(E_t))= underline(E_(t,0))e^(i(omega t
         "Il s'agit d'une question de cours."
     ),
 )[
-    Établir l'équation de dispersion dans le plasma en posant $omega_p=sqrt((N e^2)/(m epsilon_0))$.
+    Établir l'équation de dispersion dans le plasma en posant $omega_p=sqrt((N e^2)/(m_e epsilon_0))$.
 ][
     C'est une question de cours.
     $
@@ -113,10 +113,10 @@ Dans les questions suivantes, on suppose que $omega > omega_p$.
     $
 ]
 
-Les champs magnétique et électrique sont continus à l'interface vide / plasma.
+Les champs magnétique et électrique sont continus à l'interface vide-plasma.
 
 #question()[
-    En utilisant la continuité des champs à l'interface, exprimer $underline(E_r)$ et $underline(E_t)$ en fonction de $E_0$ et de $n$.
+    En utilisant la continuité des champs à l'interface, exprimer $underline(E_(r,0))$ et $underline(E_(t,0))$ en fonction de $E_0$ et de $n$.
 ][
     En utilisant la continuité du champ électrique à l'interface, on trouve
     $
@@ -161,8 +161,8 @@ Les champs magnétique et électrique sont continus à l'interface vide / plasma
     On peut alors définir les coefficients de réflexion et de transmission en puissance $R$ et $T$ par
     $
         cases(
-            R = mean(va(Pi_r))/mean(va(Pi_i)) = ((1-n)/(1+n))^2,
-            T = mean(va(Pi_t))/mean(va(Pi_i)) = (4 n) / (1+n)^2,
+            R = (||mean(va(Pi_r))||)/(||mean(va(Pi_i))||) = ((1-n)/(1+n))^2,
+            T = (||mean(va(Pi_t))||)/(||mean(va(Pi_i))||) = (4 n) / (1+n)^2,
         )
     $
     Leur somme vaut
@@ -175,7 +175,7 @@ Les champs magnétique et électrique sont continus à l'interface vide / plasma
 Dans toute la suite, on se place dans le cas $omega < omega_p$.
 
 #question()[
-    Déterminer le nombre d'ondes complexe $underline(k_p)$ dans le plasma.
+    Déterminer le nombre d'onde complexe $underline(k_p)$ dans le plasma.
 ][
     La relation de dispersion a pour solution
     $
@@ -183,9 +183,9 @@ Dans toute la suite, on se place dans le cas $omega < omega_p$.
     $
     En remplaçant dans l'expression du champ électrique transmis, on trouve
     $
-        underline(va(E_t)) = underline(E_(t,0)) e^(i omega t) e^(minus.plus sqrt((omega_p^2 - omega^2)/c^2) x) ez
+        underline(va(E_t)) = underline(E_(t,0)) e^(i omega t) e^(plus.minus sqrt((omega_p^2 - omega^2)/c^2) x) ez
     $
-    La solution $underline(k_p) = - i sqrt((omega_p^2 - omega^2)/c^2)$ correspond à une onde électromagnétique qui croît exponentiellement et diverge quand $x -> infinity$, ce qui est non physique. On choisit donc la solution $underline(k_p) = + i sqrt((omega_p^2 - omega^2)/c^2)$, qui correspond à une onde électromagnétique qui décroit exponentiellement dans le plasma.
+    La solution $underline(k_p) = + i sqrt((omega_p^2 - omega^2)/c^2)$ correspond à une onde électromagnétique qui croît exponentiellement et diverge quand $x -> infinity$, ce qui est non physique. On choisit donc la solution $underline(k_p) = - i sqrt((omega_p^2 - omega^2)/c^2)$, qui correspond à une onde électromagnétique qui décroit exponentiellement dans le plasma.
 ]
 
 #question()[
@@ -196,21 +196,21 @@ Dans toute la suite, on se place dans le cas $omega < omega_p$.
         cases(
             underline(va(B_i)) = -E_0 / c e^(i (omega t - k x)) ey,
             underline(va(B_r)) = underline(E_(r,0)) / c e^(i (omega t + k x)) ey,
-            underline(va(B_t)) = -i sqrt((omega_p^2 - omega^2)/c^2) underline(E_(t,0)) / omega e^(i (omega t + i sqrt((omega_p^2 - omega^2)/c^2) x)) ey,
+            underline(va(B_t)) = i sqrt((omega_p^2 - omega^2)/c^2) underline(E_(t,0)) / omega e^(i omega t) e^(- sqrt((omega_p^2 - omega^2)/c^2) x) ey,
         )
     $
     En utilisant la continuité des champs électrique et magnétique à l'interface, on trouve
     $
         cases(
             E_0 + underline(E_(r,0)) = underline(E_(t,0)),
-            -E_0 / c + underline(E_(r,0)) / c = -i sqrt((omega_p^2 - omega^2)/c^2) / omega underline(E_(t,0))
+            -E_0 / c + underline(E_(r,0)) / c = i sqrt((omega_p^2 - omega^2)/c^2) / omega underline(E_(t,0))
         )
     $
     On peut en déduire
     $
         cases(
-            underline(E_(r,0)) = (1 - i sqrt((omega_p^2 - omega^2)/omega^2)) / (1 + i sqrt((omega_p^2 - omega^2)/omega^2)) E_0,
-            underline(E_(t,0)) = 2 / (1 + i sqrt((omega_p^2 - omega^2)/omega^2)) E_0,
+            underline(E_(r,0)) = (1 + i sqrt((omega_p^2 - omega^2)/omega^2)) / (1 - i sqrt((omega_p^2 - omega^2)/omega^2)) E_0,
+            underline(E_(t,0)) = 2 / (1 - i sqrt((omega_p^2 - omega^2)/omega^2)) E_0,
         )
     $
 ]
@@ -218,31 +218,29 @@ Dans toute la suite, on se place dans le cas $omega < omega_p$.
 #question()[
     Déterminer le coefficient de réflexion en puissance $R$ et le coefficient de transmission en puissance $T$.
 ][
-    Les champs réels s'écrivent
+    Notons $beta = sqrt((omega_p^2 - omega^2)/omega^2)$, réel positif, de sorte que
     $
-        cases(
-            va(E_i) = Re(underline(va(E_i))) = E_0 cos(omega t - k x) ez,
-            va(E_r) = Re(underline(va(E_r))) = Re((1 - i sqrt((omega_p^2 - omega^2)/omega^2)) / (1 + i sqrt((omega_p^2 - omega^2)/omega^2)) E_0 e^(i (omega t + k x))) ez,
-            va(E_t) = Re(underline(va(E_t))) = Re(2 / (1 + i sqrt((omega_p^2 - omega^2)/omega^2)) E_0 e^(i (omega t + i sqrt((omega_p^2 - omega^2)/c^2) x))) ez,
-            va(B_i) = Re(underline(va(B_i))) = -E_0 / c cos(omega t - k x) ey,
-            va(B_r) = Re(underline(va(B_r))) = underline(E_(r,0)) / c cos(omega t + k x) ey,
-            va(B_t) = Re(underline(va(B_t))) = -sqrt((omega_p^2 - omega^2)/c^2) underline(E_(t,0)) / omega sin(omega t + sqrt((omega_p^2 - omega^2)/c^2) x) ey,
-        )
+        underline(E_(r,0)) = (1 + i beta)/(1 - i beta) E_0 quad "et" quad underline(E_(t,0)) = 2/(1 - i beta) E_0
     $
-    On peut en déduire les vecteurs de Poynting associés à chaque onde :
+
+    *Coefficient de réflexion.* Les nombres $1 + i beta$ et $1 - i beta$ sont conjugués l'un de l'autre, donc de même module :
     $
-        cases(
-            va(Pi_i) = (va(E_i) and va(B_i))/mu_0 = E_0^2 / (mu_0 c) cos^2(omega t - k x) ex,
-            va(Pi_r) = (va(E_r) and va(B_r))/mu_0 = ((1 - i sqrt((omega_p^2 - omega^2)/omega^2)) / (1 + i sqrt((omega_p^2 - omega^2)/omega^2)))^2 E_0^2 / (mu_0 c) cos^2(omega t + k x) (-ex),
-            va(Pi_t) = (va(E_t) and va(B_t))/mu_0 = 4 sqrt((omega_p^2 - omega^2)/c^2) / (1 + i sqrt((omega_p^2 - omega^2)/omega^2))^2 E_0^2 / (mu_0 omega) cos(omega t - k x) sin(omega t + sqrt((omega_p^2 - omega^2)/c^2) x) ex,
-        )
+        abs(underline(E_(r,0))) = abs(1 + i beta)/abs(1 - i beta) E_0 = E_0
     $
-    On peut alors définir les coefficients de réflexion et de transmission en puissance $R$ et $T$ par
+    Les ondes incidente et réfléchie ont la même amplitude et se propagent toutes deux dans le vide, leurs vecteurs de Poynting moyens ont donc la même norme :
     $
-        cases(
-            R = mean(va(Pi_r))/mean(va(Pi_i)) = 1,
-            T = mean(va(Pi_t))/mean(va(Pi_i)) = 0,
-        )
+        R = (||mean(va(Pi_r))||)/(||mean(va(Pi_i))||) = 1
     $
-    Le coefficient de réflexion en puissance est égal à 1, ce qui signifie que toute l'énergie de l'onde incidente est réfléchie par le plasma. Le coefficient de transmission en puissance est égal à 0, ce qui signifie qu'aucune énergie de l'onde incidente n'est transmise dans le plasma. Ceci est cohérent avec le fait que l'onde électromagnétique décroit exponentiellement dans le plasma, ce qui empêche toute transmission d'énergie à travers l'interface.
+
+    *Coefficient de transmission.* Dans le plasma, le champ magnétique porte un facteur $i$ par rapport au champ électrique : les deux champs sont en quadrature. En écrivant $underline(E_(t,0)) = abs(underline(E_(t,0))) e^(i phi)$, les champs réels valent
+    $
+        va(E_t) & = abs(underline(E_(t,0))) e^(- sqrt((omega_p^2 - omega^2)/c^2) x) cos(omega t + phi) ez \
+        va(B_t) & = - sqrt((omega_p^2 - omega^2)/c^2)/omega abs(underline(E_(t,0))) e^(- sqrt((omega_p^2 - omega^2)/c^2) x) sin(omega t + phi) ey
+    $
+    Le vecteur de Poynting transmis est donc proportionnel à $cos(omega t + phi) sin(omega t + phi)$, de valeur moyenne nulle sur une période :
+    $
+        mean(va(Pi_t)) = va(0) quad "d'où" quad T = 0
+    $
+
+    Toute l'énergie de l'onde incidente est réfléchie par le plasma et aucune n'est transmise. L'onde qui pénètre dans le plasma est *évanescente* : elle décroit exponentiellement et ne transporte pas d'énergie en moyenne, exactement comme lors de la réflexion sur un métal parfait.
 ]

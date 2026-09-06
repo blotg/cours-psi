@@ -10,5 +10,5 @@ Les échographies sont des techniques d'imagerie médicale utilisant des ondes s
 #question()[
     Comment fonctionnent les échographies ?
 ][
-    Lorsqu'une onde sonore arrive sur un autre milieu (par exemple du liquide amniotique au crane d'un fœtus), une partie de l'onde passe dans le milieu, mais une partie est réfléchie et repart dans l'autre sens. En mesurant le temps que met l'onde à revenir, on peut déterminer la distance, ce qui permet de créer une image de l'intérieur du corps.
+    Lorsqu'une onde sonore arrive sur un autre milieu (par exemple du liquide amniotique au crâne d'un fœtus), une partie de l'onde passe dans le milieu, mais une partie est réfléchie et repart dans l'autre sens. En mesurant le temps que met l'onde à revenir, on peut déterminer la distance, ce qui permet de créer une image de l'intérieur du corps.
 ]

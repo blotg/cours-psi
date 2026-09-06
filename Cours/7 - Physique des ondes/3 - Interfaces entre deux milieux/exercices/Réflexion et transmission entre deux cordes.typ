@@ -19,7 +19,7 @@ $
         "Ces ondes sont-elles progressives ? stationnaires ? harmoniques ?"
     ),
 )[
-    Quelles sont les natures 3 ondes ?
+    Quelles sont les natures des 3 ondes ?
 ][
     Ce sont des ondes progressives harmoniques. Les ondes incidente et transmise se propagent dans le sens des $x$ croissants, tandis que l'onde réfléchie se propage dans le sens des $x$ décroissants.
 ]
@@ -79,7 +79,7 @@ $
 #question(
     coups-de-pouce: (
         "Faire tendre $epsilon$ vers $0$ pour montrer la continuité de $va(T)$ en $0$.",
-        "Projeter la continuité de $va(T)$ sur $ey$ pour relier les inclinaison de la corde juste à gauche et juste à droite de la jonction.",
+        "Projeter la continuité de $va(T)$ sur $ey$ pour relier les inclinaisons de la corde juste à gauche et juste à droite de la jonction.",
         "Relier les inclinaisons aux dérivées spatiales de $y_1$ et $y_2$ en $x=0$.",
     ),
 )[
@@ -87,7 +87,7 @@ $
     $
         forall t quad lr(pdv(y_1, x)|)_(x=0,t) = lr(pdv(y_2, x)|)_(x=0,t)
     $
-    où $T_1$ et $T_2$ sont les tensions dans les cordes 1 et 2, respectivement.
+    On notera $va(T_1)$ et $va(T_2)$ les tensions exercées de part et d'autre de la jonction.
 ][
     Le TRC s'écrit
     $
