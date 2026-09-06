@@ -5,22 +5,22 @@
 
 = Résolution numérique d'équations différentielles
 
-La méthode d'Euler est une procédure numérique permettant de résoudre numériquement et approximativement des équations différentielles à partir d'une condition initiale.
+La méthode d'Euler est une procédure permettant de résoudre numériquement et approximativement des équations différentielles à partir d'une condition initiale.
 
 == Discrétisation
 
-La mémoire des ordinateur étant finie, il est indispensable de discrétiser le problème pour le résoudre numériquement. Discrétiser consiste à associer à une fonction $y(t)$ une suite $y_i=y(i dot Delta t)$ où $Delta t$ est appelé pas de temps. Le pas de temps est l'équivalent de la période d'échantillonnage.
+La mémoire des ordinateurs étant finie, il est indispensable de discrétiser le problème pour le résoudre numériquement. Discrétiser consiste à associer à une fonction $y(t)$ une suite $y_i=y(i dot Delta t)$ où $Delta t$ est appelé pas de temps. Le pas de temps est l'équivalent de la période d'échantillonnage.
 
 == Problème d'Euler
 
-Un problème d'Euler est une équation différentielle d'ordre 1 muni d'une condition initiale : on cherche la fonction $y$ telle que $y'(t) = f(y, t)$ et $y(t=0) = y_0$. La fonction recherchée peut éventuellement être un vecteur et donc avoir plusieurs composantes.
+Un problème d'Euler est une équation différentielle d'ordre 1 munie d'une condition initiale : on cherche la fonction $y$ telle que $y'(t) = f(y, t)$ et $y(t=0) = y_0$. La fonction recherchée peut éventuellement être un vecteur et donc avoir plusieurs composantes.
 
 #exemple[$ dv(u,t) =- 1/tau u $ $ dv(va(v),t)=va(g)-k/m va(v) $]
 
-Les équations différentielle d'ordre supérieur peuvent être mises sous la forme de problème d'Euler en introduisant un vecteur dont les coordonnées sont des dérivées successives.
+Les équations différentielles d'ordre supérieur peuvent être mises sous la forme de problème d'Euler en introduisant un vecteur dont les coordonnées sont des dérivées successives.
 
 #application[
-    Mettre sous forme de problème d'Euler les équations différentielles suivante.
+    Mettre sous forme de problème d'Euler les équations différentielles suivantes.
     $ m dv(x,t,2) = -k v^2 $
     $ m dv(va(O M),t,2) =-k va(v)+m va(g) $
     $ a dv(y,t,3)+b dv(y,t,2)+c dv(y,t)+d y=e $
@@ -64,24 +64,24 @@ La méthode d'Euler consiste à approximer la courbe localement par sa tangente.
     connaitre: true,
     savoir-faire: true,
 )[
-    $ y_(i+1) = y_i+ Delta t dot f(y_i, t) $
+    $ y_(i+1) = y_i + Delta t dot f(y_i, t_i) $
 ]
 
 #flashcard(
     recto: "Schéma d'Euler explicite",
-    verso: "$ y_(i+1) = y_i + Delta t dot f(y_i, t) $",
+    verso: "$ y_(i+1) = y_i + Delta t dot f(y_i, t_i) $",
 )
 
-= Résolution numérique d'équations aux dérivées partielles}
+= Résolution numérique d'équations aux dérivées partielles
 
 Il est possible d'adapter la méthode d'Euler pour résoudre des équations aux dérivées partielles.
 
 == Discrétisation
-Une double discrétisation spatiale et temporelle pour résoudre numériquement une équation aux dérivées partielle. On pose $f_(i,j)=f(i dot Delta t, j dot Delta x)$ où $Delta t$ est le pas de temps et $Delta x$ le pas d'espace.
+Une double discrétisation, spatiale et temporelle, est nécessaire pour résoudre numériquement une équation aux dérivées partielles. On pose $f_(i,j)=f(i dot Delta t, j dot Delta x)$ où $Delta t$ est le pas de temps et $Delta x$ le pas d'espace.
 
 == Résolution numérique de l'équation de diffusion
 
-Dans cette partie, on s'appuie sur l'exemple de l'équation de diffusion $pdv(T,t)=pdv(T,x,2)$ mais la méthode peut être adaptée à toute équation aux dérivées partielles.
+Dans cette partie, on s'appuie sur l'exemple de l'équation de diffusion $pdv(T,t)=D pdv(T,x,2)$ mais la méthode peut être adaptée à toute équation aux dérivées partielles.
 
 Dans l'équation de diffusion, une dérivée seconde spatiale est présente. On l'approxime en utilisant une formule de Taylor à l'ordre 2.
 

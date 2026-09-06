@@ -8,14 +8,18 @@
     "div ",
 )
 
+// Le va() de physica applique math.italic sans condition : $va("grad ")$ sort
+// « grad » en italique, alors que div, défini par une simple chaine, sort en
+// romain. On force donc le romain, et on met l'espace hors de l'accent pour que
+// la flèche ne déborde pas du mot.
 #let grad = math.class(
     "unary",
-    $va("grad ")$,
+    $arrow(upright("grad")) thin$,
 )
 
 #let rot = math.class(
     "unary",
-    $va("rot ")$,
+    $arrow(upright("rot")) thin$,
 )
 
 #let mean(val) = {

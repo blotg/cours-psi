@@ -23,13 +23,13 @@ Les opérateurs vectoriels ont une expression simple en fonction de $va(nabla)$.
     verso: "$ va(nabla) = vec( pdv(,x), pdv(,y), pdv(,z) ) $",
 )
 
-Le gradient est un opérateur s'applicant aux champs scalaires et renvoyant un vecteur.
+Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un vecteur.
 #encadré(
     titre: "Gradient",
     connaitre: true,
     hypothèses: (
         [$f$ est une fonction de $RR^3$ dérivable.],
-        [les variables de $f$ sont les coordonnées cartésiennes.],
+        [Les variables de $f$ sont les coordonnées cartésiennes.],
     ),
 )[
     $ grad f = va(nabla) f = vec(pdv(f, x), pdv(f, y), pdv(f, z)) $
@@ -47,22 +47,22 @@ Le gradient est un opérateur s'applicant aux champs scalaires et renvoyant un v
 
 #application[Exprimer le gradient du champ $1/sqrt(x^2+y^2+z^2)$.]
 
-En coordonnées cylindriques ou sphériques, la première coordonnée (i.e. selon $va(e_r)$) de $grad f$ est la dérivée par rapport à $r$.
+En coordonnées cylindriques ou sphériques, la première coordonnée (c'est-à-dire selon $va(e_r)$) de $grad f$ est la dérivée par rapport à $r$.
 
 #application[
-    Exprimer le gradient du champ $1/r$ en coordonnées sphériques. Est-ce cohérent avec l'application précédente ? On pourra utiliser l'expression de $va(O M)$ dans les bases cartésiennes et sphérique pour comparer les deux expressions.
+    Exprimer le gradient du champ $1/r$ en coordonnées sphériques. Est-ce cohérent avec l'application précédente ? On pourra utiliser l'expression de $va(O M)$ dans les bases cartésienne et sphérique pour comparer les deux expressions.
 ]
 
 = Divergence
 == Définition
-La divergence est un opérateur s'applicant aux champs vectoriels et renvoyant un scalaire.
+La divergence est un opérateur s'appliquant aux champs vectoriels et renvoyant un scalaire.
 
 #encadré(
     titre: "Divergence",
     connaitre: true,
     hypothèses: (
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
-        [les variables de $va(A)$ sont les coordonnées cartésiennes.],
+        [Les variables de $va(A)$ sont les coordonnées cartésiennes.],
     ),
     grandeurs: grandeurs,
 )[
@@ -112,14 +112,14 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
 
 = Rotationnel
 == Définition
-Le rotationnel est un opérateur s'applicant aux champs vectoriels et renvoyant un vecteur.
+Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant un vecteur.
 
 #encadré(
     titre: "Rotationnel",
     connaitre: true,
     hypothèses: (
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
-        [les variables de $va(A)$ sont les coordonnées cartésiennes.],
+        [Les variables de $va(A)$ sont les coordonnées cartésiennes.],
     ),
     grandeurs: grandeurs,
 )[
@@ -140,9 +140,9 @@ Le rotationnel est un opérateur s'applicant aux champs vectoriels et renvoyant 
     verso: "Le rotationnel s'applique aux champs vectoriels et renvoie un champ vectoriel.",
 )
 
-== Théorème de Stockes
+== Théorème de Stokes
 #encadré(
-    titre: "Théorème de Stockes",
+    titre: "Théorème de Stokes",
     connaitre: true,
     hypothèses: (
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
@@ -150,12 +150,12 @@ Le rotationnel est un opérateur s'applicant aux champs vectoriels et renvoyant 
     ),
     grandeurs: grandeurs,
 )[
-    $ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_C va(A) dprod va(dd(l)) $
+    $ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $
 ]
 
 #flashcard(
-    recto: "Théorème de Stockes",
-    verso: "$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_C va(A) dprod va(dd(l)) $",
+    recto: "Théorème de Stokes",
+    verso: "$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $",
 )
 
 #schéma(titre: "Orientation relative entre une surface et sa frontière")[#box(height: 3cm)]
@@ -186,7 +186,7 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 )
 
 #application[
-    Démontrer le sens $exists f | va(A) = grad(f) arrow.double div va(A)=0$
+    Démontrer le sens $exists f | va(A) = grad f arrow.double rot va(A) = va(0)$.
 ]
 #application[
     $va(E)=-grad V$ est-il compatible avec les équations de Maxwell en régime stationnaire ? L'est-il en régime variable ?
@@ -212,12 +212,12 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 )
 
 = Laplacien scalaire
-Le laplacien scalaire est un opérateur s'applicant aux champs scalaires et renvoyant un scalaire.
+Le laplacien scalaire est un opérateur s'appliquant aux champs scalaires et renvoyant un scalaire.
 #encadré(
     titre: "Laplacien scalaire",
     connaitre: true,
     hypothèses: (
-        [$f$ est une fonctions de classe $cal(C)^2$ de $RR^3$.],
+        [$f$ est une fonction de classe $cal(C)^2$ de $RR^3$.],
     ),
 )[
     $ Delta f = div(grad f) = pdv(f, x, 2) + pdv(f, y, 2) + pdv(f, z, 2) $
@@ -246,13 +246,13 @@ L'opérateur $va(A) dprod grad$ peut s'appliquer à un champ vectoriel, il renvo
     ),
     grandeurs: grandeurs,
 )[
-    $ ( va(A).grad ) f = A_x pdv(f, x) + A_y pdv(f, y) + A_z pdv(f, z) $
-    $ ( va(A).grad ) va(B) = A_x pdv(va(B), x) + A_y pdv(va(B), y) + A_z pdv(va(B), z) $
+    $ ( va(A) dprod grad ) f = A_x pdv(f, x) + A_y pdv(f, y) + A_z pdv(f, z) $
+    $ ( va(A) dprod grad ) va(B) = A_x pdv(va(B), x) + A_y pdv(va(B), y) + A_z pdv(va(B), z) $
 ]
 
 #flashcard(
     recto: "$va(A) dprod grad$",
-    verso: "$ ( va(A).grad ) = A_x pdv(, x) + A_y pdv(, y) + A_z pdv(, z) $",
+    verso: "$ ( va(A) dprod grad ) = A_x pdv(, x) + A_y pdv(, y) + A_z pdv(, z) $",
 )
 
 #flashcard(
@@ -267,7 +267,7 @@ Le laplacien vectoriel est un opérateur s'appliquant aux champs vectoriels et r
     titre: "Laplacien vectoriel",
     connaitre: true,
     hypothèses: (
-        [$va(A)$ est une fonctions de classe $cal(C)^2$ de $RR^3$.],
+        [$va(A)$ est une fonction de classe $cal(C)^2$ de $RR^3$.],
     ),
     grandeurs: grandeurs,
 )[

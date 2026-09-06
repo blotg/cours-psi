@@ -7,7 +7,7 @@
 == Définition
 En coordonnées cartésiennes, un point est repéré par la distance entre son projeté sur chacun des axes et l'origine du repère.
 
-Les coordonnées d'un point sont notées $x in RR$, $y in RR$ et $z in RR$
+Les coordonnées d'un point sont notées $x in RR$, $y in RR$ et $z in RR$.
 
 #flashcard(
     recto: "Bornes des coordonnées $x$, $y$, $z$ en coordonnées cartésiennes",
@@ -57,7 +57,7 @@ L'élément de volume a pour volume $dd(V)=dd(x) dot dd(y) dot dd(z)$.
 )
 
 #application[
-    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $mu=mu_0(1+x y)$.
+    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $rho=rho_0(1+x y)$.
 ]
 
 == Élément de surface
@@ -108,8 +108,10 @@ Les vecteurs de base dépendent du point considéré. La base est donc appelée 
 )
 
 #figure[
-    // #include "schemas/cylindriques_coordonnées.typ"
-    #include "schemas/cylindriques_vecteurs.typ"
+    #grid(columns: 2,
+        include("schemas/cylindriques_coordonnées.typ"),
+        include("schemas/cylindriques_vecteurs.typ")
+    )
 ]
 
 #application[
@@ -202,7 +204,7 @@ Une coquille cylindrique est un volume infinitésimal contenu entre deux cylindr
 
 L'aire intérieure de la coquille est $2 pi r h$, son aire extérieure est $2 pi (r+dd(r)) h$ et son volume est $ dd(V)= pi (r+dd(r))^2 h - pi r^2 h = pi h (r^2+2r dd(r) + dd(r)^2 - r^2) approx 2 pi r h dd(r) $
 
-On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindrique sur l'angle $theta$ : $ dd(V) = integral_0^(2 pi) r dd(r) dd(theta) dd(z) = 2 pi r dd(r) h $
+On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindrique sur l'angle $theta$ : $ dd(V) = integral_0^h integral_0^(2 pi) r dd(r) dd(theta) dd(z) = 2 pi r h dd(r) $
 
 #flashcard(
     recto: "Volume d'une coquille cylindrique",
@@ -215,13 +217,13 @@ On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindr
 
 = Coordonnées sphériques
 == Définition
-En coordonnées sphériques, un point est repéré par sa distance à l'origine du repère, l'angle entre l'axe $O z$ et $va(O M)$ et l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$.
+En coordonnées sphériques, un point est repéré par sa distance à l'origine du repère, l'angle entre l'axe $(O z)$ et $va(O M)$ et l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$.
 
-Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,pi[$ et $phi in [0,2 pi[$
+Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,pi]$ et $phi in [0,2 pi[$.
 
 #flashcard(
     recto: "Bornes des coordonnées $r$, $theta$, $phi$ en coordonnées sphériques",
-    verso: "$r in RR^+$, $theta in [0,pi[$, $phi in [0,2 pi[$"
+    verso: "$r in RR^+$, $theta in [0,pi]$, $phi in [0,2 pi[$"
 )
 
 Les vecteurs de base dépendent du point considéré. La base est donc appelée base mobile.
@@ -305,7 +307,7 @@ Les éléments de surface sont représentés sur la figure suivante.
 
 #flashcard(
     recto: "Aire d'une sphère de rayon $R$",
-    verso: "$ 4 pi R^2 $"
+    verso: "$ A = 4 pi R^2 $"
 )
 
 #application[
@@ -313,15 +315,15 @@ Les éléments de surface sont représentés sur la figure suivante.
 ]
 
 == Coquille sphérique
-Lorsque le problème étudié est invariant par rotation selon $theta$ et $phi$, il peut être plus aisé d'utiliser une coquille sphérique
+Lorsque le problème étudié est invariant par rotation selon $theta$ et $phi$, il peut être plus aisé d'utiliser une coquille sphérique.
 
-Une coquille sphérique est un volume infinitésimale contenu entre deux sphères concentriques de rayons $r$ et $r+dd(r)$.
+Une coquille sphérique est un volume infinitésimal contenu entre deux sphères concentriques de rayons $r$ et $r+dd(r)$.
 
 #figure[
     #include "schemas/sphériques_coquille.typ"
 ]
 
-L'aire intérieure de la coquille est $4 pi r^2$, son aire extérieure est $4 pi (r+dd(r))^2$ et son volume est $ dd(V)= 4/3 pi (r+dd(r))^3 - 4/3 pi r^3 = 4/3 pi (r^3 + 3r^2 dd(r) + 3r dd(r)^3 + dd(r)^3-r^3) approx 4 pi ^2 dd(r) $
+L'aire intérieure de la coquille est $4 pi r^2$, son aire extérieure est $4 pi (r+dd(r))^2$ et son volume est $ dd(V)= 4/3 pi (r+dd(r))^3 - 4/3 pi r^3 = 4/3 pi (r^3 + 3r^2 dd(r) + 3r dd(r)^2 + dd(r)^3 - r^3) approx 4 pi r^2 dd(r) $
 
 #flashcard(
     recto: "Volume d'une coquille sphérique",
