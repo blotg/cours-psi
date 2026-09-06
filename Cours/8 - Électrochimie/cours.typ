@@ -15,7 +15,7 @@
     "i_text(\"max\")": (signification: "l'intensité du courant sur le palier de diffusion", unité: unit("A")),
     "S": (signification: "la surface immergée de l'électrode", unité: unit("m^2")),
     "D": (signification: "le coefficient de diffusion", unité: unit("m^2/s")),
-    "c": (signification: "la concentration de l'espèce limitant le courant", unité: unit("mol/L")),
+    "c": (signification: "la concentration de l'espèce limitant le courant", unité: unit("mol/m^3")),
     "delta": (signification: "l'épaisseur de la couche limite de diffusion", unité: unit("m")),
 )
 
@@ -51,8 +51,8 @@ Pour une réaction électrochimique, les potentiels des couples redox sont liés
         table.hline(),
         table.header([], [#ce("H2O(l)")], [#ce("H2")], [#ce("O2")]),
         table.hline(),
-        [$Delta_f H^circ$ (kJ/mol)], [$-241.8$], [], [],
-        [$S_m^circ$ (J/mol/K)], [$188.7$], [$130.5$], [$204.8$],
+        [$Delta_f H^circ$ (kJ/mol)], [$-285.8$], [], [],
+        [$S_m^circ$ (J/mol/K)], [$69.9$], [$130.5$], [$204.8$],
         table.hline(),
     ))
 ]
@@ -163,7 +163,7 @@ Un #strong[électrolyseur] convertit de l'énergie électrique en énergie chimi
 On construit la caractéristique d'une pile ou d'un électrolyseur à partir des courbes intensité-potentiel de ses deux électrodes.
 
 #application[
-    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $\{0 ; 0,2 ; qty("0.4", "A")\}$, en faisant apparaitre la saturation en courant.
+    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $qty("0", "A")$, $qty("0.2", "A")$ et $qty("0.4", "A")$, en faisant apparaitre la saturation en courant.
     #figure(image("images/courbes_i-E_Daniell.png", width: 85%))
 ]
 
@@ -223,7 +223,7 @@ On superpose le diagramme potentiel-pH du métal et celui de l'eau. Trois cas :
 ]
 
 === Aspect cinétique
-La cinétique se déduit des courbes intensité-potentiel. Oxydation et réduction ayant lieu au même endroit, il n'y a qu'un seul potentiel, le #strong[potentiel de corrosion] (cas particulier de potentiel mixte). L'électrode restant neutre, les courants anodique et cathodique sont égaux : un seul point des courbes vérifie ces conditions.
+La cinétique se déduit des courbes intensité-potentiel. Oxydation et réduction ayant lieu au même endroit, il n'y a qu'un seul potentiel, le #strong[potentiel de corrosion] (cas particulier de potentiel mixte). L'électrode restant neutre, le courant total y est nul : les courants anodique et cathodique sont opposés, et un seul point des courbes vérifie ces conditions.
 
 #schéma(titre: "Potentiel de corrosion", hauteur: 5cm)
 
@@ -250,6 +250,6 @@ On réalise volontairement une pile de corrosion : la pièce à protéger, reli�
 #exemple[La galvanisation protège l'acier par recouvrement ; en cas de rayure, le zinc joue le rôle d'anode sacrificielle.]
 
 === Courant imposé
-On impose un courant pour contrôler les réactions à l'électrode : #strong[protection cathodique] (augmenter le potentiel pour empêcher l'oxydation) ou #strong[protection anodique] (forcer une réaction de passivation).
+On impose un courant pour contrôler les réactions à l'électrode : #strong[protection cathodique] (abaisser le potentiel jusqu'au domaine d'immunité pour empêcher l'oxydation) ou #strong[protection anodique] (forcer une réaction de passivation).
 
 #question-de-colle("Présenter trois méthodes permettant de protéger un métal de la corrosion.")

@@ -3,7 +3,7 @@
 
 #show: exercice.with(titre: "Corrosion du zinc", difficulté: 3)
 
-On considère $qty("1", "L")$ d'eau désaérée par barbotage d'argon (#ce("O2") dissous chassé), à $"pH" = 6.0$, sous $p = p^circ$ et $T = qty("298", "K")$. On y introduit une tôle en acier électro-zingué (acier recouvert de zinc). On admet $ce("[Zn^2+]") = qty("1e-6", "mol/L")$ (seuil de corrosion). Les pressions des gaz valent $qty("1", "bar")$.
+On considère $qty("1", "L")$ d'eau désaérée par barbotage d'argon (#ce("O2") dissous chassé), à $"pH" = 6.0$, à $T = qty("298", "K")$. On y introduit une tôle en acier électro-zingué (acier recouvert de zinc). On admet $ce("[Zn^2+]") = qty("1e-6", "mol/L")$ (seuil de corrosion). Les pressions des gaz valent $qty("1", "bar")$.
 
 Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+", "Fe")) = qty("-0.44", "V")$, $E^circ(ce("O2/H2O")) = qty("1.23", "V")$. Surtensions cathodiques (à vide) de dégagement de #ce("H2") : $qty("-0.75", "V")$ sur #ce("Zn"), $qty("-0.25", "V")$ sur #ce("Fe"). On prend $(R T \/ cal(F)) ln 10 approx qty("0.06", "V")$.
 
@@ -72,5 +72,5 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
 
   Potentiels : $E(cpl("Zn^2+", "Zn")) = qty("-0.94", "V")$, $E(cpl("Fe^2+", "Fe")) = qty("-0.62", "V")$. Le dégagement de #ce("H2") débute à $qty("-1.11", "V")$ sur #ce("Zn") et à $-0.36 - 0.25 = qty("-0.61", "V")$ sur #ce("Fe").
 
-  Le zinc, plus réducteur, s'oxyde préférentiellement : $ce("Zn") -> ce("Zn^2+") + 2 e^-$ (#strong[anode sacrificielle]). Les électrons libérés servent à la réduction $2 ce("H+") + 2 e^- -> ce("H2")$, qui se produit sur le fer (surtension de #ce("H2") plus faible sur #ce("Fe")) : le fer est la #strong[cathode]. Le potentiel mixte $E_m$ se cale entre $qty("-0.94", "V")$ et $qty("-0.62", "V")$ ; comme $E_m < E(cpl("Fe^2+", "Fe"))$, le fer #strong[ne peut pas s'oxyder] : il est protégé tant qu'il reste du zinc.
+  Le zinc, plus réducteur, s'oxyde préférentiellement : $ce("Zn") -> ce("Zn^2+") + 2 e^-$ (#strong[anode sacrificielle]). Les électrons libérés servent à la réduction $2 ce("H+") + 2 e^- -> ce("H2")$, qui se produit sur le fer (surtension de #ce("H2") plus faible sur #ce("Fe")) : le fer est la #strong[cathode]. L'équilibre des courants place donc $E_m$ entre $qty("-0.94", "V")$ (début de l'oxydation du zinc) et $qty("-0.61", "V")$ (début du dégagement de #ce("H2") sur le fer). À $"pH" = 6$ la réduction de #ce("H+") est limitée par un palier de diffusion très bas, ce qui cale $E_m$ tout près de $qty("-0.94", "V")$ : on a bien $E_m < E(cpl("Fe^2+", "Fe")) = qty("-0.62", "V")$, donc le fer #strong[ne peut pas s'oxyder]. Il est protégé tant qu'il reste du zinc.
 ]

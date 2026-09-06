@@ -9,7 +9,7 @@ Réactions de décharge :
 - $ce("PbO2(s) + 3 H+ + HSO4^- + 2 e^- -> PbSO4(s) + 2 H2O")$, $E^circ_1 = qty("1.70", "V")$
 - $ce("Pb(s) + HSO4^- -> PbSO4(s) + H+ + 2 e^-")$, $E^circ_2 = qty("-0.36", "V")$
 
-Données : $"p"K_(a 1)(ce("H2SO4")/ce("HSO4^-")) = -3$ ; $"p"K_(a 2)(ce("HSO4^-")/ce("SO4^2-")) = 1.9$ ; $M(ce("O")) = qty("16.0", "g/mol")$ ; $M(ce("S")) = qty("32.1", "g/mol")$ ; $cal(F) = qty("9.65e4", "C/mol")$. Caractéristiques de la batterie : tension à vide $qty("12", "V")$, capacité $qty("100", "A h")$.
+Données : $"p"K_(a 1)(ce("H2SO4")/ce("HSO4^-")) = -3$ ; $"p"K_(a 2)(ce("HSO4^-")/ce("SO4^2-")) = 1.9$ ; $M(ce("H")) = qty("1.0", "g/mol")$ ; $M(ce("O")) = qty("16.0", "g/mol")$ ; $M(ce("S")) = qty("32.1", "g/mol")$ ; $cal(F) = qty("9.65e4", "C/mol")$. Caractéristiques de la batterie : tension à vide $qty("12", "V")$, capacité $qty("100", "A h")$.
 
 #question(coups-de-pouce: (
   "L'acide sulfurique est-il un acide fort dans l'eau (pKa1 = -3) ?",

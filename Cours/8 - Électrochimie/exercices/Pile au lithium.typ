@@ -35,7 +35,7 @@ Données : $E^circ(cpl("Li+", "Li")) = qty("-3.0", "V")$, $E^circ(ce("MnO2/MnO(O
 ]
 
 #question[
-  Exprimer la capacité massique $C_m$ (quantité d'électricité par kilogramme de lithium). La comparer à celle de piles au #ce("Cd") ($480$), au #ce("Zn") ($500$) ou à l'#ce("Ag") ($820$), en A·h·kg⁻¹.
+  Exprimer la capacité massique $C_m$ (quantité d'électricité par kilogramme de lithium). La comparer à celle de piles au #ce("Cd") ($480$), au #ce("Zn") ($820$) ou à l'#ce("Ag") ($500$), en A·h·kg⁻¹.
 ][
   $ C_m = Q \/ m(ce("Li")) = 7.8 \/ (2.0 times 10^(-3)) approx qty("3900", "A h/kg") $
   C'est bien plus élevé que pour #ce("Cd"), #ce("Zn") ou #ce("Ag") : le lithium est très léger ($M = qty("6.9", "g/mol")$) et cède un électron par atome, d'où la grande densité d'énergie des piles au lithium.

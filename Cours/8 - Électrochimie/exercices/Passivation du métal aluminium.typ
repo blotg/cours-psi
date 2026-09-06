@@ -3,7 +3,7 @@
 
 #show: exercice.with(titre: "Passivation du métal aluminium", difficulté: 2)
 
-Au contact de l'air, l'aluminium se couvre spontanément d'une couche d'oxyde d'aluminium(III) qui le protège. On épaissit cette couche par électrolyse. Donnée : masse volumique de l'oxyde d'aluminium(III) $rho = qty("3.16", "g/cm^3")$ ; $M(ce("Al")) = qty("27", "g/mol")$, $M(ce("O")) = qty("16", "g/mol")$.
+Au contact de l'air, l'aluminium se couvre spontanément d'une couche d'oxyde d'aluminium(III) qui le protège. On épaissit cette couche par électrolyse dans un bain d'acide sulfurique concentré (anodisation). Donnée : masse volumique de l'oxyde d'aluminium(III) $rho = qty("3.16", "g/cm^3")$ ; $M(ce("Al")) = qty("27", "g/mol")$, $M(ce("O")) = qty("16", "g/mol")$.
 
 #question(coups-de-pouce: (
   "Dans quelles proportions se trouvent l'aluminium (nombre d'oxydation +III) et l'oxygène (−II) dans un oxyde neutre ?",

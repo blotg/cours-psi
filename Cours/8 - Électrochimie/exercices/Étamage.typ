@@ -3,7 +3,7 @@
 
 #show: exercice.with(titre: "Étamage", difficulté: 2)
 
-L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boites de conserve). Une expérience est menée à $25 degree upright("C")$ sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
+L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boites de conserve). Une expérience est menée à #qty("25", "dC") sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
 
 #figure(canvas({
   import cetz.draw: *
@@ -31,7 +31,7 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
 ]
 
 #question(coups-de-pouce: (
-  "Dans quel sens se déplacent les électrons ? Quelle réaction à l'électrode où ils arrivent ? D'où ils partent ?",
+  "Dans quel sens se déplacent les électrons ? Quelle réaction a lieu à l'électrode où ils arrivent ? D'où partent-ils ?",
   "L'étamage dépose de l'étain sur le fer.",
 ))[
   Compléter le schéma : polarité du générateur, sens du courant, nature (anode / cathode) de chaque électrode.
@@ -83,13 +83,13 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
 ))[
   Exprimer puis calculer la masse maximale $m$ d'étain déposée, sachant que $i = qty("1.0", "A")$ et que l'électrolyse dure $qty("4", "min")$.
 ][
-  Au mieux, tout le courant sert au dépôt d'étain. La charge est $Q = i thin t = 1.0 times 240 = qty("240", "C")$. Avec $n = 2$ :
+  Au mieux, tout le courant sert au dépôt d'étain. La charge est $Q = i thin t = 1.0 times 240 = qty("240", "C")$ (l'électrolyse dure $qty("4", "min") = qty("240", "s")$). Avec $n = 2$ :
   $ m = (Q)/(n cal(F)) M(ce("Sn")) = 240/(2 times 96500) times 118.7 approx qty("0.15", "g") $
 ]
 
 #question[
   La masse mesurée est $qty("0.12", "g")$. Calculer le rendement faradique.
 ][
-  $ rho_F = (0.12)/(0.15) approx 0.82 = qty("82", "%") $
-  Les $qty("18", "%")$ manquants correspondent au courant ayant servi au dégagement de #ce("H2").
+  $ rho_F = (0.12)/(0.15) approx 0.80 = qty("80", "%") $
+  Les $qty("20", "%")$ manquants correspondent au courant ayant servi au dégagement de #ce("H2").
 ]
