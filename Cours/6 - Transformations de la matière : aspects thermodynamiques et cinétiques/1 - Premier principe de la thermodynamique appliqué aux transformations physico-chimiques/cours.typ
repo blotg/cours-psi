@@ -141,7 +141,7 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 )
 
 #application[
-    Calculer l'enthalpie standard de réaction de la combustion du méthane #ce("CH4(g)") + 2 #ce("O2(g)") #ce("->") #ce("CO2(g)") + 2 #ce("H2O(g)")
+    Calculer l'enthalpie standard de réaction de la combustion du méthane #ce("CH4(g)") + 2 #ce("O2(g)") #ce("->") #ce("CO2(g)") + 2 #ce("H2O(g)").
     #table(
         columns: 4,
         [Espèces chimiques], ce("CH4(g)"), ce("CO2(g)"), ce("H2O(g)"),
@@ -174,7 +174,7 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 
 = Effets thermiques pour une transformation isobare
 == Transfert thermique causé par une transformation chimique
-Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variation d'entropie due à la réaction entraine un transfert thermique avec le thermostat.
+Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variation d'enthalpie due à la réaction entraine un transfert thermique avec le thermostat.
 
 #figure(
     canvas({

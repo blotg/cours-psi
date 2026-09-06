@@ -15,7 +15,7 @@ Le ciment est modélisé par la seule espèce : #ce("[Ca3SiO5](s)"). La réactio
     block: true,
 ) <equation1>
 
-L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélange $m_1 = #qty("228.0", "g")$ de ciment et $m_2 = #qty("90.0", "g")$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = qty("15.0", "Celsius")$.
+L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélange $m_1 = #qty("228.0", "g")$ de ciment et $m_2 = #qty("90.0", "g")$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = qty("15.0", "Celsius")$.
 
 #let M_Ca3SiO5 = 3 * 40.0 + 28.0 + 5 * 16.0
 #let M_H2O = 2 * 1.00 + 16.0
@@ -68,7 +68,7 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
             [],
             [2 #ce("Ca3SiO5(s)")],
             ce("+"),
-            ce("H2O(l)"),
+            [6 #ce("H2O(l)")],
             ce("->"),
             ce("[Ca3Si2O7, 3H2O](s)"),
             ce("+"),
@@ -82,7 +82,7 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
     - Si #ce("Ca3SiO5") est réactif limitant, on a $xi_f = n_1/2 = #qty(scientifique(m1 / M_Ca3SiO5 / 2, 3), "mol")$.
     - Si #ce("H2O") est réactif limitant, on a $xi_f = n_2 / 6 = #qty(scientifique(m2 / (6 * M_H2O), 3), "mol")$.
 
-    Le réactif limitant est donc l'eau et l'avancement final est
+    L'avancement le plus petit est celui du ciment : c'est donc lui le réactif limitant, et l'avancement final est
     $xi_f = n_1 / 2 = #qty(scientifique(m1 / (2 * M_Ca3SiO5), 3), "mol")$
 
     À l'état final, les quantités de matière sont donc :
@@ -94,14 +94,14 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
 
 #question(
     coups-de-pouce: (
-        "On imagine une transformation constitué d'une transformation chimique isotherme suivie d'une élévation de température sans transformation chimique dont les états initiaux et finaux sont les mêmes que la transformation étudiée.",
+        "On imagine une transformation constituée d'une transformation chimique isotherme suivie d'une élévation de température sans transformation chimique dont les états initiaux et finaux sont les mêmes que la transformation étudiée.",
         "Que peut-on dire de la chaleur échangée lors de la transformation étudiée ? En déduire la variation d'enthalpie.",
         "Concernant la réaction chimique isotherme : relier la variation d'enthalpie à l'avancement.",
         "Concernant l'élévation de température sans réaction chimique : écrire la seconde loi de Joule.",
         "Relier les variations d'enthalpie sur les trois transformations.",
     ),
 )[
-    Le système constitué par le calorimètre et son contenu sont supposés en évolution adiabatique. Estimer la valeur de l’enthalpie standard de réaction $Delta_r H^0$ associée à l’équation-bilan (@equation1[]). On négligera la capacité thermique du calorimètre.
+    Le système constitué par le calorimètre et son contenu est supposé en évolution adiabatique. Estimer la valeur de l’enthalpie standard de réaction $Delta_r H^0$ associée à l’équation-bilan (@equation1[]). On négligera la capacité thermique du calorimètre.
 ][
     On imagine le cycle suivant
     #figure(
@@ -163,7 +163,7 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
 
     La transformation de l'état intermédiaire à l'état final est une élévation de température sans transformation chimique. On applique la seconde loi de Joule :
     $
-        Delta H_3^circ = integral_(T_i)^(T_f) sum_(i) n_i_(p,m,i) dd(T)\
+        Delta H_3^circ = integral_(T_i)^(T_f) sum_i n_i c_(P,m,i) dd(T)\
         = Delta theta ((n_2-3 n_1) c_(P,m) (ce("H2O(l)")) + n_1/2 c_(P,m) (ce("[Ca3Si2O7, 3H2O](s)")) + 3 n_1/2 c_(P,m) (ce("Ca(OH)2(s)")))
     $
 
@@ -183,7 +183,7 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelée _portlandite_. On mélan
                 ),
                 3
             ),
-            "kJ/mol"
+            "J/mol"
         )
     $
 ]

@@ -57,7 +57,7 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
     car l'enthalpie standard de formation du dioxygène est nulle (corps simple dans son état standard).
 ]
 
-La capacité thermique molaire à pression constante de l'eau et du dioxyde de carbone changent beaucoup entre la température ambiante (prise à #qty("25", "Celsius")) et la température de flamme. Pour rendre de compte de cette variation, on introduit les polynômes NASA dont les coefficients ont été déterminés expérimentalement pour coller au mieux aux données expérimentales :
+La capacité thermique molaire à pression constante de l'eau et du dioxyde de carbone change beaucoup entre la température ambiante (prise à #qty("25", "Celsius")) et la température de flamme. Pour rendre compte de cette variation, on introduit les polynômes NASA dont les coefficients ont été déterminés expérimentalement pour coller au mieux aux données expérimentales :
 $
     c_(P,m) / R = a_0 T^(-2) + a_1 T^(-1) + a_2 + a_3 T + a_4 T^2 + a_5 T^3 + a_6 T^4
 $
@@ -77,7 +77,7 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
     coefs_co2_basse = [4.94e4, -6.26e2, 5.30, 2.50e-3, -2.13e-7, -7.69e-10, 2.85e-13]
     coefs_co2_haute = [1.18e5, -1.79e3, 8.29, -9.22e-5, 4.86e-9, -1.89e-12, 6.33e-16]
     coefs_h2o_basse = [-3.95e4, 5.76e2, 9.32e-1, 7.22e-3, -7.34e-6, 4.96e-9, -1.34e-12]
-    coefs_h2o_haute = [1.03e-6, -2.41e3, 4.65, 2.29e-3, -6.84e-7, 9.43e-11, -4.82e-15]
+    coefs_h2o_haute = [1.03e6, -2.41e3, 4.65, 2.29e-3, -6.84e-7, 9.43e-11, -4.82e-15]
 
     def cpm_CO2(T):
         s = 0
@@ -104,18 +104,18 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 #question(
     coups-de-pouce: (),
 )[
-    On considère un mélange de dioxygène $n_1 unit("mol")$ de #ce("CO2") et $n_2 unit("mol")$ de #ce("H2O") passant de la température $T_i=#qty("25", "Celsius")$ à une température $T_f$. Écrire l'expression de la variation d'enthalpie $Delta H$ du mélange comme une intégrale faisant intervenir $c_(p,m)(ce("CO2"))(T)$, $c_(p,m)(ce("H2O"))(T)$, $n_1$ et $n_2$.
+    On considère un mélange de $n_1 unit("mol")$ de #ce("CO2") et $n_2 unit("mol")$ de #ce("H2O") passant de la température $T_i=#qty("25", "Celsius")$ à une température $T_f$. Écrire l'expression de la variation d'enthalpie $Delta H$ du mélange comme une intégrale faisant intervenir $c_(P,m)(ce("CO2"))(T)$, $c_(P,m)(ce("H2O"))(T)$, $n_1$ et $n_2$.
 ][
     La variation d'enthalpie du mélange s'écrit
     $
-        Delta H = integral_(T_i)^(T_f) (n_1 c_(p,m)(ce("CO2(g)"))(T) + n_2 c_(P,m)(ce("H2O(g)"))(T)) dd(T)
+        Delta H = integral_(T_i)^(T_f) (n_1 c_(P,m)(ce("CO2(g)"))(T) + n_2 c_(P,m)(ce("H2O(g)"))(T)) dd(T)
     $
 ]
 
 #question[
     En exhibant un cycle, montrer que la température de flamme $T_f$ d'un mélange de dioxygène et d'acétylène dans les proportions stœchiométriques vérifie l'équation
     $
-        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 c_(P,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
     $
 ][
     #figure(
@@ -172,7 +172,7 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 
     La transformation de l'état intermédiaire fictif à l'état final correspond au chauffage du mélange de #ce("CO2") et #ce("H2O") de la température $T_i$ à la température $T_f$, donc
     $
-        Delta H^circ_3 = integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T)
+        Delta H^circ_3 = integral_(T_i)^(T_f) (2 n c_(P,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T)
     $
 
     L'enthalpie est une fonction d'état, sa variation ne dépend pas du chemin suivi. On en déduit que
@@ -180,17 +180,17 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
         Delta H^circ_1 = Delta H^circ_2 + Delta H^circ_3
     $
     $
-        integral_(T_i)^(T_f) (2 n c_(p,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T) + n Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 n c_(P,m)(ce("CO2(g)"))(T) + n c_(P,m)(ce("H2O(g)"))(T)) dd(T) + n Delta_r H^circ = 0
     $
     soit, en simplifiant par $n$,
     $
-        integral_(T_i)^(T_f) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
+        integral_(T_i)^(T_f) (2 c_(P,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ = 0
     $
 ]
 
 On note $f$ la fonction définie par
 $
-    f(theta) = integral_(T_i)^(theta) (2 c_(p,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(theta) + Delta_r H^circ
+    f(theta) = integral_(T_i)^(theta) (2 c_(P,m)(ce("CO2(g)"))(T) + c_(P,m)(ce("H2O(g)"))(T)) dd(T) + Delta_r H^circ
 $
 On cherche à évaluer numériquement le zéro de cette fonction, qui correspond à la température de flamme.
 
@@ -198,7 +198,7 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
     Exprimer $f'(theta)$.
 ][
     $
-        f'(theta) = 2 c_(p,m)(ce("CO2(g)"))(theta) + c_(P,m)(ce("H2O(g)"))(theta)
+        f'(theta) = 2 c_(P,m)(ce("CO2(g)"))(theta) + c_(P,m)(ce("H2O(g)"))(theta)
     $
 ]
 
@@ -207,7 +207,8 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
 ][
     ```python
     from scipy.integrate import quad
-    DrH = 2 * -394e3 + 1 * -286e3 - 1 * 227e3 - 5/2 * 0
+    DfH_H2O_g = -286e3 + 2257e3 * 18.0e-3 # établi à la question 2
+    DrH = 2 * -394e3 + 1 * DfH_H2O_g - 1 * 227e3 - 5/2 * 0
     def df(theta):
         return 2 * cpm_CO2(theta) + cpm_H2O(theta)
 
@@ -229,7 +230,16 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
         xk1 = xk - f(xk) / df(xk)
     print(f"Température de flamme approchée : {xk1} K")
     ```
-]// L'AN donne n'importe quoi pour une raison encore non élucidée
+]
+
+#question[
+    La température de flamme oxyacétylénique mesurée est d'environ #qty("3500", "K"). Commenter l'écart avec le modèle.
+][
+    Le modèle donne une température près de deux fois trop grande, pour deux raisons.
+
+    - Au-delà de #qty("3000", "K"), le dioxyde de carbone et l'eau se *dissocient* (#ce("CO2") #ce("->") #ce("CO") + 1\/2 #ce("O2"), #ce("H2O") #ce("->") #ce("OH") + #ce("H")…). Ces réactions sont fortement endothermiques : elles absorbent une part importante de l'énergie libérée par la combustion et plafonnent la température de flamme. Le modèle, qui suppose la combustion complète et les produits inertes, les ignore complètement.
+    - Les polynômes NASA ne sont ajustés que jusqu'à #qty("6000", "K") : la valeur trouvée est hors de leur domaine de validité.
+]
 
 *Données*
 
@@ -280,7 +290,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("-1.34e-12"),
 
         [#ce("H2O(g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
-        num("1.03e-6"),
+        num("1.03e6"),
         num("-2.41e3"),
         num("4.65"),
         num("2.29e-3"),
@@ -295,5 +305,5 @@ On pourra copier-coller les listes python suivantes pour ne pas avoir à recopie
 coefs_co2_basse = [4.94e4, -6.26e2, 5.30, 2.50e-3, -2.13e-7, -7.69e-10, 2.85e-13]
 coefs_co2_haute = [1.18e5, -1.79e3, 8.29, -9.22e-5, 4.86e-9, -1.89e-12, 6.33e-16]
 coefs_h2o_basse = [-3.95e4, 5.76e2, 9.32e-1, 7.22e-3, -7.34e-6, 4.96e-9, -1.34e-12]
-coefs_h2o_haute = [1.03e-6, -2.41e3, 4.65, 2.29e-3, -6.84e-7, 9.43e-11, -4.82e-15]
+coefs_h2o_haute = [1.03e6, -2.41e3, 4.65, 2.29e-3, -6.84e-7, 9.43e-11, -4.82e-15]
 ```

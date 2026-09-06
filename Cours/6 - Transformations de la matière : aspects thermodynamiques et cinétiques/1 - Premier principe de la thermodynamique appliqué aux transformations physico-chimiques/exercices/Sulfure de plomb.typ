@@ -39,7 +39,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 
 #question(
     coups-de-pouce: (
-        "On imagine une transformation constitué d'une transformation chimique isotherme suivie d'une élévation de température sans transformation chimique dont les états initiaux et finaux sont les mêmes que la transformation étudiée.",
+        "On imagine une transformation constituée d'une transformation chimique isotherme suivie d'une élévation de température sans transformation chimique dont les états initiaux et finaux sont les mêmes que la transformation étudiée.",
         "Que peut-on dire de la chaleur échangée lors de la transformation étudiée ? En déduire la variation d'enthalpie.",
         "Concernant la réaction chimique isotherme : relier la variation d'enthalpie à l'avancement.",
         "Concernant l'élévation de température sans réaction chimique : écrire la seconde loi de Joule.",
