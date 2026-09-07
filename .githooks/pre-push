@@ -67,9 +67,11 @@ fi
 # On fabrique le commit avec les commandes de plomberie plutot qu'en changeant
 # de branche : l'index et l'arbre de travail de l'utilisateur ne sont pas
 # touches, et un `git push` reste un `git push`.
-index=$(mktemp) || exit 0
-trap 'rm -f "$index"' EXIT
-GIT_INDEX_FILE=$index
+# mktemp cree un fichier *vide*, que git refuse comme index (« fichier d'index
+# plus petit qu'attendu ») : il lui faut un chemin encore inexistant.
+tampon=$(mktemp -d) || exit 0
+trap 'rm -rf "$tampon"' EXIT
+GIT_INDEX_FILE=$tampon/index
 export GIT_INDEX_FILE
 
 if ! git --work-tree=site add --all --force . 2>/dev/null; then
