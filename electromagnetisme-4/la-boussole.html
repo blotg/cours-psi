@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>La boussole — Électromagnétisme 4 : Matériaux ferromagnétiques</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électromagnétisme 4 : Matériaux ferromagnétiques</a><span class="sep">›</span><span class="ici">La boussole</span></nav><h2>🤔 La boussole</h2><p><em>Cet exercice est un problème ouvert. Il nécessite de prendre des initiatives et de faire des choix dans la modélisation. Des approximations et des estimations sont souvent nécessaires pour arriver à une solution.</em></p><p>Visionner la vidéo suivante.</p><p><strong>Données :</strong></p><p>Moment d’inertie de l’aiguille de la boussole : <math><mi>𝐽</mi><mo>=</mo><mn>1</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><mspace width="0.1667em"/><mtext>k</mtext><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mn>2</mn></msup></math>.</p><p>Composante horizontale du champ magnétique terrestre : <math><mi>𝐵</mi><mo>=</mo><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>5</mn></mrow></msup><mspace width="0.1667em"/><mtext>T</mtext></math>.</p><p><strong>Calculer le moment magnétique de la boussole de la vidéo.</strong></p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Faire l’inventaire des moments s’exerçant sur l’aiguille de la boussole.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Rappeler l’expression du TMC (dans sa version en rotation autour d’un axe fixe).</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 3</div><div class="volet-texte">Montrer que l’équation différentielle régissant le mouvement de l’aiguille est celle d’un oscillateur harmonique et donner l’expression de la période des oscillations.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 4</div><div class="volet-texte">La vidéo permet d’estimer la période des oscillations. En déduire le moment magnétique de la boussole.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>On étudie l’aiguille de boussole, soumise aux actions :</p><ul><li>poids (de moment nul)</li><li>force de réaction du support (de moment nul si on suppose la liaison pivot idéale)</li><li>l’action du champ magnétique (de moment <math><mover accent="true"><mi>ℳ︀</mi><mo stretchy="true">⃗</mo></mover><mo>∧</mo><mover accent="true"><mi>𝐵</mi><mo stretchy="true">⃗</mo></mover></math>)</li><li>les frottements (négligés)</li></ul><p>On note <math><mi>𝜃</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math> l’angle entre l’aiguille et la composante horizontale du champ magnétique terrestre.</p><p>Le TMC s’écrit</p><math display="block"><mi>𝐽</mi><mfrac><mrow><msup><mi mathvariant="normal">d</mi><mn>2</mn></msup><mi>𝜃</mi></mrow><mrow><mi mathvariant="normal">d</mi><msup><mi>𝑡</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mrow><mo>(</mo><mrow><mover accent="true"><mi>ℳ︀</mi><mo stretchy="true">⃗</mo></mover><mo>∧</mo><mover accent="true"><mi>𝐵</mi><mo stretchy="true">⃗</mo></mover></mrow><mo>)</mo></mrow><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑧</mi></msub><mo>=</mo><mo form="prefix">−</mo><mi>ℳ︀</mi><mi>𝐵</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">sin</mo><mrow><mo>(</mo><mi>𝜃</mi><mo>)</mo></mrow></math><p>Aux petits angles, on a <math><mo lspace="0em" rspace="0em">sin</mo><mrow><mo>(</mo><mi>𝜃</mi><mo>)</mo></mrow><mo>≈</mo><mi>𝜃</mi></math>, donc l’équation différentielle devient</p><math display="block"><mfrac><mrow><msup><mi mathvariant="normal">d</mi><mn>2</mn></msup><mi>𝜃</mi></mrow><mrow><mi mathvariant="normal">d</mi><msup><mi>𝑡</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mo form="prefix">−</mo><mfrac><mrow><mi>ℳ︀</mi><mi>𝐵</mi></mrow><mi>𝐽</mi></mfrac><mi>𝜃</mi><mo>=</mo><mo form="prefix">−</mo><msup><mi>𝜔</mi><mn>2</mn></msup><mi>𝜃</mi></math><p>avec</p><math display="block"><mi>𝜔</mi><mo>=</mo><msqrt><mfrac><mrow><mi>ℳ︀</mi><mi>𝐵</mi></mrow><mi>𝐽</mi></mfrac></msqrt></math><p>Cette équation différentielle est celle d’un oscillateur harmonique de pulsation <math><mi>𝜔</mi></math>.</p><p>La période des oscillations est donc</p><math display="block"><mi>𝑇</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>𝜋</mi></mrow><mi>𝜔</mi></mfrac><mo>=</mo><mn>2</mn><mi>𝜋</mi><msqrt><mfrac><mi>𝐽</mi><mrow><mi>ℳ︀</mi><mi>𝐵</mi></mrow></mfrac></msqrt></math><p>Avec la vidéo, on peut estimer la période des oscillations à environ <math><mi>𝑇</mi><mo>≈</mo><mn>3</mn><mspace width="0.1667em"/><mtext>s</mtext></math>, soit</p><math display="block"><mi>ℳ︀</mi><mo>=</mo><mn>4</mn><msup><mi>𝜋</mi><mn>2</mn></msup><mfrac><mi>𝐽</mi><mrow><mi>𝐵</mi><msup><mi>𝑇</mi><mn>2</mn></msup></mrow></mfrac><mo>≈</mo><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mn>2</mn></msup></math></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

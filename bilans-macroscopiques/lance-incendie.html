@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lance incendie — Bilans macroscopiques</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Bilans macroscopiques</a><span class="sep">›</span><span class="ici">Lance incendie</span></nav><h2>🤔 Lance incendie</h2><p><em>Cet exercice est un problème ouvert. Il nécessite de prendre des initiatives et de faire des choix dans la modélisation. Des approximations et des estimations sont souvent nécessaires pour arriver à une solution.</em></p><p>Les lances incendie sont utilisées pour projeter de l’eau à haute vitesse afin d’éteindre les incendies. Elles sont souvent connectées à des hydrants ou des camions de pompiers. Leur débit peut atteindre plusieurs centaines de litres par minute et générer une poussée importante.</p><p>Le coefficient de frottement statique solide tissus/béton est approximativement <math><mi>𝑓</mi><mo>=</mo><mn>0.5</mn></math>.</p><p><strong>Estimer un ordre de grandeur de la vitesse de l’eau en sortie de lance.</strong></p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>On estime la masse du pompier à <math><mn>80</mn><mspace width="0.1667em"/><mtext>k</mtext><mtext>g</mtext></math> et le débit de la lance à <math><mn>300</mn><mspace width="0.1667em"/><mtext>L</mtext><mspace width="0.1667em"/><msup><mtext>min</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>. La poussée s’exprime comme <math><mi>𝐹</mi><mo>=</mo><msub><mi>𝐷</mi><mi>𝑚</mi></msub><mi>𝑣</mi></math>. Juste avant que le pompier ne commence à glisser, la poussée est équilibrée par la force de frottement statique maximale entre ses vêtements et le sol, soit <math><msub><mi>𝐹</mi><mi>𝑓</mi></msub><mo>=</mo><mi>𝑓</mi><mi>𝑚</mi><mi>𝑔</mi></math> où <math><mi>𝑚</mi></math> est la masse du pompier et <math><mi>𝑔</mi></math> l’intensité de la pesanteur.</p><p>En égalant les deux expressions, on trouve :</p><math display="block"><mi>𝑣</mi><mo>=</mo><mfrac><mrow><mi>𝑓</mi><mi>𝑚</mi><mi>𝑔</mi></mrow><msub><mi>𝐷</mi><mi>𝑚</mi></msub></mfrac><mo>=</mo><mfrac><mrow><mn>0.5</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>80</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>9.81</mn></mrow><mfrac><mn>300</mn><mn>60</mn></mfrac></mfrac><mo>=</mo><mn>8</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>1</mn></msup><mspace width="0.1667em"/><mtext>m</mtext><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

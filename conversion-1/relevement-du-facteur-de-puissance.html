@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relèvement du facteur de puissance — Conversion de puissance 1 : Puissance électrique en régime sinusoïdal</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Conversion de puissance 1 : Puissance électrique en régime sinusoïdal</a><span class="sep">›</span><span class="ici">Relèvement du facteur de puissance</span></nav><h2>Relèvement du facteur de puissance ★★</h2><p>Une installation industrielle comporte en parallèle deux machines assimilées à des impédances inductives qui consomment respectivement les puissances <math><msub><mi>𝑃</mi><mn>1</mn></msub><mo>=</mo><mn>2000</mn><mspace width="0.1667em"/><mtext>W</mtext></math> avec un facteur de puissance <math><mo lspace="0em" rspace="0.16666666666666666em">cos</mo><msub><mi>𝜑</mi><mn>1</mn></msub><mo>=</mo><mn>0</mn><mo>,</mo><mn>6</mn></math> et <math><msub><mi>𝑃</mi><mn>2</mn></msub><mo>=</mo><mn>3000</mn><mspace width="0.1667em"/><mtext>W</mtext></math> avec un facteur de puissance <math><mo lspace="0em" rspace="0.16666666666666666em">cos</mo><msub><mi>𝜑</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn><mo>,</mo><mn>7</mn></math>, en parallèle desquelles sont branchées des lampes consommant au total une puissance <math><msub><mi>𝑃</mi><mi>𝐿</mi></msub><mo>=</mo><mn>2000</mn><mspace width="0.1667em"/><mtext>W</mtext></math>. Les lampes sont assimilées à des résistances.</p><p>La tension aux bornes de l’installation est sinusoïdale de fréquence <math><mi>𝑓</mi><mo>=</mo><mn>50</mn><mspace width="0.1667em"/><mtext>Hz</mtext></math> et sa valeur efficace est <math><msub><mi>𝑈</mi><mtext>eff</mtext></msub><mo>=</mo><mn>230</mn><mspace width="0.1667em"/><mtext>V</mtext></math>.</p><p><strong>1/</strong> Calculer le facteur de puissance et la valeur efficace du courant consommé par l’installation complète et commenter le résultat.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Déterminer l’admittance de chaque machine et des lampes, puis l’admittance totale.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Déterminer la partie réelle de l’admittance grâce à la puissance. Représenter l’admittance sur un diagramme de Fresnel et en déduire une relation entre <math><mi>𝜑</mi></math>, la partie réelle et la partie imaginaire de m’admittance.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>On calcule les admittances des deux machines et des lampes : <math><msub><mi>𝑌</mi><mn>1</mn></msub></math>, <math><msub><mi>𝑌</mi><mn>2</mn></msub></math> et <math><msub><mi>𝑌</mi><mi>𝐿</mi></msub></math>.</p><p>Les lampes sont purement résistives donc</p><math display="block"><msub><mi>𝑌</mi><mi>𝐿</mi></msub><mo>=</mo><mfrac><msub><mi>𝑃</mi><mi>𝐿</mi></msub><msubsup><mi>𝑈</mi><mtext>eff</mtext><mn>2</mn></msubsup></mfrac><mo>=</mo><mn>38</mn><mspace width="0.1667em"/><mtext>m</mtext><mtext>S</mtext></math><p>Pour la machine 1, on a <math><msub><mi>𝑃</mi><mn>1</mn></msub><mo>=</mo><msubsup><mi>𝑈</mi><mtext>eff</mtext><mn>2</mn></msubsup><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow></math> donc <math><mo lspace="0em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>=</mo><mfrac><msub><mi>𝑃</mi><mn>1</mn></msub><msubsup><mi>𝑈</mi><mtext>eff</mtext><mn>2</mn></msubsup></mfrac></math>.</p><p>De plus, <math><msub><mi>𝜑</mi><mn>1</mn></msub><mo>=</mo><mo form="prefix" lspace="0em" rspace="0em">arccos</mo><mrow><mo>(</mo><mrow><mo lspace="0em" rspace="0em">cos</mo><mrow><mo>(</mo><msub><mi>𝜑</mi><mn>1</mn></msub><mo>)</mo></mrow></mrow><mo>)</mo></mrow></math>. Connaissant la partie réelle de <math><msub><mi>𝑌</mi><mn>1</mn></msub></math> et son argument, on le donc connait complètement :</p><math display="block"><mtable class="multiline-equation aligned"><mtr><mtd><msub><mi>𝑌</mi><mn>1</mn></msub><mo>=</mo><mo form="prefix" lspace="0em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>+</mo><mi>𝑗</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">Im</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow></mtd><mtd><mo form="infix">=</mo><mo form="prefix" lspace="0em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>−</mo><mi>𝑗</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>)</mo></mrow><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">tan</mo><mrow><mo>(</mo><msub><mi>𝜑</mi><mn>1</mn></msub><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo form="infix">=</mo><mfrac><msub><mi>𝑃</mi><mn>1</mn></msub><msubsup><mi>𝑈</mi><mtext>eff</mtext><mn>2</mn></msubsup></mfrac><mo>−</mo><mi>𝑗</mi><mfrac><msub><mi>𝑃</mi><mn>1</mn></msub><msubsup><mi>𝑈</mi><mtext>eff</mtext><mn>2</mn></msubsup></mfrac><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">tan</mo><mrow><mo>(</mo><mrow><mo lspace="0em" rspace="0em">arccos</mo><mrow><mo>(</mo><mrow><mo lspace="0em" rspace="0em">cos</mo><mrow><mo>(</mo><msub><mi>𝜑</mi><mn>1</mn></msub><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo form="infix">=</mo><mn>38</mn><mo>−</mo><mn>50</mn><mi>𝑗</mi><mspace width="0.2222em"/><mtext>m</mtext><mtext>S</mtext></mtd></mtr></mtable></math><p>De même, on trouve <math><msub><mi>𝑌</mi><mn>2</mn></msub><mo>=</mo><mn>57</mn><mo>−</mo><mn>58</mn><mi>𝑗</mi><mspace width="0.2222em"/><mtext>m</mtext><mtext>S</mtext></math>.</p><p>On peut en déduire l’admittance totale : <math><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>=</mo><msub><mi>𝑌</mi><mn>1</mn></msub><mo>+</mo><msub><mi>𝑌</mi><mn>2</mn></msub><mo>+</mo><msub><mi>𝑌</mi><mi>𝐿</mi></msub><mo>=</mo><mn>133</mn><mo>−</mo><mn>108</mn><mi>𝑗</mi><mspace width="0.2222em"/><mtext>m</mtext><mtext>S</mtext></math>, puis le déphasage totale :</p><math display="block"><msub><mi>𝜑</mi><mtext>tot</mtext></msub><mo>=</mo><mo form="prefix" lspace="0em" rspace="0em">arctan</mo><mrow><mo>(</mo><mfrac><mrow><mo lspace="0em" rspace="0em">Im</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>)</mo></mrow></mrow><mrow><mo lspace="0em" rspace="0em">Re</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>)</mo></mrow></mrow></mfrac><mo>)</mo></mrow><mo>=</mo><mo form="prefix" lspace="0em" rspace="0em">arctan</mo><mrow><mo>(</mo><mrow><mo>−</mo><mfrac><mn>108</mn><mn>133</mn></mfrac></mrow><mo>)</mo></mrow><mo>=</mo><mn>39</mn><mi>°</mi></math><p>et le facteur de puissance <math><mo lspace="0em" rspace="0em">cos</mo><mrow><mo>(</mo><msub><mi>𝜑</mi><mtext>tot</mtext></msub><mo>)</mo></mrow><mo>=</mo><mn>0.77</mn></math>.</p><p>Ce facteur de puissance est assez faible, ce qui signifie que l’installation consomme beaucoup de puissance réactive, engendrant des pertes en lignes importantes.</p></div></div></div></div><p><strong>2/</strong> Pour réduire les pertes en lignes, on ajoute un condensateur à l’installation. Doit-on l’ajouter en parallèle ou en série ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Il faut que les machines continuent à fonctionner normalement, donc que la tension à leur bornes ne soit pas modifiée par l’ajout du condensateur.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Le condensateur doit être ajouté en parallèle, de façon à ne pas modifier la tension aux bornes des machines, afin qu’elles continuent à fonctionner normalement.</div></div></div></div><p><strong>3/</strong> Calculer la valeur du condensateur pour ramener le facteur de puissance à <math><mn>1</mn></math>.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Que peut-on dire de l’admittance totale si le facteur de puissance est égal à 1 ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Comme le condensateur est en parallèle, l’admittance totale devient <math><msub><mi>𝑌</mi><mtext>global</mtext></msub><mo>=</mo><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>+</mo><mi>𝑗</mi><mi>𝜔</mi><mi>𝐶</mi></math>.</p><p>On veut <math><mo lspace="0em" rspace="0em">cos</mo><mrow><mo>(</mo><msub><mi>𝜑</mi><mtext>global</mtext></msub><mo>)</mo></mrow><mo>=</mo><mn>1</mn></math>, c’est-à-dire <math><msub><mi>𝜑</mi><mtext>global</mtext></msub><mo>=</mo><mn>0</mn></math> autrement dit <math><mo lspace="0em" rspace="0em">Im</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mtext>global</mtext></msub><mo>)</mo></mrow><mo>=</mo><mn>0</mn></math>.</p><p>On a donc</p><math display="block"><mn>0</mn><mo>=</mo><mo form="prefix" lspace="0em" rspace="0em">Im</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>)</mo></mrow><mo>+</mo><mi>𝜔</mi><mi>𝐶</mi></math><p>d’où</p><math display="block"><mi>𝐶</mi><mo>=</mo><mo form="prefix">−</mo><mfrac><mrow><mo lspace="0em" rspace="0em">Im</mo><mrow><mo>(</mo><msub><mi>𝑌</mi><mtext>tot</mtext></msub><mo>)</mo></mrow></mrow><mi>𝜔</mi></mfrac><mo>=</mo><mfrac><mrow><mn>108</mn><mspace width="0.2222em"/><mtext>m</mtext><mtext>S</mtext></mrow><mrow><mn>2</mn><mi>𝜋</mi><mn>50</mn></mrow></mfrac><mo>=</mo><mn>258</mn><mspace width="0.1667em"/><mtext>µ</mtext><mtext>F</mtext></math></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Size of marine mammals — Phénomènes de transport 2 : Transfert thermique par conduction</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Phénomènes de transport 2 : Transfert thermique par conduction</a><span class="sep">›</span><span class="ici">Size of marine mammals</span></nav><h2>Size of marine mammals</h2><p>Marine mammals are warm-blooded animals whose temperature remains constant. To maintain this temperature, exothermal reactions happen in their cells and produce a volumetric power <math><mi>𝑎</mi></math>. The total power produced by the mammal is <math><mi>𝑃</mi></math>.</p><p>To simplify, mammals are described as spheres of radius <math><mi>𝑅</mi></math>, immersed in immobile water of thermal conductivity <math><mi>𝜆</mi></math> and whose temperature is <math><msub><mi>𝑇</mi><mi>∞</mi></msub></math> far away from the animal.</p><p>The problem is supposed to be invariant through a rotation about <math><mi>𝜃</mi></math> and <math><mi>𝜑</mi></math>.</p><p><strong>1/</strong> Establish the thermal diffusion equation in water (in spherical coordinates).</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Faire un bilan d’énergie sur un volume infinitésimal ou une boule creuse.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>By applying the first principle of thermodynamics on a spherical shell of radius <math><mi>𝑟</mi></math> and thickness <math><mi mathvariant="normal">d</mi><mi>𝑟</mi></math> :</p><math display="block"><msup><mi mathvariant="normal">d</mi><mn>2</mn></msup><mi>𝑈</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><msup><mi mathvariant="normal">d</mi><mn>2</mn></msup><msub><mi>𝐸</mi><mi>𝑐</mi></msub><mo>=</mo><msup><mi>𝛿</mi><mn>2</mn></msup><mi>𝑄</mi><mo>+</mo><msup><mi>𝛿</mi><mn>2</mn></msup><mi>𝑊</mi></math><p>with <math><msup><mi mathvariant="normal">d</mi><mn>2</mn></msup><msub><mi>𝐸</mi><mi>𝑐</mi></msub><mo>=</mo><mn>0</mn></math> and <math><msup><mi>𝛿</mi><mn>2</mn></msup><mi>𝑊</mi><mo>=</mo><mn>0</mn></math>.</p><math display="block"><mtable class="multiline-equation aligned"><mtr><mtd><mi>𝜇</mi><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑉</mi><mrow><mo>(</mo><mrow><mi>𝑢</mi><mrow><mo>(</mo><mrow><mi>𝑡</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow><mo>)</mo></mrow><mo>−</mo><mi>𝑢</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mtd><mtd><mo form="infix">=</mo><msub><mi>𝑗</mi><mi>𝑄</mi></msub><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><mn>4</mn><mi>𝜋</mi><msup><mi>𝑟</mi><mn>2</mn></msup><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi><mo>−</mo><msub><mi>𝑗</mi><mi>𝑄</mi></msub><mrow><mo>(</mo><mrow><mi>𝑟</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi></mrow><mo>)</mo></mrow><mn>4</mn><mi>𝜋</mi><msup><mrow><mo>(</mo><mrow><mi>𝑟</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi></mrow><mo>)</mo></mrow><mn>2</mn></msup><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></mtd></mtr><mtr><mtd><mi>𝜇</mi><mn>4</mn><mi>𝜋</mi><msup><mi>𝑟</mi><mn>2</mn></msup><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑢</mi></mrow><mrow><mi>𝜕</mi><mi>𝑡</mi></mrow></mfrac><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></mtd><mtd><mo form="infix">=</mo><mo form="prefix">−</mo><mfrac><mrow><mi>𝜕</mi><msub><mi>𝑗</mi><mi>𝑄</mi></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><mn>4</mn><mi>𝜋</mi><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></mtd></mtr></mtable></math><p>We then use Fourier’s law <math><msub><mi>𝑗</mi><mi>𝑄</mi></msub><mo>=</mo><mo form="prefix">−</mo><mi>𝜆</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac></math> and the caloric equation <math><mi mathvariant="normal">d</mi><mi>𝑢</mi><mo>=</mo><mi>𝑐</mi><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑇</mi></math> to obtain :</p><math display="block"><mtable class="multiline-equation"><mtr><mtd><mi>𝜇</mi><mi>𝑐</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mi>𝜆</mi><mfrac><mn>1</mn><msup><mi>𝑟</mi><mn>2</mn></msup></mfrac><mfrac><mrow><mi>𝜕</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msup><mi>𝑟</mi><mn>2</mn></msup></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑡</mi></mrow></mfrac><mo>−</mo><msub><mi>𝐷</mi><mtext>th</mtext></msub><mfrac><mn>1</mn><msup><mi>𝑟</mi><mn>2</mn></msup></mfrac><mfrac><mrow><mi>𝜕</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msup><mi>𝑟</mi><mn>2</mn></msup></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mtd></mtr></mtable></math><p>with <math><msub><mi>𝐷</mi><mtext>th</mtext></msub><mo>=</mo><mfrac><mi>𝜆</mi><mrow><mi>𝜇</mi><mi>𝑐</mi></mrow></mfrac></math> the thermal diffusivity of water.</p></div></div></div></div><p><strong>2/</strong> Ascertain the temperature <math><mi>𝑇</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow></math> around the animal in stationary state.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Résoudre l’équation précédente en régime stationnaire.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>In stationary state, the equation becomes :</p><math display="block"><mtable class="multiline-equation aligned"><mtr><mtd><mfrac><mn>1</mn><msup><mi>𝑟</mi><mn>2</mn></msup></mfrac><mfrac><mrow><mi>𝜕</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msup><mi>𝑟</mi><mn>2</mn></msup></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac></mtd><mtd><mo form="infix">=</mo><mn>0</mn></mtd></mtr><mtr><mtd><mfrac><mrow><mi>𝜕</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msup><mi>𝑟</mi><mn>2</mn></msup></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac></mtd><mtd><mo form="infix">=</mo><mn>0</mn></mtd></mtr></mtable></math><p>Integrating gives :</p><math display="block"><mtable class="multiline-equation"><mtr><mtd><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msup><mi>𝑟</mi><mn>2</mn></msup><mo>=</mo><mi>𝐴</mi></mtd></mtr><mtr><mtd><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><mo>=</mo><mfrac><mi>𝐴</mi><msup><mi>𝑟</mi><mn>2</mn></msup></mfrac></mtd></mtr><mtr><mtd><mi>𝑇</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><mo>=</mo><mo form="prefix">−</mo><mfrac><mi>𝐴</mi><mi>𝑟</mi></mfrac><mo>+</mo><mi>𝐵</mi></mtd></mtr></mtable></math><p>with <math><mi>𝐴</mi></math> and <math><mi>𝐵</mi></math> constants to be determined using the boundary conditions :</p><ul><li><math><mi>𝑇</mi><mrow><mo>(</mo><mrow><mi>𝑟</mi><mo stretchy="false">→</mo><mi>∞</mi></mrow><mo>)</mo></mrow><mo>=</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></math> implies <math><mi>𝐵</mi><mo>=</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></math>,</li><li><math><mi>𝑇</mi><mrow><mo>(</mo><mrow><mi>𝑟</mi><mo>=</mo><mi>𝑅</mi></mrow><mo>)</mo></mrow><mo>=</mo><msub><mi>𝑇</mi><mn>0</mn></msub></math> implies <math><mi>𝐴</mi><mo>=</mo><mrow><mo>(</mo><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><mo>)</mo></mrow><mi>𝑅</mi></math>.</li></ul><p>Finally, the temperature profile is :</p><math display="block"><mi>𝑇</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><mo>=</mo><mrow><mo>(</mo><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><mo>)</mo></mrow><mfrac><mi>𝑅</mi><mi>𝑟</mi></mfrac><mo>+</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></math></div></div></div></div><p><strong>3/</strong> Determine the thermal power lost by the mammal by integrating <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑄</mi></msub></math>.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">La puissance perdue par l’animal est le flux thermique sortant de l’animal en <math><mi>𝑟</mi><mo>=</mo><mi>𝑅</mi></math>.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>The thermal flux at the surface of the animal is given by Fourier’s law :</p><math display="block"><msub><mi>𝑗</mi><mi>𝑄</mi></msub><mrow><mo>(</mo><mi>𝑅</mi><mo>)</mo></mrow><mo>=</mo><mo form="prefix">−</mo><mi>𝜆</mi><mfrac><mrow><mi>𝜕</mi><mi>𝑇</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><mrow><mo>(</mo><mrow><mi>𝑟</mi><mo>=</mo><mi>𝑅</mi></mrow><mo>)</mo></mrow><mo>=</mo><mi>𝜆</mi><mrow><mo>(</mo><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><mo>)</mo></mrow><mfrac><mi>𝑅</mi><msup><mi>𝑅</mi><mn>2</mn></msup></mfrac><mo>=</mo><mi>𝜆</mi><mfrac><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><mi>𝑅</mi></mfrac></math><p>The total power lost by the animal is then :</p><math display="block"><mi>𝑃</mi><mo>=</mo><msub><mi>𝑗</mi><mi>𝑄</mi></msub><mrow><mo>(</mo><mi>𝑅</mi><mo>)</mo></mrow><mn>4</mn><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><mo>=</mo><mn>4</mn><mi>𝜋</mi><mi>𝜆</mi><mi>𝑅</mi><mrow><mo>(</mo><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><mo>)</mo></mrow></math></div></div></div></div><p><strong>4/</strong> Explain why there is no small aquatic mammal.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Déterminer la puissance volumique produite par l’animal et montrer qu’elle est d’autant plus grande que l’animal est petit.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>The volumetric power produced by the animal is given by :</p><math display="block"><mi>𝑎</mi><mo>=</mo><mfrac><mi>𝑃</mi><mrow><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>𝜋</mi><msup><mi>𝑅</mi><mn>3</mn></msup></mrow></mfrac><mo>=</mo><mn>3</mn><mi>𝜆</mi><mfrac><mrow><msub><mi>𝑇</mi><mn>0</mn></msub><mo>−</mo><msub><mi>𝑇</mi><mi>∞</mi></msub></mrow><msup><mi>𝑅</mi><mn>2</mn></msup></mfrac></math><p>This power increases when the radius of the animal decreases. Small animals thus need to produce more power to maintain their temperature, which is not sustainable for them. This explains why there are no small aquatic mammals.</p></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

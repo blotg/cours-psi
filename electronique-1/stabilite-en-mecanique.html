@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Stabilité en mécanique — Électronique 1 : Stabilité des systèmes linéaires</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électronique 1 : Stabilité des systèmes linéaires</a><span class="sep">›</span><span class="ici">Stabilité en mécanique</span></nav><h2>Stabilité en mécanique</h2><p>On étudie un point matériel dont l’énergie potentielle dépend de la position <math><mi>𝑥</mi></math> selon la loi <math><msub><mi>𝐸</mi><mi>𝑝</mi></msub><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow><mo>=</mo><mi>𝛼</mi><msup><mi>𝑥</mi><mn>2</mn></msup></math>.</p><p><strong>1/</strong> Proposer une situation physique correspondant à cette loi d’énergie potentielle.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quelques formes d’énergie potentielle sont à connaitre. Laquelle est quadratique (c’est-à-dire fait apparaitre un carré) ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Les énergies potentielles à connaitre sont l’énergie potentielle de pesanteur, l’énergie potentielle élastique et l’énergie potentielle électrostatique.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>L’énergie potentielle élastique d’un ressort est <math><msub><mi>𝐸</mi><mi>𝑝</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝑘</mi><msup><mrow><mo>(</mo><mrow><mi>𝑙</mi><mo>−</mo><msub><mi>𝑙</mi><mn>0</mn></msub></mrow><mo>)</mo></mrow><mn>2</mn></msup></math>. En notant l’allongement <math><mi>𝑥</mi><mo>=</mo><mi>𝑙</mi><mo>−</mo><msub><mi>𝑙</mi><mn>0</mn></msub></math> et <math><mi>𝛼</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝑘</mi></math>, on retrouve la loi donnée.</div></div></div></div><p><strong>2/</strong> Établir l’équation différentielle vérifiée par la position <math><mi>𝑥</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math> du point matériel.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Utiliser un théorème énergétique.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Utiliser le théorème de la puissance mécanique.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>L’énergie mécanique est</p><math display="block"><msub><mi>𝐸</mi><mi>𝑚</mi></msub><mo>=</mo><msub><mi>𝐸</mi><mi>𝑐</mi></msub><mo>+</mo><msub><mi>𝐸</mi><mi>𝑝</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝑚</mi><msup><mover accent="true"><mi>𝑥</mi><mo>̇</mo></mover><mn>2</mn></msup><mo>+</mo><mi>𝛼</mi><msup><mi>𝑥</mi><mn>2</mn></msup></math><p>Le théorème de la puissance mécanique appliqué au point matériel donne</p><math display="block"><mfrac><mrow><mi mathvariant="normal">d</mi><msub><mi>𝐸</mi><mi>𝑚</mi></msub></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mn>0</mn></math><math display="block"><mi>𝑚</mi><mover accent="true"><mi>𝑥</mi><mo>̇</mo></mover><mover accent="true"><mi>𝑥</mi><mo>̈</mo></mover><mo>+</mo><mn>2</mn><mi>𝛼</mi><mi>𝑥</mi><mover accent="true"><mi>𝑥</mi><mo>̇</mo></mover><mo>=</mo><mn>0</mn></math><p>soit, en simplifiant</p><math display="block"><mi>𝑚</mi><mover accent="true"><mi>𝑥</mi><mo>̈</mo></mover><mo>+</mo><mn>2</mn><mi>𝛼</mi><mi>𝑥</mi><mo>=</mo><mn>0</mn></math></div></div></div></div><p><strong>3/</strong> À quelle condition sur le paramètre <math><mi>𝛼</mi></math> le point matériel a-il un mouvement stable ?</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Le système est stable si tous les coefficients de l’équation différentielle (d’ordre 2) sont positifs. Ici, le coefficient de <math><mi>𝑥</mi></math> est <math><mn>2</mn><mi>𝛼</mi></math>. Ainsi, le mouvement est stable si <math><mi>𝛼</mi><mo>></mo><mn>0</mn></math>.</div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dipôle électrostatique — Électromagnétisme 1 : Champ électrique en régime stationnaire</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électromagnétisme 1 : Champ électrique en régime stationnaire</a><span class="sep">›</span><span class="ici">Dipôle électrostatique</span></nav><h2>Dipôle électrostatique ★★</h2><p>Un dipôle est constitué d’une charge <math><mi>𝑞</mi></math> au point <math><mi>𝐴</mi></math> de coordonnées <math><mrow><mo>(</mo><mrow><mfrac><mi>𝑎</mi><mn>2</mn></mfrac><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn></mrow><mo>)</mo></mrow></math> et d’une charge <math><mo>−</mo><mi>𝑞</mi></math> au point <math><msup><mi>𝐴</mi><mo>′</mo></msup></math> de coordonnées <math><mrow><mo>(</mo><mrow><mo>−</mo><mfrac><mi>𝑎</mi><mn>2</mn></mfrac><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn></mrow><mo>)</mo></mrow></math>. On étudie le champ et le potentiel électriques en un point <math><mi>𝑀</mi></math>. On note <math><mi>𝑑</mi><mo>=</mo><mi>𝐴</mi><mi>𝑀</mi></math>, <math><msup><mi>𝑑</mi><mo>′</mo></msup><mo>=</mo><msup><mi>𝐴</mi><mo>′</mo></msup><mi>𝑀</mi></math> et <math><mi>𝑟</mi><mo>=</mo><mi>𝑂</mi><mi>𝑀</mi></math>, et <math><mi>𝜃</mi></math> l’angle entre <math><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub></math> et <math><mover accent="true"><mrow><mi>𝑂</mi><mi>𝑀</mi></mrow><mo stretchy="true">⃗</mo></mover></math>. On rappelle le gradient en coordonnées sphériques :</p><math display="block"><mrow><mover accent="true"><mtext>grad</mtext><mo stretchy="true">⃗</mo></mover><mspace width="0.1667em"/></mrow><mi>𝑓</mi><mo>=</mo><mfrac><mrow><mi>𝜕</mi><mi>𝑓</mi></mrow><mrow><mi>𝜕</mi><mi>𝑟</mi></mrow></mfrac><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub><mo>+</mo><mfrac><mn>1</mn><mi>𝑟</mi></mfrac><mfrac><mrow><mi>𝜕</mi><mi>𝑓</mi></mrow><mrow><mi>𝜕</mi><mi>𝜃</mi></mrow></mfrac><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝜃</mi></msub><mo>+</mo><mfrac><mn>1</mn><mrow><mi>𝑟</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">sin</mo><mi>𝜃</mi></mrow></mfrac><mfrac><mrow><mi>𝜕</mi><mi>𝑓</mi></mrow><mrow><mi>𝜕</mi><mi>𝜑</mi></mrow></mfrac><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝜑</mi></msub></math><p><strong>1/</strong> Déterminer le potentiel créé par chacune des charges en fonction de <math><mi>𝑑</mi></math> et <math><msup><mi>𝑑</mi><mo>′</mo></msup></math> (potentiel nul à l’infini). En déduire le potentiel total du dipôle.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quel est le potentiel créé par une charge ponctuelle ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Une charge ponctuelle <math><msub><mi>𝑞</mi><mi>𝑖</mi></msub></math> à la distance <math><msub><mi>𝑑</mi><mi>𝑖</mi></msub></math> crée le potentiel <math><msub><mi>𝑞</mi><mi>𝑖</mi></msub><mi>/</mi><mrow><mo>(</mo><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msub><mi>𝑑</mi><mi>𝑖</mi></msub></mrow><mo>)</mo></mrow></math>. Par superposition :</p><math display="block"><mi>𝑉</mi><mrow><mo>(</mo><mi>𝑀</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mi>𝑞</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><mi>𝑑</mi></mrow></mfrac><mo>−</mo><mfrac><mi>𝑞</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑑</mi><mo>′</mo></msup></mrow></mfrac><mo>=</mo><mfrac><mi>𝑞</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub></mrow></mfrac><mrow><mo>(</mo><mrow><mfrac><mn>1</mn><mi>𝑑</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><msup><mi>𝑑</mi><mo>′</mo></msup></mfrac></mrow><mo>)</mo></mrow></math></div></div></div></div><p><strong>2/</strong> Dans l’approximation <math><mi>𝑟</mi><mo>≫</mo><mi>𝑎</mi></math>, montrer que</p><math display="block"><mi>𝑉</mi><mrow><mo>(</mo><mi>𝑀</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac><mover accent="true"><mi>𝑝</mi><mo stretchy="true">⃗</mo></mover><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></math><p>où l’on exprimera le moment dipolaire <math><mover accent="true"><mi>𝑝</mi><mo stretchy="true">⃗</mo></mover></math>.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Développement limité de <math><mfrac><mn>1</mn><mi>𝑑</mi></mfrac></math> et <math><mfrac><mn>1</mn><msup><mi>𝑑</mi><mo>′</mo></msup></mfrac></math> au premier ordre en <math><mfrac><mi>𝑎</mi><mi>𝑟</mi></mfrac></math>.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Loi des cosinus : <math><msup><mi>𝑑</mi><mn>2</mn></msup><mo>=</mo><msup><mi>𝑟</mi><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mfrac><mi>𝑎</mi><mn>2</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>𝑟</mi><mrow><mo>(</mo><mfrac><mi>𝑎</mi><mn>2</mn></mfrac><mo>)</mo></mrow><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></math>.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Loi des cosinus : <math><msup><mi>𝑑</mi><mn>2</mn></msup><mo>=</mo><msup><mi>𝑟</mi><mn>2</mn></msup><mo>+</mo><mfrac><msup><mi>𝑎</mi><mn>2</mn></msup><mn>4</mn></mfrac><mo>−</mo><mi>𝑟</mi><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi><mo>≈</mo><msup><mi>𝑟</mi><mn>2</mn></msup><mrow><mo>(</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><mi>𝑟</mi></mfrac></mrow><mo>)</mo></mrow></math>, donc</p><math display="block"><mfrac><mn>1</mn><mi>𝑑</mi></mfrac><mo>≈</mo><mfrac><mn>1</mn><mi>𝑟</mi></mfrac><mrow><mo>(</mo><mrow><mn>1</mn><mo>+</mo><mfrac><mrow><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><mrow><mn>2</mn><mi>𝑟</mi></mrow></mfrac></mrow><mo>)</mo></mrow></math><p>De même avec <math><msup><mi>𝐴</mi><mo>′</mo></msup></math> (angle <math><mi>𝜋</mi><mo>−</mo><mi>𝜃</mi></math>) : <math><mfrac><mn>1</mn><msup><mi>𝑑</mi><mo>′</mo></msup></mfrac><mo>≈</mo><mfrac><mn>1</mn><mi>𝑟</mi></mfrac><mrow><mo>(</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><mrow><mn>2</mn><mi>𝑟</mi></mrow></mfrac></mrow><mo>)</mo></mrow></math>. Ainsi</p><math display="block"><mfrac><mn>1</mn><mi>𝑑</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><msup><mi>𝑑</mi><mo>′</mo></msup></mfrac><mo>≈</mo><mfrac><mrow><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><msup><mi>𝑟</mi><mn>2</mn></msup></mfrac><mspace width="1em"/><mo lspace="0em" rspace="0em" stretchy="false">⇒</mo><mspace width="1em"/><mi>𝑉</mi><mrow><mo>(</mo><mi>𝑀</mi><mo>)</mo></mrow><mo>≈</mo><mfrac><mrow><mi>𝑞</mi><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac></math><p>En posant <math><mover accent="true"><mi>𝑝</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mi>𝑞</mi><mi>𝑎</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub></math>, on a <math><mover accent="true"><mi>𝑝</mi><mo stretchy="true">⃗</mo></mover><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub><mo>=</mo><mi>𝑞</mi><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></math>, d’où</p><math display="block"><mi>𝑉</mi><mrow><mo>(</mo><mi>𝑀</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mover accent="true"><mi>𝑝</mi><mo stretchy="true">⃗</mo></mover><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></mrow><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac></math></div></div></div></div><p><strong>3/</strong> En déduire l’expression du champ électrique dans la même approximation.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Utiliser <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mo form="prefix">−</mo><mrow><mover accent="true"><mtext>grad</mtext><mo stretchy="true">⃗</mo></mover><mspace width="0.1667em"/></mrow><mi>𝑉</mi></math> et l’expression fournie du gradient sphérique.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p><math><mi>𝑉</mi><mo>=</mo><mfrac><mrow><mi>𝑞</mi><mi>𝑎</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi></mrow><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac></math> ne dépend pas de <math><mi>𝜑</mi></math>. Donc</p><math display="block"><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mo form="prefix">−</mo><mrow><mover accent="true"><mtext>grad</mtext><mo stretchy="true">⃗</mo></mover><mspace width="0.1667em"/></mrow><mi>𝑉</mi><mo>=</mo><mfrac><mrow><mi>𝑞</mi><mi>𝑎</mi></mrow><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>3</mn></msup></mrow></mfrac><mrow><mo>(</mo><mrow><mn>2</mn><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub><mo>+</mo><mo form="prefix" lspace="0em" rspace="0.16666666666666666em">sin</mo><mi>𝜃</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝜃</mi></msub></mrow><mo>)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>3</mn></msup></mrow></mfrac><mrow><mo>(</mo><mrow><mn>2</mn><mi>𝑝</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">cos</mo><mi>𝜃</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub><mo>+</mo><mi>𝑝</mi><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">sin</mo><mi>𝜃</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝜃</mi></msub></mrow><mo>)</mo></mrow></math></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

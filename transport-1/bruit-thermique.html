@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bruit thermique — Phénomènes de transport 1 : Transport de charge</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Phénomènes de transport 1 : Transport de charge</a><span class="sep">›</span><span class="ici">Bruit thermique</span></nav><h2>🖥️ Bruit thermique ★★</h2><p>Le bruit thermique, ou bruit de Johnson-Nyquist, est un phénomène physique qui se manifeste par des fluctuations aléatoires des grandeurs électriques dans un conducteur en raison de l’agitation des porteurs de charge (électrons).</p><p>Pour le modéliser, on s’intéresse à des électrons dans un conducteur soumis à un champ électrique <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mi>𝐸</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub></math>. On suppose que les électrons se déplacent dans la seule direction <math><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub></math>.</p><p><strong>1/</strong> Que représente <math><mi>𝜏</mi></math> ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Reprendre le cours sur le modèle de Drude.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><math><mi>𝜏</mi></math> est le temps moyen entre deux collisions successives d’un électron dans le conducteur.</div></div></div></div><p><strong>2/</strong> En l’absence de choc, écrire l’équation différentielle vérifiée par la vitesse <math><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math> de l’électron.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Une seule force agit sur l’électron entre deux collisions. Laquelle ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Écrire la loi de la quantité de mouvement en l’absence de choc.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>La loi de la quantité de mouvement donne <math><mi>𝑚</mi><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑣</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mo form="prefix">−</mo><mi>𝑒</mi><mi>𝐸</mi></math>, d’où</p><math display="block"><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑣</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mo form="prefix">−</mo><mi>𝑒</mi><mfrac><mi>𝐸</mi><mi>𝑚</mi></mfrac></math></div></div></div></div><p><strong>3/</strong> On souhaite simuler l’évolution de la vitesse de l’électron grâce à la méthode d’Euler. Compléter le code suivant qui calcule la vitesse de l’électron au cours du temps en l’absence de choc.</p><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br></div></div><div><pre><code data-lang="python"><span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+
+N <span style="color: #d73948">=</span> <span style="color: #b60157">1000</span> <span style="color: #74747c">#</span><span style="color: #74747c"> nombre de pas de temps</span>
+
+E <span style="color: #d73948">=</span> <span style="color: #b60157">100</span> <span style="color: #74747c">#</span><span style="color: #74747c"> champ électrique en V/m</span>
+e <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> charge de l'électron en C</span>
+m <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> masse de l'électron en kg</span>
+l <span style="color: #d73948">=</span> <span style="color: #b60157">1e-2</span> <span style="color: #74747c">#</span><span style="color: #74747c"> longueur du conducteur en m</span>
+
+T <span style="color: #d73948">=</span> <span style="color: #b60157">1e-12</span> <span style="color: #74747c">#</span><span style="color: #74747c"> temps total de la simulation en s</span>
+dt <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> pas de temps en s</span>
+t <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> array numpy contenant tous les temps de la simulation</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">V</span>():
+    v <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> initialisation du array des vitesses par des vitesses nulles</span>
+    <span style="color: #d73948">for</span> i <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(N<span style="color: #d73948">-</span><span style="color: #b60157">1</span>):
+        v[i<span style="color: #d73948">+</span><span style="color: #b60157">1</span>] <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de la vitesse à l'instant t[i+1] en fonction de la vitesse à</span>
+                     <span style="color: #74747c">#</span><span style="color: #74747c"> l'instant t[i] grâce à la méthode d'Euler</span>
+    <span style="color: #d73948">return</span> v</code></pre></div></div><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">La fonction <code>np.linspace(a, b, N)</code> crée un array numpy de <code>N</code> valeurs régulièrement espacées entre <code>a</code> et <code>b</code>. On peut s’en servir pour créer le array <code>t</code>.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">La fonction <code>np.zeros(N)</code> crée un array numpy de <code>N</code> valeurs nulles. On peut s’en servir pour initialiser le array des vitesses.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 3</div><div class="volet-texte">Utiliser la relation de Taylor pour exprimer <math><mi>𝑣</mi><mrow><mo>(</mo><mrow><mi>𝑡</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> en fonction de <math><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math> et <math><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑣</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac></math>. En déduire une relation entre <code>v[i+1]</code> et <code>v[i]</code>.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br></div></div><div><pre><code data-lang="python"><span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+
+N <span style="color: #d73948">=</span> <span style="color: #b60157">1000</span> <span style="color: #74747c">#</span><span style="color: #74747c"> nombre de pas de temps</span>
+
+E <span style="color: #d73948">=</span> <span style="color: #b60157">100</span> <span style="color: #74747c">#</span><span style="color: #74747c"> champ électrique en V/m</span>
+e <span style="color: #d73948">=</span> <span style="color: #b60157">1</span><span style="color: #b60157">.</span><span style="color: #b60157">6e-19</span> <span style="color: #74747c">#</span><span style="color: #74747c"> charge de l'électron en C</span>
+m <span style="color: #d73948">=</span> <span style="color: #b60157">9</span><span style="color: #b60157">.</span><span style="color: #b60157">11e-31</span> <span style="color: #74747c">#</span><span style="color: #74747c"> masse de l'électron en kg</span>
+l <span style="color: #d73948">=</span> <span style="color: #b60157">1e-2</span> <span style="color: #74747c">#</span><span style="color: #74747c"> longueur du conducteur en m</span>
+
+T <span style="color: #d73948">=</span> <span style="color: #b60157">1e-12</span> <span style="color: #74747c">#</span><span style="color: #74747c"> temps total de la simulation en s</span>
+dt <span style="color: #d73948">=</span> T <span style="color: #d73948">/</span> N <span style="color: #74747c">#</span><span style="color: #74747c"> pas de temps en s</span>
+t <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">linspace</span>(<span style="color: #b60157">0</span>, T, N) <span style="color: #74747c">#</span><span style="color: #74747c"> array numpy contenant tous les temps de la simulation</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">V</span>():
+    v <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">zeros</span>(N) <span style="color: #74747c">#</span><span style="color: #74747c"> initialisation du array des vitesses par des vitesses nulles</span>
+    <span style="color: #d73948">for</span> i <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(N<span style="color: #d73948">-</span><span style="color: #b60157">1</span>):
+        v[i<span style="color: #d73948">+</span><span style="color: #b60157">1</span>] <span style="color: #d73948">=</span> v[i] <span style="color: #d73948">+</span> (<span style="color: #d73948">-</span>e <span style="color: #d73948">*</span> E <span style="color: #d73948">/</span> m) <span style="color: #d73948">*</span> dt <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de la vitesse à l'instant t[i+1] en fonction de la vitesse à</span>
+                                          <span style="color: #74747c">#</span><span style="color: #74747c"> l'instant t[i] grâce à la méthode d'Euler</span>
+    <span style="color: #d73948">return</span> v</code></pre></div></div></div></div></div><p>Entre <math><mi>𝑡</mi></math> et <math><mi>𝑡</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></math>, l’électron a une probabilité <math><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow><mi>𝜏</mi></mfrac></math> de subir une collision. Lors d’une collision, l’électron repart avec une vitesse aléatoire suivant une distribution gaussienne de moyenne nulle et d’écart-type <math><msub><mi>𝑣</mi><mn>0</mn></msub></math>.</p><p><strong>4/</strong> On modifie la fonction <code>V()</code> définie précédemment pour prendre en compte les collisions :</p><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br></div></div><div><pre><code data-lang="python"><span style="color: #d73948">from</span> random <span style="color: #d73948">import</span> random, gauss
+
+tau <span style="color: #d73948">=</span> <span style="color: #b60157">1e-14</span> <span style="color: #74747c">#</span><span style="color: #74747c"> temps moyen entre deux collisions en s</span>
+v0 <span style="color: #d73948">=</span> <span style="color: #b60157">1</span> <span style="color: #74747c">#</span><span style="color: #74747c"> écart-type de la distribution des vitesses après choc en m/s</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">V</span>():
+    v <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> initialisation du array des vitesses par des vitesses nulles</span>
+    <span style="color: #d73948">for</span> i <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(N<span style="color: #d73948">-</span><span style="color: #b60157">1</span>):
+        <span style="color: #d73948">if</span> <span style="color: #4b69c6">random</span>() <span style="color: #d73948">&lt;</span> dt<span style="color: #d73948">/</span>tau: <span style="color: #74747c">#</span><span style="color: #74747c"> l'électron subit une collision</span>
+            v[i<span style="color: #d73948">+</span><span style="color: #b60157">1</span>] <span style="color: #d73948">=</span> <span style="color: #4b69c6">gauss</span>(<span style="color: #b60157">0</span>, v0) <span style="color: #74747c">#</span><span style="color: #74747c"> l'électron subit une collision et repart avec une vitesse aléatoire de</span>
+                                  <span style="color: #74747c">#</span><span style="color: #74747c"> moyenne nulle et d'écart-type v0</span>
+        <span style="color: #d73948">else</span>: <span style="color: #74747c">#</span><span style="color: #74747c"> l'électron ne subit pas de collision</span>
+            v[i<span style="color: #d73948">+</span><span style="color: #b60157">1</span>] <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de la vitesse à l'instant t[i+1] en fonction de la vitesse à</span>
+                        <span style="color: #74747c">#</span><span style="color: #74747c"> l'instant t[i] grâce à la méthode d'Euler</span>
+    <span style="color: #d73948">return</span> v</code></pre></div></div><p>Sachant que la fonction <code>random()</code> renvoie un nombre aléatoire uniformément distribué entre 0 et 1, expliquer la ligne 9.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quelle est la probabilité que l’instruction <code>random() &lt; dt/tau:</code> renvoie <code>True</code> ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>La probabilité que l’instruction <code>random() &lt; dt/tau:</code> soit vraie est égale à <math><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow><mi>𝜏</mi></mfrac></math>, ce qui correspond à la probabilité que l’électron subisse une collision entre <math><mi>𝑡</mi></math> et <math><mi>𝑡</mi><mo rspace="0em">+</mo><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></math>.</div></div></div></div><p><strong>5/</strong> Justifier que le courant traversant le conducteur s’exprime comme</p><math display="block"><mi>𝐼</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow><mo>=</mo><mo form="prefix">−</mo><mfrac><mi>𝑒</mi><mi>𝑙</mi></mfrac><munder><mo form="prefix">∑</mo><mrow><mi>𝑖</mi><mspace width="0.2222em"/><mtext>électrons</mtext></mrow></munder><msub><mi>𝑣</mi><mi>𝑖</mi></msub></math><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quel est le lien entre le vecteur densité de courant <math><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover></math> et la vitesse <math><mi>𝑣</mi></math> d’un électron ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">À quelle densité particulaire <math><mi>𝑛</mi></math> correspond un seul électron dans un conducteur de longueur <math><mi>𝑙</mi></math> et de section <math><mi>𝑆</mi></math> ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Si on considère un seul électron, sa “densité particulaire” est <math><mi>𝑛</mi><mo>=</mo><mfrac><mn>1</mn><mi>𝑉</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mi>𝑙</mi><mi>𝑆</mi></mrow></mfrac></math></p><math display="block"><mi>𝐼</mi><mo>=</mo><mi>𝑆</mi><mo form="prefix">∑</mo><mi>𝑗</mi><mo>=</mo><mi>𝑆</mi><mo form="prefix">∑</mo><mfrac><mn>1</mn><mrow><mi>𝑙</mi><mi>𝑆</mi></mrow></mfrac><mrow><mo>(</mo><mrow><mo>−</mo><mi>𝑒</mi></mrow><mo>)</mo></mrow><msub><mi>𝑣</mi><mi>𝑖</mi></msub><mo>=</mo><mo form="prefix">−</mo><mfrac><mi>𝑒</mi><mi>𝑙</mi></mfrac><mo form="prefix">∑</mo><msub><mi>𝑣</mi><mi>𝑖</mi></msub></math></div></div></div></div><p><strong>6/</strong> Compléter le code précédent pour qu’il simule le courant traversant le conducteur en fonction du temps pour <math><msub><mi>𝑁</mi><mi>𝑒</mi></msub><mo>=</mo><mn>1000</mn></math> électrons. Tracer le graphe <math><mi>𝐼</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math>.</p><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br></div></div><div><pre><code data-lang="python"><span style="color: #d73948">import</span> matplotlib.pyplot <span style="color: #d73948">as</span> plt
+
+Ne <span style="color: #d73948">=</span> <span style="color: #b60157">1000</span> <span style="color: #74747c">#</span><span style="color: #74747c"> nombre d'électrons</span>
+
+I <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">zeros</span>(N) <span style="color: #74747c">#</span><span style="color: #74747c"> initialisation du array des courants par des courants nuls</span>
+
+<span style="color: #d73948">for</span> j <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(Ne):
+    v <span style="color: #d73948">=</span> <span style="color: #4b69c6">V</span>() <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de la vitesse de l'électron j</span>
+    I <span style="color: #d73948">+=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> ajout de la contribution de l'électron j au courant total</span>
+</code></pre></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br></div></div><div><pre><code data-lang="python"><span style="color: #d73948">import</span> matplotlib.pyplot <span style="color: #d73948">as</span> plt
+
+Ne <span style="color: #d73948">=</span> <span style="color: #b60157">1000</span> <span style="color: #74747c">#</span><span style="color: #74747c"> nombre d'électrons</span>
+
+I <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">zeros</span>(N) <span style="color: #74747c">#</span><span style="color: #74747c"> initialisation du array des courants par des courants nuls</span>
+
+<span style="color: #d73948">for</span> j <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(Ne):
+    v <span style="color: #d73948">=</span> <span style="color: #4b69c6">V</span>() <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de la vitesse de l'électron j</span>
+    I <span style="color: #d73948">+=</span> <span style="color: #d73948">-</span>e<span style="color: #d73948">/</span>l <span style="color: #d73948">*</span> v <span style="color: #74747c">#</span><span style="color: #74747c"> ajout de la contribution de l'électron j au courant total</span>
+
+plt.<span style="color: #4b69c6">plot</span>(t, I)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">"</span><span style="color: #198810">Temps (s)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">ylabel</span>(<span style="color: #198810">"</span><span style="color: #198810">Courant (A)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">Courant traversant le conducteur en fonction du temps</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre></div></div></div></div></div><p><strong>7/</strong> Graphiquement, estimer un ordre de grandeur de la durée du régime transitoire.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Le régime transitoire dure environ <math><mn>3</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>14</mn></mrow></msup><mspace width="0.1667em"/><mtext>s</mtext></math>.</div></div></div></div><p>Le coefficient de variation, aussi appelé écart-type relatif est défini par <math><mtext>CV</mtext><mo>=</mo><mfrac><mi>𝜎</mi><mi>𝜇</mi></mfrac></math> où <math><mi>𝜎</mi></math> est l’écart-type et <math><mi>𝜇</mi></math> la moyenne.</p><p><strong>8/</strong> Calculer le coefficient de variation du courant en régime permanent. L’écart-type peut être calculé avec <code>np.std()</code> et la moyenne avec <code>np.mean()</code>.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quel lien existe-t-il entre un instant <math><mi>𝑡</mi></math> et l’indice <code>i</code> correspondant ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">On peut utiliser le <em>slicing</em> : <code>I[i:]</code> renvoie un array numpy contenant les valeurs de <code>I</code> à partir de l’indice <code>i</code> jusqu’à la fin.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div class="grille" style="grid-template-columns: auto auto"><div><div>1<br>2<br>3<br></div></div><div><pre><code data-lang="python">i <span style="color: #d73948">=</span> <span style="color: #4b69c6">int</span>(<span style="color: #b60157">3e-14</span> <span style="color: #d73948">/</span> dt) <span style="color: #74747c">#</span><span style="color: #74747c"> indice correspondant à la fin du régime transitoire</span>
+CV <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">std</span>(I[i:]) <span style="color: #d73948">/</span> np.<span style="color: #4b69c6">mean</span>(I[i:])
+<span style="color: #4b69c6">print</span>(<span style="color: #198810">"</span><span style="color: #198810">Coefficient de variation du courant en régime permanent :</span><span style="color: #198810">"</span>, CV)</code></pre></div></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

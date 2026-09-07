@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Simulation de la propagation d'un paquet d'onde dans un plasma — Physique des ondes 2 : Phénomènes de propagation linéaires : absorption et dispersion</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Physique des ondes 2 : Phénomènes de propagation linéaires : absorption et dispersion</a><span class="sep">›</span><span class="ici">Simulation de la propagation d’un paquet d’onde dans un plasma</span></nav><h2>🖥️ Simulation de la propagation d’un paquet d’onde dans un plasma ★</h2><p>On s’intéresse à la propagation d’un paquet d’onde <math><mi>𝑠</mi><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> dans un milieu pouvant être dispersif.</p><p>Le paquet d’onde est connu en <math><mi>𝑥</mi><mo>=</mo><mn>0</mn></math> :</p><math display="block"><mi>𝑠</mi><mrow><mo>(</mo><mrow><mn>0</mn><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow><mo>=</mo><mi>𝑓</mi><mrow><mo>(</mo><mrow><mi>𝑡</mi><mo>,</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>𝑡</mi></mrow><mo>)</mo></mrow><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">cos</mo><mrow><mo>(</mo><mrow><mi>𝜔</mi><mi>𝑡</mi></mrow><mo>)</mo></mrow></math><p>où <math><mi>𝑓</mi><mrow><mo>(</mo><mrow><mi>𝑡</mi><mo>,</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">Δ</mi><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> est la fonction gaussienne centrée en <math><mn>0</mn></math> et d’extension temporelle <math><mi mathvariant="normal">Δ</mi><mi>𝑡</mi></math>. La porteuse a pour fréquence <math><mn>2</mn><mspace width="0.1667em"/><mtext>Hz</mtext></math>.</p><p>Pour déterminer comment le paquet d’onde se propage, on le décompose grâce au théorème de Fourier et on étudie la propagation de chaque signal monochromatique composant le paquet d’onde.</p><p><strong>1/</strong> Compléter le code ci-dessous pour définir <code>s_x0</code> avec <math><mi>𝑠</mi><mrow><mo>(</mo><mrow><mn>0</mn><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow></math>.</p><pre><code data-lang="python">  <span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+
+  Deltat <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">4</span> <span style="color: #74747c">#</span><span style="color: #74747c"> extension temporelle (s)</span>
+  t <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">linspace</span>(<span style="color: #d73948">-</span><span style="color: #b60157">2</span>,<span style="color: #b60157">10</span>,<span style="color: #b60157">1000</span>) <span style="color: #74747c">#</span><span style="color: #74747c"> temps pour lesquels on calcule s (s)</span>
+
+  <span style="color: #d73948">def</span> <span style="color: #4b69c6">gaussienne</span>(x, mu, sig): <span style="color: #74747c">#</span><span style="color: #74747c"> Définition d'une gaussienne de x. sig est l'écart-type et mu la position du centre.</span>
+      <span style="color: #d73948">return</span> <span style="color: #b60157">1</span><span style="color: #b60157">.</span> <span style="color: #d73948">/</span> (np.<span style="color: #4b69c6">sqrt</span>(<span style="color: #b60157">2</span><span style="color: #b60157">.</span> <span style="color: #d73948">*</span> np.pi) <span style="color: #d73948">*</span> sig) <span style="color: #d73948">*</span> np.<span style="color: #4b69c6">exp</span>(<span style="color: #d73948">-</span>np.<span style="color: #4b69c6">power</span>((x <span style="color: #d73948">-</span> mu) <span style="color: #d73948">/</span> sig, <span style="color: #b60157">2</span><span style="color: #b60157">.</span>) <span style="color: #d73948">/</span> <span style="color: #b60157">2</span>)
+
+  s_x0 <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> onde s en x=0</span></code></pre><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python">s_x0 <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">cos</span>(<span style="color: #b60157">2</span><span style="color: #d73948">*</span>np.pi<span style="color: #d73948">*</span><span style="color: #b60157">2</span><span style="color: #d73948">*</span>t)<span style="color: #d73948">*</span><span style="color: #4b69c6">gaussienne</span>(t,<span style="color: #b60157">0</span>,Deltat) <span style="color: #74747c">#</span><span style="color: #74747c"> onde s en x=0</span></code></pre></div></div></div><p><strong>2/</strong> Tracer l’onde en <math><mi>𝑥</mi><mo>=</mo><mn>0</mn></math> en fonction de <math><mi>𝑡</mi></math>.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">import</span> matplotlib.pyplot <span style="color: #d73948">as</span> plt
+
+plt.<span style="color: #4b69c6">figure</span>(<span style="color: #b60157">1</span>)
+plt.<span style="color: #4b69c6">clf</span>()
+plt.<span style="color: #4b69c6">plot</span>(t,s_x0)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">"</span><span style="color: #198810">temps (s)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">Signal en x=0</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre></div></div></div><p>La décomposition spectrale consiste à décomposer un signal comme une somme de signaux monochromatiques</p><math display="block"><mi>𝑠</mi><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow><mo>=</mo><munder><mo form="prefix" lspace="0em">∑</mo><mi>𝑖</mi></munder><msub><mi>𝐴</mi><mi>𝑖</mi></msub><msup><mi>𝑒</mi><mrow><mi>𝑗</mi><msub><mi>𝜔</mi><mi>𝑖</mi></msub><mi>𝑡</mi></mrow></msup></math><p>On peut calculer le spectre du paquet d’onde pour obtenir la liste des <math><msub><mi>𝐴</mi><mi>𝑖</mi></msub></math> grâce à la fonction <a href="https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html"><code>rfft</code></a>.</p><p><strong>3/</strong> Calculer le spectre de <math><mi>𝑠</mi><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> et tracer <math><mo stretchy="false">|</mo><mi>𝐴</mi><mo stretchy="false">|</mo></math> en fonction de la fréquence en complétant le code ci-dessous.</p><pre><code data-lang="python"><span style="color: #d73948">from</span> numpy.fft <span style="color: #d73948">import</span> rfft, irfft, rfftfreq
+
+frequences <span style="color: #d73948">=</span> <span style="color: #4b69c6">rfftfreq</span>(<span style="color: #4b69c6">len</span>(t), t[<span style="color: #b60157">1</span>]<span style="color: #d73948">-</span>t[<span style="color: #b60157">0</span>]) <span style="color: #74747c">#</span><span style="color: #74747c"> calcul des fréquences de la transformée de Fourier (Hz)</span>
+pulsations <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> pulsations (rad/s)</span>
+spectre_x0 <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> spectre de s(x=0,t) (c'est-à-dire liste des A_i)</span>
+
+plt.<span style="color: #4b69c6">figure</span>()
+plt.<span style="color: #4b69c6">clf</span>()
+plt.<span style="color: #4b69c6">plot</span>(<span style="color: #d73948">...</span>)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #d73948">...</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">spectre de s en x=0</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">from</span> numpy.fft <span style="color: #d73948">import</span> rfft, irfft, rfftfreq
+
+frequences <span style="color: #d73948">=</span> <span style="color: #4b69c6">rfftfreq</span>(<span style="color: #4b69c6">len</span>(t), t[<span style="color: #b60157">1</span>]<span style="color: #d73948">-</span>t[<span style="color: #b60157">0</span>]) <span style="color: #74747c">#</span><span style="color: #74747c"> calcul des fréquences de la transformée de Fourier (Hz)</span>
+pulsations <span style="color: #d73948">=</span> <span style="color: #b60157">2</span><span style="color: #d73948">*</span>np.pi<span style="color: #d73948">*</span>frequences <span style="color: #74747c">#</span><span style="color: #74747c"> pulsations (rad/s)</span>
+spectre_x0 <span style="color: #d73948">=</span> <span style="color: #4b69c6">rfft</span>(s_x0) <span style="color: #74747c">#</span><span style="color: #74747c"> spectre de s(x=0,t) (c'est-à-dire liste des A_i)</span>
+
+plt.<span style="color: #4b69c6">figure</span>()
+plt.<span style="color: #4b69c6">clf</span>()
+plt.<span style="color: #4b69c6">plot</span>(frequences, np.<span style="color: #4b69c6">abs</span>(spectre_x0))
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">"</span><span style="color: #198810">fréquence (Hz)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">spectre de s en x=0</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre></div></div></div><p><strong>4/</strong> En faisant varier <code>Deltat</code>, quel est l’effet de l’extension temporelle du paquet d’onde sur son spectre ?</p><p>On utilisera <code>Deltat = 0.4</code> dans toute la suite.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Plus l’extension temporelle du paquet d’onde est grande, plus son spectre est concentré autour de la pulsation centrale. Inversement, plus l’extension temporelle est petite, plus le spectre est large et contient des fréquences éloignées de la pulsation centrale.</div></div></div></div><p><strong>5/</strong> Si une OPPH s’écrit <math><msub><mi>𝐴</mi><mi>𝑖</mi></msub><msup><mi>𝑒</mi><mrow><mi>𝑗</mi><msub><mi>𝜔</mi><mi>𝑖</mi></msub><mi>𝑡</mi></mrow></msup></math> en <math><mi>𝑥</mi><mo>=</mo><mn>0</mn></math>, comment s’écrit-elle après avoir parcouru une distance <math><mi>𝑥</mi></math> dans le milieu ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Comment s’écrit de manière générale une OPPH ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Après avoir parcouru une distance <math><mi>𝑥</mi></math> dans le milieu, l’onde monochromatique s’écrit</p><math display="block"><msub><mi>𝐴</mi><mi>𝑖</mi></msub><msup><mi>𝑒</mi><mrow><mi>𝑗</mi><mrow><mo>(</mo><mrow><msub><mi>𝜔</mi><mi>𝑖</mi></msub><mi>𝑡</mi><mo lspace="0em" rspace="0em">−</mo><msub><mi>𝑘</mi><mi>𝑖</mi></msub><mi>𝑥</mi></mrow><mo>)</mo></mrow></mrow></msup><mo>=</mo><msub><mi>𝐴</mi><mi>𝑖</mi></msub><msup><mi>𝑒</mi><mrow><mi>𝑗</mi><msub><mi>𝜔</mi><mi>𝑖</mi></msub><mi>𝑡</mi></mrow></msup><msup><mi>𝑒</mi><mrow><mo>−</mo><mi>𝑗</mi><msub><mi>𝑘</mi><mi>𝑖</mi></msub><mi>𝑥</mi></mrow></msup></math></div></div></div></div><p>La fonction <a href="https://numpy.org/doc/stable/reference/generated/numpy.fft.irfft.html"><code>irfft</code></a> permet de réaliser l’opération inverse à la transformée de Fourier : elle calcule le signal à partir de son spectre.</p><p><strong>6/</strong> Compléter le code ci-dessous.</p><pre><code data-lang="python">j <span style="color: #d73948">=</span> <span style="color: #b60157">1</span><span style="color: #d73948">j</span>
+c <span style="color: #d73948">=</span> <span style="color: #b60157">1</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">rd</span>(omega): <span style="color: #74747c">#</span><span style="color: #74747c"> relation de dispersion : calcule k(omega) et le renvoie</span>
+    c <span style="color: #d73948">=</span> <span style="color: #b60157">1</span> <span style="color: #74747c">#</span><span style="color: #74747c"> célérité</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">#########################</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> D'Alembert</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> return ...</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">#########################</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> Plasma</span>
+    omega_p <span style="color: #d73948">=</span> <span style="color: #b60157">2</span><span style="color: #d73948">*</span>np.pi <span style="color: #74747c">#</span><span style="color: #74747c"> pulsation plasma</span>
+    <span style="color: #d73948">if</span> omega <span style="color: #d73948">></span> omega_p:
+        <span style="color: #d73948">return</span> <span style="color: #d73948">...</span>
+    <span style="color: #d73948">else</span>:
+        <span style="color: #d73948">return</span> <span style="color: #b60157">0</span> <span style="color: #74747c">#</span><span style="color: #74747c"> pour des raisons de stabilité dépassant le programme, on laisse 0 pour ce cas-ci</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">########################</span>
+
+x <span style="color: #d73948">=</span> <span style="color: #b60157">3</span> <span style="color: #74747c">#</span><span style="color: #74747c"> position où calculer l'onde</span>
+k <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">array</span>(<span style="color: #d73948">...</span>) <span style="color: #74747c">#</span><span style="color: #74747c"> nombres d'onde calculés grâce à la relation de dispersion</span>
+spectre_x <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> spectre de s en x</span>
+s_x <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de s(x,t) à l'abscisse x</span></code></pre><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python">j <span style="color: #d73948">=</span> <span style="color: #b60157">1</span><span style="color: #d73948">j</span>
+
+c <span style="color: #d73948">=</span> <span style="color: #b60157">1</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">rd</span>(omega): <span style="color: #74747c">#</span><span style="color: #74747c"> relation de dispersion : calcule k(omega) et le renvoie</span>
+    c <span style="color: #d73948">=</span> <span style="color: #b60157">1</span> <span style="color: #74747c">#</span><span style="color: #74747c"> célérité</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">#########################</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> D'Alembert</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> return omega/c</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">#########################</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c"> Plasma</span>
+    omega_p <span style="color: #d73948">=</span> <span style="color: #b60157">2</span><span style="color: #d73948">*</span>np.pi <span style="color: #74747c">#</span><span style="color: #74747c"> pulsation plasma</span>
+    <span style="color: #d73948">if</span> omega <span style="color: #d73948">></span> omega_p:
+        <span style="color: #d73948">return</span> omega<span style="color: #d73948">/</span>c<span style="color: #d73948">*</span>np.<span style="color: #4b69c6">sqrt</span>(<span style="color: #b60157">1</span><span style="color: #d73948">-</span>omega_p<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span><span style="color: #d73948">/</span>omega<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span>)
+    <span style="color: #d73948">else</span>:
+        <span style="color: #d73948">return</span> <span style="color: #b60157">0</span> <span style="color: #74747c">#</span><span style="color: #74747c"> pour des raisons de stabilité dépassant le programme, on laisse 0 pour ce cas-ci</span>
+    <span style="color: #74747c">#</span><span style="color: #74747c">########################</span>
+
+x <span style="color: #d73948">=</span> <span style="color: #b60157">3</span> <span style="color: #74747c">#</span><span style="color: #74747c"> position où calculer l'onde</span>
+k <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">array</span>([<span style="color: #4b69c6">rd</span>(omega) <span style="color: #d73948">for</span> omega <span style="color: #d73948">in</span> pulsations]) <span style="color: #74747c">#</span><span style="color: #74747c"> nombres d'onde calculés grâce à la relation de dispersion</span>
+spectre_x <span style="color: #d73948">=</span> spectre_x0 <span style="color: #d73948">*</span> np.<span style="color: #4b69c6">exp</span>(<span style="color: #d73948">-</span>j<span style="color: #d73948">*</span>k<span style="color: #d73948">*</span>x) <span style="color: #74747c">#</span><span style="color: #74747c"> spectre de s en x</span>
+s_x <span style="color: #d73948">=</span> <span style="color: #4b69c6">irfft</span>(spectre_x) <span style="color: #74747c">#</span><span style="color: #74747c"> calcul de s(x,t) à l'abscisse x</span></code></pre></div></div></div><p><strong>7/</strong> Tracer l’onde après propagation sur une longueur <math><mi>𝑥</mi><mo>=</mo><mn>3</mn><mspace width="0.1667em"/><mtext>m</mtext></math> pour une onde vérifiant l’équation de d’Alembert puis dans un plasma. Vérifier l’existence d’un étalement du paquet d’onde pour l’onde dans un plasma. Est-ce que les hautes fréquences ou les basses fréquences se propagent plus vite ?</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><pre><code data-lang="python">plt.<span style="color: #4b69c6">figure</span>(<span style="color: #b60157">3</span>)
+plt.<span style="color: #4b69c6">clf</span>()
+plt.<span style="color: #4b69c6">plot</span>(t,s_x)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">"</span><span style="color: #198810">temps (s)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #d73948">f</span><span style="color: #198810">"</span><span style="color: #198810">Signal en x=</span><span style="color: #8b41b1">{</span><span style="color: #8b41b1">x</span><span style="color: #8b41b1">}</span><span style="color: #198810"> m</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre><p>Le paquet d’onde est plus large en <math><mi>𝑥</mi></math> qu’en <math><mi>𝑥</mi><mo>=</mo><mn>0</mn></math>.</p><p>On observe que les hautes fréquences arrivent plus vite que les basses fréquences : à une abscisse fixée, elles sont là plus tôt. C’est bien ce qu’annonce la vitesse de groupe <math><msub><mi>𝑣</mi><mi>𝑔</mi></msub><mo>=</mo><mi>𝑐</mi><msqrt><mn>1</mn><mo>−</mo><mfrac><msubsup><mi>𝜔</mi><mi>𝑝</mi><mn>2</mn></msubsup><msup><mi>𝜔</mi><mn>2</mn></msup></mfrac></msqrt></math>, qui croît avec <math><mi>𝜔</mi></math>.</p></div></div></div></div><p>On souhaite maintenant visualiser la propagation de l’onde en traçant <math><mi>𝑠</mi><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> en fonction de <math><mi>𝑥</mi></math> à <math><mi>𝑡</mi></math> fixé. Pour cela, il faut calculer <math><mi>𝑠</mi></math> pour un grand nombre de <math><mi>𝑥</mi></math> en utilisant la même méthode que précédemment.</p><p><strong>8/</strong> Compléter le code ci-dessous puis tracer <math><mi>𝑠</mi><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo>,</mo><mi>𝑡</mi></mrow><mo>)</mo></mrow></math> en fonction de <math><mi>𝑥</mi></math> pour différents temps de sorte à visualiser la propagation de l’onde. Quelles fréquences sont plus rapides (hautes ou basses) ? Est-ce cohérent avec votre réponse précédente ?</p><pre><code data-lang="python">x <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">linspace</span>(<span style="color: #d73948">-</span><span style="color: #b60157">3</span>,<span style="color: #b60157">6</span>,<span style="color: #b60157">1000</span>) <span style="color: #74747c">#</span><span style="color: #74747c"> abscisses auxquelles l'onde sera calculée</span>
+
+s <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">zeros</span>((<span style="color: #4b69c6">len</span>(x),<span style="color: #4b69c6">len</span>(t))) <span style="color: #74747c">#</span><span style="color: #74747c"> s est un array à 2 dimensions dont les lignes correspondent à une position et les colonnes à un instant</span>
+
+<span style="color: #d73948">for</span> i <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(<span style="color: #4b69c6">len</span>(x)):
+    s[i,:] <span style="color: #d73948">=</span> <span style="color: #d73948">...</span>
+    
+    
+plt.<span style="color: #4b69c6">figure</span>(<span style="color: #b60157">4</span>)
+plt.<span style="color: #4b69c6">clf</span>()
+i <span style="color: #d73948">=</span> <span style="color: #b60157">500</span> <span style="color: #74747c">#</span><span style="color: #74747c"> à changer pour changer l'instant auquel l'onde est tracée</span>
+plt.<span style="color: #4b69c6">plot</span>(x,s[:,i])
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #d73948">...</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #d73948">f</span><span style="color: #198810">"</span><span style="color: #198810">signal à t=</span><span style="color: #8b41b1">{</span><span style="color: #8b41b1">t</span><span style="color: #8b41b1">[</span><span style="color: #8b41b1">i</span><span style="color: #8b41b1">]</span><span style="color: #8b41b1">}</span><span style="color: #198810"> s</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><pre><code data-lang="python">x <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">linspace</span>(<span style="color: #d73948">-</span><span style="color: #b60157">3</span>,<span style="color: #b60157">6</span>,<span style="color: #b60157">1000</span>) <span style="color: #74747c">#</span><span style="color: #74747c"> abscisses auxquelles l'onde sera calculée</span>
+
+s <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">zeros</span>((<span style="color: #4b69c6">len</span>(x),<span style="color: #4b69c6">len</span>(t))) <span style="color: #74747c">#</span><span style="color: #74747c"> s est un array à 2 dimensions dont les lignes correspondent à une position et les colonnes à un instant</span>
+
+<span style="color: #d73948">for</span> i <span style="color: #d73948">in</span> <span style="color: #4b69c6">range</span>(<span style="color: #4b69c6">len</span>(x)):
+    s[i,:] <span style="color: #d73948">=</span> <span style="color: #4b69c6">irfft</span>(spectre_x0 <span style="color: #d73948">*</span> np.<span style="color: #4b69c6">exp</span>(<span style="color: #d73948">-</span>j<span style="color: #d73948">*</span>k<span style="color: #d73948">*</span>x[i]))
+    
+    
+plt.<span style="color: #4b69c6">figure</span>(<span style="color: #b60157">4</span>)
+plt.<span style="color: #4b69c6">clf</span>()
+i <span style="color: #d73948">=</span> <span style="color: #b60157">500</span> <span style="color: #74747c">#</span><span style="color: #74747c"> à changer pour changer l'instant auquel l'onde est tracée</span>
+plt.<span style="color: #4b69c6">plot</span>(x,s[:,i])
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">"</span><span style="color: #198810">position (m)</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #d73948">f</span><span style="color: #198810">"</span><span style="color: #198810">signal à t=</span><span style="color: #8b41b1">{</span><span style="color: #8b41b1">t</span><span style="color: #8b41b1">[</span><span style="color: #8b41b1">i</span><span style="color: #8b41b1">]</span><span style="color: #8b41b1">}</span><span style="color: #198810"> s</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre><p>On remarque qu’à <math><mi>𝑡</mi></math> fixé, les hautes fréquences sont à une abscisse plus grande : elles se sont propagées plus vite que les basses fréquences, ce qui confirme la réponse précédente.</p></div></div></div></div><p>Afin de visualiser la propagation de l’onde d’une façon plus commode, on peut animer l’évolution de l’onde.</p><pre><code data-lang="python"><span style="color: #d73948">import</span> matplotlib.animation <span style="color: #d73948">as</span> animation
+
+fig <span style="color: #d73948">=</span> plt.<span style="color: #4b69c6">figure</span>(<span style="color: #b60157">5</span>) <span style="color: #74747c">#</span><span style="color: #74747c"> initialise la figure</span>
+plt.<span style="color: #4b69c6">clf</span>()
+line, <span style="color: #d73948">=</span> plt.<span style="color: #4b69c6">plot</span>(x, s[:,<span style="color: #b60157">0</span>])
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">animate</span>(i):
+    line.<span style="color: #4b69c6">set_data</span>(x, s[:,i])
+    <span style="color: #d73948">return</span> line,
+
+ani <span style="color: #d73948">=</span> animation.<span style="color: #4b69c6">FuncAnimation</span>(fig, animate, frames<span style="color: #d73948">=</span><span style="color: #b60157">1000</span>, interval<span style="color: #d73948">=</span><span style="color: #b60157">10</span>, blit<span style="color: #d73948">=</span><span style="color: #d73948">True</span>, repeat<span style="color: #d73948">=</span><span style="color: #d73948">False</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

@@ -1,0 +1,285 @@
+/* Feuille de style du site (cf. outils/site.py, gabarits/site.typ).
+   Copiée telle quelle dans site/styles.css.
+
+   Parti pris : noir sur blanc, comme les documents imprimés. Mêmes graisses,
+   mêmes filets, mêmes bandeaux que le poly — le site n'est pas un autre
+   document, c'est le même, lu à l'écran. Pas de thème sombre : le papier n'en
+   a pas. */
+
+:root {
+    color-scheme: light;
+
+    --fond: #ffffff;
+    --texte: #000000;
+    /* luma(35%) du paquet typst : la couleur des mentions secondaires. */
+    --gris: #595959;
+    /* luma(20%), la teinte des filets de 0,6 pt. */
+    --filet: #333333;
+    --filet-clair: #b8b8b8;
+    /* luma(90%) : bandeau des blocs d'activité. */
+    --fond-bandeau: #e5e5e5;
+    /* black.lighten(90%) : corps des points clés. */
+    --fond-encadré: #e6e6e6;
+    --largeur: 44rem;
+
+    /* Combien de temps il faut tenir le survol (ou l'appui) pour lire. */
+    --délai-pouce: 5s;
+    --délai-corrigé: 15s;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    /* La largeur de lecture est portée par body : le document inclus ne peut
+       pas être enveloppé dans un conteneur (cf. gabarits/site.typ). */
+    max-width: var(--largeur);
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    background: var(--fond);
+    color: var(--texte);
+    /* Le poly compose en New Computer Modern. Qui l'a installé lit le site
+       dans la police du papier ; les autres tombent sur le plus proche. */
+    font-family: "New Computer Modern", "Latin Modern Roman", "CMU Serif", Cambria, "Times New Roman", Times, serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* Le paquet typst souligne les liens ; le site fait pareil. */
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--texte); outline-offset: 2px; }
+
+/* -- Fil d'Ariane --------------------------------------------------------- */
+
+.fil {
+    padding: 1.5rem 0 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gris);
+    text-align: left;
+}
+.fil .sep { margin: 0 0.45em; color: var(--filet-clair); }
+.fil .ici { color: var(--gris); }
+
+/* -- Titres --------------------------------------------------------------- */
+
+h1, h2, h3, h4 { line-height: 1.25; text-wrap: balance; text-align: left; font-weight: 700; }
+h1 { font-size: 1.8rem; margin: 1rem 0 2rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-size: 1.12rem; margin: 2rem 0 0.5rem; }
+h4 { font-size: 1rem; margin: 1.5rem 0 0.4rem; }
+/* Une page d'exercice n'a pas de titre de document : son premier titre, celui
+   de l'exercice, en tient lieu. typst réserve <h1> au titre du document et
+   décale le corps d'un cran, d'où ce <h2> juste après le fil d'Ariane. */
+.fil + h2 { font-size: 1.6rem; margin: 1rem 0 1.5rem; }
+
+/* -- Listes de liens (accueil, sommaire de chapitre) ---------------------- */
+
+ul.liens { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+ul.liens li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6em;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--filet-clair);
+    text-align: left;
+}
+ul.liens li:last-child { border-bottom: none; }
+/* Numéro de chapitre : une pastille de chiffres alignés. */
+ul.liens .marque {
+    flex: none;
+    min-width: 1.6em;
+    font-variant-numeric: tabular-nums;
+    color: var(--gris);
+}
+ul.liens .détail { margin-left: auto; padding-left: 1em; color: var(--gris); font-size: 0.85rem; white-space: nowrap; }
+/* Type et difficulté d'un exercice : l'emoji seul est muet, l'infobulle le dit
+   en toutes lettres. */
+ul.liens .détail[title] { cursor: help; }
+p.vide { color: var(--gris); font-style: italic; }
+
+/* -- Grilles et piles ----------------------------------------------------- */
+/* `grid` et `stack` disparaissent à l'export HTML : gabarits/site.typ les
+   rejoue en balises, la mise en colonnes se fait ici. */
+
+.grille { display: grid; gap: 0.4rem 1.2rem; align-items: start; }
+/* Le trait d'un grid.hline : il court sur toutes les colonnes (le total d'un
+   barème s'en détache). */
+.filet-grille { grid-column: 1 / -1; border-top: 1px solid var(--filet); margin: 0.15rem 0; }
+.pile { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: baseline; }
+/* Sur un écran étroit, deux colonnes de texte ne tiennent pas. Le
+   grid-template-columns venant d'un attribut style, il faut ce !important. */
+@media (max-width: 34rem) {
+    .grille { grid-template-columns: 1fr !important; }
+}
+/* En dessous, une ligne justifiée ne tient plus assez de mots : les blancs
+   s'ouvrent. Le poly, lui, garde ses 19 cm de justification. */
+@media (max-width: 30rem) {
+    body { text-align: left; }
+}
+
+/* -- Blocs du cours (point clé, schéma, manipulation, évaluation…) --------- */
+/* La structure vient de _boite, dans le paquet typst. */
+
+.bloc {
+    margin: 1.4rem 0;
+    border: 1px solid var(--filet);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.bloc-bandeau {
+    padding: 0.35rem 0.85em;
+    background: var(--fond-bandeau);
+    border-bottom: 1px solid var(--filet);
+    text-align: left;
+}
+/* Bandeau noir : points clés, travail préparatoire, évaluations. */
+.bloc-bandeau.noir { background: var(--texte); color: var(--fond); }
+.bloc-bandeau.noir a { color: var(--fond); }
+.bloc-corps { padding: 0.6rem 0.85em; }
+.bloc[data-genre="encadré"] .bloc-corps { background: var(--fond-encadré); }
+.bloc > .bloc-corps > :first-child { margin-top: 0; }
+.bloc > .bloc-corps > :last-child { margin-bottom: 0; }
+
+/* -- Volets à découvrir (coups de pouce, corrigés) ------------------------ */
+/* Révélation en CSS pure : il faut tenir le survol — ou l'appui, sur écran
+   tactile — le temps du délai. Le retour est immédiat : on ne garde pas un
+   texte lisible après avoir quitté. */
+
+.volets { margin: 0.7rem 0 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+/* Coups de pouce et corrigé sont deux .volets qui se suivent : ils forment un
+   seul groupe sous la question, pas deux. */
+.volets + .volets { margin-top: -0.8rem; }
+
+.volet {
+    position: relative;
+    padding: 0.55rem 0.85em 0.65rem;
+    border: 1px dashed var(--filet-clair);
+    border-radius: 3px;
+    cursor: help;
+    overflow: hidden;
+    /* Sur écran tactile, l'appui prolongé ne doit pas déclencher la sélection
+       de texte ni le menu contextuel : ils annuleraient le maintien. */
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.volet.pouce { --délai: var(--délai-pouce); }
+.volet.corrige { --délai: var(--délai-corrigé); }
+
+.volet-titre {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gris);
+    text-align: left;
+    margin-bottom: 0.2rem;
+}
+.volet-texte {
+    filter: blur(5px);
+    opacity: 0.55;
+    user-select: none;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+/* Le délai est porté par l'état survolé : c'est lui qu'il faut tenir.
+   `:active` est la version tactile du même geste — le doigt reste posé. */
+.volet:hover .volet-texte,
+.volet:active .volet-texte {
+    filter: blur(0);
+    opacity: 1;
+    user-select: auto;
+    transition: filter 0.35s ease var(--délai), opacity 0.35s ease var(--délai);
+}
+/* Au clavier, pas de geste à tenir : le focus révèle tout de suite.
+   `:focus-visible` et non `:focus` — sur smartphone, un simple appui donne le
+   focus à l'élément (il porte un tabindex) et découvrait tout instantanément. */
+.volet:focus-visible .volet-texte,
+.volet:focus-within:not(:focus) .volet-texte {
+    filter: blur(0);
+    opacity: 1;
+    user-select: auto;
+    transition: none;
+}
+
+/* Jauge du délai, pour qu'on sache qu'il faut tenir. */
+.volet::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--texte);
+    transition: width 0s;
+}
+.volet:hover::after, .volet:active::after { width: 100%; transition: width var(--délai) linear; }
+.volet:focus-visible::after { width: 0; transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .volet-texte, .volet:hover .volet-texte, .volet:active .volet-texte { transition-duration: 0s; }
+    .volet::after, .volet:hover::after, .volet:active::after { transition: none; }
+}
+
+/* -- Formules et figures -------------------------------------------------- */
+
+/* Les navigateurs rendent le MathML avec la police de math du système : sans
+   pile explicite, les parenthèses et les racines ne s'étirent pas. */
+math {
+    font-size: 1.05em;
+    font-family: "New Computer Modern Math", "Latin Modern Math", "STIX Two Math", "Cambria Math", "DejaVu Math TeX Gyre", math, serif;
+}
+/* Surtout pas de `display: block` ici : un élément <math> a le mode de rendu
+   `block math`, et le remplacer par `block` fait retomber ses enfants en
+   boîtes ordinaires — l'équation part en morceaux. */
+math[display="block"] { margin: 1rem 0; }
+
+figure { margin: 1.5rem 0; text-align: center; }
+figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--gris); text-align: center; }
+img, svg { max-width: 100%; height: auto; }
+img { display: block; margin: 0 auto; }
+/* Les schémas cetz/zap sortent en noir sur transparent : rien à corriger, le
+   fond du site est déjà celui du papier. */
+svg { display: block; margin: 1.25rem auto; }
+
+/* Le code des corrigés et des exercices numériques. */
+pre, code { font-family: "New Computer Modern Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.9em; }
+pre {
+    text-align: left;
+    hyphens: none;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--filet-clair);
+    border-radius: 3px;
+    overflow-x: auto;
+}
+
+table { border-collapse: collapse; margin: 1.25rem 0; }
+table td, table th { border: 1px solid var(--filet); padding: 0.3rem 0.6rem; text-align: left; }
+
+ul, ol { padding-left: 1.4em; }
+li { text-align: left; }
+
+/* -- Pied ----------------------------------------------------------------- */
+
+footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--filet-clair);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--gris);
+    text-align: left;
+}
+
+/* -- Impression ----------------------------------------------------------- */
+/* Le poly reste le document à imprimer, mais une page du site doit sortir
+   proprement : les volets y sont déjà découverts, faute de souris. */
+
+@media print {
+    body { max-width: none; padding: 0; font-size: 11pt; }
+    .fil, footer { display: none; }
+    .volet-texte { filter: none; opacity: 1; }
+    .volet::after { display: none; }
+    .bloc, .volet, figure, pre { break-inside: avoid; }
+}

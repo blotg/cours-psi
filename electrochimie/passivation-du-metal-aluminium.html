@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Passivation du métal aluminium — Électrochimie</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électrochimie</a><span class="sep">›</span><span class="ici">Passivation du métal aluminium</span></nav><h2>Passivation du métal aluminium ★★</h2><p>Au contact de l’air, l’aluminium se couvre spontanément d’une couche d’oxyde d’aluminium(III) qui le protège. On épaissit cette couche par électrolyse dans un bain d’acide sulfurique concentré (anodisation). Donnée : masse volumique de l’oxyde d’aluminium(III) <math><mi>𝜌</mi><mo>=</mo><mn>3.16</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><mtext>c</mtext><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup></math> ; <math><mi>𝑀</mi><mrow><mo>(</mo><mrow><mtext>Al</mtext></mrow><mo>)</mo></mrow><mo>=</mo><mn>27</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>, <math><mi>𝑀</mi><mrow><mo>(</mo><mrow><mtext>O</mtext></mrow><mo>)</mo></mrow><mo>=</mo><mn>16</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>.</p><p><strong>1/</strong> Quelle est la formule de l’oxyde d’aluminium(III) ? En déduire l’équation de la réaction électrochimique d’obtention de l’oxyde.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Dans quelles proportions se trouvent l’aluminium (nombre d’oxydation +III) et l’oxygène (−II) dans un oxyde neutre ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Écrire la demi-équation entre l’oxyde d’aluminium(III) et l’aluminium solide, puis la combiner avec un couple de l’eau.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Neutralité : <math><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mrow><mo>(</mo><mrow><mo>+</mo><mn>3</mn></mrow><mo>)</mo></mrow><mo>+</mo><mn>3</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mrow><mo>(</mo><mrow><mo>−</mo><mn>2</mn></mrow><mo>)</mo></mrow><mo>=</mo><mn>0</mn></math>, donc <math><msub><mtext>Al</mtext><mn>2</mn></msub><msub><mtext>O</mtext><mn>3</mn></msub></math>.</p><p>Demi-équation (l’aluminium passe de <math><mn>0</mn></math> à <math><mo>+</mo><mtext>III</mtext></math>, il est oxydé) :</p><math display="block"><mn>2</mn><mspace width="0.2222em"/><mtext>Al</mtext><mo>+</mo><mn>3</mn><msub><mtext>H</mtext><mn>2</mn></msub><mtext>O</mtext><mo stretchy="false">→</mo><msub><mtext>Al</mtext><mn>2</mn></msub><msub><mtext>O</mtext><mn>3</mn></msub><mo>+</mo><mn>6</mn><msup><mtext>H</mtext><mo>+</mo></msup><mo>+</mo><mn>6</mn><msup><mi>𝑒</mi><mo>−</mo></msup></math><p>C’est la réaction anodique (<math><mi>𝑛</mi><mo>=</mo><mn>6</mn></math>).</p></div></div></div></div><p><strong>2/</strong> On impose une densité de courant <math><mi>𝑗</mi><mo>=</mo><mn>1</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><mtext>d</mtext><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>. Quelle est l’épaisseur de la couche d’alumine après <math><mn>10</mn><mspace width="0.1667em"/><mtext>min</mtext></math> d’électrolyse ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Intégrer <math><mi>𝑖</mi><mo>=</mo><mo form="prefix">−</mo><mi>𝑛</mi><mi>ℱ︀</mi><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝜉</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac></math> pour l’avancement, puis passer à la masse, au volume, à l’épaisseur.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Par unité de surface, la charge est <math><mi>𝑞</mi><mo>=</mo><mi>𝑗</mi><mspace width="0.1667em"/><mi>𝑡</mi><mo>=</mo><mn>100</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>600</mn><mo>=</mo><mn>6</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>4</mn></msup><mspace width="0.1667em"/><mtext>C</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math> (avec <math><mi>𝑗</mi><mo>=</mo><mn>1</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><mtext>d</mtext><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>=</mo><mn>100</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>).</p><p>Quantité d’<math><msub><mtext>Al</mtext><mn>2</mn></msub><msub><mtext>O</mtext><mn>3</mn></msub></math> formée par unité de surface : <math><mi>𝑛</mi><mo>=</mo><mi>𝑞</mi><mi>/</mi><mrow><mo>(</mo><mrow><mn>6</mn><mi>ℱ︀</mi></mrow><mo>)</mo></mrow><mo>=</mo><mn>6</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mn>4</mn></msup><mi>/</mi><mrow><mo>(</mo><mrow><mn>6</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>96500</mn></mrow><mo>)</mo></mrow><mo>≈</mo><mn>0.104</mn><mspace width="0.1667em"/><mtext>mol</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>.</p><p>Avec <math><mi>𝑀</mi><mrow><mo>(</mo><mrow><msub><mtext>Al</mtext><mn>2</mn></msub><msub><mtext>O</mtext><mn>3</mn></msub></mrow><mo>)</mo></mrow><mo>=</mo><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>27</mn><mo>+</mo><mn>3</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>16</mn><mo>=</mo><mn>102</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>, la masse par unité de surface est <math><mn>10.6</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, le volume <math><mn>10.6</mn><mi>/</mi><mrow><mo>(</mo><mrow><mn>3.16</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mn>6</mn></msup></mrow><mo>)</mo></mrow><mo>≈</mo><mn>3.4</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>m</mtext><mn>3</mn></msup><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, soit une épaisseur</p><math display="block"><mi>𝑒</mi><mo>≈</mo><mn>3.4</mn><mspace width="0.1667em"/><mtext>µ</mtext><mtext>m</mtext></math></div></div></div></div><p><strong>3/</strong> Un manuel indique : « avec <math><mi>𝑗</mi><mo>=</mo><mn>150</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, la couche atteint <math><mn>10</mn><mspace width="0.1667em"/><mtext>µ</mtext><mtext>m</mtext></math> en <math><mn>30</mn><mspace width="0.1667em"/><mtext>min</mtext></math> ». Est-ce en accord avec l’étude théorique ? Sinon, proposer une explication.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Reprendre la formule littérale et calculer l’épaisseur théorique.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Qu’est-ce qui peut faire que tout le courant ne participe pas à la passivation ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Théorie : <math><mi>𝑞</mi><mo>=</mo><mn>150</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>1800</mn><mo>=</mo><mn>2.7</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>5</mn></msup><mspace width="0.1667em"/><mtext>C</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, <math><mi>𝑛</mi><mo>=</mo><mn>2.7</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mn>5</mn></msup><mi>/</mi><mrow><mo>(</mo><mrow><mn>6</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>96500</mn></mrow><mo>)</mo></mrow><mo>≈</mo><mn>0.47</mn><mspace width="0.1667em"/><mtext>mol</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, masse <math><mn>47.6</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, volume <math><mn>1.5</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>5</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>m</mtext><mn>3</mn></msup><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup></math>, soit <math><msub><mi>𝑒</mi><mtext>théo</mtext></msub><mo>≈</mo><mn>15</mn><mspace width="0.1667em"/><mtext>µ</mtext><mtext>m</mtext></math>.</p><p>Le manuel annonce <math><mn>10</mn><mspace width="0.1667em"/><mtext>µ</mtext><mtext>m</mtext></math>, soit nettement moins. Le rendement faradique n’est donc pas de <math><mn>100</mn><mspace width="0.1667em"/><mi>%</mi></math> : <math><msub><mi>𝜌</mi><mi>𝐹</mi></msub><mo>≈</mo><mn>10</mn><mi>/</mi><mn>15</mn><mo>≈</mo><mn>67</mn><mspace width="0.1667em"/><mi>%</mi></math>. Une partie du courant sert au dégagement de <math><msub><mtext>O</mtext><mn>2</mn></msub></math> à l’anode (réaction parasite), et une partie de l’alumine formée se dissout dans l’acide sulfurique concentré.</p></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

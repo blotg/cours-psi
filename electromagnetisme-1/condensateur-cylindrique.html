@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Condensateur cylindrique — Électromagnétisme 1 : Champ électrique en régime stationnaire</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électromagnétisme 1 : Champ électrique en régime stationnaire</a><span class="sep">›</span><span class="ici">Condensateur cylindrique</span></nav><h2>Condensateur cylindrique ★</h2><p>Un condensateur cylindrique est constitué de deux armatures coaxiales de hauteur <math><mi>ℎ</mi></math>. L’armature intérieure, de rayon <math><msub><mi>𝑅</mi><mn>1</mn></msub></math>, porte la charge <math><mi>𝑄</mi></math> ; l’armature extérieure, de rayon <math><msub><mi>𝑅</mi><mn>2</mn></msub></math>, porte la charge <math><mo>−</mo><mi>𝑄</mi></math>. L’espace entre les armatures est vide et on néglige les effets de bord.</p><p><strong>1/</strong> Que signifie « négliger les effets de bord » ?</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Cela revient à traiter les armatures comme des cylindres de longueur infinie : le champ est alors purement radial, ne dépend que de <math><mi>𝑟</mi></math> et ne présente ni composante selon l’axe ni dépendance en <math><mi>𝑧</mi></math>. Cette approximation est valable loin des extrémités, lorsque <math><mi>ℎ</mi><mo>≫</mo><msub><mi>𝑅</mi><mn>2</mn></msub></math>.</div></div></div></div><p><strong>2/</strong> Établir l’expression du champ électrique en tout point de l’espace.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Effectuer les quatre étapes : invariances, symétries, choix de la surface de Gauss, théorème de Gauss.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Invariances (cylindre infini) et symétries donnent <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mi>𝐸</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></math>. On prend pour surface de Gauss un cylindre coaxial de rayon <math><mi>𝑟</mi></math> et de hauteur <math><mi>ℓ</mi></math>. Le flux vaut <math><mi>𝐸</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>2</mn><mi>𝜋</mi><mi>𝑟</mi><mi>ℓ</mi></math> (les bases ne contribuent pas).</p><p><strong>Pour <math><msub><mi>𝑅</mi><mn>1</mn></msub><mo>&lt;</mo><mi>𝑟</mi><mo>&lt;</mo><msub><mi>𝑅</mi><mn>2</mn></msub></math> :</strong> la charge intérieure est la fraction <math><mi>ℓ</mi><mi>/</mi><mi>ℎ</mi></math> de l’armature interne, <math><msub><mi>𝑄</mi><mtext>int</mtext></msub><mo>=</mo><mi>𝑄</mi><mi>ℓ</mi><mi>/</mi><mi>ℎ</mi></math> :</p><math display="block"><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mn>2</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><mi>ℎ</mi><mi>𝑟</mi></mrow></mfrac><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></math><p><strong>Pour <math><mi>𝑟</mi><mo>&lt;</mo><msub><mi>𝑅</mi><mn>1</mn></msub></math> :</strong> <math><msub><mi>𝑄</mi><mtext>int</mtext></msub><mo>=</mo><mn>0</mn></math>, donc <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mover accent="true"><mn>0</mn><mo stretchy="true">⃗</mo></mover></math>.</p><p><strong>Pour <math><mi>𝑟</mi><mo>></mo><msub><mi>𝑅</mi><mn>2</mn></msub></math> :</strong> <math><msub><mi>𝑄</mi><mtext>int</mtext></msub><mo>=</mo><mi>𝑄</mi><mo>−</mo><mi>𝑄</mi><mo>=</mo><mn>0</mn></math>, donc <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mover accent="true"><mn>0</mn><mo stretchy="true">⃗</mo></mover></math>.</p></div></div></div></div><p><strong>3/</strong> Établir l’expression de la différence de potentiel entre les deux armatures.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Utiliser la circulation de <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover></math> d’une armature à l’autre.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><math display="block"><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>−</mo><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>2</mn></msub><mo>)</mo></mrow><mo>=</mo><msubsup><mo form="prefix" lspace="0em">∫</mo><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub></msubsup><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mover accent="true"><mrow><mi mathvariant="normal">d</mi><mi>𝑙</mi></mrow><mo stretchy="true">⃗</mo></mover><mo>=</mo><msubsup><mo form="prefix" lspace="0em">∫</mo><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub></msubsup><mfrac><mi>𝑄</mi><mrow><mn>2</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><mi>ℎ</mi><mi>𝑟</mi></mrow></mfrac><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mn>2</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><mi>ℎ</mi></mrow></mfrac><mo form="prefix" lspace="0.16666666666666666em" rspace="0em">ln</mo><mrow><mo>(</mo><mfrac><msub><mi>𝑅</mi><mn>2</mn></msub><msub><mi>𝑅</mi><mn>1</mn></msub></mfrac><mo>)</mo></mrow></math></div></div></div><p><strong>4/</strong> En déduire l’expression de la capacité du condensateur cylindrique.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><math display="block"><mi>𝐶</mi><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>−</mo><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>2</mn></msub><mo>)</mo></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><mi>ℎ</mi></mrow><mrow><mo lspace="0em" rspace="0em">ln</mo><mrow><mo>(</mo><mrow><msub><mi>𝑅</mi><mn>2</mn></msub><mi>/</mi><msub><mi>𝑅</mi><mn>1</mn></msub></mrow><mo>)</mo></mrow></mrow></mfrac></math></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

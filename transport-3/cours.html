@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Phénomènes de transport 3
+Diffusion de particules
+</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Phénomènes de transport 3 : Diffusion de particules</a><span class="sep">›</span><span class="ici">Cours</span></nav><div></div><h1>Phénomènes de transport 3<br>Diffusion de particules<br></h1><p><strong>Résumé du cours</strong></p><h3>1. Transfert de masse</h3><h4>1.1. Particules</h4><p>Une particule est un petit élément d’un système. Toutes les particules ont une masse, à part les photons.</p><section class="bloc" data-genre="exemple"><div class="bloc-bandeau"><strong>Exemple 1</strong></div><div class="bloc-corps">Neutron, électron, atome, molécule, ion, grain de pollen, grain de sable</div></section><p>Dans ce chapitre, on s’intéresse aux particules neutres. Les particules chargées sont traitées dans le chapitre « Transport de charge ».</p><section class="bloc" data-genre="application"><div class="bloc-bandeau"><strong>Application 1</strong> ✍</div><div class="bloc-corps">Dans l’exemple ci-dessus, quelles particules sont neutres ?</div></section><h4>1.2. Transfert de masse</h4><p>Transférer de la masse implique transporter des particules massives<sup id="loc-1" role="doc-noteref"><span style="text-decoration: underline"><a href="#loc-4">1</a></span></sup>.</p><p>Deux phénomènes contribuent à transférer de la masse</p><dl><dt>Transfert par convection</dt><dd><p>Le transfert par convection a lieu lorsqu’un mouvement macroscopique existe dans un fluide. Les particules présentes dans le fluide sont transportées avec lui.</p><section class="bloc" data-genre="exemple"><div class="bloc-bandeau"><strong>Exemple 2</strong></div><div class="bloc-corps">Plancton transporté par les courants marins, particules fines transportées par les courants atmosphériques.</div></section></dd><dt>Transfert par diffusion</dt><dd><p>Même en l’absence de mouvement macroscopique, les particules ont un mouvement d’agitation. L’agitation des particules fait migrer les particules des zones de plus forte concentration vers les zones de plus faible concentration.</p><section class="bloc" data-genre="exemple"><div class="bloc-bandeau"><strong>Exemple 3</strong></div><div class="bloc-corps">Parfum dans une pièce sans courant d’air, encre dans de l’eau au repos.</div></section></dd></dl><h3>2. Vecteur densité de courant de particule <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> et densité particulaire</h3><h4>2.1. Définition</h4><p>La norme du vecteur densité de courant de particule <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> est le nombre de particules transportées par unité d’aire et de temps.</p><p>Le sens et la direction du vecteur densité de courant de particule <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> sont le sens et la direction de transport des particules.</p><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 1</strong> – Nombre de particules traversant une surface élémentaire ♥︎</div><div class="bloc-corps"><math display="block"><msup><mi>𝛿</mi><mn>2</mn></msup><mi>𝑁</mi><mo>=</mo><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mover accent="true"><mrow><mi mathvariant="normal">d</mi><mi>𝑆</mi></mrow><mo stretchy="true">⃗</mo></mover><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑡</mi></math><div>avec <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> le vecteur densité de courant de particule (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><msup><mi>𝛿</mi><mn>2</mn></msup><mi>𝑁</mi></math> le nombre de particules traversant <math><mi mathvariant="normal">d</mi><mi>𝑆</mi></math> (sans unité) ; <math><mi mathvariant="normal">d</mi><mi>𝑆</mi></math> la surface élémentaire (<math><msup><mtext>m</mtext><mn>2</mn></msup></math>).</div></div></section><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 2</strong> – Lien avec la vitesse moyenne ♥︎✍</div><div class="bloc-corps"><math display="block"><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub><mo>=</mo><mi>𝑛</mi><mover accent="true"><mi>𝑣</mi><mo stretchy="true">⃗</mo></mover></math><div>avec <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> le vecteur densité de courant de particule (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><mover accent="true"><mi>𝑣</mi><mo stretchy="true">⃗</mo></mover></math> la vitesse moyenne des particules (<math><mtext>m</mtext><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>).</div></div></section><h4>2.2. Débit de particules</h4><p>Le débit de particules est l’intégrale du vecteur densité de courant de particule sur une surface orientée.</p><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 3</strong> – Débit de particules ♥︎</div><div class="bloc-corps"><math display="block"><mi mathvariant="normal">Φ</mi><mo>=</mo><msub><mo form="prefix" lspace="0em">∬</mo><mi>𝑆</mi></msub><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mover accent="true"><mrow><mi mathvariant="normal">d</mi><mi>𝑆</mi></mrow><mo stretchy="true">⃗</mo></mover></math><div>avec <math><mi mathvariant="normal">Φ</mi></math> le débit de particules (<math><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> le vecteur densité de courant de particule (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>).</div></div></section><h4>2.3. Densité particulaire</h4><p>La densité particulaire (ou densité de particules) est le nombre de particules par unité de volume. La densité particulaire se mesure en <math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup></math>.</p><p>La densité particulaire est une grandeur intensive.</p><h4>2.4. Loi de Fick</h4><p>La loi de Fick relie la densité particulaire au vecteur densité de courant de particules diffusées.</p><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 4</strong> – Loi de Fick ♥︎</div><div class="bloc-corps"><p>Hypothèse : Le transport de particules se fait par diffusion.</p><math display="block"><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub><mo>=</mo><mo form="prefix">−</mo><mi>𝐷</mi><mrow><mover accent="true"><mtext>grad</mtext><mo stretchy="true">⃗</mo></mover><mspace width="0.1667em"/></mrow><mi>𝑛</mi></math><div>avec <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> le vecteur densité de courant de particule (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><mi>𝐷</mi></math> le coefficient de diffusion (<math><msup><mtext>m</mtext><mn>2</mn></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><mi>𝑛</mi></math> la densité particulaire (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup></math>).</div></div></section><p>Le signe « <math><mo form="prefix">−</mo></math> » dans la loi de Fick correspond à un sens de diffusion des zones où il y a le plus de particules vers les zones où il y a le moins de particules.</p><h3>3. Équation de diffusion</h3><h4>3.1. Bilan de particules</h4><p>On peut faire le bilan du nombre de particules dans un système : la variation du nombre de particules dans un système est égale au nombre de particules rentrant dans le système plus le nombre de particules créées<sup id="loc-2" role="doc-noteref"><span style="text-decoration: underline"><a href="#loc-5">2</a></span></sup> dans le système<sup id="loc-3" role="doc-noteref"><span style="text-decoration: underline"><a href="#loc-6">3</a></span></sup>.</p><section class="bloc" data-genre="exemple"><div class="bloc-bandeau"><strong>Exemple 4</strong></div><div class="bloc-corps">Dans un hôpital, en une journée, 253 personnes sont rentrées, 243 sont sorties, 5 sont nées et 2 sont décédées. Le nombre de personnes dans l’hôpital a varié de <math><mn>253</mn><mo>−</mo><mn>243</mn><mo>+</mo><mn>5</mn><mo>−</mo><mn>2</mn><mo>=</mo><mn>13</mn></math>.</div></section><p>Faire le bilan de particules sur un système infinitésimal permet de démontrer l’équation locale de conservation du nombre de particules.</p><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 5</strong> – Équation locale de conservation du nombre de particules ♥︎✍</div><div class="bloc-corps"><math display="block"><mfrac><mrow><mi>𝜕</mi><mi>𝑛</mi></mrow><mrow><mi>𝜕</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mo form="prefix">−</mo><mtext>div </mtext><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub><mo>+</mo><mi>𝑎</mi></math><div>avec <math><mi>𝑛</mi></math> la densité particulaire (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup></math>) ; <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> le vecteur densité de courant de particule (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>2</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><mi>𝑎</mi></math> le nombre de particules créées par unité de temps et de volume (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>).</div></div></section><h4>3.2. Équation de diffusion</h4><p>Si on remplace le vecteur densité de courant de particules <math><msub><mover accent="true"><mi>𝑗</mi><mo stretchy="true">⃗</mo></mover><mi>𝑁</mi></msub></math> grâce à la loi de Fick dans l’équation locale de conservation du nombre de particules, on obtient l’équation de diffusion.</p><section class="bloc" data-genre="encadré"><div class="bloc-bandeau noir"><strong>Point clé 6</strong> – Équation de diffusion ♥︎✍</div><div class="bloc-corps"><p>Hypothèse : Les particules sont transportées par diffusion</p><math display="block"><mfrac><mrow><mi>𝜕</mi><mi>𝑛</mi></mrow><mrow><mi>𝜕</mi><mi>𝑡</mi></mrow></mfrac><mo>−</mo><mi>𝐷</mi><mi mathvariant="normal">Δ</mi><mi>𝑛</mi><mo>=</mo><mi>𝑎</mi></math><div>avec <math><mi>𝑛</mi></math> la densité particulaire (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup></math>) ; <math><mi>𝐷</mi></math> le coefficient de diffusion (<math><msup><mtext>m</mtext><mn>2</mn></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) ; <math><mi>𝑎</mi></math> le nombre de particules créées par unité de temps et de volume (<math><mspace width="0.1667em"/><msup><mtext>m</mtext><mrow><mo>−</mo><mn>3</mn></mrow></msup><mspace width="0.1667em"/><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>).</div></div></section><h4>3.3. Irréversibilité</h4><p>L’équation de diffusion n’est pas invariante par renversement du temps. L’équation de diffusion est donc irréversible.</p><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-4"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>Une particule massive est une particule qui a une masse non nulle, c’est-à-dire une particule qui n’est pas un photon.</li><li id="loc-5"><sup role="doc-backlink"><a href="#loc-2">2</a></sup>Souvent, les particules ne sont pas créées de rien mais sont le résultat de réactions chimiques ou nucléaires.</li><li id="loc-6"><sup role="doc-backlink"><a href="#loc-3">3</a></sup>On compte négativement les particules qui sortent du système ou qui y sont détruites.</li></ol></section></body></html>

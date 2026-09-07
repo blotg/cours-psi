@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Transport de l'électricité en haute tension — Conversion de puissance 1 : Puissance électrique en régime sinusoïdal</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Conversion de puissance 1 : Puissance électrique en régime sinusoïdal</a><span class="sep">›</span><span class="ici">Transport de l’électricité en haute tension</span></nav><h2>💬 J’explique à ma cousine : Transport de l’électricité en haute tension</h2><p><em>Le but de cet exercice est de vous faire expliquer un concept/phénomène avec des mots simples et courants (pas de vocabulaire technique ou scientifique) à une personne de votre entourage. Tachez de faire simple et court, utilisez des analogies avec des choses connues. Vous pouvez vous inspirer de <a href="https://www.youtube.com/@MT180_fr">Ma thèse en 180 secondes</a>. Profitez-en pour prendre des nouvelles !</em></p><p><strong>Pourquoi l’électricité est-elle transportée en haute tension sur de longues distances ?</strong></p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Quand de l’électricité passe dans un câble, celui-ci chauffe. Ceci constitue une perte d’énergie. Plus le courant est important, plus ça chauffe et plus il y a de pertes.</p><p>La puissance électrique est la multiplication entre la tension et le courant : <math><mi>𝑃</mi><mo>=</mo><mi>𝑈</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mi>𝐼</mi></math>. Pour transporter une puissance de <math><mn>1000</mn><mspace width="0.1667em"/><mtext>W</mtext></math>, on peut par exemple utiliser une tension de <math><mn>100</mn><mspace width="0.1667em"/><mtext>V</mtext></math> et un courant de <math><mn>10</mn><mspace width="0.1667em"/><mtext>A</mtext></math>, ou bien une tension de <math><mn>1000</mn><mspace width="0.1667em"/><mtext>V</mtext></math> et un courant de <math><mn>1</mn><mspace width="0.1667em"/><mtext>A</mtext></math>. Dans le second cas, il y a moins de courant, donc moins de pertes dans le câble.</p></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

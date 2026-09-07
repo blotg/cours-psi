@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Calculs numériques sur un diagramme de Fresnel — Conversion de puissance 3 : Conversion électro-magnéto-mécanique</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Conversion de puissance 3 : Conversion électro-magnéto-mécanique</a><span class="sep">›</span><span class="ici">Calculs numériques sur un diagramme de Fresnel</span></nav><h2>🖥️ Calculs numériques sur un diagramme de Fresnel</h2><p>En Python, le nombre complexe <math><mi>𝑖</mi></math> s’écrit <code>1j</code>. L’exponentielle complexe est la fonction <code>exp</code> du module <code>cmath</code>. Le module est réalisé par la fonction <code>abs</code>.</p><p>À l’aide de Python, déterminer la tension efficace aux bornes d’un moteur synchrone diphasé dipolaire dans chacun des cas suivants. On sommera les amplitudes complexes résultant de la loi des mailles.</p><p><strong>1/</strong> La force contre-électromotrice induite efficace est <math><mn>250</mn><mspace width="0.1667em"/><mtext>V</mtext></math>, la résistance de l’induit est négligeable, l’inductance de l’induit est <math><mn>0.10</mn><mspace width="0.1667em"/><mtext>H</mtext></math>, la fréquence de rotation est <math><mn>3000</mn><mspace width="0.1667em"/><mspace width="0.1667em"/><msup><mtext>min</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math> et le courant est <math><mn>10</mn><mspace width="0.1667em"/><mtext>A</mtext></math>. L’angle de pilotage est nul. Le calcul effectué par Python pourra être vérifié à la main de ce premier cas simple.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Quelles amplitudes complexes sont en fait réelles si on prend <math><mi>𝑖</mi></math> commet origine des phases ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Écrire la loi des mailles en utilisant les amplitudes complexes.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><pre><code data-lang="python"><span style="color: #d73948">from</span> math <span style="color: #d73948">import</span> pi
+E <span style="color: #d73948">=</span> <span style="color: #b60157">250</span> <span style="color: #74747c">#</span><span style="color: #74747c"> V</span>
+I <span style="color: #d73948">=</span> <span style="color: #b60157">10</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> A</span>
+L <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">1</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> H</span>
+f <span style="color: #d73948">=</span> <span style="color: #b60157">3000</span> <span style="color: #d73948">/</span> <span style="color: #b60157">60</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> Hz</span>
+w <span style="color: #d73948">=</span> <span style="color: #b60157">2</span> <span style="color: #d73948">*</span> pi <span style="color: #d73948">*</span> f  <span style="color: #74747c">#</span><span style="color: #74747c"> rad/s</span>
+U <span style="color: #d73948">=</span> E <span style="color: #d73948">+</span> <span style="color: #b60157">1</span><span style="color: #d73948">j</span> <span style="color: #d73948">*</span> w <span style="color: #d73948">*</span> L <span style="color: #d73948">*</span> I
+<span style="color: #4b69c6">print</span>(<span style="color: #4b69c6">abs</span>(U))</code></pre><p>A la main, le théorème de Pythagore donne : <math><mi>𝑈</mi><mo>=</mo><msqrt><msup><mi>𝐸</mi><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mrow><mi>𝐿</mi><mi>𝜔</mi><mi>𝐼</mi></mrow><mo>)</mo></mrow><mn>2</mn></msup></msqrt><mo>=</mo><mn>4.0</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>2</mn></msup><mspace width="0.1667em"/><mtext>V</mtext></math></p></div></div></div></div><p><strong>2/</strong> La force contre-électromotrice induite efficace est <math><mn>250</mn><mspace width="0.1667em"/><mtext>V</mtext></math>, la résistance de l’induit est négligeable, l’inductance de l’induit est <math><mn>0.1</mn><mspace width="0.1667em"/><mtext>H</mtext></math>, la fréquence de rotation est <math><mn>3000</mn><mspace width="0.1667em"/><mspace width="0.1667em"/><msup><mtext>min</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math> et le courant est <math><mn>10</mn><mspace width="0.1667em"/><mtext>A</mtext></math>. L’angle de pilotage vaut <math><mn>30</mn><mi>°</mi></math>.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">from</span> math <span style="color: #d73948">import</span> pi
+<span style="color: #d73948">from</span> cmath <span style="color: #d73948">import</span> exp
+psi <span style="color: #d73948">=</span> <span style="color: #b60157">30</span> <span style="color: #d73948">*</span> pi <span style="color: #d73948">/</span> <span style="color: #b60157">180</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> rad</span>
+E <span style="color: #d73948">=</span> <span style="color: #b60157">250</span> <span style="color: #d73948">*</span> <span style="color: #4b69c6">exp</span>(<span style="color: #b60157">1</span><span style="color: #d73948">j</span><span style="color: #d73948">*</span>psi) <span style="color: #74747c">#</span><span style="color: #74747c"> V</span>
+I <span style="color: #d73948">=</span> <span style="color: #b60157">10</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> A</span>
+L <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">1</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> H</span>
+f <span style="color: #d73948">=</span> <span style="color: #b60157">3000</span> <span style="color: #d73948">/</span> <span style="color: #b60157">60</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> Hz</span>
+w <span style="color: #d73948">=</span> <span style="color: #b60157">2</span> <span style="color: #d73948">*</span> pi <span style="color: #d73948">*</span> f  <span style="color: #74747c">#</span><span style="color: #74747c"> rad/s</span>
+U <span style="color: #d73948">=</span> E <span style="color: #d73948">+</span> <span style="color: #b60157">1</span><span style="color: #d73948">j</span> <span style="color: #d73948">*</span> w <span style="color: #d73948">*</span> L <span style="color: #d73948">*</span> I
+<span style="color: #4b69c6">print</span>(<span style="color: #4b69c6">abs</span>(U))</code></pre></div></div></div><p><strong>3/</strong> La force contre-électromotrice induite efficace est <math><mn>250</mn><mspace width="0.1667em"/><mtext>V</mtext></math>, la résistance de l’induit est <math><mn>0.1</mn><mspace width="0.1667em"/><mtext>Ω</mtext></math>, l’inductance de l’induit est <math><mn>0.1</mn><mspace width="0.1667em"/><mtext>H</mtext></math>, la fréquence de rotation est <math><mn>3000</mn><mspace width="0.1667em"/><mspace width="0.1667em"/><msup><mtext>min</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math> et le courant est <math><mn>10</mn><mspace width="0.1667em"/><mtext>A</mtext></math>. L’angle de pilotage vaut <math><mn>30</mn><mi>°</mi></math>.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">from</span> math <span style="color: #d73948">import</span> pi
+<span style="color: #d73948">from</span> cmath <span style="color: #d73948">import</span> exp
+psi <span style="color: #d73948">=</span> <span style="color: #b60157">30</span> <span style="color: #d73948">*</span> pi <span style="color: #d73948">/</span> <span style="color: #b60157">180</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> rad</span>
+E <span style="color: #d73948">=</span> <span style="color: #b60157">250</span> <span style="color: #d73948">*</span> <span style="color: #4b69c6">exp</span>(<span style="color: #b60157">1</span><span style="color: #d73948">j</span><span style="color: #d73948">*</span>psi) <span style="color: #74747c">#</span><span style="color: #74747c"> V</span>
+I <span style="color: #d73948">=</span> <span style="color: #b60157">10</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> A</span>
+R <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">1</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> Ohm</span>
+L <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">1</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> H</span>
+f <span style="color: #d73948">=</span> <span style="color: #b60157">3000</span> <span style="color: #d73948">/</span> <span style="color: #b60157">60</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> Hz</span>
+w <span style="color: #d73948">=</span> <span style="color: #b60157">2</span> <span style="color: #d73948">*</span> pi <span style="color: #d73948">*</span> f  <span style="color: #74747c">#</span><span style="color: #74747c"> rad/s</span>
+U <span style="color: #d73948">=</span> E <span style="color: #d73948">+</span> R <span style="color: #d73948">*</span> I <span style="color: #d73948">+</span> <span style="color: #b60157">1</span><span style="color: #d73948">j</span> <span style="color: #d73948">*</span> w <span style="color: #d73948">*</span> L <span style="color: #d73948">*</span> I
+<span style="color: #4b69c6">print</span>(<span style="color: #4b69c6">abs</span>(U))</code></pre></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

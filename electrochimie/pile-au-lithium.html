@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pile au lithium — Électrochimie</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électrochimie</a><span class="sep">›</span><span class="ici">Pile au lithium</span></nav><h2>Pile au lithium ★★</h2><p>Les piles au lithium équipent de nombreux appareils. Borne positive en <math><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub></math>, borne négative en lithium ; électrolyte : un sel de lithium (<math><mtext>Li</mtext><mtext>P</mtext><msub><mtext>F</mtext><mn>6</mn></msub></math>) dans un solvant organique, concentré en <math><msup><mtext>Li</mtext><mo>+</mo></msup></math>. Le compartiment cathodique contient des ions <math><msup><mtext>H</mtext><mo>+</mo></msup></math>. Couples : <math><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub><mtext>(s)</mtext><mtext>/</mtext><mtext>Mn</mtext><mtext>O</mtext><span style="display: inline-block">(<math><mtext>O</mtext></math><math><mtext>H</mtext></math>)</span><mtext>(s)</mtext></math> et <math><msup><mtext>Li</mtext><mo>+</mo></msup></math>/<math><mtext>Li</mtext><mtext>(s)</mtext></math>.</p><p>Données : <math><msup><mi>𝐸</mi><mrow><mo form="infix" lspace="0em" rspace="0em">∘</mo><mrow><mo>(</mo><mrow><msup><mtext>Li</mtext><mo>+</mo></msup><mi>/</mi><mtext>Li</mtext></mrow><mo>)</mo></mrow></mrow></msup><mo>=</mo><mo form="prefix">−</mo><mn>3.0</mn><mspace width="0.1667em"/><mtext>V</mtext></math>, <math><msup><mi>𝐸</mi><mrow><mo form="infix" lspace="0em" rspace="0em">∘</mo><mrow><mo>(</mo><mrow><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub><mtext>/</mtext><mtext>Mn</mtext><mtext>O</mtext><span style="display: inline-block">(<math><mtext>O</mtext></math><math><mtext>H</mtext></math>)</span></mrow><mo>)</mo></mrow></mrow></msup><mo>=</mo><mn>1.0</mn><mspace width="0.1667em"/><mtext>V</mtext></math> ; masse de l’électrode de lithium <math><mn>2.0</mn><mspace width="0.1667em"/><mtext>g</mtext></math>, <math><mi>𝑀</mi><mrow><mo>(</mo><mrow><mtext>Li</mtext></mrow><mo>)</mo></mrow><mo>=</mo><mn>6.9</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math> ; courant débité <math><mi>𝐼</mi><mo>=</mo><mn>0.1</mn><mspace width="0.1667em"/><mtext>m</mtext><mtext>A</mtext></math> ; <math><mn>1</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><mtext>h</mtext><mo>=</mo><mn>3600</mn><mspace width="0.1667em"/><mtext>C</mtext></math>.</p><p><strong>1/</strong> Écrire les réactions à chaque électrode (en précisant leur nature), puis la réaction globale. Exprimer la force électromotrice théorique initiale en fonction des activités de <math><msup><mtext>H</mtext><mo>+</mo></msup></math> et <math><msup><mtext>Li</mtext><mo>+</mo></msup></math>. Pourquoi l’électrolyte n’est-il pas aqueux ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">L’électrode de lithium est-elle borne <math><mo form="prefix">+</mo></math> ou <math><mo form="prefix">−</mo></math> ? Pour une pile, anode ou cathode ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Que se passe-t-il si on met du lithium solide en présence d’eau ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><ul><li><strong>Électrode de lithium</strong> (borne <math><mo form="prefix">−</mo></math>, anode) : <math><mtext>Li</mtext><mo stretchy="false">→</mo><msup><mtext>Li</mtext><mo>+</mo></msup><mo>+</mo><msup><mi>𝑒</mi><mo>−</mo></msup></math> (oxydation).</li><li><strong>Électrode de <math><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub></math></strong> (borne <math><mo form="prefix">+</mo></math>, cathode) : <math><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub><mo>+</mo><msup><mtext>H</mtext><mo>+</mo></msup><mo>+</mo><msup><mi>𝑒</mi><mo>−</mo></msup><mo stretchy="false">→</mo><mtext>Mn</mtext><mtext>O</mtext><span style="display: inline-block">(<math><mtext>O</mtext></math><math><mtext>H</mtext></math>)</span></math> (réduction).</li></ul><p>Réaction globale (<math><mi>𝑛</mi><mo>=</mo><mn>1</mn></math>) : <math><mtext>Li</mtext><mo>+</mo><mtext>Mn</mtext><msub><mtext>O</mtext><mn>2</mn></msub><mo>+</mo><msup><mtext>H</mtext><mo>+</mo></msup><mo stretchy="false">→</mo><msup><mtext>Li</mtext><mo>+</mo></msup><mo>+</mo><mtext>Mn</mtext><mtext>O</mtext><span style="display: inline-block">(<math><mtext>O</mtext></math><math><mtext>H</mtext></math>)</span></math>.</p><p>Force électromotrice :</p><math display="block"><mi>𝑒</mi><mo>=</mo><msub><mi>𝐸</mi><mo>+</mo></msub><mo>−</mo><msub><mi>𝐸</mi><mo>−</mo></msub><mo>=</mo><mrow><mo>(</mo><mrow><mn>1.0</mn><mo>+</mo><mn>0.06</mn><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">log</mo><mi>𝑎</mi><mrow><mo>(</mo><mrow><msup><mtext>H</mtext><mo>+</mo></msup></mrow><mo>)</mo></mrow></mrow><mo>)</mo></mrow><mo>−</mo><mrow><mo>(</mo><mrow><mo>−</mo><mn>3.0</mn><mo>+</mo><mn>0.06</mn><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">log</mo><mi>𝑎</mi><mrow><mo>(</mo><mrow><msup><mtext>Li</mtext><mo>+</mo></msup></mrow><mo>)</mo></mrow></mrow><mo>)</mo></mrow><mo>=</mo><mn>4.0</mn><mo>+</mo><mn>0.06</mn><mo form="prefix" lspace="0.16666666666666666em" rspace="0.16666666666666666em">log</mo><mfrac><mrow><mi>𝑎</mi><mrow><mo>(</mo><mrow><msup><mtext>H</mtext><mo>+</mo></msup></mrow><mo>)</mo></mrow></mrow><mrow><mi>𝑎</mi><mrow><mo>(</mo><mrow><msup><mtext>Li</mtext><mo>+</mo></msup></mrow><mo>)</mo></mrow></mrow></mfrac></math><p>L’électrolyte n’est pas aqueux car <math><msup><mi>𝐸</mi><mrow><mo form="infix" lspace="0em" rspace="0em">∘</mo><mrow><mo>(</mo><mrow><msup><mtext>Li</mtext><mo>+</mo></msup><mi>/</mi><mtext>Li</mtext></mrow><mo>)</mo></mrow></mrow></msup><mo>=</mo><mo form="prefix">−</mo><mn>3.0</mn><mspace width="0.1667em"/><mtext>V</mtext></math> est très inférieur au potentiel de <math><msub><mtext>H</mtext><mn>2</mn></msub><mtext>O</mtext><mtext>/</mtext><msub><mtext>H</mtext><mn>2</mn></msub></math> : le lithium réagirait violemment avec l’eau (<math><mn>2</mn><mspace width="0.2222em"/><mtext>Li</mtext><mo>+</mo><mn>2</mn><msub><mtext>H</mtext><mn>2</mn></msub><mtext>O</mtext><mo stretchy="false">→</mo><mn>2</mn><msup><mtext>Li</mtext><mo>+</mo></msup><mo>+</mo><mn>2</mn><mspace width="0.2222em"/><mtext>H</mtext><msup><mtext>O</mtext><mo>−</mo></msup><mo>+</mo><msub><mtext>H</mtext><mn>2</mn></msub></math>).</p></div></div></div></div><p><strong>2/</strong> Déterminer la quantité de matière de <math><mtext>Li</mtext></math> disponible, la quantité <math><msub><mi>𝑛</mi><mi>𝑒</mi></msub></math> d’électrons transférables (<math><mtext>Li</mtext></math> limitant), et la quantité d’électricité <math><mi>𝑄</mi></math> (en C puis en A·h).</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Relier masse, masse molaire et quantité de matière.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><math display="block"><mi>𝑛</mi><mrow><mo>(</mo><mrow><mtext>Li</mtext></mrow><mo>)</mo></mrow><mo>=</mo><mn>2.0</mn><mi>/</mi><mn>6.9</mn><mo>≈</mo><mn>0.29</mn><mspace width="0.1667em"/><mtext>mol</mtext></math><p>Chaque <math><mtext>Li</mtext></math> libère un électron : <math><msub><mi>𝑛</mi><mi>𝑒</mi></msub><mo>=</mo><mn>0.29</mn><mspace width="0.1667em"/><mtext>mol</mtext></math>.</p><math display="block"><mi>𝑄</mi><mo>=</mo><msub><mi>𝑛</mi><mi>𝑒</mi></msub><mi>ℱ︀</mi><mo>=</mo><mn>0.29</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>96500</mn><mo>≈</mo><mn>2.8</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>4</mn></msup><mspace width="0.1667em"/><mtext>C</mtext><mo>=</mo><mn>7.8</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><mtext>h</mtext></math></div></div></div></div><p><strong>3/</strong> Exprimer la capacité massique <math><msub><mi>𝐶</mi><mi>𝑚</mi></msub></math> (quantité d’électricité par kilogramme de lithium). La comparer à celle de piles au <math><mtext>Cd</mtext></math> (<math><mn>480</mn></math>), au <math><mtext>Zn</mtext></math> (<math><mn>820</mn></math>) ou à l’<math><mtext>Ag</mtext></math> (<math><mn>500</mn></math>), en A·h·kg⁻¹.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><math display="block"><msub><mi>𝐶</mi><mi>𝑚</mi></msub><mo>=</mo><mi>𝑄</mi><mi>/</mi><mi>𝑚</mi><mrow><mo>(</mo><mrow><mtext>Li</mtext></mrow><mo>)</mo></mrow><mo>=</mo><mn>7.8</mn><mi>/</mi><mrow><mo>(</mo><mrow><mn>2.0</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow><mo>)</mo></mrow><mo>≈</mo><mn>3900</mn><mspace width="0.1667em"/><mtext>A</mtext><mspace width="0.1667em"/><mtext>h</mtext><mspace width="0.1667em"/><mtext>k</mtext><msup><mtext>g</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math><p>C’est bien plus élevé que pour <math><mtext>Cd</mtext></math>, <math><mtext>Zn</mtext></math> ou <math><mtext>Ag</mtext></math> : le lithium est très léger (<math><mi>𝑀</mi><mo>=</mo><mn>6.9</mn><mspace width="0.1667em"/><mtext>g</mtext><mspace width="0.1667em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>) et cède un électron par atome, d’où la grande densité d’énergie des piles au lithium.</p></div></div></div></div><p><strong>4/</strong> Calculer l’autonomie de la pile (en années).</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><math display="block"><mi>𝑡</mi><mo>=</mo><mi>𝑄</mi><mi>/</mi><mi>𝐼</mi><mo>=</mo><mrow><mo>(</mo><mrow><mn>2.8</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mn>4</mn></msup></mrow><mo>)</mo></mrow><mi>/</mi><mrow><mo>(</mo><mrow><mn>1</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><mo>)</mo></mrow><mo>=</mo><mn>2.8</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>8</mn></msup><mspace width="0.1667em"/><mtext>s</mtext><mo>≈</mo><mn>8.9</mn><mspace width="0.1667em"/></math></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>

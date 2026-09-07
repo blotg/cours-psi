@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chute d'une bille dans un fluide peu visqueux — Phénomènes de transport 4 : Fluides en écoulement</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Phénomènes de transport 4 : Fluides en écoulement</a><span class="sep">›</span><span class="ici">Chute d’une bille dans un fluide peu visqueux</span></nav><h2>🖥️ Chute d’une bille dans un fluide peu visqueux ★</h2><p>On lâche sans vitesse initiale une bille sphérique de rayon <math><mi>𝑅</mi></math>, de masse <math><mi>𝑚</mi></math>, dans un fluide peu visqueux, de masse volumique <math><mi>𝜇</mi></math> très faible devant celle de la bille, et de viscosité cinématique <math><mi>𝜈</mi></math>.</p><p>On suppose la pesanteur uniforme, et on note <math><mover accent="true"><mi>𝑣</mi><mo stretchy="true">⃗</mo></mover><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow><mo>=</mo><mo form="prefix">−</mo><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑧</mi></msub></math> la vitesse de la bille, <math><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math> désignant sa norme.</p><p>On suppose que le nombre de Reynolds est compris entre <math><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>3</mn></msup></math> et <math><mn>2</mn><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msup><mn>10</mn><mn>5</mn></msup></math>. Dans ce cas, le coefficient de trainée d’une sphère est <math><msub><mi>𝐶</mi><mi>𝑥</mi></msub><mo>=</mo><mn>0.47</mn></math>.</p><p><strong>1/</strong> Exprimer la force de frottement fluide sur la bille.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Que vaut le maitre-couple pour une sphère de rayon <math><mi>𝑅</mi></math> ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><math display="block"><msub><mover accent="true"><mi>𝐹</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝜇</mi><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><msub><mi>𝐶</mi><mi>𝑥</mi></msub><msup><mi>𝑣</mi><mn>2</mn></msup><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑧</mi></msub></math></div></div></div><p><strong>2/</strong> Établir l’équation différentielle vérifiée par <math><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math>.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Faire le bilan des forces agissant sur la bille.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>Le théorème de la résultante cinétique appliqué à la bille s’écrit <math><mi>𝑚</mi><mfrac><mrow><mi mathvariant="normal">d</mi><mover accent="true"><mi>𝑣</mi><mo stretchy="true">⃗</mo></mover></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mi>𝑚</mi><mover accent="true"><mi>𝑔</mi><mo stretchy="true">⃗</mo></mover><mo>+</mo><msub><mover accent="true"><mi>𝐹</mi><mo stretchy="true">⃗</mo></mover><mi>𝑥</mi></msub></math>. Comme <math><mover accent="true"><mi>𝑣</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mo form="prefix">−</mo><mi>𝑣</mi><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑧</mi></msub></math>, la projection sur <math><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑧</mi></msub></math> donne <math><mo>−</mo><mi>𝑚</mi><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑣</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mo form="prefix">−</mo><mi>𝑚</mi><mi>𝑔</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝜇</mi><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><msub><mi>𝐶</mi><mi>𝑥</mi></msub><msup><mi>𝑣</mi><mn>2</mn></msup></math>, soit</p><math display="block"><mi>𝑚</mi><mfrac><mrow><mi mathvariant="normal">d</mi><mi>𝑣</mi></mrow><mrow><mi mathvariant="normal">d</mi><mi>𝑡</mi></mrow></mfrac><mo>=</mo><mi>𝑚</mi><mi>𝑔</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝜇</mi><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><msub><mi>𝐶</mi><mi>𝑥</mi></msub><msup><mi>𝑣</mi><mn>2</mn></msup></math></div></div></div></div><p><strong>3/</strong> Établir l’expression de la vitesse limite <math><msub><mi>𝑣</mi><mtext>lim</mtext></msub></math> atteinte par la bille.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Comment se simplifie l’équation différentielle en régime stationnaire ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>L’équation différentielle possède une solution particulière constante :</p><math display="block"><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>𝜇</mi><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><msub><mi>𝐶</mi><mi>𝑥</mi></msub><msup><mi>𝑣</mi><mn>2</mn></msup><mo>=</mo><mi>𝑚</mi><mi>𝑔</mi></math><math display="block"><mi>𝑣</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mi>𝑚</mi><mi>𝑔</mi></mrow><mrow><mi>𝜇</mi><mi>𝜋</mi><msup><mi>𝑅</mi><mn>2</mn></msup><msub><mi>𝐶</mi><mi>𝑥</mi></msub></mrow></mfrac></msqrt></math></div></div></div></div><p><strong>4/</strong> On cherche à résoudre numériquement l’équation différentielle pour obtenir <math><mi>𝑣</mi><mrow><mo>(</mo><mi>𝑡</mi><mo>)</mo></mrow></math>.</p><p>Compléter le code Python suivant pour simuler la chute de la bille.</p><pre><code data-lang="python"><span style="color: #d73948">from</span> math <span style="color: #d73948">import</span> pi
+<span style="color: #d73948">from</span> scipy.integrate <span style="color: #d73948">import</span> solve_ivp
+R <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">01</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> rayon de la bille en m</span>
+m <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">1</span>   <span style="color: #74747c">#</span><span style="color: #74747c"> masse de la bille en kg</span>
+mu <span style="color: #d73948">=</span> <span style="color: #b60157">1</span>    <span style="color: #74747c">#</span><span style="color: #74747c"> masse volumique du fluide en kg/m^3</span>
+Cx <span style="color: #d73948">=</span> <span style="color: #b60157">0</span><span style="color: #b60157">.</span><span style="color: #b60157">47</span> <span style="color: #74747c">#</span><span style="color: #74747c"> coefficient de trainée</span>
+g <span style="color: #d73948">=</span> <span style="color: #b60157">9</span><span style="color: #b60157">.</span><span style="color: #b60157">81</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> accélération due à la pesanteur en m/s^2</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">dvdt</span>(t, v): <span style="color: #74747c">#</span><span style="color: #74747c"> renvoie la dérivée de la vitesse</span>
+    <span style="color: #d73948">...</span>
+
+v0 <span style="color: #d73948">=</span> <span style="color: #b60157">0</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> vitesse initiale en m/s</span>
+
+sol <span style="color: #d73948">=</span> <span style="color: #4b69c6">solve_ivp</span>(dvdt, (<span style="color: #b60157">0</span>,<span style="color: #b60157">10</span>), [v0])
+t <span style="color: #d73948">=</span> sol.t
+v <span style="color: #d73948">=</span> sol.y[<span style="color: #b60157">0</span>]</code></pre><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Isoler la dérivée de la vitesse dans l’équation différentielle.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">def</span> <span style="color: #4b69c6">dvdt</span>(t, v):
+    <span style="color: #d73948">return</span> (m <span style="color: #d73948">*</span> g <span style="color: #d73948">-</span> <span style="color: #b60157">1</span><span style="color: #d73948">/</span><span style="color: #b60157">2</span> <span style="color: #d73948">*</span> mu <span style="color: #d73948">*</span> pi <span style="color: #d73948">*</span> R<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span> <span style="color: #d73948">*</span> Cx <span style="color: #d73948">*</span> v<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span>) <span style="color: #d73948">/</span> m</code></pre></div></div></div><p><strong>5/</strong> Tracer la vitesse de la bille en fonction du temps.</p><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python"><span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+<span style="color: #d73948">import</span> matplotlib.pyplot <span style="color: #d73948">as</span> plt
+plt.<span style="color: #4b69c6">plot</span>(t, v)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">'</span><span style="color: #198810">Temps (s)</span><span style="color: #198810">'</span>)
+plt.<span style="color: #4b69c6">ylabel</span>(<span style="color: #198810">'</span><span style="color: #198810">Vitesse (m/s)</span><span style="color: #198810">'</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">Chute d'une bille dans un fluide peu visqueux</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre></div></div></div><p><strong>6/</strong> Expliquer pourquoi la modélisation proposée pose problème aux premiers instants du mouvement.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Que vaut le nombre de Reynolds aux premiers instants du mouvement ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div>Au début de la chute, la vitesse est très faible, ce qui conduit à un nombre de Reynolds faible. Dans ce régime, le coefficient de trainée n’est pas constant.</div></div></div></div><p><strong>7/</strong> Des relevés expérimentaux du coefficient de trainée en fonction du nombre de Reynolds sont donnés dans un fichier téléchargeable à l’adresse suivante</p><p>Compléter le code Python suivant pour calculer la force de trainée à partir de ces données expérimentales.</p><pre><code data-lang="python"><span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+
+data <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">loadtxt</span>(<span style="color: #198810">'</span><span style="color: #198810">Cx-Re.csv</span><span style="color: #198810">'</span>, delimiter<span style="color: #d73948">=</span><span style="color: #198810">'</span><span style="color: #198810">,</span><span style="color: #198810">'</span>, skiprows<span style="color: #d73948">=</span><span style="color: #b60157">1</span>)
+
+Re_exp <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> première colonne de data</span>
+Cx_exp <span style="color: #d73948">=</span> <span style="color: #d73948">...</span> <span style="color: #74747c">#</span><span style="color: #74747c"> deuxième colonne de data</span>
+
+eta <span style="color: #d73948">=</span> <span style="color: #b60157">1</span><span style="color: #b60157">.</span><span style="color: #b60157">85e-5</span>  <span style="color: #74747c">#</span><span style="color: #74747c"> viscosité dynamique de l'air en Pa.s</span>
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">Fx</span>(v):
+    Re <span style="color: #d73948">=</span> <span style="color: #d73948">...</span>
+    Cx <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">interp</span>(Re, Re_exp, Cx_exp) <span style="color: #74747c">#</span><span style="color: #74747c"> interpolation du coefficient de trainée à partir des données expérimentales</span>
+    <span style="color: #d73948">return</span> <span style="color: #d73948">...</span></code></pre><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">On peut utiliser le découpage (slicing) : <code>L[:,:]</code> par exemple pour prendre toutes les lignes et toutes les colonnes d’un tableau <code>L</code>.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Rappeler l’expression du nombre de Reynolds en fonction de la vitesse.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 3</div><div class="volet-texte">Rappeler l’expression de la force de trainée en fonction du coefficient de trainée.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><pre><code data-lang="python">Re_exp <span style="color: #d73948">=</span> data[:, <span style="color: #b60157">0</span>]
+Cx_exp <span style="color: #d73948">=</span> data[:, <span style="color: #b60157">1</span>]
+
+<span style="color: #d73948">def</span> <span style="color: #4b69c6">Fx</span>(v):
+    Re <span style="color: #d73948">=</span> (<span style="color: #b60157">2</span> <span style="color: #d73948">*</span> R <span style="color: #d73948">*</span> mu <span style="color: #d73948">*</span> v) <span style="color: #d73948">/</span> eta
+    Cx <span style="color: #d73948">=</span> np.<span style="color: #4b69c6">interp</span>(Re, Re_exp, Cx_exp)
+    <span style="color: #d73948">return</span> <span style="color: #b60157">1</span><span style="color: #d73948">/</span><span style="color: #b60157">2</span> <span style="color: #d73948">*</span> mu <span style="color: #d73948">*</span> pi <span style="color: #d73948">*</span> R<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span> <span style="color: #d73948">*</span> Cx <span style="color: #d73948">*</span> v<span style="color: #d73948">*</span><span style="color: #d73948">*</span><span style="color: #b60157">2</span></code></pre></div></div></div><p><strong>8/</strong> Modifier le code de la question 4 pour prendre en compte cette nouvelle expression de la force de trainée, et tracer la vitesse de la bille en fonction du temps.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Seule la fonction <code>dvdt</code> doit être modifiée pour prendre en compte la nouvelle expression de la force de trainée.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><pre><code data-lang="python"><span style="color: #d73948">def</span> <span style="color: #4b69c6">dvdt</span>(t, v):
+    <span style="color: #d73948">return</span> (m <span style="color: #d73948">*</span> g <span style="color: #d73948">-</span> <span style="color: #4b69c6">Fx</span>(v)) <span style="color: #d73948">/</span> m</code></pre><pre><code data-lang="python"><span style="color: #d73948">import</span> numpy <span style="color: #d73948">as</span> np
+<span style="color: #d73948">import</span> matplotlib.pyplot <span style="color: #d73948">as</span> plt
+plt.<span style="color: #4b69c6">plot</span>(t, v)
+plt.<span style="color: #4b69c6">xlabel</span>(<span style="color: #198810">'</span><span style="color: #198810">Temps (s)</span><span style="color: #198810">'</span>)
+plt.<span style="color: #4b69c6">ylabel</span>(<span style="color: #198810">'</span><span style="color: #198810">Vitesse (m/s)</span><span style="color: #198810">'</span>)
+plt.<span style="color: #4b69c6">title</span>(<span style="color: #198810">"</span><span style="color: #198810">Chute d'une bille dans un fluide peu visqueux</span><span style="color: #198810">"</span>)
+plt.<span style="color: #4b69c6">show</span>()</code></pre></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>
