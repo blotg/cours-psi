@@ -24,6 +24,16 @@ SORTIE = "site"
 #: Racine du dépôt : les `#include` des pages s'y résolvent.
 RACINE = Path(__file__).resolve().parent.parent
 
+#: Ce qu'un chapitre offre au téléchargement : (type de document, extension,
+#: intitulé du lien, mention de format). Les fichiers viennent de `build/`,
+#: rempli par `outils build` (donc par le hook pre-commit) ; ceux qui manquent
+#: sont simplement signalés et omis.
+TÉLÉCHARGEMENTS = (
+    ("poly", "pdf", "Poly du chapitre", "PDF"),
+    ("flashcards", "pdf", "Flashcards à découper", "PDF"),
+    ("flashcards", "apkg", "Flashcards pour Anki", "paquet Anki"),
+)
+
 
 def adresse(texte: str) -> str:
     """Un nom de fichier sûr dans une URL, tiré d'un titre.
@@ -34,6 +44,25 @@ def adresse(texte: str) -> str:
         c for c in unicodedata.normalize("NFD", texte.lower()) if unicodedata.category(c) != "Mn"
     )
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", sans_accent)).strip("-") or "page"
+
+
+def _poids(fichier: Path) -> str:
+    """Le poids d'un fichier, en français et sans fausse précision."""
+    octets = fichier.stat().st_size
+    if octets >= 1024 * 1024:
+        return f"{octets / 1048576:.1f}".replace(".", ",") + " Mo"
+    return f"{max(1, round(octets / 1024))} ko"
+
+
+def _sans_préfixe(nom: str) -> str:
+    """« 4 - Phénomènes de transport » donne « Phénomènes de transport »."""
+    return re.sub(r"^\d+\s*-\s*", "", nom)
+
+
+def _préfixe(nom: str) -> str:
+    """Le numéro de classement d'un dossier, s'il en porte un."""
+    trouvé = re.match(r"^(\d+)\s*-\s*", nom)
+    return trouvé.group(1) if trouvé else ""
 
 
 def _chaine(valeur: str) -> str:
@@ -60,6 +89,7 @@ class Site:
     def __init__(self, sortie: Path | str = SORTIE):
         self.sortie = Path(sortie)
         self.produits: list[Path] = []
+        self.absents: list[Path] = []
 
     # -- Une page ---------------------------------------------------------
 
@@ -68,6 +98,9 @@ class Site:
         lien = "../" * profondeur + "styles.css"
         html = cible.read_text(encoding="utf-8")
         html = html.replace("</head>", f'<link rel="stylesheet" href="{lien}"></head>', 1)
+        # typst écrit `lang="en"` en dur. La langue commande la coupure des mots
+        # et le rendu de certains symboles : elle doit dire le vrai.
+        html = html.replace('<html lang="en">', '<html lang="fr">', 1)
         cible.write_text(html, encoding="utf-8")
         self.produits.append(cible)
 
@@ -78,7 +111,7 @@ class Site:
         titre: str,
         fil,
         profondeur: int,
-        corrigés: bool = False,
+        corrigés: bool = True,
     ) -> Path:
         """Une page qui compile un document du cours (cours, exercice, TP).
 
@@ -114,6 +147,22 @@ class Site:
         self._style(cible, profondeur)
         return cible
 
+    def fichier_joint(self, source: Path, dossier: str) -> str | None:
+        """Recopie un document produit (poly, flashcards…) dans le site.
+
+        Renvoie l'adresse relative au dossier du chapitre, ou None si le
+        document n'a pas été construit.
+        """
+        if not source.is_file():
+            self.absents.append(source)
+            return None
+        nom = adresse(source.stem) + source.suffix
+        cible = self.sortie / dossier / nom
+        cible.parent.mkdir(parents=True, exist_ok=True)
+        copyfile(source, cible)
+        self.produits.append(cible)
+        return nom
+
     # -- Lecture des sources ----------------------------------------------
 
     @staticmethod
@@ -136,6 +185,24 @@ class Site:
                     trouvés.append((source, _titre_exercice(source)))
         return trouvés
 
+    @staticmethod
+    def rangement(chapitre: Chapitre) -> tuple[str, str, str]:
+        """(thème, numéro dans le thème, titre propre) d'un chapitre.
+
+        Le thème est le dossier de premier niveau sous `Cours/` : c'est le
+        classement que le dépôt tient déjà. Un chapitre posé directement là
+        — « 8 - Électrochimie » — est à lui seul son thème.
+
+        Le titre d'un chapitre tient sur deux lignes dans infos.yml : le thème
+        et son numéro d'abord, le titre propre ensuite. C'est le second qu'on
+        affiche sous l'intitulé du thème, pour ne pas répéter celui-ci.
+        """
+        parties = chapitre.chemin.resolve().relative_to(RACINE / "Cours").parts
+        thème = _sans_préfixe(parties[0])
+        numéro = _préfixe(parties[1]) if len(parties) > 1 else ""
+        lignes = [l.strip() for l in chapitre.titre().split("\n") if l.strip()]
+        return thème, numéro, lignes[-1] if len(lignes) > 1 else lignes[0]
+
     # -- Construction ------------------------------------------------------
 
     def construit(self) -> list[Path]:
@@ -146,20 +213,24 @@ class Site:
         # ignore tout chemin commençant par un souligné et réécrit le reste.
         (self.sortie / ".nojekyll").write_text("", encoding="utf-8")
 
-        chapitres_liens = []
+        # Un thème par section, dans l'ordre des dossiers — qui est celui du
+        # programme. `dict` conserve l'ordre d'insertion.
+        thèmes: dict[str, list[dict]] = {}
         for chapitre in chapitres(RACINE / "Cours"):
             dossier = adresse(chapitre.titre_court)
-            chapitres_liens.append({
-                "texte": chapitre.titre(inline=True),
+            thème, numéro, titre = self.rangement(chapitre)
+            thèmes.setdefault(thème, []).append({
+                "texte": titre,
                 "url": f"{dossier}/index.html",
+                "marque": numéro,
             })
             self._chapitre(chapitre, dossier)
 
         tp_liens = []
         for tp in sorted((RACINE / "TP").glob("*/TP.typ")):
-            nom = re.sub(r"^\d+\s*-\s*", "", tp.parent.name)
+            nom = _sans_préfixe(tp.parent.name)
             fichier = f"tp/{adresse(nom)}.html"
-            tp_liens.append({"texte": nom, "url": fichier})
+            tp_liens.append({"texte": nom, "url": fichier, "marque": _préfixe(tp.parent.name)})
             self.page_contenu(
                 fichier, tp, nom, [("Accueil", "../index.html"), (nom, None)], profondeur=1
             )
@@ -169,10 +240,10 @@ class Site:
             {
                 "titre": "Cours de PSI",
                 "fil": [],
-                "sections": [
-                    {"titre": "Chapitres", "liens": chapitres_liens},
-                    {"titre": "Travaux pratiques", "liens": tp_liens},
-                ],
+                "sections": (
+                    [_section(thème, liens) for thème, liens in thèmes.items()]
+                    + [{"titre": "Travaux pratiques", "liens": tp_liens}]
+                ),
             },
             profondeur=0,
         )
@@ -191,7 +262,17 @@ class Site:
                 base + [("Cours", None)],
                 profondeur=1,
             )
-            documents.append({"texte": "Cours", "url": "cours.html"})
+            documents.append({"texte": "Cours", "url": "cours.html", "détail": "à lire en ligne"})
+
+        for type_de_document, extension, intitulé, mention in TÉLÉCHARGEMENTS:
+            source = chapitre.fichier(type_de_document, extension)
+            nom = self.fichier_joint(source, dossier)
+            if nom:
+                documents.append({
+                    "texte": intitulé,
+                    "url": nom,
+                    "détail": f"{mention} · {_poids(source)}",
+                })
 
         for source, titre_exo in self.exercices(chapitre):
             fichier = f"{adresse(titre_exo)}.html"
@@ -218,5 +299,24 @@ class Site:
         )
 
 
+def _section(thème: str, liens: list[dict]) -> dict:
+    """Une section de l'accueil : un thème et ses chapitres.
+
+    Un thème qui tient en un seul chapitre du même nom — « Électrochimie » —
+    n'a rien à lister : sa liste ne ferait que répéter son intitulé. Le titre
+    de section devient alors le lien.
+    """
+    if len(liens) == 1 and liens[0]["texte"] == thème:
+        return {"titre": thème, "url": liens[0]["url"]}
+    return {"titre": thème, "liens": liens}
+
+
 def construit(sortie: Path | str = SORTIE) -> list[Path]:
-    return Site(sortie).construit()
+    site = Site(sortie)
+    produits = site.construit()
+    # Un document peut manquer pour deux raisons : le chapitre n'a jamais été
+    # construit, ou il n'a rien à produire (Ondes 3 n'a aucune flashcard). On
+    # signale sans prescrire : c'est `outils build` qui remplit `build/`.
+    for absent in site.absents:
+        print(f"  sans lien      {absent.parent.parent.name} : pas de « {absent.name} » dans build/")
+    return produits

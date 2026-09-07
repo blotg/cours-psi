@@ -10,11 +10,65 @@
 
 // -- Ce que typst ne sait pas convertir tout seul ---------------------------
 
+// `grid` et `stack` sont de la mise en page : typst les *efface* à l'export
+// HTML, avec tout leur contenu (« grid was ignored during HTML export »).
+// C'est ce qui vidait la liste de matériel et le barème des évaluations des
+// TP, et la double colonne d'hypothèses des points clés. On les rend en
+// grille CSS, en reportant les pistes de colonnes.
+#let _piste(t) = if type(t) == fraction { "minmax(0, " + repr(t) + ")" } else { "auto" }
+
+#let _colonnes(c) = if type(c) == int {
+    "repeat(" + str(c) + ", minmax(0, 1fr))"
+} else if type(c) == array and c.len() > 0 {
+    c.map(_piste).join(" ")
+} else {
+    "minmax(0, 1fr)"
+}
+
+// Les enfants d'un grid/stack, un div par cellule. `exclus` écarte ce qui n'en
+// est pas une : ressorts d'un stack, filets verticaux d'un grid. Un filet
+// horizontal, lui, se garde : c'est le trait qui sépare le total du reste d'un
+// barème. Il devient un div qui court sur toute la largeur de la grille.
+#let _cellules(enfants, exclus) = {
+    // Les accolades ne sont pas décoratives : en markup, un `#let f() = expr`
+    // s'arrête à la fin de ligne, et le `.filter(...)` suivant redeviendrait
+    // du texte.
+    enfants
+        .filter(c => not (c.func() in exclus))
+        .map(c => if c.func() == grid.hline {
+            html.elem("div", attrs: (class: "filet-grille"), none)
+        } else {
+            html.elem("div", if c.func() == grid.cell { c.body } else { c })
+        })
+        .join()
+}
+
 // Un tracé cetz/zap est de la mise en page : sans `html.frame`, il sort une
 // balise vide. Le frame le rend en SVG, à sa taille naturelle.
+//
+// Les images, elles, ne passent PAS par html.frame : typst les exporte
+// nativement en `<img src="data:...">`, légende comprise. Les y faire passer
+// écrasait la figure sur une bande de quelques millimètres de haut, parce
+// qu'une largeur relative (`width: 90%`) n'a rien à quoi se rapporter dans un
+// frame — c'est ce qui « mangeait » les copies d'écran des TP.
 #let styles-html(doc) = {
     show <canvas>: html.frame
-    show figure.where(kind: image): html.frame
+    // Une zone quadrillée est une réserve pour écrire à la main : sur le site,
+    // elle ne serait qu'un grand vide.
+    show <carreaux>: none
+    // `target()` est indispensable : dans un html.frame, la cible redevient
+    // « paged » et la grille doit rester une vraie grille typst, sinon les
+    // schémas partent en morceaux.
+    show grid: it => context if target() == "html" {
+        html.elem(
+            "div",
+            attrs: (class: "grille", style: "grid-template-columns: " + _colonnes(it.columns)),
+            _cellules(it.children, (grid.vline,)),
+        )
+    } else { it }
+    show stack: it => context if target() == "html" {
+        html.elem("div", attrs: (class: "pile"), _cellules(it.children, (h, v)))
+    } else { it }
     doc
 }
 
@@ -33,41 +87,56 @@
     },
 )
 
-// -- Coups de pouce ---------------------------------------------------------
+// -- Volets à découvrir -----------------------------------------------------
 
-// `#question` range ses coups de pouce dans une métadonnée et ne les imprime
-// jamais : sur le papier, c'est le professeur qui les distribue. Sur le site,
-// on les affiche — mais floutés, et il faut rester dessus trois secondes pour
-// les lire (cf. `site.css`). Le geste remplace la demande d'aide.
+// Sur le papier, `#question` range ses coups de pouce dans une métadonnée et
+// ne les imprime jamais : c'est le professeur qui les distribue. Le site, lui,
+// les affiche — comme les corrigés — mais floutés : il faut tenir le survol,
+// ou l'appui sur écran tactile, le temps du délai. Le geste remplace la
+// demande d'aide, et on ne tombe pas sur la solution en faisant défiler.
+//
+// Chaque classe de volet porte son délai dans site.css (`--délai`) : c'est là
+// qu'il se change, en un seul endroit.
+#let _volet(classe, titre, corps) = html.elem(
+    "div",
+    attrs: (
+        class: "volet " + classe,
+        // Au clavier, le focus révèle sans attendre.
+        tabindex: "0",
+        // iOS n'applique `:active` à un élément quelconque que s'il porte un
+        // gestionnaire tactile. Sans cet attribut vide, l'appui prolongé ne
+        // révèle rien sur iPhone.
+        ontouchstart: "",
+    ),
+    {
+        html.elem("div", attrs: (class: "volet-titre"), titre)
+        html.elem("div", attrs: (class: "volet-texte"), corps)
+    },
+)
+
 #let coups-de-pouce(it) = {
     let liste = it.value.at("coups-de-pouce", default: ())
     if liste.len() == 0 { return }
     html.elem(
         "div",
-        attrs: (class: "pouces"),
+        attrs: (class: "volets"),
         for (i, texte) in liste.enumerate() {
-            html.elem(
-                "div",
-                // tabindex : au clavier, le focus révèle sans attendre.
-                attrs: (class: "pouce", tabindex: "0"),
-                {
-                    html.elem("div", attrs: (class: "pouce-titre"), "Coup de pouce " + str(i + 1))
-                    html.elem("div", attrs: (class: "pouce-texte"), markup(texte))
-                },
-            )
+            _volet("pouce", "Coup de pouce " + str(i + 1), markup(texte))
         },
     )
 }
 
+// Le corrigé vient après les coups de pouce — `question()` émet sa métadonnée
+// avant lui exprès — et se mérite trois fois plus longtemps.
+#let corrigé(it) = html.elem("div", attrs: (class: "volets"), _volet("corrige", "Corrigé", it))
+
 // -- Gabarit de page --------------------------------------------------------
 
-// `corrigés` : les pages d'exercice n'en montrent pas. Les coups de pouce
-// perdraient tout intérêt si la solution complète se lisait juste en dessous.
-#let page-site(titre: "", fil: (), corrigés: false, doc) = {
+#let page-site(titre: "", fil: (), corrigés: true, doc) = {
     set document(title: titre)
     show: styles-html
-    show <correction>: it => if corrigés { it } else { none }
     show <coups-de-pouce>: coups-de-pouce
+    show <correction>: it => if corrigés { corrigé(it) } else { none }
 
     fil-ariane(fil)
     // Pas de <main> autour du document : `init-document` pose un
@@ -88,8 +157,14 @@
 // Alimentée par `--input données` :
 //
 //     {"titre": "...", "fil": [["texte", "url"], ...],
-//      "sections": [{"titre": "...", "liens": [{"texte": "...", "url": "...",
-//                                               "détail": "..."}]}]}
+//      "sections": [{"titre": "...", "url": "...", "liens": [{"texte": "...",
+//                       "url": "...", "détail": "...", "marque": "..."}]}]}
+//
+// `marque` est la pastille de tête (numéro de chapitre) ; `détail` la mention
+// grise de queue (poids d'un fichier à télécharger). Une section peut porter
+// une `url` au lieu de liens : son titre devient alors le lien — c'est le cas
+// d'un thème qui tient en un seul chapitre du même nom, où la liste ne ferait
+// que répéter l'intitulé.
 #let page-liens(données) = {
     show: page-site.with(
         titre: données.titre,
@@ -97,22 +172,28 @@
     )
     html.elem("h1", markup(données.titre))
     for section in données.at("sections", default: ()) {
+        let url = section.at("url", default: "")
         if "titre" in section and section.titre != "" {
-            html.elem("h2", markup(section.titre))
+            html.elem("h2", if url == "" { markup(section.titre) } else { lien(url, markup(section.titre)) })
+        }
+        if url != "" { continue }
+        let liens = section.at("liens", default: ())
+        if liens.len() == 0 {
+            html.elem("p", attrs: (class: "vide"), "Rien pour l'instant.")
+            continue
         }
         html.elem(
             "ul",
             attrs: (class: "liens"),
-            for l in section.at("liens", default: ()) {
+            for l in liens {
                 html.elem("li", {
+                    let marque = l.at("marque", default: "")
+                    if marque != "" { html.elem("span", attrs: (class: "marque"), markup(marque)) }
                     lien(l.url, markup(l.texte))
                     let détail = l.at("détail", default: "")
                     if détail != "" { html.elem("span", attrs: (class: "détail"), markup(détail)) }
                 })
             },
         )
-        if section.at("liens", default: ()).len() == 0 {
-            html.elem("p", attrs: (class: "vide"), "Rien pour l'instant.")
-        }
     }
 }

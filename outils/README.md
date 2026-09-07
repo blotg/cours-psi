@@ -77,13 +77,24 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 | `site.py` | site statique du cours, en HTML |
 
 `site` produit le site statique dans `site/`, ignoré par git : une page par
-exercice et par cours, plus un sommaire par chapitre. Les pages de contenu ne
-sont pas une réécriture du cours en HTML — ce sont les mêmes sources typst,
-compilées avec `--format html` : les formules deviennent du MathML, les schémas
-cetz/zap des SVG. Les corrigés n'y figurent pas ; les coups de pouce, si, mais
-floutés : il faut rester dessus trois secondes pour les lire (transition CSS,
-aucun script). C'est le hook `pre-push` qui reconstruit tout ça, et qui publie
+exercice et par cours, plus un sommaire par chapitre, l'accueil regroupant les
+chapitres par thème. Les pages de contenu ne sont pas une réécriture du cours
+en HTML — ce sont les mêmes sources typst, compilées avec `--format html` :
+les formules deviennent du MathML, les schémas cetz/zap des SVG, et la mise en
+page se refait en CSS (cf. `gabarits/site.css`, noir sur blanc comme le
+papier). Le sommaire d'un chapitre offre en plus le poly et les flashcards
+(planche à découper et paquet Anki) au téléchargement : ce sont les fichiers
+de `build/`, donc ceux qu'`outils build` a produits — un chapitre jamais
+construit est signalé et son lien omis.
+
+Coups de pouce et corrigés y figurent, mais floutés : il faut tenir le survol
+— ou l'appui, sur écran tactile — cinq secondes pour un coup de pouce, quinze
+pour un corrigé (transition CSS, aucun script ; les délais se règlent en tête
+de `site.css`). C'est le hook `pre-push` qui reconstruit tout ça, et qui publie
 sur la branche `gh-pages` si on le lui demande (`git config hooks.site true`).
+La publication écrase la branche à chaque fois (commit orphelin, push en
+force) : sans cela, les PDF joints — que typst horodate, donc qui changent à
+chaque recompilation — ajouteraient une trentaine de Mo au dépôt par push.
 
 Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
