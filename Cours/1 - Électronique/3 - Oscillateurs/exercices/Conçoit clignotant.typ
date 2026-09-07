@@ -24,7 +24,7 @@
     $
 
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)

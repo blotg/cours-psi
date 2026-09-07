@@ -5,7 +5,7 @@
 )
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         switch("k1", (0, 0), (3, 0), label: $K_1$)
         switch("k2", (3, 0), (6, 0), label: $K_2$)

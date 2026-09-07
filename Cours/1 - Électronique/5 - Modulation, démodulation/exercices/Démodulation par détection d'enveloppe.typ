@@ -8,7 +8,7 @@
 On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi f_s t)] cos(2 pi f_p t)$. On utilise pour cela le montage ci-dessous, appelé détecteur d'enveloppe.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

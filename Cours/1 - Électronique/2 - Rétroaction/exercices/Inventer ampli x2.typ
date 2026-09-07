@@ -15,7 +15,7 @@
     On peut par exemple choisir des résistances de #qty("10","kO") pour $R_1$ et $R_2$.
 
     #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         opamp("ALI", (0, 0), invert: true)

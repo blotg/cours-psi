@@ -28,7 +28,7 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
     Rappeler le schéma électrique d'une phase en fonctionnement moteur et en fonctionnement générateur.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             inductor("L", (0, 0), (3, 0), variant: "ieee", label: $L$, i: $underline(I)$)

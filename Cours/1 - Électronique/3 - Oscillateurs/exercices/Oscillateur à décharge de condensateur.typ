@@ -8,7 +8,7 @@
 On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$, $R_3=qty("10", "kO")$ et $C=qty("10", "nF")$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

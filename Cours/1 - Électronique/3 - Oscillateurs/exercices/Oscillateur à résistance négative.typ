@@ -7,7 +7,7 @@
 On considère le montage ci-dessous, appelé montage à résistance négative. On *suppose* l'ALI idéal en fonctionnement stable.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)
@@ -79,7 +79,7 @@ On considère le montage ci-dessous, appelé montage à résistance négative. O
 Ce montage, qui se comporte comme une « résistance négative », est placé dans le circuit suivant où $R=qty("10", "kO")$ et $r=qty("10", "kO")$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

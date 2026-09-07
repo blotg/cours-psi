@@ -24,7 +24,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
     Faire le schéma du montage.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
 
             resistor("R", (-2, 0), (2, 0), label: "R")
@@ -52,7 +52,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 
     Difficile de justifier les phases pour l'instant, on le fera plus tard dans l'exercice.
     #figure(
-        cetz.canvas({
+        canvas({
             let f(S: 0, t, phi: 0) = S * calc.cos(2 * calc.pi * t + phi)
             plot.plot(
                 size: (8, 4),

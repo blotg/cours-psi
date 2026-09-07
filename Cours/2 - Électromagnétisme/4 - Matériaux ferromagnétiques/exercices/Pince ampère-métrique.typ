@@ -116,7 +116,7 @@
         Le flux magnétique sur le tore est $Phi = Phi_i+Phi_I$. On peut représenter le schéma électrique équivalent suivant :
         #figure[
 
-            #zap.circuit({
+            #circuit({
                 import zap: *
 
                 vsource("V", (0, 0), (0, 2), u: $-dv(Phi, t)$)

@@ -186,9 +186,9 @@
     numQuestion.step()
     parbreak()
     [*#context numQuestion.display()#sym.slash* <numéro-question> #body <question>]
-    import "symboles.typ" as symboles
+    import "helper-functions.typ": scope-des-chaines
     for c in coups-de-pouce {
-        let _ = eval(c, mode: "markup", scope: dictionary(symboles))
+        let _ = eval(c, mode: "markup", scope: scope-des-chaines)
     }
     // Émise AVANT le corrigé, et non après : la métadonnée n'imprime rien, mais
     // le site s'en sert pour poser les coups de pouce dans le flux — et ils
@@ -292,15 +292,15 @@
 // -- Encadré de cours ------------------------------------------------------
 
 #let _rendu-grandeurs(grandeurs) = {
-    import "symboles.typ" as symboles
+    import "helper-functions.typ": scope-des-chaines
     let items = ()
     for (clé, valeur) in grandeurs {
         let unité = if "unité" in valeur and valeur.unité != none [ (#valeur.unité)]
-        items.push([#eval(clé, mode: "math", scope: dictionary(symboles)) #if type(valeur.signification) == str {
+        items.push([#eval(clé, mode: "math", scope: scope-des-chaines) #if type(valeur.signification) == str {
                 eval(
                     valeur.signification,
                     mode: "markup",
-                    scope: dictionary(symboles),
+                    scope: scope-des-chaines,
                 )
             } else { valeur.signification } #unité])
     }

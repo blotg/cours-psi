@@ -6,7 +6,7 @@
 Un matériau ferromagnétique est destiné à réaliser la carcasse d'un transformateur. On se propose de visualiser le cycle d'hystérésis de ce matériau sur un écran d'oscilloscope c'est-à-dire la courbe $B(H)$ où $B$ et $H$ représentent les valeurs algébriques de $va(B)$ et $va(H)$. Pour cela, on réalise le montage suivant.
 
 #figure[
-    #zap.circuit({
+    #circuit({
         import zap: *
         import cetz.draw: *
 

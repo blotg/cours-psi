@@ -9,7 +9,7 @@
 On s'intéresse à un redresseur triphasé représenté ci-dessous.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
 
         node("ground", (-4, 0))

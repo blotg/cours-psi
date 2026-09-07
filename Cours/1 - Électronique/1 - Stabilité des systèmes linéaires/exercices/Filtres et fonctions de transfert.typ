@@ -14,7 +14,7 @@
 ][
     On propose un premier circuit composé d'un condensateur et d'un résistor.
 
-    #figure(zap.circuit({
+    #figure(circuit({
         import zap: *
         import cetz.draw: *
 
@@ -35,7 +35,7 @@
 
     #columns(2)[
         *Haute fréquence*
-        #figure(zap.circuit({
+        #figure(circuit({
             import zap: *
             import cetz.draw: *
 
@@ -50,7 +50,7 @@
 
         #colbreak()
         *Basse fréquence*
-        #figure(zap.circuit({
+        #figure(circuit({
             import zap: *
             import cetz.draw: *
 
@@ -66,7 +66,7 @@
 
     On propose un second circuit composé d'une bobine et d'un résistor.
 
-    #figure(zap.circuit({
+    #figure(circuit({
         import zap: *
         import cetz.draw: *
 
@@ -85,7 +85,7 @@
 
     #columns(2)[
         *Haute fréquence*
-        #figure(zap.circuit({
+        #figure(circuit({
             import zap: *
             import cetz.draw: *
 
@@ -100,7 +100,7 @@
 
         #colbreak()
         *Basse fréquence*
-        #figure(zap.circuit({
+        #figure(circuit({
             import zap: *
             import cetz.draw: *
 

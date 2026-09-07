@@ -7,7 +7,7 @@
 On s'intéresse au montage suivant, appelé montage dérivateur. L'ALI est supposé idéal.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         opamp("ALI", (0, 0))

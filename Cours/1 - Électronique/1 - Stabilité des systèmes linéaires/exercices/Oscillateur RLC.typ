@@ -8,7 +8,7 @@
 Dans le montage ci-dessous, le générateur impose une tension $U$ proportionnelle au courant $i$ qui le traverse. On note $alpha$ le coefficient de proportionnalité, de sorte que $u=alpha i$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("u", (0, -3), (0, 0), u: $u$, i: $i$)
         resistor("R", (0, 0), (3, 0), label: (content: $R$))
@@ -27,7 +27,7 @@ Dans le montage ci-dessous, le générateur impose une tension $U$ proportionnel
 ][
     Si on passe en complexes, on a le circuit suivant
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("u", (0, -3), (0, 0), u: $u$, i: $i$)
             resistor("R", (0, 0), (3, 0), label: (content: $R$))

@@ -7,7 +7,7 @@
 In the previous exercise, we have seen the necessity for a summing system in order to realize an amplitude modulation. This system can be realized by the following assembly in which the operational amplifier is ideal.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)
@@ -107,7 +107,7 @@ In the previous exercise, we have seen the necessity for a summing system in ord
     $
 
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             set-style(padding: .4em)

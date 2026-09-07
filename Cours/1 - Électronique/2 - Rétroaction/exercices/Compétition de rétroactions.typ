@@ -10,7 +10,7 @@ On s'intéresse au montage ci-dessous. L'ALI est supposé *non idéal*, de fonct
 $ H(p)=S(p)/epsilon(p)=A_0/(1+tau p) $
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

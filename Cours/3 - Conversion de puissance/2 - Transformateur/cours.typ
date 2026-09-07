@@ -181,7 +181,7 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 
 #application[Déterminer la tension aux bornes de la résistance $R_2$ dans le montage ci-dessous en fonction de $m$, $e$, $R_1$ et $R_2$.
     #figure[
-        #zap.circuit({
+        #circuit({
             import zap: *
 
             transformateur("transfo", (0, 0))
@@ -232,7 +232,7 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 
 #application[Déterminer le courant au primaire dans le montage ci-dessous en fonction de $e$, $m$, $R_1$ et $R_2$.
     #figure[
-        #zap.circuit({
+        #circuit({
             import zap: *
 
             transformateur("transfo", (0, 0))

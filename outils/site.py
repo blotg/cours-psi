@@ -24,6 +24,12 @@ SORTIE = "site"
 #: Racine du dépôt : les `#include` des pages s'y résolvent.
 RACINE = Path(__file__).resolve().parent.parent
 
+#: Les deux pages de second niveau, vers lesquelles l'accueil aiguille. Les TP
+#: ont déjà leur dossier, l'index y prend donc sa place ; les chapitres, eux,
+#: ont chacun le leur à la racine, et leur index reste une page.
+CHAPITRES_INDEX = "chapitres.html"
+TP_INDEX = "tp/index.html"
+
 #: Ce qu'un chapitre offre au téléchargement : (type de document, extension,
 #: intitulé du lien, mention de format). Les fichiers viennent de `build/`,
 #: rempli par `outils build` (donc par le hook pre-commit) ; ceux qui manquent
@@ -52,6 +58,11 @@ def _poids(fichier: Path) -> str:
     if octets >= 1024 * 1024:
         return f"{octets / 1048576:.1f}".replace(".", ",") + " Mo"
     return f"{max(1, round(octets / 1024))} ko"
+
+
+def _pluriel(n: int, mot: str, pluriel: str | None = None) -> str:
+    """« 27 chapitres », « 1 TP »."""
+    return f"{n} {mot if n < 2 else (pluriel or mot + 's')}"
 
 
 def _sans_préfixe(nom: str) -> str:
@@ -225,6 +236,7 @@ class Site:
                 "marque": numéro,
             })
             self._chapitre(chapitre, dossier)
+        nombre_de_chapitres = sum(len(liens) for liens in thèmes.values())
 
         tp_liens = []
         for tp in sorted((RACINE / "TP").glob("*/TP.typ")):
@@ -232,18 +244,54 @@ class Site:
             fichier = f"tp/{adresse(nom)}.html"
             tp_liens.append({"texte": nom, "url": fichier, "marque": _préfixe(tp.parent.name)})
             self.page_contenu(
-                fichier, tp, nom, [("Accueil", "../index.html"), (nom, None)], profondeur=1
+                fichier,
+                tp,
+                nom,
+                [("Accueil", "../index.html"), ("Travaux pratiques", "index.html"), (nom, None)],
+                profondeur=1,
             )
 
+        self.page_liens(
+            CHAPITRES_INDEX,
+            {
+                "titre": "Chapitres",
+                "fil": [["Accueil", "index.html"], ["Chapitres", None]],
+                "sections": [_section(thème, liens) for thème, liens in thèmes.items()],
+            },
+            profondeur=0,
+        )
+        self.page_liens(
+            TP_INDEX,
+            {
+                "titre": "Travaux pratiques",
+                "fil": [["Accueil", "../index.html"], ["Travaux pratiques", None]],
+                # Les liens des TP sont relatifs à la racine : sur leur propre
+                # index, qui vit dans tp/, ils deviennent voisins.
+                "sections": [{"titre": "", "liens": [
+                    dict(l, url=l["url"].removeprefix("tp/")) for l in tp_liens
+                ]}],
+            },
+            profondeur=1,
+        )
+        # L'accueil ne fait que départager les deux : le cours d'un côté, la
+        # paillasse de l'autre. Le détail des chapitres tient sur sa page.
         self.page_liens(
             "index.html",
             {
                 "titre": "Cours de PSI",
                 "fil": [],
-                "sections": (
-                    [_section(thème, liens) for thème, liens in thèmes.items()]
-                    + [{"titre": "Travaux pratiques", "liens": tp_liens}]
-                ),
+                "sections": [{"titre": "", "liens": [
+                    {
+                        "texte": "Chapitres",
+                        "url": CHAPITRES_INDEX,
+                        "détail": _pluriel(nombre_de_chapitres, "chapitre"),
+                    },
+                    {
+                        "texte": "Travaux pratiques",
+                        "url": TP_INDEX,
+                        "détail": _pluriel(len(tp_liens), "TP", pluriel="TP"),
+                    },
+                ]}],
             },
             profondeur=0,
         )
@@ -251,7 +299,11 @@ class Site:
 
     def _chapitre(self, chapitre: Chapitre, dossier: str) -> None:
         titre = chapitre.titre(inline=True)
-        base = [("Accueil", "../index.html"), (titre, "index.html")]
+        base = [
+            ("Accueil", "../index.html"),
+            ("Chapitres", f"../{CHAPITRES_INDEX}"),
+            (titre, "index.html"),
+        ]
         documents, exercices = [], []
 
         if (chapitre.chemin / "cours.typ").is_file():

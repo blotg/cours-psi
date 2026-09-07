@@ -10,7 +10,7 @@ On considère le montage ci-dessous qui utilise une résistance étalon $R$ conn
 Les grandeurs $i(t)$, $i_1(t)$ et $i_2(t)$ sont sinusoïdales de valeurs efficaces respectives $I$, $I_1$ et $I_2$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
 
         ammeter("A", (0, 0), (2, 0), i: $i(t)$)

@@ -142,8 +142,8 @@
             [= Questions de cours des interrogations orales]
             for q in query(<question-de-colle>) {
                 [
-                    #import "symboles.typ" as symboles
-                    - #eval(q.value, mode: "markup", scope: dictionary(symboles))
+                    #import "helper-functions.typ": scope-des-chaines
+                    - #eval(q.value, mode: "markup", scope: scope-des-chaines)
                 ]
             }
         }

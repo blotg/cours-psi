@@ -7,7 +7,7 @@
 On s'intéresse au montage suivant, appelé montage comparateur simple. L'ALI est supposé idéal.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(content: (padding: .4em))

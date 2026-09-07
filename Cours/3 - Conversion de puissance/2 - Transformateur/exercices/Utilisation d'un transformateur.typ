@@ -4,7 +4,7 @@
 )
 
 #figure[
-    #zap.circuit({
+    #circuit({
         import zap: *
         import cetz.draw: *
 
@@ -33,7 +33,7 @@
     Si on ramène le secondaire au primaire, on obtient :
 
     #figure[
-        #zap.circuit({
+        #circuit({
             import zap: *
             import cetz.draw: *
 

@@ -5,7 +5,7 @@
 )
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("E", (0, 0), (0, 5), u: $E$)
         diode("D", (3, 0), (3, 5), u: $u_s$)
@@ -54,7 +54,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kHz")$. L'interr
         columns: (1fr, 1fr),
         figure[
             *Sur $[0,alpha T[$*
-            #zap.circuit({
+            #circuit({
                 import zap: *
                 vsource("E", (0, 0), (0, 5), u: $E$)
                 switch("D", (3, 0), (3, 5), u: $u_s$, closed: false)
@@ -67,7 +67,7 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kHz")$. L'interr
         ],
         figure[
             *Sur $[alpha T,T[$*
-            #zap.circuit({
+            #circuit({
                 import zap: *
                 vsource("E", (0, 0), (0, 5), u: $E$)
                 switch("D", (3, 0), (3, 5), u: $u_s$, closed: true)

@@ -70,7 +70,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
     Fonctionnement en charge. L'intensité du courant d'excitation vaut $I_e=qty("44", "A")$, la tension efficace aux bornes d'une phase est #qty("8.64", "kV") et le facteur de puissance du réseau vaut $cos(phi)=0.9$ arrière (charge inductive). Représenter le schéma électrique d'une phase en négligeant la résistance $R$.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("E", (0, 0), (0, 3), u: $underline(E)$)
             inductor("L", (0, 3), (3, 3), label: $L$, i: $underline(I)$, variant: "ieee")

@@ -10,7 +10,7 @@ Les onduleurs triphasés sont utilisés pour alimenter des moteurs électriques 
 Un onduleur triphasé est représenté ci-dessous. Il est alimenté par une source de tension continue et alimente une source de courant triphasée.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("U", (0, -2.5), (0, 2.5))
         switch("S1", (2, 2.5), (2, 0), label: $K_0$)

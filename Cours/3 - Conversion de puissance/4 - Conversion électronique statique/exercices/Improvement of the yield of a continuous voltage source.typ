@@ -7,7 +7,7 @@
 #grid(
     columns: (1fr, 1fr),
     figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("e", (0, 0), (0, 2.5), u: $E$)
             switch("K", (0, 5), (3, 5))
@@ -20,7 +20,7 @@
         numbering: none,
     ),
     figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("e", (0, 0), (0, 2.5), u: $E$)
             switch("K", (2.5, 5), (5, 5))

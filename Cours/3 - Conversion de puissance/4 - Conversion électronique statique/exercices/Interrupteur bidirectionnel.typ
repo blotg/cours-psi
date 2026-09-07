@@ -7,7 +7,7 @@
 On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transistor tous deux considérés idéaux.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         diode("D", (2, 0), (0, 0), i:(content: $i_D$, anchor: "west"), u:$u$)
         thyristor("Q", (0, 1), (2, 1), i:$i_T$)

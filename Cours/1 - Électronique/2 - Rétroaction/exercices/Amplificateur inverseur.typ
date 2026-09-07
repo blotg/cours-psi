@@ -7,7 +7,7 @@
 On considère le montage suivant, appelé montage amplificateur inverseur. L'ALI est supposé idéal.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         opamp("ALI", (0, 0))

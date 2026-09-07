@@ -7,7 +7,7 @@
 On considère le montage suivant, constitué d'un montage amplificateur non-inverseur et d'un filtre RLC-série.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

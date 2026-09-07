@@ -8,7 +8,7 @@
 On s'intéresse au montage suivant. L'ALI est supposé idéal. Le montage est *supposé stable*.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

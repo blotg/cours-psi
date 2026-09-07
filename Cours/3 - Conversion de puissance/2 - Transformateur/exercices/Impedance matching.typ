@@ -7,7 +7,7 @@
 A voltage generator gives a sinusoidal voltage $e$ to the primary of a transformer through a resistor $R_1$.
 
 #figure[
-    #zap.circuit({
+    #circuit({
         import zap: *
         import cetz.draw: *
 
@@ -35,7 +35,7 @@ A voltage generator gives a sinusoidal voltage $e$ to the primary of a transform
 ][
     The circuit is equivalent to the following one (primary side brought to the secondary side):
     #figure[
-        #zap.circuit({
+        #circuit({
             import zap: *
             import cetz.draw: *
 

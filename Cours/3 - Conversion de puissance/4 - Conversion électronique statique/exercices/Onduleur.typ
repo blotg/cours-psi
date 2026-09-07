@@ -9,7 +9,7 @@
 On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10", "O")$, $L=#qty("100", "mH")$ et $E = #qty("100", "V")$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("E", (0, -2.5), (0, 2.5), u: $E$, i: $i_e$)
         switch("S1", (2, 2.5), (2, 0), label: $K_1$, i: $i_1$)

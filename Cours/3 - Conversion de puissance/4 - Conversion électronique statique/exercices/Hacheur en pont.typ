@@ -5,7 +5,7 @@
 )
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("E", (0, -2.5), (0, 2.5), u: $E$, i: $i_e$)
         switch("S1", (2, 2.5), (2, 0), label: $K_1$, i: $i_1$)
@@ -105,7 +105,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
 ][
     Dans le premier état retenu :
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("E", (0, -2.5), (0, 2.5), u: $E$, i: $i_e$)
             switch("S1", (2, 2.5), (2, 0), label: $K_1$, i: $i_1$, u: (content: $u_1$, anchor: "south-west"))
@@ -137,7 +137,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
 
     Dans le second état retenu :
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             vsource("E", (0, -2.5), (0, 2.5), u: $E$, i: $i_e$)
             switch(

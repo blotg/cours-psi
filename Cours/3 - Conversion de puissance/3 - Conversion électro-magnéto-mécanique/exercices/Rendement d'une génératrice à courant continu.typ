@@ -18,7 +18,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     Représenter le schéma électrique de l'induit alimentant la charge électrique (on placera la machine à courant continu en convention générateur). Préciser l'expression du couple électromagnétique qui s'exerce sur la machine en fonction de $Phi_0$ et $i$.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             vsource("e", (0, 0), (0, 2), u: $e$)

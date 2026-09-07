@@ -8,7 +8,7 @@
 First, we will study the electronic filter below, named Hartley filter.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)
@@ -32,7 +32,7 @@ First, we will study the electronic filter below, named Hartley filter.
     Using Kirchhoff's nodal rule in $A$, express its potential $V_A (p)$ as a function of the voltages $e$ and $s$.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             set-style(padding: .4em)
@@ -91,7 +91,7 @@ First, we will study the electronic filter below, named Hartley filter.
 The complete Hartley oscillator's electrical schema is shown below.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         set-style(padding: .4em)

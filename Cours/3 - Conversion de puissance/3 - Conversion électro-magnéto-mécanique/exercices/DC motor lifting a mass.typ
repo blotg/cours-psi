@@ -25,7 +25,7 @@ The mass is lifted at a constant speed $v_0$.
     Since the mass is lifted at a constant speed, every values are constant over time. The inductance $L$ will have no influence and is not represented on the electrical schematic.
 
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             vsource("E0", (0, 0), (0, 2), u: $E_0$)

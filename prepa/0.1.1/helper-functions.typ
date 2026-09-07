@@ -64,6 +64,23 @@
 //     return d
 // }
 
+// Le scope commun à toutes les chaines que le paquet évalue — titres,
+// hypothèses, flashcards, questions de colle, coups de pouce, significations.
+//
+// Les symboles du cours, et les enveloppes de dessin de cetz.typ : un schéma
+// glissé dans une flashcard doit pouvoir s'écrire `circuit(…)` plutôt que
+// `zap.circuit(…)`, et surtout porter par elle l'étiquette <canvas>, sans
+// laquelle il sort vide en HTML — la carte Anki de l'oscillateur de Wien n'en
+// montrait qu'un cadre vide.
+//
+// Les symboles passent en second : à nom égal ce sont eux qui l'emportent,
+// comme avant l'ajout des dessins.
+#let scope-des-chaines = {
+    import "symboles.typ" as symboles
+    import "cetz.typ" as dessins
+    dictionary(dessins) + dictionary(symboles)
+}
+
 #let sub-dictionary(d, keys) = {
     let d2 = (:)
     for key in keys {
@@ -88,6 +105,5 @@
 // numéro du chapitre, puis son intitulé) : en markup un simple passage à la
 // ligne n'est qu'une espace, on rétablit donc la coupure ligne par ligne.
 #let markup(x) = if type(x) == str {
-    import "symboles.typ" as symboles
-    x.split("\n").map(l => eval(l, mode: "markup", scope: dictionary(symboles))).join(linebreak())
+    x.split("\n").map(l => eval(l, mode: "markup", scope: scope-des-chaines)).join(linebreak())
 } else { x }

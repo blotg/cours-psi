@@ -92,7 +92,7 @@ L'étude s'intéresse au régime stationnaire.
     Tracer le circuit équivalent et calculer la résistance équivalente.
 ][
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             resistor("Rc1", (0, 0), (2.5, 0), label: $R_"th,conv"$, i: (content: $Phi$, anchor: "north-west"))

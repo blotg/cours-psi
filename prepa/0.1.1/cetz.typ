@@ -2,8 +2,17 @@
 #import "@preview/cetz-plot:0.1.4": chart, plot
 #import "@preview/zap:0.6.0"
 
+// L'étiquette <canvas> n'est pas décorative : un tracé cetz est de la mise en
+// page, et l'export HTML n'en garde qu'une balise vide. C'est elle qui permet
+// au site de le passer par html.frame (cf. gabarits/site.typ). Tout dessin
+// doit donc passer par ces enveloppes, et non par cetz.canvas ou zap.circuit
+// directement — sinon il disparait du site sans rien signaler.
 #let canvas(..args) = {
     [#cetz.canvas(..args); <canvas>]
+}
+
+#let circuit(..args) = {
+    [#zap.circuit(..args); <canvas>]
 }
 
 #let projection-cabinet() = {

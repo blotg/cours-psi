@@ -7,7 +7,7 @@
 Les pertes dans un câble coaxial sont prises en compte en considérant la résistance linéique $r$ du conducteur et la conductance linéique $g$ de l'isolant séparant l'âme et la gaine. Le modèle à constantes réparties correspondant est représenté sur le schéma ci-dessous correspondant à une portion de câble de longueur $dd(x)$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         import cetz.draw: *
         resistor("r", (0, 0), (2.5, 0), label: $r dd(x)$)

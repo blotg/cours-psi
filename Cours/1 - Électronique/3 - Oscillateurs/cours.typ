@@ -72,7 +72,7 @@ Pour le filtre de Wien, le filtre passe-bande est un filtre de Wien et l'amplifi
     #import \"@preview/zap:0.6.0\"
     #import \"@preview/cetz:0.5.2\": draw
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import draw: *
             opamp(\"ALI\", (0,0), invert: true)
@@ -210,7 +210,7 @@ La condition d'existence d'oscillations sinusoïdales apparait comme un cas limi
 )[
     On réalise le montage de l'oscillateur de Wien avec une résistance $R_2$ réglable. On cherche les valeurs de $R_2$ pour lesquelles des oscillations apparaissent spontanément. On mesure la fréquence des oscillations dans le cas limite.
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
@@ -285,7 +285,7 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
     #import \"@preview/zap:0.6.0\"
     #import \"@preview/cetz:0.5.2\": draw
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import draw: *
             opamp(\"ALI\", (0,0), invert: true)
@@ -365,7 +365,7 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
 #manipulation(titre: "Forme des signaux de sortie")[
     On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=qty("22","kO")$.
     #figure(
-        zap.circuit({
+        circuit({
             import zap: *
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
