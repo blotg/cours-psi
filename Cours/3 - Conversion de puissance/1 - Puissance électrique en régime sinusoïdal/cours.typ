@@ -59,6 +59,16 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
     verso: "$ mean(s) = 1/T integral_0^T s(t) dd(t) $",
 )
 
+#question-de-début-de-cours(
+    "Trouvez l'ERREUR",
+    (
+        "$mean(u(t) v(t)) = mean(u(t)) mean(v(t))$",
+        "$mean(u(t) + v(t)) = mean(u(t)) + mean(v(t))$",
+        "$mean(dv(s, t)) = 0$",
+        "$mean(s) = cal(A)/T$",
+    ),
+)
+
 #schéma(titre: "Valeur moyenne")[#box(height: 3cm)]
 
 #encadré(

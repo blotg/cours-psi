@@ -53,6 +53,26 @@ Une spire circulaire parcourue par un courant produit un champ magnétique carac
     verso: "$va(cal(M))=i va(S)$",
 )
 
+#question-de-début-de-cours(
+    "Le moment magnétique d'une spire parcourue par un courant s'écrit",
+    (
+        "$i va(S)$",
+        "$mu_0/(4 pi r^3) vec(2 cos(theta), sin(theta), 0)$",
+        "$- grad cal(E)_p$",
+        "$va(cal(M)) and va(B)$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Lequel de ces systèmes ne possède PAS de moment magnétique ?",
+    (
+        "un champ magnétique",
+        "un dipôle magnétique",
+        "une spire parcourue par un courant",
+        "un aimant",
+    ),
+)
+
 Si on fait tendre vers $0$ le rayon d'une spire circulaire en gardant constant son moment magnétique, on obtient un dipôle magnétique.
 
 Le dipôle magnétique est un système ponctuel. Le dipôle magnétique est le plus simple système ayant un moment magnétique.
@@ -118,6 +138,16 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 )
 
 == Champ créé par un aimant
+
+#question-de-début-de-cours(
+    "Quimper a pour coordonnées 47°59′ N, 4°05′ O. L'angle $theta$ des coordonnées sphériques y vaut",
+    (
+        "42.02°",
+        "47.98°",
+        "47.59°",
+        "42.41°",
+    ),
+)
 
 Si on se place suffisamment loin, les champs créés par un aimant, par une spire et par un dipôle magnétique sont similaires. On définit le moment magnétique d'un aimant comme le moment magnétique du dipôle magnétique ayant le même champ magnétique à grande distance.
 
@@ -230,6 +260,16 @@ Les effets de l'aimantation sont pris en compte dans les équations de Maxwell �
     recto: "Équation de Maxwell-Ampère dans un milieu magnétique",
     verso: "$rot va(H)=va(j)_\"libre\"$",
 )
+
+#question-de-début-de-cours(
+    "L'équation de Maxwell-Ampère s'écrit, dans un matériau magnétique",
+    (
+        "$rot va(H) = va(j)_\"libre\"$",
+        "$rot va(B) = va(j)_\"libre\"$",
+        "$rot va(H) = mu_0 va(j)_\"libre\"$",
+        "$rot va(B) = mu_0 va(j)_\"libre\"$",
+    ),
+)
 #flashcard(
     recto: "Définition de l'excitation magnétique",
     verso: "$va(H)= (va(B))/(mu_0) - va(M)$",
@@ -311,6 +351,16 @@ Les matériaux ferromagnétiques durs sont utilisés pour fabriquer des aimants 
     verso: "Cycle d'hystérésis large, grande aimantation rémanente et un grand champ magnétique rémanent. Exemples : alliages au néodyme, alnicos",
 )
 
+#question-de-début-de-cours(
+    "Pour fabriquer un aimant permanent, on utilise un matériau",
+    (
+        "ferromagnétique dur",
+        "ferromagnétique doux",
+        "non magnétique",
+        "isolant",
+    ),
+)
+
 == Matériaux ferromagnétiques doux
 Un matériau ferromagnétique doux est un matériau ferromagnétique dont le cycle d'hystérésis est fin et linéaire dans une certaine zone.
 
@@ -321,6 +371,16 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
 #flashcard(
     recto: "Matériau ferromagnétique doux",
     verso: "Cycle d'hystérésis étroit, faible aimantation rémanente et un faible champ magnétique rémanent. Exemples : fer doux, ferrite",
+)
+
+#question-de-début-de-cours(
+    "Pour limiter les pertes par hystérésis",
+    (
+        "on utilise un matériau doux.",
+        "on travaille hors de la zone de saturation.",
+        "on utilise le feuilletage.",
+        "on utilise un bon conducteur électrique.",
+    ),
 )
 
 #schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique doux")[#box(height: 3cm)]
@@ -340,6 +400,16 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
 #flashcard(
     recto: "Conditions auxquelles $ va(B)= mu va(H) $",
     verso: "Matériau doux, hors saturation.",
+)
+
+#question-de-début-de-cours(
+    "Dans quel cas a-t-on $va(B) = mu va(H)$ ?",
+    (
+        "Pour un matériau doux, hors de la zone de saturation.",
+        "Pour un matériau doux, dans la zone de saturation.",
+        "Pour un matériau dur, hors de la zone de saturation.",
+        "Pour un matériau dur, dans la zone de saturation.",
+    ),
 )
 
 La perméabilité magnétique relative est de l'ordre de $mu_r tilde.op 10^5$.

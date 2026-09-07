@@ -100,13 +100,24 @@
 // ne porte que quelques lignes, l'interligne peut se le permettre.
 #show math.equation.where(block: false): math.display
 
-// Un `set align(horizon)` ne centrerait pas : le contenu d'une page s'écoule
-// depuis le haut. Ce sont les deux ressorts qui répartissent le blanc.
-#let _diapo(contenu) = {
-    v(1fr)
-    block(width: 100%, contenu)
-    v(1fr)
-}
+// `layout` donne la place réellement disponible sur la page ; un bloc de cette
+// hauteur exacte permet ensuite de centrer verticalement (le contenu d'une page
+// s'écoule depuis le haut, un `set align(horizon)` seul ne centrerait rien).
+//
+// Une diapo qui déborde se couperait en deux pages : la numérotation des
+// questions ne suivrait plus le corrigé, et la moitié des réponses passerait à
+// l'écran suivant. On rétrécit donc le contenu jusqu'à ce qu'il tienne — quatre
+// matrices 3 × 3 de dérivées partielles ne rentrent pas à pleine taille.
+#let _diapo(contenu) = layout(dispo => {
+    let facteur = 1.0
+    while (
+        facteur > 0.5
+            and measure(box(width: dispo.width, text(size: facteur * 1em, contenu))).height > dispo.height
+    ) {
+        facteur -= 0.05
+    }
+    block(width: 100%, height: dispo.height, align(horizon, text(size: facteur * 1em, contenu)))
+})
 
 // -- Diapo de titre --------------------------------------------------------
 

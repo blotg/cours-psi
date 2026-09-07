@@ -127,6 +127,26 @@ Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contribu
     verso: "$rho=n q$ ou $rho=sum_\"porteurs de charge\" n_i q_i$",
 )
 
+#question-de-début-de-cours(
+    "Lequel n'est PAS un porteur de charge ?",
+    (
+        "un atome",
+        "un positon",
+        "un ion",
+        "un noyau d'atome",
+    ),
+)
+
+#question-de-début-de-cours(
+    "La relation entre densité de porteurs et charge volumique s'écrit",
+    (
+        "$rho = n q$",
+        "$n = q rho$",
+        "$q = n rho$",
+        "$q = 1/(n rho)$",
+    ),
+)
+
 = Déplacement global de charge
 == Le vecteur densité de courant électrique
 Pour rendre compte du déplacement global des porteurs de charge, on définit le vecteur densité de courant électrique.
@@ -160,6 +180,26 @@ Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contribu
 #flashcard(
     recto: "Vecteur densité de courant électrique.",
     verso: "$va(j_\"élec\") = rho_\"libre\" va(v) = n_\"libre\" q va(v)$",
+)
+
+#question-de-début-de-cours(
+    "Le vecteur densité de courant électrique est défini comme",
+    (
+        "$va(j_\"élec\") = n q va(v)$",
+        "$va(j_\"élec\") = n va(v)$",
+        "$va(j_\"élec\") = q rho va(v)$",
+        "$va(j_\"élec\") = va(v)$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Le vecteur densité de courant électrique se mesure en",
+    (
+        "$unit(\"C/s/m^2\")$",
+        "$unit(\"A\") dot unit(\"m\")^2$",
+        "$unit(\"C/s\")$",
+        "$unit(\"A\")$",
+    ),
 )
 
 == Grandeurs locales et globales
@@ -213,6 +253,26 @@ L'équation locale de conservation de la charge peut également s'obtenir à par
     recto: "Équation locale de conservation de la charge.",
     verso: "$ pdv(rho,t) = -div(va(j_\"élec\"))$",
 )
+
+#question-de-début-de-cours(
+    "La charge est une grandeur conservative",
+    (
+        "toujours.",
+        "jamais.",
+        "en régime stationnaire uniquement.",
+        "en régime variable uniquement.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'équation locale de conservation de la charge s'écrit",
+    (
+        "$pdv(rho, t) = - div va(j_\"élec\")$",
+        "$pdv(rho, t) = div va(j_\"élec\")$",
+        "$pdv(va(j_\"élec\"), t) = - div rho$",
+        "$pdv(va(j_\"élec\"), t) = div rho$",
+    ),
+)
 #question-de-colle(
     "Établir l'équation locale de conservation de la charge grâce à un bilan à 1D en coordonnées cartésiennes et généraliser à 3D. Retrouver cette équation à partir des équations de Maxwell.",
 )
@@ -226,6 +286,16 @@ En régime stationnaire, l'équation de conservation de la charge s'écrit $div 
 #flashcard(
     recto: "Que peut-on dire de $va(j_\"élec\")$ en régime stationnaire ?",
     verso: "Il est à flux conservatif : $div va(j_\"élec\")=0$",
+)
+
+#question-de-début-de-cours(
+    "Le vecteur densité de courant électrique est à flux conservatif",
+    (
+        "en régime stationnaire uniquement.",
+        "toujours.",
+        "jamais.",
+        "en régime variable uniquement.",
+    ),
 )
 #question-de-colle(
     "Montrer que $va(j_\"élec\")$ est à flux conservatif en régime stationnaire.",
@@ -279,6 +349,26 @@ La durée du régime transitoire est très courte. On considère que les électr
     verso: "$ va(F)=-m_e/tau va(v) $",
 )
 
+#question-de-début-de-cours(
+    "Dans le modèle de Drude",
+    (
+        "les électrons subissent des chocs avec le réseau cristallin.",
+        "les électrons ont un mouvement d'agitation, mais pas de mouvement global.",
+        "les électrons n'interagissent pas avec le réseau cristallin.",
+        "les électrons se déplacent en ligne droite.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Les interactions entre le réseau cristallin et les électrons peuvent être modélisées par une force",
+    (
+        "$- m_e/tau va(v)$",
+        "$m_e/tau va(v)^2$",
+        "$tau/m_e va(v)$",
+        "$tau/m_e va(v)^2$",
+    ),
+)
+
 #encadré(
     titre: "Loi d'Ohm locale",
     connaitre: true,
@@ -309,6 +399,15 @@ La résistivité est l'inverse de la conductivité. La résistivité se mesure e
 #flashcard(
     recto: "Loi d'Ohm locale",
     verso: "$va(j_\"élec\")= gamma va(E)$",
+)
+
+#question-de-début-de-cours(
+    "La loi d'Ohm locale s'écrit",
+    (
+        "$va(j_\"élec\") = gamma va(E)$",
+        "$va(E) = gamma va(j_\"élec\")$",
+        "$U = gamma I$",
+    ),
 )
 #flashcard(
     recto: "Ordre de grandeur de la conductivité électrique du cuivre.",
@@ -345,6 +444,16 @@ La loi d'Ohm est une conséquence de la loi d'Ohm locale.
     verso: "$R=L/(gamma S)$",
 )
 
+#question-de-début-de-cours(
+    "La résistance d'un barreau cylindrique s'écrit",
+    (
+        "$L/(gamma S)$",
+        "$S/(gamma L)$",
+        "$gamma/(L S)$",
+        "$(gamma S)/L$",
+    ),
+)
+
 == Aspect énergétique
 La puissance reçue par l'électron de la part du champ électrique est dissipée sous forme de chaleur à chaque choc avec le réseau cristallin. C'est la source de l'effet Joule.
 
@@ -363,6 +472,16 @@ La puissance reçue par l'électron de la part du champ électrique est dissipé
 #flashcard(
     recto: "Densité volumique de puissance cédée aux porteurs de charge par le champ électrique",
     verso: "$ p_\"vol\"= va(j_\"élec\") dot va(E) $"
+)
+
+#question-de-début-de-cours(
+    "La densité volumique de puissance dissipée par effet Joule est",
+    (
+        "$p_\"vol\" = va(j_\"élec\") dot va(E)$",
+        "$p_\"vol\" = va(j_\"élec\") and va(E)$",
+        "$p_\"vol\" = va(E) and va(j_\"élec\")$",
+        "$p_\"vol\" = U I$",
+    ),
 )
 
 #application[

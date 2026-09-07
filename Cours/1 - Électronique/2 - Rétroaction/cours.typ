@@ -82,6 +82,21 @@ La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible po
     verso: "$A_0 tilde num(\"e5\")$, $tau tilde qty(\"e-2\", \"s\")$.",
 )
 
+#question-de-début-de-cours(
+    "L'ALI est un composant",
+    ("actif", "passif"),
+)
+
+#question-de-début-de-cours(
+    "La fonction de transfert de l'ALI est",
+    (
+        "$(S(p))/(epsilon(p)) = A_0/(1 + tau p)$",
+        "$(S(p))/(epsilon(p)) = (A_0 tau p)/(1 + tau p)$",
+        "$(S(p))/(epsilon(p)) = 1/(1 + tau p)$",
+        "$(S(p))/(epsilon(p)) = (tau p)/(1 + tau p)$",
+    ),
+)
+
 / Résistance d'entrée: La résistance d'entrée $R_e$ est très élevée sur les deux entrées. Le courant d'entrée $i_e=e/R_e$ est donc très faible.
 
 #application[
@@ -116,6 +131,16 @@ Le modèle présenté dans la partie précédente a des limites.
 
 #question-de-colle(
     "Décrire le modèle de l'ALI en précisant les ordres de grandeurs du gain statique et du temps de réponse, ainsi que ses limitations.",
+)
+
+#question-de-début-de-cours(
+    "Parmi ces grandeurs, laquelle NE sature PAS pour un ALI ?",
+    (
+        "L'entrée différentielle",
+        "La dérivée de la tension de sortie",
+        "La tension de sortie",
+        "Le courant de sortie",
+    ),
 )
 
 == Modèle de l'ALI idéal
@@ -158,6 +183,26 @@ Dans le modèle de l'ALI idéal, deux régimes existent :
     verso: "$epsilon = 0$",
 )
 
+#question-de-début-de-cours(
+    "Que peut-on dire pour un ALI dans un montage stable ?",
+    (
+        "L'entrée différentielle $epsilon approx 0$.",
+        "Le courant de sortie est presque nul.",
+        "La tension de sortie est égale à l'entrée différentielle $epsilon$.",
+        "La tension de sortie sature à $plus.minus V_\"sat\"$.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Que peut-on dire pour un ALI dans un montage instable ?",
+    (
+        "La tension de sortie sature à $plus.minus V_\"sat\"$.",
+        "L'entrée différentielle $epsilon approx 0$.",
+        "Le courant de sortie est presque nul.",
+        "La tension de sortie est égale à l'entrée différentielle $epsilon$.",
+    ),
+)
+
 = L'ALI dans un montage avec rétroaction négative
 #{
     grandeurs.insert("S(p)", (signification: "la sortie du montage", unité: unit("V")))
@@ -191,6 +236,16 @@ La rétroaction est la prise en compte de la sortie d'un système à son entrée
 #flashcard(
     recto: "Lien entre la nature de la rétroaction et la stabilité",
     verso: "Une rétroaction négative suggère un fonctionnement stable. Une rétroaction positive ou une absence de rétroaction suggère un fonctionnement instable.",
+)
+
+#question-de-début-de-cours(
+    "Une rétroaction négative a tendance à",
+    ("stabiliser le système", "déstabiliser le système"),
+)
+
+#question-de-début-de-cours(
+    "Le réchauffement climatique provoque la fonte du pergélisol, qui relâche du dioxyde de carbone et du méthane dans l'atmosphère. Le méthane et le dioxyde de carbone sont des gaz à effet de serre.",
+    ("Il s'agit d'une rétroaction positive", "Il s'agit d'une rétroaction négative"),
 )
 
 #application[

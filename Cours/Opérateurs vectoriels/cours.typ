@@ -45,6 +45,26 @@ Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un 
     verso: "Le gradient s'applique aux champs scalaires et renvoie un champ vectoriel.",
 )
 
+#question-de-début-de-cours(
+    "Le gradient",
+    (
+        "prend en entrée un scalaire et renvoie un vecteur.",
+        "prend en entrée un vecteur et renvoie un vecteur.",
+        "prend en entrée un scalaire et renvoie un scalaire.",
+        "prend en entrée un vecteur et renvoie un scalaire.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Le gradient d'un champ $A$ est défini par",
+    (
+        "$vec(pdv(A, x), pdv(A, y), pdv(A, z))$",
+        "$pdv(A, x) + pdv(A, y) + pdv(A, z)$",
+        "$vec(pdv(A_x, x), pdv(A_y, y), pdv(A_z, z))$",
+        "$pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z)$",
+    ),
+)
+
 #application[Exprimer le gradient du champ $1/sqrt(x^2+y^2+z^2)$.]
 
 En coordonnées cylindriques ou sphériques, la première coordonnée (c'est-à-dire selon $va(e_r)$) de $grad f$ est la dérivée par rapport à $r$.
@@ -79,6 +99,26 @@ La divergence est un opérateur s'appliquant aux champs vectoriels et renvoyant 
     verso: "La divergence s'applique aux champs vectoriels et renvoie un champ scalaire.",
 )
 
+#question-de-début-de-cours(
+    "La divergence",
+    (
+        "prend en entrée un vecteur et renvoie un scalaire.",
+        "prend en entrée un scalaire et renvoie un vecteur.",
+        "prend en entrée un vecteur et renvoie un vecteur.",
+        "prend en entrée un scalaire et renvoie un scalaire.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "La divergence d'un champ $va(A)$ est définie par",
+    (
+        "$pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z)$",
+        "$vec(pdv(A, x), pdv(A, y), pdv(A, z))$",
+        "$pdv(A, x) + pdv(A, y) + pdv(A, z)$",
+        "$vec(pdv(A_x, x), pdv(A_y, y), pdv(A_z, z))$",
+    ),
+)
+
 #application[
     Exprimer la divergence du champ $x va(e_x)+ 1/x va(e_y) + 1/z va(e_z)$.
 ]
@@ -101,6 +141,26 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
 #flashcard(
     recto: "Théorème d'Ostrogradski",
     verso: "$ integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S)) $",
+)
+
+#question-de-début-de-cours(
+    "D'après le théorème de Green-Ostrogradski",
+    (
+        "$integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S))$",
+        "$integral.triple_V grad A dd(V) = integral.surf_S A dd(S)$",
+        "$integral.triple_V A dd(V) = integral.surf_S div va(A) dd(S)$",
+        "$integral.triple_V A dd(V) = integral.surf_S grad A dprod va(dd(S))$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Dans le théorème de Green-Ostrogradski",
+    (
+        "la surface est fermée et orientée vers l'extérieur.",
+        "la surface est fermée et orientée vers l'intérieur.",
+        "la surface est ouverte et orientée vers l'extérieur.",
+        "la surface est ouverte et orientée vers l'intérieur.",
+    ),
 )
 
 #application[Parmi les surfaces suivantes, lesquelles sont fermées :
@@ -138,6 +198,26 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
 #flashcard(
     recto: "À quoi s'applique le rotationnel ? Que renvoie-t-il ?",
     verso: "Le rotationnel s'applique aux champs vectoriels et renvoie un champ vectoriel.",
+)
+
+#question-de-début-de-cours(
+    "Le rotationnel",
+    (
+        "prend en entrée un vecteur et renvoie un vecteur.",
+        "prend en entrée un vecteur et renvoie un scalaire.",
+        "prend en entrée un scalaire et renvoie un vecteur.",
+        "prend en entrée un scalaire et renvoie un scalaire.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Le rotationnel d'un champ $va(A)$ est défini par",
+    (
+        "$vec(pdv(A_z, y) - pdv(A_y, z), pdv(A_x, z) - pdv(A_z, x), pdv(A_y, x) - pdv(A_x, y))$",
+        "$vec(pdv(A_y, z) - pdv(A_z, y), pdv(A_z, x) - pdv(A_x, z), pdv(A_x, y) - pdv(A_y, x))$",
+        "$vec(pdv(A_x, y) - pdv(A_y, x), pdv(A_y, z) - pdv(A_z, y), pdv(A_z, x) - pdv(A_x, z))$",
+        "$vec(pdv(A_x, z) - pdv(A_z, x), pdv(A_y, x) - pdv(A_x, y), pdv(A_z, y) - pdv(A_y, z))$",
+    ),
 )
 
 == Théorème de Stokes

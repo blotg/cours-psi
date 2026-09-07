@@ -117,6 +117,16 @@ Le fonctionnement des parties de l'oscillateur de Wien peut être représenté p
 
 #question-de-colle("Schématiser le montage et établir le schéma-bloc de l'oscillateur de Wien.")
 
+#question-de-début-de-cours(
+    "Les oscillateurs quasi-sinusoïdaux sont constitués",
+    (
+        "d'un amplificateur et d'un filtre passe-bande.",
+        "d'un générateur et d'un filtre passe-bas.",
+        "de composants passifs uniquement.",
+        "d'un filtre passe-bande et d'un montage inverseur.",
+    ),
+)
+
 Le schéma-bloc met en évidence le caractère bouclé de l'oscillateur de Wien.
 
 == Condition d'oscillation et fréquence des oscillations
@@ -177,6 +187,16 @@ Si le système est stable et que les tensions sont initialement nulles, rien ne 
 
 La condition d'existence d'oscillations sinusoïdales apparait comme un cas limite de cette inégalité.
 
+#question-de-début-de-cours(
+    "Pour que des oscillations démarrent, il faut que",
+    (
+        "le système bouclé soit instable.",
+        "le filtre passe-bande soit instable.",
+        "le comparateur à hystérésis soit stable.",
+        "les termes du dénominateur de la fonction de transfert soient de même signe.",
+    ),
+)
+
 #manipulation(
     titre: "Démarrage des oscillations",
     matériel: (
@@ -234,6 +254,11 @@ S'il n'y avait pas la saturation de l'ALI, l'amplitude des oscillations continue
 La saturation de l'ALI est un phénomène non linéaire, qui modifie donc les spectres de $v_1$ et $v_2$. Expérimentalement, on observe que plus $R_2-2R_1$ est grand, plus les spectres comportent d'harmoniques et moins les signaux sont sinusoïdaux.
 
 La tension $v_2$ est "plus sinusoïdale" que $v_1$ car c'est la sortie du filtre passe-bande, qui diminue l'amplitude relative des harmoniques.
+
+#question-de-début-de-cours(
+    "La tension la plus sinusoïdale est celle",
+    ("qui sort du filtre passe-bande.", "qui sort de l'amplificateur."),
+)
 
 #question-de-colle(
     "Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition de démarrage des oscillations et établir l’amplitude des oscillations sinusoïdales pour les deux tensions.",

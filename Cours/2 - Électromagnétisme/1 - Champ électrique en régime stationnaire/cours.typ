@@ -75,6 +75,16 @@ $lambda(M, t)$ désigne la densité linéique de charge au point $M$ et à l'ins
 === Distribution ponctuelle
 $Q$ désigne la charge d'un objet ponctuel.
 
+#question-de-début-de-cours(
+    "La charge surfacique se mesure en",
+    (
+        "$unit(\"C/m^2\")$",
+        "$unit(\"C\")$",
+        "$unit(\"V\")$",
+        "$unit(\"V/m^2\")$",
+    ),
+)
+
 == Charge électrique et force
 #encadré(
     titre: "Force d'interaction électrostatique (loi de Coulomb)",
@@ -107,6 +117,26 @@ La force est répulsive si les charges sont de même signe, attractive si elles 
     verso: "$ va(E) = q/(4 pi epsilon_0) 1/r^2 va(e_r) $",
 )
 
+#question-de-début-de-cours(
+    "Le champ électrique créé par une particule ponctuelle est",
+    (
+        "$q/(4 pi epsilon_0) 1/r^2 va(e_r)$",
+        "$(q_1 q_2)/(4 pi epsilon_0) 1/r^2 va(e_r)$",
+        "$q/(2 pi epsilon_0) 1/r^2 va(e_r)$",
+        "$(q_1 q_2)/(2 pi epsilon_0) 1/r^2 va(e_r)$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Le champ électrique créé par une particule ponctuelle s'écrit",
+    (
+        "$va(E) = q/(4 pi epsilon_0 r^2) va(e_r)$",
+        "$va(E) = - q/(4 pi epsilon_0 r^2) va(e_r)$",
+        "$va(E) = q/(4 pi epsilon_0 r) va(e_r)$",
+        "$va(E) = - q/(4 pi epsilon_0 r) va(e_r)$",
+    ),
+)
+
 = Champ et potentiel électriques
 == Équations de Maxwell
 Le champ électrique obéit aux équations de Maxwell.
@@ -121,6 +151,16 @@ Le champ électrique obéit aux équations de Maxwell.
 
 #flashcard(recto: "Équation de Maxwell-Gauss", verso: "$ div va(E) = rho/epsilon_0 $")
 
+#question-de-début-de-cours(
+    "L'équation de Maxwell-Gauss",
+    (
+        "relie la divergence du champ électrique et la densité volumique de charge.",
+        "relie la divergence du potentiel électrique et la densité volumique de charge.",
+        "relie la divergence du champ électrique et la charge ponctuelle.",
+        "relie la divergence du potentiel électrique et la charge ponctuelle.",
+    ),
+)
+
 #encadré(
     titre: "Équation de Maxwell-Faraday",
     connaitre: true,
@@ -130,6 +170,16 @@ Le champ électrique obéit aux équations de Maxwell.
 ]
 
 #flashcard(recto: "Équation de Maxwell-Faraday", verso: "$ rot va(E) = - pdv(va(B), t) $")
+
+#question-de-début-de-cours(
+    "L'équation de Maxwell-Faraday s'écrit",
+    (
+        "$rot va(E) = - pdv(va(B), t)$",
+        "$rot va(E) = pdv(va(B), t)$",
+        "$div va(E) = - pdv(va(B), t)$",
+        "$div va(E) = pdv(va(B), t)$",
+    ),
+)
 
 == Potentiel électrique
 #encadré(
@@ -157,6 +207,15 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
 ]
 
 #flashcard(recto: "Circulation du champ électrique", verso: "$ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $ (en régime stationnaire)")
+
+#question-de-début-de-cours(
+    "Laquelle de ces affirmations sur $va(E)$ est FAUSSE en régime stationnaire ?",
+    (
+        "Sa divergence est nulle.",
+        "Sa circulation ne dépend pas du chemin suivi.",
+        "Il s'exprime comme un gradient.",
+    ),
+)
 
 #question-de-colle("Énoncer l'équation de Maxwell-Faraday, en déduire qu'en régime stationnaire $va(E) = - grad V$, puis exprimer la circulation du champ électrique.")
 
@@ -315,6 +374,16 @@ Si, pour chaque couple de points symétriques par un plan, la distribution de ch
 
 #flashcard(recto: "Rapport du champ électrique aux plans d'antisymétrie de la distribution de charge", verso: "Le champ électrique leur est orthogonal.")
 
+#question-de-début-de-cours(
+    "Le champ électrique est",
+    (
+        "inclus dans les plans de symétrie et orthogonal aux plans d'antisymétrie.",
+        "orthogonal aux plans de symétrie et orthogonal aux plans d'antisymétrie.",
+        "inclus dans les plans de symétrie et inclus dans les plans d'antisymétrie.",
+        "orthogonal aux plans de symétrie et inclus dans les plans d'antisymétrie.",
+    ),
+)
+
 #application[
     On considère deux armatures planes en regard, de charges opposées. Déterminer la direction du champ électrique dans le plan médiateur des armatures.
 ]
@@ -347,6 +416,16 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
 ]
 
 #flashcard(recto: "Théorème de Gauss", verso: "$ integral.surf_S va(E) dot va(dd(S)) = Q_\"int\"/epsilon_0 $")
+
+#question-de-début-de-cours(
+    "Le champ électrique créé par un cylindre infini uniformément chargé",
+    (
+        "dépend de $r$ et est selon $va(e_r)$",
+        "dépend de $r$ et est selon $va(e_phi)$",
+        "dépend de $z$ et est selon $va(e_r)$",
+        "dépend de $z$ et est selon $va(e_phi)$",
+    ),
+)
 
 #question-de-colle("Énoncer l'équation de Maxwell-Gauss et démontrer le théorème de Gauss.")
 
@@ -400,6 +479,16 @@ Champ électrique et champ gravitationnel sont analogues.
 ]
 
 #flashcard(recto: "Théorème de Gauss gravitationnel", verso: "$ integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_\"int\" $")
+
+#question-de-début-de-cours(
+    "Le théorème de Gauss gravitationnel s'écrit",
+    (
+        "$integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_\"int\"$",
+        "$integral.surf_S va(g) dot va(dd(S)) = 4 pi cal(G) M_\"int\"$",
+        "$integral.surf_S va(g) dot va(dd(S)) = - cal(G) M_\"int\"$",
+        "$integral.surf_S va(g) dot va(dd(S)) = cal(G) M_\"int\"$",
+    ),
+)
 
 #question-de-colle("Dresser les analogies entre les champs électrique et gravitationnel. Énoncer le théorème de Gauss gravitationnel.")
 

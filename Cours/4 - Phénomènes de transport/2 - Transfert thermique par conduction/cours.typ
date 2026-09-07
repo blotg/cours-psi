@@ -108,6 +108,26 @@ En physique, les grandeurs notées $delta f$ représentent des *quantités* infi
     verso: "Petite quantité.",
 )
 
+#question-de-début-de-cours(
+    "$cos(y) dd(x) + x sin(y) dd(y)$ est une forme différentielle.",
+    ("Oui", "Non"),
+)
+
+#question-de-début-de-cours(
+    "$cos(y) dd(x) - x sin(y) dd(y)$ est une différentielle.",
+    ("Oui", "Non"),
+)
+
+#question-de-début-de-cours(
+    "La variation de pression peut être notée $dd(P)$.",
+    ("Oui", "Non"),
+)
+
+#question-de-début-de-cours(
+    "La masse d'un système mésoscopique peut être notée $dd(m)$.",
+    ("Non", "Oui"),
+)
+
 Exception : pour les variables d'intégration, cette règle est enfreinte. On note $dd(x)$, $dd(y)$, $dd(z)$ des dimensions, $dd(S)$ une surface, $dd(V)$ un volume, $dd(t)$ une durée alors que ce ne sont pas des variations.
 
 == Premier principe
@@ -207,6 +227,16 @@ La chaleur peut se transporter d'un système à un autre de 3 façons :
     verso: "Par conduction (la queue d'une casserole devient chaude) ; par conducto-convection (le fond de la casserole chauffe l'eau qu'elle contient) ; par rayonnement (la chaleur du Soleil nous parvient).",
 )
 
+#question-de-début-de-cours(
+    "La chaleur qui vous vient d'un sèche-cheveux est transmise par",
+    (
+        "conducto-convection.",
+        "conduction.",
+        "rayonnement.",
+        "aération.",
+    ),
+)
+
 == Le vecteur densité de courant thermique
 Le vecteur densité de courant thermique $va(j_Q)$ est la chaleur transitant par unité de surface et de temps.
 #encadré(
@@ -230,6 +260,16 @@ Le vecteur densité de courant thermique $va(j_Q)$ est la chaleur transitant par
 #flashcard(
     recto: "Lien entre la chaleur $delta Q$, le flux thermique $delta Phi$ et le vecteur densité de courant thermique $va(j_Q)$.",
     verso: "$delta Q = delta Phi dd(t) = va(j_Q) dot va(dd(S)) dd(t)$.",
+)
+
+#question-de-début-de-cours(
+    "Le vecteur densité de courant thermique se mesure en",
+    (
+        "$unit(\"J/m^2/s\")$",
+        "$unit(\"W/m/s^2\")$",
+        "$unit(\"J/m^3/s\")$",
+        "$unit(\"W/m^2/s\")$",
+    ),
 )
 
 La puissance (aussi appelée flux thermique#footnote[En physique, les intégrales doubles sur des surfaces s'appellent des flux.]) qui traverse une surface finie est l'intégrale du flux sur une surface infinitésimale.
@@ -285,6 +325,16 @@ La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle
     $ lambda_\"eau\" tilde #qty(\"e-1\", \"J/s/m/K\") $
     $ lambda_\"béton\" tilde #qty(\"e0\", \"J/s/m/K\") $
     $ lambda_\"acier\" tilde #qty(\"e1\", \"J/s/m/K\") $",
+)
+
+#question-de-début-de-cours(
+    "Quelle affirmation est FAUSSE ?",
+    (
+        "Le béton est un meilleur isolant thermique que l'air.",
+        "Le flux thermique et la puissance sont synonymes.",
+        "La chaleur est conduite du chaud vers le froid.",
+        "$va(j_Q) = - lambda grad T$",
+    ),
 )
 
 Le signe "$-$" dans la loi de Fourier traduit le sens de déplacement de la chaleur : toujours du chaud vers le froid.
@@ -349,6 +399,46 @@ Le coefficient $D_"th"$ est appelé diffusivité thermique ou coefficient de dif
     verso: "$ pdv(T, t) - D_\"th\" Delta T = cal(P)_V/(mu c_V) $",
 )
 
+#question-de-début-de-cours(
+    "Le coefficient de diffusion thermique est égal à",
+    (
+        "$lambda/(mu c_V)$",
+        "$mu/(lambda c_V)$",
+        "$c_V/(mu lambda)$",
+        "$(mu c_V)/lambda$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'équation de diffusion sans terme source est une équation aux dérivées partielles",
+    (
+        "d'ordre 2.",
+        "non linéaire.",
+        "réversible.",
+        "sans solutions.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'équation de diffusion thermique sans terme source s'écrit",
+    (
+        "$pdv(T, t) - D_\"th\" Delta T = 0$",
+        "$pdv(T, t, 2) + D_\"th\" Delta T = 0$",
+        "$pdv(T, t) + D_\"th\" Delta T = 0$",
+        "$D_\"th\" pdv(T, t, 2) + Delta T = 0$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Dans l'équation de diffusion thermique",
+    (
+        "la dérivée spatiale est seconde et la dérivée temporelle première.",
+        "la dérivée spatiale est première et la dérivée temporelle première.",
+        "la dérivée spatiale est première et la dérivée temporelle seconde.",
+        "la dérivée spatiale est seconde et la dérivée temporelle seconde.",
+    ),
+)
+
 == Analyse en ordres de grandeurs
 #encadré(
     titre: "Approximation d'une dérivée par le taux d'accroissement",
@@ -380,6 +470,16 @@ Comme la durée caractéristique dépend de $l^2$, l'onde de température ralent
     Si je plonge une cuillère de #qty("20", "cm") en acier ($mu=#qty("8e3", "kg/m^3")$, $c_V=qty("4e2", "J/K/kg")$) dans une casserole d'eau bouillante, quel est l'ordre de grandeur de la durée au bout de laquelle la queue de la cuillère devient chaude ?
 ]
 
+
+#question-de-début-de-cours(
+    "Le régime stationnaire correspond au cas où",
+    (
+        "$L^2 << D_\"th\" tau$",
+        "$tau >> D_\"th\" L^2$",
+        "$tau^2 >> D_\"th\" L$",
+        "$L << D_\"th\" tau^2$",
+    ),
+)
 == Irréversibilité
 La vidéo du lien ci-dessous illustre l'irréversibilité de différents phénomènes.
 #lien("https://youtu.be/i6rVHr6OwjI")
@@ -397,6 +497,16 @@ Si une vidéo d'un phénomène irréversible est passée à l'envers, on s'en re
 
 L'équation de la diffusion thermique est irréversible.
 
+
+#question-de-début-de-cours(
+    "Quelle affirmation est FAUSSE ?",
+    (
+        "L'équation de diffusion thermique sans terme source est réversible.",
+        "Le vecteur densité de courant thermique est à flux conservatif en régime stationnaire.",
+        "$R_\"th\" = L/(lambda S)$ pour un barreau cylindrique.",
+        "$R_\"th\"$ se mesure en $unit(\"K/W\")$.",
+    ),
+)
 == Conditions aux limites
 Le flux thermique est toujours continu.
 #encadré(
@@ -468,6 +578,16 @@ Dans l'ARQS, la différence de température entre les extrémités d'un système
     verso: "$T_1-T_2=R_\"th\" Phi$ avec $R_\"th\"=L/(S lambda)$",
 )
 
+#question-de-début-de-cours(
+    "La résistance thermique d'un barreau cylindrique est",
+    (
+        "$L/(lambda S)$",
+        "$lambda/(L S)$",
+        "$S/(lambda L)$",
+        "$(L lambda)/S$",
+    ),
+)
+
 == Association de résistances thermiques
 Si deux résistances thermiques sont en série, elles sont traversées par le même flux thermique.
 #schéma(titre: "Résistances thermiques en série", hauteur: 3cm)
@@ -520,6 +640,16 @@ Si deux résistances thermiques sont en parallèle, elles sont soumises à la m�
     Déterminer la résistance thermique équivalente d'une gigoteuse de surface #qty("0.5", "m^2") et de #qty("2", "tog")#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un tog correspond à #qty("0.1", "m^2 K/W").] et d'un bonnet de surface #qty("400", "cm^2") et de #qty("1", "tog").
 ]
 
+
+#question-de-début-de-cours(
+    "Des résistances thermiques en parallèle",
+    (
+        "sont soumises à la même différence de température.",
+        "sont égales.",
+        "s'ajoutent.",
+        "sont traversées par le même flux thermique.",
+    ),
+)
 == Circuit RC thermique
 Le circuit RC thermique correspond à une capacité thermique en contact avec un thermostat à travers une résistance thermique.
 
@@ -544,6 +674,26 @@ Le circuit RC thermique correspond à une capacité thermique en contact avec un
 ]
 
 == Analogie avec l'électrocinétique
+
+#question-de-début-de-cours(
+    "L'analogue électrocinétique de la température est",
+    (
+        "la tension.",
+        "le courant.",
+        "la résistance.",
+        "la capacité.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'analogue électrocinétique du flux thermique est",
+    (
+        "le courant.",
+        "la tension.",
+        "la résistance.",
+        "la capacité.",
+    ),
+)
 On peut faire une analogie entre l'électrocinétique et la thermique.
 
 #figure(

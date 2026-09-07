@@ -42,6 +42,25 @@ Le *volume de contrôle* est le volume occupé par un système ouvert. La *surfa
 
 La plupart des théorèmes de physique connus ne s'appliquent pas aux systèmes ouverts.
 
+
+#question-de-début-de-cours(
+    "Qu'est-ce qu'un système ouvert ?",
+    (
+        "Un système qui échange de la matière avec l'extérieur.",
+        "Un système qui n'échange pas de matière avec l'extérieur.",
+        "Un système qui échange uniquement de la chaleur.",
+        "Un système sans volume de contrôle.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Quel est un exemple de système ouvert ?",
+    (
+        "Un lac.",
+        "Une solution dans un bécher.",
+        "L'eau dans le circuit primaire d'une centrale nucléaire.",
+    ),
+)
 == Système fermé
 Un système fermé est un système n'échangeant pas de matière avec l'extérieur.
 
@@ -90,6 +109,16 @@ Lorsqu'un système ouvert est traversé par un écoulement unidimensionnel, il e
 #flashcard(
     recto: "Premier principe industriel",
     verso: "$ Delta (h + e_c + e_p) = w_u+q $",
+)
+
+#question-de-début-de-cours(
+    "Quelle est la forme du premier principe de la thermodynamique pour un système ouvert en écoulement stationnaire ?",
+    (
+        "$Delta (h + e_c + e_p) = w_u + q$",
+        "$Delta h = w_u + q$",
+        "$Delta h = P_u + P_\"th\"$",
+        "$Delta (h + e_c + e_p) = 0$",
+    ),
 )
 
 Pour les applications industrielles, il est souvent plus pratique de travailler avec des relations sur les puissances.
@@ -141,6 +170,16 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
     verso: "$ Delta s = s_e+s_c $",
 )
 
+#question-de-début-de-cours(
+    "Quel est l'énoncé du second principe de la thermodynamique pour un système ouvert en écoulement stationnaire ?",
+    (
+        "$Delta s = s_e + s_c$",
+        "$Delta h = h_e + h_c$",
+        "$Delta (h + e_c + e_p) = w_u + q$",
+        "$Delta s = s_e$",
+    ),
+)
+
 = Conservation de l'énergie dans un écoulement parfait
 == Le modèle de l'écoulement parfait
 Un écoulement parfait est un écoulement dans lequel il n'existe aucun phénomène de diffusion (thermique, de quantité de mouvement, ...).
@@ -162,6 +201,16 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
     La puissance des actions intérieures est nulle.
 ]
 
+
+#question-de-début-de-cours(
+    "Quel est le modèle de l'écoulement parfait ?",
+    (
+        "Un écoulement où il n'existe aucun phénomène de diffusion.",
+        "Un écoulement à faible nombre de Reynolds.",
+        "Un écoulement où les particules subissent des phénomènes thermiques.",
+        "Un écoulement qui n'est pas réversible.",
+    ),
+)
 == Relation de Bernoulli
 
 #encadré(
@@ -187,6 +236,26 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
     recto: "Hypothèses de la relation de Bernoulli",
     verso: "L'écoulement est Parfait, Stationnaire, Incompressible et Homogène.",
 )
+
+#question-de-début-de-cours(
+    "Quelle condition N'est PAS nécessaire pour appliquer la relation de Bernoulli ?",
+    (
+        "Toutes les lignes de courant doivent passer par le même point.",
+        "L'écoulement doit être à haut nombre de Reynolds.",
+        "Le débit volumique doit se conserver.",
+        "Les lignes de courant doivent être les trajectoires des particules de fluide.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Que représente la relation de Bernoulli ?",
+    (
+        "La conservation de l'énergie mécanique volumique.",
+        "La conservation de la masse dans un écoulement.",
+        "La conservation de l'entropie dans un écoulement.",
+        "La conservation de la quantité de mouvement dans un écoulement.",
+    ),
+)
 #question-de-colle(
     "Établir la relation de Bernoulli. Note : $u_e=u_s$ est admis jusqu'au chapitre \"Deuxième principe de la thermodynamique appliqué aux transformations physico-chimiques\".",
 )
@@ -210,6 +279,16 @@ Dans un écoulement horizontal, une augmentation de la vitesse s'accompagne d'un
     #schéma(hauteur: 3cm)
 ]
 
+
+#question-de-début-de-cours(
+    "Qu'indique l'effet Venturi ?",
+    (
+        "Une augmentation de la vitesse s'accompagne d'une diminution de la pression.",
+        "Une augmentation de la pression s'accompagne d'une augmentation de la vitesse.",
+        "La pression reste constante lorsque la vitesse augmente.",
+        "La vitesse d'écoulement reste constante dans une conduite rétrécie.",
+    ),
+)
 = Mécanique sur des systèmes ouverts
 == Bilan de quantité de mouvement
 La quantité de mouvement est une grandeur conservative. Une force est un débit de quantité de mouvement d'un système vers un autre.

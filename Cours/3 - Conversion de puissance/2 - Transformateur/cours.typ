@@ -49,6 +49,16 @@ Dans le modèle du transformateur idéal,
     verso: "Pertes cuivres et fer négligées, matériaux doux, hors saturation, de perméabilité infinie, lignes de champ parfaitement canalisées, champ magnétique de norme uniforme.",
 )
 
+#question-de-début-de-cours(
+    "Quelle hypothèse NE fait PAS partie du modèle du transformateur idéal ?",
+    (
+        "Le champ magnétique est stationnaire.",
+        "Toutes les pertes sont négligées.",
+        "Le matériau est doux et hors saturation.",
+        "La perméabilité magnétique est infinie.",
+    ),
+)
+
 #schéma(titre: "Schéma électrique du transformateur idéal")[#box(height: 3cm)]
 
 == Loi de transformation des tensions
@@ -69,6 +79,16 @@ Dans le modèle du transformateur idéal,
 #flashcard(
     recto: "Rapport de transformation sur les tensions",
     verso: "$ (v_2(t))/(v_1(t))=m $",
+)
+
+#question-de-début-de-cours(
+    "La relation liant les tensions instantanées primaire $v_1(t)$ et secondaire $v_2(t)$ s'écrit",
+    (
+        "$v_2(t) = m v_1(t)$",
+        "$v_1(t) = m v_2(t)$",
+        "$v_2(t) = m^2 v_1(t)$",
+        "$v_1(t) = m^2 v_2(t)$",
+    ),
 )
 
 #application[
@@ -94,6 +114,16 @@ Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le t
 #flashcard(
     recto: "Rapport de transformation sur les courants",
     verso: "$ (i_2(t))/(i_1(t))=(-1)/m $",
+)
+
+#question-de-début-de-cours(
+    "La relation liant les courants efficaces primaire $I_(1\, \"eff\")$ et secondaire $I_(2\, \"eff\")$ s'écrit",
+    (
+        "$I_(1\, \"eff\") = m I_(2\, \"eff\")$",
+        "$I_(2\, \"eff\") = m I_(1\, \"eff\")$",
+        "$I_(2\, \"eff\") = - m I_(1\, \"eff\")$",
+        "$I_(1\, \"eff\") = - m I_(2\, \"eff\")$",
+    ),
 )
 
 #question-de-colle(
@@ -184,6 +214,16 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 #flashcard(
     recto: "Ramener le secondaire au primaire",
     verso: "Les impédances sont divisées par $m^2$.\nLes tensions sont divisées par $m$.\nLes courants sont divisés par $1/m$.",
+)
+
+#question-de-début-de-cours(
+    "Pour ramener le secondaire au primaire, on multiplie les impédances par",
+    (
+        "$1/m^2$",
+        "$m^2$",
+        "$m$",
+        "$1/m$",
+    ),
 )
 
 #question-de-colle(

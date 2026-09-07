@@ -87,6 +87,26 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
         $ rot va(B) = mu_0 va(j) $",
 )
 
+#question-de-début-de-cours(
+    "Dans l'ARQS magnétique, l'équation de Maxwell qu'on simplifie est",
+    (
+        "l'équation de Maxwell-Ampère",
+        "l'équation de Maxwell-Faraday",
+        "l'équation de Maxwell-Gauss",
+        "l'équation de Maxwell-Thomson",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Dans l'ARQS magnétique, l'équation de Maxwell-Ampère s'écrit",
+    (
+        "$rot va(B) = mu_0 va(j)$",
+        "$rot va(B) = epsilon_0 va(j)$",
+        "$rot va(B) = mu_0 epsilon_0 pdv(va(E), t)$",
+        "$rot va(B) = mu_0 epsilon_0 va(j)$",
+    ),
+)
+
 #encadré(
     titre: "Condition d'application de l'ARQS",
     savoir-faire: true,
@@ -119,6 +139,16 @@ Dans l'ARQS, les courants créent des champs magnétiques (qu'on peut détermine
 
 Dans l'ARQS, le champ magnétique induit le champ électrique.
 
+#question-de-début-de-cours(
+    "Dans l'ARQS magnétique",
+    (
+        "les courants créent le champ magnétique, qui crée un champ électrique.",
+        "les charges créent le champ magnétique, qui crée un champ électrique.",
+        "le champ magnétique crée le courant, qui crée un champ magnétique.",
+        "le champ électrique crée le champ magnétique, qui crée le courant.",
+    ),
+)
+
 = Induction
 
 == Circulation du champ électrique
@@ -136,6 +166,16 @@ Dans l'ARQS, le champ magnétique induit le champ électrique.
 #flashcard(
     recto: "Circulation du champ électrique dans l'ARQS",
     verso: "$ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $",
+)
+
+#question-de-début-de-cours(
+    "Dans l'ARQS magnétique, la circulation du champ électrique s'écrit",
+    (
+        "$integral.cont_cal(C) va(E) dot va(dd(l)) = - dv(Phi, t)$",
+        "$integral.cont_cal(C) va(E) dot va(dd(l)) = 0$",
+        "$integral.cont_cal(C) va(E) dot va(dd(l)) = dv(Phi, t)$",
+        "$integral.cont_cal(C) va(E) dot va(dd(l)) = Phi$",
+    ),
 )
 
 Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-Faraday.
@@ -222,6 +262,16 @@ Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le
         image("images/transformateur.jpg"), image("images/rotor.jpg"),
     ),
     caption: "Transformateur et rotor d’un moteur électrique dont le feuilletage est visible.",
+)
+
+#question-de-début-de-cours(
+    "Quelle affirmation est correcte ?",
+    (
+        "On utilise le feuilletage pour limiter les courants de Foucault dans les moteurs.",
+        "On utilise le feuilletage pour limiter les courants de Foucault dans les casseroles pour induction.",
+        "Les courants de Foucault sont des courants parasites qui augmentent le rendement des machines électriques.",
+        "Les courants de Foucault sont des courants parasites qui diminuent le rendement des casseroles pour induction.",
+    ),
 )
 
 = Inductance propre, inductance mutuelle
@@ -358,6 +408,26 @@ En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 
 #flashcard(
     recto: "Inégalité vérifiée par l'inductance mutuelle $M$",
     verso: "$ M^2 <= L_1 L_2 $",
+)
+
+#question-de-début-de-cours(
+    "L'inégalité vérifiée par l'inductance mutuelle est",
+    (
+        "$M <= sqrt(L_1 L_2)$",
+        "$M <= L_1 L_2$",
+        "$M >= sqrt(L_1 L_2)$",
+        "$M >= L_1 L_2$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'inductance mutuelle se mesure en",
+    (
+        "$unit(\"H\")$",
+        "$unit(\"A/m^2\")$",
+        "$unit(\"T\")$",
+        "$unit(\"H/m\")$",
+    ),
 )
 #question-de-colle(
     "À partir de l'expression des flux magnétiques, établir l'énergie stockée dans deux bobines en interaction puis établir une inégalité portant sur l'inductance mutuelle et les inductances propres.",

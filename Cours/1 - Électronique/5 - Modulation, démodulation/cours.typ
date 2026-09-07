@@ -84,6 +84,15 @@ La modulation consiste à combiner
 - le signal qu'on souhaite transmettre
 - un signal sinusoïdal dont la fréquence est adaptée au canal, appelé "porteuse"
 
+#question-de-début-de-cours(
+    "La modulation NE permet PAS de",
+    (
+        "diminuer la perte d'information.",
+        "adapter le signal à transmettre au canal.",
+        "mettre plusieurs signaux sur un même canal.",
+    ),
+)
+
 == Les différents types de modulation
 
 #encadré(
@@ -133,6 +142,16 @@ $
     verso: "Radio en mode FM avec une porteuse entre $qty(\"87\",\"MHz\")$ et $qty(\"108\",\"MHz\")$.",
 )
 
+#question-de-début-de-cours(
+    "Un signal modulé en fréquence a pour expression",
+    (
+        "$s_\"FM\" (t) = A_p cos(2 pi f(t) t + phi_p)$",
+        "$s_\"FM\" (t) = A(t) cos(2 pi f_p t + phi_p)$",
+        "$s_\"FM\" (t) = A_p cos(2 pi f_p t + phi(t))$",
+        "$s_\"FM\" (t) = A_p cos(2 pi f_p t + phi_p)$",
+    ),
+)
+
 === La modulation de phase
 La modulation de phase consiste à faire varier la phase de la porteuse : $phi_p$ devient $phi(t)$.
 $
@@ -149,6 +168,16 @@ $
 #flashcard(
     recto: "Application de la modulation de phase.",
     verso: "Téléphonie mobile avec une porteuse à environ $qty(\"900\",\"MHz\")$.",
+)
+
+#question-de-début-de-cours(
+    "Lequel de ces exemples utilise la modulation de phase ?",
+    (
+        "La téléphonie mobile.",
+        "La radio FM.",
+        "La radio AM.",
+        "La radio en mode grandes ondes.",
+    ),
 )
 
 #question-de-colle(
@@ -172,6 +201,11 @@ $
 #flashcard(
     recto: "Forme d'un signal modulé en amplitude.",
     verso: "$s_\"AM\" (t) = (1+k s(t)) s_p (t)$",
+)
+
+#question-de-début-de-cours(
+    "La modulation d'amplitude est une opération linéaire.",
+    ("Faux", "Vrai"),
 )
 
 #application[
@@ -347,6 +381,16 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
 #application[
     Quelle fréquence de coupure le filtre passe-bas peut-il avoir pour démoduler la radio en grandes ondes (GO) ?
 ]
+
+#question-de-début-de-cours(
+    "Lors de la démodulation synchrone, un filtrage passe-bas est nécessaire. Quelle condition doit remplir la fréquence de coupure $f_c$ ?",
+    (
+        "$f_\"max\" < f_c << 2 f_p$",
+        "$f_\"max\" << f_c < 2 f_p$",
+        "$f_c < f_\"min\"$",
+        "$f_c << f_\"min\"$",
+    ),
+)
 
 === Troisième étape : filtrage passe-haut
 

@@ -26,6 +26,11 @@ En présentation alternative, le courant et la tension sont de moyenne nulle : $
     L'électricité du secteur, et donc celle reçue par tous les appareils électroménagers, est en présentation alternative.
 ]
 
+
+#question-de-début-de-cours(
+    "En présentation alternative, les valeurs moyennes de la tension $u$, du courant $i$ et de la puissance $u i$ sont nulles.",
+    ("Faux", "Vrai"),
+)
 == Présentation continue
 En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 
@@ -37,6 +42,11 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
     Les voitures, électrolyseurs et certains TGV consomment de l'électricité en présentation continue.
 ]
 
+
+#question-de-début-de-cours(
+    "En présentation continue, les tensions et les courants sont indépendants du temps.",
+    ("Faux", "Vrai"),
+)
 == Ordres de grandeur
 
 #application[
@@ -83,6 +93,26 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
     )
 ]
 
+
+#question-de-début-de-cours(
+    "La puissance délivrée par un réacteur nucléaire a pour ordre de grandeur",
+    (
+        "$qty(\"1\", \"GW\")$",
+        "$qty(\"1\", \"MW\")$",
+        "$qty(\"1\", \"TW\")$",
+        "$qty(\"1\", \"kW\")$",
+    ),
+)
+
+#question-de-début-de-cours(
+    "La puissance délivrée par $qty(\"1\", \"m^2\")$ de panneau photovoltaïque a pour ordre de grandeur",
+    (
+        "$qty(\"400\", \"W\")$",
+        "$qty(\"400\", \"mW\")$",
+        "$qty(\"400\", \"kW\")$",
+        "$qty(\"400\", \"GW\")$",
+    ),
+)
 = Convertisseur électronique statique de puissance
 == Structure générale
 Un convertisseur électrique statique est constitué d'interrupteurs intégrés dans un circuit de puissance. Les interrupteurs peuvent être commandés par un circuit de commande.
@@ -142,6 +172,16 @@ La puissance arrivant au résistor peut être modulée grâce à la *modulation 
     verso: "$ alpha=(Delta t_f) / T $",
 )
 
+#question-de-début-de-cours(
+    "Le rapport cyclique est défini comme",
+    (
+        "$alpha = (Delta t_f)/T$",
+        "$alpha = T/(Delta t_f)$",
+        "$alpha = T/(2 pi Delta t_f)$",
+        "$alpha = T/(4 pi)$",
+    ),
+)
+
 Le rapport cyclique est la proportion du temps où l'interrupteur est fermé.
 
 #application[
@@ -165,6 +205,16 @@ Les interrupteurs régulent le flux énergétique.
 
 Les condensateurs et les bobines stockent l'énergie puis la restituent périodiquement. Les condensateurs et les bobines servent à lisser la tension ou le courant.
 
+
+#question-de-début-de-cours(
+    "Dans un convertisseur idéal, il NE peut PAS y avoir",
+    (
+        "de résistor.",
+        "d'interrupteur.",
+        "de bobine.",
+        "de condensateur.",
+    ),
+)
 = Dipôles de type source de tension ou de courant
 == Dipôles de type source de tension
 === Source de tension idéale
@@ -211,6 +261,16 @@ Par analogie avec la partie précédente, un *dipôle de type source de courant*
     Les machines à courant continu et les machines synchrones sont des dipôles de type source de courant.
 ]
 
+
+#question-de-début-de-cours(
+    "Un dipôle de type source de courant",
+    (
+        "possède une inductance importante en série.",
+        "a un courant qui varie beaucoup avec la tension.",
+        "a une tension à ses bornes presque constante.",
+        "a une capacité très importante.",
+    ),
+)
 == Réversibilité des sources
 === Réversibilité en tension
 Une source est *réversible en tension* si, pour un courant donné, la tension à ses bornes peut être positive ou négative.
@@ -312,6 +372,15 @@ La *diode* est un interrupteur *unidirectionnel* (elle ne laisse passer le coura
     verso: "$(i=0, u <= 0)$ ou $(i>= 0, u=0)$ en convention directe",
 )
 
+#question-de-début-de-cours(
+    "La caractéristique d'une diode",
+    (
+        "a une tension et un courant de signes opposés.",
+        "ne passe pas par l'origine.",
+        "ne dépend pas du sens dans lequel la diode est branchée.",
+    ),
+)
+
 == Le transistor
 #figure(
     image("images/transistors.jpg", height: 5cm),
@@ -324,6 +393,15 @@ Le *transistor* est un interrupteur *unidirectionnel* à commutation commandée 
 #flashcard(
     recto: "Caractéristique du transistor",
     verso: "$(i=0,u>=0)$ ou $(i>= 0, u=0)$",
+)
+
+#question-de-début-de-cours(
+    "Un transistor",
+    (
+        "a un courant et une tension de même signe.",
+        "est à commutation libre.",
+        "consomme une puissance importante.",
+    ),
 )
 
 = Hacheur série
@@ -344,6 +422,26 @@ Les deux interrupteurs ont un fonctionnement complémentaire et sont commandés 
     ),
 )
 
+
+#question-de-début-de-cours(
+    "Un hacheur est composé",
+    (
+        "d'une diode et d'un transistor.",
+        "de 4 interrupteurs.",
+        "uniquement de transistors.",
+        "uniquement de diodes.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Dans un hacheur",
+    (
+        "les interrupteurs ont un fonctionnement complémentaire.",
+        "les interrupteurs s'ouvrent et se ferment en même temps.",
+        "les interrupteurs sont placés en série.",
+        "les interrupteurs sont placés en parallèle.",
+    ),
+)
 == Étude avec des sources idéales
 On s'intéresse ici au cas où la source de tension et la source de courant sont des sources continues idéales.
 === Chronogrammes
@@ -467,6 +565,16 @@ L'onduleur est constitué d'un pont à 4 interrupteurs.
 
 #schéma(titre: "Schéma de l'onduleur", hauteur: 4cm)
 
+
+#question-de-début-de-cours(
+    "Dans un onduleur, combien y a-t-il d'états pour les interrupteurs ?",
+    (
+        "16",
+        "4",
+        "15",
+        "7",
+    ),
+)
 == Séquence de commutation
 #application[
     Lister les 16 états pour les interrupteurs et dire s'ils sont possibles et s'ils permettent de transférer de l'énergie entre la source et la charge.

@@ -180,6 +180,26 @@ La machine synchrone est constituée d'une partie fixe, appelée stator et d'une
     verso: "L'induit désigne les circuits statoriques, l'inducteur désigne le circuit rotorique.",
 )
 
+#question-de-début-de-cours(
+    "Combien de circuits distincts sont enroulés sur le rotor d'une machine synchrone diphasée ?",
+    (
+        "$1$",
+        "$2$",
+        "$3$",
+        "un grand nombre",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Combien de circuits distincts sont enroulés sur le stator d'une machine synchrone diphasée ?",
+    (
+        "$2$",
+        "$1$",
+        "$3$",
+        "un grand nombre",
+    ),
+)
+
 Sur le rotor, un circuit électrique est enroulé orthogonalement à l'axe de rotation.
 
 Sur le stator, plusieurs circuits électriques sont enroulés orthogonalement à l'axe de rotation. Sur une machine diphasée, il y a deux enroulements tournés de #qty("90", "deg") l'un par rapport à l'autre.
@@ -245,6 +265,15 @@ Ce champ magnétique est appelé champ glissant car il tourne#footnote[Pour êtr
 
 #schéma(titre: "Champ glissant")[#box(height: 3cm)]
 
+
+#question-de-début-de-cours(
+    "Le champ statorique total est nommé « champ glissant » car",
+    (
+        "son maximum tourne.",
+        "sa direction tourne.",
+        "il est en phase avec le champ rotorique.",
+    ),
+)
 == Champ rotorique
 Le circuit rotorique est parcouru par un courant continu $I_e$ appelé courant excitateur. Le champ produit par cet enroulement peut être trouvé par analogie avec le champ statorique.
 
@@ -352,6 +381,16 @@ La condition $Omega = omega$ est appelée condition de synchronisme. Dans une ma
     verso: "La condition de synchronisme $Omega = omega$.",
 )
 
+#question-de-début-de-cours(
+    "La condition de synchronisme stipule que, si la pulsation du champ glissant et la vitesse angulaire diffèrent,",
+    (
+        "le couple exercé sur le rotor par le champ magnétique est en moyenne nul.",
+        "le couple exercé sur le rotor par le champ magnétique est nul à chaque instant.",
+        "la machine synchrone se comporte comme un générateur (alternateur).",
+        "le rotor est immobile.",
+    ),
+)
+
 Si $alpha > 0$ le champ glissant est en avance sur le rotor. Le couple moyen subi par le rotor est positif, le fonctionnement est moteur.
 
 Si $alpha < 0$ le rotor est en avance sur le champ glissant. Le couple moyen subi par le rotor est négatif, le fonctionnement est générateur.
@@ -397,6 +436,16 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
 #flashcard(
     recto: "Modèle électrique équivalent d'un moteur synchrone.",
     verso: "Une résistance, une bobine et une force contre-électromotrice en série. La force contre-électromotrice est en convention récepteur.",
+)
+
+#question-de-début-de-cours(
+    "En fonctionnement moteur, la loi des mailles sur une phase s'écrit",
+    (
+        "$underline(U) = R_s underline(I) + j L omega underline(I) + underline(E)$",
+        "$underline(U) = R_s underline(I) + L omega underline(I) + underline(E)$",
+        "$U_\"eff\" = R_s I_\"eff\" + L omega I_\"eff\" + E_\"eff\"$",
+        "$underline(U) = R_s underline(I) + L dv(underline(I), t) + underline(E)$",
+    ),
 )
 
 #encadré(
@@ -486,6 +535,15 @@ On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-�
     "Représenter le schéma équivalent de l'induit en fonctionnement moteur et alternateur. Écrire la loi des mailles et la représenter sur un diagramme de Fresnel dans les deux cas.",
 )
 
+
+#question-de-début-de-cours(
+    "En fonctionnement alternateur",
+    (
+        "le champ glissant est en retard sur le champ rotorique.",
+        "le champ glissant est en avance sur le champ rotorique.",
+        "l'angle de pilotage est négatif.",
+    ),
+)
 = Machine à courant continu
 == Structure
 La machine à courant continu est constituée d'un stator, aussi appelé inducteur#footnote[La correspondance induit/inducteur - rotor/stator est inversée par rapport à la machine synchrone.] sur lequel est enroulé un circuit électrique et d'un rotor, aussi appelé induit sur lequel sont enroulés plusieurs circuits électriques indépendants.
@@ -548,6 +606,31 @@ Le lien ci-dessous mène à une animation illustrant le fonctionnement du systè
     verso: "Alimenter le circuit rotorique formant un angle $pi/2$ avec le stator afin d'assurer la condition de synchronisme et maximiser le couple électromagnétique.",
 )
 
+#question-de-début-de-cours(
+    "Dans la machine à courant continu, la condition de synchronisme est-elle toujours vérifiée ?",
+    ("Oui", "Non"),
+)
+
+#question-de-début-de-cours(
+    "Les collecteurs sont au nombre de",
+    (
+        "2 par circuit rotorique",
+        "1 par circuit rotorique",
+        "2",
+        "1",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Le système balais-collecteurs NE permet PAS de",
+    (
+        "limiter les pertes et augmenter le rendement.",
+        "assurer la condition de synchronisme.",
+        "alimenter le circuit rotorique en formant un angle de $pi/2$ avec le champ statorique.",
+        "maximiser le couple électromagnétique.",
+    ),
+)
+
 #grid(
     columns: (1fr, 1fr, 1fr),
     column-gutter: 10pt,
@@ -585,6 +668,16 @@ Par analogie avec la machine synchrone, le couple électromagnétique subi par l
     verso: "$ Gamma_\"ém\" = Phi_0 I_r $",
 )
 
+#question-de-début-de-cours(
+    "Pour une machine à courant continu, le couple électromagnétique s'écrit",
+    (
+        "$Gamma_\"ém\" = Phi_0 I_r$",
+        "$Gamma_\"ém\" = I_r/Phi_0$",
+        "$Gamma_\"ém\" = Phi_0 E_\"cém\"$",
+        "$Gamma_\"ém\" = E_\"cém\"/Phi_0$",
+    ),
+)
+
 #application[
     Vérifier l'homogénéité de la relation ci-dessus.
 ]
@@ -614,6 +707,16 @@ La conservation de l'énergie dans une machine sans perte permet d'en déduire l
 #flashcard(
     recto: "Force contre-électromotrice pour une machine à courant continu",
     verso: "$ E_\"cém\" = Phi_0 Omega $",
+)
+
+#question-de-début-de-cours(
+    "Pour une machine à courant continu, la vitesse angulaire s'écrit",
+    (
+        "$Omega = E_\"cém\"/Phi_0$",
+        "$Omega = Phi_0 I_r$",
+        "$Omega = I_r/Phi_0$",
+        "$Omega = Phi_0 E_\"cém\"$",
+    ),
 )
 
 #application[

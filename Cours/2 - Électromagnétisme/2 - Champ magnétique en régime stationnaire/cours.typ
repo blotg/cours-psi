@@ -72,6 +72,16 @@ Le comportement du champ magnétique est régi par les équations de Maxwell-Tho
 
 #flashcard(recto: "Équation de Maxwell-Ampère", verso: "$ rot va(B) = mu_0 va(j) + mu_0 epsilon_0 pdv(va(E), t) $")
 
+#question-de-début-de-cours(
+    "Le champ magnétique est créé par",
+    (
+        "des courants électriques",
+        "des charges électriques",
+        "des masses",
+        "des dipôles électriques",
+    ),
+)
+
 == Théorème de superposition
 Les équations de Maxwell sont linéaires : le champ magnétique résultant de plusieurs distributions de courant est la somme vectorielle des champs magnétiques créés par chacune d'elles.
 
@@ -87,6 +97,16 @@ Les équations de Maxwell sont linéaires : le champ magnétique résultant de p
 #flashcard(
     recto: "À quelle condition le champ magnétique est-il à flux conservatif ?",
     verso: "Aucune, c'est toujours le cas.",
+)
+
+#question-de-début-de-cours(
+    "Sur une ligne de champ magnétique",
+    (
+        "$va(B)$ est colinéaire à la ligne de champ",
+        "$norm(va(B))$ est uniforme",
+        "$va(dd(l))$ est orthogonal à la ligne de champ",
+        "les courants enlacés sont nuls",
+    ),
 )
 
 Du fait de cette propriété, l'équation de Maxwell-Thomson est parfois appelée équation de Maxwell-flux. L'évasement d'un tube de champ s'accompagne alors de la diminution de la norme du champ magnétique.
@@ -160,6 +180,16 @@ Les invariances de la distribution de courant contraignent la forme du champ mag
     verso: "Les invariances de la distribution de courant sont aussi des invariances du champ magnétique (principe de Curie).",
 )
 
+#question-de-début-de-cours(
+    "Le champ magnétique",
+    (
+        "a les mêmes invariances que la distribution de courant.",
+        "a des invariances opposées à celles de la distribution de courant.",
+        "a les mêmes invariances que la distribution de charge.",
+        "a des invariances opposées à celles de la distribution de charge.",
+    ),
+)
+
 == Symétries du champ magnétique
 Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rapport aux plans d'antisymétrie de la distribution de courant, et antisymétrique par rapport à ses plans de symétrie.
 
@@ -193,6 +223,16 @@ Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rappo
     verso: "Le champ magnétique y est inclus.",
 )
 
+#question-de-début-de-cours(
+    "Le champ magnétique est",
+    (
+        "inclus dans les plans d'antisymétrie et orthogonal aux plans de symétrie.",
+        "orthogonal aux plans d'antisymétrie et inclus dans les plans de symétrie.",
+        "inclus dans les plans d'antisymétrie et inclus dans les plans de symétrie.",
+        "orthogonal aux plans d'antisymétrie et orthogonal aux plans de symétrie.",
+    ),
+)
+
 #question-de-colle("Énoncer le principe de Curie. Établir le lien entre les plans de symétrie et d'antisymétrie de la distribution de courant et la direction du champ magnétique.")
 
 == Théorème d'Ampère
@@ -209,6 +249,16 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
 ]
 
 #flashcard(recto: "Théorème d'Ampère", verso: "$ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_\"enlacé\" $")
+
+#question-de-début-de-cours(
+    "Le champ magnétique créé par un fil infini est selon",
+    (
+        "$va(e_theta)$",
+        "$va(e_r)$",
+        "$va(e_z)$",
+        "$va(e_x)$",
+    ),
+)
 
 #question-de-colle("Citer l'équation de Maxwell-Ampère puis établir le théorème d'Ampère.")
 

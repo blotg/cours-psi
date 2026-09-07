@@ -107,6 +107,16 @@ Les vecteurs de base dépendent du point considéré. La base est donc appelée 
     verso: "Les vecteurs $va(e_r)$ et $va(e_theta)$ sont mobiles et dépendent de l'angle $theta$. Le vecteur $va(e_z)$ est fixe et identique au vecteur $va(e_z)$ de la base cartésienne. #linebreak();" + read("schemas/cylindriques_vecteurs.typ")
 )
 
+#question-de-début-de-cours(
+    "Quelle affirmation est FAUSSE ?",
+    (
+        "La base cartésienne est une base mobile.",
+        "La base cylindrique est une base mobile.",
+        "La base sphérique est une base mobile.",
+        "La direction du vecteur $va(e_z)$ est la même en tous points de l'espace.",
+    ),
+)
+
 #figure[
     #grid(columns: 2,
         include("schemas/cylindriques_coordonnées.typ"),
@@ -128,12 +138,32 @@ Le vecteur $va(O M)$ s'exprime comme $va(O M)=r va(e_r)+z va(e_z)$.
     verso: "$ va(O M)=r va(e_r)+z va(e_z) $"
 )
 
+#question-de-début-de-cours(
+    "En coordonnées cylindriques, $va(O M)$ a des composantes selon",
+    (
+        "$va(e_r)$ et $va(e_z)$",
+        "$va(e_r)$, $va(e_z)$ et $va(e_phi)$",
+        "$va(e_r)$ seulement",
+        "$va(e_z)$ et $va(e_phi)$",
+    ),
+)
+
 == Élément de volume
 L'élément de volume a pour volume $dd(V)=dd(r) dot r dot dd(theta) dot dd(z)$.
 
 #flashcard(
     recto: "Élément de volume cylindrique",
     verso: "$ dd(V)=dd(r) dot r dot dd(theta) dot dd(z) $" + read("schemas/cylindriques_element_volume.typ")
+)
+
+#question-de-début-de-cours(
+    "L'élément de volume en coordonnées cylindriques s'écrit",
+    (
+        "$r dd(r) dd(theta) dd(z)$",
+        "$sin(theta) dd(r) dd(theta) dd(z)$",
+        "$4/3 pi sin(theta) r^2 dd(r) dd(theta) dd(z)$",
+        "$4/3 pi r^3 dd(r) dd(theta) dd(z)$",
+    ),
 )
 
 #figure[
@@ -193,6 +223,16 @@ Les éléments de surface sont représentés sur la figure suivante.
     verso: "$ A = 2 pi R h $"
 )
 
+#question-de-début-de-cours(
+    "La surface latérale d'un cylindre de rayon $R$ et de hauteur $h$ est",
+    (
+        "$2 pi R h$",
+        "$pi R^2 h$",
+        "$2 pi R h^2$",
+        "$pi R h$",
+    ),
+)
+
 == Coquille cylindrique
 Lorsque le problème étudié est invariant par rotation selon $theta$, il peut être plus aisé d'utiliser une coquille cylindrique.
 
@@ -224,6 +264,16 @@ Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,pi]$ et $phi 
 #flashcard(
     recto: "Bornes des coordonnées $r$, $theta$, $phi$ en coordonnées sphériques",
     verso: "$r in RR^+$, $theta in [0,pi]$, $phi in [0,2 pi[$"
+)
+
+#question-de-début-de-cours(
+    "En coordonnées sphériques",
+    (
+        "$theta in [0, pi[$ et $phi in [0, 2 pi[$",
+        "$theta in [0, 2 pi[$ et $phi in [0, pi[$",
+        "$theta in [0, pi[$ et $phi in [0, pi/2[$",
+        "$theta in [0, pi[$ et $phi in [0, pi[$",
+    ),
 )
 
 Les vecteurs de base dépendent du point considéré. La base est donc appelée base mobile.
@@ -275,6 +325,16 @@ L'élément de volume a pour volume $dd(V)=r^2 sin(theta) dot dd(r) dot dd(theta
     verso: "$ V = 4/3 pi R^3 $"
 )
 
+#question-de-début-de-cours(
+    "Le volume d'une boule de rayon $R$ est",
+    (
+        "$4/3 pi R^3$",
+        "$4 pi R^2$",
+        "$pi R^2$",
+        "$2 pi R$",
+    ),
+)
+
 == Éléments de surface
 Les éléments de surface sont représentés sur la figure suivante.
 
@@ -289,6 +349,16 @@ Les éléments de surface sont représentés sur la figure suivante.
 #flashcard(
     recto: "Élément de surface $va(dd(S))=dd(S)va(e_r)$ en coordonnées sphériques",
     verso: "$ va(dd(S))=r^2 sin(theta) dot dd(theta) dot dd(phi) va(e_r) $" + read("schemas/sphériques_dS_r.typ")
+)
+
+#question-de-début-de-cours(
+    "Pour intégrer sur une sphère de rayon $R$, l'élément de surface s'écrit",
+    (
+        "$R^2 sin(theta) dd(theta) dd(phi)$",
+        "$R^2 sin(theta) dd(r) dd(theta) dd(phi)$",
+        "$R sin(theta) dd(theta) dd(phi)$",
+        "$R^2 cos(theta) dd(theta) dd(phi)$",
+    ),
 )
 
 #flashcard(

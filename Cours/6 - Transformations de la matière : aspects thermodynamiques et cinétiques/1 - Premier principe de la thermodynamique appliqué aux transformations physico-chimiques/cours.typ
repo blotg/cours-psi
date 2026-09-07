@@ -31,9 +31,27 @@ L'état standard d'une substance est un état particulier servant de référence
     recto: "Pression standard",
     verso: "$standard(P)=qty(\"1\",\"bar\")=qty(\"1e5\",\"Pa\")$",
 )
+
+#question-de-début-de-cours(
+    "$qty(\"1\", \"bar\")$ est la pression",
+    (
+        "standard.",
+        "de référence.",
+        "simple.",
+    ),
+)
 #flashcard(
     recto: "Température de référence",
     verso: "$T=qty(\"25\",\"Celsius\")=qty(\"298.15\",\"K\")$",
+)
+
+#question-de-début-de-cours(
+    "$qty(\"25\", \"dC\")$ est la température",
+    (
+        "de référence.",
+        "standard.",
+        "simple.",
+    ),
 )
 
 L'état standard de référence est l'état standard à la température de référence.
@@ -87,6 +105,26 @@ Une grandeur standard de réaction est une grandeur de réaction pour laquelle o
     verso: "$ standard(Delta_r Y) = sum nu_i standard(Y_m(X_i)) $",
 )
 
+#question-de-début-de-cours(
+    "$H$ est",
+    (
+        "l'enthalpie.",
+        "l'entropie.",
+        "l'énergie interne.",
+        "la température.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "L'enthalpie standard de réaction se mesure en",
+    (
+        "$unit(\"J/mol\")$",
+        "$unit(\"J/K\")$",
+        "$unit(\"J/K/mol\")$",
+        "$unit(\"J\")$",
+    ),
+)
+
 
 #application[
     Déterminer l'entropie standard de réaction de #ce("Ni(CO)_4(g)") #ce("->") #ce("Ni(s)") + 4 #ce("CO(g)").
@@ -122,6 +160,16 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 #flashcard(
     recto: "Pour quelles espèces l'enthalpie standard de formation est-elle nulle ?",
     verso: "Les corps simples dans leur état standard.",
+)
+
+#question-de-début-de-cours(
+    "L'enthalpie standard de formation est nulle",
+    (
+        "pour un corps simple dans son état standard.",
+        "pour un corps pur dans son état standard.",
+        "pour un corps simple à la température de référence.",
+        "pour un corps pur à la température de référence.",
+    ),
 )
 #application[
     Donner l'enthalpie standard de formation $standard(Delta_f H)$ des espèces suivantes : #ce("H2(g)"), #ce("C(gr)"), #ce("O2(g)").
@@ -166,6 +214,16 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 #flashcard(
     recto: "Réaction endothermique",
     verso: "$standard(Delta_r H) > 0$",
+)
+
+#question-de-début-de-cours(
+    "L'enthalpie standard de formation est négative",
+    (
+        "pour une réaction exothermique.",
+        "pour une réaction endothermique.",
+        "pour une réaction isotherme.",
+        "pour une réaction isobare.",
+    ),
 )
 
 #application[
@@ -226,6 +284,26 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 #flashcard(
     recto: "Variation de l'enthalpie pour une isotherme isobare à la pression standard",
     verso: "$ standard(Delta H) = xi standard(Delta_r H) $",
+)
+
+#question-de-début-de-cours(
+    "La variation d'enthalpie est nulle pour une transformation",
+    (
+        "adiabatique et isobare.",
+        "isotherme et isobare.",
+        "isotherme et adiabatique.",
+        "isochore et adiabatique.",
+    ),
+)
+
+#question-de-début-de-cours(
+    "Pour une transformation isobare sans transformation chimique, la variation d'enthalpie est",
+    (
+        "$C_p Delta T$",
+        "$C_V Delta T$",
+        "$xi Delta_r H^circ$",
+        "$0$",
+    ),
 )
 
 #encadré(
