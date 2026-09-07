@@ -70,13 +70,10 @@
         // align() est une mise en page : à l'export HTML, typst ne sait pas la
         // représenter et emporte le contenu de la boîte avec elle — un cours
         // sortait réduit à ses titres et à ses paragraphes. Le centrage qu'elle
-        // annule n'existe de toute façon qu'en sortie paginée. On en profite
-        // pour donner à la boîte une balise et un genre, de quoi la styler.
-        context if target() == "html" {
-            html.elem("section", attrs: (class: "bloc", "data-genre": it.kind), it.body)
-        } else {
-            align(start, it.body)
-        }
+        // annule n'existe de toute façon qu'en sortie paginée. En HTML, c'est
+        // _boite qui a déjà posé la <section> : il ne reste qu'à la laisser
+        // passer, sans la <figure> que typst mettrait autour.
+        context if target() == "html" { it.body } else { align(start, it.body) }
     } else {
         it
     }
@@ -89,6 +86,10 @@
 
 // Enveloppe : rectangle fermé arrondi = bandeau + corps.
 // `genre` (avec `supplement`) rend la boîte référençable : voir ci-dessus.
+//
+// `classe` nomme la boîte à l'export HTML (attribut `data-genre`). Par défaut
+// c'est le genre ; les blocs qui ne peuvent pas être des figure() — cf.
+// évaluation — la donnent à la main.
 #let _boite(
     bandeau,
     corps,
@@ -99,29 +100,46 @@
     écart: _écart,
     genre: none,
     supplement: none,
+    classe: auto,
 ) = {
-    let boîte = block(
-        breakable: breakable,
-        width: 100%,
-        above: écart,
-        below: écart,
-        radius: _rayon,
-        stroke: _filet,
-        clip: true,
-        {
-            block(
-                width: 100%,
-                above: 0pt,
-                below: 0pt,
-                sticky: true, // ne pas laisser le bandeau seul en bas de page
-                fill: if noir { _fond-bandeau-noir } else { _fond-bandeau },
-                inset: (x: _inset-x, y: 0.45em),
-                stroke: (bottom: _filet),
-                bandeau,
-            )
-            block(width: 100%, above: 0pt, fill: fond-corps, inset: inset-corps, corps)
-        },
-    )
+    if classe == auto { classe = genre }
+    let boîte = context if target() == "html" {
+        // Les block() ci-dessous sont de la mise en page : à l'export HTML
+        // typst n'en laisse qu'un div anonyme, et le bandeau se confond avec le
+        // corps. On écrit la structure en clair, pour que site.css ait prise
+        // dessus — filet, bandeau noir, fond du corps.
+        html.elem(
+            "section",
+            attrs: (class: "bloc", "data-genre": if classe == none { "" } else { classe }),
+            {
+                html.elem("div", attrs: (class: if noir { "bloc-bandeau noir" } else { "bloc-bandeau" }), bandeau)
+                html.elem("div", attrs: (class: "bloc-corps"), corps)
+            },
+        )
+    } else {
+        block(
+            breakable: breakable,
+            width: 100%,
+            above: écart,
+            below: écart,
+            radius: _rayon,
+            stroke: _filet,
+            clip: true,
+            {
+                block(
+                    width: 100%,
+                    above: 0pt,
+                    below: 0pt,
+                    sticky: true, // ne pas laisser le bandeau seul en bas de page
+                    fill: if noir { _fond-bandeau-noir } else { _fond-bandeau },
+                    inset: (x: _inset-x, y: 0.45em),
+                    stroke: (bottom: _filet),
+                    bandeau,
+                )
+                block(width: 100%, above: 0pt, fill: fond-corps, inset: inset-corps, corps)
+            },
+        )
+    }
     if genre != none { figure(kind: genre, supplement: supplement, numbering: "1", caption: none, boîte) } else {
         boîte
     }
@@ -137,6 +155,7 @@
     fond-corps: none,
     genre: none,
     supplement: none,
+    classe: auto,
 ) = _boite(
     _bandeau(intitulé, titre: titre, marqueur: marqueur, noir: noir),
     corps,
@@ -144,6 +163,7 @@
     fond-corps: fond-corps,
     genre: genre,
     supplement: supplement,
+    classe: classe,
 )
 
 // -- Questions ---------------------------------------------------------------
@@ -166,6 +186,18 @@
     numQuestion.step()
     parbreak()
     [*#context numQuestion.display()#sym.slash* <numéro-question> #body <question>]
+    import "symboles.typ" as symboles
+    for c in coups-de-pouce {
+        let _ = eval(c, mode: "markup", scope: dictionary(symboles))
+    }
+    // Émise AVANT le corrigé, et non après : la métadonnée n'imprime rien, mais
+    // le site s'en sert pour poser les coups de pouce dans le flux — et ils
+    // doivent y venir avant la solution, sans quoi ils ne servent plus à rien.
+    context [#metadata((
+        exercice: counter(heading).get().sum(),
+        question: numQuestion.get().first(),
+        coups-de-pouce: coups-de-pouce,
+    )) <coups-de-pouce>]
     if corrigé != none {
         // Style volontairement à part : un simple filet gris à gauche.
         [#block(
@@ -178,15 +210,6 @@
             corrigé,
         ) <correction>]
     }
-    import "symboles.typ" as symboles
-    for c in coups-de-pouce {
-        let _ = eval(c, mode: "markup", scope: dictionary(symboles))
-    }
-    context [#metadata((
-        exercice: counter(heading).get().sum(),
-        question: numQuestion.get().first(),
-        coups-de-pouce: coups-de-pouce,
-    )) <coups-de-pouce>]
 }
 
 #let entourage(graine: "") = {
@@ -261,7 +284,10 @@
 // Un simple pictogramme, sans numéro : le numéro du bloc est désormais dans
 // le bandeau lui-même (cf. _numéro-bloc et les fonctions de bloc plus bas).
 
-#let demo() = text(font: "D050000L", "-")
+// Une main qui écrit. Le glyphe vient d'une police de dingbats, que le web
+// n'a pas : à l'export HTML on passe au caractère Unicode équivalent, sans
+// quoi le marqueur se lisait « - » sur toutes les pages du site.
+#let demo() = context if target() == "html" { "✍" } else { text(font: "D050000L", "-") }
 
 // -- Encadré de cours ------------------------------------------------------
 
@@ -379,7 +405,7 @@
     [Application #_numéro-bloc("application")],
     contenu,
     titre: titre,
-    marqueur: text(font: "D050000L", "-"),
+    marqueur: demo(),
     genre: "application",
     supplement: "application",
 )
@@ -491,8 +517,10 @@
                     )
                 },
                 noir: true,
+                classe: "évaluation",
                 // Vue « prof » (sans --input numéro-copie) : poids de rotation.
-                marqueur: if copie == none { $#nombre / #total$ },
+                // Rien sur le site : l'élève n'a que faire de la rotation.
+                marqueur: if copie == none and target() != "html" { $#nombre / #total$ },
             )
         }
     }

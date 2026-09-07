@@ -95,6 +95,18 @@
     doc
 }
 
+// Titre d'un document : centré et en gros sur le papier.
+//
+// align() est de la mise en page : à l'export HTML, typst l'ignore *avec son
+// contenu* — les pages du site sortaient sans titre du tout. On y met à la
+// place le <h1> que typst réserve justement au titre du document — il décale
+// d'un cran ceux du corps, si bien qu'un `=` sort en <h2>.
+#let titre-document(contenu, taille: 17pt) = context if target() == "html" {
+    html.elem("h1", contenu)
+} else {
+    align(center, text(size: taille, strong(contenu)))
+}
+
 #let checkbox = text(font: "D050000L", "o")
 
 #let lien-cahier-entrainement(numéro-exo, classe: "PSI") = {
@@ -240,7 +252,7 @@
         it
     }
     context [#metadata(here().page()) <première-page>]
-    align(center, text(17pt)[*#markup(titre)*])
+    titre-document(markup(titre))
     doc
     context [#metadata(here().page()) <dernière-page>]
 }
@@ -253,7 +265,7 @@
         show: init-document.with(titre: titre)
         set heading(numbering: "1.")
         show <correction>: it => if avec-corrigé { it } else {}
-        align(center, text(17pt)[*#markup(titre) TD*])
+        titre-document[#markup(titre) TD]
         doc
     }
 }
@@ -271,14 +283,14 @@
     } else {
         show: init-document.with(titre: titre)
         set heading(offset: 1, numbering: (first, ..other) => numbering("1.", ..other))
-        align(center, text(17pt)[*#markup(titre)*])
+        titre-document(markup(titre))
         corps
     }
 }
 
 #let programme-de-colle(date: datetime.today(), doc) = {
     show: init-document.with(titre: "Programme de colle")
-    align(center, text(17pt)[*Programme de colle de la semaine du #date.display("[day]/[month]/[year]")*])
+    titre-document[Programme de colle de la semaine du #date.display("[day]/[month]/[year]")]
     doc
 }
 
@@ -303,7 +315,7 @@
         ]
     ]
 
-    align(center, text(17pt)[*#titre-doc*])
+    titre-document(titre-doc)
     doc
 }
 
@@ -319,6 +331,6 @@
     )
     set text(size: 10pt)
     show heading: set text(size: 12pt)
-    align(center, text(size: 15pt, [*Évaluation du compte-rendu*]))
+    titre-document([Évaluation du compte-rendu], taille: 15pt)
     doc
 }
