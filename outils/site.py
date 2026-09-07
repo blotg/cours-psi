@@ -41,6 +41,19 @@ TÉLÉCHARGEMENTS = (
 )
 
 
+#: Ce qu'un drapeau d'`exercice()` montre dans la liste : l'emoji que porte
+#: déjà le titre de l'exercice, et sa glose pour l'infobulle. Même ordre que
+#: dans le titre, pour qu'on retrouve la même chose des deux côtés.
+DRAPEAUX_EXERCICE = (
+    ("explique", "💬", "à expliquer avec des mots simples"),
+    ("ouvert", "🤔", "problème ouvert"),
+    ("numérique", "🖥️", "exercice numérique"),
+)
+
+#: L'étoile de difficulté, la même que `exercice()` imprime.
+ÉTOILE = "★"
+
+
 def adresse(texte: str) -> str:
     """Un nom de fichier sûr dans une URL, tiré d'un titre.
 
@@ -89,11 +102,62 @@ def _fil(entrées) -> str:
     return "(" + ", ".join(morceaux) + ("," if morceaux else "") + ")"
 
 
-def _titre_exercice(source: Path) -> str:
-    """Le `titre:` de l'appel à `exercice()`, à défaut le nom du fichier."""
-    motif = r'#show:\s*exercice\.with\(\s*(?:.*?\s)?titre:\s*"((?:[^"\\]|\\.)*)"'
-    trouvé = re.search(motif, source.read_text(encoding="utf-8"), re.S)
-    return trouvé.group(1).replace('\\"', '"') if trouvé else source.stem
+def _arguments_exercice(texte: str) -> str:
+    """Le texte des arguments de `#show: exercice.with(…)`.
+
+    Un compteur de parenthèses, mais qui saute les chaines : un titre peut
+    contenir une parenthèse, et le décompte naïf s'arrêtait dessus.
+    """
+    début = re.search(r"#show:\s*exercice\.with\(", texte)
+    if not début:
+        return ""
+    i, profondeur, dans_chaine, échappe = début.end(), 1, False, False
+    while i < len(texte) and profondeur:
+        c = texte[i]
+        if échappe:
+            échappe = False
+        elif dans_chaine:
+            if c == "\\":
+                échappe = True
+            elif c == '"':
+                dans_chaine = False
+        elif c == '"':
+            dans_chaine = True
+        elif c == "(":
+            profondeur += 1
+        elif c == ")":
+            profondeur -= 1
+        i += 1
+    return texte[début.end() : i - 1]
+
+
+def _infos_exercice(source: Path) -> dict:
+    """Titre, type et difficulté d'un exercice, lus dans sa source.
+
+    De quoi afficher dans la liste ce que le titre de l'exercice montre déjà —
+    l'emoji du type, les étoiles de difficulté — sans avoir à ouvrir la page.
+    """
+    arguments = _arguments_exercice(source.read_text(encoding="utf-8"))
+    titre = re.search(r'titre:\s*"((?:[^"\\]|\\.)*)"', arguments)
+    # Les drapeaux se cherchent hors des chaines : un titre qui contiendrait
+    # « ouvert: » ne doit pas passer pour un problème ouvert.
+    hors_chaines = re.sub(r'"(?:[^"\\]|\\.)*"', '""', arguments)
+    difficulté = re.search(r"difficulté:\s*(\d+)", hors_chaines)
+
+    emojis, gloses = "", []
+    for nom, emoji, glose in DRAPEAUX_EXERCICE:
+        if re.search(nom + r":\s*true", hors_chaines):
+            emojis += emoji
+            gloses.append(glose)
+    étoiles = ÉTOILE * int(difficulté.group(1) if difficulté else 0)
+    if étoiles:
+        gloses.append(f"difficulté {len(étoiles)}")
+
+    return {
+        "titre": titre.group(1).replace('\\"', '"') if titre else source.stem,
+        "détail": " ".join(x for x in (emojis, étoiles) if x),
+        "infobulle": " · ".join(gloses),
+    }
 
 
 class Site:
@@ -177,8 +241,8 @@ class Site:
     # -- Lecture des sources ----------------------------------------------
 
     @staticmethod
-    def exercices(chapitre: Chapitre) -> list[tuple[Path, str]]:
-        """Les exercices d'un chapitre, dans l'ordre du TD.
+    def exercices(chapitre: Chapitre) -> list[tuple[Path, dict]]:
+        """Les exercices d'un chapitre, dans l'ordre du TD, avec leurs infos.
 
         On lit les `#include` du TD plutôt que le contenu du dossier : c'est le
         TD qui fixe l'ordre, et un exercice mis en commentaire — parce qu'il est
@@ -193,7 +257,7 @@ class Site:
             if trouvé:
                 source = chapitre.chemin / trouvé.group(1)
                 if source.is_file():
-                    trouvés.append((source, _titre_exercice(source)))
+                    trouvés.append((source, _infos_exercice(source)))
         return trouvés
 
     @staticmethod
@@ -326,16 +390,23 @@ class Site:
                     "détail": f"{mention} · {_poids(source)}",
                 })
 
-        for source, titre_exo in self.exercices(chapitre):
-            fichier = f"{adresse(titre_exo)}.html"
+        for source, infos in self.exercices(chapitre):
+            fichier = f"{adresse(infos['titre'])}.html"
             self.page_contenu(
                 f"{dossier}/{fichier}",
                 source,
-                f"{titre_exo} — {titre}",
-                base + [(titre_exo, None)],
+                f"{infos['titre']} — {titre}",
+                base + [(infos["titre"], None)],
                 profondeur=1,
             )
-            exercices.append({"texte": titre_exo, "url": fichier})
+            exercices.append({
+                "texte": infos["titre"],
+                "url": fichier,
+                # Le type et la difficulté, tels que le titre de l'exercice les
+                # montre : on les lit dans la liste sans avoir à ouvrir la page.
+                "détail": infos["détail"],
+                "infobulle": infos["infobulle"],
+            })
 
         self.page_liens(
             f"{dossier}/index.html",

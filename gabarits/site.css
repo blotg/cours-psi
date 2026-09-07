@@ -94,6 +94,9 @@ ul.liens .marque {
     color: var(--gris);
 }
 ul.liens .détail { margin-left: auto; padding-left: 1em; color: var(--gris); font-size: 0.85rem; white-space: nowrap; }
+/* Type et difficulté d'un exercice : l'emoji seul est muet, l'infobulle le dit
+   en toutes lettres. */
+ul.liens .détail[title] { cursor: help; }
 p.vide { color: var(--gris); font-style: italic; }
 
 /* -- Grilles et piles ----------------------------------------------------- */

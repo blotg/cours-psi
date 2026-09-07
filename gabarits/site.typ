@@ -158,13 +158,15 @@
 //
 //     {"titre": "...", "fil": [["texte", "url"], ...],
 //      "sections": [{"titre": "...", "url": "...", "liens": [{"texte": "...",
-//                       "url": "...", "détail": "...", "marque": "..."}]}]}
+//                       "url": "...", "détail": "...", "marque": "...",
+//                       "infobulle": "..."}]}]}
 //
 // `marque` est la pastille de tête (numéro de chapitre) ; `détail` la mention
-// grise de queue (poids d'un fichier à télécharger). Une section peut porter
-// une `url` au lieu de liens : son titre devient alors le lien — c'est le cas
-// d'un thème qui tient en un seul chapitre du même nom, où la liste ne ferait
-// que répéter l'intitulé.
+// grise de queue (poids d'un fichier, type et difficulté d'un exercice), que
+// l'`infobulle` met en mots au survol. Une section peut porter une `url` au
+// lieu de liens : son titre devient alors le lien — c'est le cas d'un thème
+// qui tient en un seul chapitre du même nom, où la liste ne ferait que
+// répéter l'intitulé.
 #let page-liens(données) = {
     show: page-site.with(
         titre: données.titre,
@@ -191,7 +193,12 @@
                     if marque != "" { html.elem("span", attrs: (class: "marque"), markup(marque)) }
                     lien(l.url, markup(l.texte))
                     let détail = l.at("détail", default: "")
-                    if détail != "" { html.elem("span", attrs: (class: "détail"), markup(détail)) }
+                    if détail != "" {
+                        let infobulle = l.at("infobulle", default: "")
+                        let attrs = (class: "détail")
+                        if infobulle != "" { attrs.insert("title", infobulle) }
+                        html.elem("span", attrs: attrs, markup(détail))
+                    }
                 })
             },
         )
