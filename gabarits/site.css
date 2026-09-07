@@ -1,0 +1,203 @@
+/* Feuille de style du site (cf. outils/site.py, gabarits/site.typ).
+   Copiée telle quelle dans site/styles.css. */
+
+:root {
+    --fond: #fbfaf7;
+    --fond-bloc: #f2efe8;
+    --fond-code: #eeebe4;
+    --texte: #1f1d1a;
+    --texte-doux: #6a655c;
+    --filet: #ddd8cd;
+    --accent: #1d5c56;
+    --accent-doux: #e3efec;
+    --largeur: 44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fond: #16181a;
+        --fond-bloc: #1f2225;
+        --fond-code: #24282c;
+        --texte: #e7e4de;
+        --texte-doux: #9a958c;
+        --filet: #32373b;
+        --accent: #6fbdae;
+        --accent-doux: #1d2b29;
+    }
+}
+
+* { box-sizing: border-box; }
+
+body {
+    /* La largeur de lecture est portée par body : le document inclus ne peut
+       pas être enveloppé dans un conteneur (cf. gabarits/site.typ). */
+    max-width: var(--largeur);
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    background: var(--fond);
+    color: var(--texte);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* -- Fil d'Ariane --------------------------------------------------------- */
+
+.fil {
+    padding: 1.5rem 0 0.5rem;
+    font-size: 0.9rem;
+    color: var(--texte-doux);
+}
+.fil .sep { margin: 0 0.45em; color: var(--filet); }
+.fil .ici { color: var(--texte-doux); }
+
+/* -- Titres --------------------------------------------------------------- */
+
+h1, h2, h3, h4 { line-height: 1.25; text-wrap: balance; font-weight: 600; }
+h1 { font-size: 1.9rem; margin: 1rem 0 2rem; }
+h2 { font-size: 1.4rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+h4 { font-size: 1rem; margin: 1.5rem 0 0.4rem; color: var(--texte-doux); }
+
+/* -- Listes de liens (accueil, sommaire de chapitre) ---------------------- */
+
+ul.liens { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+ul.liens li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--filet);
+}
+ul.liens li:last-child { border-bottom: none; }
+ul.liens .détail { color: var(--texte-doux); font-size: 0.9rem; margin-left: 0.6em; }
+p.vide { color: var(--texte-doux); font-style: italic; }
+
+/* -- Blocs du cours (encadré, schéma, exemple, manipulation…) ------------- */
+/* `data-genre` vient de styles-blocs, dans le paquet typst. */
+
+.bloc {
+    background: var(--fond-bloc);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    margin: 1.5rem 0;
+}
+.bloc > div:first-child {
+    font-size: 0.95rem;
+    color: var(--texte-doux);
+    margin-bottom: 0.4rem;
+}
+.bloc > div:first-child strong { color: var(--texte); }
+.bloc[data-genre="encadré"] { border-left: 3px solid var(--accent); }
+.bloc[data-genre="manipulation"],
+.bloc[data-genre="préparatoire"],
+.bloc[data-genre="matériel"] { background: none; border: 1px solid var(--filet); }
+
+/* -- Coups de pouce ------------------------------------------------------- */
+/* Révélation en CSS pure : il faut survoler trois secondes. Le retour, lui,
+   est immédiat — on ne garde pas un texte lisible après avoir quitté. */
+
+.pouces { margin: 0.75rem 0 1.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.pouce {
+    position: relative;
+    background: var(--accent-doux);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem 0.7rem;
+    cursor: help;
+    overflow: hidden;
+}
+.pouce-titre {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.15rem;
+}
+.pouce-texte {
+    filter: blur(5px);
+    opacity: 0.6;
+    user-select: none;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+/* Le délai est porté par l'état survolé : c'est lui qu'il faut tenir. */
+.pouce:hover .pouce-texte {
+    filter: blur(0);
+    opacity: 1;
+    user-select: auto;
+    transition: filter 0.35s ease 3s, opacity 0.35s ease 3s;
+}
+/* Au clavier, pas de survol à tenir : le focus révèle tout de suite. */
+.pouce:focus .pouce-texte,
+.pouce:focus-within .pouce-texte {
+    filter: blur(0);
+    opacity: 1;
+    user-select: auto;
+    transition: none;
+}
+.pouce:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Jauge des trois secondes, pour qu'on sache qu'il faut attendre. */
+.pouce::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0s;
+}
+.pouce:hover::after { width: 100%; transition: width 3s linear; }
+.pouce:focus::after, .pouce:focus-within::after { width: 0; transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pouce-texte, .pouce:hover .pouce-texte { transition: none; }
+    .pouce::after, .pouce:hover::after { transition: none; }
+}
+
+/* -- Formules et figures -------------------------------------------------- */
+
+/* Chromium et Firefox rendent le MathML avec la police de math du système :
+   sans pile explicite, les parenthèses et les racines ne s'étirent pas. */
+math { font-size: 1.05em; font-family: "Latin Modern Math", "STIX Two Math", "Cambria Math", "DejaVu Math TeX Gyre", math, serif; }
+/* Surtout pas de `display: block` ici : un élément <math> a le mode de
+   rendu `block math`, et le remplacer par `block` fait retomber ses
+   enfants en boîtes ordinaires — l'équation part en morceaux. */
+math[display="block"] { margin: 1rem 0; }
+figure { margin: 1.5rem 0; text-align: center; }
+figure svg, svg { max-width: 100%; height: auto; }
+
+svg { display: block; margin: 1.25rem auto; }
+
+/* Les schémas sortent de typst en noir sur transparent : sur fond sombre, ils
+   disparaitraient. On leur rend leur papier plutôt que d'inverser les
+   couleurs, ce qui abimerait les tracés en couleur. */
+@media (prefers-color-scheme: dark) {
+    svg {
+        background: #f6f4ef;
+        border-radius: 4px;
+        padding: 0.5rem;
+    }
+}
+img { max-width: 100%; height: auto; }
+
+/* Le code des corrigés et des exercices numériques. */
+pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.9em; }
+pre { background: var(--fond-code); padding: 0.8rem 1rem; border-radius: 6px; overflow-x: auto; }
+
+table { border-collapse: collapse; margin: 1.25rem 0; }
+table td, table th { border: 1px solid var(--filet); padding: 0.35rem 0.6rem; }
+
+/* -- Pied ----------------------------------------------------------------- */
+
+footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--filet);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--texte-doux);
+}

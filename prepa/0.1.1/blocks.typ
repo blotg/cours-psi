@@ -28,13 +28,17 @@
 #let _bandeau(intitulé, titre: none, marqueur: none, noir: false) = {
     import "helper-functions.typ": markup
     set text(fill: if noir { white } else { black })
+    // h() est une mise en page : à l'export HTML elle disparait, et le tiret
+    // comme le marqueur viennent se coller au titre. On repasse par de vraies
+    // espaces, que les deux cibles savent composer.
+    let écart = context if target() == "html" { sym.space } else { h(0.4em) }
     strong(intitulé)
     if titre != none and titre != "" {
-        text(fill: if noir { luma(75%) } else { _gris })[#h(0.4em)#sym.dash.en#h(0.4em)]
+        text(fill: if noir { luma(75%) } else { _gris })[#écart#sym.dash.en#écart]
         markup(titre)
     }
     if marqueur != none {
-        h(1fr)
+        context if target() == "html" { sym.space } else { h(1fr) }
         marqueur
     }
 }
@@ -63,7 +67,16 @@
 // à travers `import`, d'où cette fonction.
 #let styles-blocs(doc) = {
     show figure: it => if type(it.kind) == str and it.kind in _genres-blocs {
-        align(start, it.body)
+        // align() est une mise en page : à l'export HTML, typst ne sait pas la
+        // représenter et emporte le contenu de la boîte avec elle — un cours
+        // sortait réduit à ses titres et à ses paragraphes. Le centrage qu'elle
+        // annule n'existe de toute façon qu'en sortie paginée. On en profite
+        // pour donner à la boîte une balise et un genre, de quoi la styler.
+        context if target() == "html" {
+            html.elem("section", attrs: (class: "bloc", "data-genre": it.kind), it.body)
+        } else {
+            align(start, it.body)
+        }
     } else {
         it
     }

@@ -36,6 +36,7 @@ python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - 
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
+python3 -m outils site                              # site/ : le cours en HTML
 ```
 
 Toutes ces commandes acceptent plusieurs chapitres à la suite.
@@ -73,10 +74,21 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 | `programme_de_colle.py` | programme de colle hebdomadaire (en typst) |
 | `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
 | `qcm_cam.py` | questions au format QCMCam |
+| `site.py` | site statique du cours, en HTML |
+
+`site` produit le site statique dans `site/`, ignoré par git : une page par
+exercice et par cours, plus un sommaire par chapitre. Les pages de contenu ne
+sont pas une réécriture du cours en HTML — ce sont les mêmes sources typst,
+compilées avec `--format html` : les formules deviennent du MathML, les schémas
+cetz/zap des SVG. Les corrigés n'y figurent pas ; les coups de pouce, si, mais
+floutés : il faut rester dessus trois secondes pour les lire (transition CSS,
+aucun script). C'est le hook `pre-push` qui reconstruit tout ça, et qui publie
+sur la branche `gh-pages` si on le lui demande (`git config hooks.site true`).
 
 Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
-flashcards, la liste des manipulations et le diaporama. Les données leur arrivent en JSON par
+flashcards, la liste des manipulations, le diaporama et les pages de liens
+du site. Les données leur arrivent en JSON par
 `--input données`.
 
 ## D'où viennent les données

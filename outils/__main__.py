@@ -78,6 +78,14 @@ def _colles(args) -> int:
     return 0
 
 
+def _site(args) -> int:
+    from .site import construit
+
+    for fichier in construit(args.sortie):
+        print(f"  {fichier}")
+    return 0
+
+
 def _qcm(args) -> int:
     from .qcm_cam import depuis_yaml
 
@@ -131,6 +139,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("semaine", help="date du lundi, AAAA-MM-JJ")
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_colles)
+
+    p = sous.add_parser("site", help="site statique du cours (HTML)")
+    p.add_argument("--sortie", type=Path, default=Path("site"))
+    p.set_defaults(fonction=_site)
 
     p = sous.add_parser("qcm", help="questions QCMCam depuis un YAML")
     p.add_argument("source", type=Path)

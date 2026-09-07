@@ -29,9 +29,18 @@ def query(fichier: Path | str, sélecteur: str, champ: str | None = None):
     return json.loads(_exécute(commande).decode("utf-8"))
 
 
-def compile_fichier(source: Path | str, sortie: Path | str | None = None, entrées: dict | None = None) -> None:
+#: Ce qu'il faut ajouter à `typst compile` pour viser le HTML plutôt que le PDF.
+_HTML = ("--features", "html", "--format", "html")
+
+
+def compile_fichier(
+    source: Path | str,
+    sortie: Path | str | None = None,
+    entrées: dict | None = None,
+    html: bool = False,
+) -> None:
     """Compile un fichier. `entrées` alimente les `--input` de typst."""
-    options: list[str] = []
+    options: list[str] = list(_HTML) if html else []
     for clé, valeur in (entrées or {}).items():
         options += ["--input", f"{clé}={valeur}"]
     if sortie is not None:
@@ -39,10 +48,17 @@ def compile_fichier(source: Path | str, sortie: Path | str | None = None, entré
     _exécute(["typst", "compile", *options, str(source)] + ([str(sortie)] if sortie else []))
 
 
-def compile_source(source: str, sortie: Path | str) -> None:
-    """Compile un document passé sous forme de chaîne."""
+def compile_source(source: str, sortie: Path | str, html: bool = False, racine: Path | str | None = None) -> None:
+    """Compile un document passé sous forme de chaîne.
+
+    `racine` est nécessaire dès que la source contient un `#include` : les
+    chemins absolus d'un document lu sur l'entrée standard s'y résolvent.
+    """
     Path(sortie).parent.mkdir(parents=True, exist_ok=True)
-    _exécute(["typst", "compile", "-", str(sortie)], entrée=source.encode("utf-8"))
+    options = list(_HTML) if html else []
+    if racine is not None:
+        options += ["--root", str(racine)]
+    _exécute(["typst", "compile", *options, "-", str(sortie)], entrée=source.encode("utf-8"))
 
 
 _PRÉAMBULE_HTML = (

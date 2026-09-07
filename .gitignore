@@ -30,3 +30,7 @@ build/
 # environnements virtuels python
 .venv/
 __pycache__/
+
+# Site HTML, reconstruit par le hook pre-push et publie sur gh-pages :
+# rien a suivre sur la branche de travail (cf. outils/README.md).
+site/
