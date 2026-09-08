@@ -83,20 +83,36 @@ fi
 [ -n "$dirs" ] || exit 0
 
 # --- Compilation ---------------------------------------------------------
-fail=0
+# Les documents ne dependent pas les uns des autres : on les compile de front.
+# Une modif sous prepa/ en met plus d'une centaine sur la liste, et les
+# enchainer coutait plusieurs minutes.
+fronts=$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)
+[ "$fronts" -gt 8 ] && fronts=8
+
+# Un travail = trois champs separes par NUL (dossier, document, titre court) :
+# les chemins portent espaces et accents, seul NUL ne s'y trouve jamais.
+travaux=$(mktemp) || exit 1
+trap 'rm -f "$travaux"' EXIT
 IFS='
 '
 for d in $dirs; do
     tc=$(titre_court "$d")
     for base in $docs; do
         [ -f "$d/$base.typ" ] || continue
-
-        printf '  typst  %s/%s/%s - %s.pdf\n' "$d" "$OUT" "$base" "$tc"
-        # typst ne cree pas le dossier de sortie
-        mkdir -p "$d/$OUT" || { fail=1; continue; }
-        ( cd "$d" && typst compile --diagnostic-format short "$base.typ" "$OUT/$base - $tc.pdf" ) || fail=1
+        printf '%s\0%s\0%s\0' "$d" "$base" "$tc" >> "$travaux"
     done
 done
+unset IFS
+
+fail=0
+if [ -s "$travaux" ]; then
+    OUT="$OUT" xargs -0 -n 3 -P "$fronts" sh -c '
+        printf "  typst  %s/%s/%s - %s.pdf\n" "$1" "$OUT" "$2" "$3"
+        # typst ne cree pas le dossier de sortie
+        mkdir -p "$1/$OUT" || exit 1
+        cd "$1" && typst compile --diagnostic-format short "$2.typ" "$OUT/$2 - $3.pdf"
+    ' _ < "$travaux" || fail=1
+fi
 
 # --- DM, flashcards, manipulations ----------------------------------------
 # On prefere le venv du depot, sinon le python du systeme.

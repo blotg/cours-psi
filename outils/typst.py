@@ -38,17 +38,26 @@ def compile_fichier(
     sortie: Path | str | None = None,
     entrées: dict | None = None,
     html: bool = False,
+    dépendances: Path | str | None = None,
 ) -> None:
     """Compile un fichier. `entrées` alimente les `--input` de typst."""
     options: list[str] = list(_HTML) if html else []
     for clé, valeur in (entrées or {}).items():
         options += ["--input", f"{clé}={valeur}"]
+    if dépendances is not None:
+        options += ["--make-deps", str(dépendances)]
     if sortie is not None:
         Path(sortie).parent.mkdir(parents=True, exist_ok=True)
     _exécute(["typst", "compile", *options, str(source)] + ([str(sortie)] if sortie else []))
 
 
-def compile_source(source: str, sortie: Path | str, html: bool = False, racine: Path | str | None = None) -> None:
+def compile_source(
+    source: str,
+    sortie: Path | str,
+    html: bool = False,
+    racine: Path | str | None = None,
+    dépendances: Path | str | None = None,
+) -> None:
     """Compile un document passé sous forme de chaîne.
 
     `racine` est nécessaire dès que la source contient un `#include` : les
@@ -58,7 +67,24 @@ def compile_source(source: str, sortie: Path | str, html: bool = False, racine: 
     options = list(_HTML) if html else []
     if racine is not None:
         options += ["--root", str(racine)]
+    if dépendances is not None:
+        options += ["--make-deps", str(dépendances)]
     _exécute(["typst", "compile", *options, "-", str(sortie)], entrée=source.encode("utf-8"))
+
+
+def lit_dépendances(fichier: Path | str) -> list[str]:
+    """Les chemins listés par `--make-deps`, au format Makefile.
+
+    « cible: dep dep … », une espace dans un chemin étant échappée par une
+    barre oblique inverse, et une longue ligne coupée par « \\ » en fin de
+    ligne. La cible elle-même n'en fait évidemment pas partie.
+    """
+    texte = Path(fichier).read_text(encoding="utf-8")
+    if ":" not in texte:
+        return []
+    corps = texte.split(":", 1)[1].replace("\\\n", " ")
+    # On met les espaces échappées à l'abri le temps de découper sur les vraies.
+    return [d.replace("\x00", " ") for d in corps.replace("\\ ", "\x00").split()]
 
 
 _PRÉAMBULE_HTML = (

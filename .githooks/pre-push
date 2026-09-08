@@ -68,11 +68,10 @@ fi
 # de branche : l'index et l'arbre de travail de l'utilisateur ne sont pas
 # touches, et un `git push` reste un `git push`.
 #
-# Le commit est *orphelin* (sans parent) et pousse en force : gh-pages ne garde
-# donc qu'un instantane. C'est indispensable depuis que le site emporte les
-# poly et les flashcards (une trentaine de Mo) : typst horodate ses PDF, si
-# bien qu'une recompilation en change chaque octet. Avec un historique, chaque
-# push aurait ajoute trente Mo d'objets au depot.
+# gh-pages garde son historique. Le site emporte pourtant une trentaine de Mo
+# de PDF, mais le hook pre-commit compile avec SOURCE_DATE_EPOCH=0 : deux
+# compilations d'une meme source donnent le meme octet, et git ne renvoie donc
+# que ce qui a vraiment change.
 # mktemp cree un fichier *vide*, que git refuse comme index (« fichier d'index
 # plus petit qu'attendu ») : il lui faut un chemin encore inexistant.
 tampon=$(mktemp -d) || exit 0
@@ -86,19 +85,23 @@ if ! git --work-tree=site add --all --force . 2>/dev/null; then
 fi
 
 arbre=$(git write-tree) || exit 0
-ancien=$(git rev-parse --verify --quiet refs/heads/gh-pages)
-# Rien de neuf : inutile de fabriquer un commit et de repousser.
-if [ -n "$ancien" ] && [ "$(git rev-parse "$ancien^{tree}")" = "$arbre" ]; then
-    printf '  site   inchange, rien a publier\n'
-    exit 0
+parent=$(git rev-parse --verify --quiet refs/heads/gh-pages)
+message="Site du cours — $(git rev-parse --short HEAD)"
+if [ -n "$parent" ]; then
+    # Rien de neuf : inutile de fabriquer un commit vide.
+    if [ "$(git rev-parse "$parent^{tree}")" = "$arbre" ]; then
+        printf '  site   inchange, rien a publier\n'
+        exit 0
+    fi
+    commit=$(printf '%s\n' "$message" | git commit-tree "$arbre" -p "$parent")
+else
+    commit=$(printf '%s\n' "$message" | git commit-tree "$arbre")
 fi
-
-commit=$(printf 'Site du cours — %s\n' "$(git rev-parse --short HEAD)" | git commit-tree "$arbre")
 [ -n "$commit" ] || exit 0
 
 git update-ref refs/heads/gh-pages "$commit"
 printf '  site   publication sur %s (gh-pages)\n' "$remote"
-git push --quiet --force "$remote" refs/heads/gh-pages:refs/heads/gh-pages || {
+git push --quiet "$remote" refs/heads/gh-pages:refs/heads/gh-pages || {
     printf '  site   Avertissement : le push de gh-pages a echoue.\n'
 }
 exit 0

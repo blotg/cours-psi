@@ -6,28 +6,50 @@ from datetime import date
 from pathlib import Path
 
 
-def _pour_chaque(dossiers, étapes) -> int:
+def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
     """Applique des étapes à chaque chapitre, en rapportant sans s'arrêter.
 
-    Les étapes partagent le même objet `Chapitre`, donc la même requête
-    `typst query` sur le cours : l'interroger coûte plus que tout le reste.
+    Les étapes d'un même chapitre restent en file : elles partagent son objet
+    `Chapitre`, donc la même requête `typst query` sur le cours — l'interroger
+    coûte plus que tout le reste. Les chapitres, eux, sont indépendants et
+    passent de front : une modif sous prepa/ les remet tous sur la liste.
     """
+    import os
+    from concurrent.futures import ThreadPoolExecutor
+
     from .chapitre import Chapitre
 
-    code = 0
-    for dossier in dossiers:
+    def un_chapitre(dossier):
+        """Les sorties sont mises de côté : à plusieurs chapitres de front,
+        les imprimer au fil de l'eau les entrelacerait."""
         chapitre = Chapitre(dossier)
+        lignes, erreurs = [], []
         for nom, produire in étapes:
             try:
                 produits = produire(chapitre)
             except Exception as e:  # noqa: BLE001 - on rapporte et on continue
-                print(f"  {nom:<13} {dossier} : {e}", file=sys.stderr)
-                code = 1
+                erreurs.append(f"  {nom:<13} {dossier} : {e}")
                 continue
             if not produits:
-                print(f"  {nom:<13} {dossier} : rien à produire")
-            for fichier in produits:
-                print(f"  {nom:<13} {fichier}")
+                lignes.append(f"  {nom:<13} {dossier} : rien à produire")
+            lignes += [f"  {nom:<13} {fichier}" for fichier in produits]
+        return lignes, erreurs
+
+    dossiers = list(dossiers)
+    fronts = max(1, processus or min(8, os.cpu_count() or 1))
+    if fronts == 1 or len(dossiers) == 1:
+        résultats = [un_chapitre(d) for d in dossiers]
+    else:
+        with ThreadPoolExecutor(max_workers=fronts) as pool:
+            résultats = list(pool.map(un_chapitre, dossiers))
+
+    code = 0
+    for lignes, erreurs in résultats:
+        for ligne in lignes:
+            print(ligne)
+        for erreur in erreurs:
+            print(erreur, file=sys.stderr)
+            code = 1
     return code
 
 
@@ -42,7 +64,11 @@ def _pour_chaque(dossiers, étapes) -> int:
 
 
 def _étapes(*noms):
-    return lambda args: _pour_chaque(args.chapitres, [e for e in ÉTAPES if e[0] in noms])
+    return lambda args: _pour_chaque(
+        args.chapitres,
+        [e for e in ÉTAPES if e[0] in noms],
+        processus=getattr(args, "processus", None),
+    )
 
 
 def _imprimable(args) -> int:
@@ -81,8 +107,11 @@ def _colles(args) -> int:
 def _site(args) -> int:
     from .site import construit
 
-    for fichier in construit(args.sortie):
-        print(f"  {fichier}")
+    from .site import PROCESSUS
+
+    for fichier in construit(args.sortie, processus=args.processus or PROCESSUS):
+        if args.verbeux:
+            print(f"  {fichier}")
     return 0
 
 
@@ -94,12 +123,26 @@ def _qcm(args) -> int:
     return 0
 
 
+def _option_processus(p) -> None:
+    """Le nombre de chapitres (ou de pages) menés de front.
+
+    Le défaut se résout à l'exécution, pas ici : les imports de ce fichier
+    restent paresseux pour que la CLI démarre vite.
+    """
+    p.add_argument(
+        "--processus",
+        type=int,
+        help="travaux menés de front (défaut : 8, ou le nombre de cœurs)",
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     parseur = argparse.ArgumentParser(prog="python3 -m outils", description=__doc__)
     sous = parseur.add_subparsers(dest="commande", required=True)
 
     p = sous.add_parser("build", help="tout ce qu'un chapitre tire de son cours")
     p.add_argument("chapitres", nargs="+", type=Path)
+    _option_processus(p)
     p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations", "diapo", "imprimable"))
 
     p = sous.add_parser("flashcards", help="paquet Anki et planche à découper")
@@ -142,6 +185,8 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sous.add_parser("site", help="site statique du cours (HTML)")
     p.add_argument("--sortie", type=Path, default=Path("site"))
+    _option_processus(p)
+    p.add_argument("-v", "--verbeux", action="store_true", help="lister chaque fichier produit")
     p.set_defaults(fonction=_site)
 
     p = sous.add_parser("qcm", help="questions QCMCam depuis un YAML")

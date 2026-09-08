@@ -92,9 +92,20 @@ Coups de pouce et corrigés y figurent, mais floutés : il faut tenir le survol
 pour un corrigé (transition CSS, aucun script ; les délais se règlent en tête
 de `site.css`). C'est le hook `pre-push` qui reconstruit tout ça, et qui publie
 sur la branche `gh-pages` si on le lui demande (`git config hooks.site true`).
-La publication écrase la branche à chaque fois (commit orphelin, push en
-force) : sans cela, les PDF joints — que typst horodate, donc qui changent à
-chaque recompilation — ajouteraient une trentaine de Mo au dépôt par push.
+
+**On ne recompile que ce qui a bougé.** Chaque page note dans
+`.site-manifeste.json` (à la racine, ignoré par git) sa recette et l'empreinte
+— taille et date — de tout ce dont typst dit dépendre (`--make-deps`) : la
+source, le gabarit, le paquet, les paquets typst. Une page dont rien n'a bougé
+n'est pas refaite. Une reconstruction complète prend une minute ; un push qui
+ne touche qu'un exercice, deux secondes. `outils site` fait par ailleurs le
+ménage : une page qu'il n'a pas produite — exercice retiré du TD, chapitre
+renommé — disparait de `site/`. Effacer le manifeste refait tout.
+
+Les compilations sont **menées de front** (huit à la fois par défaut, cf.
+`--processus`) : dans `outils site` page par page, dans `outils build` chapitre
+par chapitre, et dans le hook `pre-commit` document par document. Elles sont
+indépendantes et le gain est d'un facteur trois à cinq.
 
 Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de

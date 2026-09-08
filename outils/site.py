@@ -9,17 +9,36 @@ Le seul post-traitement est l'insertion, dans le `<head>` que typst produit, du
 lien vers la feuille de style : typst n'expose pas encore ce `<head>`.
 """
 
+import hashlib
 import json
+import os
 import re
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from pathlib import Path
 from shutil import copyfile
+from tempfile import TemporaryDirectory
+from threading import Lock
 
 from . import typst
 from .chapitre import GABARITS, Chapitre, chapitres
 
 #: Dossier produit, ignoré par git (cf. .gitignore) et publié par le hook pre-push.
 SORTIE = "site"
+
+#: Où l'on note ce qui a servi à fabriquer chaque page, pour ne recompiler que
+#: ce qui a bougé. Hors de `site/`, qui part en entier sur gh-pages.
+MANIFESTE = ".site-manifeste.json"
+
+#: À changer dès que la fabrication d'une page change autrement que par ses
+#: sources — la retouche du <head> dans `_style`, par exemple. Tout le site se
+#: reconstruit alors, au lieu de garder des pages fabriquées à l'ancienne.
+FORMAT_MANIFESTE = 1
+
+#: Compilations menées de front. Une page ne tient pas douze cœurs occupés,
+#: mais le gain plafonne vers huit : au-delà on ne fait que se marcher dessus.
+PROCESSUS = min(8, os.cpu_count() or 1)
 
 #: Racine du dépôt : les `#include` des pages s'y résolvent.
 RACINE = Path(__file__).resolve().parent.parent
@@ -71,6 +90,29 @@ def _poids(fichier: Path) -> str:
     if octets >= 1024 * 1024:
         return f"{octets / 1048576:.1f}".replace(".", ",") + " Mo"
     return f"{max(1, round(octets / 1024))} ko"
+
+
+def _empreinte(chemin: str) -> list | None:
+    """Taille et date d'un fichier — de quoi voir qu'il a bougé, sans le lire.
+
+    Une page compte deux cents dépendances (les paquets typst surtout) : les
+    hacher toutes coûterait plus cher que de recompiler.
+    """
+    try:
+        état = os.stat(chemin)
+    except OSError:
+        return None
+    return [état.st_size, état.st_mtime_ns]
+
+
+def _condensé(*morceaux: str) -> str:
+    """Le condensé d'une recette de page, pour la comparer d'une fois sur l'autre."""
+    h = hashlib.sha256()
+    h.update(str(FORMAT_MANIFESTE).encode())
+    for m in morceaux:
+        h.update(b"\x00")
+        h.update(m.encode("utf-8"))
+    return h.hexdigest()
 
 
 def _pluriel(n: int, mot: str, pluriel: str | None = None) -> str:
@@ -161,10 +203,59 @@ def _infos_exercice(source: Path) -> dict:
 
 
 class Site:
-    def __init__(self, sortie: Path | str = SORTIE):
+    def __init__(self, sortie: Path | str = SORTIE, processus: int = PROCESSUS):
         self.sortie = Path(sortie)
+        self.processus = max(1, processus)
         self.produits: list[Path] = []
         self.absents: list[Path] = []
+        self.effacés: list[Path] = []
+        self.recompilées = 0
+        self._verrou = Lock()
+        self._manifeste: dict[str, dict] = {}
+        self._nouveau_manifeste: dict[str, dict] = {}
+
+    # -- Ne refaire que ce qui a bougé -------------------------------------
+
+    @property
+    def _fichier_manifeste(self) -> Path:
+        return self.sortie.parent / MANIFESTE
+
+    def _charge_manifeste(self) -> None:
+        try:
+            self._manifeste = json.loads(self._fichier_manifeste.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self._manifeste = {}
+
+    def _écrit_manifeste(self) -> None:
+        self._fichier_manifeste.write_text(
+            json.dumps(self._nouveau_manifeste, ensure_ascii=False), encoding="utf-8"
+        )
+
+    def _à_jour(self, chemin: str, recette: str) -> bool:
+        """La page est-elle encore bonne ? Recette et dépendances inchangées."""
+        note = self._manifeste.get(chemin)
+        if note is None or note.get("recette") != recette:
+            return False
+        if not (self.sortie / chemin).is_file():
+            return False
+        return all(_empreinte(d) == e for d, e in note.get("deps", {}).items())
+
+    def _note(self, chemin: str, recette: str, dépendances: list[str] | None) -> None:
+        """Consigne ce qui a servi à la page — ou reprend la note d'avant."""
+        if dépendances is None:
+            note = self._manifeste.get(chemin, {"recette": recette, "deps": {}})
+        else:
+            # `<stdin>` n'est pas un fichier : la recette en tient déjà lieu.
+            note = {
+                "recette": recette,
+                "deps": {d: _empreinte(d) for d in dépendances if d != "<stdin>"},
+            }
+        with self._verrou:
+            self._nouveau_manifeste[chemin] = note
+
+    def _retient(self, cible: Path) -> None:
+        with self._verrou:
+            self.produits.append(cible)
 
     # -- Une page ---------------------------------------------------------
 
@@ -177,7 +268,6 @@ class Site:
         # et le rendu de certains symboles : elle doit dire le vrai.
         html = html.replace('<html lang="en">', '<html lang="fr">', 1)
         cible.write_text(html, encoding="utf-8")
-        self.produits.append(cible)
 
     def page_contenu(
         self,
@@ -194,33 +284,70 @@ class Site:
         sur l'entrée standard, il se résout sur la racine passée à `--root`.
         """
         inclus = "/" + source.resolve().relative_to(RACINE).as_posix()
-        cible = self.sortie / chemin
-        typst.compile_source(
+        recette = (
             f'#import "/gabarits/site.typ": *\n'
             f"#show: page-site.with(\n"
             f"    titre: {_chaine(titre)},\n"
             f"    fil: {_fil(fil)},\n"
             f"    corrigés: {'true' if corrigés else 'false'},\n"
             f")\n"
-            f"#include {_chaine(inclus)}\n",
-            cible,
-            html=True,
-            racine=RACINE,
+            f"#include {_chaine(inclus)}\n"
         )
-        self._style(cible, profondeur)
-        return cible
+        return self._page(chemin, profondeur, recette, lambda cible, deps: typst.compile_source(
+            recette, cible, html=True, racine=RACINE, dépendances=deps
+        ))
 
     def page_liens(self, chemin: str, données: dict, profondeur: int) -> Path:
         """Une page qui n'est qu'un titre et des listes de liens."""
-        cible = self.sortie / chemin
-        typst.compile_fichier(
+        entrée = json.dumps(données, ensure_ascii=False)
+        return self._page(chemin, profondeur, entrée, lambda cible, deps: typst.compile_fichier(
             GABARITS / "site-liens.typ",
             cible,
-            entrées={"données": json.dumps(données, ensure_ascii=False)},
+            entrées={"données": entrée},
             html=True,
-        )
+            dépendances=deps,
+        ))
+
+    def _page(self, chemin: str, profondeur: int, recette: str, compile) -> Path:
+        """Fabrique une page, sauf si elle est encore bonne.
+
+        `recette` est ce qui la décrit hors fichiers — la source typst montée
+        pour l'occasion, ou le JSON passé en `--input`. Les fichiers, eux, sont
+        ceux que typst déclare avec `--make-deps`.
+        """
+        cible = self.sortie / chemin
+        empreinte = _condensé(str(profondeur), recette)
+        if self._à_jour(chemin, empreinte):
+            self._note(chemin, empreinte, None)
+            self._retient(cible)
+            return cible
+        # Le fichier de dépendances est jetable : il ne sert qu'ici, et il ne
+        # doit surtout pas atterrir dans site/, qui part en entier sur gh-pages.
+        with TemporaryDirectory() as tampon:
+            deps = Path(tampon) / "deps.mk"
+            compile(cible, deps)
+            dépendances = typst.lit_dépendances(deps)
         self._style(cible, profondeur)
+        self._note(chemin, empreinte, dépendances)
+        self._retient(cible)
+        with self._verrou:
+            self.recompilées += 1
         return cible
+
+    def _copie(self, source: Path, cible: Path) -> None:
+        """Recopie un fichier, sauf s'il est déjà là, identique.
+
+        Le dépôt est sur un partage réseau : recopier trente Mo de PDF à chaque
+        construction se paie, alors que rien n'a bougé la plupart du temps.
+        """
+        cible.parent.mkdir(parents=True, exist_ok=True)
+        if not cible.is_file() or _empreinte(str(source)) != self._manifeste.get(
+            "@joints", {}
+        ).get(str(cible)):
+            copyfile(source, cible)
+        with self._verrou:
+            self._nouveau_manifeste.setdefault("@joints", {})[str(cible)] = _empreinte(str(source))
+        self._retient(cible)
 
     def fichier_joint(self, source: Path, dossier: str) -> str | None:
         """Recopie un document produit (poly, flashcards…) dans le site.
@@ -232,10 +359,7 @@ class Site:
             self.absents.append(source)
             return None
         nom = adresse(source.stem) + source.suffix
-        cible = self.sortie / dossier / nom
-        cible.parent.mkdir(parents=True, exist_ok=True)
-        copyfile(source, cible)
-        self.produits.append(cible)
+        self._copie(source, self.sortie / dossier / nom)
         return nom
 
     # -- Lecture des sources ----------------------------------------------
@@ -280,13 +404,51 @@ class Site:
 
     # -- Construction ------------------------------------------------------
 
+    def _exécute(self, tâches: list) -> None:
+        """Mène les compilations de front — elles sont indépendantes.
+
+        Une exception dans une tâche remonte ici : une page qui ne compile pas
+        doit faire échouer la construction, pas passer inaperçue.
+        """
+        if self.processus == 1:
+            for tâche in tâches:
+                tâche()
+            return
+        with ThreadPoolExecutor(max_workers=self.processus) as pool:
+            list(pool.map(lambda t: t(), tâches))
+
+    def _nettoie(self) -> list[Path]:
+        """Efface de site/ ce que cette construction n'a pas produit.
+
+        Un exercice retiré du TD, un chapitre renommé : sans ce ménage leur
+        page resterait publiée indéfiniment. La construction n'écrit plus tout
+        à chaque fois, elle ne peut donc plus compter sur l'écrasement.
+        """
+        gardés = {p.resolve() for p in self.produits}
+        effacés = []
+        # Du plus profond vers la racine, pour qu'un dossier vidé se voie vide.
+        for chemin in sorted(self.sortie.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+            if chemin.is_file() and chemin.resolve() not in gardés:
+                chemin.unlink()
+                effacés.append(chemin)
+            elif chemin.is_dir() and not any(chemin.iterdir()):
+                chemin.rmdir()
+        return effacés
+
     def construit(self) -> list[Path]:
         self.sortie.mkdir(parents=True, exist_ok=True)
-        copyfile(GABARITS / "site.css", self.sortie / "styles.css")
-        self.produits.append(self.sortie / "styles.css")
+        self._charge_manifeste()
+        self._copie(GABARITS / "site.css", self.sortie / "styles.css")
         # Sans ce fichier, GitHub Pages fait passer le site par Jekyll, qui
         # ignore tout chemin commençant par un souligné et réécrit le reste.
-        (self.sortie / ".nojekyll").write_text("", encoding="utf-8")
+        nojekyll = self.sortie / ".nojekyll"
+        if not nojekyll.is_file():
+            nojekyll.write_text("", encoding="utf-8")
+        self._retient(nojekyll)
+
+        # Rien ne se compile dans cette phase : on ne fait que dresser la liste
+        # des pages à fabriquer, pour les mener ensuite toutes de front.
+        tâches: list = []
 
         # Un thème par section, dans l'ordre des dossiers — qui est celui du
         # programme. `dict` conserve l'ordre d'insertion.
@@ -299,7 +461,7 @@ class Site:
                 "url": f"{dossier}/index.html",
                 "marque": numéro,
             })
-            self._chapitre(chapitre, dossier)
+            tâches += self._chapitre(chapitre, dossier)
         nombre_de_chapitres = sum(len(liens) for liens in thèmes.values())
 
         tp_liens = []
@@ -307,15 +469,17 @@ class Site:
             nom = _sans_préfixe(tp.parent.name)
             fichier = f"tp/{adresse(nom)}.html"
             tp_liens.append({"texte": nom, "url": fichier, "marque": _préfixe(tp.parent.name)})
-            self.page_contenu(
+            tâches.append(partial(
+                self.page_contenu,
                 fichier,
                 tp,
                 nom,
                 [("Accueil", "../index.html"), ("Travaux pratiques", "index.html"), (nom, None)],
                 profondeur=1,
-            )
+            ))
 
-        self.page_liens(
+        tâches.append(partial(
+            self.page_liens,
             CHAPITRES_INDEX,
             {
                 "titre": "Chapitres",
@@ -323,8 +487,9 @@ class Site:
                 "sections": [_section(thème, liens) for thème, liens in thèmes.items()],
             },
             profondeur=0,
-        )
-        self.page_liens(
+        ))
+        tâches.append(partial(
+            self.page_liens,
             TP_INDEX,
             {
                 "titre": "Travaux pratiques",
@@ -336,10 +501,11 @@ class Site:
                 ]}],
             },
             profondeur=1,
-        )
+        ))
         # L'accueil ne fait que départager les deux : le cours d'un côté, la
         # paillasse de l'autre. Le détail des chapitres tient sur sa page.
-        self.page_liens(
+        tâches.append(partial(
+            self.page_liens,
             "index.html",
             {
                 "titre": "Cours de PSI",
@@ -358,26 +524,32 @@ class Site:
                 ]}],
             },
             profondeur=0,
-        )
+        ))
+
+        self._exécute(tâches)
+        self.effacés = self._nettoie()
+        self._écrit_manifeste()
         return self.produits
 
-    def _chapitre(self, chapitre: Chapitre, dossier: str) -> None:
+    def _chapitre(self, chapitre: Chapitre, dossier: str) -> list:
         titre = chapitre.titre(inline=True)
         base = [
             ("Accueil", "../index.html"),
             ("Chapitres", f"../{CHAPITRES_INDEX}"),
             (titre, "index.html"),
         ]
+        tâches: list = []
         documents, exercices = [], []
 
         if (chapitre.chemin / "cours.typ").is_file():
-            self.page_contenu(
+            tâches.append(partial(
+                self.page_contenu,
                 f"{dossier}/cours.html",
                 chapitre.chemin / "cours.typ",
                 f"{titre} — cours",
                 base + [("Cours", None)],
                 profondeur=1,
-            )
+            ))
             documents.append({"texte": "Cours", "url": "cours.html", "détail": "à lire en ligne"})
 
         for type_de_document, extension, intitulé, mention in TÉLÉCHARGEMENTS:
@@ -392,13 +564,14 @@ class Site:
 
         for source, infos in self.exercices(chapitre):
             fichier = f"{adresse(infos['titre'])}.html"
-            self.page_contenu(
+            tâches.append(partial(
+                self.page_contenu,
                 f"{dossier}/{fichier}",
                 source,
                 f"{infos['titre']} — {titre}",
                 base + [(infos["titre"], None)],
                 profondeur=1,
-            )
+            ))
             exercices.append({
                 "texte": infos["titre"],
                 "url": fichier,
@@ -408,18 +581,24 @@ class Site:
                 "infobulle": infos["infobulle"],
             })
 
-        self.page_liens(
+        tâches.append(partial(
+            self.page_liens,
             f"{dossier}/index.html",
             {
                 "titre": titre,
-                "fil": [["Accueil", "../index.html"], [titre, None]],
+                "fil": [
+                    ["Accueil", "../index.html"],
+                    ["Chapitres", f"../{CHAPITRES_INDEX}"],
+                    [titre, None],
+                ],
                 "sections": [
                     {"titre": "", "liens": documents},
                     {"titre": "Exercices", "liens": exercices},
                 ],
             },
             profondeur=1,
-        )
+        ))
+        return tâches
 
 
 def _section(thème: str, liens: list[dict]) -> dict:
@@ -434,12 +613,19 @@ def _section(thème: str, liens: list[dict]) -> dict:
     return {"titre": thème, "liens": liens}
 
 
-def construit(sortie: Path | str = SORTIE) -> list[Path]:
-    site = Site(sortie)
+def construit(sortie: Path | str = SORTIE, processus: int = PROCESSUS) -> list[Path]:
+    site = Site(sortie, processus=processus)
     produits = site.construit()
     # Un document peut manquer pour deux raisons : le chapitre n'a jamais été
     # construit, ou il n'a rien à produire (Ondes 3 n'a aucune flashcard). On
     # signale sans prescrire : c'est `outils build` qui remplit `build/`.
     for absent in site.absents:
         print(f"  sans lien      {absent.parent.parent.name} : pas de « {absent.name} » dans build/")
+    for effacé in site.effacés:
+        print(f"  retiré         {effacé}")
+    pages = sum(1 for p in produits if p.suffix == ".html")
+    print(
+        f"  {site.recompilées} page(s) recompilée(s) sur {pages}, "
+        f"{site.processus} de front"
+    )
     return produits
