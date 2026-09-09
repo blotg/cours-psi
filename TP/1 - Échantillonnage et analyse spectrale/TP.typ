@@ -22,20 +22,20 @@ du #unit("mV"), il faudra donc l’amplifier.
 Si l’on désire réaliser un traitement numérique de ce signal, une conversion "analogique-numérique" ("CAN") doit être réalisée. C’est par exemple ce que réalise une carte d’acquisition.
 On peut représenter l’ensemble de la chaine d’acquisition ainsi :
 
-#figure(image("images/1.png", width: 90%), caption: [Chaine d'acquisition d'un signal analogique])
+#figure(image("images/1.png", width: 70%), caption: [Chaine d'acquisition d'un signal analogique])
 
 #évaluation(
     barème: (
-        ([Signification des réglages LatisPro], 2),
-        ([Comment choisir les réglages LatisPro], 2),
-        ([Tracé spectre LatisPro], 2),
+        ([Signification des réglages Latis-Pro], 2),
+        ([Comment choisir les réglages Latis-Pro], 2),
+        ([Tracé spectre Latis-Pro], 2),
         ([Tracé spectre Python], 2),
         ([Fiche qui donne envie d'être lue], 2),
     ),
 )[
     Au cours de ce TP, vous rédigerez, en plus du compte-rendu habituel, une fiche méthode à la fin de votre cahier de TP. Cette fiche méthode devra contenir les points suivants :
-    - Comment régler LatisPro quand on fait une acquisition
-    - Comment tracer un spectre avec LatisPro
+    - Comment régler Latis-Pro quand on fait une acquisition
+    - Comment tracer un spectre avec Latis-Pro
     - Comment tracer un spectre avec Python
 ]
 
@@ -116,7 +116,7 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
 
 = Choix d'une fréquence d'échantillonnage
 
-Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisition, on va acquérir un signal sinusoïdal de fréquence #qty("10", "kHz") connue produit par un GBF puis en tracer le spectre grâce à LatisPro (voir @annexe-spectre-latis-pro).
+Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisition, on va acquérir un signal sinusoïdal de fréquence #qty("10", "kHz") connue produit par un GBF puis en tracer le spectre grâce à Latis-Pro (voir @annexe-spectre-latis-pro).
 
 #manipulation(titre: "Acquisition correcte")[
     Réaliser une acquisition d'un signal sinusoïdal de fréquence #qty("10", "kHz") produit par un GBF en respectant *largement* le critère de Shannon.
@@ -179,7 +179,7 @@ La fréquence la plus grande observable sur le spectre est la fréquence donnée
 *Si on veut observer des fréquences plus élevées, il faut acquérir plus vite*.
 
 = Calcul de spectre avec Python
-Le calcul du spectre à partir du signal est effectué avec un algorithme appelé FFT (Fast Fourier Transform). Cet algorithme, de complexité quasi-linéaire et utilisant le principe "diviser pour régner", est implanté par exemple dans les oscilloscopes numériques, dans LatisPro et dans la bibliothèque numpy de Python, notamment les fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html")[`np.fft.rfft`] et #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfftfreq.html")[`np.fft.rfftfreq`].
+Le calcul du spectre à partir du signal est effectué avec un algorithme appelé FFT (Fast Fourier Transform). Cet algorithme, de complexité quasi-linéaire et utilisant le principe "diviser pour régner", est implanté par exemple dans les oscilloscopes numériques, dans Latis-Pro et dans la bibliothèque numpy de Python, notamment les fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html")[`np.fft.rfft`] et #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfftfreq.html")[`np.fft.rfftfreq`].
 
 Le spectre d'un signal peut être calculé à partir des lignes suivantes, à supposer que le signal soit dans la variable `s` et la période d’échantillonnage dans la variable `Te`.
 ```python
@@ -189,7 +189,7 @@ freqs = np.fft.rfftfreq(len(s), Te) # Calcul des fréquences en Hz
 ```
 
 #manipulation(titre: "Tracé du spectre avec Python")[
-    Exporter les données de l'acquisition dans un fichier texte, les importer dans Python et tracer le spectre. Ce spectre est-il cohérent avec celui tracé par LatisPro ?
+    Exporter les données de l'acquisition dans un fichier texte, les importer dans Python et tracer le spectre. Ce spectre est-il cohérent avec celui tracé par Latis-Pro ?
 ]
 
 = Visualisation du critère de Shannon avec Python
@@ -205,15 +205,38 @@ On pourra utiliser les fonctions #link("https://numpy.org/doc/stable/reference/g
 
 #show: appendix
 
-= Tracé de spectre avec LatisPro<annexe-spectre-latis-pro>
+= Tracé de spectre avec Latis-Pro<annexe-spectre-latis-pro>
 
-Pour tracer le spectre avec LatisPro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, LatisPro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
+Pour tracer le spectre avec Latis-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, Latis-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
 
 #figure(
     grid(
         columns: (1fr, 1fr),
         align: horizon,
-        image("images/capture latis menu.png", width: 70%), image("images/capture latis.png", width: 70%),
+        image("images/capture latis menu.png", width: 60%), image("images/capture latis.png", width: 60%),
     ),
-    caption: [Fenêtre de calcul du spectre avec LatisPro],
+    caption: [Fenêtre de calcul du spectre avec Latis-Pro],
 )
+
+= Transférer des données de  à Python
+
+Pour traiter avec Python des données acquise avec Latis-Pro, il faut les exporter ("Fichier" puis "Exportation"). Le format le plus pratique est le format TXT, avec comme séparateur décimal le point et entre les données le point-virgule. Il faut ensuite faire glisser les courbes à exporter vers la colonne de droite.
+
+Pour importer les données avec Python, on utilise la fonction `loadtxt` de la bibliothèque `numpy`. Le paramètre `skiprows` permet d'ignorer les premières lignes qui contiennent des en-têtes (une seule pour Latis-Pro).
+
+```python
+data = np.loadtxt(nom_fichier, skiprows = 1, delimiter = ";")
+t = data[:,0] # la première colonne contient les temps
+s1 = data[:,1] # la seconde colonne contient le premier signal
+... # on fait de même pour tous les signaux à importer
+```
+
+= Tracer un spectre avec Python
+
+La bibliothèque `numpy` implémente l'algorithme FFT (pour _Fast Fourier Transform_) dans son sous-module `numpy.fft`. En particulier, la fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html")[`np.fft.rfft`] permet de calculer le spectre d'un signal et #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfftfreq.html")[`np.fft.rfftfreq`] les fréquences associées.
+
+Le spectre d'un signal `s` échantillonné avec la période d'échantillonnage `Te` peut être calculé à partir des lignes suivantes.
+```python
+s_fourier = np.abs(np.fft.rfft(s)) # Calcul de spectre
+freqs = np.fft.rfftfreq(len(s), Te) # Calcul des fréquences en Hz
+```

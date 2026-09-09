@@ -11,7 +11,6 @@
 - Format des mails
 
 # Cours
-- Génération d'un diapo de questions de début de cours
 - Génération de QCM
 - Format des liens pas satisfaisants
 - Migration unify vers zero
