@@ -520,7 +520,8 @@
                 classe: "évaluation",
                 // Vue « prof » (sans --input numéro-copie) : poids de rotation.
                 // Rien sur le site : l'élève n'a que faire de la rotation.
-                marqueur: if copie == none and target() != "html" { $#nombre / #total$ },
+                // marqueur: if copie == none and target() != "html" { $#nombre / #total$ },
+                marqueur: text(font: "Noto Sans Symbols 2", "★★⯪"),
             )
         }
     }
