@@ -1,52 +1,60 @@
-\element{interface}{
-  \begin{questionmult}{interface}\bareme{haut=2,p=0}
-    A une interface entre deux milieux, quelles sont les grandeurs qui sont toujours continues ?
-      \begin{reponses}
-        \bonne{La pression}
-        \bonne{La vitesse}
-        \mauvaise{La composante du champ électrique normale à l'interface}
-        \bonne{La composante du champ électrique tangente à l'interface}
-      \end{reponses}
-  \end{questionmult}
-}
-%\setgroupmode{vitesses}{cyclic}
+\element{1.1.1}{
+  \begin{question}{tempLaplace}\bareme{2}
+    Un système linéaire a pour fonction de transfert $H(p)=\frac{A}{1+\tau p}$, où $A$ et $\tau$ sont des constantes.
 
-\element{adaptationImpedance}{
-  \begin{questionmult}{adaptationImpedance}\bareme{haut=2,p=0}
-    Lorsqu'il y a adaptation d'impédance entre deux fluides,
-    %\begin{multicols}{2}
-      \begin{reponses}
-        \bonne{les impédances acoustiques des fluides sont égales.}
-        \mauvaise{le coefficient de réflexion est égal à 1}
-        \bonne{le coefficient de transmission est égal à 1}
-      \end{reponses}
-    %\end{multicols}
-  \end{questionmult}
-}
-
-\element{laplace}{
-  \begin{questionmult}{laplace}\bareme{haut=2,p=0}
-    Parmi les expressions suivantes de force de Laplace pour une distribution linéique, volumique ou surfacique, lesquelles sont correctes ?
+    Quelle est l'équation différentielle liant l'entrée $e(t)$ à la sortie $s(t)$ de ce système linéaire ?
     \begin{multicols}{2}
       \begin{reponses}
-        \bonne{$\vv{j_S}\wedge\vv{B}dS$}
-        \bonne{$\vv{j}\wedge\vv{B}dV$}
-        \bonne{$i\vv{dl}\wedge\vv{B}$}
-      \end{reponses}
-    \end{multicols}
-  \end{questionmult}
-}
-
-\element{courantSurfacique}{
-  \begin{question}{courantSurfacique}\bareme{1}
-    Quelle est l'unité du vecteur densité surfacique de courant électrique ?
-    \begin{multicols}{4}
-      \begin{reponses}
-        \bonne{$\unit{A.m^{-1}}$}
-        \mauvaise{$\unit{C.m^{-2}.s^{-1}}$}
-        \mauvaise{$\unit{A}$}
-        \mauvaise{$C.s^{-1}$}
+        \bonne{$s(t)+\tau\frac{ds}{dt} = Ae(t)$}
+        \mauvaise{$s(t)-\tau\frac{ds}{dt} = Ae(t)$}
+        \mauvaise{$e(t)+\tau\frac{de}{dt} = As(t)$}
+        \mauvaise{$e(t)-\tau\frac{de}{dt} = As(t)$}
       \end{reponses}
     \end{multicols}
   \end{question}
+}
+
+\element{1.1.2}{
+  \begin{questionmult}{stabiliteTemp}\bareme{mz=2}
+    Un système linéaire d'entrée $e(t)$ et de sortie $s(t)$ est régi l'équation différentielle suivante $$A_0 e(t) + A_1 \frac{de}{dt} = B_0 s(t) +B_1 \frac{ds}{dt} + B_2 \frac{d^2 s}{dt^2}$$ Les coefficients $A_0$, $A_1$, $A_2$, $B_0$, $B_1$ et $B_2$ sont des constantes.
+
+    À quelle(s) condition(s) ce système linéaire est-il stable ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$B_0$, $B_1$ et $B_2$ sont de même signe}
+        \mauvaise{$A_0$, $A_1$ et $A_2$ sont de même signe}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.1.3}{
+  \begin{questionmult}{stabiliteLaplace}\bareme{haut=2,p=0}
+    Parmi les fonctions de transfert ci-dessous, laquelle (lesquelles) décrit(vent) un système stable ?
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$H =\dfrac{1+2\tau p}{1+2\tau p+ (\tau p)^2}$}
+        \bonne{$H =\dfrac{1-2\tau p}{1+2\tau p+ (\tau p)^2}$}
+        \mauvaise{$H =\dfrac{1+2\tau p}{1+2\tau p- (\tau p)^2}$}
+        \mauvaise{$H =\dfrac{1+2\tau p}{1-2\tau p- (\tau p)^2}$}
+      \end{reponses}
+    \end{multicols}
+  \end{questionmult}
+}
+
+\element{1.1.4}{
+  \begin{questionmult}{solutionDeltaNegatif}\bareme{haut=2,p=0}
+    Parmi les fonctions suivantes, pour lesquelles existe-t-il des valeurs du discriminent du polynôme caractéristique telles qu'elles sont solutions de l'équation différentielle $A\frac{d^2s}{dt^2} + B\frac{dv}{dt} + C v(t) = 0$ ? $A\neq 0$, $B$, $C$, $K$, $K'$ et $K'' \neq 0$ désignent des constantes.
+    % \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$\exp\left(-\frac{B}{2A}t\right)\left(K\cos(\frac{\sqrt{4AC-B^2}}{2A}t) + K'\sin(\frac{\sqrt{4AC-B^2}}{2A}t)\right)$}
+        \bonne{$(Kt+K')\exp\left(\frac{-B}{2A}t\right)$}
+        \bonne{$K\exp\left(\frac{-B+\sqrt{B^2-4AC}}{2A}t\right)+K'\exp\left(\frac{-B-\sqrt{B^2-4AC}}{2A}t\right)$}
+        \bonne{0}
+        \mauvaise{$K\exp\left(-\frac{B}{A}t\right)$}
+        \mauvaise{$(K''t^2+K't+K)\exp\left(\frac{-B}{2A}t\right)$}
+        \mauvaise{$\exp\left(-\frac{B}{2A}t\right)\left(K\cos(\frac{\sqrt{B^2-4AC}}{2A}t) + K'\sin(\frac{\sqrt{B^2-4AC}}{2A}t)\right)$}
+      \end{reponses}
+    % \end{multicols}
+  \end{questionmult}
 }
