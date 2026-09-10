@@ -57,12 +57,16 @@
 
 #titre-document[Questions de cours à travailler prioritairement]
 
-#align(center, text(fill: _gris)[
+#[
+    #set text(fill: _gris)
+    #set align(center)
+    
     // #_total questions de cours, posées en interrogation orale
     Chaque étudiant devra apporter ce document lors des interrogations orales.
-
+    
+    #set align(left)
     Les #_total question de cours listées ici sont à travailler prioritairement. Elles sont fréquemment demandées à l'écrit comme à l'oral, même pour les concours plus sélectifs et elles servent de fondation sur lesquelles les exercices s'appuient. Leur maitrise est donc indispensable. À un apprentissage par cœur, fondamentalement inefficace, on préfèrera une compréhension fine.
-])
+]
 #v(1.2em)
 
 // Colonne de numéros de largeur fixe : toutes les questions du document

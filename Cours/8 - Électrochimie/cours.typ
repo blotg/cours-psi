@@ -74,6 +74,10 @@ Le travail électrique reçu par un système chimique est borné par la variatio
     Le travail électrique maximal récupérable d'un système électrochimique est $abs(Delta G)$.
 ]
 
+#question-de-colle(
+    "Établir l'inégalité reliant la variation d'enthalpie libre au travail électrique. Relier la tension à vide d'une pile à l'enthalpie libre de la réaction."
+)
+
 = Réaction et courant électrique
 == Courant électrique
 Dans une pile ou un électrolyseur, la vitesse de réaction est liée au courant électrique.
@@ -132,6 +136,10 @@ Les solutés sont transportés par diffusion (dans la couche limite), convection
 ]
 
 #question-de-colle("Expliquer ce qu'est un palier de diffusion et dans quels cas il apparait. Exprimer la hauteur d'un palier de diffusion en fonction de la concentration et de l'épaisseur de la couche limite.")
+
+#question-de-colle(
+    "Grâce à des schémas, définir système rapide, système lent, surpotentiel, palier de diffusion et mur du solvant."
+)
 
 Lorsque le réactif ne peut pas manquer (solvant, ou électrode elle-même), il n'y a pas de palier de diffusion.
 

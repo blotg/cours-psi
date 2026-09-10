@@ -147,6 +147,10 @@ Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contribu
     ),
 )
 
+#question-de-colle(
+    "Donner des ordres de grandeur de l'échelle microscopique et de l'échelle macroscopique. Définir l'échelle mésoscopique puis la densité volumique de charge, la densité particulaire et le vecteur densité de courant électrique."
+)
+
 = Déplacement global de charge
 == Le vecteur densité de courant électrique
 Pour rendre compte du déplacement global des porteurs de charge, on définit le vecteur densité de courant électrique.

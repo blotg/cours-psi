@@ -106,6 +106,10 @@ La loi de Fick relie la densité particulaire au vecteur densité de courant de 
     $ va(j_N) = -D grad n $
 ]
 
+#question-de-colle(
+    "Présenter les deux modes de transfert de particules en donnant des exemples. Énoncer la loi de Fick en précisant les unités de chacun des termes. Interpréter physiquement le signe \"moins\" présent dans la loi."
+)
+
 #flashcard(
     recto: "Loi de Fick.",
     verso: "$ va(j_N) = -D grad n $",
