@@ -12,8 +12,8 @@
   let dy = 0.3
   let dz = 0.3
 
-  let scale = 4
-  set-transform(((-scale*calc.sqrt(1/8),scale,0,0),(scale*calc.sqrt(1/8),0,-scale,0),(0,0,0,0),(0,0,0,0)))
+  projection-cabinet()
+  scale(4)
 
   // Axes de coordonnées
   line((0, 0, 0), (1, 0, 0), mark: (fill: black, end: ">>"))

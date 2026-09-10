@@ -16,3 +16,4 @@
 - Migration unify vers zero
 - RNG (explique) manuel vers suji
 - Tous les schémas dans des blocs deviennent des carreaux
+- questions de colle manquantes

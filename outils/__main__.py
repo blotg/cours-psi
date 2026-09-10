@@ -104,6 +104,17 @@ def _colles(args) -> int:
     return 0
 
 
+def _questions_de_colle(args) -> int:
+    from .chapitre import Chapitre
+    from .questions_de_colle import PROCESSUS, SORTIE, génère
+
+    # Sans chapitre nommé, tous ceux du dossier Cours : c'est l'usage courant,
+    # le document n'ayant d'intérêt que complet.
+    liste = [Chapitre(d) for d in args.chapitres] if args.chapitres else None
+    print(f"  questions     {génère(args.sortie or SORTIE, liste=liste, processus=args.processus or PROCESSUS)}")
+    return 0
+
+
 def _site(args) -> int:
     from .site import construit
 
@@ -182,6 +193,24 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("semaine", help="date du lundi, AAAA-MM-JJ")
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_colles)
+
+    p = sous.add_parser(
+        "questions-de-colle",
+        help="toutes les questions de colle de l'année, en un document",
+    )
+    p.add_argument(
+        "chapitres",
+        nargs="*",
+        type=Path,
+        help="à défaut, tous les chapitres de Cours/ (ordre lexicographique)",
+    )
+    p.add_argument(
+        "--sortie",
+        type=Path,
+        help="PDF produit (défaut : « Cours/build/questions de colle.pdf »)",
+    )
+    _option_processus(p)
+    p.set_defaults(fonction=_questions_de_colle)
 
     p = sous.add_parser("site", help="site statique du cours (HTML)")
     p.add_argument("--sortie", type=Path, default=Path("site"))

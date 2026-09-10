@@ -34,6 +34,7 @@ python3 -m outils dm "Cours/8 - Électrochimie"              # DM 1 - Électroch
 python3 -m outils imprimable "Cours/8 - Électrochimie"      # poly-imprimable - Électrochimie.pdf
 python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - Électrochimie.pdf
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
+python3 -m outils questions-de-colle                # toutes les questions de colle de l'année
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
@@ -51,12 +52,46 @@ quatre occupent une page et leurs versos la suivante, en miroir horizontal :
 imprimée en recto-verso avec **retournement sur le bord long**, chaque carte a
 bien son verso derrière son recto.
 
+Chaque carte est coiffée d'un bandeau qui porte le titre court du chapitre et
+le rang de la carte dans le paquet : découpée, elle dit encore d'où elle vient.
+C'est le titre *court* (« Électronique 2 »), le seul qui tienne sur une ligne de
+105 mm — les cases vides d'une planche incomplète, elles, restent vierges.
+
+Le paquet Anki reprend l'arborescence de `Cours/`, `::` séparant les niveaux
+comme Anki l'attend : `Cours/1 - Électronique/2 - Rétroaction` donne
+« Physique-Chimie PSI::1 - Électronique::2 - Rétroaction ». Les préfixes de
+classement des dossiers sont gardés — Anki trie ses paquets par nom, ce sont eux
+qui remettent les thèmes et les chapitres dans l'ordre du cours. Le nom se
+règle en tête de `chapitre.py` (`PAQUET_ANKI`) ; l'identifiant du paquet en
+étant déduit, le renommer fait apparaitre un **nouveau** paquet dans Anki : les
+anciens, plats, restent à supprimer à la main.
+
 `diapo` produit le diaporama des questions de début de cours du chapitre :
 une question par diapo, en QCM, et le corrigé sur la dernière. Les réponses
 sont saisies avec **la bonne en tête** ; l'ordre d'affichage est tiré au sort
 par le gabarit, de façon déterministe — le tirage ne dépend que du texte de la
 question, donc une recompilation redonne le même corrigé. Un chapitre sans
 question ne produit rien.
+
+Les tirages au sort du dépôt — cet ordre-là, et la personne à qui l'on explique
+dans un exercice « J'explique à… » — sont ceux de
+[`suiji`](https://typst.app/universe/package/suiji). Le paquet `prepa` ne garde
+que la conversion du texte en graine (`graine-du-texte`) : c'est elle qui rend
+le tirage reproductible d'une compilation à l'autre.
+
+`questions-de-colle` rassemble en un seul document **toutes** les questions de
+colle de l'année : celles de tous les chapitres de `Cours/`, dans l'ordre du
+tri lexicographique des dossiers, groupées par chapitre. La numérotation, elle,
+est continue d'un bout à l'autre — chaque question porte un numéro qui vaut
+pour l'année, là où le programme de colle hebdomadaire repart à 1 à chaque
+chapitre. Un chapitre encore sans question y figure quand même, signalé comme
+tel : ce qui reste à écrire se voit. Le document atterrit dans
+`Cours/build/questions de colle.pdf` (`--sortie` pour en changer) ; nommer des
+chapitres à la suite restreint la liste à ceux-là.
+
+Il n'est **pas** produit par le hook : il dépend de tous les chapitres à la
+fois, et les interroger coûte une vingtaine de secondes — c'est une commande
+qu'on lance quand on en a besoin.
 
 `imprimable` produit par défaut un **fascicule A3 paysage** : deux pages A4 par
 face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
@@ -72,6 +107,7 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 | `pdf.py` | imposition de PDF (mise en fascicule A3) |
 | `anki.py` | écriture d'un paquet `.apkg` |
 | `programme_de_colle.py` | programme de colle hebdomadaire (en typst) |
+| `questions_de_colle.py` | liste de toutes les questions de colle de l'année |
 | `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
 | `qcm_cam.py` | questions au format QCMCam |
 | `site.py` | site statique du cours, en HTML |
@@ -109,8 +145,8 @@ indépendantes et le gain est d'un facteur trois à cinq.
 
 Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
-flashcards, la liste des manipulations, le diaporama et les pages de liens
-du site. Les données leur arrivent en JSON par
+flashcards, la liste des manipulations, le diaporama, les questions de colle
+et les pages de liens du site. Les données leur arrivent en JSON par
 `--input données`.
 
 ## D'où viennent les données
@@ -121,11 +157,11 @@ Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
 | Étiquette | Source interrogée | Utilisée par |
 |---|---|---|
 | `<flashcard>` | `cours.typ` | `flashcards` |
-| `<question-de-colle>` | `cours.typ` | `colles` |
+| `<question-de-colle>` | `cours.typ` | `colles`, `questions-de-colle` |
 | `<question-de-début-de-cours>` | `cours.typ` | `diapo` |
 | `<coups-de-pouce>` | `TD.typ` | `Chapitre.coups_de_pouce` |
 | `<manipulation>` | `cours.typ` | `manipulations` |
-| `titre-court` (infos.yml) | — | nom des documents produits |
+| `titre-court` (infos.yml) | — | nom des documents produits, bandeau des flashcards |
 | `DM` (infos.yml) | — | `dm` |
 | `<première-page-cours>`, `<dernière-page-cours>`, `<première-page>`, `<dernière-page>` | `poly.typ` | `imprimable` |
 

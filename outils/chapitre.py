@@ -20,6 +20,14 @@ DOCUMENTS = ("cours", "TD", "poly", "TP", "évaluation")
 #: du cours (et non d'une source propre au chapitre).
 GABARITS = Path(__file__).resolve().parent.parent / "gabarits"
 
+#: Dossier sous lequel vivent les chapitres, et dont l'arborescence donne
+#: celle des paquets Anki.
+RACINE_COURS = "Cours"
+
+#: Paquet Anki qui chapeaute tous les autres. Anki lit « :: » comme un
+#: séparateur de sous-paquet : tout le cours se range donc sous ce nom.
+PAQUET_ANKI = "Physique-Chimie PSI"
+
 
 class Chapitre:
     def __init__(self, chemin: Path | str):
@@ -50,6 +58,29 @@ class Chapitre:
         """
         court = self.infos.get("titre-court")
         return str(court).strip() if court else re.sub(r"^\d+\s*-\s*", "", self.chemin.name)
+
+    @cached_property
+    def paquet_anki(self) -> str:
+        """Nom hiérarchique du paquet Anki, « :: » séparant les niveaux.
+
+        C'est l'arborescence de `Cours/` telle quelle, sous un paquet commun :
+        `Cours/1 - Électronique/2 - Rétroaction` donne « Physique-Chimie
+        PSI::1 - Électronique::2 - Rétroaction ». Les préfixes de classement
+        des dossiers sont gardés — ce sont eux qui rangent les thèmes et les
+        chapitres dans l'ordre du cours, Anki triant ses paquets par nom.
+
+        Un chapitre hors de `Cours/` (un TP) n'a pas de thème : il se range
+        directement sous le paquet commun.
+        """
+        parties = self.chemin.resolve().parts
+        if RACINE_COURS in parties:
+            # La dernière occurrence : un chemin absolu peut traverser un autre
+            # dossier du même nom avant d'arriver au nôtre.
+            départ = len(parties) - 1 - parties[::-1].index(RACINE_COURS)
+            parties = parties[départ + 1 :]
+        else:
+            parties = (self.chemin.name,)
+        return "::".join([PAQUET_ANKI, *parties])
 
     def _toutes_métadonnées(self, document: str) -> list[dict]:
         """Métadonnées d'un document, en une requête typst (mise en cache)."""
@@ -154,7 +185,7 @@ class Chapitre:
         # Recto et verso de toutes les cartes en une seule compilation typst.
         faces = typst.vers_html_lot([f for c in cartes for f in (c["recto"], c["verso"])])
         return anki.écrit_paquet(
-            self.titre(inline=True),
+            self.paquet_anki,
             list(zip(faces[::2], faces[1::2])),
             self.fichier("flashcards", "apkg"),
         )
@@ -202,7 +233,13 @@ class Chapitre:
         return self._depuis_gabarit(
             "flashcards",
             self.fichier("flashcards"),
-            {"titre": self.titre(inline=True), "cartes": cartes},
+            # Le titre complet nomme le document, le titre court coiffe chaque
+            # carte : sur 105 mm de large, il n'y a place que pour lui.
+            {
+                "titre": self.titre(inline=True),
+                "titre-court": self.titre_court,
+                "cartes": cartes,
+            },
         )
 
     def diapo(self) -> Path | None:

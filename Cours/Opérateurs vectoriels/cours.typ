@@ -170,6 +170,10 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
         [une sphère], [un disque], [un cube], [une pyramide], [un trapèze], [une demi-sphère],
     )]
 
+#question-de-colle(
+    "Définir le gradient et la divergence en coordonnées cartésiennes. Énoncer le théorème d'Ostrogradski. Citer deux exemples de surfaces fermées et deux exemples de surfaces qui ne le sont pas."
+)
+
 = Rotationnel
 == Définition
 Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant un vecteur.
@@ -291,6 +295,10 @@ Un champ irrotationnel peut s'écrire comme un gradient.
     verso: "$ div(va(A) and va(B)) = ( rot va(A) ) dprod va(B) - va(A) dprod ( rot va(B) ) $",
 )
 
+#question-de-colle(
+    "Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stockes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?"
+)
+
 = Laplacien scalaire
 Le laplacien scalaire est un opérateur s'appliquant aux champs scalaires et renvoyant un scalaire.
 #encadré(
@@ -369,3 +377,7 @@ Le laplacien vectoriel est parfois noté simplement $Delta$ (sans flèche), le c
 #application[
     Montrer que la première composante de $grad (div va(A)) - rot (rot va(A))$ est bien $Delta A_x$.
 ]
+
+#question-de-colle(
+    "Définir l'opérateur $va(A) dprod grad$. Définir le laplacien scalaire et le laplacien vectoriel à partir des autres opérateurs vectoriels. Montrer que les composantes du laplacien vectoriel sont les laplaciens scalaires des composantes du champ vectoriel (on pourra se contenter d'une seule composante)."
+)

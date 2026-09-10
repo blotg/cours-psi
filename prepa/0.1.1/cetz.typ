@@ -16,11 +16,21 @@
 }
 
 #let projection-cabinet() = {
-    cetz.draw.set-transform(((-calc.sqrt(1 / 8), 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
+    cetz.draw.set-transform((
+        (-calc.sqrt(1 / 8), 1, 0, 0),
+        (-calc.sqrt(1 / 8) * 1, 0, 1, 0),
+        (0, 0, 0, 0),
+        (0, 0, 0, 1),
+    ))
 }
 
 #let projection-de-face() = {
-    cetz.draw.set-transform(((0, 1, 0, 0), (calc.sqrt(1 / 8), 0, -1, 0), (0, 0, 0, 0), (0, 0, 0, 1)))
+    cetz.draw.set-transform((
+        (0, 1, 0, 0),
+        (-calc.sqrt(1 / 8), 0, 1, 0),
+        (0, 0, 0, 0),
+        (0, 0, 0, 1),
+    ))
 }
 
 #let transformateur(
@@ -30,7 +40,7 @@
     borne-homologue-secondaire-inversée: false,
     ..params,
 ) = {
-    import "@preview/zap:0.6.0": symbol, interface
+    import "@preview/zap:0.6.0": interface, symbol
 
     // Custom styling properties
     let custom-style = (
@@ -107,7 +117,7 @@
 }
 
 #let thyristor(name, node, ..params) = {
-    import "@preview/zap:0.6.0": symbol, interface
+    import "@preview/zap:0.6.0": interface, symbol
 
     // Custom styling properties
     let custom-style = ()

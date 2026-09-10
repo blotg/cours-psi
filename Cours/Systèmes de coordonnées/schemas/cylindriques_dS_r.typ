@@ -15,7 +15,7 @@
   let dthet = 40deg
   let dz = 0.4
 
-  set-transform(((-calc.sqrt(1/8),1,0,0),(calc.sqrt(1/8),0,-1,0),(0,0,0,0),(0,0,0,1)))// projection Cabinet
+  projection-cabinet()
   scale(4)
 
   // Axes de coordonnées

@@ -2,38 +2,38 @@
 #import "@local/prepa:0.1.1": *
 
 #canvas({
-  import cetz.draw: *
-  
-  // Coordonnées du point M
-  let x = 0.8
-  let y = 0.8
-  let z = 0.8
+    import cetz.draw: *
 
-  let scale = 4
-  set-transform(((-scale*calc.sqrt(1/8),scale,0,0),(scale*calc.sqrt(1/8),0,-scale,0),(0,0,0,0),(0,0,0,0)))
+    // Coordonnées du point M
+    let x = 0.8
+    let y = 0.8
+    let z = 0.8
 
-  // Axes de coordonnées
-  line((0, 0, 0), (1, 0, 0), mark: (fill: black, end: ">>"))
+    projection-cabinet()
+    scale(4)
 
-  line((0, 0, 0), (0, 1, 0), mark: (fill: black, end: ">>"))
+    // Axes de coordonnées
+    line((0, 0, 0), (1, 0, 0), mark: (fill: black, end: ">>"))
 
-  line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
-  
-  // Point M
-  let M = (x, y, z)
-  on-zy(x:x,{
-    circle((y,z), radius: 0.02, fill: black)
-    content((y,z), anchor: "south-west", padding: 0.1, [$M$])}
-  )
-  
-  line(M, (0, 0, z), stroke: (dash: "dashed"))
-  content((), anchor: "east", padding: 0.1, [$z$])
-  
-  line(M, (x, y, 0), stroke: (dash: "dashed"))
-  
-  line((x, y, 0), (x, 0, 0), stroke: (dash: "dashed"))
-  content((), anchor: "east", padding: 0.3, [$x$])
-  
-  line((x, y, 0), (0, y, 0), stroke: (dash: "dashed"))
-  content((), anchor: "south", padding: 0.1, [$y$])
+    line((0, 0, 0), (0, 1, 0), mark: (fill: black, end: ">>"))
+
+    line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
+
+    // Point M
+    let M = (x, y, z)
+    on-zy(x: x, {
+        circle((y, z), radius: 0.02, fill: black)
+        content((y, z), anchor: "south-west", padding: 0.1, [$M$])
+    })
+
+    line(M, (0, 0, z), stroke: (dash: "dashed"))
+    content((), anchor: "east", padding: 0.1, [$z$])
+
+    line(M, (x, y, 0), stroke: (dash: "dashed"))
+
+    line((x, y, 0), (x, 0, 0), stroke: (dash: "dashed"))
+    content((), anchor: "east", padding: 0.3, [$x$])
+
+    line((x, y, 0), (0, y, 0), stroke: (dash: "dashed"))
+    content((), anchor: "south", padding: 0.1, [$y$])
 })

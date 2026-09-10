@@ -10,15 +10,21 @@
 // Alimenté par `outils flashcards --imprimable`, qui passe en `--input
 // données` le JSON produit par `typst query <flashcard>` sur le cours :
 //
-//     {"titre": "...", "cartes": [{"recto": "...", "verso": "..."}]}
+//     {"titre": "...", "titre-court": "...",
+//      "cartes": [{"recto": "...", "verso": "..."}]}
 
 #import "@local/prepa:0.1.1": *
 
 #let données = json(bytes(sys.inputs.données))
 #let cartes = données.at("cartes", default: ())
+#let _titre-court = données.at("titre-court", default: données.at("titre", default: ""))
 
 #let _largeur = 105mm
 #let _hauteur = 148.5mm
+
+// Hauteur du bandeau de tête, prise sur la carte : la zone de contenu perd
+// d'autant.
+#let _bandeau-hauteur = 11mm
 
 // Ordre des cases sur la page des versos : miroir horizontal de 0 1 / 2 3.
 #let _miroir = (1, 0, 3, 2)
@@ -64,25 +70,64 @@
     scale(box(width: dl / f, contenu), x: f * 100%, y: f * 100%, reflow: true)
 }
 
-#let case(contenu) = box(
+// Bandeau de tête, sur les deux faces : une carte découpée finit seule sur un
+// coin de table, et rien d'autre ne dit alors de quel chapitre elle vient.
+//
+// Il porte le titre COURT (« Électronique 2 »). Le titre complet n'y tiendrait
+// pas : « Transformations de la matière : aspects thermodynamiques et
+// cinétiques 2 : Deuxième principe… » couvre trois lignes sur 105 mm de large.
+//
+// Le numéro à droite ne sert pas à apparier recto et verso — l'impression s'en
+// charge — mais à remettre un paquet en ordre, et à voir d'un coup d'œil qu'une
+// planche est sortie complète.
+#let bandeau(numéro) = block(
+    width: 100%,
+    height: _bandeau-hauteur,
+    fill: luma(93%),
+    stroke: (bottom: 0.4pt + luma(70%)),
+    inset: (x: _marge),
+)[
+    #set align(horizon)
+    #set par(justify: false)
+    #grid(
+        columns: (1fr, auto),
+        column-gutter: 0.6em,
+        align: (left + horizon, right + horizon),
+        text(size: 9pt, fill: luma(20%), smallcaps(markup(_titre-court))),
+        text(size: 8pt, fill: luma(55%))[#numéro],
+    )
+]
+
+#let case(contenu, numéro: none) = box(
     width: _largeur,
     height: _hauteur,
     // Repère de découpe, assez pâle pour ne pas salir la carte.
     stroke: (paint: luma(75%), thickness: 0.3pt, dash: "dashed"),
-    inset: _marge,
+    inset: 0pt,
 )[
-    #set align(center + horizon)
+    // Une case vide — la fin d'une planche incomplète — reste vierge : elle
+    // part à la poubelle, un bandeau n'y ferait que du bruit.
     #if contenu != none {
-        _ajusté(contenu, _largeur - 2 * _marge, _hauteur - 2 * _marge)
+        bandeau(numéro)
+        block(width: 100%, height: _hauteur - _bandeau-hauteur, inset: _marge)[
+            #set align(center + horizon)
+            #_ajusté(contenu, _largeur - 2 * _marge, _hauteur - _bandeau-hauteur - 2 * _marge)
+        ]
     }
 ]
 
-#let feuille(groupe, face) = grid(
+// `début` est le rang de la première carte du groupe : le numéro imprimé est
+// celui de la carte dans tout le paquet, et il suit la carte au miroir du verso.
+#let feuille(groupe, face, début) = grid(
     columns: (_largeur, _largeur),
     rows: (_hauteur, _hauteur),
     ..range(4).map(i => {
         let j = if face == "verso" { _miroir.at(i) } else { i }
-        case(if j < groupe.len() { rendu-carte(groupe.at(j).at(face)) })
+        if j < groupe.len() {
+            case(rendu-carte(groupe.at(j).at(face)), numéro: début + j + 1)
+        } else {
+            case(none)
+        }
     })
 )
 
@@ -91,8 +136,8 @@
 ] else {
     for (n, groupe) in cartes.chunks(4).enumerate() {
         if n > 0 { pagebreak() }
-        feuille(groupe, "recto")
+        feuille(groupe, "recto", n * 4)
         pagebreak()
-        feuille(groupe, "verso")
+        feuille(groupe, "verso", n * 4)
     }
 }

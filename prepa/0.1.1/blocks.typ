@@ -9,6 +9,11 @@
 //  (bandeau + corps), _bloc() combine les deux. Tous les blocs passent par là.
 // =============================================================================
 
+// Le tirage au sort (la personne à qui l'on explique, cf. `entourage`) est
+// délégué à suiji : générateur de Tausworthe combiné, sans état global, et
+// reproductible à graine égale.
+#import "@preview/suiji:0.4.0": choice-f, gen-rng-f
+
 #let numQuestion = counter("question")
 
 // -- Réglages partagés -------------------------------------------------------
@@ -231,15 +236,15 @@
         "mon chien",
         "mon chat",
     )
-    // Choix déterministe à partir du titre de l'exercice (hachage type
-    // « polynomial rolling hash »). Pas d'aléa d'horloge : la compilation
-    // reste reproductible et deux exercices distincts tombent sur des
-    // personnes bien réparties dans la liste.
-    let n = 0
-    for octet in array(bytes(repr(graine))) {
-        n = calc.rem(n * 31 + octet, 2147483647)
-    }
-    L.at(calc.rem(n, L.len()))
+    // Choix déterministe à partir du titre de l'exercice : pas d'aléa
+    // d'horloge, la compilation reste reproductible et deux exercices
+    // distincts tombent sur des personnes bien réparties dans la liste.
+    //
+    // Le tirage est celui de suiji ; il ne reste ici que la conversion du
+    // titre en graine (cf. `graine-du-texte`).
+    import "helper-functions.typ": graine-du-texte
+    let (_, personne) = choice-f(gen-rng-f(graine-du-texte(graine)), L)
+    personne
 }
 
 #let exercice(

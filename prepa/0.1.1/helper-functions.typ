@@ -107,3 +107,20 @@
 #let markup(x) = if type(x) == str {
     x.split("\n").map(l => eval(l, mode: "markup", scope: scope-des-chaines)).join(linebreak())
 } else { x }
+
+// Graine entière tirée d'un texte, pour `suiji`.
+//
+// Les tirages du paquet doivent être **déterministes** : le même texte donne
+// la même graine, donc le même résultat d'une compilation à l'autre — pas
+// d'aléa d'horloge, un `git diff` sur un PDF reste lisible. Mais ils partent
+// d'un texte (le titre d'un exercice, l'énoncé d'une question) là où suiji
+// veut un entier de 32 bits : d'où ce repli.
+//
+// Ce n'est **pas** un générateur — c'est suiji qui tire, et lui seul. On ne
+// demande ici qu'une chose : que deux textes différents donnent deux graines
+// différentes. Une somme d'octets ne suffirait pas (les anagrammes
+// collisionnent), le facteur 31 les sépare.
+#let graine-du-texte(valeur) = {
+    let texte = if type(valeur) == str { valeur } else { repr(valeur) }
+    array(bytes(texte)).fold(0, (n, octet) => calc.rem(n * 31 + octet, 4294967296))
+}

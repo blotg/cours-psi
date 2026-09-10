@@ -15,6 +15,7 @@
 // même corrigé, que le fichier ait été régénéré ou non.
 
 #import "@local/prepa:0.1.1": *
+#import "@preview/suiji:0.4.0": gen-rng-f, shuffle-f
 
 #let données = json(bytes(sys.inputs.données))
 #let questions = données.at("questions", default: ())
@@ -24,35 +25,10 @@
 
 // -- Tirage déterministe ---------------------------------------------------
 
-// Hachage polynomial du texte de la question (même procédé que `entourage`
-// dans le paquet) : pas d'aléa d'horloge, la compilation reste reproductible.
-#let _graine(texte) = {
-    let n = 7
-    for octet in array(bytes(texte)) {
-        n = calc.rem(n * 31 + octet, 2147483647)
-    }
-    n
-}
-
-// Fisher-Yates piloté par un générateur congruentiel linéaire. Les constantes
-// sont celles de `glibc` ; le produit reste très en deçà de la capacité d'un
-// entier typst (64 bits).
-//
-// On tire l'indice des bits de POIDS FORT : dans un générateur congruentiel de
-// module une puissance de deux, le bit de poids faible a une période de 2, et
-// `calc.rem(n, 2)` sur une question à deux réponses ne mélangerait rien.
-#let _mélange(liste, graine) = {
-    let restant = liste
-    let n = graine
-    let tiré = ()
-    while restant.len() > 0 {
-        n = calc.rem(n * 1103515245 + 12345, 2147483648)
-        let i = calc.rem(int(n / 65536), restant.len())
-        tiré.push(restant.at(i))
-        let _ = restant.remove(i)
-    }
-    tiré
-}
+// L'ordre d'affichage des réponses est tiré au sort par suiji, à partir d'une
+// graine qui ne dépend que du texte de la question (`graine-du-texte`, dans le
+// paquet). Pas d'aléa d'horloge, donc : recompiler le diaporama redonne le même
+// ordre, et donc le même corrigé, que le fichier ait bougé ou non.
 
 #let _lettre(i) = str.from-unicode(str.to-unicode("A") + i)
 
@@ -60,7 +36,10 @@
 // qui porte la bonne (celle d'indice 0 dans la source).
 #let _tirées = questions.map(q => {
     let réponses = q.at("réponses", default: ())
-    let ordre = _mélange(range(réponses.len()), _graine(q.at("énoncé", default: "")))
+    let (_, ordre) = shuffle-f(
+        gen-rng-f(graine-du-texte(q.at("énoncé", default: ""))),
+        range(réponses.len()),
+    )
     (
         énoncé: q.at("énoncé", default: ""),
         réponses: ordre.map(i => réponses.at(i)),

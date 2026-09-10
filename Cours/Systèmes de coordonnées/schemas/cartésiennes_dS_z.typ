@@ -2,28 +2,28 @@
 #import "@local/prepa:0.1.1": *
 
 #canvas({
-  import cetz.draw: *
-  
-  // Coordonnées du point M
-  let x = 0.8
-  let y = 0.8
-  let z = 0.8
-  let dx = 0.3
-  let dy = 0.3
-  let dz = 0.3
+    import cetz.draw: *
 
-  let scale = 4
-  set-transform(((-scale*calc.sqrt(1/8),scale,0,0),(scale*calc.sqrt(1/8),0,-scale,0),(0,0,0,0),(0,0,0,0)))
+    // Coordonnées du point M
+    let x = 0.8
+    let y = 0.8
+    let z = 0.8
+    let dx = 0.3
+    let dy = 0.3
+    let dz = 0.3
 
-  // Axes de coordonnées
-  line((0, 0, 0), (1, 0, 0), mark: (fill: black, end: ">>"))
-  line((0, 0, 0), (0, 1, 0), mark: (fill: black, end: ">>"))
-  line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
+    projection-cabinet()
+    scale(4)
 
-  line((x, y, z), (x+dx, y, z), (x+dx, y+dy, z), (x, y+dy, z), close: true)
-  content((x+dx,y+dy/2,z), anchor: "north", padding: 0.1, $dd(y)$)
-  content((x+dx/2,y+dy,z), anchor: "west", padding: 0.1, $dd(x)$)
+    // Axes de coordonnées
+    line((0, 0, 0), (1, 0, 0), mark: (fill: black, end: ">>"))
+    line((0, 0, 0), (0, 1, 0), mark: (fill: black, end: ">>"))
+    line((0, 0, 0), (0, 0, 1), mark: (fill: black, end: ">>"))
 
-  line( (x+dx/2,y+dy/2,z), (rel: (0,0,0.3)), mark: (fill: black, end: ">>"))
-  content((), anchor: "south", padding: 0.1, $va(dd(S))$)
+    line((x, y, z), (x + dx, y, z), (x + dx, y + dy, z), (x, y + dy, z), close: true)
+    content((x + dx, y + dy / 2, z), anchor: "north", padding: 0.1, $dd(y)$)
+    content((x + dx / 2, y + dy, z), anchor: "west", padding: 0.1, $dd(x)$)
+
+    line((x + dx / 2, y + dy / 2, z), (rel: (0, 0, 0.3)), mark: (fill: black, end: ">>"))
+    content((), anchor: "south", padding: 0.1, $va(dd(S))$)
 })

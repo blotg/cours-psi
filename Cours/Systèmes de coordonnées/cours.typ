@@ -25,9 +25,16 @@ Les vecteurs de base sont les mêmes en tout point de l'espace.
 
 Le vecteur $va(O M)$ s'exprime comme $va(O M)=x va(e_x)+y va(e_y)+z va(e_z)$.
 
+Le déplacement élémentaire s'exprime comme $va(dd(l))=dd(x) ex+dd(y) ey+dd(z) ez$.
+
 #flashcard(
     recto: "Vecteur $va(O M)$ en coordonnées cartésiennes",
     verso: "$ va(O M)=x va(e_x)+y va(e_y)+z va(e_z) $"
+)
+
+#flashcard(
+    recto: "Déplacement élémentaire $va(dd(l))$ en coordonnées cartésiennes",
+    verso: "$ va(dd(l))=dd(x) va(e_x)+dd(y) va(e_y)+dd(z) va(e_z) $"
 )
 
 #flashcard(
@@ -89,6 +96,8 @@ Les éléments de surface sont représentés sur la figure suivante.
     Déterminer grâce à un calcul d'intégrale l'aire d'un triangle rectangle isocèle de hauteur $l$ situé dans le plan $(O y z)$.
 ]
 
+#question-de-colle("Présenter les coordonnées cartésiennes d'un point et donner leur bornes. Donner  l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral l'aire d'un triangle rectangle isocèle de hauteur $l$ situé dans le plan $(O y z)$.")
+
 = Coordonnées cylindriques
 == Définition
 En coordonnées cylindriques, un point est repéré par sa distance à l'axe $(O z)$, l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$ et la distance entre son projeté sur l'axe $z$ et l'origine du repère.
@@ -136,6 +145,13 @@ Le vecteur $va(O M)$ s'exprime comme $va(O M)=r va(e_r)+z va(e_z)$.
 #flashcard(
     recto: "Vecteur $va(O M)$ en coordonnées cylindriques",
     verso: "$ va(O M)=r va(e_r)+z va(e_z) $"
+)
+
+Le déplacement élémentaire s'exprime comme $va(dd(l))=dd(r) va(e_r)+r dd(theta) va(e_theta)+dd(z) va(e_z)$.
+
+#flashcard(
+    recto: "Déplacement élémentaire $va(dd(l))$ en coordonnées cylindriques",
+    verso: "$ va(dd(l))=dd(r) va(e_r)+r dd(theta) va(e_theta)+dd(z) va(e_z) $"
 )
 
 #question-de-début-de-cours(
@@ -255,6 +271,10 @@ On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindr
     Déterminer le volume d'un cylindre de rayon $R$ et de hauteur $h$ en utilisant une coquille cylindrique.
 ]
 
+#question-de-colle("
+    Présenter les coordonnées cylindriques d'un point et donner leurs bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral l'aire latérale d'un cylindre.
+")
+
 = Coordonnées sphériques
 == Définition
 En coordonnées sphériques, un point est repéré par sa distance à l'origine du repère, l'angle entre l'axe $(O z)$ et $va(O M)$ et l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$.
@@ -304,6 +324,11 @@ Le vecteur $va(O M)$ s'exprime comme $va(O M)=r va(e_r)$.
     verso: "$ va(O M)=r va(e_r) $"
 )
 
+Le vecteur déplacement élémentaire s'exprime comme $va(dd(l))=dd(r) va(e_r)+r dd(theta) va(e_theta)+r sin(theta)dd(phi) va(e_phi)$.
+#flashcard(
+    recto: "Déplacement élémentaire $va(dd(l))$ en coordonnées sphériques",
+    verso: "$ va(dd(l))=dd(r) va(e_r)+r dd(theta) va(e_theta)+r sin(theta)dd(phi) va(e_phi) $"
+)
 == Élément de volume
 L'élément de volume a pour volume $dd(V)=r^2 sin(theta) dot dd(r) dot dd(theta) dot dd(phi)$.
 
@@ -405,3 +430,7 @@ On peut aussi retrouver ce résultat en intégrant l'élément de volume sphéri
 #application[
     Déterminer le volume d'une boule de rayon $R$ en utilisant une coquille sphérique.
 ]
+
+#question-de-colle("
+    Présenter les coordonnées sphériques d'un point et préciser leur bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral le volume d'une boule.
+")
