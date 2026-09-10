@@ -130,6 +130,10 @@ En physique, les grandeurs notées $delta f$ représentent des *quantités* infi
 
 Exception : pour les variables d'intégration, cette règle est enfreinte. On note $dd(x)$, $dd(y)$, $dd(z)$ des dimensions, $dd(S)$ une surface, $dd(V)$ un volume, $dd(t)$ une durée alors que ce ne sont pas des variations.
 
+#question-de-colle(
+    "Définir mathématiquement la différentielle d'une fonction et une forme différentielle. En quoi le calcul de leur intégrale diffère-t-il ? Donne une interprétation physique d'une différentielle et d'une forme différentielle en donnant au moins deux exemples de chaque."
+)
+
 == Premier principe
 
 #encadré(
@@ -237,6 +241,10 @@ La chaleur peut se transporter d'un système à un autre de 3 façons :
     ),
 )
 
+#question-de-colle(
+    "Lister et expliquer les trois modes de transport de chaleur en donnant au moins un exemple pour chacun. Citer la loi de Fourier.",
+)
+
 == Le vecteur densité de courant thermique
 Le vecteur densité de courant thermique $va(j_Q)$ est la chaleur transitant par unité de surface et de temps.
 #encadré(
@@ -318,6 +326,10 @@ La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle
     $ lambda_"béton" tilde #qty("e0", "J/s/m/K") $
     $ lambda_"acier" tilde #qty("e1", "J/s/m/K") $
 ]
+
+#question-de-colle(
+    "Donner la loi de Fourier en définissant chaque terme et en donnant son unité. Donner un ordre de grandeur des conductivités thermiques de l'air, de l'eau, du béton et de l'acier.",
+)
 
 #flashcard(
     recto: "Conductivité thermique de l'acier, de l'air, du béton et de l'eau (ordres de grandeur)",
@@ -521,6 +533,14 @@ Le flux thermique est toujours continu.
 Lorsque la température est continue à une interface, on dit qu'il y a *contact thermique parfait*.
 
 
+#question-de-colle(
+    "Établir l'équation de la diffusion thermique en coordonnées cartésiennes dans le cas unidimensionnel puis en généralisant au cas tridimensionnel."
+)
+
+#question-de-colle(
+    "Donner l'équation de la diffusion thermique puis montrer son irréversibilité. En raisonnant en ordres de grandeur, relier le temps caractéristique de diffusion thermique à la longueur caractéristique du système."
+)
+
 = ARQS et résistance thermique
 == Approximation du régime quasi-stationnaire (ARQS)
 Dans l'ARQS, les grandeurs ne varient pas très vite avec le temps. Dans l'ARQS, on peut négliger les dérivées partielles par rapport au temps ($pdv(, t)$). Dans l'ARQS, la durée que met une variation de température à parcourir le système est très courte devant la durée caractéristique de variation de la température.
@@ -586,6 +606,10 @@ Dans l'ARQS, la différence de température entre les extrémités d'un système
         "$S/(lambda L)$",
         "$(L lambda)/S$",
     ),
+)
+
+#question-de-colle(
+    "Donner la condition de validité de l'ARQS thermique puis établir l'expression de la résistance thermique d'un barreau cylindrique."
 )
 
 == Association de résistances thermiques
@@ -730,4 +754,8 @@ On peut faire une analogie entre l'électrocinétique et la thermique.
         [$R_"th" C_V dv(T, t) + T = T_"ext"$],
         [$R C dv(u, t) + u = E$],
     ),
+)
+
+#question-de-colle(
+    "Dans un tableau, présenter l'analogie entre les grandeurs thermiques et électrocinétiques en précisant les unités. En déduire l'expression des résistances thermiques équivalentes en série et en parallèle en donnant un exemple d'application pour chaque cas."
 )

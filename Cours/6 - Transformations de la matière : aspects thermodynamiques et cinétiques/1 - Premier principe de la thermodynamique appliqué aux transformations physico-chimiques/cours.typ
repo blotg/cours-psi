@@ -230,6 +230,10 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
     Est-ce que la combustion du méthane est endothermique ou exothermique ?
 ]
 
+#question-de-colle(
+    "Définir l'état standard, la température de référence et l'état standard. Donner l'état standard de référence pour les éléments #ce(\"H\"), #ce(\"C\"), #ce(\"O\") et #ce(\"N\"). Définir l'enthalpie de formation et citer la loi de Hess."
+)
+
 = Effets thermiques pour une transformation isobare
 == Transfert thermique causé par une transformation chimique
 Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variation d'enthalpie due à la réaction entraine un transfert thermique avec le thermostat.
@@ -398,4 +402,6 @@ Il est également possible d'exprimer la température de flamme en fonction de l
     )
 ]
 
-
+#question-de-colle(
+    "Établir l'expression de la température de flamme d'une réaction en citant les hypothèses faites."
+)

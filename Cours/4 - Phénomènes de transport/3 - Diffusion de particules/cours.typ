@@ -160,3 +160,19 @@ Si on remplace le vecteur densité de courant de particules $va(j_N)$ grâce à 
 
 == Irréversibilité
 L'équation de diffusion n'est pas invariante par renversement du temps. L'équation de diffusion est donc irréversible.
+
+#question-de-colle(
+    "Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel sans terme source. Montrer que l'équation obtenue est irréversible."
+)
+
+#question-de-colle(
+    "Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel avec terme source. Donnes des exemples de phénomènes pouvant être modélisés par un terme source."
+)
+
+#question-de-colle(
+    "Établir l'équation de diffusion particulaire en coordonnées cylindriques dans le cas unidimensionnel avec terme source."
+)
+
+#question-de-colle(
+    "Établir l'équation de diffusion particulaire en coordonnées sphériques dans le cas unidimensionnel avec terme source."
+)
