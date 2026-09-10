@@ -70,8 +70,9 @@
     scale(box(width: dl / f, contenu), x: f * 100%, y: f * 100%, reflow: true)
 }
 
-// Bandeau de tête, sur les deux faces : une carte découpée finit seule sur un
-// coin de table, et rien d'autre ne dit alors de quel chapitre elle vient.
+// Bandeau de tête, au recto seulement : une carte découpée finit seule sur un
+// coin de table, et rien d'autre ne dit alors de quel chapitre elle vient. Au
+// verso il ne répèterait que ça, et la réponse y gagne sa hauteur.
 //
 // Il porte le titre COURT (« Électronique 2 »). Le titre complet n'y tiendrait
 // pas : « Transformations de la matière : aspects thermodynamiques et
@@ -98,6 +99,7 @@
     )
 ]
 
+// `numéro` donné vaut bandeau : c'est ce qui distingue un recto d'un verso ici.
 #let case(contenu, numéro: none) = box(
     width: _largeur,
     height: _hauteur,
@@ -108,23 +110,29 @@
     // Une case vide — la fin d'une planche incomplète — reste vierge : elle
     // part à la poubelle, un bandeau n'y ferait que du bruit.
     #if contenu != none {
-        bandeau(numéro)
-        block(width: 100%, height: _hauteur - _bandeau-hauteur, inset: _marge)[
+        let coiffé = numéro != none
+        if coiffé { bandeau(numéro) }
+        // Le verso n'ayant pas de bandeau, sa réponse dispose de toute la carte.
+        let dh = if coiffé { _hauteur - _bandeau-hauteur } else { _hauteur }
+        block(width: 100%, height: dh, inset: _marge)[
             #set align(center + horizon)
-            #_ajusté(contenu, _largeur - 2 * _marge, _hauteur - _bandeau-hauteur - 2 * _marge)
+            #_ajusté(contenu, _largeur - 2 * _marge, dh - 2 * _marge)
         ]
     }
 ]
 
-// `début` est le rang de la première carte du groupe : le numéro imprimé est
-// celui de la carte dans tout le paquet, et il suit la carte au miroir du verso.
+// `début` est le rang de la première carte du groupe : le numéro imprimé au
+// recto est celui de la carte dans tout le paquet.
 #let feuille(groupe, face, début) = grid(
     columns: (_largeur, _largeur),
     rows: (_hauteur, _hauteur),
     ..range(4).map(i => {
         let j = if face == "verso" { _miroir.at(i) } else { i }
         if j < groupe.len() {
-            case(rendu-carte(groupe.at(j).at(face)), numéro: début + j + 1)
+            case(
+                rendu-carte(groupe.at(j).at(face)),
+                numéro: if face == "recto" { début + j + 1 },
+            )
         } else {
             case(none)
         }

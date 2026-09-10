@@ -28,6 +28,13 @@ RACINE_COURS = "Cours"
 #: séparateur de sous-paquet : tout le cours se range donc sous ce nom.
 PAQUET_ANKI = "Physique-Chimie PSI"
 
+#: Le rang du chapitre dans son thème, en fin de titre court : « Thermochimie 2 »
+#: se coupe là, et ce qui précède nomme le thème.
+_RANG = re.compile(r"\s+\d+$")
+
+#: Le préfixe de classement d'un dossier : « 6 - » dans « 6 - Électrochimie ».
+_PRÉFIXE = re.compile(r"^\d+\s*-\s*")
+
 
 class Chapitre:
     def __init__(self, chemin: Path | str):
@@ -60,26 +67,44 @@ class Chapitre:
         return str(court).strip() if court else re.sub(r"^\d+\s*-\s*", "", self.chemin.name)
 
     @cached_property
+    def thème_court(self) -> str:
+        """Nom court du thème, tiré du titre court du chapitre.
+
+        « Thermochimie 2 » donne « Thermochimie ». Les chapitres d'un même
+        thème portent tous ce préfixe : c'est lui qui le nomme, et bien plus
+        court que son dossier — « Transformations de la matière : aspects
+        thermodynamiques et cinétiques ».
+        """
+        return _RANG.sub("", self.titre_court)
+
+    @cached_property
     def paquet_anki(self) -> str:
         """Nom hiérarchique du paquet Anki, « :: » séparant les niveaux.
 
-        C'est l'arborescence de `Cours/` telle quelle, sous un paquet commun :
-        `Cours/1 - Électronique/2 - Rétroaction` donne « Physique-Chimie
-        PSI::1 - Électronique::2 - Rétroaction ». Les préfixes de classement
-        des dossiers sont gardés — ce sont eux qui rangent les thèmes et les
-        chapitres dans l'ordre du cours, Anki triant ses paquets par nom.
+        C'est l'arborescence de `Cours/` sous un paquet commun, le thème pris
+        sous son nom court : `Cours/6 - Transformations de la matière : aspects
+        thermodynamiques et cinétiques/2 - Deuxième principe…` donne
+        « Physique-Chimie PSI::6 - Thermochimie::2 - Deuxième principe… ».
 
-        Un chapitre hors de `Cours/` (un TP) n'a pas de thème : il se range
-        directement sous le paquet commun.
+        Les préfixes de classement des dossiers sont gardés — ce sont eux qui
+        rangent les thèmes et les chapitres dans l'ordre du cours, Anki triant
+        ses paquets par nom.
+
+        Un chapitre sans thème (`Cours/8 - Électrochimie`, ou un TP, hors de
+        `Cours/`) se range directement sous le paquet commun.
         """
         parties = self.chemin.resolve().parts
         if RACINE_COURS in parties:
             # La dernière occurrence : un chemin absolu peut traverser un autre
             # dossier du même nom avant d'arriver au nôtre.
             départ = len(parties) - 1 - parties[::-1].index(RACINE_COURS)
-            parties = parties[départ + 1 :]
+            parties = list(parties[départ + 1 :])
         else:
-            parties = (self.chemin.name,)
+            parties = [self.chemin.name]
+        if len(parties) > 1:
+            # Le dossier du thème garde son rang, mais prend le nom court.
+            préfixe = _PRÉFIXE.match(parties[-2])
+            parties[-2] = (préfixe.group(0) if préfixe else "") + self.thème_court
         return "::".join([PAQUET_ANKI, *parties])
 
     def _toutes_métadonnées(self, document: str) -> list[dict]:

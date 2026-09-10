@@ -52,19 +52,30 @@ quatre occupent une page et leurs versos la suivante, en miroir horizontal :
 imprimée en recto-verso avec **retournement sur le bord long**, chaque carte a
 bien son verso derrière son recto.
 
-Chaque carte est coiffée d'un bandeau qui porte le titre court du chapitre et
-le rang de la carte dans le paquet : découpée, elle dit encore d'où elle vient.
-C'est le titre *court* (« Électronique 2 »), le seul qui tienne sur une ligne de
-105 mm — les cases vides d'une planche incomplète, elles, restent vierges.
+Le **recto** de chaque carte est coiffé d'un bandeau qui porte le titre court
+du chapitre et le rang de la carte dans le paquet : découpée, elle dit encore
+d'où elle vient. C'est le titre *court* (« Électronique 2 »), le seul qui tienne
+sur une ligne de 105 mm. Le verso n'en a pas — il ne répèterait que ça, et la
+réponse y gagne la hauteur — et les cases vides d'une planche incomplète restent
+vierges.
 
 Le paquet Anki reprend l'arborescence de `Cours/`, `::` séparant les niveaux
-comme Anki l'attend : `Cours/1 - Électronique/2 - Rétroaction` donne
-« Physique-Chimie PSI::1 - Électronique::2 - Rétroaction ». Les préfixes de
-classement des dossiers sont gardés — Anki trie ses paquets par nom, ce sont eux
-qui remettent les thèmes et les chapitres dans l'ordre du cours. Le nom se
-règle en tête de `chapitre.py` (`PAQUET_ANKI`) ; l'identifiant du paquet en
-étant déduit, le renommer fait apparaitre un **nouveau** paquet dans Anki : les
-anciens, plats, restent à supprimer à la main.
+comme Anki l'attend, le thème pris sous son **nom court** :
+
+    Cours/6 - Transformations de la matière : aspects thermodynamiques
+          et cinétiques/2 - Deuxième principe…
+    → Physique-Chimie PSI::6 - Thermochimie::2 - Deuxième principe…
+
+Ce nom court vient du `titre-court` du chapitre, amputé de son rang :
+« Thermochimie 2 » donne « Thermochimie ». Tous les chapitres d'un thème
+portent le même préfixe, ils tombent donc bien dans le même paquet. Les
+préfixes de classement des dossiers, eux, sont gardés — Anki trie ses paquets
+par nom, ce sont eux qui remettent les thèmes et les chapitres dans l'ordre du
+cours.
+
+Le paquet racine se règle en tête de `chapitre.py` (`PAQUET_ANKI`) ;
+l'identifiant du paquet étant déduit de son nom, le renommer fait apparaitre un
+**nouveau** paquet dans Anki : les anciens restent à supprimer à la main.
 
 `diapo` produit le diaporama des questions de début de cours du chapitre :
 une question par diapo, en QCM, et le corrigé sur la dernière. Les réponses
