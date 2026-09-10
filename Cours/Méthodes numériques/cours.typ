@@ -72,6 +72,10 @@ La méthode d'Euler consiste à approximer la courbe localement par sa tangente.
     verso: "$ y_(i+1) = y_i + Delta t dot f(y_i, t_i) $",
 )
 
+#question-de-colle(
+    "Sur un exemple précis fourmi par le colleur, mettre une équation différentielle d'ordre 2 sous la forme d'un problème d'Euler. Établir le schéma d'Euler explicite."
+)
+
 = Résolution numérique d'équations aux dérivées partielles
 
 Il est possible d'adapter la méthode d'Euler pour résoudre des équations aux dérivées partielles.
@@ -109,3 +113,7 @@ Dans l'équation de diffusion, une dérivée seconde spatiale est présente. On 
 Afin que ce schéma soit stable, il est nécessaire que $2 D (Delta t)/(Delta x^2) < 1$.
 
 On peut interpréter $T_(i,j)$ sous la forme d'une matrice. Chaque ligne $i$ correspond alors à la température à un instant $i dot Delta t$ partout dans le milieu. Chaque colonne $j$ correspond à la température à une position $j dot Delta x$ à tous les instants.
+
+#question-de-colle(
+    "Établir une approximation numérique de la dérivée seconde spatiale. Sur l'exemple de l'équation de diffusion, établir le schéma permettant de résoudre une équation aux dérivées partielles."
+)
