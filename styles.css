@@ -233,6 +233,32 @@ math {
    boîtes ordinaires — l'équation part en morceaux. */
 math[display="block"] { margin: 1rem 0; }
 
+/* Le trait des grandeurs complexes ($underline(Z)$) et celui des longueurs
+   algébriques ($overline(A B)$). typst les efface à l'export MathML : c'est
+   `site.typ` qui rejoue chaque `underline`/`overline` en <mrow> porteur de
+   l'une de ces classes, et le trait se dessine ici.
+
+   Une bordure, et surtout pas `text-decoration` : Firefox n'applique aucune
+   décoration de texte aux boites MathML — le trait n'y serait jamais apparu.
+   La bordure, elle, épouse la boite dans les deux moteurs, indice compris :
+   $underline(Z_(e q))$ est souligné en entier, $underline(Z)_R$ sous le seul
+   Z, exactement comme sur le papier. */
+mrow.souligné { border-bottom: max(1px, 0.05em) solid currentColor; padding-bottom: 0.08em; }
+mrow.surligné { border-top: max(1px, 0.05em) solid currentColor; padding-top: 0.08em; }
+
+/* Le trait oblique de `cancel`, dans les corrigés. Ni bordure ni
+   `text-decoration` ne savent tracer une diagonale : c'est un dégradé de
+   fond, que les deux moteurs peignent bien sur une boite MathML. Le trait va
+   de coin à coin, comme celui de typst sur le papier. */
+mrow.barré {
+    background-image: linear-gradient(
+        to top right,
+        transparent calc(50% - 0.7px),
+        currentColor calc(50% - 0.7px),
+        currentColor calc(50% + 0.7px),
+        transparent calc(50% + 0.7px));
+}
+
 figure { margin: 1.5rem 0; text-align: center; }
 figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--gris); text-align: center; }
 img, svg { max-width: 100%; height: auto; }
