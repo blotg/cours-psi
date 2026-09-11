@@ -8,11 +8,11 @@
 
 #flashcard(
     recto: "Conditions de continuité pour un condensateur",
-    verso: "La tension aux bornes d'un condensateur est continue : sa discontinuité demanderait une puissance $p = u i = u D dv(u,t)$ infinie.",
+    verso: "La tension aux bornes d'un condensateur est continue : sa discontinuité demanderait une puissance $p = u i = u C dv(u,t)$ infinie.",
 )
 #flashcard(
     recto: "Conditions de continuité pour une bobine",
-    verso: "L'intensité traversant une bobine est continue : sa discontinuité demanderait une puissance $p = u i = L i di/dt$ infinie.",
+    verso: "L'intensité traversant une bobine est continue : sa discontinuité demanderait une puissance $p = u i = L i dv(i,t)$ infinie.",
 )
 #flashcard(
     recto: "Temps caractéristique d'un circuit du premier ordre",

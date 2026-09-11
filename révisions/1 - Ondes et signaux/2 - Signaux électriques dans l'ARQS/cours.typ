@@ -34,7 +34,7 @@
 )
 #flashcard(
     recto: "Relation courant-tension pour une bobine",
-    verso: "$u = L dv(u,t)$ en *convention récepteur*.",
+    verso: "$u = L dv(i,t)$ en *convention récepteur*.",
 )
 #flashcard(
     recto: "Unité de la résistance et valeurs usuelles",
