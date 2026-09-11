@@ -1,0 +1,26 @@
+#import "@local/prepa:0.1.1": *
+
+- Identifier les grandeurs physiques correspondant à des signaux acoustiques, électriques, électromagnétiques.
+- #compétence-TP Déterminer une différence de fréquences à partir d’enregistrements de battements ou d’observation sensorielle directe.
+- Écrire les signaux sous la forme $f(x-c t)$ ou $g(x+c t)$.
+- Écrire les signaux sous la forme $f(t-x/c)$ ou $g(t+x/c)$.
+- Prévoir, dans le cas d’une onde progressive, l’évolution temporelle à position fixée et l’évolution spatiale à différents instants.
+- Citer quelques ordres de grandeur de fréquences dans les domaines acoustique, mécanique et électromagnétique.
+- Établir la relation entre la fréquence, la longueur d’onde et la vitesse de phase.
+- Relier le déphasage entre les signaux perçus en deux points distincts au retard dû à la propagation.
+- #compétence-TP Mesurer la vitesse de phase, la longueur d’onde et le déphasage dû à la propagation d’un phénomène ondulatoire.
+- Définir un milieu dispersif.
+- Citer des exemples de situations de propagation dispersive et non dispersive.
+- Exprimer les conditions d’interférences constructives ou destructives.
+- Déterminer l’amplitude de l’onde résultante en un point en fonction du déphasage.
+- Mettre en œuvre un dispositif expérimental pour visualiser et caractériser le phénomène d’interférences de deux ondes.
+- Relier le déphasage entre les deux ondes à la différence de chemin optique.
+- Établir l’expression littérale de la différence de chemin optique entre les deux ondes.
+- Exploiter la formule de Fresnel fournie pour décrire la répartition d’intensité lumineuse.
+- #compétence-TP Mettre en œuvre le dispositif expérimental des trous d’Young avec une acquisition numérique d’image.
+- Caractériser une onde stationnaire par l’existence de nœuds et de ventres.
+- Exprimer les fréquences des modes propres connaissant la célérité et la longueur de la corde.
+- Utiliser la propriété énonçant qu’une vibration quelconque d’une corde accrochée entre deux extrémités fixes se décompose en modes propres.
+- Relier les notions sur les ondes stationnaires avec celles utilisées en musique.
+- #compétence-TP Décrire une onde stationnaire observée par stroboscopie sur la corde de Melde.
+- #compétence-TP Mettre en œuvre un dispositif expérimental permettant d’analyser le spectre du signal acoustique produit par une corde vibrante.

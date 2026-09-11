@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.1": *
+
+- Différencier un solide d’un système déformable.
+- Reconnaitre et décrire une translation rectiligne ainsi qu’une translation circulaire.
+- Décrire la trajectoire d’un point quelconque du solide et exprimer sa vitesse en fonction de sa distance à l’axe et de la vitesse angulaire.
+- Exploiter, pour un solide, la relation entre le moment cinétique scalaire, la vitesse angulaire de rotation et le moment d’inertie fourni.
+- Relier qualitativement le moment d’inertie à la répartition des masses.
+- Définir un couple.
+- Définir une liaison pivot et justifier le moment qu’elle peut produire.
+- Exploiter le théorème scalaire du moment cinétique appliqué au solide en rotation autour d’un axe fixe dans un référentiel galiléen.
+- Établir l’équation du mouvement.
+- Établir une intégrale première du mouvement.
+- Établir l’équation du mouvement.
+- Établir une intégrale première du mouvement.
+- #compétence-TP Réaliser l’étude énergétique d’un pendule pesant et mettre en évidence une diminution de l’énergie mécanique.
+- #compétence-numérique À l’aide d’un langage de programmation, mettre en évidence le non isochronisme des oscillations.
+- Utiliser l’expression de l’énergie cinétique, l’expression du moment d’inertie étant fournie.
+- Établir, dans ce cas, l’équivalence entre le théorème scalaire du moment cinétique et celui de l’énergie cinétique.
+- Prendre en compte le travail des forces intérieures.
+- Utiliser sa nullité dans le cas d’un solide.
+- #compétence-TP Conduire le bilan énergétique du tabouret d’inertie.

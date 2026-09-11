@@ -1,0 +1,22 @@
+#import "@local/prepa:0.1.1": *
+
+- Analyser la décomposition fournie d’un signal périodique en une somme de fonctions sinusoïdales.
+- Définir la valeur moyenne et la valeur efficace d’un signal.
+- Établir par le calcul la valeur efficace d’un signal sinusoïdal.
+- Interpréter le fait que le carré de la valeur efficace d’un signal périodique est égal à la somme des carrés des valeurs efficaces de ses harmoniques.
+- Tracer le diagramme de Bode (amplitude et phase) associé à une fonction de transfert d’ordre 1.
+- Utiliser une fonction de transfert donnée d’ordre 1 ou 2 (ou ses représentations graphiques) pour étudier la réponse d’un système linéaire à une excitation sinusoïdale, à une somme finie d’excitations sinusoïdales, à un signal périodique.
+- Utiliser les échelles logarithmiques et interpréter les zones rectilignes des diagrammes de Bode en amplitude d’après l’expression de la fonction de transfert.
+- #compétence-TP Mettre en œuvre un dispositif expérimental illustrant l’utilité des fonctions de transfert pour un système linéaire à un ou plusieurs étages.
+- Choisir un modèle de filtre en fonction d’un cahier des charges.
+- Expliciter les conditions d’utilisation d’un filtre en tant que moyenneur, intégrateur, ou dérivateur.
+- Expliquer l’intérêt, pour garantir leur fonctionnement lors de mises en cascade, de réaliser des filtres de tension de faible impédance de sortie et forte impédance d’entrée.
+- Expliquer la nature du filtrage introduit par un dispositif mécanique (sismomètre, amortisseur, accéléromètre, etc.).
+- #compétence-TP Étudier le filtrage linéaire d’un signal non sinusoïdal à partir d’une analyse spectrale.
+- #compétence-TP Détecter le caractère non linéaire d’un système par l’apparition de nouvelles fréquences.
+- #compétence-numérique Simuler, à l’aide d’un langage de programmation, l'action d'un filtre sur un signal périodique dont le spectre est fourni.
+- Mettre en évidence l'influence des caractéristiques du filtre sur l'opération de filtrage.
+- Identifier la présence d’une rétroaction sur la borne inverseuse comme un indice de fonctionnement en régime linéaire.
+- Établir la relation entrée-sortie des montages non inverseur, suiveur, inverseur, intégrateur.
+- Déterminer les impédances d’entrée de ces montages.
+- #compétence-TP Mettre en œuvre un filtre actif.

@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.1": *
+
+- Établir et reconnaître l’équation différentielle qui caractérise un oscillateur harmonique ; la résoudre compte tenu des conditions initiales.
+- Caractériser le mouvement en utilisant les notions d’amplitude, de phase, de période, de fréquence, de pulsation.
+- Réaliser un bilan énergétique.
+- Analyser, sur des relevés expérimentaux, l’évolution de la forme des régimes transitoires en fonction des paramètres caractéristiques.
+- Prévoir l’évolution du système à partir de considérations énergétiques.
+- Écrire sous forme canonique l’équation différentielle afin d’identifier la pulsation propre et le facteur de qualité.
+- Décrire la nature de la réponse en fonction de la valeur du facteur de qualité.
+- Déterminer la réponse détaillée dans le cas d’un régime libre ou d’un système soumis à un échelon en recherchant les racines du polynôme caractéristique.
+- Déterminer un ordre de grandeur de la durée du régime transitoire selon la valeur du facteur de qualité.
+- #compétence-TP Mettre en évidence la similitude des comportements des oscillateurs mécanique et électronique.
+- #compétence-TP Réaliser l’acquisition d’un régime transitoire pour un système linéaire du deuxième ordre et analyser ses caractéristiques.
+- Réaliser un bilan énergétique.
+- Établir et connaitre l’impédance d’une résistance, d’un condensateur, d’une bobine.
+- Remplacer une association série ou parallèle de deux impédances par une impédance équivalente.
+- Utiliser la représentation complexe pour étudier le régime forcé.
+- Relier l’acuité d’une résonance au facteur de qualité.
+- Déterminer la pulsation propre et le facteur de qualité à partir de graphes expérimentaux d’amplitude et de phase.
+- #compétence-TP Mettre en œuvre un dispositif expérimental visant à caractériser un phénomène de résonance.
+- #compétence-TP Mettre en œuvre une démarche expérimentale visant à caractériser des régimes transitoires du premier ou du second ordre (flash, sismomètre, etc.).

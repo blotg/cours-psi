@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.1": *
+
+- Citer l’ordre de grandeur de longueurs et d’énergies de liaison covalente.
+- Déterminer, pour les éléments des blocs s et p, le nombre d’électrons de valence d’un atome à partir de la position de l’élément dans le tableau périodique.
+- Citer les éléments des périodes 1 à 3 du tableau périodique (nom, symbole, numéro atomique).
+- Établir un ou des schémas de Lewis pertinent(s) pour une molécule ou un ion.
+- Identifier et représenter les enchaînements donnant lieu à une délocalisation électronique.
+- Mettre en évidence une éventuelle délocalisation électronique à partir de données expérimentales.
+- Associer qualitativement la géométrie d’une entité à la minimisation de son énergie.
+- Prévoir et interpréter les structures de type AX n avec n ≤ 4 et AX p E q , avec p+q = 3 ou 4.
+- Comparer les électronégativités de deux atomes à partir de données ou de leurs positions dans le tableau périodique.
+- Prévoir la polarisation d’une liaison à partir des électronégativités comparées des deux atomes mis en jeu.
+- Relier l’existence ou non d’un moment dipolaire permanent à la structure géométrique d’une molécule.
+- Déterminer direction et sens du vecteur moment dipolaire d’une liaison ou d’une molécule.
+- Comparer la stabilité de plusieurs conformations. la Interpréter la stabilité d’un conformère donné.
+- Attribuer les descripteurs stéréochimiques aux centres stéréogènes.
+- Déterminer la relation d’isomérie entre deux isomères.
+- Représenter une entité chimique organique à partir de son nom, fourni en nomenclature systématique, en tenant compte de la donnée d’éventuelles informations stéréochimiques, en utilisant un type de représentation donné.
+- Relier la valeur du pouvoir rotatoire à la composition d’un mélange de stéréoisomères.
+- Déterminer la composition d’un système chimique ou suivre une transformation chimique en utilisant l’activité optique. et Citer des analogies et différences de propriétés entre des diastéréoisomères et des énantiomères.
+- Reconnaitre des protocoles de séparation de stéréoisomères.

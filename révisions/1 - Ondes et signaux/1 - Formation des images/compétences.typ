@@ -1,0 +1,21 @@
+#import "@local/prepa:0.1.1": *
+
+- Caractériser une source lumineuse par son spectre.
+- Relier la longueur d’onde dans le vide et la couleur.
+- Définir le modèle de l’optique géométrique.
+- Indiquer les limites du modèle de l’optique géométrique.
+- Établir la condition de réflexion totale.
+- Construire l’image d’un objet par un miroir plan.
+- Énoncer les conditions de l’approximation de Gauss et ses conséquences.
+- Relier le stigmatisme approché aux caractéristiques d’un détecteur.
+- Définir les propriétés du centre optique, des foyers principaux et secondaires, de la distance focale, de la vergence.
+- Construire l’image d’un objet situé à distance finie ou infinie à l’aide de rayons lumineux, identifier sa nature réelle ou virtuelle.
+- Exploiter les formules de conjugaison et de grandissement transversal de Descartes et de Newton.
+- Établir et utiliser la condition de formation de l’image réelle d’un objet réel par une lentille convergente.
+- Modéliser l’œil comme l’association d’une lentille de vergence variable et d’un capteur plan fixe.
+- Citer les ordres de grandeur de la limite de résolution angulaire et de la plage d’accommodation.
+- Modéliser l’appareil photographique comme l’association d’une lentille et d’un capteur.
+- Construire géométriquement la profondeur de champ pour un réglage donné.
+- #compétence-TP Étudier l’influence de la focale, de la durée d’exposition, du diaphragme sur la formation de l’image.
+- Établir les expressions du cône d’acceptance et de la dispersion intermodale d’une fibre à saut d’indice.
+- #compétence-TP Modéliser, à l’aide de plusieurs lentilles, un dispositif optique d’utilisation courante.
