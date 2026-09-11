@@ -69,6 +69,35 @@
     show stack: it => context if target() == "html" {
         html.elem("div", attrs: (class: "pile"), _cellules(it.children, (h, v)))
     } else { it }
+    // `underline` et `overline` sont *effacés* à l'export MathML (« underline
+    // was ignored during MathML export »), sans laisser la moindre trace : le
+    // trait des grandeurs complexes ($underline(Z)$, $underline(k)$) et celui
+    // des longueurs algébriques ($overline(A B)$) disparaissaient, et plus
+    // rien ne distinguait $underline(Z)$ de $Z$ — deux choses différentes.
+    //
+    // On les rejoue en CSS sur un `<mrow>`, que `html.elem` sait insérer au
+    // milieu d'une formule. C'est le seul balisage qui tienne dans les deux
+    // moteurs : Firefox ignore `text-decoration` sur du MathML, et Chromium
+    // n'étire pas le trait d'un `<munder>` au-delà de la base — sur
+    // $underline(Z_(e q))$ il ne restait qu'une encoche sous l'indice. Une
+    // bordure, elle, suit la boite entière partout (cf. site.css).
+    //
+    // Le garde `target()` vaut ici comme pour les grilles : dans un
+    // `html.frame`, la cible redevient « paged » et le trait doit rester
+    // celui de typst, sinon les étiquettes des schémas le perdraient.
+    show math.underline: it => context if target() == "html" {
+        html.elem("mrow", attrs: (class: "souligné"), it.body)
+    } else { it }
+    show math.overline: it => context if target() == "html" {
+        html.elem("mrow", attrs: (class: "surligné"), it.body)
+    } else { it }
+    // Même effacement pour `cancel`, et là c'est le sens qui part avec le
+    // trait : sans lui, « $dd(U, 2) + cancel(dd(E_c, 2))$ » se lit comme si le
+    // terme comptait encore. Les sept corrigés qui simplifient ainsi
+    // annonçaient donc le contraire de ce qu'ils démontrent.
+    show math.cancel: it => context if target() == "html" {
+        html.elem("mrow", attrs: (class: "barré"), it.body)
+    } else { it }
     doc
 }
 
