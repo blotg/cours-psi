@@ -116,11 +116,11 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
     #let R-Cu = B/(n-Cu * e * b)
     Pour le cuivre, on calcule la densité volumique de charges
     $
-        n_ce("Cu") = (mu Na) / M = #qty(scientifique(n-Cu,1),"/m^3")
+        n_ce("Cu") = (mu Na) / M = #qty(n-Cu, "/m^3", chiffres: 1)
     $
     d'où
     $
-        R_("Hall", ce("Cu")) = B/(n e b) = qty(#scientifique(R-Cu,1),"O")
+        R_("Hall", ce("Cu")) = B/(n e b) = #qty(R-Cu, "O", chiffres: 1)
     $
     Ce qui est extrêmement faible et difficilement mesurable.
 
@@ -128,7 +128,7 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
     #let n-SC = 1.6e22
     #let R-SC = B/(n-SC * e * b)
     $
-         R_"Hall, semi-conducteur" = B/(n e b) = qty(#scientifique(R-SC,1),"O")
+         R_"Hall, semi-conducteur" = B/(n e b) = #qty(R-SC, "O", chiffres: 1)
     $
     Ce qui est plus grand mais reste faible. Cependant, avec un courant suffisamment grand et un voltmètre assez sensible, il est possible de mesurer cette différence de potentiel.
 ]

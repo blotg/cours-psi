@@ -66,10 +66,10 @@ On se place dans le cadre de l'ARQS.
   #let R = 5e-2
   #let N = 100
   #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.log((R + a) / R)
-  Pour $N=100$, $L=qty(scientifique(#L,#1),"H")$, 
+  Pour $N=100$, $L=#qty(L, "H", chiffres: 1)$, 
   #let N=1000
   #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.log((R + a) / R)
-  pour $N=1000$, $L=qty(scientifique(#L,#1),"H")$
+  pour $N=1000$, $L=#qty(L, "H", chiffres: 1)$
 ]
 
 // #question([

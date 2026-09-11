@@ -75,6 +75,6 @@ On s'intéresse à un câble en aluminium (de masse volumique $qty("2.7", "g/cm^
     #let T = 1000
     #let r = 2.7e3
     #let S = 500e-6
-      alpha = sqrt(T rho S) = #qty(scientifique(calc.sqrt(T*r*S), 2), "N s/m")
+      alpha = sqrt(T rho S) = #qty(calc.sqrt(T*r*S), "N s/m", chiffres: 2)
     $
 ]

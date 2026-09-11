@@ -177,7 +177,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
     #let visc = 1e-3
     #let Rh = 12 * L * visc / (l * calc.pow(e, 3))
     $
-        R_H = (12 L eta)/(l e^3) = #qty(scientifique(Rh, 1), "Pa s/m^3")
+        R_H = (12 L eta)/(l e^3) = #qty(Rh, "Pa s/m^3", chiffres: 1)
     $
 ]
 

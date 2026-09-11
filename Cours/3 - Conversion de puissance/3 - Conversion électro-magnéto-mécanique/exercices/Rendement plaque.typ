@@ -22,8 +22,8 @@ La plaque signalétique d'un moteur à courant continu indique les caractéristi
     Dans les conditions nominales, le moteur fournit une puissance mécanique de #qty("36.3", "kW").
 
     #let Pc = 440*95.5+360*3
-    Dans les conditions nominales, le moteur absorbe une puissance électrique de $440 times 95.5 + 360 times 3 = #qty(scientifique(Pc,2), "W")$.
+    Dans les conditions nominales, le moteur absorbe une puissance électrique de $440 times 95.5 + 360 times 3 = #qty(Pc, "W", chiffres: 2)$.
 
     Le rendement du moteur est donc
-    $ eta = P_"utile"/P_"couteuse" = 36.3/43 = #scientifique(36.3e3/Pc,2) $
+    $ eta = P_"utile"/P_"couteuse" = 36.3/43 = #num(36.3e3/Pc, chiffres: 2) $
 ]

@@ -25,7 +25,7 @@ Le signal d'entrée noté $e(t) = A sin(2 pi f t)$ avec $A = qty("10", "V")$ et 
     #let f = 300e3
     #let A = 10
     #let dv = 2 * calc.pi * f * A
-    Sa valeur maximale est donc $2 pi f A = #qty(scientifique(dv, 2), "V/s")$, la vitesse de balayage doit être au moins égale à cette valeur pour ne pas avoir de déformation.
+    Sa valeur maximale est donc $2 pi f A = #qty(dv, "V/s", chiffres: 2)$, la vitesse de balayage doit être au moins égale à cette valeur pour ne pas avoir de déformation.
 ]
 
 L'ALI simulé a une vitesse de balayage de #qty("14", "V/us").

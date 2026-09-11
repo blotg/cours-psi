@@ -165,13 +165,13 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
     
     $
         s_(2,e) - s_(1,e) = integral_(T_(1,e))^(T_(2,e)) c dd(T)/T = c ln(T_(2,e)/T_(1,e))
-        = #qty(scientifique(Delta-s-e,2), "J/kg/K")
+        = #qty(Delta-s-e, "J/kg/K", chiffres: 2)
     $
     Pour le gaz parfait, on utilise la seconde loi de Joule isobare $dd(h) = c_p dd(T)$ avec $c_p = (gamma R)/(M (gamma - 1))$, ce qui donne
     
     $
         s_(2,g) - s_(1,g) = integral_(T_1)^(T_2) (gamma R)/(M (gamma - 1)) dd(T)/T = (gamma R)/(M (gamma - 1)) ln(T_2/T_1)
-        = #qty(scientifique(Delta-s-g,2), "J/kg/K")
+        = #qty(Delta-s-g, "J/kg/K", chiffres: 2)
     $
 ]
 
@@ -181,7 +181,7 @@ On considère maintenant un échangeur thermique isobare et adiabatique. Dans le
     En utilisant les valeurs numériques précédentes, on trouve
     #let Delta-S-c = D-g * Delta-s-g + D-e * Delta-s-e
     $
-        (delta S_c)/dd(t) = D_g (s_(2,g) - s_(1,g)) + D_e (s_(2,e) - s_(1,e)) = #qty(scientifique(Delta-S-c,2), "W/K") >0
+        (delta S_c)/dd(t) = D_g (s_(2,g) - s_(1,g)) + D_e (s_(2,e) - s_(1,e)) = #qty(Delta-S-c, "W/K", chiffres: 2) >0
     $
     Ceci est conforme avec le second principe de la thermodynamique qui impose que le taux de création d'entropie soit positif ou nul.
 ]

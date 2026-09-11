@@ -24,10 +24,10 @@ Delta_t = 0.1 # pas temporel
 ][
   Les $N_x$ points sont régulièrement répartis de $x=0$ à $x=l$ : ils délimitent $N_x - 1$ intervalles, donc
   #let Delta-x = 10e-2 / 19
-  $ Delta x = l/(N_x - 1) = (10 dot 10^(-2))/19 = #qty(scientifique(Delta-x, 2), "m") $
+  $ Delta x = l/(N_x - 1) = (10 dot 10^(-2))/19 = #qty(Delta-x, "m", chiffres: 2) $
 
   #let Delta-t = calc.pow(Delta-x, 2) / (2 * 99e-6)
-  $ Delta t < (Delta x)^2/(2 D) = #qty(scientifique(Delta-t, 2), "s") $
+  $ Delta t < (Delta x)^2/(2 D) = #qty(Delta-t, "s", chiffres: 2) $
   Le pas $Delta t = #qty("0.1", "s")$ proposé convient donc.
 ```python
 Delta_x = l/(N_x - 1) # pas spatial

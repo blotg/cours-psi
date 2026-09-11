@@ -78,7 +78,8 @@
 #let scope-des-chaines = {
     import "symboles.typ" as symboles
     import "cetz.typ" as dessins
-    dictionary(dessins) + dictionary(symboles)
+    import "unités.typ" as unités
+    dictionary(dessins) + dictionary(symboles) + dictionary(unités)
 }
 
 #let sub-dictionary(d, keys) = {

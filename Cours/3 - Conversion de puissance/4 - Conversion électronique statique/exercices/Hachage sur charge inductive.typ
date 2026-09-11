@@ -109,5 +109,5 @@ Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kHz")$. L'interr
     La loi des mailles donne $u_s = u_r + u_L$, soit en valeur moyenne 
     $alpha E = r mean(i_s) + 0$ d'où
     #let ism = (RC * E) / r
-    $ mean(i_s) = (alpha E)/r = #qty(scientifique(ism,2),"A") $
+    $ mean(i_s) = (alpha E)/r = #qty(ism, "A", chiffres: 2) $
 ]

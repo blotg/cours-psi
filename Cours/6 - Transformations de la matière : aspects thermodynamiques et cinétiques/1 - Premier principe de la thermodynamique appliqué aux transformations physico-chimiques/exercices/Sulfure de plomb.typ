@@ -33,7 +33,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     $
         standard(Delta_r H) = sum nu_i standard(Delta_f H)(ce("X")_i)\
         = - standard(Delta_f H)(ce("PbS(s)")) - 3/2 standard(Delta_f H)(ce("O_2(g)")) + standard(Delta_f H)(ce("PbO(s)")) + standard(Delta_f H)(ce("SO2(g)"))
-        = #qty(scientifique(DrH, 3), "kJ/mol")
+        = #qty(DrH, "kJ/mol", chiffres: 3)
     $
 ]
 
@@ -118,7 +118,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     #let Tf = Ti - DrH*1000 / (c_P_m_PbO + c_P_m_SO2)
     $
       T_f = T_i - (Delta_r H^circ)/(c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)")))
-      = #qty(scientifique(Tf,3), "K")
+      = #qty(Tf, "K", chiffres: 3)
     $
 ]
 
@@ -207,7 +207,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
     #let Tf = Ti - DrH*1000 / (c_P_m_PbO + c_P_m_SO2 + 6 * c_P_m_N2)
     $
       T_f = T_i - (Delta_r H^circ)/(c_(P,m)(ce("PbO(s)")) + c_(P,m)(ce("SO2(g)")) + 6 c_(P,m)(ce("N2(g)")))
-      = #qty(scientifique(Tf,3), "K")
+      = #qty(Tf, "K", chiffres: 3)
     $
 ]
 

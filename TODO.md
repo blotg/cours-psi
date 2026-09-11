@@ -13,6 +13,4 @@
 # Cours
 - Génération de QCM
 - Format des liens pas satisfaisants
-- Migration unify vers zero
-- Tous les schémas dans des blocs deviennent des carreaux
-- questions de colle manquantes
+- questions de colle manquantes ( Électronique 4 )

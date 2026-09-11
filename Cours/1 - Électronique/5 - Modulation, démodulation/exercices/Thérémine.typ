@@ -73,6 +73,6 @@
     #let fmax = 2e3
     #let C1 = calc.sqrt(Rb / (4 * Ra * R) * Cp / fmax)
     $
-        C_1 = sqrt(R_b/(4 R_a R) times C'/(f_1-f_2)) = #qty(scientifique(C1, 2), "F") approx #qty(scientifique(C1 * 1e12, 2), "pF")
+        C_1 = sqrt(R_b/(4 R_a R) times C'/(f_1-f_2)) = #qty(C1, "F", chiffres: 2) approx #qty(C1 * 1e12, "pF", chiffres: 2)
     $
 ]

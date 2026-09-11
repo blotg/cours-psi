@@ -19,7 +19,7 @@ Dans les trains à sustentation magnétique, le train lévite au-dessus des rail
     #let N = 10000
     #let l = 0.5
     #let i = (B * l) / (mu0 * N)
-    Pour obtenir un champ magnétique de #qty("4", "T"), il faut un courant $i = (B l)/(mu_0 N) = #qty(scientifique(i, 1), "A")$.
+    Pour obtenir un champ magnétique de #qty("4", "T"), il faut un courant $i = (B l)/(mu_0 N) = #qty(i, "A", chiffres: 1)$.
 
     Pour illustrer à quel point ce courant est grand pour un câble de #qty("2", "mm") de diamètre, on va calculer le temps que mettrait ce câble à fondre sous l'effet de l'échauffement par effet Joule. Pour ce faire, on néglige tout échange thermique avec l'extérieur.
 
@@ -39,7 +39,7 @@ Dans les trains à sustentation magnétique, le train lévite au-dessus des rail
     #let d = 2e-3
     #let tf = (Tf - T0) * (gamma-Cu * mu-Cu * calc.pow(calc.pi,2) * calc.pow(d,4) *c)/16 * calc.pow((mu0 * N)/(B * l), 2)
     $
-        t_f = (T_f - T_0) (gamma mu pi^2 d^4 c)/16 ((mu_0 N)/(B l))^2 = #qty(scientifique(tf, 1), "s")
+        t_f = (T_f - T_0) (gamma mu pi^2 d^4 c)/16 ((mu_0 N)/(B l))^2 = #qty(tf, "s", chiffres: 1)
     $
     Sans système de refroidissement, le fil fondrait en quelques minutes. Il est plus aisé d'utiliser des bobines supraconductrices qui n'ont pas de résistance électrique et donc pas d'échauffement par effet Joule.
 ]

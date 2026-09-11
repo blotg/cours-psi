@@ -41,8 +41,8 @@ Le débit sanguin hépatique est d'environ #qty("1.5", "L/min").
         X = (F_(ce("CH_3CH_2OH"), e) - F_(ce("CH_3CH_2OH"), s)) / F_(ce("CH_3CH_2OH"), e) = dv(xi, t) / F_(ce("CH_3CH_2OH"), e)\
         = dv(xi, t) / ([ce("CH_3CH_2OH")]_e D_V) \
         = (#num("7") / (num("46") times #num("60"))) / (#num("0.2") / num("46") times num("1.5"))
-        = #num(scientifique(7/60/0.2/1.5, 2))
-        = #qty(scientifique(7/60/0.2/1.5 * 100, 2), "%")
+        = #num(7/60/0.2/1.5, chiffres: 2)
+        = #qty(7/60/0.2/1.5 * 100, "%", chiffres: 2)
     $
     On a effectué l'application numérique en #unit("mol"), #unit("g"), #unit("L") et #unit("min").
 ]

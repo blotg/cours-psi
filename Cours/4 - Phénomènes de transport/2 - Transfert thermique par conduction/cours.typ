@@ -660,7 +660,6 @@ Si deux résistances thermiques sont en parallèle, elles sont soumises à la m�
 ]
 
 #application[
-    #add-unit("tog", "tog", "upright(\"tog\")")
     Déterminer la résistance thermique équivalente d'une gigoteuse de surface #qty("0.5", "m^2") et de #qty("2", "tog")#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un tog correspond à #qty("0.1", "m^2 K/W").] et d'un bonnet de surface #qty("400", "cm^2") et de #qty("1", "tog").
 ]
 

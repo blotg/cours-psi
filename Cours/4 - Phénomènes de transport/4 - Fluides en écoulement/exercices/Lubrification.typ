@@ -36,7 +36,7 @@ Dans un premier temps, on étudie le contact sec entre le mobile et la surface. 
     #let f = 0.2
     #let RT = f * M * g
     La projection du théorème de la résultante cinétique sur $ey$ donne $R_N - M g = 0$, soit $R_N = M g$. On en déduit
-    $ R_T=f R_N = f M g = #qty(scientifique(RT, 2), "N") $
+    $ R_T=f R_N = f M g = #qty(RT, "N", chiffres: 2) $
 ]
 
 #question(
@@ -62,7 +62,7 @@ Dans un premier temps, on étudie le contact sec entre le mobile et la surface. 
     #let g = 9.81
     #let d-arrêt = calc.pow(v0, 2) / (2 * f * g)
     $
-        d_"arrêt" = x(t_"arrêt") = v_0 v_0/(f g) - 1/2 f g (v_0/(f g))^2 = v_0^2/(2 f g) = #qty(scientifique(d-arrêt, 2), "m")
+        d_"arrêt" = x(t_"arrêt") = v_0 v_0/(f g) - 1/2 f g (v_0/(f g))^2 = v_0^2/(2 f g) = #qty(d-arrêt, "m", chiffres: 2)
     $
 ]
 
@@ -90,7 +90,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
     Calculer la viscosité dynamique de l'huile.
 ][
     La masse volumique de l'huile est $mu = #num("0.9") mu_"eau"$
-    La viscosité dynamique de l'huile est $eta= mu nu = #qty(scientifique(viscosité,1), "Pa s")$.
+    La viscosité dynamique de l'huile est $eta= mu nu = #qty(viscosité, "Pa s", chiffres: 1)$.
 ]
 
 #question(
@@ -136,7 +136,7 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
     #let S = 400 * 1.0e-4
     #let FT = viscosité * vm / e * S
     $
-        F_T = - (delta^2 F)/dd(S) S = - eta v_m / e S = - #qty(scientifique(FT, 2), "N")
+        F_T = - (delta^2 F)/dd(S) S = - eta v_m / e S = - #qty(FT, "N", chiffres: 2)
     $
 ]
 
@@ -162,5 +162,5 @@ La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("6
     #let S = 400e-4
     #let v0 = 10 * 1000 / 3600
     #let d-arrêt = (M * e) / (viscosité * S) * v0
-    $ d_"arrêt" = lim_(t-> infinity) x(t) = (M e)/(eta S) v_0 = #qty(scientifique(d-arrêt,1),"m") $
+    $ d_"arrêt" = lim_(t-> infinity) x(t) = (M e)/(eta S) v_0 = #qty(d-arrêt, "m", chiffres: 1) $
 ]

@@ -36,7 +36,7 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
 
     #let Pfer = 0.47
     #let Pcumax = U1eff*I1effmax*cos-phi1 - U2eff*I2effmax - Pfer
-    Les pertes cuivres sont donc $P_"cuivre max" = P_"pertes totales max"-P_"fer" approx #qty(scientifique(Pcumax,1),"W")$.
+    Les pertes cuivres sont donc $P_"cuivre max" = P_"pertes totales max"-P_"fer" approx #qty(Pcumax, "W", chiffres: 1)$.
 
     #let R = Pcumax / calc.pow(I1effmax, 2)
     Notons $R$ la résistance équivalente des fils du transformateur vu du primaire. On a alors $P_"cuivre" = I_(1 "eff")^2 R$ d'où $R = P_"cuivre"/I_(1 "eff")^2$. En particulier, à la puissance max : $R = P_"cuivre max"/I_(1 "eff max")^2$.
@@ -55,6 +55,6 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
     $
         eta & = P/(P + P_"pertes totales") \
             & = P/(P + P_"cuivre max"/I_(1 "eff max")^2 ((m P)/(U_(2 "eff")))^2 + P_"fer")
-            & approx #qty(scientifique(rendement*100,1),"%")
+            & approx #qty(rendement*100, "%", chiffres: 1)
     $
 ]

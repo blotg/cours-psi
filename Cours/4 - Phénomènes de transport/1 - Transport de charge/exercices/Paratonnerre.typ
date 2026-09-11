@@ -88,7 +88,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
     Cette résistance ne doit pas dépasser #qty("30", "O"). Déterminer le rayon minimum de la demi-sphère.
 ][
 
-    $ R=1/(2 pi gamma R_"sol") = #qty(scientifique(R, 2), "m") $
+    $ R=1/(2 pi gamma R_"sol") = #qty(R, "m", chiffres: 2) $
 ]
 
 #let I = 300e3
@@ -99,7 +99,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 ][
     #let R-sol = 30
     #let V-R = R-sol * I
-    $ V(R) = R_"sol" I = #qty(scientifique(V-R, 2), "V") $
+    $ V(R) = R_"sol" I = #qty(V-R, "V", chiffres: 2) $
 
     #figure(
         canvas({
@@ -114,10 +114,10 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
                 y-max: V-R * 1.2,
                 x-label: $r$,
                 y-label: $V(r)$,
-                y-ticks: ((0, $0$), (V-R, num(scientifique(V-R, 2)))),
+                y-ticks: ((0, $0$), (V-R, num(V-R, chiffres: 2))),
                 { add(domain: (R, 3), V) },
                 y-tick-step: none,
-                x-ticks: ((R, num(scientifique(R, 2))),),
+                x-ticks: ((R, num(R, chiffres: 2)),),
                 x-tick-step: none,
                 axis-style: "school-book",
             )
@@ -160,7 +160,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
     La solution positive est 
     #let d = 0.3
     #let r-min = (-d + calc.sqrt(d*d + 4 * I * d / (2 * calc.pi * gamma-sol * V-max))) / 2
-    $ r_"min" = (-d + sqrt(d^2 + 4 I d/(2 pi gamma V_"max")))/2 = #qty(scientifique(r-min, 2), "m") $
+    $ r_"min" = (-d + sqrt(d^2 + 4 I d/(2 pi gamma V_"max")))/2 = #qty(r-min, "m", chiffres: 2) $
 
-    Selon ce modèle, il faudrait se tenir à plus de #qty(scientifique(r-min, 2), "m") de la demi-sphère. Sur la photo, la distance est beaucoup plus faible. Cela peut s'expliquer par le fait que l'étude a été faite en régime stationnaire, ce qui n'est pas le cas pour un éclair.
+    Selon ce modèle, il faudrait se tenir à plus de #qty(r-min, "m", chiffres: 2) de la demi-sphère. Sur la photo, la distance est beaucoup plus faible. Cela peut s'expliquer par le fait que l'étude a été faite en régime stationnaire, ce qui n'est pas le cas pour un éclair.
 ]

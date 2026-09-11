@@ -37,9 +37,9 @@ Les câbles haute tension ont une résistance linéique de l'ordre de #qty("0.1"
         table(
             columns: (auto, auto),
             [Matériau], [Masse linéique (#unit("kg/m"))],
-            [Cuivre], num(scientifique(8.96e3 / (6e7 * 0.1e-3), 1)),
-            [Aluminium], num(scientifique(2.7e3 / (3.8e7 * 0.1e-3), 1)),
-            [Graphite], num(scientifique(2.25e3 / (2e4 * 0.1e-3), 1)),
+            [Cuivre], num(8.96e3 / (6e7 * 0.1e-3), chiffres: 1),
+            [Aluminium], num(2.7e3 / (3.8e7 * 0.1e-3), chiffres: 1),
+            [Graphite], num(2.25e3 / (2e4 * 0.1e-3), chiffres: 1),
         ),
     )
     Le matériau le plus léger est l'aluminium.

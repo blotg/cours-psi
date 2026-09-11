@@ -52,7 +52,7 @@ On commande un moteur à courant continu d'inductance propre #qty("10", "mH") et
 
     #let L = E / (4 * ondulation-max) * T
     #let Lajout = L - Lmoteur
-    L'inductance à ajouter est donc $ L_"ajout" = E alpha(1-alpha)/(Delta i) T - L_"moteur" = #qty(scientifique(Lajout, 2), "H") $
+    L'inductance à ajouter est donc $ L_"ajout" = E alpha(1-alpha)/(Delta i) T - L_"moteur" = #qty(Lajout, "H", chiffres: 2) $
 
     Remarque : on a utilisé le fait que deux inductances en série s'additionnent. Pour le montrer, on peut écrire la loi des mailles :
     $ u_L = u_(L 1) + u_(L 2) = L_1 dv(i, t) + L_2 dv(i, t) = (L_1 + L_2) dv(i, t) $

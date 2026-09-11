@@ -46,7 +46,7 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
     #let R = 1.5e-3
     #let tc = 2 * R * R * mv-acier / (9 * viscosité)
     $
-        tau = m /(6 pi eta R) = (4/3 pi R^3 rho_"acier")/(6 pi eta R) = (2 R^2 rho_"acier")/(9 eta) = #qty(scientifique(tc, 1), "s")
+        tau = m /(6 pi eta R) = (4/3 pi R^3 rho_"acier")/(6 pi eta R) = (2 R^2 rho_"acier")/(9 eta) = #qty(tc, "s", chiffres: 1)
     $
 ]
 
@@ -112,12 +112,12 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
         }),
     )
     #let p = 0.029/2.4e-6
-    Une lecture graphique donne une pente de $p=qty("0.029", "m/s")/qty("2.4", "mm^2") = #qty(scientifique(p, 2), "/s/m")$.
+    Une lecture graphique donne une pente de $p=qty("0.029", "m/s")/qty("2.4", "mm^2") = #qty(p, "/s/m", chiffres: 2)$.
 
     On a donc
     #let visc = 2 * g * mv-acier / (9 * p)
     $
-        eta = (2 g' rho_"acier")/(9 p) = #qty(scientifique(visc, 2), "Pl")
+        eta = (2 g' rho_"acier")/(9 p) = #qty(visc, "Pl", chiffres: 2)
     $
 ]
 #figure(
@@ -166,8 +166,8 @@ L'éprouvette est de diamètre très supérieur à celui de la bille. La force d
     #let R = 1.5e-3
     #let v = 2 * mv-acier * g / (9 * viscosité) * R * R
     #let reynolds = v * 2 * R * mv-glycerine / viscosité
-    La plus grosse bille ($R = #qty("1.5", "mm")$) atteint $v_"lim" = #qty(scientifique(v, 2), "m/s")$, d'où
-    $ R_e = (v D)/nu = (2 v R rho_"glycérine")/eta = #num(scientifique(reynolds, 2)) $
+    La plus grosse bille ($R = #qty("1.5", "mm")$) atteint $v_"lim" = #qty(v, "m/s", chiffres: 2)$, d'où
+    $ R_e = (v D)/nu = (2 v R rho_"glycérine")/eta = #num(reynolds, chiffres: 2) $
 
     $R_e$ est d'autant plus grand que $R$ est grand. Il est très inférieur à $1$ pour la plus grande des billes, donc pour toutes les autres aussi. Il est donc légitime de considérer un modèle linéaire des frottements fluides.
 ]

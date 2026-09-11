@@ -67,7 +67,7 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
     Ici, $Delta P = P_e - P_a = mu g h$ et $S = pi R^2$ d'où $R^4 = S^2/pi^2$, ainsi
     $ D_V = (S^2)/(8 pi eta L) mu g h $
     Le débit volumique est relié à la vitesse débitante par la relation $D_V = U S$, donc :
-    $ U = D_V/S = (S mu g h)/(8 pi eta L) = #qty(scientifique(U, 1), "m/s") $
+    $ U = D_V/S = (S mu g h)/(8 pi eta L) = #qty(U, "m/s", chiffres: 1) $
 ]
 
 #question[
@@ -75,7 +75,7 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
 ][
     #let Re = (S * mv * g * h * 2 * calc.sqrt(S / calc.pi) * mv) / (8 * calc.pi * viscosité * L * viscosité)
     Le diamètre de la conduite est tel que $S = pi (D/2)^2$, d'où $D = 2 sqrt(S/pi)$
-    $ R_e = (U D)/(nu) = (S mu g h 2 sqrt(S/pi) mu)/(8 pi eta L eta) = #num(scientifique(Re, 1)) $
+    $ R_e = (U D)/(nu) = (S mu g h 2 sqrt(S/pi) mu)/(8 pi eta L eta) = #num(Re, chiffres: 1) $
 
     $R_e > 2000$, l'écoulement n'est donc pas laminaire, la modélisation précédente n'est pas correcte.
 ]

@@ -6,6 +6,7 @@
 // séparation visuelle entre le bloc de gauche et la mention de licence.
 #import "helper-functions.typ": markup
 #import "@preview/ccicons:1.0.1": *
+#import "@preview/zero:0.6.1": set-num, set-round
 #let pied-de-page = context {
     set text(size: 7.5pt, fill: luma(45%))
     // init-document souligne les liens ; dans un pied de page c'est du bruit.
@@ -72,11 +73,9 @@
     show link: underline
     import "lib.typ": *
     set-round(mode: "figures")
-    // unify ne connait ni le tour ni l'année : sans ces déclarations,
-    // qty("1500", "tr/min") imprime « 1500 min⁻¹ » et qty("8.9", "an")
-    // n'imprime aucune unité, le tout sans la moindre erreur de compilation.
-    add-unit("tour", "tr", "upright(\"tr\")")
-    add-unit("année", "an", "upright(\"an\")")
+    // Le point de multiplication d'unify plutôt que la croix, défaut de zero :
+    // c'est la notation du cours, et tous les documents déjà tirés l'ont.
+    set-num(product: sym.dot.op)
     show: styles-blocs
     if logotype {
         let largeur = 30mm

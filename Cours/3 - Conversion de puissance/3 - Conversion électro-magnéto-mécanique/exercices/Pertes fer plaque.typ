@@ -38,9 +38,9 @@ La plaque signalétique d'un moteur à courant continu indique les caractéristi
     #let Phi0 = Pméca/(I*O)
     #let R = (U - Phi0*O)/I
     #let Pcu = R*calc.pow(I,2) + Ue*Ie
-    Les pertes cuivre sont donc, pour les circuits rotoriques et statorique, $P_ce("Cu") = (U - P_"mécanique"/Gamma) I  + U_e I_e = #qty(scientifique(Pcu,2),"W")$
+    Les pertes cuivre sont donc, pour les circuits rotoriques et statorique, $P_ce("Cu") = (U - P_"mécanique"/Gamma) I  + U_e I_e = #qty(Pcu, "W", chiffres: 2)$
 
     Un bilan de puissance sur l'induit donne $U I = P_"mécanique" + P_ce("Cu") + P_ce("Fe")$, soit
-    $ P_ce("Fe") = U I - P_"mécanique" - P_ce("Cu") = #qty(scientifique(U*I - Pméca - R*calc.pow(I,2),2),"W") approx 0 $
+    $ P_ce("Fe") = U I - P_"mécanique" - P_ce("Cu") = #qty(U*I - Pméca - R*calc.pow(I,2), "W", chiffres: 2) approx 0 $
 
 ]

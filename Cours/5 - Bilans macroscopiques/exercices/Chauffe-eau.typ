@@ -37,7 +37,7 @@ La capacité thermique massique de l'eau est $c_p = #qty("4.18", "kJ/kg/K")$.
     #let Tsortie = 37
     #let DV = P/(mv * capa * (Tsortie - Tentree))
     $
-      D_(V,"max") = D_(m,"max")/mu = P_"th" / (mu c_p (T_"sortie" - T_"entrée")) = #qty(scientifique(DV,1), "m^3/s") = #qty(scientifique(DV*60*1000,1), "L/min")
+      D_(V,"max") = D_(m,"max")/mu = P_"th" / (mu c_p (T_"sortie" - T_"entrée")) = #qty(DV, "m^3/s", chiffres: 1) = #qty(DV*60*1000, "L/min", chiffres: 1)
     $
     C'est très en deçà des #qty("12", "L/min") à #qty("20", "L/min") d'une douche : ce chauffe-eau ne convient pas. Il pourrait tout au plus alimenter un lavabo.
 ]

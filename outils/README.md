@@ -160,6 +160,40 @@ flashcards, la liste des manipulations, le diaporama, les questions de colle
 et les pages de liens du site. Les données leur arrivent en JSON par
 `--input données`.
 
+## Unités et nombres
+
+Les unités et les nombres du cours sont rendus par
+[`zero`](https://typst.app/universe/package/zero) ; `unify` a disparu, et avec
+lui la fonction maison `scientifique()`. Les appels gardent leur forme —
+`unit("m/s")`, `qty("1.3", "T")`, `num("42")` — parce que `zi.declare` lit la
+même syntaxe de chaine. La couche de traduction tient dans
+[`prepa/0.1.1/unités.typ`](../prepa/0.1.1/unités.typ) ; elle ne fait que deux
+choses :
+
+- **Les graphies d'unify**, dans `UNITÉS-COMPLÉMENTAIRES` : unify écrivait
+  l'ohm « O » et le micro « u », zero veut le symbole et le préfixe « mu ». Une
+  quinzaine de jetons, plus le degré et le degré Celsius.
+- **L'exposant en E majuscule** (« 6.0E-2 ») qu'unify tolérait et que zero
+  refuse.
+
+Les chiffres significatifs se demandent maintenant à l'appel :
+`qty(x, "T", chiffres: 2)` au lieu de `qty(scientifique(x, 2), "T")`. La valeur
+est arrondie avant d'être passée à zero, qui la met seul en notation
+scientifique (à partir de l'exposant 1 — « 3,14 » ne devient pas « 3,14·10⁰ »).
+Cet arrondi préalable n'est pas un reste de l'ancienne fonction : zero fixe
+l'exposant sur son entrée et ne renormalise pas la mantisse quand l'arrondi la
+porte à 10, si bien que 9,96·10⁵ à deux chiffres sortait « 10,0·10⁵ ».
+
+Trois différences de rendu par rapport à unify, toutes voulues :
+
+- Les nombres de cinq chiffres et plus sont **groupés** : « 96 500 » et non
+  « 96500 ». C'est le défaut de zero, et l'usage français.
+- « 1500 tr/min » et « 8,9 an » **sortent enfin** : malgré ses `add-unit`,
+  unify perdait le tour et l'année en silence. Les trois `add-unit` qui
+  trainaient dans le cours (`USI`, `tog`, `cal`) ont pu disparaitre.
+- Le signe de multiplication reste le point d'unify (`set-num(product:
+  sym.dot.op)` dans `init-document`), et non la croix de zero.
+
 ## D'où viennent les données
 
 Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec

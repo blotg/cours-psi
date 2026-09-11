@@ -117,7 +117,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
     $
     Avec $c = qty("340", "m/s")$, $rho_0=qty("1", "kg/m^3")$, on obtient
     $
-        delta = #qty(scientifique(d, 2), "m")
+        delta = #qty(d, "m", chiffres: 2)
     $
 ]
 
@@ -129,7 +129,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
 )[
     Est-ce la raison pour laquelle on entend moins bien un son quand on s'éloigne de sa source ?
 ][
-    Si la seule cause d'atténuation était l’absorption décrite dans cet exercice, au bout de $delta approx #qty(scientifique(d, 2), "m")$, l'amplitude de l'onde serait divisée par $e approx #num(scientifique(calc.e, 2))$. Or, l'amplitude est bien plus faible à une si longue distance.
+    Si la seule cause d'atténuation était l’absorption décrite dans cet exercice, au bout de $delta approx #qty(d, "m", chiffres: 2)$, l'amplitude de l'onde serait divisée par $e approx #num(calc.e, chiffres: 2)$. Or, l'amplitude est bien plus faible à une si longue distance.
 
     Les ondes sonores du quotidien ne sont pas planes mais souvent sphériques et leur atténuation est due majoritairement à un étalement de leur puissance sur des surfaces d'ondes de plus en plus grandes au fur et à mesure de leur propagation.
 ]

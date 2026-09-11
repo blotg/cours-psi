@@ -44,7 +44,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
     Le pas de profondeur est donné par $Delta z = 10 / 100 = #qty("0.1", "m")$.
 
     $
-        2 D (Delta t) / (Delta z^2) = 2 times #num("1e-6") times #num("3600") / #num("0.1")^2 = #num(scientifique(2 * D * dt / calc.pow(dz, 2), 2)) < 1
+        2 D (Delta t) / (Delta z^2) = 2 times #num("1e-6") times #num("3600") / #num("0.1")^2 = #num(2 * D * dt / calc.pow(dz, 2), chiffres: 2) < 1
     $
     La condition de stabilité est bien vérifiée.
 ]

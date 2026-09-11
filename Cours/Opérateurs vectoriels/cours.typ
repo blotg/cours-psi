@@ -242,7 +242,7 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
     verso: "$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $",
 )
 
-#schéma(titre: "Orientation relative entre une surface et sa frontière")[#box(height: 3cm)]
+#schéma(titre: "Orientation relative entre une surface et sa frontière", hauteur: 3cm)
 
 == Champ irrotationnel
 Un champ dont le rotationnel est nul est dit irrotationnel.

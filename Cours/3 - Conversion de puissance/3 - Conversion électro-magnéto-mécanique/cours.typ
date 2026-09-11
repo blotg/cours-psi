@@ -81,7 +81,7 @@ Le contacteur électromécanique en translation est composé de deux parties fer
 #figure(image("images/relais.png", height: 5cm), caption: "Contacteur électromécanique en translation")
 
 
-#schéma(titre: "Contacteur électromécanique en translation")[#box(height: 3cm)]
+#schéma(titre: "Contacteur électromécanique en translation", hauteur: 3cm)
 
 Le courant électrique crée un champ magnétique qui fait se déplacer la partie mobile.
 
@@ -208,7 +208,7 @@ Les circuits électriques peuvent donner naissance à plusieurs paires de pôles
 
 Les circuits électriques se trouvent dans des encoches sur le matériau ferromagnétique. L'entrefer est très étroit.
 
-#schéma(titre: "Structure d'une machine synchrone diphasée et bipolaire")[#box(height: 4cm)]
+#schéma(titre: "Structure d'une machine synchrone diphasée et bipolaire", hauteur: 4cm)
 
 #grid(
     columns: (1fr, 1fr),
@@ -243,7 +243,7 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
 
 Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) va(e)_r$.
 
-#schéma(titre: [Champ statorique créé par 3 spires d'*un* circuit statorique])[#box(height: 4cm)]
+#schéma(titre: [Champ statorique créé par 3 spires d'*un* circuit statorique], hauteur: 4cm)
 
 Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I sqrt(2) cos(omega t)$ et $i_2=I sqrt(2) cos(omega t+pi/2)$.
 
@@ -263,7 +263,7 @@ Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de m�
 
 Ce champ magnétique est appelé champ glissant car il tourne#footnote[Pour être précis, la position du maximum de $B_s$ tourne.] à la pulsation $omega$ dans le sens trigonométrique.
 
-#schéma(titre: "Champ glissant")[#box(height: 3cm)]
+#schéma(titre: "Champ glissant", hauteur: 3cm)
 
 
 #question-de-début-de-cours(
@@ -397,7 +397,7 @@ Si $alpha < 0$ le rotor est en avance sur le champ glissant. Le couple moyen sub
 
 == Stabilité du système
 
-#schéma(titre: [Courbe du couple moyen en fonction de $alpha$])[#box(height: 3cm)]
+#schéma(titre: [Courbe du couple moyen en fonction de $alpha$], hauteur: 3cm)
 
 Pour $alpha in ]-pi/2, pi/2[$, le système est stable : si le couple résistant augmente, le rotor ralentit brièvement, augmentant ainsi l'angle $alpha$ entre rotor et champ tournant ; le couple moteur augmente alors pour s'ajuster au couple résistant.
 
@@ -431,7 +431,7 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
     $ u_2(t)=R_s i_2 + L dv(i_2, t) + E_2 $
 ]
 
-#schéma(titre: "Schéma équivalent de l'induit")[#box(height: 4cm)]
+#schéma(titre: "Schéma équivalent de l'induit", hauteur: 4cm)
 
 #flashcard(
     recto: "Modèle électrique équivalent d'un moteur synchrone.",
@@ -485,11 +485,11 @@ L'angle de pilotage est $Psi=pi/2 - alpha$.
     verso: "Angle $Psi=pi/2 - alpha$ où $alpha$ est l'angle entre le champ glissant et le champ rotorique.",
 )
 
-#schéma(titre: "Angle de pilotage")[#box(height: 3cm)]
+#schéma(titre: "Angle de pilotage", hauteur: 3cm)
 
 La loi des mailles peut être représentée sur un diagramme de Fresnel#footnote[Dans ce contexte, le diagramme de Fresnel est parfois appelé diagramme de Behn-Eschenburg].
 
-#schéma(titre: "Diagramme de Fresnel de la loi des mailles")[#box(height: 4cm)]
+#schéma(titre: "Diagramme de Fresnel de la loi des mailles", hauteur: 4cm)
 
 == Rendement et puissance
 
@@ -515,7 +515,7 @@ Le moteur synchrone reçoit de la puissance sous forme électrique. Une partie e
 
 Il est possible de réaliser un bilan de puissance plus complet faisant apparaitre toutes les formes de pertes.
 
-#schéma(titre: "Transfert de puissance électrique - mécanique")[#box(height: 4cm)]
+#schéma(titre: "Transfert de puissance électrique - mécanique", hauteur: 4cm)
 
 == Fonctionnement en alternateur
 
@@ -529,7 +529,7 @@ Si l'alternateur est équilibré, les relations vues précédemment sont valable
 
 On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-électromotrice.
 
-#schéma(titre: "Schéma équivalent et diagramme de Fresnel en fonctionnement générateur")[#box(height: 4cm)]
+#schéma(titre: "Schéma équivalent et diagramme de Fresnel en fonctionnement générateur", hauteur: 4cm)
 
 #question-de-colle(
     "Représenter le schéma équivalent de l'induit en fonctionnement moteur et alternateur. Écrire la loi des mailles et la représenter sur un diagramme de Fresnel dans les deux cas.",
@@ -568,7 +568,7 @@ Les enroulements rotorique et statorique sont parcourus par des courants continu
     caption: "Photographies de machines à courant continu dont on a retiré le capot.",
 )
 
-#schéma(titre: "Schéma en couple d'une machine à courant continu")[#box(height: 3cm)]
+#schéma(titre: "Schéma en couple d'une machine à courant continu", hauteur: 3cm)
 
 Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
@@ -726,7 +726,7 @@ La conservation de l'énergie dans une machine sans perte permet d'en déduire l
 == Pertes
 Les bilans énergétiques aux différentes étapes de conversion peuvent être représentés sur un schéma.
 
-#schéma(titre: "Pertes aux différentes étapes de conversion en régime stationnaire")[#box(height: 4cm)]
+#schéma(titre: "Pertes aux différentes étapes de conversion en régime stationnaire", hauteur: 4cm)
 
 #question-de-colle(
     "Énoncer la relation couple-courant pour une machine à courant continu. Établir la relation vitesse angulaire-tension pour une machine sans pertes. Présenter la chaine énergétique pour un moteur à courant continu, en faisant apparaitre tous les types de pertes.",
@@ -737,7 +737,7 @@ Comme pour la machine synchrone, le modèle électrique de l'inducteur ne se com
 
 Le modèle équivalent de l'induit est le même que pour la machine synchrone, mais il n'y a qu'un seul circuit.
 
-#schéma(titre: "Modèle électrique de l'induit")[#box(height: 3cm)]
+#schéma(titre: "Modèle électrique de l'induit", hauteur: 3cm)
 
 #flashcard(
     recto: "Modèle équivalent de l'induit d'un moteur à courant continu",
@@ -778,4 +778,4 @@ La machine à courant continu peut être utilisée en fonctionnement générateu
 
 En fonctionnement générateur, on adopte préférentiellement la convention générateur, en posant $E_"cém" = -E_"ém"$.
 
-#schéma(titre: "Schéma équivalent en fonctionnement générateur")[#box(height: 4cm)]
+#schéma(titre: "Schéma équivalent en fonctionnement générateur", hauteur: 4cm)

@@ -57,5 +57,5 @@ Un abonné d'EDF dispose d'un radiateur électrique qui est parcouru par #qty(I2
 )[
     Calculer le facteur de puissance du moteur.
 ][
-    $ cos(phi_1) = (I^2 - I_(1)^2 - I_(2)^2)/(2I_1 I_2) = (#I^2 - #I1^2 - #I2^2)/(2 times #I1 times #I2) = #num(scientifique((I*I - I1*I1 - I2*I2)/(2*I1*I2), 2)) $
+    $ cos(phi_1) = (I^2 - I_(1)^2 - I_(2)^2)/(2I_1 I_2) = (#I^2 - #I1^2 - #I2^2)/(2 times #I1 times #I2) = #num((I*I - I1*I1 - I2*I2)/(2*I1*I2), chiffres: 2) $
 ]

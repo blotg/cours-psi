@@ -151,6 +151,6 @@ On prend pour condition aux limites $n(r=R)=0$.
     $
         m_c & = mu 4/3 pi R_c^3 \
             & = mu 4/3 pi (pi sqrt(D tau/(nu-1)))^3 \
-            & = #qty(scientifique(mc,2), "kg")
+            & = #qty(mc, "kg", chiffres: 2)
     $
 ]

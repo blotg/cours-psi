@@ -44,7 +44,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     #let Gamma-t = 0.5
     #let phi-0 = 0.12
     #let i = Gamma-t / phi-0
-    $ i = Gamma_"t" / Phi_0 = #qty(scientifique(i, 2), "A") $
+    $ i = Gamma_"t" / Phi_0 = #qty(i, "A", chiffres: 2) $
 
     L'équation électrique issue de la loi des mailles dans le circuit de l'induit s'écrit $u = e - r i - L dv(i,t)$ soit $R_c i = e - r i$.
 
@@ -54,7 +54,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     Or $e = Phi_0 Omega$ d'où
     $ (R_c+r) i = (R_c + r)Gamma_"t"/Phi_0 = Phi_0 Omega $
     Finalement,
-    $ Omega = ((R_c + r)Gamma_"t")/(Phi_0^2) = #qty(scientifique(O,2),"rad/s") $
+    $ Omega = ((R_c + r)Gamma_"t")/(Phi_0^2) = #qty(O, "rad/s", chiffres: 2) $
 ]
 
 #question(
@@ -68,13 +68,13 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     #let r = 0.45
     #let rendement = Rc / (r + Rc)
     Le rendement s'écrit
-    $ eta = (u i) / (Gamma_"t" Omega) = (u i)/(Phi_0 i e/Phi_0) = u /e = R_c/(r+R_c) = #num(scientifique(rendement,2)) $
+    $ eta = (u i) / (Gamma_"t" Omega) = (u i)/(Phi_0 i e/Phi_0) = u /e = R_c/(r+R_c) = #num(rendement, chiffres: 2) $
 
     #let Gamma-t = 0.5
     #let phi-0 = 0.12
     #let i = Gamma-t / phi-0
     #let u = Rc * i
     La tension $u$ s'écrit
-    $ u = R_c i = #qty(scientifique(u,2), "V") < #qty("40","V") = U_n $
+    $ u = R_c i = #qty(u, "V", chiffres: 2) < #qty("40","V") = U_n $
     La machine ne fonctionne pas dans les conditions nominales.
 ]

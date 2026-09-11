@@ -8,7 +8,6 @@ On étudie les conditions de survie d'une bactérie dans un lac de très grande 
 
 La bactérie est modélisée par une boule de centre $O$ fixe, de rayon $R$, de masse volumique $mu$ identique à celle de l'eau.
 
-#add-unit("USI", "USI", "upright(\"USI\")")
 
 On se place en régime stationnaire et on note $n(r)$ la densité particulaire, exprimée en #unit("/m^3"), de #ce("O2") dissous à la distance $r$ de $O$ ($r>R$). La diffusion de #ce("O2") obéit à la loi de Fick avec un coefficient de diffusion de $D=qty("2E-9", "USI")$. Loin de la bactérie, la concentration molaire volumique de #ce("O2") dissous dans le lac vaut $c_0=#qty("2.6e-4", "mol/L")$ (c'est la solubilité du dioxygène dans l'eau douce à cette température).
 
@@ -133,7 +132,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
     #let mv = 1e3
     #let Rc = calc.sqrt(3 * D * c0 / (a * mv))
     $
-        R_c = sqrt(3 D c_0 / (a mu)) = #qty(scientifique(Rc, 2), "m")
+        R_c = sqrt(3 D c_0 / (a mu)) = #qty(Rc, "m", chiffres: 2)
     $
     Les bactéries réelles, de rayon $1$ à #qty("10", "um"), sont bien en dessous de ce rayon critique, mais d'un facteur $4$ à $40$ seulement : c'est l'approvisionnement en dioxygène qui limite la taille des bactéries aérobies.
 ]

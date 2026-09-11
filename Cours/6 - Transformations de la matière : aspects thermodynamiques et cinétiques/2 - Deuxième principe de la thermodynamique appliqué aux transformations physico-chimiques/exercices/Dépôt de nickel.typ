@@ -19,7 +19,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
     D'après la loi de Hess,
     $
         Delta_r H^circ = Delta_f H^circ (ce("Ni(s)")) + 4 Delta_f H^circ (ce("CO(g)")) - Delta_f H^circ (ce("Ni(CO)4(g)"))
-        = #qty(scientifique(DrH, 2), "J/mol")
+        = #qty(DrH, "J/mol", chiffres: 2)
     $
     car $Delta_f H^circ (ce("Ni(s)")) = 0$, le nickel solide étant un corps simple dans son état standard.
 
@@ -28,7 +28,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
     De même,
     $
         Delta_r S^circ = S^circ_m (ce("Ni(s)")) + 4 S^circ_m (ce("CO(g)")) - S^circ_m (ce("Ni(CO)4(g)"))
-        = #qty(scientifique(DrS, 2), "J/K/mol")
+        = #qty(DrS, "J/K/mol", chiffres: 2)
     $
 
     $Delta_r S^circ > 0$ donc l'entropie augmente au cours de la réaction, ce qui est cohérent avec le fait que la quantité de matière de gaz (état de la matière désordonné) augmente.
@@ -108,11 +108,11 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
     #let R = 8.314
     #let a = 0.05
     #let T1 = DrH / (DrS - R * calc.ln(calc.pow((4 * a) / (1 + 3 * a), 4) * (1 + 3 * a) / (1 - a)))
-    Pour $alpha = #num("0.05")$, on trouve $T approx #qty(scientifique(T1, 2), "K")$.
+    Pour $alpha = #num("0.05")$, on trouve $T approx #qty(T1, "K", chiffres: 2)$.
 
     #let a = 0.95
     #let T2 = DrH / (DrS - R * calc.ln(calc.pow((4 * a) / (1 + 3 * a), 4) * (1 + 3 * a) / (1 - a)))
-    Pour $alpha = #num("0.95")$, on trouve $T approx #qty(scientifique(T2, 2), "K")$.
+    Pour $alpha = #num("0.95")$, on trouve $T approx #qty(T2, "K", chiffres: 2)$.
 
     La réaction est endothermique, son équilibre est donc déplacé dans le sens direct en augmentant la température, ce qui est cohérent avec le fait que le coefficient de dissociation augmente avec la température.
 ]

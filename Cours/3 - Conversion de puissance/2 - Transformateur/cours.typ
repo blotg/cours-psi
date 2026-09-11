@@ -17,7 +17,7 @@
 = Présentation du transformateur
 Le transformateur est constitué d'un circuit magnétique sans entrefer sur lequel sont enroulés deux bobinages appelés primaire et secondaire.
 
-#schéma(titre: "Transformateur")[#box(height: 4cm)]
+#schéma(titre: "Transformateur", hauteur: 4cm)
 
 Le transformateur est utilisé pour modifier l'amplitude de la tension et de l'intensité du courant en régime alternatif.
 
@@ -59,7 +59,7 @@ Dans le modèle du transformateur idéal,
     ),
 )
 
-#schéma(titre: "Schéma électrique du transformateur idéal")[#box(height: 3cm)]
+#schéma(titre: "Schéma électrique du transformateur idéal", hauteur: 3cm)
 
 == Loi de transformation des tensions
 
@@ -253,7 +253,7 @@ Un transformateur réel comporte des pertes par hystérésis. Pour les limiter, 
 
 Un transformateur réel comporte des pertes par courants de Foucault. Pour les limiter, le circuit magnétique est feuilleté.
 
-#schéma(titre: "Feuilletage du transformateur réel")[#box(height: 3cm)]
+#schéma(titre: "Feuilletage du transformateur réel", hauteur: 3cm)
 
 Pertes par hystérésis et pertes par courant de Foucault sont regroupées sous le terme "pertes fer".
 

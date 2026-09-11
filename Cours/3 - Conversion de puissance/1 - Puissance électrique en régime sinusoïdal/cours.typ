@@ -38,7 +38,7 @@ L'amplitude pic à pic est la différence entre la valeur la plus haute et la va
 
 L'amplitude est la moitié de l'amplitude pic à pic.
 
-#schéma(titre: "Amplitude et amplitude pic à pic")[#box(height: 3cm)]
+#schéma(titre: "Amplitude et amplitude pic à pic", hauteur: 3cm)
 
 == Valeur moyenne
 La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne est la valeur autour de laquelle évolue le signal.
@@ -69,7 +69,7 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
     ),
 )
 
-#schéma(titre: "Valeur moyenne")[#box(height: 3cm)]
+#schéma(titre: "Valeur moyenne", hauteur: 3cm)
 
 #encadré(
     titre: "Valeur moyenne d'un signal sinusoïdal",
@@ -218,7 +218,7 @@ En électricité, on appelle régime sinusoïdal le régime dans lequel les tens
 == Notations complexes
 Aux grandeurs sinusoïdales, on peut associer des grandeurs complexes permettant de faciliter les calculs. À $s(t)=S cos(omega t+phi)$, on associe $underline(s)(t)=S e^(j( omega t+phi))=underline(S)e^(j omega t)$. La grandeur $underline(S)=S e^(j phi)$ est appelée amplitude complexe.
 
-#schéma(titre: "Diagramme de Fresnel")[#box(height: 3cm)]
+#schéma(titre: "Diagramme de Fresnel", hauteur: 3cm)
 
 Pour passer d'une grandeur complexe $underline(s)$ à une grandeur $s$, on prend la partie réelle : $s=Re(underline(s))$.
 
@@ -254,7 +254,7 @@ Un dipôle dont la réactance est positive est dit inductif. Un dipôle dont la 
 
 Un dipôle de résistance nulle est dit purement réactif.
 
-#schéma(titre: "Diagramme de Fresnel pour un dipôle inductif et un dipôle capacitif")[#box(height: 3cm)]
+#schéma(titre: "Diagramme de Fresnel pour un dipôle inductif et un dipôle capacitif", hauteur: 3cm)
 
 == Puissance moyenne reçue par un dipôle
 

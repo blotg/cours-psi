@@ -58,12 +58,12 @@ L'étude s'intéresse au régime stationnaire.
 
     Pour la pierre :
     $
-        R_"th,pierre" = e_p/(lambda_p S) = qty(#scientifique(Rp, 2), "K/W")
+        R_"th,pierre" = e_p/(lambda_p S) = #qty(Rp, "K/W", chiffres: 2)
     $
 
     Pour la laine de verre :
     $
-        R_"th,laine" = e_l/(lambda_l S) = qty(#scientifique(Rl, 1), "K/W")
+        R_"th,laine" = e_l/(lambda_l S) = #qty(Rl, "K/W", chiffres: 1)
     $
 ]
 
@@ -107,7 +107,7 @@ L'étude s'intéresse au régime stationnaire.
     )
     Les résistances thermiques sont en série. La résistance thermique équivalente est donc la somme des résistances thermiques :
     $
-        R_"th,eq" = R_"th,conv" + R_"th,pierre" + R_"th,laine" + R_"th,conv" = qty(#scientifique(Req, 1), "K/W")
+        R_"th,eq" = R_"th,conv" + R_"th,pierre" + R_"th,laine" + R_"th,conv" = #qty(Req, "K/W", chiffres: 1)
     $
 ]
 
@@ -124,7 +124,7 @@ L'étude s'intéresse au régime stationnaire.
     La puissance thermique perdue par le mur est donnée par la loi d'Ohm thermique : $Phi = (T_i - T_e)/R_"th,eq"$.
 
     On trouve : $
-        Phi = qty(#scientifique((Ti - Te)/Req, 1), "W")
+        Phi = #qty((Ti - Te)/Req, "W", chiffres: 1)
     $
 
     Pour maintenir la température intérieure constante, le radiateur doit fournir une puissance égale à cette puissance perdue. En effet, en régime stationnaire, le bilan d'énergie sur l'intérieur de la maison impose que la puissance fournie par le chauffage compense exactement la puissance perdue par les murs.

@@ -39,7 +39,7 @@ La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, do
 #question()[
     Quelle est la fréquence de la porteuse ?
 ][
-    On compte $12$ oscillations rapides (la porteuse) sur une durée de #qty("0.3", "ms") : la fréquence de la porteuse vaut donc $f_p = 1/T_p = num("12")/num("0.3e-3") = #qty(scientifique(12 / 0.3e-3, 2), "Hz")$.
+    On compte $12$ oscillations rapides (la porteuse) sur une durée de #qty("0.3", "ms") : la fréquence de la porteuse vaut donc $f_p = 1/T_p = num("12")/num("0.3e-3") = #qty(12 / 0.3e-3, "Hz", chiffres: 2)$.
 ]
 
 #question()[

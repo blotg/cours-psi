@@ -57,6 +57,6 @@ Un agriculteur souhaite vidanger une cuve cubique d'un mètre cube remplie d'eau
     #let g = 9.81
     #let tf = 2 * calc.pow(a, 5/2) / (S * calc.sqrt(2 * g))
     $
-      t_f = #qty(scientifique(tf,1), "s") approx #qty(scientifique(tf/60,1), "min")
+      t_f = #qty(tf, "s", chiffres: 1) approx #qty(tf/60, "min", chiffres: 1)
     $
 ]

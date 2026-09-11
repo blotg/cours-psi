@@ -70,7 +70,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     D'où :
     $
         L = sqrt(V^2 - (E + R I)^2)/(omega I)
-        = #qty(scientifique(L, 2), "H")
+        = #qty(L, "H", chiffres: 2)
     $
 ]
 
@@ -86,7 +86,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 
     En utilisant la condition de synchronisme $omega=p Omega$, on a :
     $ E = Phi_0 omega = Phi_0 p Omega = A Omega $ d'où
-    $ A = E/Omega = #qty(scientifique(A, 2), "Wb") $
+    $ A = E/Omega = #qty(A, "Wb", chiffres: 2) $
 ]
 
 
@@ -178,7 +178,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     Le couple développé par le moteur vaut :
     $
         C = 2 A I_N cos(0) = 2 A I_N
-        = #qty(scientifique(2 * A * I, 2), "N m")
+        = #qty(2 * A * I, "N m", chiffres: 2)
     $
 
     #figure(
@@ -208,5 +208,5 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     $ phi = arctan((L omega I_N) / E) = #qty("33","deg") $
 
     En remplaçant $phi$ dans la première équation, on trouve :
-    $ V = E / cos(phi) = #qty(scientifique(E / calc.cos(calc.atan((L * pulsation * I) / E)), 2), "V") $
+    $ V = E / cos(phi) = #qty(E / calc.cos(calc.atan((L * pulsation * I) / E)), "V", chiffres: 2) $
 ]

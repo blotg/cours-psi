@@ -60,7 +60,7 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
     #let E = 1.2e2
     #let O = 6.0e3 * 2 * calc.pi / 60
     #let flux = E / O
-    En circuit ouvert, l'intensité dans la phase est nulle ($underline(I)=0$), donc la tension aux bornes de la phase est égale à la force contre-électromotrice ($underline(U)=underline(E)$). On en déduit que $Phi = E / Omega = #qty(scientifique(flux,2), "Wb")$.
+    En circuit ouvert, l'intensité dans la phase est nulle ($underline(I)=0$), donc la tension aux bornes de la phase est égale à la force contre-électromotrice ($underline(U)=underline(E)$). On en déduit que $Phi = E / Omega = #qty(flux, "Wb", chiffres: 2)$.
 ]
 
 #question(
@@ -76,5 +76,5 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
     #let L = E/(Icc*O)
     La loi des mailles appliquée au circuit de la phase en court-circuit donne $underline(U)=0 = underline(E) + j omega L underline(I)$. On en déduit que $underline(E) = - j omega L underline(I)$. La valeur efficace de la force contre-électromotrice s'écrit donc $E = omega L I$.
     $E$ ne dépend que de la vitesse de rotation du rotor et du flux magnétique $Phi$ créé par le rotor, on a donc toujours $E = #qty("1.2e2","V")$.
-    On en déduit que $L = E / (omega I_(c c)) = #qty(scientifique(L,2), "H")$.
+    On en déduit que $L = E / (omega I_(c c)) = #qty(L, "H", chiffres: 2)$.
 ]

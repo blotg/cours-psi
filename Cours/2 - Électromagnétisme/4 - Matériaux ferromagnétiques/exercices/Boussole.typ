@@ -17,9 +17,9 @@ Visionner la vidéo suivante.
 
 *Données :*
 
-Moment d'inertie de l'aiguille de la boussole : $J = #qty(scientifique(J, 1), "kg m^2")$.
+Moment d'inertie de l'aiguille de la boussole : $J = #qty(J, "kg m^2", chiffres: 1)$.
 
-Composante horizontale du champ magnétique terrestre : $B = #qty(scientifique(B, 1), "T")$.
+Composante horizontale du champ magnétique terrestre : $B = #qty(B, "T", chiffres: 1)$.
 
 #question(
     coups-de-pouce: (
@@ -47,5 +47,5 @@ Composante horizontale du champ magnétique terrestre : $B = #qty(scientifique(B
 
     La période des oscillations est donc $ T = (2 pi) / omega = 2 pi sqrt(J/(cal(M) B)) $
 
-    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx qty("3", "s")$, soit $ cal(M) = 4 pi^2J/(B T^2) approx qty(#scientifique(M, 1), "A m^2") $
+    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx qty("3", "s")$, soit $ cal(M) = 4 pi^2J/(B T^2) approx #qty(M, "A m^2", chiffres: 1) $
 ]

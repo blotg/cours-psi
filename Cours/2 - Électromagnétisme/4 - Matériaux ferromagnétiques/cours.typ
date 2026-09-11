@@ -328,7 +328,7 @@ Un matériau ferromagnétique canalise les lignes de champ magnétique. Lorsque 
 == Présentation empirique : le cycle d'hystérésis
 Pour un matériau ferromagnétique, le champ magnétique $va(B)$ et l'aimantation $va(M)$ dépendent de l'excitation magnétique. Cette dépendance comporte une hystérésis.
 
-#schéma(titre: "Cycle d'hystérésis")[#box(height: 5cm)]
+#schéma(titre: "Cycle d'hystérésis", hauteur: 5cm)
 
 L'aimantation peut saturer, ce qui correspond à un état où tous les dipôles magnétiques sont orientés dans le même sens que l'excitation magnétique $va(H)$.
 
@@ -338,7 +338,7 @@ L'excitation coercitive est l'excitation qu'il faut appliquer pour que le champ 
 
 Un matériau ferromagnétique dur est un matériau ferromagnétique dont le cycle d'hystérésis est large.
 
-#schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique dur")[#box(height: 3cm)]
+#schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique dur", hauteur: 3cm)
 
 Un matériau dur a une grande aimantation rémanente et un grand champ magnétique rémanent.
 
@@ -383,7 +383,7 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
     ),
 )
 
-#schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique doux")[#box(height: 3cm)]
+#schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique doux", hauteur: 3cm)
 
 #encadré(
     titre: "Perméabilité magnétique",
@@ -419,7 +419,7 @@ La perméabilité magnétique relative est de l'ordre de $mu_r tilde.op 10^5$.
 === Présentation générale
 Un circuit magnétique sans entrefer est constitué d'un matériau ferromagnétique formant une boucle autour duquel est enroulé un fil parcouru par un courant électrique.
 
-#schéma(titre: "Circuit magnétique sans entrefer")[#box(height: 4cm)]
+#schéma(titre: "Circuit magnétique sans entrefer", hauteur: 4cm)
 Le matériau guide les lignes de champ, elles ont donc une forme similaire à celle du circuit magnétique. Pour étudier le système, on s'intéresse à une ligne de champ moyenne.
 
 === Relations entre grandeurs électriques et électromagnétiques
@@ -540,7 +540,7 @@ Des pertes par effet Joule se produisent également dans le bobinage, souvent r�
 == Circuit magnétique avec entrefer
 Un entrefer est une zone de l'espace vide#footnote[Vide de matériau ferromagnétique.] au sein du circuit magnétique. Un circuit magnétique avec entrefer est appelé un électroaimant car il permet de réaliser un champ magnétique dans une zone de l'espace grâce à un courant électrique.
 
-#schéma(titre: "Circuit magnétique avec entrefer")[#box(height: 4cm)]
+#schéma(titre: "Circuit magnétique avec entrefer", hauteur: 4cm)
 
 #encadré(
     titre: "Champ magnétique dans l'entrefer d'un électroaimant",

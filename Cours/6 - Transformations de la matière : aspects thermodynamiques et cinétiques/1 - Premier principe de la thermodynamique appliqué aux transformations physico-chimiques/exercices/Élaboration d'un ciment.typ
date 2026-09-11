@@ -32,21 +32,21 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélang
     La masse molaire de #ce("Ca3SiO5") est
     $
         M(ce("Ca3SiO5")) = 3 M(ce("Ca")) + M(ce("Si")) + 5 M(ce("O")) =
-        #qty(scientifique(M_Ca3SiO5, 3), "g/mol")
+        #qty(M_Ca3SiO5, "g/mol", chiffres: 3)
     $
 
     Celle de l'eau est
     $
         M(ce("H2O")) = 2 M(ce("H")) + M(ce("O")) =
-        #qty(scientifique(M_H2O, 3), "g/mol")
+        #qty(M_H2O, "g/mol", chiffres: 3)
     $
 
     Les quantités de matière sont donc
     $
-        n_1 = m_1 / M(ce("Ca3SiO5")) = #qty(scientifique(m1 / M_Ca3SiO5, 3), "mol")
+        n_1 = m_1 / M(ce("Ca3SiO5")) = #qty(m1 / M_Ca3SiO5, "mol", chiffres: 3)
     $
     $
-        n_2 = m_2 / M(ce("H2O")) = #qty(scientifique(m2 / M_H2O, 3), "mol")
+        n_2 = m_2 / M(ce("H2O")) = #qty(m2 / M_H2O, "mol", chiffres: 3)
     $
 ]
 
@@ -79,17 +79,17 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélang
             [État final], $n_1 - 2 xi_f$, [], $n_2 - 6 xi_f$, [], $xi_f$, [], $3 xi_f$,
         )
     })
-    - Si #ce("Ca3SiO5") est réactif limitant, on a $xi_f = n_1/2 = #qty(scientifique(m1 / M_Ca3SiO5 / 2, 3), "mol")$.
-    - Si #ce("H2O") est réactif limitant, on a $xi_f = n_2 / 6 = #qty(scientifique(m2 / (6 * M_H2O), 3), "mol")$.
+    - Si #ce("Ca3SiO5") est réactif limitant, on a $xi_f = n_1/2 = #qty(m1 / M_Ca3SiO5 / 2, "mol", chiffres: 3)$.
+    - Si #ce("H2O") est réactif limitant, on a $xi_f = n_2 / 6 = #qty(m2 / (6 * M_H2O), "mol", chiffres: 3)$.
 
     L'avancement le plus petit est celui du ciment : c'est donc lui le réactif limitant, et l'avancement final est
-    $xi_f = n_1 / 2 = #qty(scientifique(m1 / (2 * M_Ca3SiO5), 3), "mol")$
+    $xi_f = n_1 / 2 = #qty(m1 / (2 * M_Ca3SiO5), "mol", chiffres: 3)$
 
     À l'état final, les quantités de matière sont donc :
     - $0$ pour #ce("Ca3SiO5(s)")
-    - $n_2 - 6 n_1/2 = n_2 - 3 n_1 = #qty(scientifique(m2 / M_H2O - 3 * m1 / M_Ca3SiO5, 3), "mol")$ pour #ce("H2O(l)")
-    - $n_1/2 = #qty(scientifique(m1 / (2 * M_Ca3SiO5), 3), "mol")$ pour #ce("[Ca3Si2O7, 3H2O](s)")
-    - $3 n_1/2 = #qty(scientifique(3 * m1 / (2 * M_Ca3SiO5), 3), "mol")$ pour #ce("Ca(OH)2(s)")
+    - $n_2 - 6 n_1/2 = n_2 - 3 n_1 = #qty(m2 / M_H2O - 3 * m1 / M_Ca3SiO5, "mol", chiffres: 3)$ pour #ce("H2O(l)")
+    - $n_1/2 = #qty(m1 / (2 * M_Ca3SiO5), "mol", chiffres: 3)$ pour #ce("[Ca3Si2O7, 3H2O](s)")
+    - $3 n_1/2 = #qty(3 * m1 / (2 * M_Ca3SiO5), "mol", chiffres: 3)$ pour #ce("Ca(OH)2(s)")
 ]
 
 #question(
@@ -174,17 +174,11 @@ L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélang
     soit
     $
         Delta_r H^0 = - (2 / n_1) Delta theta ((n_2-3 n_1) c_(P,m) (ce("H2O(l)")) + n_1/2 c_(P,m) (ce("[Ca3Si2O7, 3H2O](s)")) + 3 n_1/2 c_(P,m) (ce("Ca(OH)2(s)")))\
-        = #qty(
-            scientifique(
-                - (2 / (m1 / M_Ca3SiO5)) * 15.0 * (
+        = #qty(- (2 / (m1 / M_Ca3SiO5)) * 15.0 * (
                     (m2 / M_H2O - 3 * m1 / M_Ca3SiO5) * 75 +
                     (m1 / (2 * M_Ca3SiO5)) * 340 +
                     3 * (m1 / (2 * M_Ca3SiO5)) * 80
-                ),
-                3
-            ),
-            "J/mol"
-        )
+                ), "J/mol", chiffres: 3)
     $
 ]
 

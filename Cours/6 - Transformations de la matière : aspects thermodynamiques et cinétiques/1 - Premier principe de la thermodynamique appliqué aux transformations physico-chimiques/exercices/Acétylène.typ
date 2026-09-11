@@ -37,7 +37,7 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
 
     On en déduit donc que
     $
-        Delta_f H^circ (ce("H2O(g)")) = Delta_f H^circ (ce("H2O(l)")) + L_"vap" M_ce("H2O") = #qty(scientifique(DfH_H2O, 3), "J/mol")
+        Delta_f H^circ (ce("H2O(g)")) = Delta_f H^circ (ce("H2O(l)")) + L_"vap" M_ce("H2O") = #qty(DfH_H2O, "J/mol", chiffres: 3)
     $
 ]
 
@@ -52,7 +52,7 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
     La loi de Hess permet d'écrire l'enthalpie standard de la réaction de combustion de l'acétylène comme
     $
         Delta_r H^circ = 2 Delta_f H^circ (ce("CO2(g)")) + 1 Delta_f H^circ (ce("H2O(g)")) - 1 Delta_f H^circ (ce("C2H2(g)")) - 5/2 Delta_f H^circ (ce("O2(g)"))\
-        = #qty(scientifique(DrH, 3), "J/mol")
+        = #qty(DrH, "J/mol", chiffres: 3)
     $
     car l'enthalpie standard de formation du dioxygène est nulle (corps simple dans son état standard).
 ]

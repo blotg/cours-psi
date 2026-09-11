@@ -25,15 +25,15 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
     #let U1eff = 230
     #let I1eff = 0.26
     #let cos-phi1 = 0.99
-    En charge maximale, la puissance reçue par le primaire est $U_(1 "eff") I_(1 "eff") cos(phi) = 230 times 0.26 times 0.99 = #qty(scientifique(U1eff*I1eff*cos-phi1,2),"W")$
+    En charge maximale, la puissance reçue par le primaire est $U_(1 "eff") I_(1 "eff") cos(phi) = 230 times 0.26 times 0.99 = #qty(U1eff*I1eff*cos-phi1, "W", chiffres: 2)$
 
     #let U2eff = 11.5
     #let I2eff = 4.9
-    La charge étant purement résistive, la puissance fournie par le secondaire est $U_(2 "eff") I_(2 "eff")  = #qty(scientifique(U2eff*I2eff,2),"W")$
+    La charge étant purement résistive, la puissance fournie par le secondaire est $U_(2 "eff") I_(2 "eff")  = #qty(U2eff*I2eff, "W", chiffres: 2)$
 
-    Les pertes totales dans le transformateur sont donc $U_(1 "eff") I_(1 "eff") cos(phi)-U_(2 "eff") I_(2 "eff") approx #qty(scientifique(U1eff*I1eff*cos-phi1 - U2eff*I2eff,1),"W")$
+    Les pertes totales dans le transformateur sont donc $U_(1 "eff") I_(1 "eff") cos(phi)-U_(2 "eff") I_(2 "eff") approx #qty(U1eff*I1eff*cos-phi1 - U2eff*I2eff, "W", chiffres: 1)$
 
-    Les pertes cuivres sont donc $P_"cuivre" = P_"pertes totales"-P_"fer" approx #qty(scientifique(U1eff*I1eff*cos-phi1 - U2eff*I2eff - 0.47,1),"W")$. Les pertes sont majoritairement sous forme de pertes cuivres.
+    Les pertes cuivres sont donc $P_"cuivre" = P_"pertes totales"-P_"fer" approx #qty(U1eff*I1eff*cos-phi1 - U2eff*I2eff - 0.47, "W", chiffres: 1)$. Les pertes sont majoritairement sous forme de pertes cuivres.
 
-    Le rendement du transformateur en charge maximale est donc $eta = (U_(2 "eff") I_(2 "eff"))/(U_(1 "eff") I_(1 "eff") cos(phi)) approx #num(scientifique((U2eff*I2eff)/(U1eff*I1eff*cos-phi1),1))$.
+    Le rendement du transformateur en charge maximale est donc $eta = (U_(2 "eff") I_(2 "eff"))/(U_(1 "eff") I_(1 "eff") cos(phi)) approx #num((U2eff*I2eff)/(U1eff*I1eff*cos-phi1), chiffres: 1)$.
 ]

@@ -35,7 +35,7 @@ Sur le noyau ferromagnétique de forme torique, de section S, de circonférence 
 Le générateur de f.é.m. $e(t) = E cos(omega t)$ est une source de tension sinusoïdale de fréquence $f = qty("50", "Hz")$.
 
 #let R = 1e5
-La résistance $R = #qty(scientifique(R, 2), "O")$ est telle que le produit $n_2i_2$ est négligeable devant le produit $n_1i_1$.
+La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$ est négligeable devant le produit $n_1i_1$.
 
 #question(
     coups-de-pouce: (
@@ -57,7 +57,7 @@ La résistance $R = #qty(scientifique(R, 2), "O")$ est telle que le produit $n_2
     Dans ce montage, le circuit $R C$ (entrée $u_2$, sortie $v_y$) fonctionne en intégrateur. Quelle condition la capacité $C$ doit-elle satisfaire pour cela ? Quelle(s) valeur(s) peut-on choisir pour $C$ parmi les valeurs usuelles suivantes : $qty("10", "nF"), qty("47", "nF"), qty("100", "nF"), qty("1", "uF")$ et $qty("4.7", "uF")$ ?
 ][
     $ underline(H)=1/(j C omega)/(R + 1/(j C omega)) = 1/(j C omega R + 1) $
-    $underline(H) approx 1/(j C omega R)$ si $C omega R >> 1$. Donc $C >> 1/(omega R) = 1/(2 pi f R) approx #qty(scientifique(1 / (pulsation * R), 2), "F")$. Parmi les valeurs proposées, on peut choisir $C = qty("1", "uF")$ ou $C = qty("4.7", "uF")$.
+    $underline(H) approx 1/(j C omega R)$ si $C omega R >> 1$. Donc $C >> 1/(omega R) = 1/(2 pi f R) approx #qty(1 / (pulsation * R), "F", chiffres: 2)$. Parmi les valeurs proposées, on peut choisir $C = qty("1", "uF")$ ou $C = qty("4.7", "uF")$.
 ]
 
 #question(
@@ -104,9 +104,9 @@ Dans toute la suite, on prendra $l = qty("50", "cm")$, $S = qty("20", "cm^2")$, 
 )[
     Calculer, en précisant les unités, les coefficients de proportionnalité entre $H$ et $v_x$ puis entre $B$ et $v_y$.
 ][
-    $n_1/(l R_0) = #qty(scientifique(CH, 2), "A/m/V")$
+    $n_1/(l R_0) = #qty(CH, "A/m/V", chiffres: 2)$
 
-    $(R C)/(n_2 S) = #qty(scientifique(CB, 1), "T/V")$
+    $(R C)/(n_2 S) = #qty(CB, "T/V", chiffres: 1)$
 ]
 
 On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représente #qty("2", "V")). $v_y$ est en abscisse (1 graduation représente #qty("1", "V")).
@@ -122,11 +122,11 @@ On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représ
 )[
     Déduire de cet oscillogramme les valeurs approximatives du champ magnétique rémanent $B_r$, de l'aimantation rémanente $M_r$ et du champ coercitif $H_c$.
 ][
-    Le champ magnétique rémanent est à #num("1.3") carreaux, soit $v_y = #qty("1.3", "V")$ et donc $B_r = #qty(scientifique(CB * 1.3, 1), "T")$.
+    Le champ magnétique rémanent est à #num("1.3") carreaux, soit $v_y = #qty("1.3", "V")$ et donc $B_r = #qty(CB * 1.3, "T", chiffres: 1)$.
 
-    L'excitation coercitive est à #num("0.5") carreaux, soit $v_x = #qty("1", "V")$ et donc $H_c = #qty(scientifique(CH * 1, 2), "A/m")$.
+    L'excitation coercitive est à #num("0.5") carreaux, soit $v_x = #qty("1", "V")$ et donc $H_c = #qty(CH * 1, "A/m", chiffres: 2)$.
 
-    $M = B/mu_0 - H$ d'où $M_r = B/mu_0 = #qty(scientifique(CB * 1.3 / mu0, 1), "A/m")$
+    $M = B/mu_0 - H$ d'où $M_r = B/mu_0 = #qty(CB * 1.3 / mu0, "A/m", chiffres: 1)$
 ]
 
 Dans le schéma du montage, on peut raisonnablement négliger la puissance dissipée par effet Joule dans les enroulements primaire et secondaire. Pour simplifier, on suppose également négligeables les pertes dues aux courants de Foucault dans le tore. Dans ces conditions, la puissance $p_H = u_1i_1$ dissipée est uniquement due aux propriétés ferromagnétiques du noyau.
@@ -152,7 +152,7 @@ Dans le schéma du montage, on peut raisonnablement négliger la puissance dissi
 
     #qty("1", "V^2") correspond à une aire $(R C)/(n_2 S) n_1/(l R_0)$.
 
-    Finalement, $cal(A) = 6 times 2 times num(#scientifique(CH, 2)) times #num(scientifique(CB, 2)) = qty(#scientifique(12 * CH * CB, 1), "A/m T")$.
+    Finalement, $cal(A) = 6 times 2 times #num(CH, chiffres: 2) times #num(CB, chiffres: 2) = #qty(12 * CH * CB, "A/m T", chiffres: 1)$.
 ]
 
 #question(

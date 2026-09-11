@@ -26,7 +26,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 )[
     Calculer l'intensité du courant d'induit nominal.
 ][
-    $S_n = I_n V_n$ donc $ I_n = S_n / V_n = #qty(scientifique(In, 2), "A") $
+    $S_n = I_n V_n$ donc $ I_n = S_n / V_n = #qty(In, "A", chiffres: 2) $
 ]
 
 
@@ -61,7 +61,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
         = sqrt(((k I_e)/I_(c c))^2 - R^2)
     $
     Avec $I_(c c) = 300 I_e$, on obtient
-    $X = sqrt((k/300)^2-R^2) = qty(#scientifique(X, 2), "O")$.
+    $X = sqrt((k/300)^2-R^2) = #qty(X, "O", chiffres: 2)$.
 ]
 
 #question(
@@ -128,7 +128,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
     On en déduit, avec $phi = arccos(0.9)$,
     $
         I = sqrt((sqrt(E^2 - (V cos(phi))^2) - V sin(phi)) / X)
-        = qty(#scientifique(I, 2), "A")
+        = #qty(I, "A", chiffres: 2)
     $
 ]
 
@@ -146,6 +146,6 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
     $
         eta &= P_"utile" / (P_"utile" + P_"Joule" + P_p)\
         &= (2 V I cos(phi)) / (2 V I cos(phi) + 2R I^2 + P_p)\
-        &= #num(scientifique((2 * V * I * calc.cos(angle)) / (2 * V * I * calc.cos(angle) + 2*R * calc.pow(I, 2) + 2.4e6), 2))
+        &= #num((2 * V * I * calc.cos(angle)) / (2 * V * I * calc.cos(angle) + 2*R * calc.pow(I, 2) + 2.4e6), chiffres: 2)
     $
 ]

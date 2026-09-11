@@ -76,8 +76,8 @@
 #let m = 10
 
 #question()[
-    Application numérique : que vaut la valeur efficace de $i_2$ dans le cas où $R_0 = #qty(scientifique(R0, 1), "O")$, $R_1 = #qty(scientifique(R1, 1), "O")$, $R_2 = #qty(scientifique(R2, 1), "O")$, $e = #qty(scientifique(Eeff, 1), "V") _"eff"$ et $m = #num(scientifique(m, 1))$ ?
+    Application numérique : que vaut la valeur efficace de $i_2$ dans le cas où $R_0 = #qty(R0, "O", chiffres: 1)$, $R_1 = #qty(R1, "O", chiffres: 1)$, $R_2 = #qty(R2, "O", chiffres: 1)$, $e = #qty(Eeff, "V", chiffres: 1) _"eff"$ et $m = #num(m, chiffres: 1)$ ?
 ][
     #let I2eff = (m * Eeff * R1) / ((calc.pow(m, 2) * R1 + R2) * R0 + R1 * R2)
-    $ I_(2,"eff") = (m E_"eff" R_1)/((m^2R_1+R_2)R_0 + R_1R_2) = #qty(scientifique(I2eff, 1), "A") $
+    $ I_(2,"eff") = (m E_"eff" R_1)/((m^2R_1+R_2)R_0 + R_1R_2) = #qty(I2eff, "A", chiffres: 1) $
 ]

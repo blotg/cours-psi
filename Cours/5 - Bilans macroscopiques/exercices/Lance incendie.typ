@@ -19,6 +19,6 @@ Le coefficient de frottement statique solide tissus/béton est approximativement
     En égalant les deux expressions, on trouve :
     #let Dm = 300/60
     $
-        v = (f m g)/(D_m) = (0.5 times 80 times 9.81)/(300/60) = #qty(scientifique(0.5 * 80 * 9.81 / Dm, 1), "m/s")
+        v = (f m g)/(D_m) = (0.5 times 80 times 9.81)/(300/60) = #qty(0.5 * 80 * 9.81 / Dm, "m/s", chiffres: 1)
     $
 ]

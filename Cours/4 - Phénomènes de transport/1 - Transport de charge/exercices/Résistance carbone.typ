@@ -34,5 +34,5 @@ Les résistances à film de carbone (qui sont celles utilisées en travaux prati
     La spirale déroulée sera un parallélépipède de largeur $l$ et de longueur $L$. La surface reste la même une fois déroulée donc $l L = 2 pi r h$. On en déduit que $L = (2 pi r h)/l$.
 
     La résistance est $R = L/(e l gamma) = (2 pi r h)/(e l^2 gamma)$ d'où
-    $ l = sqrt((2 pi r h)/(e R gamma)) = #qty(scientifique(l, 1), "m") $
+    $ l = sqrt((2 pi r h)/(e R gamma)) = #qty(l, "m", chiffres: 1) $
 ]

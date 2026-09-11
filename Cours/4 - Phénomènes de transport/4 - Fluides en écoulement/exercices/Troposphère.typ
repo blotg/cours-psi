@@ -48,7 +48,7 @@ On suppose dans un premier temps que la température est uniforme dans la tropos
     #let T = 288
     #let q = 1 - calc.exp(-M-air * g * 10e3 / (R * T))
     $
-        m(qty("10", "km")) / m(infinity) = 1 - exp(-(M_"air" g qty("10", "km"))/(R T)) approx #num(scientifique(q, 2))
+        m(qty("10", "km")) / m(infinity) = 1 - exp(-(M_"air" g qty("10", "km"))/(R T)) approx #num(q, chiffres: 2)
     $
 ]
 
@@ -135,7 +135,7 @@ On renonce à l'hypothèse isotherme pour passer à une atmosphère adiabatique.
     #let z = 11e3
     #let Ttop = T0 - ((gam - 1)/gam) * (M-air * g) / R * z
     $
-        T(qty("11", "km")) = #qty(scientifique(Ttop, 3), "K")
+        T(qty("11", "km")) = #qty(Ttop, "K", chiffres: 3)
     $
 
     La tropopause est en réalité à #qty("217", "K") environ : le modèle adiabatique sec surestime le refroidissement, l'air réel étant humide.

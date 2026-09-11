@@ -5,7 +5,6 @@
     ouvert: true,
 )
 
-#add-unit("cal", "cal", "upright(\"cal\")")
 
 Lorsqu'il est ingéré, l'éthanol contenu dans les boissons alcoolisées est très bien métabolisé par l'organisme en dioxyde de carbone et en eau, apportant quasiment toute son énergie à l'organisme.
 
@@ -19,30 +18,30 @@ Lorsqu'il est ingéré, l'éthanol contenu dans les boissons alcoolisées est tr
 )[
     Combien de kilocalories (#unit("kcal")) sont apportées par un shot de vodka de 3 cL contenant 40 % en volume d'éthanol ? À combien de carreaux de sucre de #qty("4", "g") cela correspond-il ?
 ][
-    Un shot de vodka de 3 cL contient $0.40 times #qty("3", "cL") = #qty(scientifique(0.4 * 3, 2), "cL")$ d'éthanol pur.
+    Un shot de vodka de 3 cL contient $0.40 times #qty("3", "cL") = #qty(0.4 * 3, "cL", chiffres: 2)$ d'éthanol pur.
 
     #let m = 3e-2 * 1e-3 * 0.4 * 0.789 * 1e3
-    La masse d'éthanol contenue dans le shot est donc de $m = mu_"éthanol" V = d mu_"eau" V = #qty(scientifique(m, 2), "kg")$.
+    La masse d'éthanol contenue dans le shot est donc de $m = mu_"éthanol" V = d mu_"eau" V = #qty(m, "kg", chiffres: 2)$.
 
     La quantité de matière d'éthanol contenue dans le shot est donc
     #let n = m / 46.0e-3
     $
-      n = m/M = #qty(scientifique(n, 2), "mol")
+      n = m/M = #qty(n, "mol", chiffres: 2)
     $
 
     La chaleur apportée par le shot est donc
     #let Q = n * 1367e3
     $
-      Q = - n Delta_r H^circ = #qty(scientifique(Q,2), "J") = #qty(scientifique(Q / 4184, 2), "kcal")
+      Q = - n Delta_r H^circ = #qty(Q, "J", chiffres: 2) = #qty(Q / 4184, "kcal", chiffres: 2)
     $
 
     Cette énergie est autant que celle apportée par une masse de sucre
     #let m_sucre = Q / (4.0e3 * 4184)
     $
-      m_"sucre" = Q / (Delta_"comb" H^circ ("sucre")) = #qty(scientifique(m_sucre, 2), "kg")
+      m_"sucre" = Q / (Delta_"comb" H^circ ("sucre")) = #qty(m_sucre, "kg", chiffres: 2)
     $
 
-    Ce qui correspond à $m_"sucre" \/ #qty("4", "g") approx #num(scientifique(m_sucre / 4e-3, 1))$ carreaux de sucre.
+    Ce qui correspond à $m_"sucre" \/ #qty("4", "g") approx #num(m_sucre / 4e-3, chiffres: 1)$ carreaux de sucre.
 ]
 
 *Données*

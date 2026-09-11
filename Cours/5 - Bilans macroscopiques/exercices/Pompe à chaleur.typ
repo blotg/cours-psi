@@ -64,7 +64,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
 ][
     Pour la condensation, on lit une variation d'enthalpie massique
     $
-        Delta h_"condensation" = #num("270") - #num("650") = #qty(scientifique(Dh-cond, 2), "kJ/kg")
+        Delta h_"condensation" = #num("270") - #num("650") = #qty(Dh-cond, "kJ/kg", chiffres: 2)
     $
     Le PPI donne
     $
@@ -72,11 +72,11 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     $
     Soit
     $
-        q_c = Delta h_"condensation" = #qty(scientifique(Dh-cond, 2), "kJ/kg")
+        q_c = Delta h_"condensation" = #qty(Dh-cond, "kJ/kg", chiffres: 2)
     $
     La puissance thermique *fournie* à l'habitation est $P = -q_c D_m$, soit
     $
-        D_m = - P/q_c = #qty(scientifique(Dm, 2), "kg/s")
+        D_m = - P/q_c = #qty(Dm, "kg/s", chiffres: 2)
     $
 ]
 
@@ -98,7 +98,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     $
     La puissance utile est
     $
-        P_u = w_u D_m = #qty(scientifique(Dh-comp * 1e3 * Dm, 2), "W")
+        P_u = w_u D_m = #qty(Dh-comp * 1e3 * Dm, "W", chiffres: 2)
     $
 ]
 
@@ -106,6 +106,6 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
     Calculer l'efficacité, aussi appelée COP (pour Coefficient Of Performance), de la pompe à chaleur. 
 ][
     $
-      e = -Q_c / W_u = -q_c / w_u = #num(scientifique(-Dh-cond / Dh-comp, 2))
+      e = -Q_c / W_u = -q_c / w_u = #num(-Dh-cond / Dh-comp, chiffres: 2)
     $
 ]

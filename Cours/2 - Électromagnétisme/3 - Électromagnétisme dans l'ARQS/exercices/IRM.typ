@@ -24,11 +24,11 @@ Lors de l'entrée dans la machine, le patient se déplace à une vitesse d'envir
   On modélise le corps humain par un cylindre conducteur de rayon $R = #qty("0.2","m")$ et de hauteur $h = #qty("1.7","m")$.
   
   #let pulsation = 2 * calc.pi / 10
-  On estime la taille de l'IRM à #qty("1","m"). Le temps d'entrée dans la machine est donc $Delta t = L/v = #qty("5","s")$. Cette durée est la durée nécessaire pour passer du champ magnétique minimal au champ maximal. Pour un signal sinusoïdal, il s'agirait de la demi période. On note donc $T=qty("10","s")$. La pulsation associée est donc $omega = 2 pi / T = qty(scientifique(#pulsation,#1),"rad/s")$.
+  On estime la taille de l'IRM à #qty("1","m"). Le temps d'entrée dans la machine est donc $Delta t = L/v = #qty("5","s")$. Cette durée est la durée nécessaire pour passer du champ magnétique minimal au champ maximal. Pour un signal sinusoïdal, il s'agirait de la demi période. On note donc $T=qty("10","s")$. La pulsation associée est donc $omega = 2 pi / T = #qty(pulsation, "rad/s", chiffres: 1)$.
 
   #let P = calc.pi * 0.2 * calc.pow(pulsation,2) * 1.7 * calc.pow(0.2,4) / 16
   La puissance moyenne dissipée par les courants de Foucault s'écrit alors
-  $ P_text("moy") approx (pi gamma B_0^2 omega^2 h R^4)/16 = (pi dot 0.2 dot 1^2 dot 0.6^2 dot 1.7 dot 0.2^4)/16 approx qty(scientifique(#P,#1), "W")$
+  $ P_text("moy") approx (pi gamma B_0^2 omega^2 h R^4)/16 = (pi dot 0.2 dot 1^2 dot 0.6^2 dot 1.7 dot 0.2^4)/16 approx #qty(P, "W", chiffres: 1)$
 
   Cette puissance est négligeable devant la puissance métabolique d'un être humain au repos (environ #qty("100","W")). On en conclut que la chaleur dégagée n'est pas dangereuse.
 

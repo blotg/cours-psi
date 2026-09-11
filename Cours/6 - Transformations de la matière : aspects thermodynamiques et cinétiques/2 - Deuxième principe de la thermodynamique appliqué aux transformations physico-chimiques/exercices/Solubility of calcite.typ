@@ -15,7 +15,7 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
     Hess's law states that
     $
         Delta_r G^circ = - Delta_f G^circ (ce("CaCO3(s)")) + Delta_f G^circ (ce("Ca^2+")) + Delta_f G^circ (ce("CO3^2-"))\
-        = #qty(scientifique(DrG, 4), "J/mol")
+        = #qty(DrG, "J/mol", chiffres: 4)
     $
 ]
 
@@ -31,7 +31,7 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
     The solubility product is given by
     $
         K^circ = exp(- (Delta_r G^circ) / (R T))\
-        = #num(scientifique(K, 2))
+        = #num(K, chiffres: 2)
     $
 ]
 

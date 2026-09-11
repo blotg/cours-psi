@@ -20,7 +20,7 @@
     #let T = 4 * R1 / R2 * R * C
     La période de clignotement est de l'ordre de #qty("1", "s"). Il faut choisir les valeurs de composants pour avoir $T = 4R_1/R_2 R C approx qty("1", "s")$ avec $R_1 > R_2$ pour avoir des oscillations. On peut par exemple choisir $R_1 = qty("10", "kO")$, $R_2 = qty("22", "kO")$, $C = qty("10", "uF")$ et $R = qty("66", "kO")$ ce qui donne une période de clignotement de
     $
-        T approx #qty(scientifique(T, 2), "s")
+        T approx #qty(T, "s", chiffres: 2)
     $
 
     #figure(
@@ -52,5 +52,5 @@
         }),
     )
 
-    La tension de sortie $u(t)$ est une tension créneau variant entre #qty("-15", "V") et #qty("15", "V") avec une période de #qty(scientifique(T, 2), "s"). On peut l'envoyer aux ampoules LED avec un circuit de puissance placé en aval, les LED ne s'allumant que la moitié du temps.
+    La tension de sortie $u(t)$ est une tension créneau variant entre #qty("-15", "V") et #qty("15", "V") avec une période de #qty(T, "s", chiffres: 2). On peut l'envoyer aux ampoules LED avec un circuit de puissance placé en aval, les LED ne s'allumant que la moitié du temps.
 ]

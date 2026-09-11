@@ -29,7 +29,7 @@ En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la
     ```
     #let U = calc.sqrt(calc.pow(250,2) + calc.pow(2 * calc.pi * (3000/60) * 0.1 * 10,2))
     A la main, le théorème de Pythagore donne :
-    $ U = sqrt(E^2 + (L omega I)^2) = #qty(scientifique(U,2),"V")$
+    $ U = sqrt(E^2 + (L omega I)^2) = #qty(U, "V", chiffres: 2)$
 ]
 
 #question(

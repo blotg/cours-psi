@@ -32,7 +32,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     #let t98 = -calc.ln(0.02) / kapp
     $
         t_qty("98", "%") = -ln(0.02) / k_"app"
-        approx #qty(scientifique(t98, 2), "min")
+        approx #qty(t98, "min", chiffres: 2)
     $
 ]
 
@@ -61,12 +61,12 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     #let tau98 = (1 - 0.02) / (kapp * 0.02)
     $
         tau = 0.98 / (0.02 k_"app")
-        approx #qty(scientifique(tau98, 2), "min")
+        approx #qty(tau98, "min", chiffres: 2)
     $
     #let V98 = tau98 / 60 * 40
     Le volume du réacteur s'en déduit par $V = tau D_V$ :
     $
-        V = tau D_V approx #qty(scientifique(V98, 2), "L")
+        V = tau D_V approx #qty(V98, "L", chiffres: 2)
     $
 ]
 
@@ -99,12 +99,12 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     #let kapp = 6e-2
     #let tau98 = (calc.pow(0.02, -1/10) - 1) / kapp
     $        tau = ( (1 / 0.02)^(1/10) - 1 ) / k_"app"
-        approx #qty(scientifique(tau98, 2), "min")
+        approx #qty(tau98, "min", chiffres: 2)
     $
     #let Vtot = 10 * tau98 / 60 * 40
     Chaque réacteur a pour volume $tau D_V$, d'où un volume total
     $
-        V_"tot" = 10 tau D_V approx #qty(scientifique(Vtot, 2), "L")
+        V_"tot" = 10 tau D_V approx #qty(Vtot, "L", chiffres: 2)
     $
     soit dix fois moins que le réacteur unique de la question précédente.
 ]

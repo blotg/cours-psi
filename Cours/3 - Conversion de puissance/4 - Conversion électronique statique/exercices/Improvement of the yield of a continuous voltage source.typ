@@ -50,7 +50,7 @@ The values of the components are $r=#qty("5", "O")$, $R=#qty("10", "O")$, $E=#qt
     / Between $alpha T$ and $T$: $u_R = 0$ so $p_R = 0$
     The mean power received by the resistor is therefore $P_R = alpha R/(R+r)^2 E^2$, and the mean power delivered by the source is $P_e = alpha E^2/(R+r)$.
     
-    The yield is therefore $eta = P_R/P_e = R/(R+r) approx #num(scientifique(2/3,1))$.
+    The yield is therefore $eta = P_R/P_e = R/(R+r) approx #num(2/3, chiffres: 1)$.
 ]
 
 #question(
@@ -62,5 +62,5 @@ The values of the components are $r=#qty("5", "O")$, $R=#qty("10", "O")$, $E=#qt
     #let T = 1e-6
     #let r = 5
     / Between $0$ and $alpha T$: $i_c = C dv(u,t) = (E-u)/r$. Let's compare two terms :
-    $ abs(C dv(u,t))/abs(-u/r) tilde (C r)/T approx #num(scientifique(C*r/T,2)) >>1 $
+    $ abs(C dv(u,t))/abs(-u/r) tilde (C r)/T approx #num(C*r/T, chiffres: 2) >>1 $
 ]

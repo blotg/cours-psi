@@ -228,5 +228,5 @@ On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$
     #let R3 = 10e3
     #let C = 10e-9
     #let T = 2 * R3 * C * calc.ln(1 + 2 * R2 / R1)
-    Application numérique : $T = #qty(scientifique(T, 2), "s") approx #qty(scientifique(T * 1e6, 2), "us")$.
+    Application numérique : $T = #qty(T, "s", chiffres: 2) approx #qty(T * 1e6, "us", chiffres: 2)$.
 ]

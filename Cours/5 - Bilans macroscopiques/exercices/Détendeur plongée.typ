@@ -76,10 +76,10 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 ][
     L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume massique d'environ #qty("0.8", "m^3/kg"), soit une masse volumique de
     $
-        mu approx 1/0.8 approx #qty(scientifique(1 / 0.8, 2), "kg/m^3")
+        mu approx 1/0.8 approx #qty(1 / 0.8, "kg/m^3", chiffres: 2)
     $
     $
-        D_m = mu D_V = #qty(scientifique(Dm, 1), "kg/s")
+        D_m = mu D_V = #qty(Dm, "kg/s", chiffres: 1)
     $
 ]
 
@@ -90,7 +90,7 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
     
     Le PPI s'écrit
     $
-        P_"th" = D_m Delta h = #qty(scientifique(30e3*Dm,1), "W")
+        P_"th" = D_m Delta h = #qty(30e3*Dm, "W", chiffres: 1)
     $
 ]
 
@@ -99,11 +99,11 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 ][
     En sortie de bouteille, on lit sur le diagramme $(P,h)$ un volume massique d'environ #qty("0.004", "m^3/kg"), soit une masse volumique de
     $
-        mu approx 1 / 0.004 = #qty(scientifique(1 / 0.004, 2), "kg/m^3")
+        mu approx 1 / 0.004 = #qty(1 / 0.004, "kg/m^3", chiffres: 2)
     $
 
     La vitesse débitante est
     $
-        v = D_m / (mu pi d^2/4) = #qty(scientifique(Dm /(1/0.004 * calc.pi * calc.pow(0.01/2, 2)), 1), "m/s")
+        v = D_m / (mu pi d^2/4) = #qty(Dm /(1/0.004 * calc.pi * calc.pow(0.01/2, 2)), "m/s", chiffres: 1)
     $
 ]
