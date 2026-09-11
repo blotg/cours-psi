@@ -447,12 +447,44 @@
     supplement: "travail préparatoire",
 )
 
+// Lien vers une ressource extérieure : QR code à gauche, URL à côté, le tout
+// cliquable et posé dans un liseré pleine largeur.
+//
+// L'ancienne disposition — QR à sa taille propre, URL en 6 pt dessous, bloc
+// centré — prenait 28 mm de haut pour un lien ; celle-ci en prend 13. Le QR
+// descend à 10 mm : c'est le plancher pour que les URL les plus longues du
+// cours (une image Wikimedia en fait 87 caractères) restent scannables sur du
+// papier. Le banc d'essai qui a servi à trancher est dans `essais/liens/`.
 #let lien(url) = {
     import "@preview/tiaoma:0.3.0": qrcode
-    align(center, block(width: 5cm)[
-        #link(url, qrcode(url))
-        #text(size: 6pt, url)
-    ])
+    // Sur le site, la mise en page de typst saute à l'export HTML — `grid` et
+    // `align` y sont ignorés AVEC leur contenu, si bien que l'ancien bloc n'y
+    // laissait rien du tout, ni QR ni URL. On rend donc le HTML à la main, et
+    // `gabarits/site.css` lui redonne l'allure du papier.
+    context if target() == "html" {
+        html.elem(
+            "div",
+            attrs: (class: "lien"),
+            link(url, qrcode(url, height: 10mm)) + link(url, url),
+        )
+    } else {
+        block(
+            above: _écart,
+            below: _écart,
+            width: 100%,
+            radius: _rayon,
+            stroke: 0.5pt + luma(75%),
+            fill: luma(97%),
+            inset: (x: 0.6em, y: 0.45em),
+            grid(
+                columns: (auto, 1fr),
+                column-gutter: 0.7em,
+                align: (top, horizon),
+                link(url, qrcode(url, height: 10mm)),
+                link(url, text(size: 7.5pt, fill: _gris, url)),
+            ),
+        )
+    }
 }
 
 #let matériel(groupe: (), classe: ()) = {

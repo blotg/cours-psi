@@ -12,5 +12,4 @@
 
 # Cours
 - Génération de QCM
-- Format des liens pas satisfaisants
 - questions de colle manquantes ( Électronique 4 )

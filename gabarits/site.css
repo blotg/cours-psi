@@ -258,6 +258,33 @@ table td, table th { border: 1px solid var(--filet); padding: 0.3rem 0.6rem; tex
 ul, ol { padding-left: 1.4em; }
 li { text-align: left; }
 
+/* -- Liens vers une ressource extérieure ----------------------------------- */
+/* Le pendant du bloc `lien` du poly : QR code à gauche, URL à côté. typst ne
+   sait pas exporter sa mise en page en HTML (il laisse tomber grid et align
+   avec leur contenu), le paquet émet donc ce div et la mise en forme se fait
+   ici. L'URL passe à la ligne au besoin — certaines font 90 caractères. */
+
+.lien {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin: 1.2em 0;
+    padding: 0.45em 0.6em;
+    border: 1px solid var(--filet-clair);
+    border-radius: 3px;
+    background: #fafafa;
+}
+
+/* typst pose déjà la taille du QR en style en ligne (10 mm) : on ne la
+   redéfinit pas, on empêche seulement le flex de l'écraser. */
+.lien img { flex: none; }
+
+.lien a:last-child {
+    font-size: 0.8em;
+    color: var(--gris);
+    overflow-wrap: anywhere;
+}
+
 /* -- Pied ----------------------------------------------------------------- */
 
 footer {
