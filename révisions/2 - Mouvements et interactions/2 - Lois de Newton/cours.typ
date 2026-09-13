@@ -33,15 +33,15 @@
 
 #flashcard(
     recto: "Poids",
-    verso: "$ va(P) = m va(g) $ avec $g approx 9,8$ $m dot s^(-2)$"
+    verso: "$ va(P) = m va(g) $ avec $g approx qty(\"9.8\", \"m/s^2\")$",
 )
 #flashcard(
     recto: "Force de gravitation",
-    verso: "$ va(F) = -G (m_1 m_2)/r^2 va(e_r) $ (force toujours attractive)",
+    verso: "$ va(F) = -cal(G) (m_1 m_2)/r^2 va(e_r) $ (force toujours attractive)",
 )
 #flashcard(
     recto: "Force de rappel d'un ressort (loi de Hooke)",
-    verso: "$ va(F) = -k (l - l_0) va(e) $ avec $k$ la raideur du ressort en $N dot m^(-1)$ et $va(e)$ dirigé du point fixe vers la masse.",
+    verso: "$ va(F) = -k (l - l_0) va(e) $ avec $k$ la raideur du ressort en #unit(\"N/m\") et $va(e)$ dirigé du point fixe vers la masse.",
 )
 #flashcard(
     recto: "Frottement fluide",
@@ -57,7 +57,7 @@
     "Tir d'un projectile sans frottement, vitesse initiale faisant un angle $alpha$ avec l'horizontale : déterminer les équations horaires et l'équation de la trajectoire. Définir et exprimer la flèche et la portée.",
 )
 #question-de-colle(
-    "Établir l'équation du mouvement d'un pendule simple par la deuxième loi de Newton. Faire l'approximation des petits angles et exprimer la période $T_0$ des oscillations.",
+    "Établir l'équation du mouvement d'un pendule simple par la seconde loi de Newton. Faire l'approximation des petits angles et exprimer la période $T_0$ des oscillations.",
 )
 #question-de-colle(
     "Établir l'équation du mouvement de la masse d'un système masse-ressort vertical, en commençant par déterminer la position d'équilibre statique.",

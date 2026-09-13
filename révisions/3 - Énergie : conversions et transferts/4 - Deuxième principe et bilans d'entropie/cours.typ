@@ -28,14 +28,14 @@
     verso: "Pour un gaz parfait subissant une transformation adiabatique réversible $ P V^gamma = \"constante\" $",
 )
 #flashcard(
-  recto: "Hypothèses de la loi de Laplace",
-  verso: "- gaz parfait
+    recto: "Hypothèses de la loi de Laplace",
+    verso: "- gaz parfait
   - transformation adiabatique
-  - transformation réversible"
+  - transformation réversible",
 )
 #flashcard(
     recto: "Entropie de changement d'état",
-    verso: " $Delta s = (Delta h)/T $ à la température d'équilibre.",
+    verso: "$ Delta s = (Delta h)/T $ à la température d'équilibre.",
 )
 
 #question-de-colle(

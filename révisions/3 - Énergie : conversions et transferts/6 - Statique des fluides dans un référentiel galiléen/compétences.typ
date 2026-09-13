@@ -12,4 +12,4 @@
 - Expliquer l’origine de la poussée d'Archimède.
 - Exploiter la loi d’Archimède.
 - S’appuyer sur la loi d’évolution de la densité moléculaire de l’air dans le cas de l'atmosphère isotherme pour illustrer la signification du facteur de Boltzmann.
-- Utiliser $k T$ comme référence des énergies mises en jeu à l’échelle microscopique.
+- Utiliser $k_B T$ comme référence des énergies mises en jeu à l’échelle microscopique.

@@ -34,14 +34,14 @@
 )
 #flashcard(
     recto: "Fréquences des ondes électromagnétiques",
-    verso: "De #qty(\"3\",\"kHz\") à #qty(\"300\",\"GHz\") pour les ondes radio, de #qty(\"430\",\"THz\") à #qty(\"770\",\"THz\") pour le visible, au delà pour les ultraviolets, les rayons X puis les rayons gamma.",
+    verso: "De #qty(\"3\",\"kHz\") à #qty(\"300\",\"GHz\") pour les ondes radio, de #qty(\"430\",\"THz\") à #qty(\"770\",\"THz\") pour le visible, au-delà pour les ultraviolets, les rayons X puis les rayons gamma.",
 )
 #flashcard(
     recto: "Exemples de situation de propagation dispersive",
     verso: "Fibre optique multimode, lumière blanche dans un prisme, onde de tension dans une ligne ADSL.",
 )
 #flashcard(
-    recto: "Exemples de situation de propagation non-dispersive",
+    recto: "Exemples de situation de propagation non dispersive",
     verso: "Lumière et autres ondes EM dans l'espace, ondes sonores dans l'air dans les conditions usuelles.",
 )
 

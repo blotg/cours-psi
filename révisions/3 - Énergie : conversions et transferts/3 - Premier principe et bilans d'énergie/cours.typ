@@ -34,16 +34,16 @@
     verso: "Pour un gaz parfait, $ C_P - C_V = n R $",
 )
 #flashcard(
-  recto: "Coefficient de Laplace",
-  verso: "$ gamma = C_P / C_V $",
+    recto: "Coefficient de Laplace",
+    verso: "$ gamma = C_P / C_V $",
 )
 #flashcard(
-  recto: "Capacités thermique à volume constant et à pression constante pour un gaz parfait",
-  verso: "$ C_V = (n R)/(gamma-1) $$ C_P = (gamma n R)/(gamma-1) $",
+    recto: "Capacités thermiques à volume constant et à pression constante pour un gaz parfait",
+    verso: "$ C_V = (n R)/(gamma-1) $$ C_P = (gamma n R)/(gamma-1) $",
 )
 
 #question-de-colle(
-    "Énoncer la relation de Mayer et en déduire les expressions de $C_V$ et $C_P$ en fonction de $gamma$ et $n$, et $R$.",
+    "Énoncer la relation de Mayer et en déduire les expressions de $C_V$ et $C_P$ en fonction de $gamma$, $n$ et $R$.",
 )
 
 = Changements d'état

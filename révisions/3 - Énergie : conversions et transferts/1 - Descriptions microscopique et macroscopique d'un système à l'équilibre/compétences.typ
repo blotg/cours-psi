@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- d’un système à l'équilibre Définir l’échelle mésoscopique et en expliquer la nécessité.
+- Définir l’échelle mésoscopique et en expliquer la nécessité.
 - Citer quelques ordres de grandeur de libres parcours moyens.
 - Préciser les paramètres nécessaires à la description d’un état microscopique et d’un état macroscopique sur un exemple.
 - Utiliser un modèle unidirectionnel avec une distribution discrète de vitesse pour montrer que la pression est proportionnelle à la masse des particules, à la densité particulaire et au carré de la vitesse quadratique moyenne.
@@ -11,8 +11,8 @@
 - Citer quelques ordres de grandeur de volumes molaires ou massiques dans les conditions usuelles de pression et de température.
 - Citer et utiliser l’équation d’état des gaz parfaits.
 - Exprimer l’énergie interne d’un gaz parfait monoatomique à partir de l’interprétation microscopique de la température.
-- Exploiter la propriété $U_m =U_m (T)$ pour un gaz parfait.
-- Exploiter la propriété $U_m =U_m (T)$ pour une phase condensée incompressible et indilatable.
+- Exploiter la propriété $U_m = U_m (T)$ pour un gaz parfait.
+- Exploiter la propriété $U_m = U_m (T)$ pour une phase condensée incompressible et indilatable.
 - Interpréter graphiquement la différence de compressibilité entre un liquide et un gaz à partir d’isothermes expérimentales.
 - Comparer le comportement d’un gaz réel au modèle du gaz parfait sur des réseaux d’isothermes expérimentales en coordonnées de Clapeyron ou d’Amagat.
 - Analyser un diagramme de phase expérimental $(P,T)$.

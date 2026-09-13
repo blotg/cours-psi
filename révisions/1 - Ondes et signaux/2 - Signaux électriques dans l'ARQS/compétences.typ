@@ -8,7 +8,7 @@
 - Algébriser les grandeurs électriques et utiliser les conventions récepteur et générateur.
 - Citer les ordres de grandeur des intensités et des tensions dans différents domaines d’application.
 - Utiliser les relations entre l’intensité et la tension.
-- Citer des ordres de grandeurs des composants R, L, C.
+- Citer des ordres de grandeur des composants $R$, $L$, $C$.
 - Exprimer la puissance dissipée par effet Joule dans une résistance.
 - Exprimer l’énergie stockée dans un condensateur ou une bobine.
 - Modéliser une source en utilisant la représentation de Thévenin.
@@ -16,4 +16,4 @@
 - Établir et exploiter les relations des diviseurs de tension ou de courant.
 - #compétence-TP Évaluer une résistance d’entrée ou de sortie à l’aide d’une notice ou d’un appareil afin d’appréhender les conséquences de leurs valeurs sur le fonctionnement d’un circuit.
 - #compétence-TP Étudier l’influence des résistances d’entrée ou de sortie sur le signal délivré par un GBF, sur la mesure effectuée par un oscilloscope ou un multimètre.
-- #compétence-TP Étudier la caractéristique d’un dipôle pouvant être non-linéaire et mettre en œuvre un capteur dans un dispositif expérimental.
+- #compétence-TP Étudier la caractéristique d’un dipôle pouvant être non linéaire et mettre en œuvre un capteur dans un dispositif expérimental.

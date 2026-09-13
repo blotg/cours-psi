@@ -8,14 +8,14 @@
 
 #flashcard(
     recto: "Variation d'énergie interne et d'entropie sur un cycle",
-    verso: "Sur un cycle, $Delta U = 0$ et $Delta S = 0$ car ce sont des fonctions d'état",
+    verso: "Sur un cycle, $Delta U = 0$ et $Delta S = 0$ car ce sont des fonctions d'état.",
 )
 #flashcard(
     recto: "Signes du travail et des transferts thermiques pour un moteur ditherme",
     verso: "Il fournit du travail en exploitant le transfert thermique d'une source chaude à une source froide. $ W < 0 $$ Q_C > 0 $$ Q_F < 0 $",
 )
 #flashcard(
-    recto: "Rendement pour un moteur ditherme",
+    recto: "Rendement d'un moteur ditherme",
     verso: "$ eta = -W/Q_C $",
 )
 #flashcard(
@@ -23,7 +23,7 @@
     verso: "Un travail permet de transférer de la chaleur dans le sens froid vers chaud. $ W > 0 $$ Q_C < 0 $$ Q_F > 0 $",
 )
 #flashcard(
-    recto: "Rendement pour un climatiseur ou un réfrigérateur",
+    recto: "Efficacité d'un climatiseur ou d'un réfrigérateur",
     verso: "$ eta = Q_F/W $",
 )
 #flashcard(
@@ -31,7 +31,7 @@
     verso: "Un travail permet de transférer de la chaleur dans le sens froid vers chaud. $ W > 0 $$ Q_C < 0 $$ Q_F > 0 $",
 )
 #flashcard(
-    recto: "Rendement pour une pompe à chaleur",
+    recto: "Efficacité d'une pompe à chaleur",
     verso: "$ eta = -Q_C/W $",
 )
 #flashcard(
@@ -40,7 +40,7 @@
 )
 #flashcard(
     recto: "Ordres de grandeur de l'efficacité d'une pompe à chaleur",
-    verso: "#qty(\"300\",\"%\") à #qty(\"400\",\"%\")",
+    verso: "#qty(\"300\",\"%\") à #qty(\"400\",\"%\").",
 )
 
 #question-de-colle(

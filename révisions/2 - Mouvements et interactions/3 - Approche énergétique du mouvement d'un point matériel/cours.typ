@@ -24,7 +24,7 @@
 )
 #flashcard(
     recto: "Définition d'une force conservative",
-    verso: "Une force est conservative si son travail est indépendant du chemin suivi,ce qui équivaut à dire qu'elle s'écrit comme un gradient.",
+    verso: "Une force est conservative si son travail est indépendant du chemin suivi, ce qui équivaut à dire qu'elle s'écrit comme un gradient.",
 )
 #flashcard(
     recto: "Force conservative comme un gradient",
@@ -32,7 +32,7 @@
 )
 #flashcard(
     recto: "Travail d'une force conservative",
-    verso: "$ W_(A B) = E_p(A) - E_p(B) $ Le travail d'une force conservative ne dépend que des points initial et final."
+    verso: "$ W_(A B) = E_p(A) - E_p(B) $ Le travail d'une force conservative ne dépend que des points initial et final.",
 )
 #flashcard(
     recto: "Théorème de l'énergie mécanique",
@@ -50,19 +50,19 @@
 = Énergies potentielles
 
 #flashcard(
-    recto: "Énergies potentielle de pesanteur",
+    recto: "Énergie potentielle de pesanteur",
     verso: "$ E_p = m g z $",
 )
 #flashcard(
-    recto: "Énergies potentielle élastique",
+    recto: "Énergie potentielle élastique",
     verso: "$ E_p = 1/2 k (l-l_0)^2 $",
 )
 #flashcard(
-    recto: "Énergies potentielle gravitationnelle",
-    verso: "$ E_p = -G (m M)/r $",
+    recto: "Énergie potentielle gravitationnelle",
+    verso: "$ E_p = -cal(G) (m M)/r $",
 )
 #flashcard(
-    recto: "Énergies potentielle de électrostatique",
+    recto: "Énergie potentielle électrostatique",
     verso: "$ E_p = q V $",
 )
 
@@ -76,7 +76,7 @@
     recto: "Position d'équilibre et stabilité",
     verso: "Équilibre ssi la force est nulle ssi $dv(E_p,x) = 0$
     
-    Stable ssi $E_p$ est un minimum local ssi $dv(E_p,x,2) > 0$)
+    Stable ssi $E_p$ est un minimum local ssi $dv(E_p,x,2) > 0$
     
     Instable ssi $E_p$ est un maximum local ssi $dv(E_p,x,2) < 0$",
 )

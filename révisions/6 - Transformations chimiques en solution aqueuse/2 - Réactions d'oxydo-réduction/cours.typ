@@ -12,7 +12,7 @@
 )
 #flashcard(
     recto: "Formule de Nernst",
-    verso: "$E = E^circ + (0,06)/n log (product a_(\"ox\"))/(product a_(\"red\"))$ à $25$ °C, où $n$ est le nombre d'électrons échangés.",
+    verso: "$E = E^circ + #num(\"0.06\")/n log (product a_(\"ox\"))/(product a_(\"red\"))$ à #qty(\"25\", \"Celsius\"), où $n$ est le nombre d'électrons échangés.",
 )
 #flashcard(
     recto: "Prévision du sens d'une réaction",
@@ -46,7 +46,7 @@
 )
 #flashcard(
     recto: "Domaine de stabilité de l'eau",
-    verso: "Il est délimité par les couples $O_2\\/H_2 O$ et $H_2 O\\/H_2$. Une espèce dont le domaine est disjoint de celui de l'eau réagit avec elle — parfois lentement.",
+    verso: "Il est délimité par les couples #ce(\"O2/H2O\") et #ce(\"H2O/H2\"). Une espèce dont le domaine est disjoint de celui de l'eau réagit avec elle — parfois lentement.",
 )
 
 #question-de-colle(

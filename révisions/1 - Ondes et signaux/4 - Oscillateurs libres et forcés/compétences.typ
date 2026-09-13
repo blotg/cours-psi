@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- Établir et reconnaître l’équation différentielle qui caractérise un oscillateur harmonique ; la résoudre compte tenu des conditions initiales.
+- Établir et reconnaitre l’équation différentielle qui caractérise un oscillateur harmonique ; la résoudre compte tenu des conditions initiales.
 - Caractériser le mouvement en utilisant les notions d’amplitude, de phase, de période, de fréquence, de pulsation.
 - Réaliser un bilan énergétique.
 - Analyser, sur des relevés expérimentaux, l’évolution de la forme des régimes transitoires en fonction des paramètres caractéristiques.

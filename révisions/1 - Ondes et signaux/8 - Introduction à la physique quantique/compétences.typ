@@ -2,7 +2,7 @@
 
 - Décrire un exemple d’expérience mettant en évidence la nécessité de la notion de photon.
 - Décrire un exemple d’expérience mettant en évidence le comportement ondulatoire de la matière.
-- Évaluer des ordres de grandeurs typiques intervenant dans des phénomènes quantiques.
+- Évaluer des ordres de grandeur typiques intervenant dans des phénomènes quantiques.
 - Interpréter une expérience d’interférences (matière ou lumière) « particule par particule » en termes probabilistes.
 - Établir par analogie avec la diffraction des ondes lumineuses, l’inégalité en ordre de grandeur : $Delta p Delta x >= hbar$.
 - Exploiter l’hypothèse de quantification du moment cinétique orbital pour obtenir l’expression des niveaux d’énergie électronique de l’atome d’hydrogène.

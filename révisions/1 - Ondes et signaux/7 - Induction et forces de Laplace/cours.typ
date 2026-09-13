@@ -12,7 +12,7 @@
 )
 #flashcard(
     recto: "Moment magnétique d'une boucle de courant",
-    verso: "$ va(m) = i va(S) $ en #unit(\"Am^2\"), orienté par la règle de la main droite à partir du sens du courant.",
+    verso: "$ va(m) = i va(S) $ en #unit(\"A m^2\"), orienté par la règle de la main droite à partir du sens du courant.",
 )
 
 #question-de-colle(

@@ -3,20 +3,17 @@
 #let infos = yaml("infos.yml")
 #show: cours.with(infos: infos)
 
-
-= Lumière et modèle de l'optique géométrique
-
 #flashcard(
     recto: "Indice d'un milieu transparent",
-    verso: "$n = c/v$, où $v$ est la vitesse de la lumière dans le milieu. $n=1$ dans le vide, $n approx 1,5$ pour le verre.",
+    verso: "$n = c/v$, où $v$ est la vitesse de la lumière dans le milieu. $n=1$ dans le vide, $n approx num(\"1.5\")$ pour le verre.",
 )
 #flashcard(
-    recto: "Indice optique du vide.",
+    recto: "Indice optique du vide",
     verso: "$n = 1$.",
 )
 #flashcard(
     recto: "Indice optique de l'eau",
-    verso: "$n approx 1,33$.",
+    verso: "$n approx num(\"1.33\")$.",
 )
 #flashcard(
     recto: "Indice optique du verre",
@@ -31,7 +28,6 @@
     verso: "$sin theta approx lambda/d$ : plus l'ouverture $d$ est petite devant $lambda$, plus le faisceau s'ouvre.",
 )
 
-= Lois de Snell-Descartes
 #flashcard(
     recto: "Lois de Snell-Descartes",
     verso: "- Les rayons incident, réfléchi et réfracté sont dans le plan d'incidence.
@@ -49,8 +45,6 @@
 #question-de-colle(
     "Pour une fibre à saut d'indice, établir l'expression de l'angle d'acceptance à l'entrée de la fibre, puis celle de la dispersion intermodale.",
 )
-
-= Lentilles minces
 
 #flashcard(
     recto: "Conditions de Gauss",
@@ -78,28 +72,26 @@
 )
 
 #question-de-colle(
-    "Construire géométriquement l'image d'un objet $A B$ perpendiculaire à l'axe optique par une lentille convergente ou divergente (au choix du colleur), dans quatre cas suivant la position de l'objet $A B$ par rapport aux foyers et au centre optique. Les propriétés permettant le trace (foyers, centre optique, aplanétisme, stigmatisme) seront explicitées."
+    "Construire géométriquement l'image d'un objet $A B$ perpendiculaire à l'axe optique par une lentille convergente ou divergente (au choix du colleur), dans quatre cas suivant la position de l'objet $A B$ par rapport aux foyers et au centre optique. Les propriétés permettant le tracé (foyers, centre optique, aplanétisme, stigmatisme) seront explicitées.",
 )
 #question-de-colle(
-    "Pour une lentille convergente ou divergente (au choix du colleur), tracer l'image d'un objet $A B$ situé à l'infini puis dans le plan focal objet. Les propriétés permettant le trace (foyers, centre optique, stigmatisme) seront explicitées.",
+    "Pour une lentille convergente ou divergente (au choix du colleur), tracer l'image d'un objet $A B$ situé à l'infini puis dans le plan focal objet. Les propriétés permettant le tracé (foyers, centre optique, stigmatisme) seront explicitées.",
 )
 #question-de-colle(
-    "Pour une lentille convergente puis divergente, tracer le rayon émergent correspondant à un rayon incident quelconque. Les propriétés permettant le trace (foyers, centre optique, stigmatisme) seront explicitées.",
+    "Pour une lentille convergente puis divergente, tracer le rayon émergent correspondant à un rayon incident quelconque. Les propriétés permettant le tracé (foyers, centre optique, stigmatisme) seront explicitées.",
 )
-
-= Instruments d'optique
 
 #flashcard(
     recto: "Modèle de l'œil",
-    verso: "Une lentille convergente de distance focale variable (le cristallin) et un écran fixe (la rétine). Limite de résolution angulaire de l'ordre de la minute d'arc, soit $3 dot 10^(-4)$ rad.",
+    verso: "Une lentille convergente de distance focale variable (le cristallin) et un écran fixe (la rétine). Limite de résolution angulaire de l'ordre de la minute d'arc, soit #qty(\"3e-4\", \"rad\").",
 )
 #flashcard(
-  recto: "Limite de résolution de l'œil",
-  verso: "La limite de résolution angulaire de l'œil est de l'ordre de la minute d'arc, soit $num(\"3e-4\")$ rad.",
+    recto: "Limite de résolution de l'œil",
+    verso: "La limite de résolution angulaire de l'œil est de l'ordre de la minute d'arc, soit #qty(\"3e-4\", \"rad\").",
 )
 #flashcard(
     recto: "Plage d'accommodation de l'œil",
-    verso: "Ponctum proximum à $25$ cm, ponctum remotum à l'infini.",
+    verso: "Ponctum proximum à #qty(\"25\", \"cm\"), ponctum remotum à l'infini.",
 )
 #flashcard(
     recto: "Modèle de l'appareil photographique",

@@ -12,7 +12,7 @@
 )
 #flashcard(
     recto: "Liaison pivot idéale",
-    verso: "Une liaison pivot idéale exerce un moment par rapport à l'axe la traversant nul. Elle bloque tout autre mouvement (translations et rotations autour d'autres axes).",
+    verso: "Une liaison pivot idéale exerce un moment nul par rapport à son axe. Elle bloque tout autre mouvement (translations et rotations autour d'autres axes).",
 )
 #flashcard(
     recto: "Définition d'un couple",
@@ -20,7 +20,7 @@
 )
 #flashcard(
     recto: "Définition d'une translation rectiligne",
-    verso: "Une translation est un mouvement où tous les points du solide décrivent des droites parallèles.",
+    verso: "Une translation rectiligne est un mouvement où tous les points du solide décrivent des droites parallèles.",
 )
 #flashcard(
     recto: "Définition d'une translation circulaire",
@@ -31,7 +31,7 @@
 
 #flashcard(
     recto: "Moment cinétique d'un solide en rotation",
-    verso: "$ L_Delta = J_Delta omega $, où $J_Delta$ est le moment d'inertie par rapport à l'axe, en #unit(\"kgm^2\").",
+    verso: "$ L_Delta = J_Delta omega $, où $J_Delta$ est le moment d'inertie par rapport à l'axe, en #unit(\"kg m^2\").",
 )
 #flashcard(
     recto: "Énergie cinétique d'un solide en rotation autour de l'axe $Delta$",

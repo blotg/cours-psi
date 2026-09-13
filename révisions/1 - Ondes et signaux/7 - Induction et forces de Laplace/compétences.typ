@@ -19,7 +19,8 @@
 - Évaluer le flux d’un champ magnétique uniforme à travers une surface s’appuyant sur un contour fermé orienté plan.
 - #compétence-TP Décrire, mettre en œuvre et interpréter des expériences illustrant les lois de Lenz et de Faraday.
 - Utiliser la loi de Lenz pour prédire ou interpréter les phénomènes physiques observés.
-- Utiliser la loi de Faraday en précisant les conventions d’algébrisation. qui dépend du temps Différencier le flux propre des flux extérieurs.
+- Utiliser la loi de Faraday en précisant les conventions d’algébrisation.
+- Différencier le flux propre des flux extérieurs.
 - Utiliser la loi de modération de Lenz.
 - Évaluer et citer l’ordre de grandeur de l’inductance propre d’une bobine de grande longueur.
 - #compétence-TP Mesurer la valeur de l’inductance propre d’une bobine.
@@ -29,7 +30,8 @@
 - Citer des applications dans le domaine de l’industrie ou de la vie courante.
 - Établir le système d’équations en régime sinusoïdal forcé en s’appuyant sur des schémas électriques équivalents.
 - Établir la loi des tensions.
-- Réaliser un bilan de puissance et d’énergie. stationnaire Interpréter qualitativement les phénomènes observés.
+- Réaliser un bilan de puissance et d’énergie.
+- Interpréter qualitativement les phénomènes observés.
 - Écrire les équations électrique et mécanique en précisant les conventions de signe.
 - Effectuer un bilan énergétique.
 - Citer des applications dans le domaine de l’industrie ou de la vie courante.

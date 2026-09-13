@@ -14,7 +14,7 @@
 )
 #flashcard(
     recto: "Vitesse quadratique moyenne",
-    verso: " $v^* = sqrt(mean(v^2)) $",
+    verso: "$ v^* = sqrt(mean(v^2)) $",
 )
 #flashcard(
     recto: "Vitesse quadratique moyenne pour un gaz parfait monoatomique",
@@ -74,11 +74,11 @@
 = Corps pur diphasé
 
 #flashcard(
-    recto: "Diagramme (P,T) d'un corps pur (cas général)",
+    recto: "Diagramme $(P,T)$ d'un corps pur (cas général)",
     verso: "", //TODO schéma
 )
 #flashcard(
-    recto: "Diagramme (P,T) de l'eau pure",
+    recto: "Diagramme $(P,T)$ de l'eau pure",
     verso: "", //TODO schéma
 )
 #flashcard(

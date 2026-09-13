@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- conservatif Établir la conservation du moment cinétique à partir du théorème du moment cinétique.
+- Établir la conservation du moment cinétique à partir du théorème du moment cinétique.
 - Établir les conséquences de la conservation du moment cinétique : mouvement plan, loi des aires.
 - Exprimer l’énergie mécanique d’un système conservatif ponctuel à partir de l’équation du mouvement.
 - Exprimer la conservation de l’énergie mécanique et construire une énergie potentielle effective.

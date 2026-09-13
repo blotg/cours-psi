@@ -16,4 +16,4 @@
 - Discuter de la stabilité des espèces dans l’eau.
 - Prévoir une éventuelle dismutation ou médiamutation en fonction du pH du milieu.
 - Confronter les prévisions à des données expérimentales et interpréter d’éventuels écarts en termes cinétiques.
-- Mettre en œuvre des réactions d’oxydo- réduction en s’appuyant sur l’utilisation d’un diagramme potentiel-pH.
+- Mettre en œuvre des réactions d’oxydo-réduction en s’appuyant sur l’utilisation d’un diagramme potentiel-pH.

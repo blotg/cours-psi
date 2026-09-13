@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- d’un point Citer une situation où la description classique de l’espace ou du temps est prise en défaut.
+- Citer une situation où la description classique de l’espace ou du temps est prise en défaut.
 - Exprimer à partir d’un schéma le déplacement élémentaire dans les différents systèmes de coordonnées, construire le trièdre local associé et en déduire géométriquement les composantes du vecteur vitesse en coordonnées cartésiennes et cylindriques.
 - Établir les expressions des composantes des vecteurs position, déplacement élémentaire, vitesse et accélération dans les seuls cas des coordonnées cartésiennes et cylindriques.
 - Identifier les degrés de liberté d’un mouvement.

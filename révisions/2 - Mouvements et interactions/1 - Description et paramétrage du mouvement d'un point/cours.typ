@@ -8,15 +8,15 @@
 
 #flashcard(
     recto: "Déplacement élémentaire en coordonnées cartésiennes",
-    verso: "$ dd(va(l)) = dd(x) ex + dd(y) ey + dd(z) ez $",
+    verso: "$ va(dd(l)) = dd(x) ex + dd(y) ey + dd(z) ez $",
 )
 #flashcard(
     recto: "Déplacement élémentaire en coordonnées cylindriques",
-    verso: "$ dd(va(l)) = dd(r) er + r dd(theta) etheta + dd(z) ez $",
+    verso: "$ va(dd(l)) = dd(r) er + r dd(theta) etheta + dd(z) ez $",
 )
 #flashcard(
     recto: "Déplacement élémentaire en coordonnées polaires",
-    verso: "$ dd(va(l)) = dd(r) er + r dd(theta) etheta $",
+    verso: "$ va(dd(l)) = dd(r) er + r dd(theta) etheta $",
 )
 #flashcard(
     recto: "Vecteur position en coordonnées cartésiennes",
@@ -66,8 +66,8 @@
 )
 
 #question-de-colle(
-  "Pour un mouvement uniformément accéléré, exprimer le vecteur vitesse et le vecteur position en fonction du temps. Établir la trajectoire en coordonnées cartésiennes.",
+    "Pour un mouvement uniformément accéléré, exprimer le vecteur vitesse et le vecteur position en fonction du temps. Établir la trajectoire en coordonnées cartésiennes.",
 )
 #question-de-colle(
-  "Pour un mouvement circulaire uniforme, exprimer le vecteur vitesse, le vecteur position et le vecteur accélération en fonction du temps en coordonnées polaires.",
+    "Pour un mouvement circulaire uniforme, exprimer le vecteur vitesse, le vecteur position et le vecteur accélération en fonction du temps en coordonnées polaires.",
 )

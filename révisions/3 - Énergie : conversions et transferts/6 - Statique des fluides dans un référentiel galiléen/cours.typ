@@ -22,7 +22,7 @@
     "Établir l'équivalent volumique des forces de pression et en déduire l'équation locale de la statique des fluides.",
 )
 #question-de-colle(
-  "Établir le champ de pression dans un fluide incompressible. En déduire la force pressante subie par un barrage rectangulaire de hauteur $h$ et de largeur $l$."
+    "Établir le champ de pression dans un fluide incompressible. En déduire la force pressante subie par un barrage rectangulaire de hauteur $h$ et de largeur $l$.",
 )
 
 = Champ de pression

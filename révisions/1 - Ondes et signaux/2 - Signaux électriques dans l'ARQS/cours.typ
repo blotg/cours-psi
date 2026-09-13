@@ -26,7 +26,7 @@
 
 #flashcard(
     recto: "Relation courant-tension pour un résistor",
-    verso: "Loi d'ohm : $u = R i$ en *convention récepteur*.",
+    verso: "Loi d'Ohm : $u = R i$ en *convention récepteur*.",
 )
 #flashcard(
     recto: "Relation courant-tension pour un condensateur",
@@ -38,15 +38,15 @@
 )
 #flashcard(
     recto: "Unité de la résistance et valeurs usuelles",
-    verso: "L'unité de la résistance est l'ohm ($Omega$). Les valeurs usuelles vont du #unit(\"O\") à plusieurs #unit(\"MO\").",
+    verso: "L'unité de la résistance est l'ohm (#unit(\"O\")). Les valeurs usuelles vont du #unit(\"O\") à plusieurs #unit(\"MO\").",
 )
 #flashcard(
     recto: "Unité de la capacité et valeurs usuelles",
-    verso: "L'unité de la capacité est le farad ($F$). Les valeurs usuelles vont du #unit(\"pF\") au#unit(\"mF\").",
+    verso: "L'unité de la capacité est le farad (#unit(\"F\")). Les valeurs usuelles vont du #unit(\"pF\") au #unit(\"mF\").",
 )
 #flashcard(
     recto: "Unité de l'inductance et valeurs usuelles",
-    verso: "L'unité de l'inductance est le henry ($H$). Les valeurs usuelles vont du #unit(\"mH\") à quelques #unit(\"H\").",
+    verso: "L'unité de l'inductance est le henry (#unit(\"H\")). Les valeurs usuelles vont du #unit(\"mH\") à quelques #unit(\"H\").",
 )
 #flashcard(
     recto: "Énergie stockée dans un condensateur",
@@ -54,7 +54,7 @@
 )
 #flashcard(
     recto: "Énergie stockée dans une bobine",
-    verso: "$ E_L = 1/2 L i^2 $.",
+    verso: "$ E_L = 1/2 L i^2 $",
 )
 #flashcard(
     recto: "Puissance dissipée par effet Joule dans un résistor",
@@ -85,7 +85,7 @@
 )
 #flashcard(
     recto: "Pont diviseur de courant",
-    verso: "Si les deux résistances en parallèle (même tension aux bornes) : $ i_1 = R_2/(R_1+R_2) i $",
+    verso: "Si les deux résistances sont en parallèle (même tension aux bornes) : $ i_1 = R_2/(R_1+R_2) i $",
 )
 
 #question-de-colle(

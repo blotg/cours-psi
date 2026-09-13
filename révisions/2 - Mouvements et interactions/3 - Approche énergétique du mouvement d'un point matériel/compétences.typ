@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- point matériel Reconnaitre le caractère moteur ou résistant d'une force.
+- Reconnaitre le caractère moteur ou résistant d'une force.
 - Utiliser le théorème approprié en fonction du contexte.
 - Établir et citer les expressions de l’énergie potentielle de pesanteur (champ uniforme), de l’énergie potentielle gravitationnelle (champ créé par un astre ponctuel), de l’énergie potentielle élastique.
 - Déterminer l’expression d’une force à partir de l’énergie potentielle, l’expression du gradient étant fournie.
@@ -13,4 +13,4 @@
 - Déduire d’un graphe d’énergie potentielle l’existence de positions d’équilibre.
 - Analyser qualitativement la nature, stable ou instable, de ces positions.
 - Établir l’équation différentielle du mouvement au voisinage d’une position d’équilibre.
-- #compétence-numérique à l’aide d’un langage de programmation, résoudre numériquement une équation différentielle du deuxième ordre non- linéaire et faire apparaitre l’effet des termes non- linéaires.
+- #compétence-numérique À l’aide d’un langage de programmation, résoudre numériquement une équation différentielle du deuxième ordre non linéaire et faire apparaitre l’effet des termes non linéaires.

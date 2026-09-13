@@ -7,4 +7,4 @@
 - Utiliser l’expression fournie de la fonction d’état entropie.
 - Exploiter l’extensivité de l’entropie.
 - Citer et utiliser la loi de Laplace et ses conditions d’application.
-- Citer et utiliser la relation entre les variations d’entropie et d'enthalpie associées à une transition de phase : $Delta h_(1 -> 2) (T)=T Delta s_(1 -> 2) (T)$
+- Citer et utiliser la relation entre les variations d’entropie et d'enthalpie associées à une transition de phase : $Delta h_(1 -> 2) (T) = T Delta s_(1 -> 2) (T)$.

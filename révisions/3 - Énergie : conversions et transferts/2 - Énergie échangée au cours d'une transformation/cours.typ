@@ -12,7 +12,7 @@
     / \"Mono-\" : c'est la grandeur du milieu extérieur qui est constante, le système n'étant défini qu'aux états initial et final
     / \"-bare\" : la pression
     / \"-therme\" : la température
-    / \"-chore\" : le volume,
+    / \"-chore\" : le volume
     ",
 )
 #flashcard(
@@ -32,7 +32,7 @@
 )
 #flashcard(
     recto: "Travail reçu lors d'une transformation monobare",
-    verso: " $W = -P_\"ext\" Delta V$",
+    verso: "$ W = -P_\"ext\" Delta V $",
 )
 #flashcard(
     recto: "Travail reçu lors d'une transformation isotherme quasi-statique d'un gaz parfait",
@@ -56,8 +56,6 @@
 #flashcard(
     recto: "Les trois modes de transfert thermique",
     verso: "/ Conduction : de proche en proche dans la matière immobile
-    
     / Convection : par déplacement de matière
-    
     / Rayonnement : par ondes électromagnétiques, sans support",
 )

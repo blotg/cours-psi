@@ -7,7 +7,7 @@
 = Moment cinétique et moment d'une force
 
 #flashcard(
-    recto: "Moment cinétique d'un point matériel en un point O",
+    recto: "Moment cinétique d'un point matériel en un point $O$",
     verso: "$ va(L)_O = va(O M) and m va(v) $",
 )
 #flashcard(
@@ -15,7 +15,7 @@
     verso: "$ va(L)_Delta = (va(O M) and m va(v)) dot va(u)_Delta $ où $O$ est un point de l'axe $Delta$ et $va(u)_Delta$ est le vecteur unitaire le long de l'axe.",
 )
 #flashcard(
-    recto: "Moment d'une force en un point O",
+    recto: "Moment d'une force en un point $O$",
     verso: "$ va(M)_O (va(F)) = va(O M) and va(F) $",
 )
 #flashcard(
@@ -31,11 +31,11 @@
 
 #flashcard(
     recto: "Théorème du moment cinétique en un point fixe",
-    verso: "En un point fixe $O$ d'un référentiel galiléen $ (dv(va(L)_O,t) = sum va(M)_O (va(F)_\"ext\") $",
+    verso: "En un point fixe $O$ d'un référentiel galiléen : $ dv(va(L)_O,t) = sum va(M)_O (va(F)_\"ext\") $",
 )
 #flashcard(
     recto: "Théorème du moment cinétique par rapport à un axe fixe",
-    verso: "Sur un axe fixe $Delta$ d'un référentiel galiléen $ (dv(va(L)_Delta,t) = sum va(M)_Delta (va(F)_\"ext\") $",
+    verso: "Sur un axe fixe $Delta$ d'un référentiel galiléen : $ dv(va(L)_Delta,t) = sum va(M)_Delta (va(F)_\"ext\") $",
 )
 
 #question-de-colle(

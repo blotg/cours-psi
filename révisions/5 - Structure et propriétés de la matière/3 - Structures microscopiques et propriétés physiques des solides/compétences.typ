@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-- physiques des solides Illustrer l’influence des conditions expérimentales sur la formation de solides et de solides cristallins.
+- Illustrer l’influence des conditions expérimentales sur la formation de solides et de solides cristallins.
 - Décrire un cristal parfait comme un assemblage de mailles parallélépipédiques.
 - Déterminer la population, la coordinence et la compacité pour une structure fournie.
 - Déterminer la valeur de la masse volumique d’un matériau cristallisé selon une structure cristalline fournie.
