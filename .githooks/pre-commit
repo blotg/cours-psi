@@ -126,10 +126,17 @@ fi
 
 if [ -n "$PY" ] && [ -d outils ]; then
     chapitres=""
+    # Un chemin par ligne : les noms de chapitres portent des espaces. Sans ce
+    # IFS (remis a zero plus haut), la boucle coupait « Cours/8 - Electrochimie »
+    # en trois mots, ne trouvait aucun cours.typ, et `outils build` ne tournait
+    # jamais -- pas une flashcard n'etait produite au commit.
+    IFS='
+'
     for d in $dirs; do
         [ -f "$d/cours.typ" ] && chapitres="$chapitres
 $d"
     done
+    unset IFS
     if [ -n "$chapitres" ]; then
         # shellcheck disable=SC2086
         printf '%s' "$chapitres" | sed '/^$/d' | tr '\n' '\0' \
