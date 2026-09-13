@@ -14,18 +14,18 @@
 - Exprimer la puissance des forces de Laplace.
 - Établir et exploiter l’expression du moment du couple subi en fonction du champ magnétique extérieur et du moment magnétique.
 - Exprimer la puissance des actions mécaniques de Laplace.
-- Mettre en œuvre un dispositif expérimental pour étudier l’action d’un champ magnétique uniforme sur une boussole.
-- Créer un champ magnétique tournant à l’aide de deux ou trois bobines et mettre en rotation une aiguille aimantée.
+- #compétence-TP Mettre en œuvre un dispositif expérimental pour étudier l’action d’un champ magnétique uniforme sur une boussole.
+- #compétence-TP Créer un champ magnétique tournant à l’aide de deux ou trois bobines et mettre en rotation une aiguille aimantée.
 - Évaluer le flux d’un champ magnétique uniforme à travers une surface s’appuyant sur un contour fermé orienté plan.
-- Décrire, mettre en œuvre et interpréter des expériences illustrant les lois de Lenz et de Faraday.
+- #compétence-TP Décrire, mettre en œuvre et interpréter des expériences illustrant les lois de Lenz et de Faraday.
 - Utiliser la loi de Lenz pour prédire ou interpréter les phénomènes physiques observés.
 - Utiliser la loi de Faraday en précisant les conventions d’algébrisation. qui dépend du temps Différencier le flux propre des flux extérieurs.
 - Utiliser la loi de modération de Lenz.
 - Évaluer et citer l’ordre de grandeur de l’inductance propre d’une bobine de grande longueur.
-- Mesurer la valeur de l’inductance propre d’une bobine.
+- #compétence-TP Mesurer la valeur de l’inductance propre d’une bobine.
 - Réaliser un bilan de puissance et d’énergie dans un système siège d’un phénomène d’auto-induction en s’appuyant sur un schéma électrique équivalent.
 - Déterminer l’inductance mutuelle entre deux bobines de même axe de grande longueur en « influence totale ».
-- Mesurer la valeur de l’inductance mutuelle entre deux bobines et étudier l’influence de la géométrie.
+- #compétence-TP Mesurer la valeur de l’inductance mutuelle entre deux bobines et étudier l’influence de la géométrie.
 - Citer des applications dans le domaine de l’industrie ou de la vie courante.
 - Établir le système d’équations en régime sinusoïdal forcé en s’appuyant sur des schémas électriques équivalents.
 - Établir la loi des tensions.
@@ -34,6 +34,6 @@
 - Effectuer un bilan énergétique.
 - Citer des applications dans le domaine de l’industrie ou de la vie courante.
 - Expliquer l’origine des courants de Foucault et en citer des exemples d’utilisation.
-- Mettre en évidence qualitativement les courants de Foucault.
+- #compétence-TP Mettre en évidence qualitativement les courants de Foucault.
 - Analyser le fonctionnement du moteur à courant continu à entrefer plan en s’appuyant sur la configuration des rails de Laplace.
 - Citer des exemples d’utilisation du moteur à courant continu.

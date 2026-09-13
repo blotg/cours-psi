@@ -8,8 +8,8 @@
 - Établir l’équation locale de la statique des fluides.
 - Citer des ordres de grandeur des champs de pression dans le cas de l’océan et de l’atmosphère.
 - Exprimer l’évolution de la pression avec l’altitude dans le cas d’un fluide incompressible et homogène et dans le cas de l’atmosphère isotherme dans le modèle du gaz parfait.
-- Capacité numérique : à l’aide d’un langage de programmation, étudier les variations de température et de pression dans l'atmosphère.
+- #compétence-numérique À l’aide d’un langage de programmation, étudier les variations de température et de pression dans l'atmosphère.
 - Expliquer l’origine de la poussée d'Archimède.
 - Exploiter la loi d’Archimède.
 - S’appuyer sur la loi d’évolution de la densité moléculaire de l’air dans le cas de l'atmosphère isotherme pour illustrer la signification du facteur de Boltzmann.
-- Utiliser kT comme référence des énergies mises en jeu à l’échelle microscopique. et signaux (2)
+- Utiliser $k T$ comme référence des énergies mises en jeu à l’échelle microscopique.

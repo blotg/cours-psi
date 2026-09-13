@@ -6,4 +6,4 @@
 - Justifier et utiliser le théorème de Carnot.
 - Citer quelques ordres de grandeur des rendements des machines thermiques réelles actuelles.
 - Expliquer le principe de la cogénération.
-- Mettre en œuvre une machine thermique cyclique ditherme.
+- #compétence-TP Mettre en œuvre une machine thermique cyclique ditherme.

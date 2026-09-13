@@ -6,13 +6,46 @@
 
 = Machines cycliques dithermes
 
-#flashcard(recto: "Bilan sur un cycle", verso: "Sur un cycle, $Delta U = 0$ et $Delta S = 0$ : donc $W + Q_C + Q_F = 0$ et $Q_C\\/T_C + Q_F\\/T_F = -S_c <= 0$ (inégalité de Clausius).")
-#flashcard(recto: "Moteur ditherme", verso: "Il fournit du travail : $W < 0$, $Q_C > 0$, $Q_F < 0$. Rendement $eta = -W\\/Q_C$, majoré par $eta_(\"Carnot\") = 1 - T_F\\/T_C$.")
-#flashcard(recto: "Machine frigorifique", verso: "Elle refroidit la source froide : $W > 0$, $Q_F > 0$, $Q_C < 0$. Efficacité $e = Q_F\\/W <= T_F\\/(T_C - T_F)$.")
-#flashcard(recto: "Pompe à chaleur", verso: "Elle chauffe la source chaude : $W > 0$, $Q_C < 0$, $Q_F > 0$. Efficacité $e = -Q_C\\/W <= T_C\\/(T_C - T_F)$.")
-#flashcard(recto: "Ordres de grandeur des rendements", verso: "Moteur à essence $25$ à $35$ %, diesel $35$ à $45$ %, centrale thermique $40$ %. Une pompe à chaleur domestique a une efficacité de $3$ à $4$.")
+#flashcard(
+    recto: "Variation d'énergie interne et d'entropie sur un cycle",
+    verso: "Sur un cycle, $Delta U = 0$ et $Delta S = 0$ car ce sont des fonctions d'état",
+)
+#flashcard(
+    recto: "Signes du travail et des transferts thermiques pour un moteur ditherme",
+    verso: "Il fournit du travail en exploitant le transfert thermique d'une source chaude à une source froide. $ W < 0 $$ Q_C > 0 $$ Q_F < 0 $",
+)
+#flashcard(
+    recto: "Rendement pour un moteur ditherme",
+    verso: "$ eta = -W/Q_C $",
+)
+#flashcard(
+    recto: "Signes du travail et des transferts thermiques pour un climatiseur ou un réfrigérateur",
+    verso: "Un travail permet de transférer de la chaleur dans le sens froid vers chaud. $ W > 0 $$ Q_C < 0 $$ Q_F > 0 $",
+)
+#flashcard(
+    recto: "Rendement pour un climatiseur ou un réfrigérateur",
+    verso: "$ eta = Q_F/W $",
+)
+#flashcard(
+    recto: "Signes du travail et des transferts thermiques pour une pompe à chaleur",
+    verso: "Un travail permet de transférer de la chaleur dans le sens froid vers chaud. $ W > 0 $$ Q_C < 0 $$ Q_F > 0 $",
+)
+#flashcard(
+    recto: "Rendement pour une pompe à chaleur",
+    verso: "$ eta = -Q_C/W $",
+)
+#flashcard(
+    recto: "Ordres de grandeur des rendements pour des moteurs thermiques",
+    verso: "Moteur à essence ou diesel #qty(\"25\",\"%\") à #qty(\"45\",\"%\").",
+)
+#flashcard(
+    recto: "Ordres de grandeur de l'efficacité d'une pompe à chaleur",
+    verso: "#qty(\"300\",\"%\") à #qty(\"400\",\"%\")",
+)
 
-#question-de-colle("Moteur thermique ditherme : expliquer à quoi il sert, faire le schéma des échanges énergétiques, préciser le signe de $W$, $Q_C$ et $Q_F$, définir le rendement et établir le théorème de Carnot. Donner un ordre de grandeur du rendement réel.")
-#question-de-colle("Machine frigorifique : mêmes questions, avec l'efficacité.")
-#question-de-colle("Pompe à chaleur : mêmes questions, avec l'efficacité.")
-#question-de-colle("Expliquer le principe de la cogénération et dire en quoi elle améliore le bilan énergétique d'une installation.")
+#question-de-colle(
+    "Établir l'inégalité de Clausius pour une machine ditherme.",
+)
+#question-de-colle(
+    "Pour un moteur ditherme, une pompe à chaleur ou un climatiseur (au choix du colleur), schématiser les échanges énergétiques en précisant leur signe, définir le rendement et établir le théorème de Carnot.",
+)

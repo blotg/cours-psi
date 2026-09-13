@@ -11,14 +11,14 @@
 - Citer quelques ordres de grandeur de volumes molaires ou massiques dans les conditions usuelles de pression et de température.
 - Citer et utiliser l’équation d’état des gaz parfaits.
 - Exprimer l’énergie interne d’un gaz parfait monoatomique à partir de l’interprétation microscopique de la température.
-- Exploiter la propriété U m =U m (T) pour un gaz parfait.
-- Exploiter la propriété U m =U m (T) pour une phase condensée incompressible et indilatable.
+- Exploiter la propriété $U_m =U_m (T)$ pour un gaz parfait.
+- Exploiter la propriété $U_m =U_m (T)$ pour une phase condensée incompressible et indilatable.
 - Interpréter graphiquement la différence de compressibilité entre un liquide et un gaz à partir d’isothermes expérimentales.
 - Comparer le comportement d’un gaz réel au modèle du gaz parfait sur des réseaux d’isothermes expérimentales en coordonnées de Clapeyron ou d’Amagat.
-- Analyser un diagramme de phase expérimental (P,T).
+- Analyser un diagramme de phase expérimental $(P,T)$.
 - Proposer un jeu de variables d’état suffisant pour caractériser l’état d’équilibre d’un corps pur diphasé soumis aux seules forces de pression.
-- Positionner les phases dans les diagrammes (P,T) et (P,v).
-- Déterminer la composition d’un mélange diphasé en un point d’un diagramme (P,v).
-- Mettre en œuvre un protocole expérimental d'étude des relations entre paramètres d'état d'un fluide à l'équilibre (corps pur monophasé ou sous deux phases).
+- Positionner les phases dans les diagrammes $(P,T)$ et $(P,v)$.
+- Déterminer la composition d’un mélange diphasé en un point d’un diagramme $(P,v)$.
+- #compétence-TP Mettre en œuvre un protocole expérimental d'étude des relations entre paramètres d'état d'un fluide à l'équilibre (corps pur monophasé ou sous deux phases).
 - Utiliser la notion de pression partielle pour étudier les conditions de l’équilibre liquide-vapeur en présence d'une atmosphère inerte.
 - Identifier les conditions d’évaporation et de condensation.
