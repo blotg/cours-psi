@@ -14,12 +14,15 @@ la liste, l'autre pour ne produire qu'elle.
 import json
 from pathlib import Path
 
-from .chapitre import GABARITS, RACINE, Chapitre, chapitres
+from .chapitre import GABARITS, RACINE, RACINE_COURS, RACINE_RÉVISIONS, Chapitre, chapitres
 from .typst import compile_avec_annexe
 
 #: Où atterrit le document. Un `build/` comme celui des chapitres : c'est un
 #: produit et non une source, et `.gitignore` l'ignore déjà à ce titre.
-SORTIE = Path("Cours") / "build" / "questions de colle.pdf"
+SORTIE = Path(RACINE_COURS) / "build" / "questions de colle.pdf"
+
+#: Le même document pour les révisions de PCSI, rangé à côté d'elles.
+SORTIE_RÉVISIONS = Path(RACINE_RÉVISIONS) / "build" / "questions de colle.pdf"
 
 
 def données(liste: list[Chapitre]) -> dict:

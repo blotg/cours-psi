@@ -35,6 +35,7 @@ python3 -m outils imprimable "Cours/8 - Électrochimie"      # poly-imprimable -
 python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - Électrochimie.pdf
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils questions-de-colle                # toutes les questions de colle de l'année
+python3 -m outils questions-de-colle -r             # celles des révisions de PCSI
 python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
@@ -114,7 +115,9 @@ pour l'année, là où le programme de colle hebdomadaire repart à 1 à chaque
 chapitre. Un chapitre encore sans question y figure quand même, signalé comme
 tel : ce qui reste à écrire se voit. Le document atterrit dans
 `Cours/build/questions de colle.pdf` (`--sortie` pour en changer) ; nommer des
-chapitres à la suite restreint la liste à ceux-là.
+chapitres à la suite restreint la liste à ceux-là. `-r` (`--révisions`) fait de
+même pour les chapitres de `révisions/`, dans
+`révisions/build/questions de colle.pdf`.
 
 Il n'est **pas** produit par le hook : il dépend de tous les chapitres à la
 fois, qu'il inclut tous en annexe, et il en coûte deux compilations de l'année

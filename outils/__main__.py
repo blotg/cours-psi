@@ -125,13 +125,14 @@ def _colles(args) -> int:
 
 
 def _questions_de_colle(args) -> int:
-    from .chapitre import Chapitre
-    from .questions_de_colle import SORTIE, génère
+    from .chapitre import RACINE_COURS, RACINE_RÉVISIONS, Chapitre
+    from .questions_de_colle import SORTIE, SORTIE_RÉVISIONS, génère
 
-    # Sans chapitre nommé, tous ceux du dossier Cours : c'est l'usage courant,
-    # le document n'ayant d'intérêt que complet.
+    racine, sortie = (RACINE_RÉVISIONS, SORTIE_RÉVISIONS) if args.révisions else (RACINE_COURS, SORTIE)
+    # Sans chapitre nommé, tous ceux du dossier : c'est l'usage courant, le
+    # document n'ayant d'intérêt que complet.
     liste = [Chapitre(d) for d in args.chapitres] if args.chapitres else None
-    print(f"  questions     {génère(args.sortie or SORTIE, liste=liste)}")
+    print(f"  questions     {génère(args.sortie or sortie, racine=racine, liste=liste)}")
     return 0
 
 
@@ -222,7 +223,15 @@ def main(argv: list[str] | None = None) -> int:
         "chapitres",
         nargs="*",
         type=Path,
-        help="à défaut, tous les chapitres de Cours/ (ordre lexicographique)",
+        help="à défaut, tous les chapitres de Cours/, ou de révisions/ avec -r "
+        "(ordre lexicographique)",
+    )
+    p.add_argument(
+        "-r",
+        "--révisions",
+        action="store_true",
+        help="les révisions de PCSI plutôt que Cours/ "
+        "(sortie : « révisions/build/questions de colle.pdf »)",
     )
     p.add_argument(
         "--sortie",
