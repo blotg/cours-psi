@@ -22,7 +22,7 @@ from tempfile import TemporaryDirectory
 from threading import Lock
 
 from . import typst
-from .chapitre import GABARITS, Chapitre, chapitres
+from .chapitre import GABARITS, RACINE_COURS, RACINE_RÉVISIONS, Chapitre, chapitres
 
 #: Dossier produit, ignoré par git (cf. .gitignore) et publié par le hook pre-push.
 SORTIE = "site"
@@ -43,11 +43,16 @@ PROCESSUS = min(8, os.cpu_count() or 1)
 #: Racine du dépôt : les `#include` des pages s'y résolvent.
 RACINE = Path(__file__).resolve().parent.parent
 
-#: Les deux pages de second niveau, vers lesquelles l'accueil aiguille. Les TP
-#: ont déjà leur dossier, l'index y prend donc sa place ; les chapitres, eux,
-#: ont chacun le leur à la racine, et leur index reste une page.
+#: Les pages de second niveau, vers lesquelles l'accueil aiguille. Les TP ont
+#: déjà leur dossier, l'index y prend donc sa place ; les chapitres, eux, ont
+#: chacun le leur à la racine, et leur index reste une page.
 CHAPITRES_INDEX = "chapitres.html"
 TP_INDEX = "tp/index.html"
+
+#: Les révisions de PCSI ont leur dossier, index compris : leurs titres courts
+#: (« Énergie 1 ») ne doivent pas pouvoir croiser ceux des chapitres de PSI.
+RÉVISIONS = "revisions"
+RÉVISIONS_INDEX = f"{RÉVISIONS}/index.html"
 
 #: Ce qu'un chapitre offre au téléchargement : (type de document, extension,
 #: intitulé du lien, mention de format). Les fichiers viennent de `build/`,
@@ -385,18 +390,18 @@ class Site:
         return trouvés
 
     @staticmethod
-    def rangement(chapitre: Chapitre) -> tuple[str, str, str]:
+    def rangement(chapitre: Chapitre, racine: str = RACINE_COURS) -> tuple[str, str, str]:
         """(thème, numéro dans le thème, titre propre) d'un chapitre.
 
-        Le thème est le dossier de premier niveau sous `Cours/` : c'est le
-        classement que le dépôt tient déjà. Un chapitre posé directement là
-        — « 8 - Électrochimie » — est à lui seul son thème.
+        Le thème est le dossier de premier niveau sous `racine` — `Cours/` ou
+        `révisions/` : c'est le classement que le dépôt tient déjà. Un chapitre
+        posé directement là — « 8 - Électrochimie » — est à lui seul son thème.
 
         Le titre d'un chapitre tient sur deux lignes dans infos.yml : le thème
         et son numéro d'abord, le titre propre ensuite. C'est le second qu'on
         affiche sous l'intitulé du thème, pour ne pas répéter celui-ci.
         """
-        parties = chapitre.chemin.resolve().relative_to(RACINE / "Cours").parts
+        parties = chapitre.chemin.resolve().relative_to(RACINE / racine).parts
         thème = _sans_préfixe(parties[0])
         numéro = _préfixe(parties[1]) if len(parties) > 1 else ""
         lignes = [l.strip() for l in chapitre.titre().split("\n") if l.strip()]
@@ -464,6 +469,24 @@ class Site:
             tâches += self._chapitre(chapitre, dossier)
         nombre_de_chapitres = sum(len(liens) for liens in thèmes.values())
 
+        # Les révisions se rangent comme le cours, thème par thème ; les liens
+        # sont relatifs à leur propre dossier, où vit leur index.
+        révisions: dict[str, list[dict]] = {}
+        for chapitre in chapitres(RACINE / RACINE_RÉVISIONS):
+            dossier = adresse(chapitre.titre_court)
+            thème, numéro, titre = self.rangement(chapitre, RACINE_RÉVISIONS)
+            révisions.setdefault(thème, []).append({
+                "texte": titre,
+                "url": f"{dossier}/index.html",
+                "marque": numéro,
+            })
+            tâches += self._chapitre(
+                chapitre,
+                f"{RÉVISIONS}/{dossier}",
+                sommaire=("Révisions de PCSI", "../index.html"),
+            )
+        nombre_de_révisions = sum(len(liens) for liens in révisions.values())
+
         tp_liens = []
         for tp in sorted((RACINE / "TP").glob("*/TP.typ")):
             nom = _sans_préfixe(tp.parent.name)
@@ -502,8 +525,18 @@ class Site:
             },
             profondeur=1,
         ))
-        # L'accueil ne fait que départager les deux : le cours d'un côté, la
-        # paillasse de l'autre. Le détail des chapitres tient sur sa page.
+        tâches.append(partial(
+            self.page_liens,
+            RÉVISIONS_INDEX,
+            {
+                "titre": "Révisions de PCSI",
+                "fil": [["Accueil", "../index.html"], ["Révisions de PCSI", None]],
+                "sections": [_section(thème, liens) for thème, liens in révisions.items()],
+            },
+            profondeur=1,
+        ))
+        # L'accueil ne fait qu'aiguiller : le cours, la paillasse, et ce qu'il
+        # faut avoir retenu de PCSI. Le détail de chacun tient sur sa page.
         tâches.append(partial(
             self.page_liens,
             "index.html",
@@ -521,6 +554,11 @@ class Site:
                         "url": TP_INDEX,
                         "détail": _pluriel(len(tp_liens), "TP", pluriel="TP"),
                     },
+                    {
+                        "texte": "Révisions de PCSI",
+                        "url": RÉVISIONS_INDEX,
+                        "détail": _pluriel(nombre_de_révisions, "chapitre"),
+                    },
                 ]}],
             },
             profondeur=0,
@@ -531,24 +569,35 @@ class Site:
         self._écrit_manifeste()
         return self.produits
 
-    def _chapitre(self, chapitre: Chapitre, dossier: str) -> list:
+    def _chapitre(
+        self,
+        chapitre: Chapitre,
+        dossier: str,
+        sommaire: tuple[str, str] = ("Chapitres", f"../{CHAPITRES_INDEX}"),
+    ) -> list:
+        """Les pages d'un chapitre, qui vivent dans `dossier`.
+
+        `sommaire` est l'entrée du fil d'Ariane entre l'accueil et le
+        chapitre, son adresse relative à `dossier`.
+        """
+        profondeur = dossier.count("/") + 1
+        accueil = "../" * profondeur + "index.html"
         titre = chapitre.titre(inline=True)
-        base = [
-            ("Accueil", "../index.html"),
-            ("Chapitres", f"../{CHAPITRES_INDEX}"),
-            (titre, "index.html"),
-        ]
+        base = [("Accueil", accueil), sommaire, (titre, "index.html")]
         tâches: list = []
         documents, exercices = [], []
 
-        if (chapitre.chemin / "cours.typ").is_file():
+        # Le cours d'un chapitre de révision n'imprime que ses titres de
+        # sections — flashcards et questions de colle ne s'affichent pas : il
+        # n'y a rien à lire en ligne. Ses flashcards et son poly, eux, restent.
+        if not chapitre.révision and (chapitre.chemin / "cours.typ").is_file():
             tâches.append(partial(
                 self.page_contenu,
                 f"{dossier}/cours.html",
                 chapitre.chemin / "cours.typ",
                 f"{titre} — cours",
                 base + [("Cours", None)],
-                profondeur=1,
+                profondeur=profondeur,
             ))
             documents.append({"texte": "Cours", "url": "cours.html", "détail": "à lire en ligne"})
 
@@ -570,7 +619,7 @@ class Site:
                 source,
                 f"{infos['titre']} — {titre}",
                 base + [(infos["titre"], None)],
-                profondeur=1,
+                profondeur=profondeur,
             ))
             exercices.append({
                 "texte": infos["titre"],
@@ -586,17 +635,13 @@ class Site:
             f"{dossier}/index.html",
             {
                 "titre": titre,
-                "fil": [
-                    ["Accueil", "../index.html"],
-                    ["Chapitres", f"../{CHAPITRES_INDEX}"],
-                    [titre, None],
-                ],
-                "sections": [
-                    {"titre": "", "liens": documents},
-                    {"titre": "Exercices", "liens": exercices},
-                ],
+                "fil": [["Accueil", accueil], list(sommaire), [titre, None]],
+                "sections": [{"titre": "", "liens": documents}]
+                # Une révision n'a pas de TD : « Exercices — rien pour
+                # l'instant » laisserait croire qu'il en viendra.
+                + ([] if chapitre.révision else [{"titre": "Exercices", "liens": exercices}]),
             },
-            profondeur=1,
+            profondeur=profondeur,
         ))
         return tâches
 

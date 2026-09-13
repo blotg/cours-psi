@@ -12,7 +12,8 @@
 # - Ce qui se tire du cours plutot que d'une source propre (DM recopies,
 #   flashcards Anki et planche a decouper, liste des manipulations) est
 #   produit dans la foulee par `python3 -m outils build`, si les dependances
-#   sont installees (cf. outils/README.md).
+#   sont installees (cf. outils/README.md). Un chapitre de revision (sous
+#   revisions/) n'en tire que ses flashcards.
 # - Une modif sous prepa/ => tous les chapitres sont recompiles.
 # - Un chapitre qui ne compile pas : simple avertissement, le commit continue.
 #   Pour annuler le commit dans ce cas :

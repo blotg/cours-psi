@@ -125,7 +125,11 @@
     }
 }
 
-#let full-poly(infos: (:), doc) = {
+// `résumé: false` : la page de garde seule — titre, compétences, questions de
+// colle —, sans le résumé du cours. C'est le poly d'un chapitre de révision,
+// dont le cours ne porte que des flashcards et des questions de colle : rien
+// qui s'imprime, son résumé ne serait qu'une page de titres de sections.
+#let full-poly(infos: (:), résumé: true, doc) = {
     let titre = infos.at("titre", default: "")
     let révisions-sup = infos.at("révisions-sup", default: ())
     let cahier-entrainement = infos.at("cahier-entrainement", default: ())
@@ -219,7 +223,19 @@
             )
         }
     }
-    show <cours>: it => {
+    show <cours>: it => if not résumé {
+        // Tu, mais pas retiré : la page de garde tire ses questions de colle
+        // des métadonnées du cours, qui doivent donc rester dans le document.
+        //
+        // Pas de `place` pour le sortir du flux : c'est un conteneur, et à la
+        // première passe — l'état `racine` n'y est pas encore connu — `cours()`
+        // s'y croit seul et pose sa page, ce que typst refuse sans attendre la
+        // passe suivante. Titres et texte sont donc supprimés sur place, sans
+        // laisser de blanc ; `hide` couvre ce qui resterait.
+        show heading: none
+        show text: none
+        hide(it)
+    } else {
         // Le résumé du cours est isolé entre deux sauts de page. C'était
         // jusqu'ici un effet de bord : cours.typ réappliquait init-document,
         // dont le `set page` coupait la page à l'entrée comme à la sortie de

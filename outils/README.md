@@ -46,6 +46,15 @@ Toutes ces commandes acceptent plusieurs chapitres à la suite.
 `manipulations`, `diapo` et `imprimable` sur un même objet `Chapitre`, donc une seule
 requête `typst query` par chapitre — c'est de loin le poste le plus cher.
 
+Un chapitre de **révision** — sous `révisions/`, rangé comme `Cours/` en thèmes
+puis chapitres — n'en tire que ses **flashcards** (`ÉTAPES_RÉVISION` dans
+`__main__.py`). Son cours ne porte que des flashcards et des questions de
+colle : ni DM, ni manipulation, ni question de début de cours. Son poly se
+réduit à la page de garde — titre, compétences, questions de colle —, grâce à
+l'option `résumé: false` de `full-poly` dans son `poly.typ` : le résumé n'y
+serait qu'une page de titres de sections, puisque rien de ce qu'il contient ne
+s'imprime.
+
 `flashcards` produit deux fichiers : le paquet Anki (`.apkg`) et une planche à
 découper (`.pdf`), quatre cartes A6 par page A4. Les rectos d'un groupe de
 quatre occupent une page et leurs versos la suivante, en miroir horizontal :
@@ -73,7 +82,14 @@ préfixes de classement des dossiers, eux, sont gardés — Anki trie ses paquet
 par nom, ce sont eux qui remettent les thèmes et les chapitres dans l'ordre du
 cours.
 
-Le paquet racine se règle en tête de `chapitre.py` (`PAQUET_ANKI`) ;
+Les révisions de PCSI suivent la même règle sous `révisions/`, dans un
+sous-paquet qui les tient à l'écart des thèmes de PSI :
+
+    révisions/1 - Ondes et signaux/1 - Formation des images
+    → Physique-Chimie PSI::Révisions de PCSI::1 - Signaux::1 - Formation des images
+
+Le paquet racine se règle en tête de `chapitre.py` (`PAQUET_ANKI`, et
+`PAQUET_RÉVISIONS` pour celui des révisions) ;
 l'identifiant du paquet étant déduit de son nom, le renommer fait apparaitre un
 **nouveau** paquet dans Anki : les anciens restent à supprimer à la main.
 
@@ -124,8 +140,11 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 | `site.py` | site statique du cours, en HTML |
 
 `site` produit le site statique dans `site/`, ignoré par git : une page par
-exercice et par cours, plus un sommaire par chapitre, l'accueil regroupant les
-chapitres par thème. Les pages de contenu ne sont pas une réécriture du cours
+exercice et par cours, plus un sommaire par chapitre. L'accueil aiguille vers
+trois pages : les chapitres groupés par thème (`chapitres.html`), les TP
+(`tp/`), et les révisions de PCSI (`revisions/`), groupées par thème de la même
+façon. Le sommaire d'un chapitre de révision n'offre que son poly et ses
+flashcards : son cours n'a rien à lire en ligne, et il n'a pas d'exercices. Les pages de contenu ne sont pas une réécriture du cours
 en HTML — ce sont les mêmes sources typst, compilées avec `--format html` :
 les formules deviennent du MathML, les schémas cetz/zap des SVG, et la mise en
 page se refait en CSS (cf. `gabarits/site.css`, noir sur blanc comme le

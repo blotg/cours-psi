@@ -20,13 +20,25 @@ DOCUMENTS = ("cours", "TD", "poly", "TP", "évaluation")
 #: du cours (et non d'une source propre au chapitre).
 GABARITS = Path(__file__).resolve().parent.parent / "gabarits"
 
+#: Racine du dépôt.
+RACINE = Path(__file__).resolve().parent.parent
+
 #: Dossier sous lequel vivent les chapitres, et dont l'arborescence donne
 #: celle des paquets Anki.
 RACINE_COURS = "Cours"
 
+#: Dossier des révisions de PCSI. Même rangement que `Cours/` — des thèmes,
+#: puis des chapitres —, mais leur cours ne porte que des flashcards et des
+#: questions de colle.
+RACINE_RÉVISIONS = "révisions"
+
 #: Paquet Anki qui chapeaute tous les autres. Anki lit « :: » comme un
 #: séparateur de sous-paquet : tout le cours se range donc sous ce nom.
 PAQUET_ANKI = "Physique-Chimie PSI"
+
+#: Sous-paquet Anki des révisions, sous `PAQUET_ANKI` : sans lui, « 1 - Signaux »
+#: se mêlerait aux thèmes du cours de PSI.
+PAQUET_RÉVISIONS = "Révisions de PCSI"
 
 #: Le rang du chapitre dans son thème, en fin de titre court : « Thermochimie 2 »
 #: se coupe là, et ce qui précède nomme le thème.
@@ -67,6 +79,11 @@ class Chapitre:
         return str(court).strip() if court else re.sub(r"^\d+\s*-\s*", "", self.chemin.name)
 
     @cached_property
+    def révision(self) -> bool:
+        """Un chapitre des révisions de PCSI, rangé sous `révisions/`."""
+        return self.chemin.resolve().is_relative_to(RACINE / RACINE_RÉVISIONS)
+
+    @cached_property
     def thème_court(self) -> str:
         """Nom court du thème, tiré du titre court du chapitre.
 
@@ -92,12 +109,19 @@ class Chapitre:
 
         Un chapitre sans thème (`Cours/8 - Électrochimie`, ou un TP, hors de
         `Cours/`) se range directement sous le paquet commun.
+
+        Un chapitre de révision suit la même règle sous `révisions/`, dans le
+        sous-paquet `PAQUET_RÉVISIONS` : « Physique-Chimie PSI::Révisions de
+        PCSI::1 - Signaux::1 - Formation des images ».
         """
+        racine, tête = RACINE_COURS, [PAQUET_ANKI]
+        if self.révision:
+            racine, tête = RACINE_RÉVISIONS, [PAQUET_ANKI, PAQUET_RÉVISIONS]
         parties = self.chemin.resolve().parts
-        if RACINE_COURS in parties:
+        if racine in parties:
             # La dernière occurrence : un chemin absolu peut traverser un autre
             # dossier du même nom avant d'arriver au nôtre.
-            départ = len(parties) - 1 - parties[::-1].index(RACINE_COURS)
+            départ = len(parties) - 1 - parties[::-1].index(racine)
             parties = list(parties[départ + 1 :])
         else:
             parties = [self.chemin.name]
@@ -105,7 +129,7 @@ class Chapitre:
             # Le dossier du thème garde son rang, mais prend le nom court.
             préfixe = _PRÉFIXE.match(parties[-2])
             parties[-2] = (préfixe.group(0) if préfixe else "") + self.thème_court
-        return "::".join([PAQUET_ANKI, *parties])
+        return "::".join([*tête, *parties])
 
     def _toutes_métadonnées(self, document: str) -> list[dict]:
         """Métadonnées d'un document, en une requête typst (mise en cache)."""

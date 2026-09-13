@@ -58,7 +58,10 @@
 #let _ajusté(contenu, dl, dh) = context {
     let replié = measure(box(width: dl, contenu)).height
     let déplié = measure(box(width: 10 * dl, contenu)).height
-    let f = if replié == déplié { calc.min(1.0, dl / measure(contenu).width) } else { 1.0 }
+    // Une face vide — un verso encore à écrire — ne mesure rien : sans ce
+    // garde, la division par sa largeur faisait échouer toute la planche.
+    let largeur = measure(contenu).width
+    let f = if replié == déplié and largeur > 0pt { calc.min(1.0, dl / largeur) } else { 1.0 }
 
     // Élargir la mise en page réduit la hauteur : on descend par paliers
     // jusqu'à ce que ça tienne, sans boucler indéfiniment.

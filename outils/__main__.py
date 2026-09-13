@@ -9,6 +9,9 @@ from pathlib import Path
 def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
     """Applique des étapes à chaque chapitre, en rapportant sans s'arrêter.
 
+    `étapes` donne, pour un chapitre, la liste des (nom, fonction) à lui
+    appliquer : toutes ne valent pas pour tous (cf. `ÉTAPES_RÉVISION`).
+
     Les étapes d'un même chapitre restent en file : elles partagent son objet
     `Chapitre`, donc la même requête `typst query` sur le cours — l'interroger
     coûte plus que tout le reste. Les chapitres, eux, sont indépendants et
@@ -24,7 +27,7 @@ def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
         les imprimer au fil de l'eau les entrelacerait."""
         chapitre = Chapitre(dossier)
         lignes, erreurs = [], []
-        for nom, produire in étapes:
+        for nom, produire in étapes(chapitre):
             try:
                 produits = produire(chapitre)
             except Exception as e:  # noqa: BLE001 - on rapporte et on continue
@@ -63,11 +66,28 @@ def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
 )
 
 
+#: Ce que `build` tire d'un chapitre de révision : ses flashcards, rien
+#: d'autre. Il n'a ni DM, ni manipulation, ni question de début de cours, et
+#: son poly se réduit à la page de garde — pas de quoi en faire un fascicule.
+ÉTAPES_RÉVISION = ("flashcards",)
+
+
 def _étapes(*noms):
+    choisies = [e for e in ÉTAPES if e[0] in noms]
     return lambda args: _pour_chaque(
         args.chapitres,
-        [e for e in ÉTAPES if e[0] in noms],
+        lambda chapitre: choisies,
         processus=getattr(args, "processus", None),
+    )
+
+
+def _build(args) -> int:
+    """Tout ce qu'un chapitre tire de son cours — ses flashcards seules, pour
+    un chapitre de révision. C'est ce qu'appelle le hook pre-commit."""
+    return _pour_chaque(
+        args.chapitres,
+        lambda chapitre: [e for e in ÉTAPES if not chapitre.révision or e[0] in ÉTAPES_RÉVISION],
+        processus=args.processus,
     )
 
 
@@ -154,7 +174,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sous.add_parser("build", help="tout ce qu'un chapitre tire de son cours")
     p.add_argument("chapitres", nargs="+", type=Path)
     _option_processus(p)
-    p.set_defaults(fonction=_étapes("DM", "flashcards", "manipulations", "diapo", "imprimable"))
+    p.set_defaults(fonction=_build)
 
     p = sous.add_parser("flashcards", help="paquet Anki et planche à découper")
     p.add_argument("chapitres", nargs="+", type=Path)
