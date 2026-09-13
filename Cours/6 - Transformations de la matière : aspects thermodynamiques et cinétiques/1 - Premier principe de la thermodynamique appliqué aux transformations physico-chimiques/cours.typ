@@ -28,8 +28,8 @@ La température de référence est la température $T=qty("25", "Celsius")=qty("
 L'état standard d'une substance est un état particulier servant de référence pour les tables de grandeurs physicochimiques. L'état standard d'un corps pur est l'état physique (liquide, solide ou gaz) le plus stable à la pression standard. Si l'état le plus stable est l'état gazeux, on prend le gaz parfait comme état standard.
 
 #flashcard(
-    recto: "Pression standard",
-    verso: "$standard(P)=qty(\"1\",\"bar\")=qty(\"1e5\",\"Pa\")$",
+    recto: [Pression standard],
+    verso: [$standard(P)=qty("1","bar")=qty("1e5","Pa")$],
 )
 
 #question-de-début-de-cours(
@@ -41,8 +41,8 @@ L'état standard d'une substance est un état particulier servant de référence
     ),
 )
 #flashcard(
-    recto: "Température de référence",
-    verso: "$T=qty(\"25\",\"Celsius\")=qty(\"298.15\",\"K\")$",
+    recto: [Température de référence],
+    verso: [$T=qty("25","Celsius")=qty("298.15","K")$],
 )
 
 #question-de-début-de-cours(
@@ -101,8 +101,8 @@ Une grandeur standard de réaction est une grandeur de réaction pour laquelle o
 ]
 
 #flashcard(
-    recto: "Grandeur standard de réaction",
-    verso: "$ standard(Delta_r Y) = sum nu_i standard(Y_m(X_i)) $",
+    recto: [Grandeur standard de réaction],
+    verso: [$ standard(Delta_r Y) = sum nu_i standard(Y_m(X_i)) $],
 )
 
 #question-de-début-de-cours(
@@ -158,8 +158,8 @@ La réaction de formation d'une espèce #ce("X") est une réaction dont le seul 
 L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enthalpie standard de réaction $standard(Delta_r H)$ pour la réaction de formation de cette espèce. L'enthalpie standard de formation d'un corps simple dans son état standard est donc nulle.
 
 #flashcard(
-    recto: "Pour quelles espèces l'enthalpie standard de formation est-elle nulle ?",
-    verso: "Les corps simples dans leur état standard.",
+    recto: [Pour quelles espèces l'enthalpie standard de formation est-elle nulle ?],
+    verso: [Les corps simples dans leur état standard.],
 )
 
 #question-de-début-de-cours(
@@ -184,8 +184,8 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 ]
 
 #flashcard(
-    recto: "Loi de Hess",
-    verso: "$ standard(Delta_r H) = sum nu_i standard(Delta_f H(X_i)) $",
+    recto: [Loi de Hess],
+    verso: [$ standard(Delta_r H) = sum nu_i standard(Delta_f H(X_i)) $],
 )
 
 #application[
@@ -208,12 +208,12 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 ]
 
 #flashcard(
-    recto: "Réaction exothermique",
-    verso: "$standard(Delta_r H) < 0$",
+    recto: [Réaction exothermique],
+    verso: [$standard(Delta_r H) < 0$],
 )
 #flashcard(
-    recto: "Réaction endothermique",
-    verso: "$standard(Delta_r H) > 0$",
+    recto: [Réaction endothermique],
+    verso: [$standard(Delta_r H) > 0$],
 )
 
 #question-de-début-de-cours(
@@ -231,7 +231,7 @@ L'enthalpie standard de formation $standard(Delta_f H)$ d'une espèce est l'enth
 ]
 
 #question-de-colle(
-    "Définir l'état standard, la température de référence et l'état standard. Donner l'état standard de référence pour les éléments #ce(\"H\"), #ce(\"C\"), #ce(\"O\") et #ce(\"N\"). Définir l'enthalpie de formation et citer la loi de Hess."
+    [Définir l'état standard, la température de référence et l'état standard. Donner l'état standard de référence pour les éléments #ce("H"), #ce("C"), #ce("O") et #ce("N"). Définir l'enthalpie de formation et citer la loi de Hess.]
 )
 
 = Effets thermiques pour une transformation isobare
@@ -286,8 +286,8 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 ]
 
 #flashcard(
-    recto: "Variation de l'enthalpie pour une isotherme isobare à la pression standard",
-    verso: "$ standard(Delta H) = xi standard(Delta_r H) $",
+    recto: [Variation de l'enthalpie pour une isotherme isobare à la pression standard],
+    verso: [$ standard(Delta H) = xi standard(Delta_r H) $],
 )
 
 #question-de-début-de-cours(
@@ -383,12 +383,12 @@ Pour une transformation adiabatique et isobare, la variation d'enthalpie est nul
 ]
 
 #flashcard(
-    recto: "Définition température de flamme",
-    verso: "Température atteinte pour une réaction faite de façon adiabatique et isobare."
+    recto: [Définition température de flamme],
+    verso: [Température atteinte pour une réaction faite de façon adiabatique et isobare.]
 )
 #flashcard(
-    recto: "Méthode calcul température de flamme",
-    verso: "Décomposer la réaction en (1) une isotherme et (2) une élévation de température sans réaction. Utiliser le fait que l'enthalpie est une fonction d'état."
+    recto: [Méthode calcul température de flamme],
+    verso: [Décomposer la réaction en (1) une isotherme et (2) une élévation de température sans réaction. Utiliser le fait que l'enthalpie est une fonction d'état.]
 )
 
 Il est également possible d'exprimer la température de flamme en fonction de la capacité thermique du système avant réaction plutôt qu'après réaction.
@@ -403,5 +403,5 @@ Il est également possible d'exprimer la température de flamme en fonction de l
 ]
 
 #question-de-colle(
-    "Établir l'expression de la température de flamme d'une réaction en citant les hypothèses faites."
+    [Établir l'expression de la température de flamme d'une réaction en citant les hypothèses faites.]
 )

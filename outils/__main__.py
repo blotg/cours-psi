@@ -126,12 +126,12 @@ def _colles(args) -> int:
 
 def _questions_de_colle(args) -> int:
     from .chapitre import Chapitre
-    from .questions_de_colle import PROCESSUS, SORTIE, génère
+    from .questions_de_colle import SORTIE, génère
 
     # Sans chapitre nommé, tous ceux du dossier Cours : c'est l'usage courant,
     # le document n'ayant d'intérêt que complet.
     liste = [Chapitre(d) for d in args.chapitres] if args.chapitres else None
-    print(f"  questions     {génère(args.sortie or SORTIE, liste=liste, processus=args.processus or PROCESSUS)}")
+    print(f"  questions     {génère(args.sortie or SORTIE, liste=liste)}")
     return 0
 
 
@@ -229,7 +229,6 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help="PDF produit (défaut : « Cours/build/questions de colle.pdf »)",
     )
-    _option_processus(p)
     p.set_defaults(fonction=_questions_de_colle)
 
     p = sous.add_parser("site", help="site statique du cours (HTML)")

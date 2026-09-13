@@ -123,8 +123,8 @@ Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contribu
 ]
 
 #flashcard(
-    recto: "Relation entre la densité volumique de charge $rho$ et la densité particulaire $n$.",
-    verso: "$rho=n q$ ou $rho=sum_\"porteurs de charge\" n_i q_i$",
+    recto: [Relation entre la densité volumique de charge $rho$ et la densité particulaire $n$.],
+    verso: [$rho=n q$ ou $rho=sum_"porteurs de charge" n_i q_i$],
 )
 
 #question-de-début-de-cours(
@@ -148,7 +148,7 @@ Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contribu
 )
 
 #question-de-colle(
-    "Donner des ordres de grandeur de l'échelle microscopique et de l'échelle macroscopique. Définir l'échelle mésoscopique puis la densité volumique de charge, la densité particulaire et le vecteur densité de courant électrique."
+    [Donner des ordres de grandeur de l'échelle microscopique et de l'échelle macroscopique. Définir l'échelle mésoscopique puis la densité volumique de charge, la densité particulaire et le vecteur densité de courant électrique.]
 )
 
 = Déplacement global de charge
@@ -163,8 +163,8 @@ Pour rendre compte du déplacement global des porteurs de charge, on définit le
     $ delta I = va(j_"élec") dot va(dd(S)) $
 ]
 #flashcard(
-    recto: "Courant traversant une surface infinitésimale",
-    verso: "$delta I = va(j_\"élec\") dot va(dd(S))$",
+    recto: [Courant traversant une surface infinitésimale],
+    verso: [$delta I = va(j_"élec") dot va(dd(S))$],
 )
 
 #encadré(
@@ -182,8 +182,8 @@ Pour rendre compte du déplacement global des porteurs de charge, on définit le
 Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contributions de chacun : $va(j_"élec")= sum_"types de porteurs de charge"n_i q_i va(v)_i= sum_"types de porteurs de charge" rho_i va(v)_i$.
 
 #flashcard(
-    recto: "Vecteur densité de courant électrique.",
-    verso: "$va(j_\"élec\") = rho_\"libre\" va(v) = n_\"libre\" q va(v)$",
+    recto: [Vecteur densité de courant électrique.],
+    verso: [$va(j_"élec") = rho_"libre" va(v) = n_"libre" q va(v)$],
 )
 
 #question-de-début-de-cours(
@@ -217,11 +217,11 @@ Le vecteur densité de courant électrique (propriété locale) peut être reli�
 ]
 
 #flashcard(
-    recto: "Courant traversant une surface finie",
-    verso: "$I = integral.double_S va(j_\"élec\") dot va(dd(S))$",
+    recto: [Courant traversant une surface finie],
+    verso: [$I = integral.double_S va(j_"élec") dot va(dd(S))$],
 )
 #question-de-colle(
-    "Relier le courant traversant une surface infinitésimale, puis finie, au vecteur densité de courant.",
+    [Relier le courant traversant une surface infinitésimale, puis finie, au vecteur densité de courant.],
 )
 
 == Conservation de la charge
@@ -254,8 +254,8 @@ L'équation locale de conservation de la charge peut également s'obtenir à par
 ]
 
 #flashcard(
-    recto: "Équation locale de conservation de la charge.",
-    verso: "$ pdv(rho,t) = -div(va(j_\"élec\"))$",
+    recto: [Équation locale de conservation de la charge.],
+    verso: [$ pdv(rho,t) = -div(va(j_"élec"))$],
 )
 
 #question-de-début-de-cours(
@@ -278,7 +278,7 @@ L'équation locale de conservation de la charge peut également s'obtenir à par
     ),
 )
 #question-de-colle(
-    "Établir l'équation locale de conservation de la charge grâce à un bilan à 1D en coordonnées cartésiennes et généraliser à 3D. Retrouver cette équation à partir des équations de Maxwell.",
+    [Établir l'équation locale de conservation de la charge grâce à un bilan à 1D en coordonnées cartésiennes et généraliser à 3D. Retrouver cette équation à partir des équations de Maxwell.],
 )
 
 == Équation de conservation de la charge en régime stationnaire
@@ -288,8 +288,8 @@ En régime stationnaire, l'équation de conservation de la charge s'écrit $div 
     Démontrer que le vecteur densité de courant électrique est à flux conservatif en régime stationnaire.
 ]
 #flashcard(
-    recto: "Que peut-on dire de $va(j_\"élec\")$ en régime stationnaire ?",
-    verso: "Il est à flux conservatif : $div va(j_\"élec\")=0$",
+    recto: [Que peut-on dire de $va(j_"élec")$ en régime stationnaire ?],
+    verso: [Il est à flux conservatif : $div va(j_"élec")=0$],
 )
 
 #question-de-début-de-cours(
@@ -302,7 +302,7 @@ En régime stationnaire, l'équation de conservation de la charge s'écrit $div 
     ),
 )
 #question-de-colle(
-    "Montrer que $va(j_\"élec\")$ est à flux conservatif en régime stationnaire.",
+    [Montrer que $va(j_"élec")$ est à flux conservatif en régime stationnaire.],
 )
 
 #application[
@@ -349,8 +349,8 @@ Les interactions entre électrons et atomes du réseau cristallin sont modélis�
 La durée du régime transitoire est très courte. On considère que les électrons se déplacent toujours à leur vitesse limite.
 
 #flashcard(
-    recto: "Force modélisant les interactions entre les électrons et le métal dans le modèle de Drude",
-    verso: "$ va(F)=-m_e/tau va(v) $",
+    recto: [Force modélisant les interactions entre les électrons et le métal dans le modèle de Drude],
+    verso: [$ va(F)=-m_e/tau va(v) $],
 )
 
 #question-de-début-de-cours(
@@ -398,11 +398,11 @@ La résistivité est l'inverse de la conductivité. La résistivité se mesure e
 ]
 
 #question-de-colle(
-    "Établir la loi d'Ohm locale dans le cadre du modèle de Drude.",
+    [Établir la loi d'Ohm locale dans le cadre du modèle de Drude.],
 )
 #flashcard(
-    recto: "Loi d'Ohm locale",
-    verso: "$va(j_\"élec\")= gamma va(E)$",
+    recto: [Loi d'Ohm locale],
+    verso: [$va(j_"élec")= gamma va(E)$],
 )
 
 #question-de-début-de-cours(
@@ -414,8 +414,8 @@ La résistivité est l'inverse de la conductivité. La résistivité se mesure e
     ),
 )
 #flashcard(
-    recto: "Ordre de grandeur de la conductivité électrique du cuivre.",
-    verso: "$#qty(\"6e7\",\"S/m\")$",
+    recto: [Ordre de grandeur de la conductivité électrique du cuivre.],
+    verso: [$#qty("6e7","S/m")$],
 )
 
 == Lien avec la loi d'Ohm intégrale
@@ -441,11 +441,11 @@ La loi d'Ohm est une conséquence de la loi d'Ohm locale.
 ]
 
 
-#question-de-colle("Établir la résistance d'un barreau cylindrique à partir de la loi d'Ohm locale.")
+#question-de-colle([Établir la résistance d'un barreau cylindrique à partir de la loi d'Ohm locale.])
 
 #flashcard(
-    recto: "Résistance électrique d'un barreau cylindrique",
-    verso: "$R=L/(gamma S)$",
+    recto: [Résistance électrique d'un barreau cylindrique],
+    verso: [$R=L/(gamma S)$],
 )
 
 #question-de-début-de-cours(
@@ -471,11 +471,11 @@ La puissance reçue par l'électron de la part du champ électrique est dissipé
 ]
 
 #question-de-colle(
-    "Établir l'expression de la densité volumique de puissance cédée aux porteurs de charge par le champ électrique."
+    [Établir l'expression de la densité volumique de puissance cédée aux porteurs de charge par le champ électrique.]
 )
 #flashcard(
-    recto: "Densité volumique de puissance cédée aux porteurs de charge par le champ électrique",
-    verso: "$ p_\"vol\"= va(j_\"élec\") dot va(E) $"
+    recto: [Densité volumique de puissance cédée aux porteurs de charge par le champ électrique],
+    verso: [$ p_"vol"= va(j_"élec") dot va(E) $]
 )
 
 #question-de-début-de-cours(

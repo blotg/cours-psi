@@ -105,7 +105,7 @@ Lorsqu'une onde sonore arrive perpendiculairement à une interface plane, les co
 ]
 
 #question-de-colle(
-    "Établir les coefficients de transmission et de réflexion en amplitude puis en puissance pour une interface entre deux fluides non-miscibles séparés par une interface plane. Qu'est-ce que l'adaptation d'impédance ?"
+    [Établir les coefficients de transmission et de réflexion en amplitude puis en puissance pour une interface entre deux fluides non-miscibles séparés par une interface plane. Qu'est-ce que l'adaptation d'impédance ?]
 )
 
 Lorsque $Z_1=Z_2$, la puissance transmise est maximale, on dit qu'il y a *adaptation d'impédance*.
@@ -248,5 +248,5 @@ La réflexion sur un métal parfait engendre une force surfacique sur lui appel�
 ]
 
 #question-de-colle(
-    "Les relations de passages étant fournies et considérant une OPPH électromagnétique incidente $va(E)_i = E_0 e^(i omega t - k x)ey$ se propageant dans le vide et arrivant en incidence normale sur un conducteur parfait, établir l'onde réfléchie, le courant surfacique induit et la pression de radiation."
+    [Les relations de passages étant fournies et considérant une OPPH électromagnétique incidente $va(E)_i = E_0 e^(i omega t - k x)ey$ se propageant dans le vide et arrivant en incidence normale sur un conducteur parfait, établir l'onde réfléchie, le courant surfacique induit et la pression de radiation.]
 )

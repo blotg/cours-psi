@@ -4,7 +4,7 @@
 - Décrire la composition d’un système à l’aide des grandeurs physiques pertinentes.
 - Reconnaitre le caractère extensif ou intensif d’une variable.
 - Écrire l’équation de la réaction (ou des réactions) qui modélise(nt) une transformation chimique donnée.
-- Déterminer une constante thermodynamique d’équilibre et tester l’influence de différents paramètres sur l’état d’équilibre d’un système.
+- #compétence-TP Déterminer une constante thermodynamique d’équilibre et tester l’influence de différents paramètres sur l’état d’équilibre d’un système.
 - Décrire qualitativement et quantitativement un système chimique dans l’état initial ou dans un état d’avancement quelconque.
 - Exprimer l’activité d’une espèce chimique pure ou dans un mélange dans le cas de solutions aqueuses très diluées ou de mélanges de gaz parfaits avec référence à l’état standard.
 - Exprimer le quotient de réaction.

@@ -7,16 +7,21 @@
 // horizontal — la carte en haut à gauche du recto a son verso en haut à
 // droite.
 //
-// Alimenté par `outils flashcards --imprimable`, qui passe en `--input
-// données` le JSON produit par `typst query <flashcard>` sur le cours :
+// Alimenté par `outils flashcards`, qui passe en `--input données` :
 //
-//     {"titre": "...", "titre-court": "...",
-//      "cartes": [{"recto": "...", "verso": "..."}]}
+//     {"titre": "...", "titre-court": "...", "nombre": 17,
+//      "cours": "/Cours/.../cours.typ"}
+//
+// Les cartes elles-mêmes n'y sont pas : elles portent du content, que `typst
+// query` ne restitue qu'avec perte. Le cours est donc inclus à la suite de la
+// planche (cf. `cours-en-annexe`), et les cartes lues sur place — d'où la
+// compilation avec `--root` à la racine du dépôt et `--input inclus=1`, et
+// `--pages` pour écarter les pages du cours. `nombre` règle la page, qui se
+// décide avant qu'on puisse compter les cartes.
 
 #import "@local/prepa:0.1.1": *
 
 #let données = json(bytes(sys.inputs.données))
-#let cartes = données.at("cartes", default: ())
 #let _titre-court = données.at("titre-court", default: données.at("titre", default: ""))
 
 #let _largeur = 105mm
@@ -34,7 +39,7 @@
 // sur des cartes découpées. Le message du cas vide, lui, est un document
 // ordinaire. Tout se décide ici : redéfinir la page après coup ouvrirait une
 // page blanche.
-#let vide = cartes.len() == 0
+#let vide = données.at("nombre", default: 0) == 0
 
 #show: init-document.with(
     titre: "Flashcards — " + données.titre,
@@ -43,6 +48,7 @@
     numérotation: none,
     pied: if vide { auto } else { none },
 )
+#show: cours-en-annexe.with(include données.cours)
 #set text(size: 11pt)
 #set par(justify: false)
 
@@ -133,7 +139,7 @@
         let j = if face == "verso" { _miroir.at(i) } else { i }
         if j < groupe.len() {
             case(
-                rendu-carte(groupe.at(j).at(face)),
+                groupe.at(j).at(face),
                 numéro: if face == "recto" { début + j + 1 },
             )
         } else {
@@ -145,10 +151,13 @@
 #if vide [
     #align(center + horizon, emph[Aucune flashcard dans ce chapitre.])
 ] else {
-    for (n, groupe) in cartes.chunks(4).enumerate() {
-        if n > 0 { pagebreak() }
-        feuille(groupe, "recto", n * 4)
-        pagebreak()
-        feuille(groupe, "verso", n * 4)
+    context {
+        let cartes = query(<flashcard>).map(carte => carte.value)
+        for (n, groupe) in cartes.chunks(4).enumerate() {
+            if n > 0 { pagebreak() }
+            feuille(groupe, "recto", n * 4)
+            pagebreak()
+            feuille(groupe, "verso", n * 4)
+        }
     }
 }

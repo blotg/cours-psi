@@ -99,16 +99,16 @@ Une forte ressemblance entre les 2 équations précédentes peut être remarqué
 ]
 
 #flashcard(
-    recto: "À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine fréquentiel (ou de Fourier) ?",
-    verso: "$1/(j omega)$, $j omega$ et $(j omega)^2$ respectivement",
+    recto: [À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine fréquentiel (ou de Fourier) ?],
+    verso: [$1/(j omega)$, $j omega$ et $(j omega)^2$ respectivement],
 )
 #flashcard(
-    recto: "À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine de Laplace ?",
-    verso: "$1/p$, $p$ et $p^2$ respectivement",
+    recto: [À quoi correspondent $integral$, $dv(,t)$ et $dv(,t,2)$ dans le domaine de Laplace ?],
+    verso: [$1/p$, $p$ et $p^2$ respectivement],
 )
 #flashcard(
-    recto: "À quoi correspondent $1/(j omega)$, $j omega$ et $(j omega)^2$ dans le domaine temporel ?",
-    verso: "$integral$, $dv(,t)$ et $dv(,t,2)$ respectivement",
+    recto: [À quoi correspondent $1/(j omega)$, $j omega$ et $(j omega)^2$ dans le domaine temporel ?],
+    verso: [$integral$, $dv(,t)$ et $dv(,t,2)$ respectivement],
 )
 
 #application[
@@ -158,13 +158,13 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
 ]
 
 #flashcard(
-    recto: "Critère de stabilité d'un système d'ordre 1",
-    verso: "Le système est stable si les 2 coefficients du dénominateur de sa fonction de transfert sont de même signe.",
+    recto: [Critère de stabilité d'un système d'ordre 1],
+    verso: [Le système est stable si les 2 coefficients du dénominateur de sa fonction de transfert sont de même signe.],
 )
 
 
 #question-de-colle(
-    "Montrer qu'un système d'ordre 1 est stable si et seulement si les 2 coefficients de la fonction de transfert sont de même signe.",
+    [Montrer qu'un système d'ordre 1 est stable si et seulement si les 2 coefficients de la fonction de transfert sont de même signe.],
 )
 
 #question-de-début-de-cours(
@@ -214,11 +214,11 @@ Un système stable a une sortie bornée si son entrée est bornée#footnote[En p
 ]
 
 #flashcard(
-    recto: "Critère de stabilité d'un système d'ordre 2",
-    verso: "Le système est stable si les 3 coefficients du dénominateur de sa fonction de transfert sont de même signe.",
+    recto: [Critère de stabilité d'un système d'ordre 2],
+    verso: [Le système est stable si les 3 coefficients du dénominateur de sa fonction de transfert sont de même signe.],
 )
 
-#question-de-colle("Montrer qu'un système d'ordre 2 est stable si et seulement si les 3 coefficients de la fonction de transfert sont de même signe. Un seul des 3 cas (discriminant positif, nul ou négatif) sera traité, au choix du colleur.")
+#question-de-colle([Montrer qu'un système d'ordre 2 est stable si et seulement si les 3 coefficients de la fonction de transfert sont de même signe. Un seul des 3 cas (discriminant positif, nul ou négatif) sera traité, au choix du colleur.])
 
 #question-de-début-de-cours(
     "L'équation différentielle $dv(s, t, 2) + 4 dv(s, t) - 6 s = dv(e, t) + e$ a-t-elle des solutions stables ?",

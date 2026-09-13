@@ -120,8 +120,8 @@ $
 #exemple[La radio en mode grandes ondes (GO) utilise la modulation d'amplitude avec une porteuse entre #qty("150", "kHz") et #qty("300", "kHz").]
 
 #flashcard(
-    recto: "Application de la modulation d'amplitude.",
-    verso: "Radio en mode grandes ondes (GO) avec une porteuse entre $qty(\"150\",\"kHz\")$ et $qty(\"300\",\"kHz\")$.",
+    recto: [Application de la modulation d'amplitude.],
+    verso: [Radio en mode grandes ondes (GO) avec une porteuse entre $qty("150","kHz")$ et $qty("300","kHz")$.],
 )
 
 === La modulation de fréquence
@@ -138,8 +138,8 @@ $
 #exemple[La radio en mode FM utilise la modulation de fréquence avec une porteuse entre #qty("87", "MHz") et #qty("108", "MHz").]
 
 #flashcard(
-    recto: "Application de la modulation de fréquence.",
-    verso: "Radio en mode FM avec une porteuse entre $qty(\"87\",\"MHz\")$ et $qty(\"108\",\"MHz\")$.",
+    recto: [Application de la modulation de fréquence.],
+    verso: [Radio en mode FM avec une porteuse entre $qty("87","MHz")$ et $qty("108","MHz")$.],
 )
 
 #question-de-début-de-cours(
@@ -166,8 +166,8 @@ $
 #exemple[La téléphonie mobile utilise la modulation de phase avec une porteuse à environ #qty("900", "MHz").]
 
 #flashcard(
-    recto: "Application de la modulation de phase.",
-    verso: "Téléphonie mobile avec une porteuse à environ $qty(\"900\",\"MHz\")$.",
+    recto: [Application de la modulation de phase.],
+    verso: [Téléphonie mobile avec une porteuse à environ $qty("900","MHz")$.],
 )
 
 #question-de-début-de-cours(
@@ -181,7 +181,7 @@ $
 )
 
 #question-de-colle(
-    "Citer les 3 types de modulation et, pour chacun, représenter le signal modulé, citer un exemple d'application et la fréquence associée.",
+    [Citer les 3 types de modulation et, pour chacun, représenter le signal modulé, citer un exemple d'application et la fréquence associée.],
 )
 
 = Modulation d'amplitude
@@ -199,8 +199,8 @@ $
 ]
 
 #flashcard(
-    recto: "Forme d'un signal modulé en amplitude.",
-    verso: "$s_\"AM\" (t) = (1+k s(t)) s_p (t)$",
+    recto: [Forme d'un signal modulé en amplitude.],
+    verso: [$s_"AM" (t) = (1+k s(t)) s_p (t)$],
 )
 
 #question-de-début-de-cours(
@@ -223,8 +223,8 @@ $
 ]
 
 #flashcard(
-    recto: "Taux de modulation.",
-    verso: "$h = k dot max(s)$",
+    recto: [Taux de modulation.],
+    verso: [$h = k dot max(s)$],
 )
 
 Pour que le signal modulé puisse être démodulé "correctement", le taux de modulation doit être inférieur à $1$. Lorsque le taux de modulation dépasse $1$, il y a *surmodulation*.
@@ -327,8 +327,8 @@ La modulation en amplitude est la multiplication de deux signaux. La multiplicat
 ]
 
 #flashcard(
-    recto: "$cos(a) cos(b)$",
-    verso: "$(cos(a+b)+cos(a-b))/2$",
+    recto: [$cos(a) cos(b)$],
+    verso: [$(cos(a+b)+cos(a-b))/2$],
 )
 
 La *largeur de bande* est la plage de fréquence occupée par le signal modulé.
@@ -361,7 +361,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
 ]
 
 #question-de-colle(
-    "Dans le cas d'un signal de départ sinusoïdal, déterminer et tracer le spectre du signal modulé en amplitude puis du produit du signal modulé et de la porteuse.",
+    [Dans le cas d'un signal de départ sinusoïdal, déterminer et tracer le spectre du signal modulé en amplitude puis du produit du signal modulé et de la porteuse.],
 )
 
 === Deuxième étape : filtrage passe-bas
@@ -415,9 +415,9 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
 #schéma(titre: "Démodulation synchrone", hauteur: 6cm)
 
 #question-de-colle(
-    "Pour un signal de départ sinusoïdal de fréquence $f$, représenter sur un schéma les différentes étapes de la démodulation synchrone en précisant les exigences sur les fréquences de coupure et en représentant leurs effets sur le spectre du signal.",
+    [Pour un signal de départ sinusoïdal de fréquence $f$, représenter sur un schéma les différentes étapes de la démodulation synchrone en précisant les exigences sur les fréquences de coupure et en représentant leurs effets sur le spectre du signal.],
 )
 
 #question-de-colle(
-    "Pour un signal de départ audio, représenter sur un schéma les différentes étapes de la démodulation synchrone en précisant les exigences sur les fréquences de coupure et en représentant leurs effets sur le spectre du signal.",
+    [Pour un signal de départ audio, représenter sur un schéma les différentes étapes de la démodulation synchrone en précisant les exigences sur les fréquences de coupure et en représentant leurs effets sur le spectre du signal.],
 )

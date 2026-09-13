@@ -151,14 +151,14 @@ Le contacteur électromécanique en translation est utilisé pour fabriquer un r
 ]
 
 #question-de-colle(
-    "Déterminer le champ magnétique dans l'entrefer d'un contacteur électromagnétique en translation, puis en déduire la force s'exerçant sur la partie mobile, la formule $F_\"ém\"= lr(pdv(cal(E),x) \))_i$ étant fournie.",
+    [Déterminer le champ magnétique dans l'entrefer d'un contacteur électromagnétique en translation, puis en déduire la force s'exerçant sur la partie mobile, la formule $F_"ém"= lr(pdv(cal(E),x) \))_i$ étant fournie.],
 )
 
 La force électromagnétique est toujours attractive. La force électromagnétique tend à diminuer le volume des entrefers.
 
 #flashcard(
-    recto: "Sens de la force électromagnétique.",
-    verso: "La force électromagnétique est toujours attractive. La force électromagnétique tend à diminuer le volume des entrefers.",
+    recto: [Sens de la force électromagnétique.],
+    verso: [La force électromagnétique est toujours attractive. La force électromagnétique tend à diminuer le volume des entrefers.],
 )
 
 #application[
@@ -176,8 +176,8 @@ La machine synchrone peut être utilisée comme un moteur ou comme un alternateu
 La machine synchrone est constituée d'une partie fixe, appelée stator et d'une partie mobile appelée rotor. Le stator est aussi appelé induit. Le rotor est aussi appelé inducteur.
 
 #flashcard(
-    recto: "Induit et inducteur de la machine synchrone",
-    verso: "L'induit désigne les circuits statoriques, l'inducteur désigne le circuit rotorique.",
+    recto: [Induit et inducteur de la machine synchrone],
+    verso: [L'induit désigne les circuits statoriques, l'inducteur désigne le circuit rotorique.],
 )
 
 #question-de-début-de-cours(
@@ -238,7 +238,7 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
 ]
 
 #question-de-colle(
-    "Décrire la structure d'une machine synchrone et établir l'expression du champ magnétique créé dans l'entrefer par une spire d'un circuit électrique statorique.",
+    [Décrire la structure d'une machine synchrone et établir l'expression du champ magnétique créé dans l'entrefer par une spire d'un circuit électrique statorique.],
 )
 
 Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) va(e)_r$.
@@ -371,14 +371,14 @@ On s'intéresse au régime permanent, dans lequel le rotor tourne à une vitesse
 ]
 
 #question-de-colle(
-    "Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) va(e)_r$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) va(e)_r$ et la formule $Gamma_\"ém\"=lr(pdv(cal(E),theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.",
+    [Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) va(e)_r$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) va(e)_r$ et la formule $Gamma_"ém"=lr(pdv(cal(E),theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.],
 )
 
 La condition $Omega = omega$ est appelée condition de synchronisme. Dans une machine synchrone, pour avoir un couple non nul, il est indispensable que la rotation du rotor soit synchrone avec la rotation du champ glissant.
 
 #flashcard(
-    recto: "Condition à laquelle le couple électromagnétique moyen d'une machine synchrone est non nul.",
-    verso: "La condition de synchronisme $Omega = omega$.",
+    recto: [Condition à laquelle le couple électromagnétique moyen d'une machine synchrone est non nul.],
+    verso: [La condition de synchronisme $Omega = omega$.],
 )
 
 #question-de-début-de-cours(
@@ -434,8 +434,8 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
 #schéma(titre: "Schéma équivalent de l'induit", hauteur: 4cm)
 
 #flashcard(
-    recto: "Modèle électrique équivalent d'un moteur synchrone.",
-    verso: "Une résistance, une bobine et une force contre-électromotrice en série. La force contre-électromotrice est en convention récepteur.",
+    recto: [Modèle électrique équivalent d'un moteur synchrone.],
+    verso: [Une résistance, une bobine et une force contre-électromotrice en série. La force contre-électromotrice est en convention récepteur.],
 )
 
 #question-de-début-de-cours(
@@ -481,8 +481,8 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
 L'angle de pilotage est $Psi=pi/2 - alpha$.
 
 #flashcard(
-    recto: "Angle de pilotage",
-    verso: "Angle $Psi=pi/2 - alpha$ où $alpha$ est l'angle entre le champ glissant et le champ rotorique.",
+    recto: [Angle de pilotage],
+    verso: [Angle $Psi=pi/2 - alpha$ où $alpha$ est l'angle entre le champ glissant et le champ rotorique.],
 )
 
 #schéma(titre: "Angle de pilotage", hauteur: 3cm)
@@ -532,7 +532,7 @@ On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-�
 #schéma(titre: "Schéma équivalent et diagramme de Fresnel en fonctionnement générateur", hauteur: 4cm)
 
 #question-de-colle(
-    "Représenter le schéma équivalent de l'induit en fonctionnement moteur et alternateur. Écrire la loi des mailles et la représenter sur un diagramme de Fresnel dans les deux cas.",
+    [Représenter le schéma équivalent de l'induit en fonctionnement moteur et alternateur. Écrire la loi des mailles et la représenter sur un diagramme de Fresnel dans les deux cas.],
 )
 
 
@@ -549,8 +549,8 @@ On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-�
 La machine à courant continu est constituée d'un stator, aussi appelé inducteur#footnote[La correspondance induit/inducteur - rotor/stator est inversée par rapport à la machine synchrone.] sur lequel est enroulé un circuit électrique et d'un rotor, aussi appelé induit sur lequel sont enroulés plusieurs circuits électriques indépendants.
 
 #flashcard(
-    recto: "Inducteur et induit d'une machine à courant continu",
-    verso: "L'induit désigne le circuit rotorique. L'inducteur désigne le circuit statorique.",
+    recto: [Inducteur et induit d'une machine à courant continu],
+    verso: [L'induit désigne le circuit rotorique. L'inducteur désigne le circuit statorique.],
 )
 
 #exemple[
@@ -602,8 +602,8 @@ Le lien ci-dessous mène à une animation illustrant le fonctionnement du systè
 #lien("https://youtu.be/LAtPHANEfQo?feature=shared")
 
 #flashcard(
-    recto: "Rôle du système balais-collecteurs",
-    verso: "Alimenter le circuit rotorique formant un angle $pi/2$ avec le stator afin d'assurer la condition de synchronisme et maximiser le couple électromagnétique.",
+    recto: [Rôle du système balais-collecteurs],
+    verso: [Alimenter le circuit rotorique formant un angle $pi/2$ avec le stator afin d'assurer la condition de synchronisme et maximiser le couple électromagnétique.],
 )
 
 #question-de-début-de-cours(
@@ -642,7 +642,7 @@ Le lien ci-dessous mène à une animation illustrant le fonctionnement du systè
 Le frottement des balais sur les collecteurs dégrade le rendement de la machine à courant continu et use les balais, qu'il faut changer régulièrement.
 
 #question-de-colle(
-    "Présenter la machine à courant continu à l'aide d'un schéma. Expliquer l'intérêt et le fonctionnement du système balais-collecteurs.",
+    [Présenter la machine à courant continu à l'aide d'un schéma. Expliquer l'intérêt et le fonctionnement du système balais-collecteurs.],
 )
 
 == Relations entre grandeurs électriques et grandeurs mécaniques
@@ -664,8 +664,8 @@ Par analogie avec la machine synchrone, le couple électromagnétique subi par l
 ]
 
 #flashcard(
-    recto: "Couple électromagnétique pour une machine à courant continu",
-    verso: "$ Gamma_\"ém\" = Phi_0 I_r $",
+    recto: [Couple électromagnétique pour une machine à courant continu],
+    verso: [$ Gamma_"ém" = Phi_0 I_r $],
 )
 
 #question-de-début-de-cours(
@@ -705,8 +705,8 @@ La conservation de l'énergie dans une machine sans perte permet d'en déduire l
 ]
 
 #flashcard(
-    recto: "Force contre-électromotrice pour une machine à courant continu",
-    verso: "$ E_\"cém\" = Phi_0 Omega $",
+    recto: [Force contre-électromotrice pour une machine à courant continu],
+    verso: [$ E_"cém" = Phi_0 Omega $],
 )
 
 #question-de-début-de-cours(
@@ -729,7 +729,7 @@ Les bilans énergétiques aux différentes étapes de conversion peuvent être r
 #schéma(titre: "Pertes aux différentes étapes de conversion en régime stationnaire", hauteur: 4cm)
 
 #question-de-colle(
-    "Énoncer la relation couple-courant pour une machine à courant continu. Établir la relation vitesse angulaire-tension pour une machine sans pertes. Présenter la chaine énergétique pour un moteur à courant continu, en faisant apparaitre tous les types de pertes.",
+    [Énoncer la relation couple-courant pour une machine à courant continu. Établir la relation vitesse angulaire-tension pour une machine sans pertes. Présenter la chaine énergétique pour un moteur à courant continu, en faisant apparaitre tous les types de pertes.],
 )
 
 == Modèle électrique
@@ -740,12 +740,12 @@ Le modèle équivalent de l'induit est le même que pour la machine synchrone, m
 #schéma(titre: "Modèle électrique de l'induit", hauteur: 3cm)
 
 #flashcard(
-    recto: "Modèle équivalent de l'induit d'un moteur à courant continu",
-    verso: "Résistance, bobine et force contre-électromotrice, le tout en convention récepteur.",
+    recto: [Modèle équivalent de l'induit d'un moteur à courant continu],
+    verso: [Résistance, bobine et force contre-électromotrice, le tout en convention récepteur.],
 )
 #flashcard(
-    recto: "Modèle équivalent de l'induit d'une dynamo",
-    verso: "Résistance, bobine et force électromotrice, le tout en convention générateur.",
+    recto: [Modèle équivalent de l'induit d'une dynamo],
+    verso: [Résistance, bobine et force électromotrice, le tout en convention générateur.],
 )
 
 Il est possible de déduire de ce modèle la caractéristique couple-vitesse angulaire lorsque la tension d'alimentation du moteur est constante.
@@ -755,7 +755,7 @@ Il est possible de déduire de ce modèle la caractéristique couple-vitesse ang
 ]
 
 #question-de-colle(
-    "Présenter le modèle équivalent de l'induit d'un moteur à courant continu. En déduire la caractéristique $(Omega, Gamma)$ en régime stationnaire.",
+    [Présenter le modèle équivalent de l'induit d'un moteur à courant continu. En déduire la caractéristique $(Omega, Gamma)$ en régime stationnaire.],
 )
 
 == Démarrage

@@ -32,7 +32,13 @@
 // page, ni titre, ni logotype. Ce garde l'évite en amont — plutôt que de
 // laisser init-document s'appliquer deux fois et de masquer après coup ce qui
 // en déborde, ce qui obligeait à tenir une liste d'étiquettes à jour.
-#let inclus-dans-le-poly() = state("racine").get() == "full-poly"
+//
+// Un cours s'inclut aussi ailleurs que dans le poly, pour ses flashcards et ses
+// questions de colle (cf. `cours-en-annexe`). C'est alors `--input inclus=1` qui
+// le dit : il n'y a pas de poly pour poser l'état `racine`.
+#let inclus-dans-le-poly() = (
+    sys.inputs.at("inclus", default: "") != "" or state("racine").get() == "full-poly"
+)
 
 // `logotype` : bandeau d'en-tête sur la première page. À couper pour les
 // documents qui ne sont pas des feuilles de cours — la planche de
@@ -145,8 +151,7 @@
             [= Questions de cours des interrogations orales]
             for q in query(<question-de-colle>) {
                 [
-                    #import "helper-functions.typ": scope-des-chaines
-                    - #eval(q.value, mode: "markup", scope: scope-des-chaines)
+                    - #q.value
                 ]
             }
         }

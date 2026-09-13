@@ -52,8 +52,8 @@
 ]
 
 #flashcard(
-    recto: "Différentielle de l'énergie interne",
-    verso: "$ dd(U) = T dd(S) - P dd(V) $",
+    recto: [Différentielle de l'énergie interne],
+    verso: [$ dd(U) = T dd(S) - P dd(V) $],
 )
 
 Cette formule ressemble à la définition d'une différentielle d'une fonction $f(x,y)$ :
@@ -72,8 +72,8 @@ L'entropie $S$ et le volume $V$ ne sont pas faciles à mesurer et à imposer. On
 ]
 
 #flashcard(
-    recto: "Définition de l'enthalpie $H$",
-    verso: "$ H = U + P V $",
+    recto: [Définition de l'enthalpie $H$],
+    verso: [$ H = U + P V $],
 )
 
 On peut déduire la différentielle de l'enthalpie $H$ à partir de la différentielle de l'énergie interne $U$.
@@ -95,8 +95,8 @@ On peut déduire la différentielle de l'enthalpie $H$ à partir de la différen
 ]
 
 #flashcard(
-    recto: "Différentielle de l'enthalpie",
-    verso: "$ dd(H) = T dd(S) + V dd(P) $",
+    recto: [Différentielle de l'enthalpie],
+    verso: [$ dd(H) = T dd(S) + V dd(P) $],
 )
 
 Les variables naturelles de l'enthalpie $H$ sont donc $S$ et $P$. On note $H(S,P)$.
@@ -112,8 +112,8 @@ Les variables naturelles de l'enthalpie $H$ sont donc $S$ et $P$. On note $H(S,P
 ]
 
 #flashcard(
-    recto: "Définition de l'enthalpie libre $G$",
-    verso: "$ G = H - T S = U + P V - T S $",
+    recto: [Définition de l'enthalpie libre $G$],
+    verso: [$ G = H - T S = U + P V - T S $],
 )
 
 On peut déduire la différentielle de l'enthalpie libre $G$ à partir de la différentielle de l'enthalpie $H$.
@@ -135,12 +135,12 @@ On peut déduire la différentielle de l'enthalpie libre $G$ à partir de la dif
 ]
 
 #flashcard(
-    recto: "Différentielle de l'enthalpie libre",
-    verso: "$ dd(G) = V dd(P) - S dd(T) $",
+    recto: [Différentielle de l'enthalpie libre],
+    verso: [$ dd(G) = V dd(P) - S dd(T) $],
 )
 
 #question-de-colle(
-    "Citer la différentielle de l'énergie interne. Définir l'enthalpie et l'enthalpie libre et établir leur différentielle.",
+    [Citer la différentielle de l'énergie interne. Définir l'enthalpie et l'enthalpie libre et établir leur différentielle.],
 )
 
 Les variables naturelles de l'enthalpie libre $G$ sont donc $T$ et $P$. On note $G(T,P)$. Pour une transformation isotherme et isobare (les variables naturelles de $G$ restent constantes), la variation d'enthalpie libre est facilement calculable.
@@ -226,8 +226,8 @@ Bien que les grandeurs extensives $U(S,V,n)$, $H(S,P,n)$ et $G(T,P,n)$ dépenden
 ]
 
 #flashcard(
-    recto: "Lien entre potentiel chimique et enthalpie libre molaire",
-    verso: "$ mu^* = G_m $",
+    recto: [Lien entre potentiel chimique et enthalpie libre molaire],
+    verso: [$ mu^* = G_m $],
 )
 
 == Changements d'états
@@ -251,15 +251,15 @@ On s'intéresse à un changement d'état d'un corps pur #ce("A ($alpha$) <=> A (
 ]
 
 #flashcard(
-    recto: "Lien entre les potentiels chimiques lors d'un équilibre entre plusieurs phases",
-    verso: "$ mu^*_alpha (T,P) = mu^*_beta (T,P) $",
+    recto: [Lien entre les potentiels chimiques lors d'un équilibre entre plusieurs phases],
+    verso: [$ mu^*_alpha (T,P) = mu^*_beta (T,P) $],
 )
 
 L'égalité $mu^*_alpha (T,P) = mu^*_beta (T,P)$ est l'équation implicite d'une courbe dans un diagramme $(P,T)$. Lorsqu'un système est à l'équilibre entre deux phases, il se trouve sur une courbe dans le diagramme $(P,T)$
 
 #schéma(titre: [Diagramme $(P,T)$ de l'eau], hauteur: 4cm)
 
-#question-de-colle("Définir le potentiel chimique, montrer qu'il s'identifie à l'enthalpie libre molaire puis que le potentiel chimique est le même pour toutes les phases en présence lors d'un changement d'état d'un corps pur. Schématiser le diagramme $(P,T)$ de l'eau.")
+#question-de-colle([Définir le potentiel chimique, montrer qu'il s'identifie à l'enthalpie libre molaire puis que le potentiel chimique est le même pour toutes les phases en présence lors d'un changement d'état d'un corps pur. Schématiser le diagramme $(P,T)$ de l'eau.])
 
 == Potentiel chimique d'une espèce au sein d'un mélange
 Le potentiel chimique d'une espèce au sein d'un mélange dépend de l'activité de cette espèce.
@@ -281,8 +281,8 @@ Comme l'enthalpie libre est une grandeur additive, l'enthalpie libre d'un mélan
 ]
 
 #flashcard(
-    recto: "Enthalpie libre d'un mélange",
-    verso: "$ G = sum mu_i n_i $",
+    recto: [Enthalpie libre d'un mélange],
+    verso: [$ G = sum mu_i n_i $],
 )
 
 = Sens d'évolution d'une réaction
@@ -296,8 +296,8 @@ Comme l'enthalpie libre est une grandeur additive, l'enthalpie libre d'un mélan
 ]
 
 #flashcard(
-    recto: "Entropie standard de réaction en fonction des entropies molaires",
-    verso: "$ Delta_r S^circ = sum nu_i S_(m,i)^circ $"
+    recto: [Entropie standard de réaction en fonction des entropies molaires],
+    verso: [$ Delta_r S^circ = sum nu_i S_(m,i)^circ $]
 )
 
 L'entropie molaire est bien plus grande pour un gaz que pour un liquide et pour un liquide que pour un solide. On peut alors déterminer le signe de l'entropie de réaction en observant les états physiques des réactifs et des produits.
@@ -332,8 +332,8 @@ La constante d'équilibre d'une réaction peut être définie à partir de l'ent
 ]
 
 #flashcard(
-    recto: "Définition de la constante d'équilibre",
-    verso: "$ K^circ (T) = exp(- (Delta_r G^circ) / (R T)) $"
+    recto: [Définition de la constante d'équilibre],
+    verso: [$ K^circ (T) = exp(- (Delta_r G^circ) / (R T)) $]
 )
 
 L'enthalpie libre de réaction s'exprime alors en fonction de la constante d'équilibre et du quotient de réaction.
@@ -348,8 +348,8 @@ L'enthalpie libre de réaction s'exprime alors en fonction de la constante d'éq
 ]
 
 #flashcard(
-    recto: "Lien entre enthalpie libre de réaction et quotient réactionnel",
-    verso: "$ Delta_r G = R T ln(Q/K^circ) $"
+    recto: [Lien entre enthalpie libre de réaction et quotient réactionnel],
+    verso: [$ Delta_r G = R T ln(Q/K^circ) $]
 )
 
 Pour une réaction spontanée, l'enthalpie libre ne peut que diminuer. Ceci contraint le sens d'évolution en fonction du signe de l'enthalpie libre de réaction.
@@ -379,11 +379,12 @@ Cette condition d'évolution peut être reformulée en fonction des valeurs rela
 ]
 
 #flashcard(
-    recto: "Loi de Guldberg-Waage (loi d'action de masse)",
-    verso: "Si $Q < K^circ$ (c'est-à-dire $Delta_r G <0$) alors la réaction se produit dans le sens direct et réciproquement.\nLa réaction est à l'équilibre ssi $Q = K^circ$ (c'est-à-dire $Delta_r G =0$).",
+    recto: [Loi de Guldberg-Waage (loi d'action de masse)],
+    verso: [Si $Q < K^circ$ (c'est-à-dire $Delta_r G <0$) alors la réaction se produit dans le sens direct et réciproquement.
+La réaction est à l'équilibre ssi $Q = K^circ$ (c'est-à-dire $Delta_r G =0$).],
 )
 
-#question-de-colle("Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.")
+#question-de-colle([Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.])
 
 #application[
     Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("0.17")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$, sous une pression totale de #qty("200","bar") ?
@@ -406,15 +407,15 @@ La loi de Van't Hoff relie la variation de la constante d'équilibre avec la tem
 ]
 
 #flashcard(
-    recto: "Relation de Van't Hoff",
-    verso: "$ dv(ln K^circ,T) = (Delta_r H^circ)/(R T^2) $"
+    recto: [Relation de Van't Hoff],
+    verso: [$ dv(ln K^circ,T) = (Delta_r H^circ)/(R T^2) $]
 )
 
 #application[
     #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)") est une réaction exothermique. Vaut-il mieux faire la réaction à haute ou à basse température pour obtenir davantage de #ce("NH3") ?
 ]
 
-#question-de-colle("Énoncer la relation de Van't Hoff. Dans quel sens se déplace l'équilibre lorsqu'on augmente/diminue la température pour une réaction exothermique/endothermique (au choix de l'interrogateur) ?")
+#question-de-colle([Énoncer la relation de Van't Hoff. Dans quel sens se déplace l'équilibre lorsqu'on augmente/diminue la température pour une réaction exothermique/endothermique (au choix de l'interrogateur) ?])
 
 La relation de Van't Hoff est cohérente avec le *principe de modération de Le Chatelier* : lorsque l'on perturbe les conditions de température ou de pression d'un système réactif à l'équilibre, la réaction va spontanément être déplacée dans le sens qui tend à s'opposer à la perturbation imposée.
 
@@ -422,8 +423,8 @@ La relation de Van't Hoff est cohérente avec le *principe de modération de Le 
 Dans l'approximation d'Ellingham, $Delta_r H^circ$ et $Delta_r S^circ$ sont indépendants de la température.
 
 #flashcard(
-    recto: "Approximation d'Ellingham",
-    verso: "$Delta_r H^circ$ et $Delta_r S^circ$ sont indépendants de la température."
+    recto: [Approximation d'Ellingham],
+    verso: [$Delta_r H^circ$ et $Delta_r S^circ$ sont indépendants de la température.]
 )
 
 Dans l'approximation d'Ellingham, $Delta_r G^circ = Delta_r H^circ - T Delta_r S^circ$ est une fonction affine de la température.
@@ -441,6 +442,6 @@ Si des réactifs ou des produits sont des gaz, la pression a une influence sur l
 
 La loi de Le Chatelier stipule qu'une augmentation de la pression déplace l'équilibre dans le sens qui diminue le nombre de moles de gaz, et réciproquement. La loi de Le Chatelier est cohérente avec le principe de modération de Le Chatelier.
 
-#question-de-colle("Dans le cas particulier d'une réaction fournie par l'interrogateur, déterminer dans quel sens est déplacé l'équilibre en cas d'augmentation/diminution de la pression.")
+#question-de-colle([Dans le cas particulier d'une réaction fournie par l'interrogateur, déterminer dans quel sens est déplacé l'équilibre en cas d'augmentation/diminution de la pression.])
 
 

@@ -77,9 +77,9 @@ Une corde peut être le siège d'ondes transversales. C'est un milieu unidimensi
     $ pdv(y, x, 2) - 1/c^2 pdv(y, t, 2) = 0 quad "avec" quad c = sqrt(T/mu) $
 ]
 
-#question-de-colle("Établir l'équation aux dérivées partielles vérifiée par une onde dans une corde, en précisant les hypothèses et approximations effectuées.")
+#question-de-colle([Établir l'équation aux dérivées partielles vérifiée par une onde dans une corde, en précisant les hypothèses et approximations effectuées.])
 
-#flashcard(recto: "Équation de d'Alembert", verso: "$ Delta y - 1/c^2 pdv(y, t, 2) = 0 $ (ou $ pdv(y, x, 2) - 1/c^2 pdv(y, t, 2) = 0 $ en 1D)")
+#flashcard(recto: [Équation de d'Alembert], verso: [$ Delta y - 1/c^2 pdv(y, t, 2) = 0 $ (ou $ pdv(y, x, 2) - 1/c^2 pdv(y, t, 2) = 0 $ en 1D)])
 
 Cette équation aux dérivées partielles s'appelle #strong[équation de d'Alembert].
 
@@ -111,7 +111,7 @@ Dans le modèle à constantes réparties sans pertes, on étudie une portion mé
     ) quad "avec" quad c = 1/sqrt(Lambda Gamma) $
 ]
 
-#question-de-colle("Établir l'équation aux dérivées partielles vérifiée par une onde de tension dans un câble coaxial, en précisant les hypothèses et approximations effectuées.")
+#question-de-colle([Établir l'équation aux dérivées partielles vérifiée par une onde de tension dans un câble coaxial, en précisant les hypothèses et approximations effectuées.])
 
 #application[
     Calculer la vitesse de propagation d'une onde dans un câble coaxial de capacité linéique $qty("40", "pF/m")$ et d'inductance linéique $qty("0.4", "uH/m")$.
@@ -190,7 +190,7 @@ Trois équations couplées permettent d'obtenir l'équation de propagation des o
     $ Delta P_1 - 1/c^2 pdv(P_1, t, 2) = 0 quad "avec" quad c = 1/sqrt(rho_0 chi_S) $
 ]
 
-#question-de-colle("Établir l'équation aux dérivées partielles vérifiée par une onde sonore, en précisant les hypothèses et approximations effectuées.")
+#question-de-colle([Établir l'équation aux dérivées partielles vérifiée par une onde sonore, en précisant les hypothèses et approximations effectuées.])
 
 La surpression vérifie une équation de d'Alembert. On admet que la vitesse vérifie une équation de d'Alembert analogue.
 
@@ -210,7 +210,7 @@ La surpression vérifie une équation de d'Alembert. On admet que la vitesse vé
     $ c = sqrt((gamma R T)/M) $
 ]
 
-#question-de-colle("Montrer que les ondes sonores sont longitudinales et établir la célérité d'une onde sonore dans un gaz parfait.")
+#question-de-colle([Montrer que les ondes sonores sont longitudinales et établir la célérité d'une onde sonore dans un gaz parfait.])
 
 #application[
     Déterminer la célérité d'une onde sonore dans l'air, considéré comme un gaz parfait diatomique, à la température de référence. L'air est constitué de $qty("80", "%")$ de diazote ($M(N) = qty("14", "g/mol")$) et de $qty("20", "%")$ de dioxygène ($M(O) = qty("16", "g/mol")$).
@@ -240,7 +240,7 @@ Ondes radio, lumière visible et invisible, rayons X et $gamma$ sont des ondes �
     avec $c = 1 \/ sqrt(epsilon_0 mu_0)$.
 ]
 
-#question-de-colle("Établir l'équation aux dérivées partielles vérifiée par une onde électromagnétique dans le vide, en précisant les hypothèses faites.")
+#question-de-colle([Établir l'équation aux dérivées partielles vérifiée par une onde électromagnétique dans le vide, en précisant les hypothèses faites.])
 
 #application[
     Vérifier l'homogénéité de l'expression $c = 1 \/ sqrt(mu_0 epsilon_0)$.
@@ -250,7 +250,7 @@ Ondes radio, lumière visible et invisible, rayons X et $gamma$ sont des ondes �
 == Ondes progressives
 Dans un milieu unidimensionnel, une onde progressive est une fonction de $x - c t$ (propagation vers les $x$ croissants) ou de $x + c t$ (propagation vers les $x$ décroissants).
 
-#flashcard(recto: "Onde progressive (1D)", verso: "Fonction de $x - c t$ (propagation vers les $x$ croissants) ou de $x + c t$ (vers les $x$ décroissants).")
+#flashcard(recto: [Onde progressive (1D)], verso: [Fonction de $x - c t$ (propagation vers les $x$ croissants) ou de $x + c t$ (vers les $x$ décroissants).])
 
 #exemple[$A cos(k(x + c t))$, $B sin(omega t - omega/c x)$, $C exp((- x - c t)/lambda)$ sont des ondes progressives.]
 
@@ -288,7 +288,7 @@ Une onde (plane) progressive harmonique (OP(P)H) est une onde progressive dont l
     $ y(M, t) = y_0 cos(omega t - va(k) dot va(O M) + phi) $
 ]
 
-#flashcard(recto: "Onde (plane) progressive harmonique", verso: "$ y(M, t) = y_0 cos(omega t - va(k) dot va(O M) + phi) $ (ou $y_0 cos(omega t plus.minus k x + phi)$ en 1D)")
+#flashcard(recto: [Onde (plane) progressive harmonique], verso: [$ y(M, t) = y_0 cos(omega t - va(k) dot va(O M) + phi) $ (ou $y_0 cos(omega t plus.minus k x + phi)$ en 1D)])
 
 En 1D : $y(M, t) = y_0 cos(omega t plus.minus k x + phi)$ (le signe $+$ correspond à une onde vers les $x$ décroissants, $-$ vers les $x$ croissants). $k$ est le #strong[nombre d'onde].
 
@@ -311,9 +311,9 @@ On associe à l'OPH $y = y_0 cos(omega t - va(k) dot va(O M) + phi)$ la grandeur
     $
 ]
 
-#question-de-colle("Définir une onde plane progressive harmonique. Établir l'expression de la dérivée temporelle, de la divergence, du gradient et du laplacien pour une OPPH.")
+#question-de-colle([Définir une onde plane progressive harmonique. Établir l'expression de la dérivée temporelle, de la divergence, du gradient et du laplacien pour une OPPH.])
 
-#flashcard(recto: "Dérivées pour une OPH", verso: "$pdv(underline(y), t) = j omega underline(y)$ ; $div va(underline(A)) = - j va(k) dot va(underline(A))$ ; $grad underline(y) = - j va(k) underline(y)$ ; $Delta underline(y) = - k^2 underline(y)$")
+#flashcard(recto: [Dérivées pour une OPH], verso: [$pdv(underline(y), t) = j omega underline(y)$ ; $div va(underline(A)) = - j va(k) dot va(underline(A))$ ; $grad underline(y) = - j va(k) underline(y)$ ; $Delta underline(y) = - k^2 underline(y)$])
 
 Les dérivées spatiales se résument par $nabla -> - j va(k)$.
 
@@ -342,7 +342,7 @@ Les dérivées spatiales se résument par $nabla -> - j va(k)$.
     $ omega^2/k^2 = c^2 $
 ]
 
-#flashcard(recto: "Relation de dispersion pour une équation de d'Alembert", verso: "$ omega^2/k^2 = c^2 $")
+#flashcard(recto: [Relation de dispersion pour une équation de d'Alembert], verso: [$ omega^2/k^2 = c^2 $])
 
 === Vitesse de phase
 La vitesse de phase est la vitesse à laquelle se propage un plan de phase constante.
@@ -367,9 +367,9 @@ La vitesse de phase est la vitesse à laquelle se propage un plan de phase const
     $ v_phi = plus.minus c $
 ]
 
-#flashcard(recto: "Vitesse de phase", verso: "$ v_phi = omega/k $, et $v_phi = plus.minus c$ pour une OPH de d'Alembert")
+#flashcard(recto: [Vitesse de phase], verso: [$ v_phi = omega/k $, et $v_phi = plus.minus c$ pour une OPH de d'Alembert])
 
-#question-de-colle("Établir la relation de dispersion. Définir la vitesse de phase en justifiant cette définition. Établir la vitesse de phase pour une OPH vérifiant l'équation de d'Alembert.")
+#question-de-colle([Établir la relation de dispersion. Définir la vitesse de phase en justifiant cette définition. Établir la vitesse de phase pour une OPH vérifiant l'équation de d'Alembert.])
 
 === Superposition d'OPH
 L'équation de d'Alembert étant linéaire, toute combinaison linéaire de solutions est solution. Toute onde périodique se décompose en série de Fourier d'OPH, toute onde en intégrale de Fourier d'OPH : connaitre la propagation des OPH suffit à connaitre celle de n'importe quelle onde.
@@ -381,8 +381,8 @@ Une onde stationnaire s'écrit souvent comme un produit d'une fonction de $t$ et
 
 == Quelle solution privilégier ?
 #flashcard(
-    recto: "Solution à privilégier selon le milieu",
-    verso: "Milieu infini : solutions progressives. Milieu fini ou semi-infini : solutions stationnaires.",
+    recto: [Solution à privilégier selon le milieu],
+    verso: [Milieu infini : solutions progressives. Milieu fini ou semi-infini : solutions stationnaires.],
 )
 
 Dans un milieu infini, on privilégie les solutions progressives ; dans un milieu fini ou semi-infini, les solutions stationnaires.
@@ -426,7 +426,7 @@ Une onde stationnaire peut donc s'écrire comme somme de deux ondes progressives
 
 #application[Montrer qu'une OPH peut s'écrire comme la somme de deux ondes stationnaires harmoniques.]
 
-#question-de-colle("Montrer que la réflexion d'une OPH incidente sur une condition aux limites stricte donne lieu à une onde stationnaire. Montrer qu'une OPH peut aussi s'écrire comme une superposition d'ondes stationnaires.")
+#question-de-colle([Montrer que la réflexion d'une OPH incidente sur une condition aux limites stricte donne lieu à une onde stationnaire. Montrer qu'une OPH peut aussi s'écrire comme une superposition d'ondes stationnaires.])
 
 == Condition imposée
 Une source (pot vibrant, générateur, membrane…) peut imposer la valeur de l'onde en un point.
@@ -449,7 +449,7 @@ Dans un milieu fini, deux conditions aux limites sont imposées. Si elles sont t
     $ omega_n = n (pi c)/L quad "avec" quad n in NN^* $
 ]
 
-#flashcard(recto: "Modes propres pour des conditions aux limites strictes", verso: "$ omega_n = n (pi c)/L $ avec $n in NN^*$")
+#flashcard(recto: [Modes propres pour des conditions aux limites strictes], verso: [$ omega_n = n (pi c)/L $ avec $n in NN^*$])
 
 Lorsque le milieu fini est excité à une fréquence proche d'un mode propre, l'amplitude devient très grande : c'est la #strong[résonance].
 
@@ -457,7 +457,7 @@ Lorsque le milieu fini est excité à une fréquence proche d'un mode propre, l'
     Une corde de longueur $L$ est accrochée à un vibreur imposant $a_0 cos(omega t)$ en $x = 0$ ; l'autre extrémité est fixe. Déterminer les pulsations de résonance et montrer qu'elles coïncident avec celles des modes propres.
 ]
 
-#question-de-colle("Déterminer les modes propres d'une corde fixée à ses deux extrémités. Montrer que les fréquences de résonance sont celles des modes propres.")
+#question-de-colle([Déterminer les modes propres d'une corde fixée à ses deux extrémités. Montrer que les fréquences de résonance sont celles des modes propres.])
 
 = Relation entre grandeurs couplées
 Les deux grandeurs couplées d'une onde sont liées par des relations simples pour les OPH.
@@ -476,10 +476,10 @@ Les deux grandeurs couplées d'une onde sont liées par des relations simples po
     ($+$ pour une OPH vers les $x$ croissants, $-$ vers les $x$ décroissants.)
 ]
 
-#flashcard(recto: "Impédance caractéristique d'un câble coaxial", verso: "$ Z_c = sqrt(Lambda \/ Gamma) $")
-#flashcard(recto: "Condition pour avoir $u = Z_c i$ dans un câble coaxial", verso: "OPH se propageant dans le sens des $x$ croissants.")
+#flashcard(recto: [Impédance caractéristique d'un câble coaxial], verso: [$ Z_c = sqrt(Lambda \/ Gamma) $])
+#flashcard(recto: [Condition pour avoir $u = Z_c i$ dans un câble coaxial], verso: [OPH se propageant dans le sens des $x$ croissants.])
 
-#question-de-colle("Définir l'impédance caractéristique d'un câble coaxial. Établir le lien entre tension et courant pour des OPH se propageant dans les deux sens.")
+#question-de-colle([Définir l'impédance caractéristique d'un câble coaxial. Établir le lien entre tension et courant pour des OPH se propageant dans les deux sens.])
 
 === Réflexion sur une impédance terminale
 #schéma(titre: "Câble coaxial fermé sur une impédance terminale", hauteur: 4cm)
@@ -501,7 +501,7 @@ Lorsque la résistance terminale est égale à l'impédance caractéristique, il
 
 #exemple[Les prises d'antenne de téléviseur sont chargées par une résistance égale à l'impédance caractéristique du câble, pour éviter toute réflexion.]
 
-#question-de-colle("Montrer que l'onde réfléchie est nulle lorsqu'un câble coaxial est fermé sur une résistance égale à son impédance caractéristique. Citer une application.")
+#question-de-colle([Montrer que l'onde réfléchie est nulle lorsqu'un câble coaxial est fermé sur une résistance égale à son impédance caractéristique. Citer une application.])
 
 == Impédance acoustique
 #encadré(
@@ -519,10 +519,10 @@ Lorsque la résistance terminale est égale à l'impédance caractéristique, il
     $ P_1 = Z_a thin va(v)_1 dot va(n) quad "avec" quad Z_a = rho_0 c $
 ]
 
-#flashcard(recto: "Impédance acoustique", verso: "$ Z_a = rho_0 c $")
-#flashcard(recto: "Condition pour avoir $P_1 = Z_a v$", verso: "OPPH se propageant dans le sens croissant.")
+#flashcard(recto: [Impédance acoustique], verso: [$ Z_a = rho_0 c $])
+#flashcard(recto: [Condition pour avoir $P_1 = Z_a v$], verso: [OPPH se propageant dans le sens croissant.])
 
-#question-de-colle("Définir l'impédance acoustique. Établir le lien entre surpression et vitesse pour une OPPH dans le sens croissant.")
+#question-de-colle([Définir l'impédance acoustique. Établir le lien entre surpression et vitesse pour une OPPH dans le sens croissant.])
 
 == Relation de structure
 L'équation de Maxwell-Faraday fournit une relation entre les champs pour une OPPH.
@@ -539,9 +539,9 @@ L'équation de Maxwell-Faraday fournit une relation entre les champs pour une OP
 
 Les vecteurs $va(k)$, $va(E)$ et $va(B)$ sont mutuellement orthogonaux et $(va(k), va(E), va(B))$ forme un trièdre direct.
 
-#flashcard(recto: "Relation de structure", verso: "$ va(B) = (va(k) and va(E))/omega $")
+#flashcard(recto: [Relation de structure], verso: [$ va(B) = (va(k) and va(E))/omega $])
 
-#question-de-colle("Démontrer la relation de structure pour une OPPH électromagnétique. En déduire que $(va(k), va(E), va(B))$ est un trièdre direct.")
+#question-de-colle([Démontrer la relation de structure pour une OPPH électromagnétique. En déduire que $(va(k), va(E), va(B))$ est un trièdre direct.])
 
 = Aspects énergétiques
 == Énergie acoustique
@@ -557,7 +557,7 @@ Le vecteur de Poynting est le vecteur densité surfacique de puissance transport
     $ va(Pi) = P_1 va(v)_1 $
 ]
 
-#flashcard(recto: "Vecteur de Poynting acoustique", verso: "$ va(Pi) = P_1 va(v)_1 $")
+#flashcard(recto: [Vecteur de Poynting acoustique], verso: [$ va(Pi) = P_1 va(v)_1 $])
 
 === Intensité acoustique
 #encadré(
@@ -568,7 +568,7 @@ Le vecteur de Poynting est le vecteur densité surfacique de puissance transport
     $ I = mean(norm(va(Pi))) $
 ]
 
-#flashcard(recto: "Intensité acoustique", verso: "$ I = mean(norm(va(Pi))) $")
+#flashcard(recto: [Intensité acoustique], verso: [$ I = mean(norm(va(Pi))) $])
 
 Les intensités sonores usuelles s'étalant sur de nombreux ordres de grandeur, on introduit le niveau sonore.
 
@@ -580,7 +580,7 @@ Les intensités sonores usuelles s'étalant sur de nombreux ordres de grandeur, 
     $ I_"dB" = 10 log(I/I_0) $
 ]
 
-#flashcard(recto: "Niveau sonore (en dB)", verso: "$ 10 log(I \/ I_0) $")
+#flashcard(recto: [Niveau sonore (en dB)], verso: [$ 10 log(I \/ I_0) $])
 
 $I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille humaine.
 
@@ -592,7 +592,7 @@ $I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille h
     - avion à quelques mètres (seuil de douleur) : $qty("120", "dB")$.
 ]
 
-#question-de-colle("Établir l'expression du vecteur de Poynting acoustique. Définir l'intensité acoustique et le niveau sonore. Citer quelques ordres de grandeur.")
+#question-de-colle([Établir l'expression du vecteur de Poynting acoustique. Définir l'intensité acoustique et le niveau sonore. Citer quelques ordres de grandeur.])
 
 === Retour sur l'approximation acoustique
 #encadré(
@@ -606,7 +606,7 @@ $I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille h
     Aux niveaux sonores usuels, l'évolution est adiabatique et $P_1 << P_0$, $norm(va(v)) << c$.
 ]
 
-#question-de-colle("À l'aide d'ordres de grandeur de niveaux sonores usuels, vérifier que les hypothèses de l'approximation acoustique sont satisfaites.")
+#question-de-colle([À l'aide d'ordres de grandeur de niveaux sonores usuels, vérifier que les hypothèses de l'approximation acoustique sont satisfaites.])
 
 === Forme d'une onde sphérique
 #encadré(
@@ -618,7 +618,7 @@ $I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille h
     $ P_1 = f(r - c t)/r + g(r + c t)/r $
 ]
 
-#flashcard(recto: "Onde sphérique", verso: "$ P_1 = f(r - c t)/r + g(r + c t)/r $")
+#flashcard(recto: [Onde sphérique], verso: [$ P_1 = f(r - c t)/r + g(r + c t)/r $])
 
 Une onde sphérique s'atténue : sa puissance s'étale sur une surface croissante.
 
@@ -646,10 +646,10 @@ Ce bilan permet d'identifier le vecteur de Poynting et la densité volumique d'�
     $ w = (epsilon_0 E^2)/2 + B^2/(2 mu_0) quad "et" quad va(Pi) = (va(E) and va(B))/mu_0 $
 ]
 
-#flashcard(recto: "Densité volumique d'énergie électromagnétique", verso: "$ w = (epsilon_0 E^2)/2 + B^2/(2 mu_0) $")
-#flashcard(recto: "Vecteur de Poynting électromagnétique", verso: "$ va(Pi) = (va(E) and va(B))/mu_0 $")
+#flashcard(recto: [Densité volumique d'énergie électromagnétique], verso: [$ w = (epsilon_0 E^2)/2 + B^2/(2 mu_0) $])
+#flashcard(recto: [Vecteur de Poynting électromagnétique], verso: [$ va(Pi) = (va(E) and va(B))/mu_0 $])
 
-#question-de-colle("Par un bilan local d'énergie, établir par identification l'expression du vecteur de Poynting et de la densité volumique d'énergie électromagnétiques.")
+#question-de-colle([Par un bilan local d'énergie, établir par identification l'expression du vecteur de Poynting et de la densité volumique d'énergie électromagnétiques.])
 
 === Flux de photons
 Le photon est une particule élémentaire de masse nulle qui transporte l'énergie de l'onde électromagnétique.
@@ -662,7 +662,7 @@ Le photon est une particule élémentaire de masse nulle qui transporte l'énerg
     $ cal(E) = h nu $
 ]
 
-#flashcard(recto: "Relation de Planck-Einstein", verso: "$ cal(E) = h nu $")
+#flashcard(recto: [Relation de Planck-Einstein], verso: [$ cal(E) = h nu $])
 
 #application[Déterminer le débit de photons d'un pointeur laser rouge de puissance $qty("5", "mW")$.]
 

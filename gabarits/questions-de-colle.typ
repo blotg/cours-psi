@@ -1,15 +1,20 @@
 // Toutes les questions de colle de l'année, chapitre par chapitre.
 //
-// Alimenté par `outils questions-de-colle`, qui passe en `--input données` le
-// JSON produit par `typst query <question-de-colle>` sur le cours de chaque
-// chapitre :
+// Alimenté par `outils questions-de-colle`, qui passe en `--input données` les
+// chapitres et le chemin de leur cours :
 //
-//     {"chapitres": [{"titre": "...", "questions": ["...", ...]}, ...]}
+//     {"chapitres": [{"titre": "...", "cours": "/Cours/.../cours.typ"}, ...]}
+//
+// Les questions elles-mêmes n'y sont pas : elles portent du content, que `typst
+// query` ne restitue qu'avec perte. Les cours sont donc tous inclus à la suite
+// de la liste (cf. `cours-en-annexe`), et les questions lues sur place, cours
+// par cours — d'où la compilation avec `--root` à la racine du dépôt et
+// `--input inclus=1`, et `--pages` pour écarter les pages des cours.
 //
 // Les chapitres arrivent dans l'ordre où ils doivent sortir — celui du tri
 // lexicographique des dossiers de `Cours/` — et ceux qui n'ont pas encore de
-// question sont du lot, avec une liste vide : ils sortent signalés « à venir »
-// plutôt qu'omis, pour qu'on voie du même coup ce qu'il reste à écrire.
+// question sont du lot : ils sortent signalés « à venir » plutôt qu'omis, pour
+// qu'on voie du même coup ce qu'il reste à écrire.
 //
 // La numérotation est **continue d'un bout à l'autre** : chaque question porte
 // un numéro qui l'identifie dans toute l'année, de quoi dire « révise 12 à 27 »
@@ -24,16 +29,8 @@
 #let _gris = luma(45%)
 #let _pâle = luma(65%)
 
-#let _questions(chapitre) = chapitre.at("questions", default: ())
-
-#let _total = chapitres.map(c => _questions(c).len()).sum(default: 0)
-
-// Le numéro de la première question de chaque chapitre. Un `fold` plutôt qu'un
-// compteur typst : les numéros servent ici à la mise en page (largeur de la
-// colonne), il faut les connaitre avant de composer la page.
-#let _départs = chapitres.fold((1,), (acc, c) => acc + (acc.last() + _questions(c).len(),))
-
 #show: init-document.with(titre: "Questions de colle")
+#show: cours-en-annexe.with(..chapitres.map(chapitre => include chapitre.cours))
 
 #set par(justify: true)
 
@@ -57,41 +54,51 @@
 
 #titre-document[Questions de cours à travailler prioritairement]
 
-#[
-    #set text(fill: _gris)
-    #set align(center)
-    
-    // #_total questions de cours, posées en interrogation orale
-    Chaque étudiant devra apporter ce document lors des interrogations orales.
-    
-    #set align(left)
-    Les #_total question de cours listées ici sont à travailler prioritairement. Elles sont fréquemment demandées à l'écrit comme à l'oral, même pour les concours plus sélectifs et elles servent de fondation sur lesquelles les exercices s'appuient. Leur maitrise est donc indispensable. À un apprentissage par cœur, fondamentalement inefficace, on préfèrera une compréhension fine.
-]
-#v(1.2em)
+#context {
+    let questions = par-cours(<question-de-colle>)
+    let total = questions.map(q => q.len()).sum(default: 0)
 
-// Colonne de numéros de largeur fixe : toutes les questions du document
-// s'alignent, quel que soit le chapitre et le nombre de chiffres.
-#let _largeur-numéro = if _total >= 100 { 2.4em } else { 1.9em }
+    // Le numéro de la première question de chaque chapitre. Un `fold` plutôt
+    // qu'un compteur typst : les numéros servent ici à la mise en page (largeur
+    // de la colonne), il faut les connaitre avant de composer la page.
+    let départs = questions.fold((1,), (acc, q) => acc + (acc.last() + q.len(),))
 
-#for (i, chapitre) in chapitres.enumerate() {
-    heading(level: 1, markup(chapitre.at("titre", default: "")))
-    let questions = _questions(chapitre)
-    if questions.len() == 0 {
-        block(inset: (left: _largeur-numéro + 0.5em), text(fill: _pâle, style: "italic")[
-            Aucune question pour l'instant.
-        ])
-    } else {
-        grid(
-            columns: (_largeur-numéro, 1fr),
-            column-gutter: 0.5em,
-            row-gutter: 0.7em,
-            ..questions
-                .enumerate()
-                .map(((j, q)) => (
-                    align(right + top, text(fill: _gris)[#(_départs.at(i) + j).]),
-                    markup(q),
-                ))
-                .flatten()
-        )
+    [
+        #set text(fill: _gris)
+        #set align(center)
+
+        // #total questions de cours, posées en interrogation orale
+        Chaque étudiant devra apporter ce document lors des interrogations orales.
+
+        #set align(left)
+        Les #total question de cours listées ici sont à travailler prioritairement. Elles sont fréquemment demandées à l'écrit comme à l'oral, même pour les concours plus sélectifs et elles servent de fondation sur lesquelles les exercices s'appuient. Leur maitrise est donc indispensable. À un apprentissage par cœur, fondamentalement inefficace, on préfèrera une compréhension fine.
+    ]
+    v(1.2em)
+
+    // Colonne de numéros de largeur fixe : toutes les questions du document
+    // s'alignent, quel que soit le chapitre et le nombre de chiffres.
+    let largeur-numéro = if total >= 100 { 2.4em } else { 1.9em }
+
+    for (i, chapitre) in chapitres.enumerate() {
+        heading(level: 1, markup(chapitre.at("titre", default: "")))
+        if questions.at(i).len() == 0 {
+            block(inset: (left: largeur-numéro + 0.5em), text(fill: _pâle, style: "italic")[
+                Aucune question pour l'instant.
+            ])
+        } else {
+            grid(
+                columns: (largeur-numéro, 1fr),
+                column-gutter: 0.5em,
+                row-gutter: 0.7em,
+                ..questions
+                    .at(i)
+                    .enumerate()
+                    .map(((j, q)) => (
+                        align(right + top, text(fill: _gris)[#(départs.at(i) + j).]),
+                        q,
+                    ))
+                    .flatten()
+            )
+        }
     }
 }

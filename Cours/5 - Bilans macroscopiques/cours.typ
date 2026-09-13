@@ -104,11 +104,11 @@ Lorsqu'un système ouvert est traversé par un écoulement unidimensionnel, il e
 ]
 
 #question-de-colle(
-    "Démontrer le premier principe industriel puis en déduire une formulation faisant apparaitre des puissances.",
+    [Démontrer le premier principe industriel puis en déduire une formulation faisant apparaitre des puissances.],
 )
 #flashcard(
-    recto: "Premier principe industriel",
-    verso: "$ Delta (h + e_c + e_p) = w_u+q $",
+    recto: [Premier principe industriel],
+    verso: [$ Delta (h + e_c + e_p) = w_u+q $],
 )
 
 #question-de-début-de-cours(
@@ -138,8 +138,8 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
 ]
 
 #flashcard(
-    recto: "Premier principe industriel en termes de puissance",
-    verso: "$D_m Delta (h + e_c + e_p) = P_u+P_\"th\"$",
+    recto: [Premier principe industriel en termes de puissance],
+    verso: [$D_m Delta (h + e_c + e_p) = P_u+P_"th"$],
 )
 
 #application[
@@ -163,11 +163,11 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
 ]
 
 #question-de-colle(
-    "Établir le second principe de la thermodynamique pour un système ouvert en écoulement unidimensionnel et stationnaire.",
+    [Établir le second principe de la thermodynamique pour un système ouvert en écoulement unidimensionnel et stationnaire.],
 )
 #flashcard(
-    recto: "Second principe de la thermodynamique pour un système ouvert",
-    verso: "$ Delta s = s_e+s_c $",
+    recto: [Second principe de la thermodynamique pour un système ouvert],
+    verso: [$ Delta s = s_e+s_c $],
 )
 
 #question-de-début-de-cours(
@@ -229,12 +229,12 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
 ]
 
 #flashcard(
-    recto: "Relation de Bernoulli",
-    verso: "La quantité $P + mu g z+ 1/2 mu v^2$ est constante le long de chaque ligne de courant.",
+    recto: [Relation de Bernoulli],
+    verso: [La quantité $P + mu g z+ 1/2 mu v^2$ est constante le long de chaque ligne de courant.],
 )
 #flashcard(
-    recto: "Hypothèses de la relation de Bernoulli",
-    verso: "L'écoulement est Parfait, Stationnaire, Incompressible et Homogène.",
+    recto: [Hypothèses de la relation de Bernoulli],
+    verso: [L'écoulement est Parfait, Stationnaire, Incompressible et Homogène.],
 )
 
 #question-de-début-de-cours(
@@ -257,7 +257,7 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
     ),
 )
 #question-de-colle(
-    "Établir la relation de Bernoulli. Note : $u_e=u_s$ est admis jusqu'au chapitre \"Deuxième principe de la thermodynamique appliqué aux transformations physico-chimiques\".",
+    [Établir la relation de Bernoulli. Note : $u_e=u_s$ est admis jusqu'au chapitre "Deuxième principe de la thermodynamique appliqué aux transformations physico-chimiques".],
 )
 
 La relation de Bernoulli traduit la conservation de l'énergie mécanique volumique.
@@ -309,8 +309,8 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 ]
 
 #flashcard(
-    recto: "PFD formulé sous forme de conservation de quantité de mouvement",
-    verso: "$ va(p)(t+dd(t))-va(p)(t)=sum va(F)_\"ext\" dd(t) $",
+    recto: [PFD formulé sous forme de conservation de quantité de mouvement],
+    verso: [$ va(p)(t+dd(t))-va(p)(t)=sum va(F)_"ext" dd(t) $],
 )
 
 #application[
@@ -318,7 +318,7 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 ]
 
 #question-de-colle(
-    "Traiter l'exemple de la fusée : exprimer la vitesse en fonction du temps, du débit massique et de la vitesse d'éjection des gaz en sortie de tuyère.",
+    [Traiter l'exemple de la fusée : exprimer la vitesse en fonction du temps, du débit massique et de la vitesse d'éjection des gaz en sortie de tuyère.],
 )
 
 == Bilan de moment cinétique
@@ -340,8 +340,8 @@ Il est possible de faire des bilans de moment cinétique en écrivant le théor�
 ]
 
 #flashcard(
-    recto: "TMC formulé sous forme de conservation du moment cinétique",
-    verso: "$ va(L)_O(t+dd(t))-va(L)_O(t) = sum va(M)_O(va(F))_\"ext\" dd(t) $",
+    recto: [TMC formulé sous forme de conservation du moment cinétique],
+    verso: [$ va(L)_O(t+dd(t))-va(L)_O(t) = sum va(M)_O(va(F))_"ext" dd(t) $],
 )
 
 #application[

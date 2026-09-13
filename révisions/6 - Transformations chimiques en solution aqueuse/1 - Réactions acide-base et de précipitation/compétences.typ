@@ -10,5 +10,5 @@
 - Retrouver les valeurs de constantes thermodynamiques d’équilibre par lecture de courbes de distribution et de diagrammes de prédominance (et réciproquement).
 - Exploiter des courbes d’évolution de la solubilité d’un solide en fonction d’une variable.
 - #compétence-numérique Tracer, à l’aide d’un langage de programmation, le diagramme de distribution des espèces d’un ou plusieurs couple(s) acide-base, ou d’espèces impliquées dans une réaction de précipitation.
-- Mettre en œuvre une réaction acide-base et une réaction de précipitation pour réaliser une analyse qualitative ou quantitative en solution aqueuse.
-- Illustrer un procédé de retraitement ou de recyclage ou de séparation en solution aqueuse.
+- #compétence-TP Mettre en œuvre une réaction acide-base et une réaction de précipitation pour réaliser une analyse qualitative ou quantitative en solution aqueuse.
+- #compétence-TP  Illustrer un procédé de retraitement ou de recyclage ou de séparation en solution aqueuse.

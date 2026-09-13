@@ -7,52 +7,50 @@
 = Décrire un système physico-chimique
 
 #flashcard(
-    recto: "Grandeurs de composition",
-    verso: "Concentration $c_i = n_i\\/V$ en #unit(\"mol/L\"), fraction molaire $x_i = n_i\\/n_(\"tot\")$ sans unité, pression partielle $p_i = x_i P$ en #unit(\"Pa\").",
+    recto: [Définition d'une variable extensive et quelques exemples],
+    verso: [Grandeur proportionnelle à la quantité de matière. Exemples : volume, quantité de matière, enthalpie],
 )
 #flashcard(
-    recto: "Variable extensive ou intensive",
-    verso: "Extensive : proportionnelle à la quantité de matière (volume, quantité de matière, enthalpie). Intensive : indépendante de la taille du système (température, pression, concentration).",
-)
-#flashcard(
-    recto: "Avancement d'une réaction",
-    verso: "$xi = (n_i - n_(i,0))/nu_i$, en #unit(\"mol\"), avec $nu_i$ algébrique : négatif pour un réactif, positif pour un produit.",
-)
-
-#question-de-colle(
-    "Décrire la composition d'un système physico-chimique à l'aide des grandeurs pertinentes. Reconnaitre le caractère extensif ou intensif d'une variable, sur des exemples.",
+    recto: [Définition d'une variable intensive et quelques exemples],
+    verso: [Grandeur indépendante de la taille du système. Exemples : température, pression, concentration.],
 )
 
 = Activité et quotient réactionnel
 
 #flashcard(
-    recto: "Activités",
-    verso: "Soluté très dilué : $a_i = c_i\\/c^circ$ avec $c^circ = qty(\"1\", \"mol/L\")$. Gaz parfait : $a_i = p_i\\/p^circ$ avec $p^circ = qty(\"1\", \"bar\")$. Solide ou liquide pur, solvant : $a_i = 1$.",
+    recto: [Activité d'un solide pur],
+    verso: [$ a_i = 1 $],
 )
 #flashcard(
-    recto: "Quotient réactionnel",
-    verso: "$Q_r = product a_i^(nu_i)$, calculé à tout instant à partir de la composition du système.",
+    recto: [Activité d'un liquide pur],
+    verso: [$ a_i = 1 $],
 )
 #flashcard(
-    recto: "Constante thermodynamique d'équilibre",
-    verso: "$K^circ$ est la valeur que prend $Q_r$ à l'équilibre. Elle ne dépend que de la température.",
+    recto: [Activité du solvant],
+    verso: [$ a_i = 1 $],
 )
-
-#question-de-colle(
-    "Définir l'activité d'une espèce dans les différents cas rencontrés. Définir le quotient réactionnel et la constante thermodynamique d'équilibre.",
+#flashcard(
+    recto: [Activité d'un soluté très dilué],
+    verso: [$ a_i = c_i/standard(c) $ avec $standard(c) = qty("1", "mol/L")$.],
+)
+#flashcard(
+    recto: [Activité d'un gaz parfait],
+    verso: [$ a_i = P_i/standard(P) $ avec $standard(P) = qty("1", "bar")$ et $P_i = n_i / n_"total de gaz" P$ la pression partielle du gaz.],
+)
+#flashcard(
+    recto: [Quotient réactionnel],
+    verso: [$ Q_r = product a_i^(nu_i) $],
+)
+#flashcard(
+    recto: [Constante thermodynamique d'équilibre],
+    verso: [$standard(K)(T)$ est la valeur que prend $Q_r$ à l'équilibre. Elle ne dépend que de la température.],
 )
 
 = Sens d'évolution et état final
 
 #flashcard(
-    recto: "Critère d'évolution spontanée",
-    verso: "Si $Q_r < K^circ$ la réaction évolue dans le sens direct ; si $Q_r > K^circ$ dans le sens indirect ; si $Q_r = K^circ$ le système est à l'équilibre.",
-)
-#flashcard(
-    recto: "Équilibre ou transformation totale",
-    verso: "Une transformation est totale si un réactif limitant disparait avant que $Q_r$ n'atteigne $K^circ$. Sinon le système atteint un état d'équilibre chimique.",
-)
-
-#question-de-colle(
-    "Énoncer le critère d'évolution spontanée d'un système chimique et l'illustrer. Déterminer la composition du système dans l'état final en distinguant équilibre chimique et transformation totale.",
+    recto: [Critère d'évolution spontanée],
+    verso: [/ Si $Q_r < standard(K)$:  la réaction évolue dans le sens direct
+    / si $Q_r > standard(K)$ : la réaction évolue dans le sens indirect 
+    / si $Q_r = standard(K)$ : le système est à l'équilibre],
 )

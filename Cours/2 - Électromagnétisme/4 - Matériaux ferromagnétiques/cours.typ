@@ -49,8 +49,8 @@ Une spire circulaire parcourue par un courant produit un champ magnétique carac
 ]
 
 #flashcard(
-    recto: "Moment magnétique d'une spire",
-    verso: "$va(cal(M))=i va(S)$",
+    recto: [Moment magnétique d'une spire],
+    verso: [$va(cal(M))=i va(S)$],
 )
 
 #question-de-début-de-cours(
@@ -134,7 +134,7 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 ]
 
 #question-de-colle(
-    "Le champ magnétique créé par un dipôle magnétique étant fourni, déterminer l'équation des lignes de champ puis tracer leur allure.",
+    [Le champ magnétique créé par un dipôle magnétique étant fourni, déterminer l'équation des lignes de champ puis tracer leur allure.],
 )
 
 == Champ créé par un aimant
@@ -201,12 +201,12 @@ On retrouve un couple nul lorsque le moment magnétique est aligné avec le cham
 ]
 
 #flashcard(
-    recto: "Quantification du moment magnétique atomique",
-    verso: "$cal(M)=n mu_B$",
+    recto: [Quantification du moment magnétique atomique],
+    verso: [$cal(M)=n mu_B$],
 )
 
 #question-de-colle(
-    "Établir l'expression du moment magnétique atomique quantifié dans le modèle de Bohr en introduisant le magnéton de Bohr.",
+    [Établir l'expression du moment magnétique atomique quantifié dans le modèle de Bohr en introduisant le magnéton de Bohr.],
 )
 
 = Équations de Maxwell dans un milieu magnétique
@@ -225,8 +225,8 @@ L'aimantation est le moment magnétique par unité de volume.
 ]
 
 #flashcard(
-    recto: "Définition de l'aimantation",
-    verso: "$va(M) = (delta va(cal(M)))/(delta V)$",
+    recto: [Définition de l'aimantation],
+    verso: [$va(M) = (delta va(cal(M)))/(delta V)$],
 )
 
 Il est possible de définir des courants fictifs $va(j)_"lié"$ qui, s'ils existaient, donneraient lieu à la même aimantation $va(M)$
@@ -240,8 +240,8 @@ Il est possible de définir des courants fictifs $va(j)_"lié"$ qui, s'ils exist
 ]
 
 #flashcard(
-    recto: "Courants liés",
-    verso: "Courants qui, s'ils existaient, donneraient lieu à la même aimantation $ va(j)_\"lié\" = rot va(M) $",
+    recto: [Courants liés],
+    verso: [Courants qui, s'ils existaient, donneraient lieu à la même aimantation $ va(j)_"lié" = rot va(M) $],
 )
 
 == Vecteur excitation magnétique
@@ -257,8 +257,8 @@ Les effets de l'aimantation sont pris en compte dans les équations de Maxwell �
 ]
 
 #flashcard(
-    recto: "Équation de Maxwell-Ampère dans un milieu magnétique",
-    verso: "$rot va(H)=va(j)_\"libre\"$",
+    recto: [Équation de Maxwell-Ampère dans un milieu magnétique],
+    verso: [$rot va(H)=va(j)_"libre"$],
 )
 
 #question-de-début-de-cours(
@@ -271,12 +271,12 @@ Les effets de l'aimantation sont pris en compte dans les équations de Maxwell �
     ),
 )
 #flashcard(
-    recto: "Définition de l'excitation magnétique",
-    verso: "$va(H)= (va(B))/(mu_0) - va(M)$",
+    recto: [Définition de l'excitation magnétique],
+    verso: [$va(H)= (va(B))/(mu_0) - va(M)$],
 )
 
 #question-de-colle(
-    "Définir l'aimantation, les courants liés et l'excitation magnétique et établir l'équation de Maxwell-Ampère valables dans les milieux magnétiques.",
+    [Définir l'aimantation, les courants liés et l'excitation magnétique et établir l'équation de Maxwell-Ampère valables dans les milieux magnétiques.],
 )
 
 Les sources de l’excitation magnétique sont donc les courants électriques libres.
@@ -301,8 +301,8 @@ Dans les milieux magnétiques, l'équation de Maxwell-Thomson est inchangée don
 ]
 
 #flashcard(
-    recto: "Théorème d'Ampère dans un milieu magnétique",
-    verso: "$integral.cont_cal(C) va(H) dot va(dd(l)) = I_\"libre, enlacé\"$",
+    recto: [Théorème d'Ampère dans un milieu magnétique],
+    verso: [$integral.cont_cal(C) va(H) dot va(dd(l)) = I_"libre, enlacé"$],
 )
 
 = Milieux ferromagnétiques
@@ -347,8 +347,8 @@ Les matériaux ferromagnétiques durs sont utilisés pour fabriquer des aimants 
 #exemple[Les alliages à base de néodyme (NdFeB) et les alnicos sont des matériaux ferromagnétiques durs.]
 
 #flashcard(
-    recto: "Matériau ferromagnétique dur",
-    verso: "Cycle d'hystérésis large, grande aimantation rémanente et un grand champ magnétique rémanent. Exemples : alliages au néodyme, alnicos",
+    recto: [Matériau ferromagnétique dur],
+    verso: [Cycle d'hystérésis large, grande aimantation rémanente et un grand champ magnétique rémanent. Exemples : alliages au néodyme, alnicos],
 )
 
 #question-de-début-de-cours(
@@ -369,8 +369,8 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
 #exemple[Le fer doux et la ferrite sont des matériaux ferromagnétiques doux.]
 
 #flashcard(
-    recto: "Matériau ferromagnétique doux",
-    verso: "Cycle d'hystérésis étroit, faible aimantation rémanente et un faible champ magnétique rémanent. Exemples : fer doux, ferrite",
+    recto: [Matériau ferromagnétique doux],
+    verso: [Cycle d'hystérésis étroit, faible aimantation rémanente et un faible champ magnétique rémanent. Exemples : fer doux, ferrite],
 )
 
 #question-de-début-de-cours(
@@ -398,8 +398,8 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
 ]
 
 #flashcard(
-    recto: "Conditions auxquelles $ va(B)= mu va(H) $",
-    verso: "Matériau doux, hors saturation.",
+    recto: [Conditions auxquelles $ va(B)= mu va(H) $],
+    verso: [Matériau doux, hors saturation.],
 )
 
 #question-de-début-de-cours(
@@ -454,7 +454,7 @@ Cette relation est mise à profit pour mesurer le champ magnétique et tracer le
 ]
 
 #question-de-colle(
-    "Établir la relation tension-champ magnétique et la relation courant-excitation magnétique pour un circuit magnétique sans entrefer. Expliquer comment tracer un cycle d'hystérésis expérimentalement.",
+    [Établir la relation tension-champ magnétique et la relation courant-excitation magnétique pour un circuit magnétique sans entrefer. Expliquer comment tracer un cycle d'hystérésis expérimentalement.],
 )
 
 Cette relation est mise à profit pour mesurer l'excitation magnétique et tracer le cycle d'hystérésis.
@@ -505,7 +505,7 @@ Cette inductance propre est $mu_r >> 1$ fois plus grande que celle d'un tore san
 ]
 
 #question-de-colle(
-    "Établir le champ magnétique dans une bobine ayant un cœur magnétique. En déduire son inductance propre. En déduire dans ce cas particulier la densité volumique d'énergie magnétique.",
+    [Établir le champ magnétique dans une bobine ayant un cœur magnétique. En déduire son inductance propre. En déduire dans ce cas particulier la densité volumique d'énergie magnétique.],
 )
 
 === Pertes
@@ -526,7 +526,7 @@ La présence d'un milieu ferromagnétique au cœur de la bobine induit des perte
 ]
 
 #question-de-colle(
-    "Établir la puissance moyenne des pertes par hystérésis. Citer les différents types de pertes existant dans un circuit magnétique.",
+    [Établir la puissance moyenne des pertes par hystérésis. Citer les différents types de pertes existant dans un circuit magnétique.],
 )
 
 Pour limiter les pertes par hystérésis, on utilise des matériaux ferromagnétiques doux.
@@ -557,4 +557,4 @@ Un entrefer est une zone de l'espace vide#footnote[Vide de matériau ferromagné
     $ B_"entrefer"=(mu_0 N i)/e $
 ]
 
-#question-de-colle("Établir l'expression du champ magnétique dans l'entrefer d'un électroaimant.")
+#question-de-colle([Établir l'expression du champ magnétique dans l'entrefer d'un électroaimant.])

@@ -93,8 +93,8 @@ En physique, les grandeurs notées $dd(f)$ représentent des *variations* infini
 ]
 
 #flashcard(
-    recto: "Signification physique de $dd(f)$.",
-    verso: "Petite variation : $dd(f)=f(t+dd(t))-f(t)$.",
+    recto: [Signification physique de $dd(f)$.],
+    verso: [Petite variation : $dd(f)=f(t+dd(t))-f(t)$.],
 )
 
 En physique, les grandeurs notées $delta f$ représentent des *quantités* infinitésimales.
@@ -104,8 +104,8 @@ En physique, les grandeurs notées $delta f$ représentent des *quantités* infi
 ]
 
 #flashcard(
-    recto: "Signification physique de $delta f$.",
-    verso: "Petite quantité.",
+    recto: [Signification physique de $delta f$.],
+    verso: [Petite quantité.],
 )
 
 #question-de-début-de-cours(
@@ -131,7 +131,7 @@ En physique, les grandeurs notées $delta f$ représentent des *quantités* infi
 Exception : pour les variables d'intégration, cette règle est enfreinte. On note $dd(x)$, $dd(y)$, $dd(z)$ des dimensions, $dd(S)$ une surface, $dd(V)$ un volume, $dd(t)$ une durée alors que ce ne sont pas des variations.
 
 #question-de-colle(
-    "Définir mathématiquement la différentielle d'une fonction et une forme différentielle. En quoi le calcul de leur intégrale diffère-t-il ? Donne une interprétation physique d'une différentielle et d'une forme différentielle en donnant au moins deux exemples de chaque."
+    [Définir mathématiquement la différentielle d'une fonction et une forme différentielle. En quoi le calcul de leur intégrale diffère-t-il ? Donne une interprétation physique d'une différentielle et d'une forme différentielle en donnant au moins deux exemples de chaque.]
 )
 
 == Premier principe
@@ -149,8 +149,8 @@ Exception : pour les variables d'intégration, cette règle est enfreinte. On no
 ]
 
 #flashcard(
-    recto: "Premier principe de la thermodynamique pour une transformation infinitésimale.",
-    verso: "$dd(U)+dd(E_c)= delta W +  delta Q$",
+    recto: [Premier principe de la thermodynamique pour une transformation infinitésimale.],
+    verso: [$dd(U)+dd(E_c)= delta W +  delta Q$],
 )
 
 La variation d'énergie $dd(E)$ est une petite variation et s'écrit bien avec un d. La chaleur $delta Q$ et le travail $delta W$ sont des petites quantités et s'écrivent bien avec un $delta$.
@@ -170,8 +170,8 @@ La variation d'énergie $dd(E)$ est une petite variation et s'écrit bien avec u
 ]
 
 #flashcard(
-    recto: "Second principe de la thermodynamique pour une transformation infinitésimale.",
-    verso: "$dd(cal(S))=delta cal(S)_e + delta cal(S)_c$ avec $delta cal(S)_e=(delta Q)/T_\"ext\"$ et $delta cal(S)_c >= 0$",
+    recto: [Second principe de la thermodynamique pour une transformation infinitésimale.],
+    verso: [$dd(cal(S))=delta cal(S)_e + delta cal(S)_c$ avec $delta cal(S)_e=(delta Q)/T_"ext"$ et $delta cal(S)_c >= 0$],
 )
 
 La variation d'entropie $dd(cal(S))$ est une petite variation et s'écrit bien avec un $d$. La chaleur $delta Q$, l'entropie échangée $delta cal(S)_e$ et l'entropie créée $delta cal(S)_c$ sont des petites quantités et s'écrivent bien avec un $delta$.
@@ -227,8 +227,8 @@ La chaleur peut se transporter d'un système à un autre de 3 façons :
 / Par rayonnement: Tous les matériaux émettent un rayonnement électromagnétique. La fréquence et l'intensité du rayonnement électromagnétique dépendent de la température du matériau. Le rayonnement électromagnétique transporte de l'énergie. Le rayonnement électromagnétique peut se propager dans le vide ou dans les milieux transparents. Le rayonnement électromagnétique peut être absorbé par un matériau, il lui apporte alors de la chaleur. #exemple[La chaleur du Soleil, les plaques vitro-céramiques.]
 
 #flashcard(
-    recto: "Trois façons de transférer de la chaleur (avec exemples).",
-    verso: "Par conduction (la queue d'une casserole devient chaude) ; par conducto-convection (le fond de la casserole chauffe l'eau qu'elle contient) ; par rayonnement (la chaleur du Soleil nous parvient).",
+    recto: [Trois façons de transférer de la chaleur (avec exemples).],
+    verso: [Par conduction (la queue d'une casserole devient chaude) ; par conducto-convection (le fond de la casserole chauffe l'eau qu'elle contient) ; par rayonnement (la chaleur du Soleil nous parvient).],
 )
 
 #question-de-début-de-cours(
@@ -242,7 +242,7 @@ La chaleur peut se transporter d'un système à un autre de 3 façons :
 )
 
 #question-de-colle(
-    "Lister et expliquer les trois modes de transport de chaleur en donnant au moins un exemple pour chacun. Citer la loi de Fourier.",
+    [Lister et expliquer les trois modes de transport de chaleur en donnant au moins un exemple pour chacun. Citer la loi de Fourier.],
 )
 
 == Le vecteur densité de courant thermique
@@ -266,8 +266,8 @@ Le vecteur densité de courant thermique $va(j_Q)$ est la chaleur transitant par
 ]
 
 #flashcard(
-    recto: "Lien entre la chaleur $delta Q$, le flux thermique $delta Phi$ et le vecteur densité de courant thermique $va(j_Q)$.",
-    verso: "$delta Q = delta Phi dd(t) = va(j_Q) dot va(dd(S)) dd(t)$.",
+    recto: [Lien entre la chaleur $delta Q$, le flux thermique $delta Phi$ et le vecteur densité de courant thermique $va(j_Q)$.],
+    verso: [$delta Q = delta Phi dd(t) = va(j_Q) dot va(dd(S)) dd(t)$.],
 )
 
 #question-de-début-de-cours(
@@ -310,8 +310,8 @@ La loi de Fourier est une loi phénoménologique#footnote[Phénoménologique veu
 ]
 
 #flashcard(
-    recto: "Loi de Fourier.",
-    verso: "$ va(j_Q)=-lambda grad T $",
+    recto: [Loi de Fourier.],
+    verso: [$ va(j_Q)=-lambda grad T $],
 )
 
 La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle un matériau transporte la chaleur.
@@ -328,15 +328,15 @@ La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle
 ]
 
 #question-de-colle(
-    "Donner la loi de Fourier en définissant chaque terme et en donnant son unité. Donner un ordre de grandeur des conductivités thermiques de l'air, de l'eau, du béton et de l'acier.",
+    [Donner la loi de Fourier en définissant chaque terme et en donnant son unité. Donner un ordre de grandeur des conductivités thermiques de l'air, de l'eau, du béton et de l'acier.],
 )
 
 #flashcard(
-    recto: "Conductivité thermique de l'acier, de l'air, du béton et de l'eau (ordres de grandeur)",
-    verso: "$ lambda_\"air\" tilde #qty(\"e-2\", \"J/s/m/K\") $
-    $ lambda_\"eau\" tilde #qty(\"e-1\", \"J/s/m/K\") $
-    $ lambda_\"béton\" tilde #qty(\"e0\", \"J/s/m/K\") $
-    $ lambda_\"acier\" tilde #qty(\"e1\", \"J/s/m/K\") $",
+    recto: [Conductivité thermique de l'acier, de l'air, du béton et de l'eau (ordres de grandeur)],
+    verso: [$ lambda_"air" tilde #qty("e-2", "J/s/m/K") $
+    $ lambda_"eau" tilde #qty("e-1", "J/s/m/K") $
+    $ lambda_"béton" tilde #qty("e0", "J/s/m/K") $
+    $ lambda_"acier" tilde #qty("e1", "J/s/m/K") $],
 )
 
 #question-de-début-de-cours(
@@ -383,8 +383,8 @@ En faisant un bilan sur un volume infinitésimal entre $t$ et $t+d t$, on abouti
 ]
 
 #flashcard(
-    recto: "Équation locale de conservation de l'énergie.",
-    verso: "$ mu pdv(u,t)=-div va(j_Q) + cal(P)_V $",
+    recto: [Équation locale de conservation de l'énergie.],
+    verso: [$ mu pdv(u,t)=-div va(j_Q) + cal(P)_V $],
 )
 
 == Équation de la diffusion thermique
@@ -407,8 +407,8 @@ Lorsqu'on remplace le vecteur densité de courant thermique $va(j_Q)$ grâce à 
 Le coefficient $D_"th"$ est appelé diffusivité thermique ou coefficient de diffusion thermique.
 
 #flashcard(
-    recto: "Équation de diffusion thermique.",
-    verso: "$ pdv(T, t) - D_\"th\" Delta T = cal(P)_V/(mu c_V) $",
+    recto: [Équation de diffusion thermique.],
+    verso: [$ pdv(T, t) - D_"th" Delta T = cal(P)_V/(mu c_V) $],
 )
 
 #question-de-début-de-cours(
@@ -534,11 +534,11 @@ Lorsque la température est continue à une interface, on dit qu'il y a *contact
 
 
 #question-de-colle(
-    "Établir l'équation de la diffusion thermique en coordonnées cartésiennes dans le cas unidimensionnel puis en généralisant au cas tridimensionnel."
+    [Établir l'équation de la diffusion thermique en coordonnées cartésiennes dans le cas unidimensionnel puis en généralisant au cas tridimensionnel.]
 )
 
 #question-de-colle(
-    "Donner l'équation de la diffusion thermique puis montrer son irréversibilité. En raisonnant en ordres de grandeur, relier le temps caractéristique de diffusion thermique à la longueur caractéristique du système."
+    [Donner l'équation de la diffusion thermique puis montrer son irréversibilité. En raisonnant en ordres de grandeur, relier le temps caractéristique de diffusion thermique à la longueur caractéristique du système.]
 )
 
 = ARQS et résistance thermique
@@ -594,8 +594,8 @@ Dans l'ARQS, la différence de température entre les extrémités d'un système
 ]
 
 #flashcard(
-    recto: "Résistance thermique d'un barreau cylindrique.",
-    verso: "$T_1-T_2=R_\"th\" Phi$ avec $R_\"th\"=L/(S lambda)$",
+    recto: [Résistance thermique d'un barreau cylindrique.],
+    verso: [$T_1-T_2=R_"th" Phi$ avec $R_"th"=L/(S lambda)$],
 )
 
 #question-de-début-de-cours(
@@ -609,7 +609,7 @@ Dans l'ARQS, la différence de température entre les extrémités d'un système
 )
 
 #question-de-colle(
-    "Donner la condition de validité de l'ARQS thermique puis établir l'expression de la résistance thermique d'un barreau cylindrique."
+    [Donner la condition de validité de l'ARQS thermique puis établir l'expression de la résistance thermique d'un barreau cylindrique.]
 )
 
 == Association de résistances thermiques
@@ -756,5 +756,5 @@ On peut faire une analogie entre l'électrocinétique et la thermique.
 )
 
 #question-de-colle(
-    "Dans un tableau, présenter l'analogie entre les grandeurs thermiques et électrocinétiques en précisant les unités. En déduire l'expression des résistances thermiques équivalentes en série et en parallèle en donnant un exemple d'application pour chaque cas."
+    [Dans un tableau, présenter l'analogie entre les grandeurs thermiques et électrocinétiques en précisant les unités. En déduire l'expression des résistances thermiques équivalentes en série et en parallèle en donnant un exemple d'application pour chaque cas.]
 )

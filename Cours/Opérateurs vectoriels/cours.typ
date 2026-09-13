@@ -19,8 +19,8 @@ Les opérateurs vectoriels ont une expression simple en fonction de $va(nabla)$.
 ]
 
 #flashcard(
-    recto: "Notation nabla",
-    verso: "$ va(nabla) = vec( pdv(,x), pdv(,y), pdv(,z) ) $",
+    recto: [Notation nabla],
+    verso: [$ va(nabla) = vec( pdv(,x), pdv(,y), pdv(,z) ) $],
 )
 
 Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un vecteur.
@@ -36,13 +36,13 @@ Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un 
 ]
 
 #flashcard(
-    recto: "Gradient",
-    verso: "$ grad f = va(nabla) f = vec(pdv(f, x), pdv(f, y), pdv(f, z)) $",
+    recto: [Gradient],
+    verso: [$ grad f = va(nabla) f = vec(pdv(f, x), pdv(f, y), pdv(f, z)) $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique le gradient ? Que renvoie-t-il ?",
-    verso: "Le gradient s'applique aux champs scalaires et renvoie un champ vectoriel.",
+    recto: [À quoi s'applique le gradient ? Que renvoie-t-il ?],
+    verso: [Le gradient s'applique aux champs scalaires et renvoie un champ vectoriel.],
 )
 
 #question-de-début-de-cours(
@@ -90,13 +90,13 @@ La divergence est un opérateur s'appliquant aux champs vectoriels et renvoyant 
 ]
 
 #flashcard(
-    recto: "Divergence",
-    verso: "$ div va(A) = va(nabla) dprod va(A) = pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z) $",
+    recto: [Divergence],
+    verso: [$ div va(A) = va(nabla) dprod va(A) = pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z) $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique la divergence ? Que renvoie-t-elle ?",
-    verso: "La divergence s'applique aux champs vectoriels et renvoie un champ scalaire.",
+    recto: [À quoi s'applique la divergence ? Que renvoie-t-elle ?],
+    verso: [La divergence s'applique aux champs vectoriels et renvoie un champ scalaire.],
 )
 
 #question-de-début-de-cours(
@@ -139,8 +139,8 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
 ]
 
 #flashcard(
-    recto: "Théorème d'Ostrogradski",
-    verso: "$ integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S)) $",
+    recto: [Théorème d'Ostrogradski],
+    verso: [$ integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S)) $],
 )
 
 #question-de-début-de-cours(
@@ -171,7 +171,7 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
     )]
 
 #question-de-colle(
-    "Définir le gradient et la divergence en coordonnées cartésiennes. Énoncer le théorème d'Ostrogradski. Citer deux exemples de surfaces fermées et deux exemples de surfaces qui ne le sont pas."
+    [Définir le gradient et la divergence en coordonnées cartésiennes. Énoncer le théorème d'Ostrogradski. Citer deux exemples de surfaces fermées et deux exemples de surfaces qui ne le sont pas.]
 )
 
 = Rotationnel
@@ -193,15 +193,15 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
 ]
 
 #flashcard(
-    recto: "Rotationnel",
-    verso: "$
+    recto: [Rotationnel],
+    verso: [$
         rot va(A) = va(nabla) and va(A) = vec(pdv(A_z, y)-pdv(A_y, z), pdv(A_x, z)-pdv(A_z, x), pdv(A_y, x)-pdv(A_x, y))
-    $",
+    $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique le rotationnel ? Que renvoie-t-il ?",
-    verso: "Le rotationnel s'applique aux champs vectoriels et renvoie un champ vectoriel.",
+    recto: [À quoi s'applique le rotationnel ? Que renvoie-t-il ?],
+    verso: [Le rotationnel s'applique aux champs vectoriels et renvoie un champ vectoriel.],
 )
 
 #question-de-début-de-cours(
@@ -238,8 +238,8 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
 ]
 
 #flashcard(
-    recto: "Théorème de Stokes",
-    verso: "$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $",
+    recto: [Théorème de Stokes],
+    verso: [$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $],
 )
 
 #schéma(titre: "Orientation relative entre une surface et sa frontière", hauteur: 3cm)
@@ -260,13 +260,13 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 ]
 
 #flashcard(
-    recto: "Champ irrotationnel",
-    verso: "Champ dont le rotationnel est nul.",
+    recto: [Champ irrotationnel],
+    verso: [Champ dont le rotationnel est nul.],
 )
 
 #flashcard(
-    recto: "Comment peut-on écrire un champ irrotationnel ?",
-    verso: "$ rot va(A) = va(0) arrow.l.r.double exists f | va(A) = grad f $",
+    recto: [Comment peut-on écrire un champ irrotationnel ?],
+    verso: [$ rot va(A) = va(0) arrow.l.r.double exists f | va(A) = grad f $],
 )
 
 #application[
@@ -291,12 +291,12 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 ]
 
 #flashcard(
-    recto: "Divergence d'un produit vectoriel",
-    verso: "$ div(va(A) and va(B)) = ( rot va(A) ) dprod va(B) - va(A) dprod ( rot va(B) ) $",
+    recto: [Divergence d'un produit vectoriel],
+    verso: [$ div(va(A) and va(B)) = ( rot va(A) ) dprod va(B) - va(A) dprod ( rot va(B) ) $],
 )
 
 #question-de-colle(
-    "Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stockes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?"
+    [Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stockes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?]
 )
 
 = Laplacien scalaire
@@ -312,13 +312,13 @@ Le laplacien scalaire est un opérateur s'appliquant aux champs scalaires et ren
 ]
 
 #flashcard(
-    recto: "Laplacien scalaire",
-    verso: "$ Delta f = div(grad f) = pdv(f, x, 2) + pdv(f, y, 2) + pdv(f, z, 2) $",
+    recto: [Laplacien scalaire],
+    verso: [$ Delta f = div(grad f) = pdv(f, x, 2) + pdv(f, y, 2) + pdv(f, z, 2) $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique le laplacien scalaire ? Que renvoie-t-il ?",
-    verso: "Le laplacien scalaire s'applique aux champs scalaires et renvoie un champ scalaire.",
+    recto: [À quoi s'applique le laplacien scalaire ? Que renvoie-t-il ?],
+    verso: [Le laplacien scalaire s'applique aux champs scalaires et renvoie un champ scalaire.],
 )
 
 = $va(A) dprod grad$
@@ -339,13 +339,13 @@ L'opérateur $va(A) dprod grad$ peut s'appliquer à un champ vectoriel, il renvo
 ]
 
 #flashcard(
-    recto: "$va(A) dprod grad$",
-    verso: "$ ( va(A) dprod grad ) = A_x pdv(, x) + A_y pdv(, y) + A_z pdv(, z) $",
+    recto: [$va(A) dprod grad$],
+    verso: [$ ( va(A) dprod grad ) = A_x pdv(, x) + A_y pdv(, y) + A_z pdv(, z) $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique l'opérateur $va(A) dprod grad$ ? Que renvoie-t-il ?",
-    verso: "L'opérateur $va(A) dprod grad$ s'applique aux champs scalaires et vectoriels, et renvoie respectivement un scalaire et un vecteur.",
+    recto: [À quoi s'applique l'opérateur $va(A) dprod grad$ ? Que renvoie-t-il ?],
+    verso: [L'opérateur $va(A) dprod grad$ s'applique aux champs scalaires et vectoriels, et renvoie respectivement un scalaire et un vecteur.],
 )
 
 = Laplacien vectoriel
@@ -363,13 +363,13 @@ Le laplacien vectoriel est un opérateur s'appliquant aux champs vectoriels et r
 ]
 
 #flashcard(
-    recto: "Laplacien vectoriel",
-    verso: "$ arrow(Delta) va(A) = grad(div va(A)) - rot(rot va(A)) = vec(Delta A_x, Delta A_y, Delta A_z) $",
+    recto: [Laplacien vectoriel],
+    verso: [$ arrow(Delta) va(A) = grad(div va(A)) - rot(rot va(A)) = vec(Delta A_x, Delta A_y, Delta A_z) $],
 )
 
 #flashcard(
-    recto: "À quoi s'applique le laplacien vectoriel ? Que renvoie-t-il ?",
-    verso: "Le laplacien vectoriel s'applique aux champs vectoriels et renvoie un champ vectoriel.",
+    recto: [À quoi s'applique le laplacien vectoriel ? Que renvoie-t-il ?],
+    verso: [Le laplacien vectoriel s'applique aux champs vectoriels et renvoie un champ vectoriel.],
 )
 
 Le laplacien vectoriel est parfois noté simplement $Delta$ (sans flèche), le contexte permettant de le distinguer du laplacien scalaire.
@@ -379,5 +379,5 @@ Le laplacien vectoriel est parfois noté simplement $Delta$ (sans flèche), le c
 ]
 
 #question-de-colle(
-    "Définir l'opérateur $va(A) dprod grad$. Définir le laplacien scalaire et le laplacien vectoriel à partir des autres opérateurs vectoriels. Montrer que les composantes du laplacien vectoriel sont les laplaciens scalaires des composantes du champ vectoriel (on pourra se contenter d'une seule composante)."
+    [Définir l'opérateur $va(A) dprod grad$. Définir le laplacien scalaire et le laplacien vectoriel à partir des autres opérateurs vectoriels. Montrer que les composantes du laplacien vectoriel sont les laplaciens scalaires des composantes du champ vectoriel (on pourra se contenter d'une seule composante).]
 )

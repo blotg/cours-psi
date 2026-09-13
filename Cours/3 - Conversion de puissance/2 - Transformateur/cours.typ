@@ -45,8 +45,8 @@ Dans le modèle du transformateur idéal,
 - le champ magnétique est de norme uniforme dans le circuit magnétique.
 
 #flashcard(
-    recto: "Hypothèses du transformateur idéal",
-    verso: "Pertes cuivres et fer négligées, matériaux doux, hors saturation, de perméabilité infinie, lignes de champ parfaitement canalisées, champ magnétique de norme uniforme.",
+    recto: [Hypothèses du transformateur idéal],
+    verso: [Pertes cuivres et fer négligées, matériaux doux, hors saturation, de perméabilité infinie, lignes de champ parfaitement canalisées, champ magnétique de norme uniforme.],
 )
 
 #question-de-début-de-cours(
@@ -77,8 +77,8 @@ Dans le modèle du transformateur idéal,
 ]
 
 #flashcard(
-    recto: "Rapport de transformation sur les tensions",
-    verso: "$ (v_2(t))/(v_1(t))=m $",
+    recto: [Rapport de transformation sur les tensions],
+    verso: [$ (v_2(t))/(v_1(t))=m $],
 )
 
 #question-de-début-de-cours(
@@ -112,8 +112,8 @@ Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le t
 ]
 
 #flashcard(
-    recto: "Rapport de transformation sur les courants",
-    verso: "$ (i_2(t))/(i_1(t))=(-1)/m $",
+    recto: [Rapport de transformation sur les courants],
+    verso: [$ (i_2(t))/(i_1(t))=(-1)/m $],
 )
 
 #question-de-début-de-cours(
@@ -127,7 +127,7 @@ Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le t
 )
 
 #question-de-colle(
-    "Dans le cadre du transformateur idéal, démontrer les lois de transformation sur les tensions et sur les courants.",
+    [Dans le cadre du transformateur idéal, démontrer les lois de transformation sur les tensions et sur les courants.],
 )
 
 #application[
@@ -151,7 +151,7 @@ Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le t
 Il n'y a pas de perte ni de stockage d'énergie électromagnétique.
 
 #question-de-colle(
-    "Citer les hypothèses du transformateur idéal et montrer que pour un transformateur idéal, il n'y a pas de pertes ni de stockage d'énergie.",
+    [Citer les hypothèses du transformateur idéal et montrer que pour un transformateur idéal, il n'y a pas de pertes ni de stockage d'énergie.],
 )
 
 == Transfert d'impédance
@@ -175,8 +175,10 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 ]
 
 #flashcard(
-    recto: "Primaire vu du secondaire",
-    verso: "Les impédances sont multipliées par $m^2$.\nLes tensions sont multipliées par $m$.\nLes courants sont multipliés par $1/m$.",
+    recto: [Primaire vu du secondaire],
+    verso: [Les impédances sont multipliées par $m^2$.
+Les tensions sont multipliées par $m$.
+Les courants sont multipliés par $1/m$.],
 )
 
 #application[Déterminer la tension aux bornes de la résistance $R_2$ dans le montage ci-dessous en fonction de $m$, $e$, $R_1$ et $R_2$.
@@ -212,8 +214,10 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 ]
 
 #flashcard(
-    recto: "Ramener le secondaire au primaire",
-    verso: "Les impédances sont divisées par $m^2$.\nLes tensions sont divisées par $m$.\nLes courants sont divisés par $1/m$.",
+    recto: [Ramener le secondaire au primaire],
+    verso: [Les impédances sont divisées par $m^2$.
+Les tensions sont divisées par $m$.
+Les courants sont divisés par $1/m$.],
 )
 
 #question-de-début-de-cours(
@@ -227,7 +231,7 @@ Afin de simplifier l'analyse des circuits comportant un transformateur, il est p
 )
 
 #question-de-colle(
-    "Démontrer les schémas équivalents pour ramener le primaire au secondaire et le secondaire au primaire.",
+    [Démontrer les schémas équivalents pour ramener le primaire au secondaire et le secondaire au primaire.],
 )
 
 #application[Déterminer le courant au primaire dans le montage ci-dessous en fonction de $e$, $m$, $R_1$ et $R_2$.
@@ -257,7 +261,7 @@ Un transformateur réel comporte des pertes par courants de Foucault. Pour les l
 
 Pertes par hystérésis et pertes par courant de Foucault sont regroupées sous le terme "pertes fer".
 
-#question-de-colle("Citer les types de pertes existantes dans un transformateur réel et des moyens pour les limiter.")
+#question-de-colle([Citer les types de pertes existantes dans un transformateur réel et des moyens pour les limiter.])
 
 = Applications du transformateur
 == Isolement

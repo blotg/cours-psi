@@ -117,8 +117,9 @@ tel : ce qui reste à écrire se voit. Le document atterrit dans
 chapitres à la suite restreint la liste à ceux-là.
 
 Il n'est **pas** produit par le hook : il dépend de tous les chapitres à la
-fois, et les interroger coûte une vingtaine de secondes — c'est une commande
-qu'on lance quand on en a besoin.
+fois, qu'il inclut tous en annexe, et il en coûte deux compilations de l'année
+entière (cf. [D'où viennent les données](#doù-viennent-les-données)). C'est une
+commande qu'on lance quand on en a besoin.
 
 `imprimable` produit par défaut un **fascicule A3 paysage** : deux pages A4 par
 face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
@@ -129,7 +130,7 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 
 | Module | Rôle |
 |---|---|
-| `typst.py` | appels à `typst compile` / `typst query`, rendu HTML d'un fragment |
+| `typst.py` | appels à `typst compile` / `typst query`, rendu HTML des flashcards d'un cours |
 | `chapitre.py` | un chapitre : ses métadonnées et les documents qu'on en tire |
 | `pdf.py` | imposition de PDF (mise en fascicule A3) |
 | `anki.py` | écriture d'un paquet `.apkg` |
@@ -177,7 +178,9 @@ Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
 flashcards, la liste des manipulations, le diaporama, les questions de colle
 et les pages de liens du site. Les données leur arrivent en JSON par
-`--input données`.
+`--input données`. La planche de flashcards et la liste des questions de colle
+n'y reçoivent pas les cartes ni les questions, mais le chemin des cours, qu'elles
+incluent (cf. [D'où viennent les données](#doù-viennent-les-données)).
 
 ## Unités et nombres
 
@@ -216,12 +219,13 @@ Trois différences de rendu par rapport à unify, toutes voulues :
 ## D'où viennent les données
 
 Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
-`typst query` :
+`typst query` — sauf les flashcards et les questions de colle, qui se lisent en
+incluant le cours (cf. plus bas) :
 
 | Étiquette | Source interrogée | Utilisée par |
 |---|---|---|
-| `<flashcard>` | `cours.typ` | `flashcards` |
-| `<question-de-colle>` | `cours.typ` | `colles`, `questions-de-colle` |
+| `<flashcard>` | `cours.typ`, inclus (la requête ne fait que compter les cartes) | `flashcards` |
+| `<question-de-colle>` | `cours.typ`, inclus | `colles`, `questions-de-colle` |
 | `<question-de-début-de-cours>` | `cours.typ` | `diapo` |
 | `<coups-de-pouce>` | `TD.typ` | `Chapitre.coups_de_pouce` |
 | `<manipulation>` | `cours.typ` | `manipulations` |
@@ -231,3 +235,34 @@ Le paquet typst `@local/prepa` émet des `metadata` que les outils relisent avec
 
 On interroge toujours le document le moins cher qui contient l'information :
 compiler le poly coute bien plus que le seul cours.
+
+Les flashcards et les questions de colle s'écrivent en **blocs de contenu** —
+`#flashcard(recto: [...], verso: [...])`, `#question-de-colle[...]` —, la forme
+en chaine d'avant restant acceptée. Leurs métadonnées portent donc du content,
+que `typst query` sérialise avec perte : une formule `pdv(f, t)` n'y est plus
+qu'un `context` vide. Les documents qui les rendent incluent donc le cours dans
+leur propre compilation, et les lisent sur place :
+
+- la planche de flashcards, la liste des questions de colle et le programme de
+  colle incluent les cours **en annexe**, à leur suite, avec `cours-en-annexe`
+  et `par-cours` (`prepa/0.1.1/meta.typ`), puis ne gardent que leurs propres
+  pages (`typst compile --pages`). La planche sait combien elle en compte ;
+  les deux listes de colles le lisent d'abord dans le repère
+  `<fin-du-document>`, au prix d'une seconde compilation
+  (`typst.compile_avec_annexe`) ;
+- le paquet Anki inclut le cours en HTML, et découpe ses cartes dans la page
+  produite (`typst.cartes_html`).
+
+Ces compilations prennent `--root` à la racine du dépôt, où les cours
+s'incluent, et `--input inclus=1`, qui dit au cours de ne pas mettre la page en
+place. Le programme de colle, écrit hors du dépôt, prend la racine commune et
+rappelle en tête de son `programme.typ` comment le recompiler.
+
+Pourquoi une annexe plutôt qu'une boîte masquée, qui s'épargnerait ces pages :
+les notes de bas de page des cours s'échappaient de la boîte et remontaient au
+pied de la page hôte, et les y retirer faisait perdre à la liste des colles
+trente-cinq questions.
+
+Le prix de `--pages` : typst n'écrit alors ni signets ni balisage
+d'accessibilité dans le PDF. La liste des questions de colle et le programme de
+colle n'ont donc plus de signet par chapitre.

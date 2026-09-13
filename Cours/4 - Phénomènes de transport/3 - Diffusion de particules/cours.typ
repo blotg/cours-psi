@@ -62,8 +62,8 @@ Le sens et la direction du vecteur densité de courant de particule $va(j_N)$ so
 ]
 
 #flashcard(
-    recto: "Nombre de particules traversant une surface élémentaire.",
-    verso: "$delta^2 N = va(j_N) dot va(dd(S)) dd(t)$",
+    recto: [Nombre de particules traversant une surface élémentaire.],
+    verso: [$delta^2 N = va(j_N) dot va(dd(S)) dd(t)$],
 )
 
 #encadré(
@@ -107,12 +107,12 @@ La loi de Fick relie la densité particulaire au vecteur densité de courant de 
 ]
 
 #question-de-colle(
-    "Présenter les deux modes de transfert de particules en donnant des exemples. Énoncer la loi de Fick en précisant les unités de chacun des termes. Interpréter physiquement le signe \"moins\" présent dans la loi."
+    [Présenter les deux modes de transfert de particules en donnant des exemples. Énoncer la loi de Fick en précisant les unités de chacun des termes. Interpréter physiquement le signe "moins" présent dans la loi.]
 )
 
 #flashcard(
-    recto: "Loi de Fick.",
-    verso: "$ va(j_N) = -D grad n $",
+    recto: [Loi de Fick.],
+    verso: [$ va(j_N) = -D grad n $],
 )
 
 Le signe "$-$" dans la loi de Fick correspond à un sens de diffusion des zones où il y a le plus de particules vers les zones où il y a le moins de particules.
@@ -138,8 +138,8 @@ Faire le bilan de particules sur un système infinitésimal permet de démontrer
 ]
 
 #flashcard(
-    recto: "Équation locale de conservation du nombre de particules.",
-    verso: "$pdv(n,t) = - div va(j_N) + a$",
+    recto: [Équation locale de conservation du nombre de particules.],
+    verso: [$pdv(n,t) = - div va(j_N) + a$],
 )
 
 == Équation de diffusion
@@ -158,25 +158,25 @@ Si on remplace le vecteur densité de courant de particules $va(j_N)$ grâce à 
 ]
 
 #flashcard(
-    recto: "Équation de diffusion de particules.",
-    verso: "$pdv(n,t) - D Delta n=a$",
+    recto: [Équation de diffusion de particules.],
+    verso: [$pdv(n,t) - D Delta n=a$],
 )
 
 == Irréversibilité
 L'équation de diffusion n'est pas invariante par renversement du temps. L'équation de diffusion est donc irréversible.
 
 #question-de-colle(
-    "Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel sans terme source. Montrer que l'équation obtenue est irréversible."
+    [Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel sans terme source. Montrer que l'équation obtenue est irréversible.]
 )
 
 #question-de-colle(
-    "Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel avec terme source. Donnes des exemples de phénomènes pouvant être modélisés par un terme source."
+    [Établir l'équation de diffusion particulaire en coordonnées cartésiennes dans le cas unidimensionnel avec terme source. Donnes des exemples de phénomènes pouvant être modélisés par un terme source.]
 )
 
 #question-de-colle(
-    "Établir l'équation de diffusion particulaire en coordonnées cylindriques dans le cas unidimensionnel avec terme source."
+    [Établir l'équation de diffusion particulaire en coordonnées cylindriques dans le cas unidimensionnel avec terme source.]
 )
 
 #question-de-colle(
-    "Établir l'équation de diffusion particulaire en coordonnées sphériques dans le cas unidimensionnel avec terme source."
+    [Établir l'équation de diffusion particulaire en coordonnées sphériques dans le cas unidimensionnel avec terme source.]
 )

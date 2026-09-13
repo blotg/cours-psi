@@ -6,8 +6,8 @@
 - Associer une propriété d’un solvant moléculaire à une ou des grandeurs caractéristiques.
 - Interpréter la miscibilité totale, partielle ou nulle de deux solvants.
 - Interpréter la solubilité d’une espèce chimique moléculaire ou ionique.
-- Déterminer une constante de partage.
-- Réaliser une extraction, un lavage et les interpréter en termes de solubilité, miscibilité, constante de partage, ou $log P$.
+- #compétence-TP Déterminer une constante de partage.
+- #compétence-TP Réaliser une extraction, un lavage et les interpréter en termes de solubilité, miscibilité, constante de partage, ou $log P$.
 - Prévoir le caractère amphiphile d’une entité à partir de sa structure.
 - Interpréter la structure d’une association d’entités amphiphiles (micelle, bicouche, membrane cellulaire).
 - Comparer et interpréter, en lien avec la structure des entités, les propriétés physiques d’espèces chimiques amphiphiles (concentration micellaire critique, solubilité).

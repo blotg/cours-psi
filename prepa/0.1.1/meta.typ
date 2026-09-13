@@ -1,23 +1,81 @@
 
-#let flashcard(recto: "", verso: "") = {
+// Une flashcard ou une question de colle s'écrit en bloc de contenu :
+//
+//     #flashcard(recto: [Débit volumique], verso: [$ D_V = integral.double_S va(v) dot va(dd(S)) $])
+//     #question-de-colle[Établir l'équation locale de conservation de la masse.]
+//
+// La forme en chaine, `recto: "…"`, reste acceptée : elle est évaluée en markup
+// avec le scope des chaines, d'un seul tenant — et non ligne à ligne comme le
+// fait `markup()`, qui couperait un schéma écrit sur plusieurs lignes.
+//
+// Dans les deux cas la métadonnée porte du content. `typst query` le sérialise
+// avec perte — une formule `pdv(f, t)` n'y est plus qu'un `context` vide — :
+// les outils ne relisent donc pas les cartes par là, mais en incluant le cours
+// dans le document qui les rend (cf. `cours-en-annexe`).
+#let _contenu(x) = if type(x) == str {
     import "helper-functions.typ": scope-des-chaines
-    let _ = eval(recto, mode: "markup", scope: scope-des-chaines)
-    let _ = eval(verso, mode: "markup", scope: scope-des-chaines)
-    [#metadata((recto: recto, verso: verso)) <flashcard>]
+    eval(x, mode: "markup", scope: scope-des-chaines)
+} else { x }
+
+#let flashcard(recto: [], verso: []) = {
+    [#metadata((recto: _contenu(recto), verso: _contenu(verso))) <flashcard>]
 }
 
 #let question-de-colle(question) = {
-    import "helper-functions.typ": scope-des-chaines
-    let _ = eval(question, mode: "markup", scope: scope-des-chaines)
-    [#metadata(question) <question-de-colle>]
+    [#metadata(_contenu(question)) <question-de-colle>]
 }
 
-// Rend le recto ou le verso d'une flashcard. `flashcard` ne stocke que la
-// source ; c'est ce même eval qui la valide à la compilation du cours. Exposé
-// pour que les gabarits (hors du paquet) puissent en faire autant.
-#let rendu-carte(source) = {
-    import "helper-functions.typ": scope-des-chaines
-    eval(source, mode: "markup", scope: scope-des-chaines)
+// Inclut des cours à la suite d'un document pour en lire les flashcards et les
+// questions de colle : la planche à découper, les listes de questions de colle.
+//
+//     #show: cours-en-annexe.with(include "/Cours/…/cours.typ")
+//
+// Les cours sont composés après le document, sur leurs propres pages : query()
+// y trouve leurs métadonnées, et l'outil ne garde que les pages du document
+// (`typst compile --pages`). Le repère <fin-du-document> porte le numéro de la
+// dernière d'entre elles. Il est posé en tête de l'annexe et non en fin de
+// document : sur une page pleine, un repère de fin tomberait déjà sur la
+// suivante.
+//
+// Pas de boîte masquée pour s'épargner ces pages : ce qui s'en échappe ne se
+// maîtrise pas. Les notes de bas de page des cours remontaient au pied de la
+// page hôte — elles décalaient toute la planche d'Électronique 3 —, et les
+// retirer au niveau de la page faisait perdre trente-cinq questions à la liste
+// des questions de colle.
+//
+// À compiler avec `--input inclus=1` : c'est ce qui dit à `cours()` de ne pas
+// mettre la page en place (cf. `inclus-dans-le-poly`).
+//
+// Chaque cours est précédé d'un repère <cours-en-annexe>, dont `par-cours` se
+// sert pour rendre à chacun ce qui vient de lui.
+#let cours-en-annexe(..cours, doc) = {
+    assert(
+        sys.inputs.at("inclus", default: "") != "",
+        message: "cours-en-annexe : compiler avec --input inclus=1",
+    )
+    doc
+    pagebreak(weak: true)
+    context [#metadata(here().page() - 1) <fin-du-document>]
+    for (i, c) in cours.pos().enumerate() {
+        [#metadata(i) <cours-en-annexe>]
+        c
+    }
+}
+
+// Les valeurs des métadonnées `étiquette`, cours en annexe par cours en annexe,
+// dans l'ordre où les cours ont été donnés. Appelle query() : à placer dans un
+// `context`.
+#let par-cours(étiquette) = {
+    let repères = query(<cours-en-annexe>)
+    repères
+        .enumerate()
+        .map(((i, repère)) => {
+            let sélecteur = selector(étiquette).after(repère.location())
+            if i + 1 < repères.len() {
+                sélecteur = sélecteur.before(repères.at(i + 1).location())
+            }
+            query(sélecteur).map(m => m.value)
+        })
 }
 
 // Question de début de cours : un QCM d'une poignée de réponses, posé en

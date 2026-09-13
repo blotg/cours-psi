@@ -62,8 +62,8 @@ Le débit molaire $F_ce("A")$ de l'espèce #ce("A") est la quantité de matière
 ]
 
 #flashcard(
-    recto: "Lien entre débit molaire et concentration",
-    verso: "$ F_ce(\"A\") = [ce(\"A\")] D_V $",
+    recto: [Lien entre débit molaire et concentration],
+    verso: [$ F_ce("A") = [ce("A")] D_V $],
 )
 
 #encadré(
@@ -100,8 +100,8 @@ Le taux de conversion $X_ce("A")$ d'un réactif désigne la proportion de la qua
 ]
 
 #flashcard(
-    recto: "Taux de conversion",
-    verso: "$ X_ce(\"A\") = frac(F_(ce(\"A\"),\"entrée\") - F_(ce(\"A\"),\"sortie\"), F_(ce(\"A\"),\"entrée\")) $",
+    recto: [Taux de conversion],
+    verso: [$ X_ce("A") = frac(F_(ce("A"),"entrée") - F_(ce("A"),"sortie"), F_(ce("A"),"entrée")) $],
 )
 
 #application[
@@ -129,8 +129,8 @@ Pour un RPAC, la concentration en sortie est la concentration à l'intérieur du
 ]
 
 #flashcard(
-    recto: "Temps de passage",
-    verso: "$ tau = V/D_V $",
+    recto: [Temps de passage],
+    verso: [$ tau = V/D_V $],
 )
 
 Le temps de passage représente le temps moyen qu'un réactif passe dans le réacteur.
@@ -149,12 +149,12 @@ Le temps de passage représente le temps moyen qu'un réactif passe dans le réa
 ]
 
 #flashcard(
-    recto: "En effectuant un bilan de matière, déterminer une relation entre concentrations et vitesse d'apparition pour un RPAC",
-    verso: "$ D_V ( [ce(\"A\")]_\"entrée\" - [ce(\"A\")]_\"sortie\" ) + R_ce(\"A\") V = 0 $",
+    recto: [En effectuant un bilan de matière, déterminer une relation entre concentrations et vitesse d'apparition pour un RPAC],
+    verso: [$ D_V ( [ce("A")]_"entrée" - [ce("A")]_"sortie" ) + R_ce("A") V = 0 $],
 )
 
 #question-de-colle(
-    "À partir d'un bilan de matière, établir le lien entre les concentrations d'entrée et de sortie et la vitesse d'apparition pour un réacteur continu parfaitement agité.",
+    [À partir d'un bilan de matière, établir le lien entre les concentrations d'entrée et de sortie et la vitesse d'apparition pour un réacteur continu parfaitement agité.],
 )
 
 #application[
@@ -195,12 +195,12 @@ Dans un réacteur en écoulement piston (RP), le fluide progresse dans le réact
 ]
 
 #flashcard(
-    recto: "Évolution de la concentration en fonction du temps de passage pour un réacteur piston",
-    verso: "$ dd(\[ce(\"A\")\]) = nu_ce(\"A\") v(x) dd(tau) $",
+    recto: [Évolution de la concentration en fonction du temps de passage pour un réacteur piston],
+    verso: [$ dd(\[ce("A")\]) = nu_ce("A") v(x) dd(tau) $],
 )
 
 #question-de-colle(
-    "En effectuant un bilan de matière, établir une équation différentielle liant concentration et temps de passage pour un réacteur piston.",
+    [En effectuant un bilan de matière, établir une équation différentielle liant concentration et temps de passage pour un réacteur piston.],
 )
 
 #application[
@@ -218,7 +218,7 @@ Dans un réacteur en écoulement piston (RP), le fluide progresse dans le réact
 ]
 
 #question-de-colle(
-    "Pour une réaction d'ordre 1, déterminer le taux de conversion en fonction du temps de passage et de la constante de vitesse pour un réacteur continu parfaitement agité puis pour un réacteur piston. Comparer ces deux taux de conversion.",
+    [Pour une réaction d'ordre 1, déterminer le taux de conversion en fonction du temps de passage et de la constante de vitesse pour un réacteur continu parfaitement agité puis pour un réacteur piston. Comparer ces deux taux de conversion.],
 )
 
 De manière générale, pour les réactions d'ordre positif#footnote[La grande majorité des réactions a un ordre positif ou nul.], les RP ont un meilleur taux de conversion que les RPAC.
@@ -256,7 +256,7 @@ L'avancement d'une réaction chimique peut s'accompagner d'un dégagement ou d'u
 ]
 
 #question-de-colle(
-    "En effectuant un bilan d'énergie, exprimer la puissance thermique reçue par un réacteur continu parfaitement agité en faisant apparaitre les températures d'entrée et de sortie ainsi que l'enthalpie de réaction.",
+    [En effectuant un bilan d'énergie, exprimer la puissance thermique reçue par un réacteur continu parfaitement agité en faisant apparaitre les températures d'entrée et de sortie ainsi que l'enthalpie de réaction.],
 )
 
 #application[

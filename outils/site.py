@@ -136,9 +136,7 @@ def _préfixe(nom: str) -> str:
     return trouvé.group(1) if trouvé else ""
 
 
-def _chaine(valeur: str) -> str:
-    """Une chaîne littérale typst."""
-    return '"' + valeur.replace("\\", "\\\\").replace('"', '\\"') + '"'
+_chaine = typst.chaine
 
 
 def _fil(entrées) -> str:

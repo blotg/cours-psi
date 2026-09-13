@@ -18,6 +18,6 @@
 - Déterminer la relation d’isomérie entre deux isomères.
 - Représenter une entité chimique organique à partir de son nom, fourni en nomenclature systématique, en tenant compte de la donnée d’éventuelles informations stéréochimiques, en utilisant un type de représentation donné.
 - Relier la valeur du pouvoir rotatoire à la composition d’un mélange de stéréoisomères.
-- Déterminer la composition d’un système chimique ou suivre une transformation chimique en utilisant l’activité optique.
+- #compétence-TP Déterminer la composition d’un système chimique ou suivre une transformation chimique en utilisant l’activité optique.
 - Citer des analogies et différences de propriétés entre des diastéréoisomères et des énantiomères.
 - Reconnaitre des protocoles de séparation de stéréoisomères.

@@ -83,6 +83,15 @@ class Chapitre:
         """Un chapitre des révisions de PCSI, rangé sous `révisions/`."""
         return self.chemin.resolve().is_relative_to(RACINE / RACINE_RÉVISIONS)
 
+    def inclusion(self, racine: Path = RACINE) -> str:
+        """Le chemin de `cours.typ` tel qu'un `#include` le lit sous la racine
+        typst `racine` : absolu, en « /Cours/… ».
+
+        C'est ainsi que se lisent les flashcards et les questions de colle :
+        elles portent du content, que `typst query` ne restitue qu'avec perte.
+        """
+        return "/" + (self.chemin / "cours.typ").resolve().relative_to(Path(racine).resolve()).as_posix()
+
     @cached_property
     def thème_court(self) -> str:
         """Nom court du thème, tiré du titre court du chapitre.
@@ -172,10 +181,6 @@ class Chapitre:
         return self.métadonnées("<manipulation>", "cours")
 
     @cached_property
-    def questions_de_colle(self) -> list[str]:
-        return self.métadonnées("<question-de-colle>", "cours")
-
-    @cached_property
     def questions_de_début_de_cours(self) -> list[dict]:
         """QCM d'ouverture de séance : énoncé et réponses, la bonne en tête."""
         return self.métadonnées("<question-de-début-de-cours>", "cours")
@@ -225,19 +230,18 @@ class Chapitre:
         return self.document("poly")
 
     def flashcards(self) -> Path | None:
-        """Paquet Anki tiré des `#flashcard(...)` du poly. None s'il n'y en a pas."""
+        """Paquet Anki tiré des `#flashcard(...)` du cours. None s'il n'y en a pas."""
+        # La requête ne sert qu'à compter les cartes : leurs faces sont du
+        # content, qui n'y survit pas. `cartes_html` les rend en incluant le cours.
         cartes = self.métadonnées("<flashcard>", "cours")
         if not cartes:
             return None
         from . import anki
 
-        # Recto et verso de toutes les cartes en une seule compilation typst.
-        faces = typst.vers_html_lot([f for c in cartes for f in (c["recto"], c["verso"])])
-        return anki.écrit_paquet(
-            self.paquet_anki,
-            list(zip(faces[::2], faces[1::2])),
-            self.fichier("flashcards", "apkg"),
-        )
+        faces = typst.cartes_html(self.inclusion(), RACINE)
+        if len(faces) != len(cartes):
+            raise typst.ErreurTypst(f"{len(faces)} flashcards rendues sur les {len(cartes)} du cours")
+        return anki.écrit_paquet(self.paquet_anki, faces, self.fichier("flashcards", "apkg"))
 
     def DM(self) -> list[Path]:
         """Met les DM et leurs corrigés dans build/, sous le nommage commun.
@@ -258,16 +262,27 @@ class Chapitre:
                 produits.append(cible)
         return produits
 
-    def _depuis_gabarit(self, gabarit: str, cible: Path, données: dict) -> Path:
+    def _depuis_gabarit(self, gabarit: str, cible: Path, données: dict, pages_hors_annexe: int | None = None) -> Path:
         """Compile un gabarit de `gabarits/` avec des données en `--input`.
 
         Le JSON passe par la ligne de commande plutôt que par un fichier
-        temporaire : ça évite d'avoir à élargir la racine typst au dépôt.
+        temporaire, qu'il faudrait sinon poser sous la racine typst.
+
+        `pages_hors_annexe` : le gabarit inclut le cours du chapitre en annexe
+        (cf. `inclusion`), et n'a que ce nombre de pages à lui. La racine typst
+        est alors celle du dépôt, `--input inclus=1` dit au cours de ne pas
+        mettre la page en place, et seules ces pages-là sont produites.
         """
+        entrées = {"données": json.dumps(données, ensure_ascii=False)}
+        annexe = pages_hors_annexe is not None
+        if annexe:
+            entrées["inclus"] = "1"
         typst.compile_fichier(
             GABARITS / f"{gabarit}.typ",
             cible,
-            entrées={"données": json.dumps(données, ensure_ascii=False)},
+            entrées=entrées,
+            racine=RACINE if annexe else None,
+            pages=f"1-{pages_hors_annexe}" if annexe else None,
         )
         return cible
 
@@ -283,12 +298,17 @@ class Chapitre:
             "flashcards",
             self.fichier("flashcards"),
             # Le titre complet nomme le document, le titre court coiffe chaque
-            # carte : sur 105 mm de large, il n'y a place que pour lui.
+            # carte : sur 105 mm de large, il n'y a place que pour lui. Les
+            # cartes, elles, se lisent dans le cours inclus.
             {
                 "titre": self.titre(inline=True),
                 "titre-court": self.titre_court,
-                "cartes": cartes,
+                "nombre": len(cartes),
+                "cours": self.inclusion(),
             },
+            # Une page de rectos et une de versos par groupe de quatre cartes :
+            # la planche le sait, inutile de le lui demander par une requête.
+            pages_hors_annexe=2 * -(-len(cartes) // 4),
         )
 
     def diapo(self) -> Path | None:

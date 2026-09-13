@@ -54,11 +54,11 @@ Les équations de Maxwell sont compatibles avec l'équation locale de conservati
 ]
 
 #flashcard(
-    recto: "Équation locale de conservation de la charge",
-    verso: "$ div va(j) + pdv(rho, t)=0 $",
+    recto: [Équation locale de conservation de la charge],
+    verso: [$ div va(j) + pdv(rho, t)=0 $],
 )
 #question-de-colle(
-    "Énoncer les 4 équations de Maxwell et établir l'équation locale de conservation de la charge.",
+    [Énoncer les 4 équations de Maxwell et établir l'équation locale de conservation de la charge.],
 )
 
 == Courants de déplacement
@@ -80,11 +80,11 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
 ]
 
 #flashcard(
-    recto: "Équations de Maxwell dans l'ARQS",
-    verso: "$ div va(E)=rho / epsilon_0 $
+    recto: [Équations de Maxwell dans l'ARQS],
+    verso: [$ div va(E)=rho / epsilon_0 $
         $ rot va(E)=-pdv(va(B), t) $
         $ div va(B)=0 $
-        $ rot va(B) = mu_0 va(j) $",
+        $ rot va(B) = mu_0 va(j) $],
 )
 
 #question-de-début-de-cours(
@@ -117,7 +117,7 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
 )
 
 #question-de-colle(
-    "Énoncer les équations de Maxwell dans l'ARQS. Établir la condition à laquelle on peut négliger les courants de déplacement.",
+    [Énoncer les équations de Maxwell dans l'ARQS. Établir la condition à laquelle on peut négliger les courants de déplacement.],
 )
 
 == Du régime stationnaire au régime variable
@@ -164,8 +164,8 @@ Dans l'ARQS, le champ magnétique induit le champ électrique.
 )
 
 #flashcard(
-    recto: "Circulation du champ électrique dans l'ARQS",
-    verso: "$ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $",
+    recto: [Circulation du champ électrique dans l'ARQS],
+    verso: [$ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $],
 )
 
 #question-de-début-de-cours(
@@ -190,8 +190,8 @@ Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-
 )
 
 #flashcard(
-    recto: "Loi de Lenz-Faraday",
-    verso: "$ e=- dv(Phi, t) $",
+    recto: [Loi de Lenz-Faraday],
+    verso: [$ e=- dv(Phi, t) $],
 )
 
 #application(
@@ -245,7 +245,7 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
 )
 
 #question-de-colle(
-    "Établir l'expression du vecteur densité de courant puis de la puissance dissipée par les courants de Foucault dans un cylindre conducteur placé dans un champ magnétique uniforme et sinusoïdal.",
+    [Établir l'expression du vecteur densité de courant puis de la puissance dissipée par les courants de Foucault dans un cylindre conducteur placé dans un champ magnétique uniforme et sinusoïdal.],
 )
 
 #application[Le fond d'une casserole en fer ($gamma_ce("Fe")=qty("1e7", "S/m")$) a un rayon de #qty(15, "cm") et une épaisseur de #qty(1, "cm"). La casserole est posée sur une plaque à induction qui émet un champ magnétique oscillant à la fréquence #qty(20, "kHz"). Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #qty(1, "kW") ?]
@@ -306,7 +306,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
 )
 
 #question-de-colle(
-    "Établir le champ magnétique créé par un solénoïde puis son inductance propre.",
+    [Établir le champ magnétique créé par un solénoïde puis son inductance propre.],
 )
 
 #application[
@@ -351,11 +351,11 @@ Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 p
 )
 
 #flashcard(
-    recto: "Densité volumique d'énergie magnétique",
-    verso: "$ w=B^2/(2 mu_0) $",
+    recto: [Densité volumique d'énergie magnétique],
+    verso: [$ w=B^2/(2 mu_0) $],
 )
 #question-de-colle(
-    "Sur l'exemple du solénoïde, établir l'expression de la densité volumique d'énergie magnétique.",
+    [Sur l'exemple du solénoïde, établir l'expression de la densité volumique d'énergie magnétique.],
 )
 
 == Inductance mutuelle
@@ -372,12 +372,12 @@ Lorsque deux bobines sont présentes simultanément, le champ magnétique créé
 )
 
 #flashcard(
-    recto: "Flux propre",
-    verso: "$ Phi_(1 arrow 1)= integral.double(S_1) va(B_1).va(dd(S)) = L_1 i_1 $",
+    recto: [Flux propre],
+    verso: [$ Phi_(1 arrow 1)= integral.double(S_1) va(B_1).va(dd(S)) = L_1 i_1 $],
 )
 #flashcard(
-    recto: "Flux mutuel",
-    verso: "$ Phi_(2 arrow 1)= integral.double(S_1) va(B_2).va(dd(S)) = M i_2 $",
+    recto: [Flux mutuel],
+    verso: [$ Phi_(2 arrow 1)= integral.double(S_1) va(B_2).va(dd(S)) = M i_2 $],
 )
 
 L'inductance mutuelle $M$ dépend de la géométrie et de la position relative des deux bobines. Si les bobines sont infiniment éloignées, $M=0$.
@@ -406,8 +406,8 @@ En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 
 )
 
 #flashcard(
-    recto: "Inégalité vérifiée par l'inductance mutuelle $M$",
-    verso: "$ M^2 <= L_1 L_2 $",
+    recto: [Inégalité vérifiée par l'inductance mutuelle $M$],
+    verso: [$ M^2 <= L_1 L_2 $],
 )
 
 #question-de-début-de-cours(
@@ -430,5 +430,5 @@ En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 
     ),
 )
 #question-de-colle(
-    "À partir de l'expression des flux magnétiques, établir l'énergie stockée dans deux bobines en interaction puis établir une inégalité portant sur l'inductance mutuelle et les inductances propres.",
+    [À partir de l'expression des flux magnétiques, établir l'énergie stockée dans deux bobines en interaction puis établir une inégalité portant sur l'inductance mutuelle et les inductances propres.],
 )

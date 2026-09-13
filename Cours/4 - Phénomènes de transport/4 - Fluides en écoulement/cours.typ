@@ -89,12 +89,12 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 ]
 
 #question-de-colle(
-    "Dans le cas unidimensionnel, déterminer la dérivée particulaire d'une fonction scalaire. Généraliser à 3D.",
+    [Dans le cas unidimensionnel, déterminer la dérivée particulaire d'une fonction scalaire. Généraliser à 3D.],
 )
 
 #flashcard(
-    recto: "Dérivée particulaire",
-    verso: "$partdv(f) = pdv(f,t) + (va(v) dot grad) f$",
+    recto: [Dérivée particulaire],
+    verso: [$partdv(f) = pdv(f,t) + (va(v) dot grad) f$],
 )
 
 == Débit massique
@@ -109,8 +109,8 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 ]
 
 #flashcard(
-    recto: "Masse volumique de l'eau et de l'air",
-    verso: "$ mu_\"eau\" = qty(\"1e3\", \"kg/m^3\") $ $mu_\"air\"=qty(\"1\", \"kg/m^3\")$",
+    recto: [Masse volumique de l'eau et de l'air],
+    verso: [$ mu_"eau" = qty("1e3", "kg/m^3") $ $mu_"air"=qty("1", "kg/m^3")$],
 )
 
 #encadré(
@@ -132,8 +132,8 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 ]
 
 #flashcard(
-    recto: "Débit massique",
-    verso: "$ D_m= integral.double_S mu va(v) dot va(dd(S))$",
+    recto: [Débit massique],
+    verso: [$ D_m= integral.double_S mu va(v) dot va(dd(S))$],
 )
 
 #application[
@@ -160,8 +160,8 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 ]
 
 #flashcard(
-    recto: "Débit volumique",
-    verso: "$ D_V = integral.double_S va(v) dot va(dd(S))$",
+    recto: [Débit volumique],
+    verso: [$ D_V = integral.double_S va(v) dot va(dd(S))$],
 )
 
 #application[
@@ -180,11 +180,11 @@ La masse est une grandeur physique conservative.
     $ pdv(mu, t) = - div (mu va(v)) $
 ]
 
-#question-de-colle("Établir l'équation locale de conservation de la masse.")
+#question-de-colle([Établir l'équation locale de conservation de la masse.])
 
 #flashcard(
-    recto: "Équation locale de conservation de la masse",
-    verso: "$ pdv(mu, t) = - div (mu va(v)) $",
+    recto: [Équation locale de conservation de la masse],
+    verso: [$ pdv(mu, t) = - div (mu va(v)) $],
 )
 
 #encadré(
@@ -219,8 +219,8 @@ Dans un écoulement incompressible et homogène, la masse volumique $mu$ est uni
 ]
 
 #flashcard(
-    recto: "Condition à laquelle le volume se conserve",
-    verso: "Écoulement incompressible et homogène.",
+    recto: [Condition à laquelle le volume se conserve],
+    verso: [Écoulement incompressible et homogène.],
 )
 
 #encadré(
@@ -257,11 +257,11 @@ Les forces de contact s'exerçant sur la surface d'une particule de fluide sont 
 ]
 
 #flashcard(
-    recto: "Résultante volumique des forces de pression",
-    verso: "$ va(delta^3 F_P) = - grad P dd(V) $",
+    recto: [Résultante volumique des forces de pression],
+    verso: [$ va(delta^3 F_P) = - grad P dd(V) $],
 )
 #question-de-colle(
-    "Exprimer la résultante volumique des forces de pression dans le cas unidimensionnel. Généraliser à 3D.",
+    [Exprimer la résultante volumique des forces de pression dans le cas unidimensionnel. Généraliser à 3D.],
 )
 
 #encadré(
@@ -278,15 +278,15 @@ Les forces de contact s'exerçant sur la surface d'une particule de fluide sont 
 ]
 
 #flashcard(
-    recto: "Relation fondamentale de l'hydrostatique",
-    verso: "$grad P = mu va(g)$",
+    recto: [Relation fondamentale de l'hydrostatique],
+    verso: [$grad P = mu va(g)$],
 )
 
 #question-de-colle(
-    "Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans un fluide homogène et incompressible au repos.",
+    [Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans un fluide homogène et incompressible au repos.],
 )
 #question-de-colle(
-    "Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans l'atmosphère en la supposant isotherme et en assimilant l'air à un gaz parfait.",
+    [Établir l'équation fondamentale de l'hydrostatique. Établir le champ de pression dans l'atmosphère en la supposant isotherme et en assimilant l'air à un gaz parfait.],
 )
 
 #application[
@@ -315,8 +315,8 @@ La force tangentielle est due à la viscosité du fluide.
 ]
 
 #flashcard(
-    recto: "Forces de viscosité sur une surface infinitésimale",
-    verso: "$ va(delta^2 F_v) = eta pdv(v, y) dd(S) ex $",
+    recto: [Forces de viscosité sur une surface infinitésimale],
+    verso: [$ va(delta^2 F_v) = eta pdv(v, y) dd(S) ex $],
 )
 
 Cette formule doit être adaptée en fonction des axes du problème.
@@ -335,8 +335,8 @@ Cette formule doit être adaptée en fonction des axes du problème.
 ]
 
 #flashcard(
-    recto: "Viscosité dynamique de l'eau",
-    verso: "$ eta_\"eau\" = qty(\"1e-3\", \"Pl\") $",
+    recto: [Viscosité dynamique de l'eau],
+    verso: [$ eta_"eau" = qty("1e-3", "Pl") $],
 )
 
 #encadré(
@@ -380,8 +380,8 @@ La vitesse débitante est la vitesse qu'aurait le fluide si le champ de vitesse 
     $ U = D_V / S $
 ]
 #flashcard(
-    recto: "Vitesse débitante",
-    verso: "$ U = D_V / S $",
+    recto: [Vitesse débitante],
+    verso: [$ U = D_V / S $],
 )
 
 La vitesse débitante peut être vue comme la moyenne de la vitesse sur une section de la conduite : $ U=(integral.double_S va(v) dot va(dd(S))) / S $
@@ -455,8 +455,8 @@ Le nombre de Reynolds est une grandeur adimensionnée qui sert à comparer l'imp
 
 Dans le cas d'un écoulement interne, $L$ désigne le *diamètre* de la conduite.
 #flashcard(
-    recto: "Nombre de Reynolds",
-    verso: "$ R_e= (scr(V) L)/nu $",
+    recto: [Nombre de Reynolds],
+    verso: [$ R_e= (scr(V) L)/nu $],
 )
 
 Pour un écoulement interne, l'ordre de grandeur de la vitesse $scr(V)$ est la vitesse débitante.
@@ -490,8 +490,9 @@ Expérimentalement, on peut établir le seuil de passage d'un régime laminaire 
 ]
 
 #flashcard(
-    recto: "Seuil de turbulence pour un écoulement interne",
-    verso: "Si $R_e<2000$ l'écoulement est laminaire.\nSi $R_e>2000$ l'écoulement est turbulent",
+    recto: [Seuil de turbulence pour un écoulement interne],
+    verso: [Si $R_e<2000$ l'écoulement est laminaire.
+Si $R_e>2000$ l'écoulement est turbulent],
 )
 
 #application[
@@ -520,10 +521,10 @@ Dans un écoulement interne laminaire, la chute de pression entre les deux extr�
     $ D_V = (pi R^4)/(8 eta l) Delta P $
 ]
 #flashcard(
-    recto: "Loi de Hagen–Poiseuille",
-    verso: "$ D_V = (pi R^4)/(8 eta l) Delta P $",
+    recto: [Loi de Hagen–Poiseuille],
+    verso: [$ D_V = (pi R^4)/(8 eta l) Delta P $],
 )
-#question-de-colle("Établir la loi de Hagen–Poiseuille.")
+#question-de-colle([Établir la loi de Hagen–Poiseuille.])
 
 Par analogie avec l'électrocinétique, on peut définir la résistance hydraulique.
 
@@ -586,8 +587,8 @@ Le maitre-couple (ou surface apparente) est la surface projetée dans une certai
 ]
 
 #flashcard(
-    recto: "Force de trainée",
-    verso: "$ va(F_x) = - 1/2 mu v^2 S_x C_x va(u_x) $",
+    recto: [Force de trainée],
+    verso: [$ va(F_x) = - 1/2 mu v^2 S_x C_x va(u_x) $],
 )
 
 Le coefficient de trainée dépend de la forme de l'objet et du nombre de Reynolds.
@@ -614,8 +615,8 @@ Pour $R_e<1$, le graphe s'approche d'une droite (en échelle logarithmique) d'é
     $ va(F_x) = - alpha va(v) $
 ]
 #flashcard(
-    recto: "Plage de Reynolds pour une trainée linéaire",
-    verso: "$ R_e < 1 $",
+    recto: [Plage de Reynolds pour une trainée linéaire],
+    verso: [$ R_e < 1 $],
 )
 
 === Haut Reynolds
@@ -634,8 +635,8 @@ Pour $R_e in [num("2000"), num("200000")]$, $C_x$ est constant.
     $ va(F_x) = - beta v^2 va(u_x) $
 ]
 #flashcard(
-    recto: "Plage de Reynolds pour une trainée quadratique",
-    verso: "$R_e in [num(\"2000\"), num(\"200000\")]$",
+    recto: [Plage de Reynolds pour une trainée quadratique],
+    verso: [$R_e in [num("2000"), num("200000")]$],
 )
 
 == Forces de trainée et de portance sur une aile d'avion

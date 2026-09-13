@@ -32,7 +32,7 @@ Pour une réaction électrochimique, les potentiels des couples redox sont liés
     où $U = E_+ - E_-$, $E_+$ étant le potentiel du couple dont l'oxydant est du côté des réactifs.
 ]
 
-#flashcard(recto: "Enthalpie libre de réaction pour une réaction électrochimique", verso: "$ Delta_r G = - n cal(F) U $")
+#flashcard(recto: [Enthalpie libre de réaction pour une réaction électrochimique], verso: [$ Delta_r G = - n cal(F) U $])
 
 #application[
     Déterminer l'enthalpie libre de réaction de #ce("2 Fe^3+ + Zn -> 2 Fe^2+ + Zn^2+"). Données : $ce("[Fe^2+]") = ce("[Fe^3+]") = ce("[Zn^2+]") = qty("0.1", "mol/L")$, $E^circ(cpl("Fe^3+", "Fe^2+")) = qty("0.77", "V")$, $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$.
@@ -75,7 +75,7 @@ Le travail électrique reçu par un système chimique est borné par la variatio
 ]
 
 #question-de-colle(
-    "Établir l'inégalité reliant la variation d'enthalpie libre au travail électrique. Relier la tension à vide d'une pile à l'enthalpie libre de la réaction."
+    [Établir l'inégalité reliant la variation d'enthalpie libre au travail électrique. Relier la tension à vide d'une pile à l'enthalpie libre de la réaction.]
 )
 
 = Réaction et courant électrique
@@ -93,7 +93,7 @@ Dans une pile ou un électrolyseur, la vitesse de réaction est liée au courant
     où $i$ est le courant #strong[arrivant] à l'électrode. On définit aussi $j = i \/ S$ la densité surfacique de courant.
 ]
 
-#flashcard(recto: "Courant arrivant à une électrode", verso: "$ i = - n cal(F) dv(xi, t) $")
+#flashcard(recto: [Courant arrivant à une électrode], verso: [$ i = - n cal(F) dv(xi, t) $])
 
 == Montage à trois électrodes
 Pour mesurer le courant $i$ arrivant à une électrode en fonction de son potentiel, on utilise un montage à trois électrodes.
@@ -102,7 +102,7 @@ Pour mesurer le courant $i$ arrivant à une électrode en fonction de son potent
 
 Le voltmètre mesure la différence de potentiel entre l'électrode de travail et l'électrode de référence (potentiel fixe et connu), ce qui donne le potentiel $E$ de l'électrode de travail. Comme on ne peut pas faire circuler de courant dans l'électrode de référence sans l'endommager, une contre-électrode ferme le circuit. On obtient ainsi la courbe $i(E)$ point par point.
 
-#question-de-colle("Établir la relation entre courant arrivant à une électrode et vitesse de réaction. Schématiser le montage à trois électrodes en expliquant le rôle de chaque électrode.")
+#question-de-colle([Établir la relation entre courant arrivant à une électrode et vitesse de réaction. Schématiser le montage à trois électrodes en expliquant le rôle de chaque électrode.])
 
 == Courbes intensité-potentiel
 Une courbe intensité-potentiel représente le courant arrivant à une électrode en fonction de son potentiel. Elle dépend du couple redox, des concentrations et de l'électrode utilisée.
@@ -135,10 +135,10 @@ Les solutés sont transportés par diffusion (dans la couche limite), convection
     $ i_"max" = (n cal(F) S D c)/delta $
 ]
 
-#question-de-colle("Expliquer ce qu'est un palier de diffusion et dans quels cas il apparait. Exprimer la hauteur d'un palier de diffusion en fonction de la concentration et de l'épaisseur de la couche limite.")
+#question-de-colle([Expliquer ce qu'est un palier de diffusion et dans quels cas il apparait. Exprimer la hauteur d'un palier de diffusion en fonction de la concentration et de l'épaisseur de la couche limite.])
 
 #question-de-colle(
-    "Grâce à des schémas, définir système rapide, système lent, surpotentiel, palier de diffusion et mur du solvant."
+    [Grâce à des schémas, définir système rapide, système lent, surpotentiel, palier de diffusion et mur du solvant.]
 )
 
 Lorsque le réactif ne peut pas manquer (solvant, ou électrode elle-même), il n'y a pas de palier de diffusion.
@@ -197,7 +197,7 @@ La #strong[capacité] d'une pile est la quantité d'électricité qu'elle peut d
 == Rendement faradique
 Le #strong[rendement faradique] est la proportion des électrons participant à la réaction chimique désirée.
 
-#flashcard(recto: "Rendement faradique", verso: "Proportion du courant participant à la réaction désirée.")
+#flashcard(recto: [Rendement faradique], verso: [Proportion du courant participant à la réaction désirée.])
 
 #application[
     Dans l'électrolyseur précédent, le courant réel est $qty("1000", "A")$. Déterminer le rendement faradique.
@@ -260,4 +260,4 @@ On réalise volontairement une pile de corrosion : la pièce à protéger, reli�
 === Courant imposé
 On impose un courant pour contrôler les réactions à l'électrode : #strong[protection cathodique] (abaisser le potentiel jusqu'au domaine d'immunité pour empêcher l'oxydation) ou #strong[protection anodique] (forcer une réaction de passivation).
 
-#question-de-colle("Présenter trois méthodes permettant de protéger un métal de la corrosion.")
+#question-de-colle([Présenter trois méthodes permettant de protéger un métal de la corrosion.])

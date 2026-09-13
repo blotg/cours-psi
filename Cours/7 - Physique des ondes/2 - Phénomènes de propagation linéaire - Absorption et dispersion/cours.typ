@@ -77,7 +77,7 @@ La loi d'Ohm locale reste valable à condition que le temps moyen entre deux cho
     $ pdv(va(E),t) - D va(Delta) va(E) = 0 $
 ]
 
-#question-de-colle("Montrer qu'un conducteur ohmique est localement neutre. Établir l'équation de propagation du champ électrique.")
+#question-de-colle([Montrer qu'un conducteur ohmique est localement neutre. Établir l'équation de propagation du champ électrique.])
 
 Dans un conducteur ohmique, le champ électrique obéit à une équation de diffusion, tout comme la température (cf chapitre transfert thermique par conduction).
 
@@ -122,8 +122,8 @@ La définition d'une OPH peut être élargie pour être solution de n'importe qu
 ]
 
 #flashcard(
-    recto: "Onde (plane) progressive harmonique dans un milieu linéaire quelconque.",
-    verso: "$ underline(y)(M,t) = underline(y_0)e^(j (omega t - va(underline(k)).va(O M) )) $"
+    recto: [Onde (plane) progressive harmonique dans un milieu linéaire quelconque.],
+    verso: [$ underline(y)(M,t) = underline(y_0)e^(j (omega t - va(underline(k)).va(O M) )) $]
 )
 
 #application[
@@ -156,8 +156,8 @@ La largeur spectrale du paquet d'onde est reliée à son étendue temporelle.
 ]
 
 #flashcard(
-    recto: "Relation entre étendue temporelle et largeur spectrale",
-    verso: "$ Delta f tilde.op 1 / (Delta t) $"
+    recto: [Relation entre étendue temporelle et largeur spectrale],
+    verso: [$ Delta f tilde.op 1 / (Delta t) $]
 )
 
 == Vitesse de phase
@@ -173,8 +173,8 @@ La partie réelle de $underline(k)$ est en lien avec la propagation de la phase.
 ]
 
 #flashcard(
-    recto: "Vitesse de phase",
-    verso: "$ v_phi = omega / Re(underline(k)) $"
+    recto: [Vitesse de phase],
+    verso: [$ v_phi = omega / Re(underline(k)) $]
 )
 
 La vitesse de phase représente la vitesse à laquelle la phase se propage.
@@ -202,8 +202,8 @@ La partie imaginaire de $underline(k)$ est liée à la variation de l'amplitude 
 ]
 
 #flashcard(
-    recto: "Profondeur de peau",
-    verso: "$ delta = 1 / (|Im(underline(k))|) $"
+    recto: [Profondeur de peau],
+    verso: [$ delta = 1 / (|Im(underline(k))|) $]
 )
 
 Quand l'onde a parcouru quelques fois la profondeur de peau, son amplitude devient négligeable.
@@ -227,15 +227,15 @@ Au fur et à mesure de la propagation dans un conducteur ohmique, l'onde électr
 ]
 
 #flashcard(
-    recto: "Profondeur de peau dans le cuivre à #qty(\"50\",\"Hz\")",
-    verso: "#qty(\"1\",\"cm\")"
+    recto: [Profondeur de peau dans le cuivre à #qty("50","Hz")],
+    verso: [#qty("1","cm")]
 )
 
 #application[
     Calculer la profondeur de peau pour une onde thermique dans un sol de diffusivité thermique #qty("1e-6","m^2/s") en considérant les variations journalières de température.
 ]
 
-#question-de-colle("Pour une O(P)PH vérifiant une équation de diffusion, établir la relation de dispersion. En déduire la profondeur de peau. Donner sa valeur dans le cuivre à #qty(\"50\",\"Hz\").")
+#question-de-colle([Pour une O(P)PH vérifiant une équation de diffusion, établir la relation de dispersion. En déduire la profondeur de peau. Donner sa valeur dans le cuivre à #qty("50","Hz").])
 
 
 == Vitesse de groupe
@@ -246,7 +246,7 @@ Dans un milieu dispersif, toutes les pulsations ne se propagent pas à la même 
     On considère un paquet d'onde simplifié constitué de deux OPH de fréquences proches : $y(x,t)=cos(omega t-k x) + cos(( omega+dd(omega))t - (k+dd(k))x)$. En l'écrivant comme un produit de cosinus, montrer que son enveloppe se propage à la vitesse $dv(omega,k)$ et que sa phase se propage à la vitesse $omega/k$.
 ]
 
-#question-de-colle("Définir et représenter un paquet d'onde. Donner le lien entre étendue temporelle et largeur spectrale. Dans le cas simple d'un paquet d'onde constitué de seulement deux ondes sinusoïdales, montrer que l'enveloppe se propage à la vitesse de groupe.")
+#question-de-colle([Définir et représenter un paquet d'onde. Donner le lien entre étendue temporelle et largeur spectrale. Dans le cas simple d'un paquet d'onde constitué de seulement deux ondes sinusoïdales, montrer que l'enveloppe se propage à la vitesse de groupe.])
 
 #encadré(
     titre: "Vitesse de groupe",
@@ -257,14 +257,14 @@ Dans un milieu dispersif, toutes les pulsations ne se propagent pas à la même 
 ]
 
 #flashcard(
-    recto: "Vitesse de groupe",
-    verso: "$ v_g = dv(omega, Re(underline(k))) $"
+    recto: [Vitesse de groupe],
+    verso: [$ v_g = dv(omega, Re(underline(k))) $]
 )
 
 #lien("https://upload.wikimedia.org/wikipedia/commons/b/bd/Wave_group.gif?uselang=fr")
 La vitesse de groupe est la vitesse à laquelle l'enveloppe d'un paquet d'onde se propage.
 
-#question-de-colle("Donner l'expression d'une O(P)PH dans un milieu linéaire quelconque. Définir vitesse de phase, vitesse de groupe et profondeur de peau.")
+#question-de-colle([Donner l'expression d'une O(P)PH dans un milieu linéaire quelconque. Définir vitesse de phase, vitesse de groupe et profondeur de peau.])
 
 == Aspect énergétique pour une OPPH dans un conducteur ohmique
 #application[
@@ -313,7 +313,7 @@ La conductivité est imaginaire, ce qui traduit un déphasage entre le champ él
     On considère une OPPH $underline(va(E)) = E_0 e^(j(omega t - underline(k)x)) ey$. Déterminer le vecteur densité volumique de courant électrique puis la densité volumique de puissance cédée par l'onde aux porteurs de charge et enfin sa valeur moyenne.
 ]
 
-#question-de-colle("Définir un plasma dilué. Établir la conductivité d'un plasma. En déduire que le champ électromagnétique ne cède pas de puissance aux porteurs de charge en moyenne.")
+#question-de-colle([Définir un plasma dilué. Établir la conductivité d'un plasma. En déduire que le champ électromagnétique ne cède pas de puissance aux porteurs de charge en moyenne.])
 
 Un plasma ne reçoit en moyenne pas de puissance du champ électromagnétique.
 
@@ -350,7 +350,7 @@ L'onde est une onde progressive qui transporte donc de l'énergie.
     Déterminer les vitesses de phase $v_phi$ et de groupe $v_g$ pour une OPPH dans l'ionosphère vérifiant $omega > omega_p$. Tracer $v_phi$ et $v_g$ en fonction de $omega$. L'ionosphère est-elle un milieu dispersif ?
 ]
 
-#question-de-colle("Établir la relation de dispersion pour une onde électromagnétique plane progressive harmonique dans un plasma dilué. Présenter les solutions pour $omega>omega_p$ et déterminer leur vitesse de groupe et de phase.")
+#question-de-colle([Établir la relation de dispersion pour une onde électromagnétique plane progressive harmonique dans un plasma dilué. Présenter les solutions pour $omega>omega_p$ et déterminer leur vitesse de groupe et de phase.])
 
 == Pulsation inférieure à la pulsation plasma
 Dans ce cas, la relation de dispersion a deux solutions imaginaires pures : $underline(k)= plus.minus j omega/c sqrt(omega_p^2/omega^2 - 1)$.
@@ -366,8 +366,8 @@ L'onde obtenue est une onde évanescente. Une onde évanescente est une onde sta
 ]
 
 #flashcard(
-    recto: "Onde évanescente",
-    verso: "$ y(x,t)=y_0 cos(omega t + phi) e^(k_i x) $"
+    recto: [Onde évanescente],
+    verso: [$ y(x,t)=y_0 cos(omega t + phi) e^(k_i x) $]
 )
 
 #application[
@@ -378,4 +378,4 @@ Une onde évanescente ne transporte pas d'énergie en moyenne.
 
 Lorsque $omega < omega_p$ les ondes ne traversent pas l'ionosphère, elles sont réfléchies.
 
-#question-de-colle("Établir la relation de dispersion pour une onde électromagnétique plane progressive harmonique dans un plasma dilué. Présenter les solutions pour $omega<omega_p$ et montrer qu'elles ne transportent pas d'énergie en moyenne.")
+#question-de-colle([Établir la relation de dispersion pour une onde électromagnétique plane progressive harmonique dans un plasma dilué. Présenter les solutions pour $omega<omega_p$ et montrer qu'elles ne transportent pas d'énergie en moyenne.])

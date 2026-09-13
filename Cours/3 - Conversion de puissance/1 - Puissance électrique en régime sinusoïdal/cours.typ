@@ -55,8 +55,8 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
 ]
 
 #flashcard(
-    recto: "Valeur moyenne",
-    verso: "$ mean(s) = 1/T integral_0^T s(t) dd(t) $",
+    recto: [Valeur moyenne],
+    verso: [$ mean(s) = 1/T integral_0^T s(t) dd(t) $],
 )
 
 #question-de-début-de-cours(
@@ -84,8 +84,8 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
 ]
 
 #flashcard(
-    recto: "Valeur moyenne d'un signal sinusoïdal",
-    verso: "$ 0 $",
+    recto: [Valeur moyenne d'un signal sinusoïdal],
+    verso: [$ 0 $],
 )
 
 == Valeur efficace
@@ -102,8 +102,8 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
 ]
 
 #flashcard(
-    recto: "Valeur efficace",
-    verso: "$ S_\"eff\" = sqrt( mean(s^2(t)) ) $",
+    recto: [Valeur efficace],
+    verso: [$ S_"eff" = sqrt( mean(s^2(t)) ) $],
 )
 
 La valeur efficace de la tension délivrée aux foyers par Enedis est #qty("230", "V").
@@ -129,12 +129,12 @@ En électricité, la valeur efficace d'un courant est le courant continu qui, s'
 ]
 
 #flashcard(
-    recto: "Valeur efficace d'un signal sinusoïdal",
-    verso: "$ S_\"eff\" = S / sqrt(2) $",
+    recto: [Valeur efficace d'un signal sinusoïdal],
+    verso: [$ S_"eff" = S / sqrt(2) $],
 )
 
 #question-de-colle(
-    "Définir la valeur moyenne et la valeur efficace. Déterminer la valeur moyenne et la valeur efficace de $S cos(omega t+phi)$.",
+    [Définir la valeur moyenne et la valeur efficace. Déterminer la valeur moyenne et la valeur efficace de $S cos(omega t+phi)$.],
 )
 
 #application[Calculer l'amplitude de la tension délivrée aux foyers par Enedis.]
@@ -158,8 +158,8 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 ]
 
 #flashcard(
-    recto: "Puissance moyenne reçue par un condensateur",
-    verso: "$ 0 $",
+    recto: [Puissance moyenne reçue par un condensateur],
+    verso: [$ 0 $],
 )
 
 #encadré(
@@ -176,8 +176,8 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 ]
 
 #flashcard(
-    recto: "Puissance moyenne reçue par une bobine",
-    verso: "$ 0 $",
+    recto: [Puissance moyenne reçue par une bobine],
+    verso: [$ 0 $],
 )
 
 == Puissance moyenne reçue par un dipôle purement résistif
@@ -205,11 +205,11 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 ]
 
 #flashcard(
-    recto: "Puissance moyenne reçue par un résistor",
-    verso: "$ R I_\"eff\"^2 = U_\"eff\"^2 / R $",
+    recto: [Puissance moyenne reçue par un résistor],
+    verso: [$ R I_"eff"^2 = U_"eff"^2 / R $],
 )
 #question-de-colle(
-    "Déterminer en régime périodique la puissance moyenne reçue par un condensateur, une bobine et un résistor.",
+    [Déterminer en régime périodique la puissance moyenne reçue par un condensateur, une bobine et un résistor.],
 )
 
 = Puissance en régime sinusoïdal
@@ -230,20 +230,20 @@ La résistance $R$ est la partie réelle de l'impédance.
 La réactance $X$ est la partie imaginaire de l'impédance.
 
 #flashcard(
-    recto: "Réactance",
-    verso: "$X=Im(underline(Z))$",
+    recto: [Réactance],
+    verso: [$X=Im(underline(Z))$],
 )
 
 L’admittance $underline(Y)$ est l'inverse de l'impédance. L'admittance se mesure en siemens.
 
 #flashcard(
-    recto: "Admittance",
-    verso: "$underline(Y)=1/underline(Z)$",
+    recto: [Admittance],
+    verso: [$underline(Y)=1/underline(Z)$],
 )
 
 #flashcard(
-    recto: "Unité de l'admittance",
-    verso: "Siemens ($unit(\"S\") = unit(\"1/O\")$)",
+    recto: [Unité de l'admittance],
+    verso: [Siemens ($unit("S") = unit("1/O")$)],
 )
 
 #application[
@@ -277,7 +277,7 @@ Un dipôle de résistance nulle est dit purement réactif.
 
 Afin de limiter les pertes par effet Joule lors du transport, on utilise une tension aussi élevée que possible.
 
-#question-de-colle("Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.")
+#question-de-colle([Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.])
 
 #exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #qty("400","kV").]
 
@@ -322,10 +322,10 @@ La vidéo du lien ci-dessous debunk un boitier censé améliorer le facteur de p
 ]
 
 #flashcard(
-    recto: "Puissance reçue par un dipôle en régime sinusoïdal",
-    verso: "$P=U_\"eff\" I_\"eff\" cos phi = Re(underline(Z))I_\"eff\"^2=Re(underline(Y))U_\"eff\"^2$",
+    recto: [Puissance reçue par un dipôle en régime sinusoïdal],
+    verso: [$P=U_"eff" I_"eff" cos phi = Re(underline(Z))I_"eff"^2=Re(underline(Y))U_"eff"^2$],
 )
 
 #question-de-colle(
-    "En régime sinusoïdal, exprimer la puissance reçue par un dipôle d'impédance $Z$ en fonction de du facteur de puissance, puis de l'impédance et enfin de l'admittance.",
+    [En régime sinusoïdal, exprimer la puissance reçue par un dipôle d'impédance $Z$ en fonction de du facteur de puissance, puis de l'impédance et enfin de l'admittance.],
 )

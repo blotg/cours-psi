@@ -168,8 +168,8 @@ La puissance arrivant au résistor peut être modulée grâce à la *modulation 
 ]
 
 #flashcard(
-    recto: "Rapport cyclique",
-    verso: "$ alpha=(Delta t_f) / T $",
+    recto: [Rapport cyclique],
+    verso: [$ alpha=(Delta t_f) / T $],
 )
 
 #question-de-début-de-cours(
@@ -307,8 +307,8 @@ Il est possible de connecter directement une source de tension et une source de 
 #schéma(titre: "Interconnexion des sources", hauteur: 3cm)
 
 #flashcard(
-    recto: "Règles d'interconnexion des sources",
-    verso: "Deux sources de tension ne peuvent pas être en parallèle. Deux sources de courant ne peuvent pas être en série.",
+    recto: [Règles d'interconnexion des sources],
+    verso: [Deux sources de tension ne peuvent pas être en parallèle. Deux sources de courant ne peuvent pas être en série.],
 )
 
 == Structure d'un convertisseur direct
@@ -331,7 +331,7 @@ Un convertisseur direct utilise au minimum deux interrupteurs. Le convertisseur 
 Dans la cellule élémentaire de commutation, les interrupteurs ont un fonctionnement *complémentaire* : lorsqu'un est ouvert, l'autre est fermé.
 
 #question-de-colle(
-    "Montrer qu'un convertisseur direct est constitué d'au moins 2 interrupteurs. Présenter la cellule élémentaire de commutation et montrer que les interrupteurs ont nécessairement un fonctionnement complémentaire.",
+    [Montrer qu'un convertisseur direct est constitué d'au moins 2 interrupteurs. Présenter la cellule élémentaire de commutation et montrer que les interrupteurs ont nécessairement un fonctionnement complémentaire.],
 )
 
 = Interrupteurs électroniques
@@ -368,8 +368,8 @@ La *diode* est un interrupteur *unidirectionnel* (elle ne laisse passer le coura
 #schéma(titre: "Symbole et caractéristique", hauteur: 4cm)
 
 #flashcard(
-    recto: "Caractéristique de la diode",
-    verso: "$(i=0, u <= 0)$ ou $(i>= 0, u=0)$ en convention directe",
+    recto: [Caractéristique de la diode],
+    verso: [$(i=0, u <= 0)$ ou $(i>= 0, u=0)$ en convention directe],
 )
 
 #question-de-début-de-cours(
@@ -391,8 +391,8 @@ Le *transistor* est un interrupteur *unidirectionnel* à commutation commandée 
 
 #schéma(titre: "Symbole et caractéristique du transistor", hauteur: 4cm)
 #flashcard(
-    recto: "Caractéristique du transistor",
-    verso: "$(i=0,u>=0)$ ou $(i>= 0, u=0)$",
+    recto: [Caractéristique du transistor],
+    verso: [$(i=0,u>=0)$ ou $(i>= 0, u=0)$],
 )
 
 #question-de-début-de-cours(
@@ -461,7 +461,7 @@ $K_1$ est un transistor. $K_2$ est une diode en convention inverse.
 #schéma(titre: "Hacheur", hauteur: 4cm)
 
 #question-de-colle(
-    "Donner la caractéristique d'une diode et d'un transistor en précisant la convention choisie. Pour un hacheur série, déterminer la nature des interrupteurs.",
+    [Donner la caractéristique d'une diode et d'un transistor en précisant la convention choisie. Pour un hacheur série, déterminer la nature des interrupteurs.],
 )
 
 === Valeurs moyennes
@@ -491,7 +491,7 @@ Le hacheur série s'appelle hacheur dévolteur car la valeur moyenne de la tensi
 Le hacheur série ne consomme pas de puissance en moyenne. Le rendement du hacheur série est $eta=1$.
 
 #question-de-colle(
-    "Pour un hacheur série entre deux sources idéales, déterminer les valeurs moyennes du courant d'entrée et de la tension de sortie. Montrer que le hacheur a un rendement de 1.",
+    [Pour un hacheur série entre deux sources idéales, déterminer les valeurs moyennes du courant d'entrée et de la tension de sortie. Montrer que le hacheur a un rendement de 1.],
 )
 
 == Application à la commande d'une machine à courant continu
@@ -543,7 +543,7 @@ Dans le lien suivant, on peut entendre le bruit causé par l'ondulation du coura
 ]
 
 #question-de-colle(
-    "Pour un hacheur série alimentant un moteur à courant continu dont on néglige la résistance interne, exprimer la vitesse angulaire en fonction du rapport cyclique et déterminer l'ondulation du courant de sortie.",
+    [Pour un hacheur série alimentant un moteur à courant continu dont on néglige la résistance interne, exprimer la vitesse angulaire en fonction du rapport cyclique et déterminer l'ondulation du courant de sortie.],
 )
 
 Afin de réduire l'ondulation du courant, on travaille avec des fréquences élevées. On peut aussi ajouter une bobine en série avec le moteur afin de lisser le courant.
@@ -585,7 +585,7 @@ Les deux états retenus sont ceux qui permettent de connecter la source à la ch
 
 Pour avoir une présentation alternative en sortie, on choisit un rapport cyclique $alpha=1/2$.
 
-#question-de-colle("Schématiser la structure d'un onduleur. Lister les états pour les interrupteurs et dire s'ils sont possibles et ceux qui sont retenus.")
+#question-de-colle([Schématiser la structure d'un onduleur. Lister les états pour les interrupteurs et dire s'ils sont possibles et ceux qui sont retenus.])
 
 == Utilisation avec une charge R-L
 L'onduleur peut être utilisé pour alimenter un dipôle inductif modélisé par une charge R-L.

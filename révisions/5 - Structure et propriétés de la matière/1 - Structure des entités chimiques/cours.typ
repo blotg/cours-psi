@@ -7,52 +7,29 @@
 = Classification périodique
 
 #flashcard(
-    recto: "Électrons de valence",
-    verso: "Ce sont les électrons de la couche de nombre quantique principal le plus élevé. Pour les blocs s et p, leur nombre se lit dans le numéro de colonne.",
+    recto: [Électrons de valence],
+    verso: [Ce sont les électrons de la couche de nombre quantique principal $n$ le plus élevé, ainsi que ceux sur les couches $(n - 1)$d et $(n - 2)$f si celles-ci ne sont pas remplies.],
 )
 #flashcard(
-    recto: "Organisation de la classification",
-    verso: "Une ligne est une période (même couche de valence), une colonne une famille (même configuration de valence, donc mêmes propriétés chimiques).",
-)
-#flashcard(
-    recto: "Électronégativité",
-    verso: "Aptitude d'un atome à attirer les électrons d'une liaison. Elle croît de la gauche vers la droite d'une période et du bas vers le haut d'une colonne.",
+    recto: [Définition de l'électronégativité],
+    verso: [Aptitude d'un atome à attirer les électrons d'une liaison. Elle croît de la gauche vers la droite d'une période et du bas vers le haut d'une colonne.],
 )
 
 #question-de-colle(
-    "Déterminer, pour les éléments des blocs s et p, le nombre d'électrons de valence d'un atome à partir de sa position dans le tableau périodique. Expliquer l'évolution de l'électronégativité dans la classification.",
+    [Le colleur donne le nom d'un élément d'une des trois premières lignes de la classification périodique des éléments et un entier $n in [19,54]$. Pour cet élément et l'élément de numéro atomique $n$, déterminer la configuration électronique, le nombre d'électrons de valence, la position dans la classification périodique et le nom du groupe si pertinent.],
 )
 
 = Liaisons et schémas de Lewis
 
 #flashcard(
-    recto: "Ordre de grandeur d'une liaison covalente",
-    verso: "Longueur de l'ordre de #qty(\"100\", \"pm\"), énergie de l'ordre de quelques centaines de #unit(\"kJ/mol\").",
-)
-#flashcard(
-    recto: "Règle de l'octet",
-    verso: "Les atomes tendent à s'entourer de huit électrons de valence ; les éléments de la troisième période et au-delà peuvent l'étendre.",
-)
-#flashcard(
-    recto: "Mésomérie",
-    verso: "Quand plusieurs schémas de Lewis sont envisageables, la molécule réelle est un hybride de résonance : les électrons délocalisés sont répartis sur l'ensemble du système conjugué.",
-)
-
-#question-de-colle(
-    "Établir un ou plusieurs schémas de Lewis pertinents pour une molécule ou un ion donné, et justifier le choix du plus représentatif à l'aide des charges formelles et de l'électronégativité.",
+    recto: [Ordre de grandeur d'une liaison covalente],
+    verso: [Longueur de l'ordre de #qty("100", "pm").],
 )
 
 = Géométrie des molécules
 
 #flashcard(
-    recto: "Méthode VSEPR",
-    verso: "Les doublets de la couche de valence de l'atome central se repoussent et se placent le plus loin possible les uns des autres : la géométrie se déduit du nombre de doublets liants et non liants.",
-)
-#flashcard(
-    recto: "Moment dipolaire",
-    verso: "$va(p) = q va(d)$, en #unit(\"C m\") ou en debye (#qty(\"1\", \"D\") $approx$ #qty(\"3.3e-30\", \"C m\")). Une molécule est polaire si la somme vectorielle des moments de liaison est non nulle.",
+    recto: [Méthode VSEPR],
+    verso: [_Valence Shell Electron Pair Repulsion_ : Les doublets (liant ou non) de la couche de valence de l'atome central se repoussent et se placent le plus loin possible les uns des autres.],
 )
 
-#question-de-colle(
-    "Prévoir et justifier la géométrie d'entités de type $\"AX\"_n$ avec $n <= 4$, et de type $\"AX\"_p \"E\"_q$ avec $p + q = 3$ ou $4$. En déduire dans chaque cas si la molécule est polaire.",
-)

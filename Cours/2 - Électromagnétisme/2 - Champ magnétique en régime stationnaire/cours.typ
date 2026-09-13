@@ -60,7 +60,7 @@ Le comportement du champ magnétique est régi par les équations de Maxwell-Tho
     $ div va(B) = 0 $
 ]
 
-#flashcard(recto: "Équation de Maxwell-Thomson", verso: "$ div va(B) = 0 $")
+#flashcard(recto: [Équation de Maxwell-Thomson], verso: [$ div va(B) = 0 $])
 
 #encadré(
     titre: "Équation de Maxwell-Ampère",
@@ -70,7 +70,7 @@ Le comportement du champ magnétique est régi par les équations de Maxwell-Tho
     $ rot va(B) = mu_0 va(j) + mu_0 epsilon_0 pdv(va(E), t) $
 ]
 
-#flashcard(recto: "Équation de Maxwell-Ampère", verso: "$ rot va(B) = mu_0 va(j) + mu_0 epsilon_0 pdv(va(E), t) $")
+#flashcard(recto: [Équation de Maxwell-Ampère], verso: [$ rot va(B) = mu_0 va(j) + mu_0 epsilon_0 pdv(va(E), t) $])
 
 #question-de-début-de-cours(
     "Le champ magnétique est créé par",
@@ -95,8 +95,8 @@ Les équations de Maxwell sont linéaires : le champ magnétique résultant de p
 ]
 
 #flashcard(
-    recto: "À quelle condition le champ magnétique est-il à flux conservatif ?",
-    verso: "Aucune, c'est toujours le cas.",
+    recto: [À quelle condition le champ magnétique est-il à flux conservatif ?],
+    verso: [Aucune, c'est toujours le cas.],
 )
 
 #question-de-début-de-cours(
@@ -111,7 +111,7 @@ Les équations de Maxwell sont linéaires : le champ magnétique résultant de p
 
 Du fait de cette propriété, l'équation de Maxwell-Thomson est parfois appelée équation de Maxwell-flux. L'évasement d'un tube de champ s'accompagne alors de la diminution de la norme du champ magnétique.
 
-#question-de-colle("Énoncer l'équation de Maxwell-Thomson, démontrer que le champ magnétique est à flux conservatif et faire le lien avec la topographie des cartes de champ magnétique.")
+#question-de-colle([Énoncer l'équation de Maxwell-Thomson, démontrer que le champ magnétique est à flux conservatif et faire le lien avec la topographie des cartes de champ magnétique.])
 
 == Forces causées par un champ magnétique
 Le champ magnétique exerce une force sur les particules chargées en mouvement. Son expression dépend de la description du déplacement des charges.
@@ -127,7 +127,7 @@ Une particule chargée est animée d'une vitesse.
     $ va(F) = q va(v) and va(B) $
 ]
 
-#flashcard(recto: "Force de Lorentz", verso: "$ va(F) = q va(E) + q va(v) and va(B) $")
+#flashcard(recto: [Force de Lorentz], verso: [$ va(F) = q va(E) + q va(v) and va(B) $])
 
 #application[
     Une particule de charge $q$ et de masse $m$ plongée dans un champ magnétique uniforme et stationnaire $va(B) = B va(e_z)$ a une trajectoire circulaire orthogonale à $va(B)$. Exprimer sa vitesse angulaire.
@@ -145,7 +145,7 @@ Un fil infiniment fin est parcouru par un courant électrique.
     $ va(dd(F)) = I va(dd(l)) and va(B) $
 ]
 
-#flashcard(recto: "Force de Laplace sur un élément de fil", verso: "$ va(dd(F)) = I va(dd(l)) and va(B) $")
+#flashcard(recto: [Force de Laplace sur un élément de fil], verso: [$ va(dd(F)) = I va(dd(l)) and va(B) $])
 
 #application[
     Dans les rails de Laplace, une barre traversée par un courant $qty("5", "A")$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $qty("10", "cm")$, en présence d'un champ magnétique vertical $qty("3e-2", "T")$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
@@ -163,9 +163,9 @@ Le déplacement des charges est décrit par le vecteur densité volumique de cou
     $ va(dd(F)) = (va(j) dd(V)) and va(B) $
 ]
 
-#flashcard(recto: "Force de Laplace volumique", verso: "$ va(dd(F)) = (va(j) dd(V)) and va(B) $")
+#flashcard(recto: [Force de Laplace volumique], verso: [$ va(dd(F)) = (va(j) dd(V)) and va(B) $])
 
-#question-de-colle("Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.")
+#question-de-colle([Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.])
 
 #application[
     Un fil épais de section $qty("6", "mm^2")$ et de longueur $qty("10", "m")$ est parcouru par un vecteur densité de courant uniforme $va(j) = j va(e_x)$, le courant total valant $qty("10", "A")$. Calculer la norme de la force exercée par le champ magnétique terrestre ($qty("5e-5", "T")$ selon $va(e_z)$), supposé orthogonal au courant.
@@ -176,8 +176,8 @@ Le déplacement des charges est décrit par le vecteur densité volumique de cou
 Les invariances de la distribution de courant contraignent la forme du champ magnétique : d'après le principe de Curie, les invariances de la distribution de courant sont aussi des invariances du champ magnétique.
 
 #flashcard(
-    recto: "Lien entre les invariances de la distribution de courant et celles du champ magnétique",
-    verso: "Les invariances de la distribution de courant sont aussi des invariances du champ magnétique (principe de Curie).",
+    recto: [Lien entre les invariances de la distribution de courant et celles du champ magnétique],
+    verso: [Les invariances de la distribution de courant sont aussi des invariances du champ magnétique (principe de Curie).],
 )
 
 #question-de-début-de-cours(
@@ -202,8 +202,8 @@ Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rappo
 ]
 
 #flashcard(
-    recto: "Lien entre le champ magnétique et les plans de symétrie de la distribution de courant",
-    verso: "Le champ magnétique leur est orthogonal.",
+    recto: [Lien entre le champ magnétique et les plans de symétrie de la distribution de courant],
+    verso: [Le champ magnétique leur est orthogonal.],
 )
 
 #application[
@@ -219,8 +219,8 @@ Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rappo
 ]
 
 #flashcard(
-    recto: "Lien entre le champ magnétique et les plans d'antisymétrie de la distribution de courant",
-    verso: "Le champ magnétique y est inclus.",
+    recto: [Lien entre le champ magnétique et les plans d'antisymétrie de la distribution de courant],
+    verso: [Le champ magnétique y est inclus.],
 )
 
 #question-de-début-de-cours(
@@ -233,7 +233,7 @@ Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rappo
     ),
 )
 
-#question-de-colle("Énoncer le principe de Curie. Établir le lien entre les plans de symétrie et d'antisymétrie de la distribution de courant et la direction du champ magnétique.")
+#question-de-colle([Énoncer le principe de Curie. Établir le lien entre les plans de symétrie et d'antisymétrie de la distribution de courant et la direction du champ magnétique.])
 
 == Théorème d'Ampère
 Le théorème d'Ampère permet de déterminer le champ magnétique à partir de la distribution de courant, lorsque celle-ci est suffisamment symétrique.
@@ -248,7 +248,7 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
     $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_"enlacé" $
 ]
 
-#flashcard(recto: "Théorème d'Ampère", verso: "$ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_\"enlacé\" $")
+#flashcard(recto: [Théorème d'Ampère], verso: [$ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_"enlacé" $])
 
 #question-de-début-de-cours(
     "Le champ magnétique créé par un fil infini est selon",
@@ -260,21 +260,21 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
     ),
 )
 
-#question-de-colle("Citer l'équation de Maxwell-Ampère puis établir le théorème d'Ampère.")
+#question-de-colle([Citer l'équation de Maxwell-Ampère puis établir le théorème d'Ampère.])
 
 Le champ magnétique s'obtient alors par la méthode en quatre étapes : analyse des invariances, analyse des symétries, choix d'un contour d'Ampère adapté, application du théorème d'Ampère.
 
 #application[
     Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$, rectiligne et infini, parcouru par un vecteur densité de courant $va(j)$ uniforme.
 ]
-#question-de-colle("Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$ et infini parcouru par un vecteur densité de courant $va(j)$ uniforme.")
+#question-de-colle([Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$ et infini parcouru par un vecteur densité de courant $va(j)$ uniforme.])
 
 #application[
     Déterminer le champ magnétique créé dans tout l'espace par un solénoïde infini de rayon $R$ comportant $n$ spires par unité de longueur parcourues par un courant $I$. Le solénoïde est assimilé à une succession de spires circulaires jointives ; on admet que le champ magnétique est nul à l'extérieur.
 ]
-#question-de-colle("Déterminer le champ magnétique créé dans tout l'espace par un solénoïde infini de rayon $R$ comportant $n$ spires par unité de longueur parcourues par un courant $I$. Le solénoïde est assimilé à une succession de spires circulaires jointives. On suppose le champ magnétique nul à l'extérieur du solénoïde.")
+#question-de-colle([Déterminer le champ magnétique créé dans tout l'espace par un solénoïde infini de rayon $R$ comportant $n$ spires par unité de longueur parcourues par un courant $I$. Le solénoïde est assimilé à une succession de spires circulaires jointives. On suppose le champ magnétique nul à l'extérieur du solénoïde.])
 
 #application[
     Déterminer le champ magnétique créé par une bobine torique comportant $N gt.double 1$ spires parcourues par un courant $I$.
 ]
-#question-de-colle("Déterminer le champ magnétique créé par une bobine torique comportant $N gt.double 1$ spires parcourues par un courant $I$.")
+#question-de-colle([Déterminer le champ magnétique créé par une bobine torique comportant $N gt.double 1$ spires parcourues par un courant $I$.])

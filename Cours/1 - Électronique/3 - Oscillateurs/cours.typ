@@ -67,37 +67,37 @@ Pour le filtre de Wien, le filtre passe-bande est un filtre de Wien et l'amplifi
 ]
 
 #flashcard(
-    recto: "Montage de l'oscillateur de Wien.",
-    verso: "
-    #import \"@preview/zap:0.6.0\"
-    #import \"@preview/cetz:0.5.2\": draw
+    recto: [Montage de l'oscillateur de Wien.],
+    verso: [
+    #import "@preview/zap:0.6.0"
+    #import "@preview/cetz:0.5.2": draw
     #figure(
         circuit({
             import zap: *
             import draw: *
-            opamp(\"ALI\", (0,0), invert: true)
-            resistor(\"R2\", (-1.5,-1.5), (1.5,-1.5), label: (content:$R_2$, anchor: \"south\"))
-            resistor(\"R1\", (-1.5,-1.5), (-1.5,-4), label: $R_1$)
-            swire(\"R1.in\", \"ALI.minus\", axis: \"y\")
-            swire(\"ALI.out\", \"R2.out\")
-            frame(\"G1\",\"R1.out\")
-            rect((-2.5,-5), (1.8,1.2), stroke: (paint: red, dash: \"dashed\"), name: \"ANI\")
-            content(\"ANI.south\", [Amplificateur non-inverseur], anchor: \"north\", padding: .4em)
+            opamp("ALI", (0,0), invert: true)
+            resistor("R2", (-1.5,-1.5), (1.5,-1.5), label: (content:$R_2$, anchor: "south"))
+            resistor("R1", (-1.5,-1.5), (-1.5,-4), label: $R_1$)
+            swire("R1.in", "ALI.minus", axis: "y")
+            swire("ALI.out", "R2.out")
+            frame("G1","R1.out")
+            rect((-2.5,-5), (1.8,1.2), stroke: (paint: red, dash: "dashed"), name: "ANI")
+            content("ANI.south", [Amplificateur non-inverseur], anchor: "north", padding: .4em)
 
-            resistor(\"Rs\", (3,0), (5,0), label: $R$)
-            capacitor(\"Cs\", (5,0), (7,0), label: $C$)
-            resistor(\"Rp\", (7,-0), (7,-3), label: $R$)
-            capacitor(\"Cp\", (8.5,0), (8.5,-3), label: $C$)
-            frame(\"GR\", \"Rp.out\")
-            frame(\"GC\", \"Cp.out\")
-            wire(\"Cs.out\", \"Cp.in\")
-            rect((3,-5), (10,1.2), name: \"FW\", stroke: (paint: blue, dash: \"dashed\"))
-            content(\"FW.south\", [Filtre de Wien], anchor: \"north\", padding: .4em)
+            resistor("Rs", (3,0), (5,0), label: $R$)
+            capacitor("Cs", (5,0), (7,0), label: $C$)
+            resistor("Rp", (7,-0), (7,-3), label: $R$)
+            capacitor("Cp", (8.5,0), (8.5,-3), label: $C$)
+            frame("GR", "Rp.out")
+            frame("GC", "Cp.out")
+            wire("Cs.out", "Cp.in")
+            rect((3,-5), (10,1.2), name: "FW", stroke: (paint: blue, dash: "dashed"))
+            content("FW.south", [Filtre de Wien], anchor: "north", padding: .4em)
 
-            wire(\"ALI.out\", \"Rs.in\")
-            swire(\"Cp.in\", (rel: (2,0)), (rel:(-2,1.3), to: \"ALI.plus\"), \"ALI.plus\", axis: \"y\")
+            wire("ALI.out", "Rs.in")
+            swire("Cp.in", (rel: (2,0)), (rel:(-2,1.3), to: "ALI.plus"), "ALI.plus", axis: "y")
         })
-    )",
+    )],
 )
 
 Le fonctionnement des parties de l'oscillateur de Wien peut être représenté par un schéma-bloc.
@@ -115,7 +115,7 @@ Le fonctionnement des parties de l'oscillateur de Wien peut être représenté p
     #carreaux(5cm)
 ]
 
-#question-de-colle("Schématiser le montage et établir le schéma-bloc de l'oscillateur de Wien.")
+#question-de-colle([Schématiser le montage et établir le schéma-bloc de l'oscillateur de Wien.])
 
 #question-de-début-de-cours(
     "Les oscillateurs quasi-sinusoïdaux sont constitués",
@@ -165,7 +165,7 @@ Comme le système est bouclé, on doit retrouver le signal de départ après un 
 De manière générale, un oscillateur quasi-sinusoïdal composé d'un filtre passe-bande et d'un amplificateur oscille à la pulsation caractéristique du filtre passe-bande si les conditions d'oscillation sont vérifiées.
 
 #question-de-colle(
-    "Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition d’existence d’oscillations sinusoïdales ainsi que leur fréquence.",
+    [Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition d’existence d’oscillations sinusoïdales ainsi que leur fréquence.],
 )
 
 == Démarrage des oscillations
@@ -261,7 +261,7 @@ La tension $v_2$ est "plus sinusoïdale" que $v_1$ car c'est la sortie du filtre
 )
 
 #question-de-colle(
-    "Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition de démarrage des oscillations et établir l’amplitude des oscillations sinusoïdales pour les deux tensions.",
+    [Le schéma-bloc de l’oscillateur de Wien étant fourni, établir la condition de démarrage des oscillations et établir l’amplitude des oscillations sinusoïdales pour les deux tensions.],
 )
 
 = Oscillateur à relaxation
@@ -280,38 +280,38 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
 ]
 
 #flashcard(
-    recto: "Montage de l'oscillateur à relaxation.",
-    verso: "
-    #import \"@preview/zap:0.6.0\"
-    #import \"@preview/cetz:0.5.2\": draw
+    recto: [Montage de l'oscillateur à relaxation.],
+    verso: [
+    #import "@preview/zap:0.6.0"
+    #import "@preview/cetz:0.5.2": draw
     #figure(
         circuit({
             import zap: *
             import draw: *
-            opamp(\"ALI\", (0,0), invert: true)
-            resistor(\"R2\", (-2,1.5), (2,1.5), label: $R_2$)
-            resistor(\"R1\", (rel:(-1,0), to: \"ALI.plus\"), (rel: (-2.5,0)), label: $R_1$)
-            frame(\"G1\", (rel: (-.5,-.5), to:\"ALI.minus\"))
-            swire(\"G1\", \"ALI.minus\", axis: \"y\")
-            swire(\"ALI.out\", \"R2.out\")
-            swire(\"R2.in\", \"ALI.plus\", axis: \"y\")
-            rect((-4.2,-1.8), (2.5,3), stroke: (paint: red, dash: \"dashed\"), name: \"CH\")
-            content(\"CH.south\", [Comparateur à hystérésis positif], anchor: \"north\", padding: .4em)
+            opamp("ALI", (0,0), invert: true)
+            resistor("R2", (-2,1.5), (2,1.5), label: $R_2$)
+            resistor("R1", (rel:(-1,0), to: "ALI.plus"), (rel: (-2.5,0)), label: $R_1$)
+            frame("G1", (rel: (-.5,-.5), to:"ALI.minus"))
+            swire("G1", "ALI.minus", axis: "y")
+            swire("ALI.out", "R2.out")
+            swire("R2.in", "ALI.plus", axis: "y")
+            rect((-4.2,-1.8), (2.5,3), stroke: (paint: red, dash: "dashed"), name: "CH")
+            content("CH.south", [Comparateur à hystérésis positif], anchor: "north", padding: .4em)
 
-            opamp(\"ALI2\", (8,0))
-            resistor(\"R\", (rel: (-1,0), to: \"ALI2.minus\"), (rel:(-3,0)), label: $R$)
-            capacitor(\"C\", (6,2), (10,2), label: $C$)
-            frame(\"G2\", (rel: (-.5,-.5), to:\"ALI2.plus\"))
-            swire(\"G2\", \"ALI2.plus\", axis: \"y\")
-            swire(\"ALI2.out\", \"C.out\")
-            swire(\"C.in\", \"ALI2.minus\", axis: \"y\")
-            rect((3.5,-1.8), (10.5,3), stroke: (paint: blue, dash: \"dashed\"), name: \"INT\")
-            content(\"INT.south\", [Intégrateur], anchor: \"north\", padding: .4em)
+            opamp("ALI2", (8,0))
+            resistor("R", (rel: (-1,0), to: "ALI2.minus"), (rel:(-3,0)), label: $R$)
+            capacitor("C", (6,2), (10,2), label: $C$)
+            frame("G2", (rel: (-.5,-.5), to:"ALI2.plus"))
+            swire("G2", "ALI2.plus", axis: "y")
+            swire("ALI2.out", "C.out")
+            swire("C.in", "ALI2.minus", axis: "y")
+            rect((3.5,-1.8), (10.5,3), stroke: (paint: blue, dash: "dashed"), name: "INT")
+            content("INT.south", [Intégrateur], anchor: "north", padding: .4em)
 
-            swire(\"ALI.out\", \"R.out\")
-            swire(\"ALI2.out\", (11,3.5), (rel: (-0.3,0), to:\"R1.out\"),\"R1.out\")
+            swire("ALI.out", "R.out")
+            swire("ALI2.out", (11,3.5), (rel: (-0.3,0), to:"R1.out"),"R1.out")
         })
-    )",
+    )],
 )
 
 #encadré(
@@ -340,7 +340,7 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
 ]
 
 #question-de-colle(
-    "Schématiser le montage de l’oscillateur à relaxation et établir l'équation différentielle du montage intégrateur et la caractéristique du montage comparateur à hystérésis positif.",
+    [Schématiser le montage de l’oscillateur à relaxation et établir l'équation différentielle du montage intégrateur et la caractéristique du montage comparateur à hystérésis positif.],
 )
 
 == Signaux de sortie
@@ -416,7 +416,7 @@ Cette expression est valable tant que la période est très grande devant la dur
 ]
 
 #question-de-colle(
-    "L'équation différentielle de l'intégrateur et la caractéristique du comparateur à hystérésis étant données, établir la forme des signaux dans un oscillateur à relaxation et leur période.",
+    [L'équation différentielle de l'intégrateur et la caractéristique du comparateur à hystérésis étant données, établir la forme des signaux dans un oscillateur à relaxation et leur période.],
 )
 
 == Choix de $R_1$ et $R_2$

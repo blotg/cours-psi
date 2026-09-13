@@ -74,12 +74,12 @@ La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible po
 ]
 
 #flashcard(
-    recto: "Modèle de l'ALI",
-    verso: "Résistance d'entrée infinie, résistance de sortie nulle, fonction de transfert du premier ordre en régime linéaire $(S(p))/(epsilon(p)) = A_0/(1+tau p)$, existence d'une saturation de la tension de sortie.",
+    recto: [Modèle de l'ALI],
+    verso: [Résistance d'entrée infinie, résistance de sortie nulle, fonction de transfert du premier ordre en régime linéaire $(S(p))/(epsilon(p)) = A_0/(1+tau p)$, existence d'une saturation de la tension de sortie.],
 )
 #flashcard(
-    recto: "Ordre de grandeur du gain statique et du temps de réponse d'un ALI",
-    verso: "$A_0 tilde num(\"e5\")$, $tau tilde qty(\"e-2\", \"s\")$.",
+    recto: [Ordre de grandeur du gain statique et du temps de réponse d'un ALI],
+    verso: [$A_0 tilde num("e5")$, $tau tilde qty("e-2", "s")$.],
 )
 
 #question-de-début-de-cours(
@@ -125,12 +125,12 @@ Le modèle présenté dans la partie précédente a des limites.
 ]
 
 #flashcard(
-    recto: "Limites du modèle de l'ALI",
-    verso: "Vitesse de balayage, saturation du courant de sortie.",
+    recto: [Limites du modèle de l'ALI],
+    verso: [Vitesse de balayage, saturation du courant de sortie.],
 )
 
 #question-de-colle(
-    "Décrire le modèle de l'ALI en précisant les ordres de grandeurs du gain statique et du temps de réponse, ainsi que ses limitations.",
+    [Décrire le modèle de l'ALI en précisant les ordres de grandeurs du gain statique et du temps de réponse, ainsi que ses limitations.],
 )
 
 #question-de-début-de-cours(
@@ -175,12 +175,12 @@ Dans le modèle de l'ALI idéal, deux régimes existent :
 ]
 
 #flashcard(
-    recto: "Fonctionnement de l'ALI idéal en régime saturé",
-    verso: "si $epsilon > 0$ alors $s(t)=V_\"sat\"$\\ si $epsilon < 0$ alors $s(t)=-V_\"sat\"$",
+    recto: [Fonctionnement de l'ALI idéal en régime saturé],
+    verso: [si $epsilon > 0$ alors $s(t)=V_"sat"$\ si $epsilon < 0$ alors $s(t)=-V_"sat"$],
 )
 #flashcard(
-    recto: "Fonctionnement de l'ALI idéal en régime linéaire",
-    verso: "$epsilon = 0$",
+    recto: [Fonctionnement de l'ALI idéal en régime linéaire],
+    verso: [$epsilon = 0$],
 )
 
 #question-de-début-de-cours(
@@ -234,8 +234,8 @@ La rétroaction est la prise en compte de la sortie d'un système à son entrée
 ]
 
 #flashcard(
-    recto: "Lien entre la nature de la rétroaction et la stabilité",
-    verso: "Une rétroaction négative suggère un fonctionnement stable. Une rétroaction positive ou une absence de rétroaction suggère un fonctionnement instable.",
+    recto: [Lien entre la nature de la rétroaction et la stabilité],
+    verso: [Une rétroaction négative suggère un fonctionnement stable. Une rétroaction positive ou une absence de rétroaction suggère un fonctionnement instable.],
 )
 
 #question-de-début-de-cours(
@@ -303,7 +303,7 @@ Le montage amplificateur non-inverseur est stable.
 Si l'ALI est hors saturation, comme son gain est très grand, l'entrée différentielle est quasi-nulle.
 
 #question-de-colle(
-    "Le montage étant donné, établir le schéma-bloc régissant le montage amplificateur non-inverseur et en déduire sa fonction de transfert et sa stabilité.",
+    [Le montage étant donné, établir le schéma-bloc régissant le montage amplificateur non-inverseur et en déduire sa fonction de transfert et sa stabilité.],
 )
 
 #encadré(
@@ -396,7 +396,7 @@ La présence d'une rétroaction négative stabilisant le montage permet de suppo
 Le comparateur à hystérésis est un montage instable. Sa sortie diverge, ou plutôt atteint rapidement la saturation. Ainsi $s(t)=plus.minus V_"sat"$.
 
 #question-de-colle(
-    "Le montage étant donné, établir le schéma-bloc régissant le montage comparateur à hystérésis négatif et en déduire sa fonction de transfert et sa stabilité.",
+    [Le montage étant donné, établir le schéma-bloc régissant le montage comparateur à hystérésis négatif et en déduire sa fonction de transfert et sa stabilité.],
 )
 
 #encadré(
@@ -447,7 +447,7 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
 ]
 
 #question-de-colle(
-    "Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.",
+    [Le montage étant donné, établir le cycle d'hystérésis du montage comparateur à hystérésis négatif. Expliciter l'effet mémoire du montage.],
 )
 
 #pagebreak()

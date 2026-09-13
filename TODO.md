@@ -10,7 +10,8 @@
 - Pronote
 - Format des mails
 
-# Cours
-- Génération de QCM
 - questions de colle manquantes ( Électronique 4 )
-- dans les révisions, unit
+- schémas dans les révisions
+
+
+- README du dépôt
