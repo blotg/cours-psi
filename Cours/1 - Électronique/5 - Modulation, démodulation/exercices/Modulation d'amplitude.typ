@@ -16,7 +16,7 @@ On cherche à transmettre un signal audio par ondes électromagnétiques.
 #question()[
     À quelle plage de fréquences correspond le domaine audible ?
 ][
-    Le domaine audible correspond à $f in [qty("20", "Hz"); qty("20", "kHz")]$.
+    Le domaine audible correspond à $f in [#quan[20 Hz] ; #quan[20 kHz]]$.
 ]
 
 Pour émettre et recevoir une onde électromagnétique, il est nécessaire d'avoir une antenne dont la taille est une demi longueur d'onde.
@@ -31,12 +31,12 @@ Pour émettre et recevoir une onde électromagnétique, il est nécessaire d'avo
 ][
     Ces fréquences correspondent à des longueurs d'onde
     $
-        lambda = c/f = (3 times 10^8)/20 approx qty("15000", "km") "(pour " qty("20", "Hz") ")"
+        lambda = c/f = (3 times 10^8)/20 approx #quan[15000 km] "(pour " #quan[20 Hz] ")"
     $
     $
-        lambda = (3 times 10^8)/(20 times 10^3) approx qty("15", "km") "(pour " qty("20", "kHz") ")"
+        lambda = (3 times 10^8)/(20 times 10^3) approx #quan[15 km] "(pour " #quan[20 kHz] ")"
     $
-    Il faudrait donc une antenne de #qty("15000", "km") !
+    Il faudrait donc une antenne de #quan[15000 km] !
 ]
 
 On module le signal $v_e (t)$ (appelé signal modulant) en amplitude avec la porteuse $v_p (t) = A_p cos(2 pi f_p t)$ avant de l'émettre. La modulation peut se schématiser ainsi :
@@ -206,9 +206,9 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
         "Quelles sont les fréquences comprises dans un signal audio ?",
     ),
 )[
-    On suppose maintenant que $v_e (t)$ est un signal audio. Tracer un spectre possible de $v_e$. Tracer alors le spectre de $v_s$ en prenant $f_p = qty("520", "kHz")$.
+    On suppose maintenant que $v_e (t)$ est un signal audio. Tracer un spectre possible de $v_e$. Tracer alors le spectre de $v_s$ en prenant $f_p = #quan[520 kHz]$.
 ][
-    Le spectre de $v_e$ occupe la bande audio, entre #qty("20", "Hz") et #qty("20", "kHz") :
+    Le spectre de $v_e$ occupe la bande audio, entre #quan[20 Hz] et #quan[20 kHz] :
 
     #figure(
         canvas({
@@ -240,7 +240,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
         caption: [Spectre (schématique) du signal audio $v_e$.],
     )
 
-    Le spectre de $v_s$ comporte alors, en plus de la raie à $f_p=qty("520","kHz")$, deux bandes latérales, images du spectre de $v_e$, entre #qty("500", "kHz") et #qty("519980", "Hz") d'une part, et entre #qty("520020", "Hz") et #qty("540", "kHz") d'autre part :
+    Le spectre de $v_s$ comporte alors, en plus de la raie à $f_p=#quan[520 kHz]$, deux bandes latérales, images du spectre de $v_e$, entre #quan[500 kHz] et #quan[519980 Hz] d'une part, et entre #quan[520020 Hz] et #quan[540 kHz] d'autre part :
 
     #figure(
         canvas({
@@ -280,7 +280,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                 },
             )
         }),
-        caption: [Spectre de $v_s$ : la porteuse à #qty("520", "kHz") entourée des deux bandes latérales.],
+        caption: [Spectre de $v_s$ : la porteuse à #quan[520 kHz] entourée des deux bandes latérales.],
     )
 ]
 
@@ -289,9 +289,9 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
         "À partir de la question précédente, quel « espace » prend un canal ?",
     ),
 )[
-    Les ondes moyennes s'étendent de #qty("520", "kHz") à #qty("1620", "kHz"). Combien de canaux audio peuvent être émis sur cette bande ?
+    Les ondes moyennes s'étendent de #quan[520 kHz] à #quan[1620 kHz]. Combien de canaux audio peuvent être émis sur cette bande ?
 ][
-    Le spectre de $v_s$ occupe #qty("40", "kHz") (deux fois la largeur #qty("20", "kHz") de la bande audio). Dans la bande $[520;1620]$ kHz, on peut donc faire tenir
+    Le spectre de $v_s$ occupe #quan[40 kHz] (deux fois la largeur #quan[20 kHz] de la bande audio). Dans la bande $[520;1620]$ kHz, on peut donc faire tenir
     $
         (1620-520)/40 approx 27 "canaux"
     $

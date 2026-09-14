@@ -20,7 +20,7 @@ La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, do
             x-max: 1,
             y-min: -2,
             y-max: 2,
-            // x-ticks: ((0.1, $qty("100","ms")$), (1, $qty("1","s")$)),
+            // x-ticks: ((0.1, $#quan[100 ms]$), (1, $#quan[1 s]$)),
             // y-ticks: ((0.3, $0.3$), (1.7, $1.7$)),
             x-label: [$t$ (ms)],
             y-label: [$s_"AM" (t)$ (V)],
@@ -39,13 +39,13 @@ La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, do
 #question()[
     Quelle est la fréquence de la porteuse ?
 ][
-    On compte $12$ oscillations rapides (la porteuse) sur une durée de #qty("0.3", "ms") : la fréquence de la porteuse vaut donc $f_p = 1/T_p = num("12")/num("0.3e-3") = #qty(12 / 0.3e-3, "Hz", chiffres: 2)$.
+    On compte $12$ oscillations rapides (la porteuse) sur une durée de #quan[0.3 ms] : la fréquence de la porteuse vaut donc $f_p = 1/T_p = num("12")/num("0.3e-3") = #qty(12 / 0.3e-3, "Hz", chiffres: 2)$.
 ]
 
 #question()[
     Quelle est la fréquence du signal modulant ?
 ][
-    On compte $2$ oscillations lentes (l'enveloppe, donc la modulante) sur une durée de #qty("1", "ms") : la fréquence du signal modulant vaut donc $f_s = qty("2.0e3", "Hz")$.
+    On compte $2$ oscillations lentes (l'enveloppe, donc la modulante) sur une durée de #quan[1 ms] : la fréquence du signal modulant vaut donc $f_s = #quan[2.0e3 Hz]$.
 ]
 
 #question(
@@ -58,7 +58,7 @@ La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, do
 ][
     Le signal modulé en amplitude s'écrit $s_"AM" (t)=(1+k A_s cos(2 pi f_s t)) A_p cos(2 pi f_p t)$.
 
-    L'enveloppe $(1+k A_s cos(2 pi f_s t)) A_p$ a pour maximum $E_"max"=(1+k A_s) A_p = qty("1.7", "V")$ et pour minimum $E_"min"=(1- k A_s) A_p = qty("0.3", "V")$. Pour éliminer $A_p$ on effectue le rapport de ces deux valeurs :
+    L'enveloppe $(1+k A_s cos(2 pi f_s t)) A_p$ a pour maximum $E_"max"=(1+k A_s) A_p = #quan[1.7 V]$ et pour minimum $E_"min"=(1- k A_s) A_p = #quan[0.3 V]$. Pour éliminer $A_p$ on effectue le rapport de ces deux valeurs :
     $
         (1+k A_s) / (1- k A_s) = E_"max" / E_"min"
     $

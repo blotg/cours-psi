@@ -5,9 +5,9 @@
     difficulté: 2,
 )
 
-Une installation industrielle comporte en parallèle deux machines assimilées à des impédances inductives qui consomment respectivement les puissances $P_1=qty("2000", "W")$ avec un facteur de puissance $cos phi_1=0,6$ et $P_2=qty("3000", "W")$ avec un facteur de puissance $cos phi_2=0,7$, en parallèle desquelles sont branchées des lampes consommant au total une puissance $P_L=qty("2000", "W")$. Les lampes sont assimilées à des résistances.
+Une installation industrielle comporte en parallèle deux machines assimilées à des impédances inductives qui consomment respectivement les puissances $P_1=#quan[2000 W]$ avec un facteur de puissance $cos phi_1=0,6$ et $P_2=#quan[3000 W]$ avec un facteur de puissance $cos phi_2=0,7$, en parallèle desquelles sont branchées des lampes consommant au total une puissance $P_L=#quan[2000 W]$. Les lampes sont assimilées à des résistances.
 
-La tension aux bornes de l'installation est sinusoïdale de fréquence $f=qty("50", "Hz")$ et sa valeur efficace est $U_"eff"=qty("230", "V")$.
+La tension aux bornes de l'installation est sinusoïdale de fréquence $f=#quan[50 Hz]$ et sa valeur efficace est $U_"eff"=#quan[230 V]$.
 
 #question(
     coups-de-pouce: (
@@ -19,7 +19,7 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=qty("5
 ][
     On calcule les admittances des deux machines et des lampes : $Y_1$, $Y_2$ et $Y_L$.
 
-    Les lampes sont purement résistives donc $ Y_L=P_L/U_"eff"^2 = qty("38", "mS") $
+    Les lampes sont purement résistives donc $ Y_L=P_L/U_"eff"^2 = #quan[38 mS] $
 
     Pour la machine 1, on a $P_1=U_"eff"^2 Re(underline(Y_1))$ donc $Re(underline(Y_1))=P_1/(U_"eff"^2)$.
 
@@ -33,7 +33,7 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=qty("5
     De même, on trouve $underline(Y_2) = 57 - 58j unit("mS")$.
 
     On peut en déduire l'admittance totale : $underline(Y_"tot") = underline(Y_1) + underline(Y_2) + underline(Y_L) = #(38 + 57 + 38) - #(50 + 58) j unit("mS")$, puis le déphasage totale :
-    $ phi_"tot" = arctan(Im(underline(Y_"tot"))/Re(underline(Y_"tot"))) = arctan(-#(50 + 58)/#(38 + 57 + 38)) = qty("39","deg") $
+    $ phi_"tot" = arctan(Im(underline(Y_"tot"))/Re(underline(Y_"tot"))) = arctan(-#(50 + 58)/#(38 + 57 + 38)) = #quan[39 °] $
     et le facteur de puissance $cos(phi_"tot") = num("0.77")$.
 
     Ce facteur de puissance est assez faible, ce qui signifie que l'installation consomme beaucoup de puissance réactive, engendrant des pertes en lignes importantes.
@@ -60,5 +60,5 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=qty("5
 
     On veut $cos(phi_"global") = 1$, c'est-à-dire $phi_"global" = 0$ autrement dit $Im(underline(Y_"global")) = 0$.
 
-    On a donc $ 0 = Im(underline(Y_"tot")) + omega C $ d'où $ C = -Im(underline(Y_"tot"))/omega = (#(50 + 58) unit("mS"))/(2 pi #(50) ) = qty("258", "uF") $
+    On a donc $ 0 = Im(underline(Y_"tot")) + omega C $ d'où $ C = -Im(underline(Y_"tot"))/omega = (#(50 + 58) unit("mS"))/(2 pi #(50) ) = #quan[258 uF] $
 ]

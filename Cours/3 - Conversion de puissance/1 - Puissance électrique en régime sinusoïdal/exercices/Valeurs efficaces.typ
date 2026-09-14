@@ -19,7 +19,7 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
 )[
     $s_1(t) = 10 cos(20 pi t + pi/2)$. Compare your result with the known formula for a sinusoidal signal.
 ][
-    The period is $T = (2 pi) / omega = (2 pi) / (20 pi) = qty("0.1", "s")$.
+    The period is $T = (2 pi) / omega = (2 pi) / (20 pi) = #quan[0.1 s]$.
     ```python
     from scipy.integrate import quad
     import numpy as np
@@ -37,7 +37,7 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
 )[
     $s_2(t) = cos^2( pi t)$. Compare your result with the known formula for a sinusoidal signal.
 ][
-    The period is $T = qty("2", "s")$.
+    The period is $T = #quan[2 s]$.
     ```python
     from scipy.integrate import quad
     import numpy as np
@@ -53,13 +53,13 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
 #question(
     coups-de-pouce: (),
 )[
-    A triangular wave centered around zero with a peak value of 5 V and a period of #qty("2", "ms").
+    A triangular wave centered around zero with a peak value of 5 V and a period of #quan[2 ms].
 ][
-    The half-period is #qty("1", "ms").
+    The half-period is #quan[1 ms].
 
-    Between #qty("0", "ms") and #qty("1", "ms"), the signal rises linearly from #qty("-5", "V") to #qty("5", "V"), with a slope of $qty("10", "V/ms") = qty("10000", "V/s")$ and a y-intercept#footnote["Ordonnée à l'origine" in french] of #qty("-5", "V").
+    Between #quan[0 ms] and #quan[1 ms], the signal rises linearly from #quan[-5 V] to #quan[5 V], with a slope of $#quan[10 V/ms] = #quan[10000 V/s]$ and a y-intercept#footnote["Ordonnée à l'origine" in french] of #quan[-5 V].
 
-    Between #qty("1", "ms") and #qty("2", "ms"), the signal falls linearly back to #qty("-5", "V") with a slope of $qty("-10", "V/ms") = qty("-10000", "V/s")$ and a y-intercept of #qty("15", "V").
+    Between #quan[1 ms] and #quan[2 ms], the signal falls linearly back to #quan[-5 V] with a slope of $#quan[-10 V/ms] = #quan[-10000 V/s]$ and a y-intercept of #quan[15 V].
     ```python
     from scipy.integrate import quad
     import numpy as np

@@ -106,15 +106,15 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
     verso: [$ S_"eff" = sqrt( mean(s^2(t)) ) $],
 )
 
-La valeur efficace de la tension délivrée aux foyers par Enedis est #qty("230", "V").
+La valeur efficace de la tension délivrée aux foyers par Enedis est #quan[230 V].
 
 En électricité, la valeur efficace d'une tension est la tension continue qui, si elle était appliquée aux bornes d'un résistor, y dissiperait la même puissance par effet Joule.
 
-#application[Calculer la résistance d'un radiateur de #qty("1", "kW").]
+#application[Calculer la résistance d'un radiateur de #quan[1 kW].]
 
 En électricité, la valeur efficace d'un courant est le courant continu qui, s'il était appliqué aux bornes d'un résistor, y dissiperait la même puissance par effet Joule.
 
-#application[Calculer le courant qui circule dans un radiateur de #qty("1", "kW").]
+#application[Calculer le courant qui circule dans un radiateur de #quan[1 kW].]
 
 #encadré(
     titre: "Valeur efficace d'un signal sinusoïdal",
@@ -279,9 +279,9 @@ Afin de limiter les pertes par effet Joule lors du transport, on utilise une ten
 
 #question-de-colle([Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.])
 
-#exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #qty("400","kV").]
+#exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #quan[400 kV].]
 
-#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #qty("20","kV") (ligne moyenne tension) plutôt que de #qty("230","V") ?]
+#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #quan[20 kV] (ligne moyenne tension) plutôt que de #quan[230 V] ?]
 
 Le facteur de puissance a aussi un effet important car pour une même puissance et une même tension, le courant sera d'autant plus grand que le facteur de puissance est petit, ce qui entraine des pertes par effet Joule. Les fabricants cherchent à rapprocher le facteur de puissance de $1$.
 
@@ -302,7 +302,7 @@ La vidéo du lien ci-dessous debunk un boitier censé améliorer le facteur de p
 ]
 
 #application[
-    On modélise un appareil électroménager de #qty("2100","W") par une impédance $Z=qty("20","O") + qty("10","O")j$. Calculer le courant efficace le traversant.
+    On modélise un appareil électroménager de #quan[2100 W] par une impédance $Z=#quan[20 Ω] + #quan[10 Ω]j$. Calculer le courant efficace le traversant.
 ]
 
 #encadré(
@@ -318,7 +318,7 @@ La vidéo du lien ci-dessous debunk un boitier censé améliorer le facteur de p
     $ P = Re(underline(Y)) U_"eff"^2 $
 ]
 #application[
-    On modélise un appareil électroménager par une impédance $Z=qty("20","O") + qty("10","O")j$. Calculer son admittance puis la puissance moyenne qu'il reçoit.
+    On modélise un appareil électroménager par une impédance $Z=#quan[20 Ω] + #quan[10 Ω]j$. Calculer son admittance puis la puissance moyenne qu'il reçoit.
 ]
 
 #flashcard(

@@ -70,7 +70,7 @@ On considère le montage suivant, appelé montage intégrateur. L'ALI est suppos
         G_"dB" = 20 log|underline(H)| = 20 log(1/(R C omega)) = - 20 log(omega/omega_0)
     $
     avec $omega_0 = 1/(R C)$
-    Le diagramme de Bode est donc une droite de pente #qty("-20", "dB") par décade.
+    Le diagramme de Bode est donc une droite de pente #quan[-20 dB] par décade.
 
     Le gain est nul lorsque $omega = omega_0$, ce qui correspond donc à l'intersection de la droite avec l'axe des abscisses.
 

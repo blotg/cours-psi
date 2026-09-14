@@ -4,12 +4,12 @@
     titre: "Taille critique d'une bactérie aérobie",
 )
 
-On étudie les conditions de survie d'une bactérie dans un lac de très grande taille à la température $T_0=#qty("297", "K")$. Pour vivre, elle a besoin de consommer le dioxygène dissous dans l'eau au voisinage de sa surface.
+On étudie les conditions de survie d'une bactérie dans un lac de très grande taille à la température $T_0=#quan[297 K]$. Pour vivre, elle a besoin de consommer le dioxygène dissous dans l'eau au voisinage de sa surface.
 
 La bactérie est modélisée par une boule de centre $O$ fixe, de rayon $R$, de masse volumique $mu$ identique à celle de l'eau.
 
 
-On se place en régime stationnaire et on note $n(r)$ la densité particulaire, exprimée en #unit("/m^3"), de #ce("O2") dissous à la distance $r$ de $O$ ($r>R$). La diffusion de #ce("O2") obéit à la loi de Fick avec un coefficient de diffusion de $D=qty("2E-9", "USI")$. Loin de la bactérie, la concentration molaire volumique de #ce("O2") dissous dans le lac vaut $c_0=#qty("2.6e-4", "mol/L")$ (c'est la solubilité du dioxygène dans l'eau douce à cette température).
+On se place en régime stationnaire et on note $n(r)$ la densité particulaire, exprimée en #unit("/m^3"), de #ce("O2") dissous à la distance $r$ de $O$ ($r>R$). La diffusion de #ce("O2") obéit à la loi de Fick avec un coefficient de diffusion de $D=#quan[2E-9 USI]$. Loin de la bactérie, la concentration molaire volumique de #ce("O2") dissous dans le lac vaut $c_0=#quan[2.6e-4 mol/L]$ (c'est la solubilité du dioxygène dans l'eau douce à cette température).
 
 La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On introduit le taux horaire de consommation de #ce("O2") par unité de masse, noté $a$ et mesuré en #unit("mol/kg/s").
 
@@ -115,7 +115,7 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
         "La densité particulaire ne peut pas être négative.",
     ),
 )[
-    Quelle inégalité doit vérifier $n_R$ pour que la bactérie ne suffoque pas ? En déduire l'expression du rayon critique $R_c$ d'une bactérie aérobie. Effectuer l'application pour $a=qty("1e-3", "mol/kg/s")$ et sachant que la bactérie a une masse volumique comparable à celle de l'eau. Comparer ce résultat à la dimension caractéristique $R=1$ à $qty("10", "um")$ d'une bactérie réelle.
+    Quelle inégalité doit vérifier $n_R$ pour que la bactérie ne suffoque pas ? En déduire l'expression du rayon critique $R_c$ d'une bactérie aérobie. Effectuer l'application pour $a=#quan[1e-3 mol/kg/s]$ et sachant que la bactérie a une masse volumique comparable à celle de l'eau. Comparer ce résultat à la dimension caractéristique $R=1$ à $#quan[10 um]$ d'une bactérie réelle.
 ][
     Pour que la bactérie ne suffoque pas, il faut que $n_R > 0$. Donc
     $
@@ -134,5 +134,5 @@ La consommation en #ce("O2") de la bactérie est proportionnelle à sa masse. On
     $
         R_c = sqrt(3 D c_0 / (a mu)) = #qty(Rc, "m", chiffres: 2)
     $
-    Les bactéries réelles, de rayon $1$ à #qty("10", "um"), sont bien en dessous de ce rayon critique, mais d'un facteur $4$ à $40$ seulement : c'est l'approvisionnement en dioxygène qui limite la taille des bactéries aérobies.
+    Les bactéries réelles, de rayon $1$ à #quan[10 um], sont bien en dessous de ce rayon critique, mais d'un facteur $4$ à $40$ seulement : c'est l'approvisionnement en dioxygène qui limite la taille des bactéries aérobies.
 ]

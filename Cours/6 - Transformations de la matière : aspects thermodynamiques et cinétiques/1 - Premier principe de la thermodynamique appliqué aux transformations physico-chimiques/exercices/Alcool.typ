@@ -16,9 +16,9 @@ Lorsqu'il est ingéré, l'éthanol contenu dans les boissons alcoolisées est tr
         "Quelle masse de sucre libérerait cette énergie ?",
     )
 )[
-    Combien de kilocalories (#unit("kcal")) sont apportées par un shot de vodka de 3 cL contenant 40 % en volume d'éthanol ? À combien de carreaux de sucre de #qty("4", "g") cela correspond-il ?
+    Combien de kilocalories (#unit("kcal")) sont apportées par un shot de vodka de 3 cL contenant 40 % en volume d'éthanol ? À combien de carreaux de sucre de #quan[4 g] cela correspond-il ?
 ][
-    Un shot de vodka de 3 cL contient $0.40 times #qty("3", "cL") = #qty(0.4 * 3, "cL", chiffres: 2)$ d'éthanol pur.
+    Un shot de vodka de 3 cL contient $0.40 times #quan[3 cL] = #qty(0.4 * 3, "cL", chiffres: 2)$ d'éthanol pur.
 
     #let m = 3e-2 * 1e-3 * 0.4 * 0.789 * 1e3
     La masse d'éthanol contenue dans le shot est donc de $m = mu_"éthanol" V = d mu_"eau" V = #qty(m, "kg", chiffres: 2)$.
@@ -41,12 +41,12 @@ Lorsqu'il est ingéré, l'éthanol contenu dans les boissons alcoolisées est tr
       m_"sucre" = Q / (Delta_"comb" H^circ ("sucre")) = #qty(m_sucre, "kg", chiffres: 2)
     $
 
-    Ce qui correspond à $m_"sucre" \/ #qty("4", "g") approx #num(m_sucre / 4e-3, chiffres: 1)$ carreaux de sucre.
+    Ce qui correspond à $m_"sucre" \/ #quan[4 g] approx #num(m_sucre / 4e-3, chiffres: 1)$ carreaux de sucre.
 ]
 
 *Données*
 - Densité de l'éthanol : #num("0.789")
-- Enthalpie standard de combustion de l'éthanol : $standard(Delta_r H) = qty("-1367", "kJ/mol")$
-- Masse molaire de l'éthanol : #qty("46.0", "g/mol")
-- Enthalpie de combustion du sucre : #qty("4.0", "kcal/g")
-- $qty("1", "cal") = qty("4.184", "J")$
+- Enthalpie standard de combustion de l'éthanol : $standard(Delta_r H) = #quan[-1367 kJ/mol]$
+- Masse molaire de l'éthanol : #quan[46.0 g/mol]
+- Enthalpie de combustion du sucre : #quan[4.0 kcal/g]
+- $#quan[1 cal] = #quan[4.184 J]$

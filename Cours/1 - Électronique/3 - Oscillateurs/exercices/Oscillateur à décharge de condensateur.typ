@@ -5,7 +5,7 @@
     difficulté: 1,
 )
 
-On étudie le circuit suivant, où $R_1=qty("100", "kO")$, $R_2=qty("10", "kO")$, $R_3=qty("10", "kO")$ et $C=qty("10", "nF")$.
+On étudie le circuit suivant, où $R_1=#quan[100 kΩ]$, $R_2=#quan[10 kΩ]$, $R_3=#quan[10 kΩ]$ et $C=#quan[10 nF]$.
 
 #figure(
     circuit({

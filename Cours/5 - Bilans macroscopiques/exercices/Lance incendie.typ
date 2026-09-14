@@ -14,7 +14,7 @@ Le coefficient de frottement statique solide tissus/béton est approximativement
 #question()[
     Estimer un ordre de grandeur de la vitesse de l'eau en sortie de lance.
 ][
-    On estime la masse du pompier à #qty("80", "kg") et le débit de la lance à #qty("300", "L/min"). La poussée s'exprime comme $F = D_m v$. Juste avant que le pompier ne commence à glisser, la poussée est équilibrée par la force de frottement statique maximale entre ses vêtements et le sol, soit $F_f = f m g$ où $m$ est la masse du pompier et $g$ l'intensité de la pesanteur.
+    On estime la masse du pompier à #quan[80 kg] et le débit de la lance à #quan[300 L/min]. La poussée s'exprime comme $F = D_m v$. Juste avant que le pompier ne commence à glisser, la poussée est équilibrée par la force de frottement statique maximale entre ses vêtements et le sol, soit $F_f = f m g$ où $m$ est la masse du pompier et $g$ l'intensité de la pesanteur.
 
     En égalant les deux expressions, on trouve :
     #let Dm = 300/60

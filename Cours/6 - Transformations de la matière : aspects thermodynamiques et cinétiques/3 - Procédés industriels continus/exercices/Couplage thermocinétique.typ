@@ -11,14 +11,14 @@ $
     #ce("(CH3)3COOC(CH3)3 -> 2 (CH3)3CO^.")
 $
 
-Cette décomposition est exothermique avec une enthalpie de réaction $Delta_r H^circ = qty("-150", "kJ/mol")$.
+Cette décomposition est exothermique avec une enthalpie de réaction $Delta_r H^circ = #quan[-150 kJ/mol]$.
 Elle a une loi de vitesse d'ordre 1 avec une constante de vitesse $k$ qui suit la loi d'Arrhenius $k = A exp(-E_a / (R T))$.
 
-On observe ainsi un couplage thermocinétique : la réaction dégage de la chaleur, ce qui augmente la température du système, ce qui accélère la réaction. On cherche à modéliser ce couplage dans un réacteur continu parfaitement agité (RPAC) de volume $V = qty("520", "mL")$.
+On observe ainsi un couplage thermocinétique : la réaction dégage de la chaleur, ce qui augmente la température du système, ce qui accélère la réaction. On cherche à modéliser ce couplage dans un réacteur continu parfaitement agité (RPAC) de volume $V = #quan[520 mL]$.
 
 On se place dans l'approximation d'Ellingham.
 
-La réaction est maintenue à une température $T$ identique à la température d'entrée grâce à un échangeur thermique dans lequel circule un fluide caloporteur à la température $T_0$. La puissance thermique fournie par le réacteur au fluide caloporteur est donnée par la loi de Newton : $P_"th" = h S (T - T_0)$, avec $h = qty("100", "W/m^2/K")$ et $S = qty("40", "cm^2")$. Le fluide caloporteur est à $T_0 = qty("300", "K")$ et la concentration de DTBP en entrée vaut $qty("1.0", "mol/L")$.
+La réaction est maintenue à une température $T$ identique à la température d'entrée grâce à un échangeur thermique dans lequel circule un fluide caloporteur à la température $T_0$. La puissance thermique fournie par le réacteur au fluide caloporteur est donnée par la loi de Newton : $P_"th" = h S (T - T_0)$, avec $h = #quan[100 W/m^2/K]$ et $S = #quan[40 cm^2]$. Le fluide caloporteur est à $T_0 = #quan[300 K]$ et la concentration de DTBP en entrée vaut $#quan[1.0 mol/L]$.
 
 Attention : $P_"th"$ désigne ici la puissance #strong[fournie] par le réacteur, opposée à celle du cours.
 
@@ -75,10 +75,10 @@ Attention : $P_"th"$ désigne ici la puissance #strong[fournie] par le réacteur
     coups-de-pouce: (),
 )[
     Écrire une fonction Python `X(T, tau)` qui calcule le taux de conversion en fonction de la température $T$ du réacteur et du temps de passage `tau`, en utilisant les données numériques suivantes :
-    - $A = qty("1e15", "/s")$
-    - $E_a = qty("157e3", "J/mol")$
-    - $R = qty("8.314", "J/K/mol")$
-    Tracer la fonction $X(T)$ pour $T$ variant de #qty("250", "K") à #qty("600", "K") avec un temps de passage fixé à #qty("600", "s").
+    - $A = #quan[1e15 /s]$
+    - $E_a = #quan[157e3 J/mol]$
+    - $R = #quan[8.314 J/K/mol]$
+    Tracer la fonction $X(T)$ pour $T$ variant de #quan[250 K] à #quan[600 K] avec un temps de passage fixé à #quan[600 s].
 ][
     ```python
     import numpy as np
@@ -106,8 +106,8 @@ Attention : $P_"th"$ désigne ici la puissance #strong[fournie] par le réacteur
         "Pour discuter la stabilité, imaginer ce qui se passerait si la température augmentait légèrement."
     )
 )[
-    Tracer en fonction de $T$ les deux expressions de $P_"th"$ à l'aide de Python pour $tau = qty("1200", "s")$ puis pour $tau = qty("800", "s")$.
-    Combien de points de fonctionnement a-t-on dans chacun des cas ? Discuter la stabilité de ces points de fonctionnement dans le dernier cas $tau = qty("800", "s")$.
+    Tracer en fonction de $T$ les deux expressions de $P_"th"$ à l'aide de Python pour $tau = #quan[1200 s]$ puis pour $tau = #quan[800 s]$.
+    Combien de points de fonctionnement a-t-on dans chacun des cas ? Discuter la stabilité de ces points de fonctionnement dans le dernier cas $tau = #quan[800 s]$.
 ][
     ```python
     h = 100      # W/m^2/K
@@ -131,9 +131,9 @@ Attention : $P_"th"$ désigne ici la puissance #strong[fournie] par le réacteur
     plt.legend()
     plt.show()
     ```
-    Pour $tau = qty("1200", "s")$, il y a un seul point pour lequel ces puissances sont égales, donc un seul point de fonctionnement possible.
+    Pour $tau = #quan[1200 s]$, il y a un seul point pour lequel ces puissances sont égales, donc un seul point de fonctionnement possible.
 
-    Pour $tau = qty("800", "s")$, il y a trois points d'intersection, donc trois points de fonctionnement possibles.
+    Pour $tau = #quan[800 s]$, il y a trois points d'intersection, donc trois points de fonctionnement possibles.
 
     On s'intéresse pour commencer au point de fonctionnement à basse température. Si la température augmente légèrement, la puissance fournie au circuit de refroidissement augmente et la puissance fournie par la réaction n'augmente quasiment pas. Ainsi la température diminue de nouveau : ce point est stable.
 

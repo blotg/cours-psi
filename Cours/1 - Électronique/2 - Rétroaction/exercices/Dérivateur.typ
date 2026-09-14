@@ -70,7 +70,7 @@ On s'intéresse au montage suivant, appelé montage dérivateur. L'ALI est suppo
       G_"dB" = 20 log|underline(H)| = 20 log(R C omega)
     $
 
-    Le diagramme de Bode est donc une droite de pente #qty("20","dB") par décade.
+    Le diagramme de Bode est donc une droite de pente #quan[20 dB] par décade.
 
     #figure(
         canvas({

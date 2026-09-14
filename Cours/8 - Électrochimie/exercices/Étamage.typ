@@ -3,7 +3,7 @@
 
 #show: exercice.with(titre: "Étamage", difficulté: 2)
 
-L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boites de conserve). Une expérience est menée à #qty("25", "dC") sur un échantillon de fer de surface $S = qty("240", "cm^2")$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
+L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc des boites de conserve). Une expérience est menée à #quan[25 °C] sur un échantillon de fer de surface $S = #quan[240 cm^2]$. L'électrolyte contient des ions #ce("Sn^2+") et de l'acide 4-hydroxybenzènesulfonique ; son pH est proche de $0$. L'étain intervient par le couple #cpl("Sn^2+", "Sn(s)").
 
 #figure(canvas({
   import cetz.draw: *
@@ -27,7 +27,7 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
 ))[
   Le potentiel standard du couple #cpl("H+", "H2(g)") n'est pas donné. Pourquoi ?
 ][
-  Par convention, l'électrode standard à hydrogène sert d'origine des potentiels : $E^circ(cpl("H+", "H2")) = qty("0", "V")$ à toute température. Il est donc inutile de le préciser.
+  Par convention, l'électrode standard à hydrogène sert d'origine des potentiels : $E^circ(cpl("H+", "H2")) = #quan[0 V]$ à toute température. Il est donc inutile de le préciser.
 ]
 
 #question(coups-de-pouce: (
@@ -53,12 +53,12 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
   "Le fer réagit-il ?",
   "La courbe de l'étain a-t-elle un palier de diffusion ? Un surpotentiel ?",
 ))[
-  La surtension cathodique de #cpl("H+", "H2") est $eta_c = qty("-0.40", "V")$ (identique sur Fe et Sn) ; le couple #cpl("Sn^2+", "Sn") est rapide. Écrire les échanges électroniques à chaque électrode et représenter les courbes intensité-potentiel correspondantes.
+  La surtension cathodique de #cpl("H+", "H2") est $eta_c = #quan[-0.40 V]$ (identique sur Fe et Sn) ; le couple #cpl("Sn^2+", "Sn") est rapide. Écrire les échanges électroniques à chaque électrode et représenter les courbes intensité-potentiel correspondantes.
 ][
   - #strong[Cathode (Fe)] : $ce("Sn^2+") + 2 e^- -> ce("Sn")$ (souhaitée) et $2 ce("H+") + 2 e^- -> ce("H2")$ (parasite). Le fer ne réagit pas (il est protégé, c'est la cathode).
   - #strong[Anode (Sn)] : $ce("Sn") -> ce("Sn^2+") + 2 e^-$.
 
-  Courbes $i$–$E$ : la branche de réduction de #ce("Sn^2+") part de $E^circ(cpl("Sn^2+", "Sn")) = qty("-0.14", "V")$ (couple rapide) et présente un palier de diffusion (#ce("Sn^2+") est un soluté). La branche d'oxydation de #ce("Sn") part aussi de $qty("-0.14", "V")$, sans palier (l'électrode elle-même est le réactif). Le dégagement de #ce("H2") débute vers $E_"eq"(cpl("H+", "H2")) + eta_c = 0 - 0.40 = qty("-0.40", "V")$, sans palier (#ce("H+") abondant à pH $0$).
+  Courbes $i$–$E$ : la branche de réduction de #ce("Sn^2+") part de $E^circ(cpl("Sn^2+", "Sn")) = #quan[-0.14 V]$ (couple rapide) et présente un palier de diffusion (#ce("Sn^2+") est un soluté). La branche d'oxydation de #ce("Sn") part aussi de $#quan[-0.14 V]$, sans palier (l'électrode elle-même est le réactif). Le dégagement de #ce("H2") débute vers $E_"eq"(cpl("H+", "H2")) + eta_c = 0 - 0.40 = #quan[-0.40 V]$, sans palier (#ce("H+") abondant à pH $0$).
 
   #figure(canvas({
     import cetz.draw: *
@@ -81,15 +81,15 @@ L'étamage protège une tôle d'acier par une fine couche d'étain (fer-blanc de
 #question(coups-de-pouce: (
   "Intégrer $i = - n cal(F) dv(xi, t)$.",
 ))[
-  Exprimer puis calculer la masse maximale $m$ d'étain déposée, sachant que $i = qty("1.0", "A")$ et que l'électrolyse dure $qty("4", "min")$.
+  Exprimer puis calculer la masse maximale $m$ d'étain déposée, sachant que $i = #quan[1.0 A]$ et que l'électrolyse dure $#quan[4 min]$.
 ][
-  Au mieux, tout le courant sert au dépôt d'étain. La charge est $Q = i thin t = 1.0 times 240 = qty("240", "C")$ (l'électrolyse dure $qty("4", "min") = qty("240", "s")$). Avec $n = 2$ :
-  $ m = (Q)/(n cal(F)) M(ce("Sn")) = 240/(2 times 96500) times 118.7 approx qty("0.15", "g") $
+  Au mieux, tout le courant sert au dépôt d'étain. La charge est $Q = i thin t = 1.0 times 240 = #quan[240 C]$ (l'électrolyse dure $#quan[4 min] = #quan[240 s]$). Avec $n = 2$ :
+  $ m = (Q)/(n cal(F)) M(ce("Sn")) = 240/(2 times 96500) times 118.7 approx #quan[0.15 g] $
 ]
 
 #question[
-  La masse mesurée est $qty("0.12", "g")$. Calculer le rendement faradique.
+  La masse mesurée est $#quan[0.12 g]$. Calculer le rendement faradique.
 ][
-  $ rho_F = (0.12)/(0.15) approx 0.80 = qty("80", "%") $
-  Les $qty("20", "%")$ manquants correspondent au courant ayant servi au dégagement de #ce("H2").
+  $ rho_F = (0.12)/(0.15) approx 0.80 = #quan[80 %] $
+  Les $#quan[20 %]$ manquants correspondent au courant ayant servi au dégagement de #ce("H2").
 ]

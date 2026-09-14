@@ -5,7 +5,7 @@
     ouvert: true,
 )
 
-On commande un moteur à courant continu d'inductance propre #qty("10", "mH") et de résistance négligeable à l'aide d'un hacheur constitué d'une cellule élémentaire de commutation. La tension d'alimentation est #qty("12", "V"). La période de la commande est #qty("1", "ms").
+On commande un moteur à courant continu d'inductance propre #quan[10 mH] et de résistance négligeable à l'aide d'un hacheur constitué d'une cellule élémentaire de commutation. La tension d'alimentation est #quan[12 V]. La période de la commande est #quan[1 ms].
 #let Lmoteur = 10e-3
 #let T = 1e-3
 #let E = 12
@@ -17,7 +17,7 @@ On commande un moteur à courant continu d'inductance propre #qty("10", "mH") et
         "Quelle est l'inductance équivalente à deux inductances en série ?",
     ),
 )[
-    Quelle inductance de lissage faut-il ajouter en sortie du hacheur pour que l'ondulation du courant ne dépasse jamais #qty("100", "mA") ?
+    Quelle inductance de lissage faut-il ajouter en sortie du hacheur pour que l'ondulation du courant ne dépasse jamais #quan[100 mA] ?
 ][
     #let ondulation-max = 100e-3
     On note $E'$ la force contre-électromotrice du moteur et $alpha$ le rapport cyclique. On considère le transistor fermé entre $0$ et $alpha T$ et ouvert entre $alpha T$ et $T$, la loi des mailles donne

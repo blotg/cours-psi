@@ -61,7 +61,7 @@ Le courant électrique est le débit de charge passant à travers une section.
     $ I=dv(Q, t) $
 ]
 
-== Description microscopique (OdG : #qty("e-10", "m"))
+== Description microscopique (OdG : #quan[e-10 m])
 Au niveau microscopique, la charge est portée par des particules chargées appelées "porteurs de charge".
 
 #exemple[
@@ -119,7 +119,7 @@ Le système mésoscopique permet de définir des grandeurs locales.
 Lorsqu'il y a plusieurs types de porteurs de charge, il faut sommer les contributions de chacun : $rho=sum_"types de porteurs de charge" n_i q_i$.
 
 #application[
-    Le fer $isotope("Fe", z: 26)$ a pour masse volumique $rho=#qty("7.9", "g/cm^3")$ et une masse molaire $M=#qty("56", "g/mol")$. Calculer la densité particulaire de noyaux de fer, la densité particulaire d'électrons et enfin la densité volumique de charge.
+    Le fer $isotope("Fe", z: 26)$ a pour masse volumique $rho=#quan[7.9 g/cm^3]$ et une masse molaire $M=#quan[56 g/mol]$. Calculer la densité particulaire de noyaux de fer, la densité particulaire d'électrons et enfin la densité volumique de charge.
 ]
 
 #flashcard(
@@ -389,10 +389,10 @@ La durée du régime transitoire est très courte. On considère que les électr
 
 La résistivité est l'inverse de la conductivité. La résistivité se mesure en #unit("O m").
 
-#exemple[La conductivité du cuivre pur est de #qty("6e7", "S/m").]
+#exemple[La conductivité du cuivre pur est de #quan[6e7 S/m].]
 
 #application[
-    Chaque atome de cuivre apporte un électron de conduction. On donne $e=#qty("1.6e-19","C")$, $m_e=#qty("9.1e-31","kg")$, $mu_#ce("Cu")=#qty("8.96","g/cm^3")$, $M_#ce("Cu")=#qty("63.5","g/mol")$.
+    Chaque atome de cuivre apporte un électron de conduction. On donne $e=#quan[1.6e-19 C]$, $m_e=#quan[9.1e-31 kg]$, $mu_#ce("Cu")=#quan[8.96 g/cm^3]$, $M_#ce("Cu")=#quan[63.5 g/mol]$.
 
     Calculer la durée moyenne entre deux chocs pour le cuivre pur. Justifier de l'hypothèse selon laquelle le régime permanent est très rapidement atteint.
 ]
@@ -415,7 +415,7 @@ La résistivité est l'inverse de la conductivité. La résistivité se mesure e
 )
 #flashcard(
     recto: [Ordre de grandeur de la conductivité électrique du cuivre.],
-    verso: [$#qty("6e7","S/m")$],
+    verso: [$#quan[6e7 S/m]$],
 )
 
 == Lien avec la loi d'Ohm intégrale
@@ -437,7 +437,7 @@ La loi d'Ohm est une conséquence de la loi d'Ohm locale.
 ]
 
 #application[
-    Calculer la résistance d'un conducteur en cuivre utilisé en TP (#qty("1", "m") de long et #qty("1","mm") de diamètre).
+    Calculer la résistance d'un conducteur en cuivre utilisé en TP (#quan[1 m] de long et #quan[1 mm] de diamètre).
 ]
 
 
@@ -494,7 +494,7 @@ La puissance reçue par l'électron de la part du champ électrique est dissipé
 
 == Discussion de la validité du modèle
 #application[
-    La vitesse typique des électrons dans un métal est de #qty("e6","m/s"). Calculer le libre parcours moyen d'un électron. Le comparer à la distance interatomique dans un cristal.
+    La vitesse typique des électrons dans un métal est de #quan[e6 m/s]. Calculer le libre parcours moyen d'un électron. Le comparer à la distance interatomique dans un cristal.
 ]
 
 Il semble peu probable qu'un électron puisse voyager aussi longtemps dans le cristal sans subir de choc.

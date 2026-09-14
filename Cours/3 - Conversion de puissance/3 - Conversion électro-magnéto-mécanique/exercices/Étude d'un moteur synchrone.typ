@@ -15,12 +15,12 @@ Toutes les valeurs de tension et courant données le sont en valeur efficace.
 
 L'inducteur du moteur synchrone est à aimants permanents et possède 8 pôles, soir 4 paires de pôles. En régime permanent de vitesse, la condition de synchronisme pour un moteur possédant $p$ paires de pôles s'écrit $w=p Omega$, où $Omega$ désigne la vitesse de rotation du rotor en #unit("rad/s").
 
-Chaque bobinage du stator possède une résistance $R=#qty("0.03", "O")$. L'intensité nominale du courant dans un enroulement du stator est $I_N=#qty("155", "A")$. Pendant une durée limitée, elle peut atteindre la valeur maximale $I_M=#qty("185", "A")$. La machine est étudiée en convention récepteur. Le modèle équivalent à une phase de l'induit est représenté ci-contre. Les tensions et courants sont sinusoïdaux de pulsation $omega=2 pi f$ constante.
+Chaque bobinage du stator possède une résistance $R=#quan[0.03 Ω]$. L'intensité nominale du courant dans un enroulement du stator est $I_N=#quan[155 A]$. Pendant une durée limitée, elle peut atteindre la valeur maximale $I_M=#quan[185 A]$. La machine est étudiée en convention récepteur. Le modèle équivalent à une phase de l'induit est représenté ci-contre. Les tensions et courants sont sinusoïdaux de pulsation $omega=2 pi f$ constante.
 #let R = 0.03
 
 Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
-/ essai n°1: sur un banc d'essai, on entraine la machine synchrone à vide par l'intermédiaire d'un moteur auxiliaire à la vitesse $n=#qty("1500", "tr/min")$. Aux bornes d'une phase, on a mesuré une tension de #qty("57", "V").
-/ essai n°2: avec une alimentation électrique appropriée, on effectue un essai de la machine en moteur à #qty("1500", "tr/min"), pour lequel l'angle de pilotage vaut $Psi=0$, $I=I_M$ et $V=#qty("72", "V")$.
+/ essai n°1: sur un banc d'essai, on entraine la machine synchrone à vide par l'intermédiaire d'un moteur auxiliaire à la vitesse $n=#quan[1500 tr/min]$. Aux bornes d'une phase, on a mesuré une tension de #quan[57 V].
+/ essai n°2: avec une alimentation électrique appropriée, on effectue un essai de la machine en moteur à #quan[1500 tr/min], pour lequel l'angle de pilotage vaut $Psi=0$, $I=I_M$ et $V=#quan[72 V]$.
 #let pulsation = (1500 / 60) * 2 * calc.pi
 #let V = 72
 #let E = 57
@@ -31,7 +31,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
         "Écrire la condition de synchrone (donnée dans l'énoncé). Attention aux unités.",
     ),
 )[
-    Déterminer la fréquence des tension statoriques quand $n=qty("1500", "tr/min")$.
+    Déterminer la fréquence des tension statoriques quand $n=#quan[1500 tr/min]$.
 ][
     Comme le moteur possède 4 paires de pôles, en utilisant la condition de synchronisme $omega=p Omega$, on trouve une fréquence $f=(1500 / 60)times 4 = qty(#(1500 / 60 * 4), "Hz")$.
 ]
@@ -45,9 +45,9 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 )[
     Représenter le diagramme vectoriel relatif à l'essai n°2. La résistance $R$ n'étant *pas* négligée, en déduire la valeur numérique de $L$.
 ][
-    Dans l'essai n°1, le moteur tourne à vide, donc $I=0$. La loi des mailles donne alors $V=E$, d'où $E=#qty("57", "V")$.
+    Dans l'essai n°1, le moteur tourne à vide, donc $I=0$. La loi des mailles donne alors $V=E$, d'où $E=#quan[57 V]$.
 
-    La vitesse angulaire est la même dans l'essai 2 que l'essai 1, la force contre-électromotrice induite est donc la même : $E=#qty("57", "V")$.
+    La vitesse angulaire est la même dans l'essai 2 que l'essai 1, la force contre-électromotrice induite est donc la même : $E=#quan[57 V]$.
 
     L'angle de pilotage $Psi$ est nul, donc le courant est en phase avec la tension $V$.
 
@@ -173,7 +173,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
         "Représenter le diagramme de Fresnel et utiliser la trigonométrie pour déterminer $phi$ puis $V$.",
     ),
 )[
-    On se place sur un point de fonctionnement à $Psi=0$, $I=I_N$ et $n=qty("1500", "tr/min")$. Que vaut le moment du couple $C$ développé par le moteur ? Représenter le diagramme vectoriel représentatif du fonctionnement. Placer les vecteurs représentatifs des complexes $underline(E)$, $underline(V)$ et $underline(I)$. En déduire les expressions numériques de $V$ et $phi$. Calculer leurs valeurs numériques correspondantes.
+    On se place sur un point de fonctionnement à $Psi=0$, $I=I_N$ et $n=#quan[1500 tr/min]$. Que vaut le moment du couple $C$ développé par le moteur ? Représenter le diagramme vectoriel représentatif du fonctionnement. Placer les vecteurs représentatifs des complexes $underline(E)$, $underline(V)$ et $underline(I)$. En déduire les expressions numériques de $V$ et $phi$. Calculer leurs valeurs numériques correspondantes.
 ][
     Le couple développé par le moteur vaut :
     $
@@ -205,7 +205,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     En divisant la deuxième équation par la première, on obtient :
     $ tan(phi) = (L omega I_N) / E $
     D'où :
-    $ phi = arctan((L omega I_N) / E) = #qty("33","deg") $
+    $ phi = arctan((L omega I_N) / E) = #quan[33 °] $
 
     En remplaçant $phi$ dans la première équation, on trouve :
     $ V = E / cos(phi) = #qty(E / calc.cos(calc.atan((L * pulsation * I) / E)), "V", chiffres: 2) $

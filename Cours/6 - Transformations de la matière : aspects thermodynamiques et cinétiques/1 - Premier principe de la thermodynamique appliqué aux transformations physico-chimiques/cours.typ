@@ -21,19 +21,19 @@
 
 = Grandeur standard
 == État standard
-La pression standard est la pression $standard(P)=qty("1", "bar")=qty("1e5", "Pa")$. La pression standard est approximativement égale à la pression atmosphérique.
+La pression standard est la pression $standard(P)=#quan[1 bar]=#quan[1e5 Pa]$. La pression standard est approximativement égale à la pression atmosphérique.
 
-La température de référence est la température $T=qty("25", "Celsius")=qty("298.15", "K")$.
+La température de référence est la température $T=#quan[25 °C]=#quan[298.15 K]$.
 
 L'état standard d'une substance est un état particulier servant de référence pour les tables de grandeurs physicochimiques. L'état standard d'un corps pur est l'état physique (liquide, solide ou gaz) le plus stable à la pression standard. Si l'état le plus stable est l'état gazeux, on prend le gaz parfait comme état standard.
 
 #flashcard(
     recto: [Pression standard],
-    verso: [$standard(P)=qty("1","bar")=qty("1e5","Pa")$],
+    verso: [$standard(P)=#quan[1 bar]=#quan[1e5 Pa]$],
 )
 
 #question-de-début-de-cours(
-    "$qty(\"1\", \"bar\")$ est la pression",
+    "$#quan[1 bar]$ est la pression",
     (
         "standard.",
         "de référence.",
@@ -42,11 +42,11 @@ L'état standard d'une substance est un état particulier servant de référence
 )
 #flashcard(
     recto: [Température de référence],
-    verso: [$T=qty("25","Celsius")=qty("298.15","K")$],
+    verso: [$T=#quan[25 °C]=#quan[298.15 K]$],
 )
 
 #question-de-début-de-cours(
-    "$qty(\"25\", \"dC\")$ est la température",
+    "$#quan[25 °C]$ est la température",
     (
         "de référence.",
         "standard.",
@@ -57,7 +57,7 @@ L'état standard d'une substance est un état particulier servant de référence
 L'état standard de référence est l'état standard à la température de référence.
 
 #application[
-    Quel est l'état standard de l'eau à #qty("400", "K") ?
+    Quel est l'état standard de l'eau à #quan[400 K] ?
 ]
 #application[
     Quel est l'état standard de référence de l'eau ?
@@ -327,7 +327,7 @@ Lorsqu'une réaction chimique se produit au contact d'un thermostat, la variatio
 - Pour une réaction endothermique, la chaleur va du thermostat vers le système ($Q>0$)
 
 #application[
-    Calculer la chaleur libérée par la combustion de #qty("0.5","mol") de méthane.
+    Calculer la chaleur libérée par la combustion de #quan[0.5 mol] de méthane.
 ]
 
 == Température de flamme
@@ -394,7 +394,7 @@ Pour une transformation adiabatique et isobare, la variation d'enthalpie est nul
 Il est également possible d'exprimer la température de flamme en fonction de la capacité thermique du système avant réaction plutôt qu'après réaction.
 
 #application[
-    Calculer la température de flamme du méthane en réaction avec du dioxygène pur, dans les proportions stœchiométriques et avec une température initiale $T_i=qty("25","Celsius")$.
+    Calculer la température de flamme du méthane en réaction avec du dioxygène pur, dans les proportions stœchiométriques et avec une température initiale $T_i=#quan[25 °C]$.
     #table(
         columns: 3,
         [Espèces chimiques], ce("CO2(g)"), ce("H2O(g)"),

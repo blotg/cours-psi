@@ -16,12 +16,12 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
         "Que valent les pertes fer ?",
         "Calculer les pertes à puissance maximale à partir des tensions et courants au primaire et au secondaire. En déduire les pertes cuivres à puissance maximale.",
         "Calculer la résistance équivalente des fils du transformateur (vu au primaire ou au secondaire).",
-        "Que vaut le courant au secondaire pour une charge de #qty(\"20\", \"W\") ? En déduire les pertes cuivre.",
+        "Que vaut le courant au secondaire pour une charge de #quan[20 W] ? En déduire les pertes cuivre.",
     ),
 )[
-    Quel serait le rendement du transformateur s'il alimente une charge de #qty("20", "W") ?
+    Quel serait le rendement du transformateur s'il alimente une charge de #quan[20 W] ?
 ][
-    Les pertes fer ne dépendent pas du courant dans le secondaire. Elles sont donc égales à la puissance absorbée par le transformateur en circuit ouvert : $P_"fer" = #qty("0.47", "W")$.
+    Les pertes fer ne dépendent pas du courant dans le secondaire. Elles sont donc égales à la puissance absorbée par le transformateur en circuit ouvert : $P_"fer" = #quan[0.47 W]$.
 
     #let U1eff = 230
     #let I1effmax = 0.26
@@ -41,7 +41,7 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
     #let R = Pcumax / calc.pow(I1effmax, 2)
     Notons $R$ la résistance équivalente des fils du transformateur vu du primaire. On a alors $P_"cuivre" = I_(1 "eff")^2 R$ d'où $R = P_"cuivre"/I_(1 "eff")^2$. En particulier, à la puissance max : $R = P_"cuivre max"/I_(1 "eff max")^2$.
 
-    Pour une puissance de sortie de $P=#qty("20", "W")$, le courant de sortie est $I_(2" eff") = P/U_(2 "eff")$, les pertes cuivres sont donc $P_"cuivre" = R I_(1" eff")^2 = R (I_(2" eff") m)^2 = R((P m)/(U_(2 "eff")))^2$.
+    Pour une puissance de sortie de $P=#quan[20 W]$, le courant de sortie est $I_(2" eff") = P/U_(2 "eff")$, les pertes cuivres sont donc $P_"cuivre" = R I_(1" eff")^2 = R (I_(2" eff") m)^2 = R((P m)/(U_(2 "eff")))^2$.
 
     Les pertes totales sont donc $P_"pertes totales" = P_"cuivre" + P_"fer" = P_"cuivre max"/I_(1 "eff max")^2 ((m P)/(U_(2 "eff")))^2 + P_"fer"$.
 

@@ -51,7 +51,7 @@
     })
 }
 
-On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une porteuse $s_p (t)$ de fréquence #qty("200", "kHz"). Le spectre du signal original s'étend entre $0$ et #qty("10", "kHz"). On utilise pour cela le montage suivant.
+On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une porteuse $s_p (t)$ de fréquence #quan[200 kHz]. Le spectre du signal original s'étend entre $0$ et #quan[10 kHz]. On utilise pour cela le montage suivant.
 
 #figure(
     canvas({
@@ -78,11 +78,11 @@ On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une port
 #question()[
     Représenter qualitativement les spectres de $s_"AM" (t)$, $s_p (t)$, $s_i (t)$ et $s(t)$.
 ][
-    $s_p (t)$ est purement sinusoïdal : son spectre est une unique raie à $f_p=qty("200", "kHz")$.
+    $s_p (t)$ est purement sinusoïdal : son spectre est une unique raie à $f_p=#quan[200 kHz]$.
 
     #spectre(lignes: ((5, 2, $f_p$),), x-max: 10)
 
-    $s_"AM" (t) = A_p cos(2 pi f_p t)(1+k s(t))$ : son spectre comporte la raie à $f_p$, entourée de deux bandes latérales, images du spectre du signal $s$ (de largeur #qty("10", "kHz")) autour de $f_p$.
+    $s_"AM" (t) = A_p cos(2 pi f_p t)(1+k s(t))$ : son spectre comporte la raie à $f_p$, entourée de deux bandes latérales, images du spectre du signal $s$ (de largeur #quan[10 kHz]) autour de $f_p$.
 
     #spectre(bumps: ((4, 2, 1, true), (6, 2, 1)), lignes: ((5, 2, $f_p$),), x-max: 10)
 
@@ -111,5 +111,5 @@ On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une port
 )[
     Proposer des valeurs réalistes pour $R$ et $C$ afin que le signal démodulé $s(t)$ s'approche convenablement du signal modulant.
 ][
-    Il faut que la fréquence de coupure du filtre passe-bas soit très grande devant #qty("10", "kHz") (pour ne pas couper le signal utile) et très petite devant $2 f_p = qty("400", "kHz")$ (pour éliminer la composante haute fréquence). On peut par exemple prendre $f_c=qty("16", "kHz")=1/(2 pi R C)$, avec $R=qty("1", "kO")$ et $C=qty("10", "nF")$.
+    Il faut que la fréquence de coupure du filtre passe-bas soit très grande devant #quan[10 kHz] (pour ne pas couper le signal utile) et très petite devant $2 f_p = #quan[400 kHz]$ (pour éliminer la composante haute fréquence). On peut par exemple prendre $f_c=#quan[16 kHz]=1/(2 pi R C)$, avec $R=#quan[1 kΩ]$ et $C=#quan[10 nF]$.
 ]

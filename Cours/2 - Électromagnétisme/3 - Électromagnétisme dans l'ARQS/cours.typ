@@ -248,7 +248,7 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
     [Établir l'expression du vecteur densité de courant puis de la puissance dissipée par les courants de Foucault dans un cylindre conducteur placé dans un champ magnétique uniforme et sinusoïdal.],
 )
 
-#application[Le fond d'une casserole en fer ($gamma_ce("Fe")=qty("1e7", "S/m")$) a un rayon de #qty(15, "cm") et une épaisseur de #qty(1, "cm"). La casserole est posée sur une plaque à induction qui émet un champ magnétique oscillant à la fréquence #qty(20, "kHz"). Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #qty(1, "kW") ?]
+#application[Le fond d'une casserole en fer ($gamma_ce("Fe")=#quan[1e7 S/m]$) a un rayon de #quan[15 cm] et une épaisseur de #quan[1 cm]. La casserole est posée sur une plaque à induction qui émet un champ magnétique oscillant à la fréquence #quan[20 kHz]. Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #quan[1 kW] ?]
 
 == Intérêt du feuilletage
 
@@ -310,7 +310,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
 )
 
 #application[
-    Calculer l'inductance propre d'un solénoïde de #qty(10, "cm") de long et de #qty(1, "cm") de rayon comportant #num(1000) spires.
+    Calculer l'inductance propre d'un solénoïde de #quan[10 cm] de long et de #quan[1 cm] de rayon comportant #num(1000) spires.
 ]
 
 #encadré(

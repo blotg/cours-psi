@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Champ de gravitation d'une planète", difficulté: 2, numérique: true)
 
-La masse volumique d'une planète de rayon $R = qty("6400", "km")$ varie avec la distance $r$ au centre selon $mu(r) = mu_0 (1 - a (r/R)^2)$. La masse volumique moyenne de la planète vaut $mu_"moy" = m_"planète" \/ V_"planète" = qty("5.52e3", "kg/m^3")$ et celle des roches superficielles vaut $mu(R) = qty("2.67e3", "kg/m^3")$.
+La masse volumique d'une planète de rayon $R = #quan[6400 km]$ varie avec la distance $r$ au centre selon $mu(r) = mu_0 (1 - a (r/R)^2)$. La masse volumique moyenne de la planète vaut $mu_"moy" = m_"planète" \/ V_"planète" = #quan[5.52e3 kg/m^3]$ et celle des roches superficielles vaut $mu(R) = #quan[2.67e3 kg/m^3]$.
 
 #question(coups-de-pouce: (
   "La masse volumique moyenne et celle des roches superficielles donnent deux équations.",
@@ -17,7 +17,7 @@ La masse volumique d'une planète de rayon $R = qty("6400", "km")$ varie avec la
 
   Le rapport des deux relations élimine $mu_0$ :
   $ (1 - 3a/5)/(1 - a) = mu_"moy"/mu(R) = 5.52/2.67 approx 2.07 quad => quad a approx 0.73 $
-  puis $ mu_0 = mu(R)/(1 - a) approx (2.67 times 10^3)/(0.27) approx qty("9.8e3", "kg/m^3") $
+  puis $ mu_0 = mu(R)/(1 - a) approx (2.67 times 10^3)/(0.27) approx #quan[9.8e3 kg/m^3] $
 ]
 
 #question(coups-de-pouce: (

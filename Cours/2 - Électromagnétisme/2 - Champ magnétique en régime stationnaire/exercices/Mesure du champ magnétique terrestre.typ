@@ -2,9 +2,9 @@
 
 #show: exercice.with(titre: "Mesure du champ magnétique terrestre", difficulté: 1, numérique: true)
 
-Pour mesurer la composante horizontale du champ magnétique terrestre, on utilise une boussole. On place un solénoïde autour de la boussole, son axe étant horizontal et orthogonal à l'aiguille au repos. Lorsqu'un courant circule dans le solénoïde, l'aiguille tourne d'un angle $alpha = qty("40", "deg")$.
+Pour mesurer la composante horizontale du champ magnétique terrestre, on utilise une boussole. On place un solénoïde autour de la boussole, son axe étant horizontal et orthogonal à l'aiguille au repos. Lorsqu'un courant circule dans le solénoïde, l'aiguille tourne d'un angle $alpha = #quan[40 °]$.
 
-Données : rayon du solénoïde $R = qty("5", "cm")$, nombre de spires $N = 100$, longueur $l = qty("30", "cm")$, intensité $I = qty("1", "mA")$.
+Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, longueur $l = #quan[30 cm]$, intensité $I = #quan[1 mA]$.
 
 #question(coups-de-pouce: (
   "Faire un schéma vu de dessus, avec les deux champs horizontaux.",
@@ -35,8 +35,8 @@ Données : rayon du solénoïde $R = qty("5", "cm")$, nombre de spires $N = 100$
   $ tan alpha = B_"sol"/B_H quad => quad B_H = B_"sol"/(tan alpha) = (mu_0 N I)/(l tan alpha) $
 
   Application numérique :
-  $ B_"sol" = (4 pi times 10^(-7) times 100 times 10^(-3))/(0.30) approx qty("4.2e-7", "T") $
-  $ B_H = (4.2 times 10^(-7))/(tan 40 degree) approx qty("5.0e-7", "T") $
+  $ B_"sol" = (4 pi times 10^(-7) times 100 times 10^(-3))/(0.30) approx #quan[4.2e-7 T] $
+  $ B_H = (4.2 times 10^(-7))/(tan 40 degree) approx #quan[5.0e-7 T] $
 
-  L'ordre de grandeur réel de la composante horizontale étant plutôt $qty("2e-5", "T")$, ce dispositif est ici trop peu sensible (courant et nombre de spires faibles) : en pratique on augmente $N I$ pour obtenir une déviation exploitable.
+  L'ordre de grandeur réel de la composante horizontale étant plutôt $#quan[2e-5 T]$, ce dispositif est ici trop peu sensible (courant et nombre de spires faibles) : en pratique on augmente $N I$ pour obtenir une déviation exploitable.
 ]

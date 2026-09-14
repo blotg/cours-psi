@@ -5,7 +5,7 @@
     numérique: true,
 )
 
-On envisage la conversion du méthane par la vapeur d'eau à $T = #qty("900", "K")$, sous une pression totale $P_"tot"$, à partir d'un mélange initial contenant #qty("4.0", "mol") d'eau et #qty("1.0", "mol") de méthane. On doit envisager les deux équilibres chimiques suivants, dans lesquels les constituants sont des gaz parfaits :
+On envisage la conversion du méthane par la vapeur d'eau à $T = #quan[900 K]$, sous une pression totale $P_"tot"$, à partir d'un mélange initial contenant #quan[4.0 mol] d'eau et #quan[1.0 mol] de méthane. On doit envisager les deux équilibres chimiques suivants, dans lesquels les constituants sont des gaz parfaits :
 $
     #ce("CH4(g)") + #ce("H2O(g)") &= #ce("CO(g)") + 3 #ce("H2(g)") #h(1.5cm) & K^circ_1 = num("1.306") \
     #ce("CO(g)") + #ce("H2O(g)") &= #ce("CO2(g)") + #ce("H2(g)") & K^circ_2 = num("2.204")
@@ -65,7 +65,7 @@ La phase gazeuse se comporte comme un mélange parfait de gaz parfaits.
     $
 ]
 
-On souhaite obtenir la composition du système à l'équilibre lorsque la pression $P_"tot"$ est égale à $P^circ = #qty("1", "bar")$.
+On souhaite obtenir la composition du système à l'équilibre lorsque la pression $P_"tot"$ est égale à $P^circ = #quan[1 bar]$.
 
 #question(
     coups-de-pouce: "Utiliser la loi de Guldberg et Waage pour les deux réactions.",

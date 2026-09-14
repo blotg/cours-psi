@@ -176,7 +176,7 @@ Entre $t$ et $t+dd(t)$, l'électron a une probabilité $dd(t)/tau$ de subir une 
 )[
     Graphiquement, estimer un ordre de grandeur de la durée du régime transitoire.
 ][
-    Le régime transitoire dure environ #qty("3e-14", "s").
+    Le régime transitoire dure environ #quan[3e-14 s].
 ]
 
 Le coefficient de variation, aussi appelé écart-type relatif est défini par $"CV" = sigma/mu$ où $sigma$ est l'écart-type et $mu$ la moyenne.

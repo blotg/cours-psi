@@ -6,7 +6,7 @@
     difficulté: 1,
 )
 
-On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10", "O")$, $L=#qty("100", "mH")$ et $E = #qty("100", "V")$.
+On s'intéresse à un onduleur alimentant une charge inductive avec $R=#quan[10 Ω]$, $L=#quan[100 mH]$ et $E = #quan[100 V]$.
 
 #figure(
     circuit({
@@ -125,7 +125,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#qty("10"
 
 Les interrupteurs $K_1$ et $K_3$ sont fermés entre $t=n T_"MLI"$ et $t=n T_"MLI" + alpha(t) T_"MLI"$, tandis que les interrupteurs $K_2$ et $K_4$ sont fermés entre $t=n T_"MLI" + alpha(t) T_"MLI"$ et $t=(n+1)T_"MLI"$, avec $ alpha(t) = (1 + cos((2 pi)/T t) ) / 2 $
 
-On prendra $T = #qty("1", "s")$ et $T_"MLI" = #qty("10", "ms")$.
+On prendra $T = #quan[1 s]$ et $T_"MLI" = #quan[10 ms]$.
 
 #question(
     coups-de-pouce: (

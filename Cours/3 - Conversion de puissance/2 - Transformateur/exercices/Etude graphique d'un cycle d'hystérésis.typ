@@ -32,7 +32,7 @@ Sur le noyau ferromagnétique de forme torique, de section S, de circonférence 
 
 #let fréquence = 50
 #let pulsation = 2 * calc.pi * fréquence
-Le générateur de f.é.m. $e(t) = E cos(omega t)$ est une source de tension sinusoïdale de fréquence $f = qty("50", "Hz")$.
+Le générateur de f.é.m. $e(t) = E cos(omega t)$ est une source de tension sinusoïdale de fréquence $f = #quan[50 Hz]$.
 
 #let R = 1e5
 La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$ est négligeable devant le produit $n_1i_1$.
@@ -54,10 +54,10 @@ La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$
         "A quelle condition la fonction de transfert du filtre RC correspond-elle à un intégrateur ?",
     ),
 )[
-    Dans ce montage, le circuit $R C$ (entrée $u_2$, sortie $v_y$) fonctionne en intégrateur. Quelle condition la capacité $C$ doit-elle satisfaire pour cela ? Quelle(s) valeur(s) peut-on choisir pour $C$ parmi les valeurs usuelles suivantes : $qty("10", "nF"), qty("47", "nF"), qty("100", "nF"), qty("1", "uF")$ et $qty("4.7", "uF")$ ?
+    Dans ce montage, le circuit $R C$ (entrée $u_2$, sortie $v_y$) fonctionne en intégrateur. Quelle condition la capacité $C$ doit-elle satisfaire pour cela ? Quelle(s) valeur(s) peut-on choisir pour $C$ parmi les valeurs usuelles suivantes : $#quan[10 nF], #quan[47 nF], #quan[100 nF], #quan[1 uF]$ et $#quan[4.7 uF]$ ?
 ][
     $ underline(H)=1/(j C omega)/(R + 1/(j C omega)) = 1/(j C omega R + 1) $
-    $underline(H) approx 1/(j C omega R)$ si $C omega R >> 1$. Donc $C >> 1/(omega R) = 1/(2 pi f R) approx #qty(1 / (pulsation * R), "F", chiffres: 2)$. Parmi les valeurs proposées, on peut choisir $C = qty("1", "uF")$ ou $C = qty("4.7", "uF")$.
+    $underline(H) approx 1/(j C omega R)$ si $C omega R >> 1$. Donc $C >> 1/(omega R) = 1/(2 pi f R) approx #qty(1 / (pulsation * R), "F", chiffres: 2)$. Parmi les valeurs proposées, on peut choisir $C = #quan[1 uF]$ ou $C = #quan[4.7 uF]$.
 ]
 
 #question(
@@ -93,7 +93,7 @@ La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$
 #let R0 = 5
 #let n1 = 50
 #let n2 = 50
-Dans toute la suite, on prendra $l = qty("50", "cm")$, $S = qty("20", "cm^2")$, $C = qty("1", "uF")$, $R_0 = qty("5", "O")$ et $n_1 = n_2 = 50$ pour les applications numériques.
+Dans toute la suite, on prendra $l = #quan[50 cm]$, $S = #quan[20 cm^2]$, $C = #quan[1 uF]$, $R_0 = #quan[5 Ω]$ et $n_1 = n_2 = 50$ pour les applications numériques.
 
 #let CB = (R * C) / (n2 * S)
 #let CH = n1 / (l * R0)
@@ -109,7 +109,7 @@ Dans toute la suite, on prendra $l = qty("50", "cm")$, $S = qty("20", "cm^2")$, 
     $(R C)/(n_2 S) = #qty(CB, "T/V", chiffres: 1)$
 ]
 
-On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représente #qty("2", "V")). $v_y$ est en abscisse (1 graduation représente #qty("1", "V")).
+On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représente #quan[2 V]). $v_y$ est en abscisse (1 graduation représente #quan[1 V]).
 
 #figure(image("../figures/hysteresis.png", width: 10cm))
 
@@ -122,9 +122,9 @@ On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représ
 )[
     Déduire de cet oscillogramme les valeurs approximatives du champ magnétique rémanent $B_r$, de l'aimantation rémanente $M_r$ et du champ coercitif $H_c$.
 ][
-    Le champ magnétique rémanent est à #num("1.3") carreaux, soit $v_y = #qty("1.3", "V")$ et donc $B_r = #qty(CB * 1.3, "T", chiffres: 1)$.
+    Le champ magnétique rémanent est à #num("1.3") carreaux, soit $v_y = #quan[1.3 V]$ et donc $B_r = #qty(CB * 1.3, "T", chiffres: 1)$.
 
-    L'excitation coercitive est à #num("0.5") carreaux, soit $v_x = #qty("1", "V")$ et donc $H_c = #qty(CH * 1, "A/m", chiffres: 2)$.
+    L'excitation coercitive est à #num("0.5") carreaux, soit $v_x = #quan[1 V]$ et donc $H_c = #qty(CH * 1, "A/m", chiffres: 2)$.
 
     $M = B/mu_0 - H$ d'où $M_r = B/mu_0 = #qty(CB * 1.3 / mu0, "A/m", chiffres: 1)$
 ]
@@ -148,9 +148,9 @@ Dans le schéma du montage, on peut raisonnablement négliger la puissance dissi
 )[
     Sur l'oscillogramme, on évalue l'aire du cycle à 6 carreaux. En déduire la valeur de la puissance moyenne $P_H$ dissipée à cause du phénomène d'hystérésis dans l'ensemble du tore dans l'essai réalisé.
 ][
-    1 carreau correspond à une aire sur le cycle d'hystérésis de #qty("2", "V^2").
+    1 carreau correspond à une aire sur le cycle d'hystérésis de #quan[2 V^2].
 
-    #qty("1", "V^2") correspond à une aire $(R C)/(n_2 S) n_1/(l R_0)$.
+    #quan[1 V^2] correspond à une aire $(R C)/(n_2 S) n_1/(l R_0)$.
 
     Finalement, $cal(A) = 6 times 2 times #num(CH, chiffres: 2) times #num(CB, chiffres: 2) = #qty(12 * CH * CB, "A/m T", chiffres: 1)$.
 ]

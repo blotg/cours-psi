@@ -10,7 +10,7 @@
     recto: [Libre parcours moyen : définition et ordres de grandeur],
     verso: [Distance moyenne parcourue par une particule entre deux chocs.
 
-        Dans un gaz aux conditions usuelles, de l'ordre de #qty("100", "nm") ; dans un liquide, de l'ordre de la distance intermoléculaire.],
+        Dans un gaz aux conditions usuelles, de l'ordre de #quan[100 nm] ; dans un liquide, de l'ordre de la distance intermoléculaire.],
 )
 #flashcard(
     recto: [Vitesse quadratique moyenne],
@@ -37,7 +37,7 @@
 )
 #flashcard(
     recto: [Équation d'état du gaz parfait (avec unités)],
-    verso: [$ P V = n R T $ avec $P$ en #unit("Pa"), $V$ en #unit("m^3"), $n$ en #unit("mol"), $R = #qty("8.314", "J/K/mol")$ et $T$ en #unit("K"). $P V$ et $n R T$ sont des énergies, en #unit("J").],
+    verso: [$ P V = n R T $ avec $P$ en #unit("Pa"), $V$ en #unit("m^3"), $n$ en #unit("mol"), $R = #quan[8.314 J/K/mol]$ et $T$ en #unit("K"). $P V$ et $n R T$ sont des énergies, en #unit("J").],
 )
 #flashcard(
     recto: [Modèle de la phase condensée],

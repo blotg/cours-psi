@@ -6,7 +6,7 @@
 
 Un acide gras insaturé $ce("A")$ est obtenu par saponification d'un ester $ce("E")$ en présence d'un large excès de soude. Cette transformation est modélisée par l'équation
 $ ce("E(aq) + HO-(aq) -> A(aq) + alcool(aq)") $
-En présence de ce large excès de soude, la vitesse de réaction est du premier ordre par rapport à l'ester, avec une constante de vitesse $k_"app" = qty("6.0E-2", "/min")$.
+En présence de ce large excès de soude, la vitesse de réaction est du premier ordre par rapport à l'ester, avec une constante de vitesse $k_"app" = #quan[6.0E-2 /min]$.
 
 #question(
     coups-de-pouce: (
@@ -14,7 +14,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
         "Résoudre l'équation différentielle pour exprimer la concentration d'ester en fonction du temps.",
     ),
 )[
-    Dans un premier temps, on emploie un *réacteur fermé* contenant #qty("40", "L") de mélange homogène. Quelle doit être la durée de l'opération pour obtenir un taux de conversion égal à #qty("98", "%") ?
+    Dans un premier temps, on emploie un *réacteur fermé* contenant #quan[40 L] de mélange homogène. Quelle doit être la durée de l'opération pour obtenir un taux de conversion égal à #quan[98 %] ?
 ][
     $
         v = k_"app" [ce("E")] = -dv([ce("E")], t)
@@ -23,7 +23,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     $
         [ce("E")](t) = [ce("E")]_0 exp(-k_"app" t)
     $
-    On note $t_qty("98", "%")$ la durée au bout de laquelle #qty("98", "%") de l'ester a réagi. On a donc
+    On note $t_qty("98", "%")$ la durée au bout de laquelle #quan[98 %] de l'ester a réagi. On a donc
     $
         [ce("E")](t_qty("98", "%")) = [ce("E")]_0 (1 - 0.98) = [ce("E")]_0 exp(-k_"app" t_qty("98", "%"))
     $
@@ -42,7 +42,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
         "Relier la concentration en entrée, la concentration en sortie, le temps de passage et la constante $k_\"app\"$.",
     ),
 )[
-    On désire cette fois traiter #qty("40", "L/h") de solution dans un *réacteur ouvert* parfaitement agité continu pour obtenir un taux de conversion de #qty("98", "%"). Quels doivent être le temps de passage et le volume du réacteur ?
+    On désire cette fois traiter #quan[40 L/h] de solution dans un *réacteur ouvert* parfaitement agité continu pour obtenir un taux de conversion de #quan[98 %]. Quels doivent être le temps de passage et le volume du réacteur ?
 ][
     La conservation de l'ester s'écrit
     $
@@ -56,7 +56,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     $
         tau = ([ce("E")]_e - [ce("E")]_s ) / (k_"app" [ce("E")]_s)
     $
-    Pour un taux de conversion de #qty("98", "%"), on a $[ce("E")]_s = [ce("E")]_e (1 - 0.98) = 0.02 [ce("E")]_e$. On en déduit
+    Pour un taux de conversion de #quan[98 %], on a $[ce("E")]_s = [ce("E")]_e (1 - 0.98) = 0.02 [ce("E")]_e$. On en déduit
     #let kapp = 6e-2
     #let tau98 = (1 - 0.02) / (kapp * 0.02)
     $
@@ -77,7 +77,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
         "Exprimer $[ce(\"E\")]_10$ en fonction de $[ce(\"E\")]_0$, $k_\"app\"$ et $tau$.",
     ),
 )[
-    On désire, enfin, traiter #qty("40", "L/h") de solution dans une cascade de $n=10$ réacteurs parfaitement agités continus de mêmes dimensions, associés en série. On suppose que le temps de passage est le même dans chaque réacteur. Quels doivent être le temps de passage et le volume total des réacteurs pour obtenir un taux de conversion de #qty("98", "%") ?
+    On désire, enfin, traiter #quan[40 L/h] de solution dans une cascade de $n=10$ réacteurs parfaitement agités continus de mêmes dimensions, associés en série. On suppose que le temps de passage est le même dans chaque réacteur. Quels doivent être le temps de passage et le volume total des réacteurs pour obtenir un taux de conversion de #quan[98 %] ?
 ][
     On peut reprendre le résultat précédent entre le réacteur $i$ et le réacteur $i+1$ :
     $
@@ -91,7 +91,7 @@ En présence de ce large excès de soude, la vitesse de réaction est du premier
     $
         [ce("E")]_10 = [ce("E")]_0 (1 / (1 + k_"app" tau))^10
     $
-    Pour un taux de conversion de #qty("98", "%"), on a
+    Pour un taux de conversion de #quan[98 %], on a
     $
         [ce("E")]_10 = [ce("E")]_0 (1 - 0.98) = 0.02 [ce("E")]_0
     $

@@ -43,7 +43,7 @@
 
 #flashcard(
     recto: [Produit ionique de l'eau],
-    verso: [$K_e = a(ce("H3O+"))_"éq" a(ce("HO-"))_"éq" = #num("e-14")$ à #qty("25", "Celsius"). C'est la constante d'équilibre de la réaction de autoprotolyse de l'eau #ce("2 H2O = H3O+ + HO-").],
+    verso: [$K_e = a(ce("H3O+"))_"éq" a(ce("HO-"))_"éq" = #num("e-14")$ à #quan[25 °C]. C'est la constante d'équilibre de la réaction de autoprotolyse de l'eau #ce("2 H2O = H3O+ + HO-").],
 )
 
 #question-de-colle(

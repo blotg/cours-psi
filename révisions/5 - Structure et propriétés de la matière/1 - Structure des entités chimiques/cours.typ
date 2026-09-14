@@ -23,7 +23,7 @@
 
 #flashcard(
     recto: [Ordre de grandeur d'une liaison covalente],
-    verso: [Longueur de l'ordre de #qty("100", "pm").],
+    verso: [Longueur de l'ordre de #quan[100 pm].],
 )
 
 = Géométrie des molécules

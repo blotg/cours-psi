@@ -15,9 +15,9 @@ Pour chaque réaction, dire si elle est favorisée par une haute ou une basse te
 ]
 
 #question()[
-    #ce("N2(g)") + 3 #ce("H2(g)") #ce("=") 2 #ce("NH3(g)") #h(1cm) ($Delta_f H^circ (#ce("NH3(g)")) = #qty("-46", "kJ/mol")$)
+    #ce("N2(g)") + 3 #ce("H2(g)") #ce("=") 2 #ce("NH3(g)") #h(1cm) ($Delta_f H^circ (#ce("NH3(g)")) = #quan[-46 kJ/mol]$)
 ][
-    $Delta_r H^circ = 2 Delta_f H^circ (#ce("NH3(g)")) - Delta_f H^circ (#ce("N2(g)")) - 3 Delta_f H^circ (#ce("H2(g)")) = #qty("-92", "kJ/mol")$ car #ce("N2(g)") et #ce("H2(g)") sont des corps simples dans leur état standard.
+    $Delta_r H^circ = 2 Delta_f H^circ (#ce("NH3(g)")) - Delta_f H^circ (#ce("N2(g)")) - 3 Delta_f H^circ (#ce("H2(g)")) = #quan[-92 kJ/mol]$ car #ce("N2(g)") et #ce("H2(g)") sont des corps simples dans leur état standard.
 
     La réaction est exothermique, elle est donc favorisée par une basse température.
 
@@ -38,7 +38,7 @@ Pour chaque réaction, dire si elle est favorisée par une haute ou une basse te
     Dans l'approximation d'Ellingham,
     $Delta_r G^circ = Delta_r H^circ - T Delta_r S^circ$, soit en identifiant
     $
-      Delta_r H^circ = #qty("178301", "J/mol") > 0
+      Delta_r H^circ = #quan[178301 J/mol] > 0
     $
     La réaction est endothermique, elle est donc favorisée par une haute température.
 

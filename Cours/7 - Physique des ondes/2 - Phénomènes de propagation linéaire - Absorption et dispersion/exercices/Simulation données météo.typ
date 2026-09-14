@@ -5,7 +5,7 @@
     numérique: true,
 )
 
-Dans le sol, la température vérifie une équation de diffusion de coefficient $D approx qty("1e-6", "m^2/s")$. Les données à la surface sont acquises régulièrement par des stations météorologiques. Les données pour Quimper sont disponibles à l'adresse suivante : https://nuage03.apps.education.fr/index.php/s/LgXjiwkxJxcrZmz. Le temps est donné en secondes depuis le 1er janvier 1970 à 00:00:00 UTC. La température est donnée en degrés Celsius. Les mesures sont effectuées toutes les heures.
+Dans le sol, la température vérifie une équation de diffusion de coefficient $D approx #quan[1e-6 m^2/s]$. Les données à la surface sont acquises régulièrement par des stations météorologiques. Les données pour Quimper sont disponibles à l'adresse suivante : https://nuage03.apps.education.fr/index.php/s/LgXjiwkxJxcrZmz. Le temps est donné en secondes depuis le 1er janvier 1970 à 00:00:00 UTC. La température est donnée en degrés Celsius. Les mesures sont effectuées toutes les heures.
 
 On peut importer les données dans Python grâce aux instructions suivantes
 ```python
@@ -26,7 +26,7 @@ Tz0 = data[:,1] # température à la surface (en z=0) en degrés Celsius
     ```
 ]
 
-On souhaite simuler la température dans le sol sur une profondeur de #qty("10", "m") à l'aide de la méthode d'Euler explicite généralisée aux équations aux dérivées partielles.
+On souhaite simuler la température dans le sol sur une profondeur de #quan[10 m] à l'aide de la méthode d'Euler explicite généralisée aux équations aux dérivées partielles.
 
 La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j Delta z$ est notée $T_(i,j)$. On choisit #num("101") points de profondeur.
 
@@ -41,7 +41,7 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
 )[
     Calculer le pas de profondeur $Delta z$. La condition de stabilité de la méthode d'Euler $2 D Delta t / Delta z^2 < 1$ est-elle vérifiée ?
 ][
-    Le pas de profondeur est donné par $Delta z = 10 / 100 = #qty("0.1", "m")$.
+    Le pas de profondeur est donné par $Delta z = 10 / 100 = #quan[0.1 m]$.
 
     $
         2 D (Delta t) / (Delta z^2) = 2 times #num("1e-6") times #num("3600") / #num("0.1")^2 = #num(2 * D * dt / calc.pow(dz, 2), chiffres: 2) < 1
@@ -130,11 +130,11 @@ La température à l'instant $t_i = t_0 + i Delta t$ à la profondeur $z_j = j D
 
 #question(
     coups-de-pouce: (
-        "Quel indice correspond à la profondeur de #qty(\"10\",\"cm\") ? De #qty(\"1\",\"m\") ? De #qty(\"10\",\"m\") ?",
+        "Quel indice correspond à la profondeur de #quan[10 cm] ? De #quan[1 m] ? De #quan[10 m] ?",
         "On peut utiliser la notation `T[:,j]` pour accéder à toutes les lignes d'une colonne `j` et `T[i,:]` pour accéder à toutes les colonnes d'une ligne `i`."
     )
 )[
-    Tracer la température en fonction du temps pour des profondeurs de #qty("0","m"), #qty("10","cm"), #qty("1","m") et #qty("10","m").
+    Tracer la température en fonction du temps pour des profondeurs de #quan[0 m], #quan[10 cm], #quan[1 m] et #quan[10 m].
 ][
     ```python
     for j in [0, 1, 10, 100]:

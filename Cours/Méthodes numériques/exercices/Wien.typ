@@ -69,9 +69,9 @@ La fonction `solve_ivp` renvoie un objet. Si on le stocke dans la variable `solu
   "Dans quelle plage de valeurs sont les résistances utilisées en TP ?",
   "Quelle est la condition de démarrage des oscillations vue en cours ?"
 ))[
-  Définir et affecter les variables $R=qty("1","kO")$, $C=qty("10","nF")$, $R_1$, $R_2$, $A_0=num("100000")$ et $tau=qty("0.01","s")$ avec des valeurs vraisemblables satisfaisant la condition de démarrage des oscillations.
+  Définir et affecter les variables $R=#quan[1 kΩ]$, $C=#quan[10 nF]$, $R_1$, $R_2$, $A_0=num("100000")$ et $tau=#quan[0.01 s]$ avec des valeurs vraisemblables satisfaisant la condition de démarrage des oscillations.
 ][
-  La condition de démarrage vue en cours est $1 + R_2/R_1 > 3$, soit $R_2 > 2 R_1$. Il faut la prendre avec une marge : la bande passante finie de l'ALI atténue légèrement le gain à $omega_0$, ce qui relève le seuil (ici à $R_2 approx qty("2002", "O")$).
+  La condition de démarrage vue en cours est $1 + R_2/R_1 > 3$, soit $R_2 > 2 R_1$. Il faut la prendre avec une marge : la bande passante finie de l'ALI atténue légèrement le gain à $omega_0$, ce qui relève le seuil (ici à $R_2 approx #quan[2002 Ω]$).
   ```python
 R = 1000 # Ohm
 C = 10E-9 # F
@@ -126,13 +126,13 @@ plt.show()
 ))[
   Vérifier la condition de démarrage des oscillations.
 ][
-  Le filtre de Wien atténue d'un facteur $3$ à $omega_0 = 1\/(R C)$ : les oscillations démarrent si l'amplificateur compense au moins cette atténuation, soit $1 + R_2\/R_1 > 3$, c'est-à-dire $R_2 > 2 R_1 = qty("2000", "O")$.
+  Le filtre de Wien atténue d'un facteur $3$ à $omega_0 = 1\/(R C)$ : les oscillations démarrent si l'amplificateur compense au moins cette atténuation, soit $1 + R_2\/R_1 > 3$, c'est-à-dire $R_2 > 2 R_1 = #quan[2000 Ω]$.
 
   En relançant la simulation à $R_1$ fixé :
-  - $R_2 = qty("1900", "O")$ (gain $2{,}9$) : l'amplitude décroit, l'oscillateur ne démarre pas ;
-  - $R_2 = qty("2100", "O")$ (gain $3{,}1$) : l'amplitude croit exponentiellement.
+  - $R_2 = #quan[1900 Ω]$ (gain $2{,}9$) : l'amplitude décroit, l'oscillateur ne démarre pas ;
+  - $R_2 = #quan[2100 Ω]$ (gain $3{,}1$) : l'amplitude croit exponentiellement.
 
-  Le seuil observé est en fait très légèrement supérieur à $qty("2000", "O")$ : à $omega_0$, la bande passante finie de l'ALI abaisse le gain de $1+R_2\/R_1$ à $(1+R_2\/R_1)\/sqrt(1+(omega_0 (1+R_2\/R_1) tau\/A_0)^2)$. Avec les valeurs choisies, le gain de $3{,}000$ obtenu à $R_2 = qty("2000", "O")$ ne suffit pas tout à fait et l'amplitude décroit encore ; il faut $R_2 gt.tilde qty("2002", "O")$.
+  Le seuil observé est en fait très légèrement supérieur à $#quan[2000 Ω]$ : à $omega_0$, la bande passante finie de l'ALI abaisse le gain de $1+R_2\/R_1$ à $(1+R_2\/R_1)\/sqrt(1+(omega_0 (1+R_2\/R_1) tau\/A_0)^2)$. Avec les valeurs choisies, le gain de $3{,}000$ obtenu à $R_2 = #quan[2000 Ω]$ ne suffit pas tout à fait et l'amplitude décroit encore ; il faut $R_2 gt.tilde #quan[2002 Ω]$.
 ]
 
 #question(coups-de-pouce: (
@@ -142,8 +142,8 @@ plt.show()
   Vérifier la valeur de la période des oscillations.
 ][
   Le filtre de Wien n'a un déphasage nul qu'à $omega_0 = 1\/(R C)$ : c'est la seule pulsation à laquelle la condition de bouclage peut être satisfaite. La période attendue vaut donc
-  $ T = (2 pi)/omega_0 = 2 pi R C = 2 pi times 1000 times 10 dot 10^(-9) = #qty("63", "us") $
-  soit une fréquence de $#qty("16", "kHz")$. On la retrouve sur le graphe en mesurant l'écart entre deux maximums successifs.
+  $ T = (2 pi)/omega_0 = 2 pi R C = 2 pi times 1000 times 10 dot 10^(-9) = #quan[63 us] $
+  soit une fréquence de $#quan[16 kHz]$. On la retrouve sur le graphe en mesurant l'écart entre deux maximums successifs.
 ]
 
 Dans la suite, on souhaite se passer de la fonction `solve_ivp` et implémenter nous-même la méthode d'Euler.
@@ -180,7 +180,7 @@ for i in range(1,N):
 ][
   Il ne suffit pas d'écrêter $v$ après chaque pas : l'expression de $dv(w,t)$ a été obtenue en y *substituant* $dv(v,t)$ du régime linéaire, et cette substitution n'est plus valable dès que l'ALI sature. Il faut calculer $dv(v,t)$ d'abord — nul quand la sortie est bloquée — puis l'injecter dans $dv(w,t)$.
 
-  Il faut aussi simuler plus longtemps : partant de $qty("1e-4", "V")$, il faut une quarantaine de périodes pour atteindre la saturation.
+  Il faut aussi simuler plus longtemps : partant de $#quan[1e-4 V]$, il faut une quarantaine de périodes pour atteindre la saturation.
   ```python
 def F_sat(t, Y):
   u,v,w = Y
@@ -201,7 +201,7 @@ for i in range(1,N):
     Y[i][1] = min(max(Y[i][1], -Vsat), Vsat)
     t[i] = t[i-1] + Delta_t
 ```
-  En régime établi, $v$ est un signal carré à $plus.minus V_"sat"$ et $u$, filtré par le pont de Wien, reste quasi sinusoïdal d'amplitude $approx qty("5.5", "V")$.
+  En régime établi, $v$ est un signal carré à $plus.minus V_"sat"$ et $u$, filtré par le pont de Wien, reste quasi sinusoïdal d'amplitude $approx #quan[5.5 V]$.
 ]
 
 ]

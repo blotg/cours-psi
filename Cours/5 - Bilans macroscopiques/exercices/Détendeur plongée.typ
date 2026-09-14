@@ -4,7 +4,7 @@
     titre: "Détendeur de plongée",
 )
 
-Un détendeur de plongée est un dispositif qui permet de réduire la pression de l'air comprimé contenu dans une bouteille de plongée (#qty("200", "bar")) avant qu'il n'arrive au plongeur.
+Un détendeur de plongée est un dispositif qui permet de réduire la pression de l'air comprimé contenu dans une bouteille de plongée (#quan[200 bar]) avant qu'il n'arrive au plongeur.
 
 Cette détente est faite de façon adiabatique au travers d'un étranglement étroit sans pièce mobile.
 
@@ -39,11 +39,11 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal.
         "Quelle est l'allure d'une isenthalpe sur le diagramme (P,h) ?",
     ),
 )[
-    Déterminer une plage de température pour l'air à la sortie du détendeur si la température initiale est de #qty("20", "Celsius").
+    Déterminer une plage de température pour l'air à la sortie du détendeur si la température initiale est de #quan[20 °C].
 ][
-    On place le point initial sur l'isotherme #qty("20", "Celsius") du diagramme (P,h) à la pression #qty("200", "bar"). On suit l'isenthalpe (verticale sur un diagramme $(P,h)$) vers le bas jusqu'à la pression de sortie (environ #qty("1", "bar")). On se trouve entre les isothermes #qty("0", "Celsius") et #qty("-20", "Celsius"), donc
+    On place le point initial sur l'isotherme #quan[20 °C] du diagramme (P,h) à la pression #quan[200 bar]. On suit l'isenthalpe (verticale sur un diagramme $(P,h)$) vers le bas jusqu'à la pression de sortie (environ #quan[1 bar]). On se trouve entre les isothermes #quan[0 °C] et #quan[-20 °C], donc
     $
-        T_s in [#qty("-20", "Celsius"), #qty("0", "Celsius")]
+        T_s in [#quan[-20 °C], #quan[0 °C]]
     $
 ]
 
@@ -54,8 +54,8 @@ L'écoulement de l'air dans le détendeur est stationnaire, lent et horizontal.
 ]
 
 Ce n'est pas confortable pour un plongeur de respirer un air si froid. Pour pallier ce problème, la détente est en réalité réalisée en trois étapes :
-- détente isenthalpique dans un premier détendeur au niveau de la bouteille pour atteindre une pression de #qty("10", "bar"),
-- réchauffage isobare de l'air jusqu'à #qty("20", "Celsius") par échange avec l'eau
+- détente isenthalpique dans un premier détendeur au niveau de la bouteille pour atteindre une pression de #quan[10 bar],
+- réchauffage isobare de l'air jusqu'à #quan[20 °C] par échange avec l'eau
 - détente adiabatique dans un second détendeur jusqu'à la pression ambiante au niveau du masque du plongeur.
 
 Toutes les étapes sont faites de façon stationnaire, lente et horizontale.
@@ -63,18 +63,18 @@ Toutes les étapes sont faites de façon stationnaire, lente et horizontale.
 #question[
     Représenter la transformation globale sur le diagramme $(P,h)$. Estimer la température de l'air à la sortie du second détendeur.
 ][
-    Le point de départ est le même que précédemment : le point de l'isotherme #qty("20", "Celsius") à la pression #qty("200", "bar"). On descend verticalement jusqu'à la pression #qty("10", "bar") (première détente isenthalpique), puis on se déplace horizontalement vers la droite  jusqu'à l'isotherme #qty("20", "Celsius") (réchauffage isobare), enfin on descend verticalement jusqu'à la pression ambiante (seconde détente isenthalpique).
+    Le point de départ est le même que précédemment : le point de l'isotherme #quan[20 °C] à la pression #quan[200 bar]. On descend verticalement jusqu'à la pression #quan[10 bar] (première détente isenthalpique), puis on se déplace horizontalement vers la droite  jusqu'à l'isotherme #quan[20 °C] (réchauffage isobare), enfin on descend verticalement jusqu'à la pression ambiante (seconde détente isenthalpique).
 
-    À la pression finale, les isothermes sont régulièrement espacées, on peut lire directement la température de l'air à la sortie du second détendeur : elle est d'environ #qty("18", "Celsius").
+    À la pression finale, les isothermes sont régulièrement espacées, on peut lire directement la température de l'air à la sortie du second détendeur : elle est d'environ #quan[18 °C].
 ]
 
-Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante au niveau de son masque.
+Un plongeur respire en moyenne #quan[15 L/min] d'air à la pression ambiante au niveau de son masque.
 
 #let Dm = 1 / 0.8 * 15 / 1e3 / 60
 #question[
     Quelle est la masse volumique de l'air arrivant au plongeur ? Calculer le débit massique d'air dans le système de détente.
 ][
-    L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume massique d'environ #qty("0.8", "m^3/kg"), soit une masse volumique de
+    L'isochore la plus proche du point final sur le diagramme $(P,h)$ correspond à un volume massique d'environ #quan[0.8 m^3/kg], soit une masse volumique de
     $
         mu approx 1/0.8 approx #qty(1 / 0.8, "kg/m^3", chiffres: 2)
     $
@@ -86,7 +86,7 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 #question[
     Calculer la puissance échangée avec l'eau lors du réchauffage (2e étape).
 ][
-    Lors du réchauffage, la variation d'enthalpie massique est lue à environ #qty("30", "kJ/kg").
+    Lors du réchauffage, la variation d'enthalpie massique est lue à environ #quan[30 kJ/kg].
     
     Le PPI s'écrit
     $
@@ -95,9 +95,9 @@ Un plongeur respire en moyenne #qty("15", "L/min") d'air à la pression ambiante
 ]
 
 #question[
-    Le diamètre intérieur des tuyaux du détendeur est de #qty("1", "cm"). Calculer la vitesse débitante de l'air à la sortie de la bouteille (avant le premier détendeur).
+    Le diamètre intérieur des tuyaux du détendeur est de #quan[1 cm]. Calculer la vitesse débitante de l'air à la sortie de la bouteille (avant le premier détendeur).
 ][
-    En sortie de bouteille, on lit sur le diagramme $(P,h)$ un volume massique d'environ #qty("0.004", "m^3/kg"), soit une masse volumique de
+    En sortie de bouteille, on lit sur le diagramme $(P,h)$ un volume massique d'environ #quan[0.004 m^3/kg], soit une masse volumique de
     $
         mu approx 1 / 0.004 = #qty(1 / 0.004, "kg/m^3", chiffres: 2)
     $

@@ -12,7 +12,7 @@ Le paquet d'onde est connu en $x=0$ :
 $
     s(0,t)=f(t,0,Delta t) cos(omega t)
 $
-où $f(t,0,Delta t)$ est la fonction gaussienne centrée en $0$ et d'extension temporelle $Delta t$. La porteuse a pour fréquence #qty("2", "Hz").
+où $f(t,0,Delta t)$ est la fonction gaussienne centrée en $0$ et d'extension temporelle $Delta t$. La porteuse a pour fréquence #quan[2 Hz].
 
 Pour déterminer comment le paquet d'onde se propage, on le décompose grâce au théorème de Fourier et on étudie la propagation de chaque signal monochromatique composant le paquet d'onde.
 
@@ -166,7 +166,7 @@ La fonction #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.ir
 ]
 
 #question()[
-    Tracer l'onde après propagation sur une longueur $x = #qty("3", "m")$ pour une onde vérifiant l'équation de d'Alembert puis dans un plasma. Vérifier l'existence d'un étalement du paquet d'onde pour l'onde dans un plasma. Est-ce que les hautes fréquences ou les basses fréquences se propagent plus vite ?
+    Tracer l'onde après propagation sur une longueur $x = #quan[3 m]$ pour une onde vérifiant l'équation de d'Alembert puis dans un plasma. Vérifier l'existence d'un étalement du paquet d'onde pour l'onde dans un plasma. Est-ce que les hautes fréquences ou les basses fréquences se propagent plus vite ?
 ][
     ```python
     plt.figure(3)

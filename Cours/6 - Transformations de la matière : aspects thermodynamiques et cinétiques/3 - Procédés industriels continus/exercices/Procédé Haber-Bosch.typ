@@ -9,7 +9,7 @@
 On s'intéresse à la synthèse de l'ammoniac #ce("NH3") par le procédé Haber-Bosch, qui combine l'azote #ce("N2") et l'hydrogène #ce("H2") selon la réaction chimique
 $ ce("N2 + 3H2 -> 2NH3") $
 
-La réaction est réalisée dans un réacteur piston adiabatique de section $S = #qty("5", "cm^2")$, de longueur $L = #qty("6", "m")$ à la pression $P=qty("200", "bar")$.
+La réaction est réalisée dans un réacteur piston adiabatique de section $S = #quan[5 cm^2]$, de longueur $L = #quan[6 m]$ à la pression $P=#quan[200 bar]$.
 
 La vitesse volumique de réaction à la position $x$ dans le réacteur dépend des pressions partielles et s'écrit
 $ r = k(T) (P_ce("N2")P_ce("H2")^3-(P_ce("NH3")^2 standard(P)^2)/(K^circ (T))) $
@@ -146,7 +146,7 @@ On souhaite déterminer numériquement les profils de débits molaires et de tem
     ```
 ]
 
-Les réactifs sont introduits dans le réacteur dans les proportions stœchiométriques, sans ammoniac initialement et avec un débit volumique total de #qty("4000", "m^3/h") et une température de $#qty("500", "K")$.
+Les réactifs sont introduits dans le réacteur dans les proportions stœchiométriques, sans ammoniac initialement et avec un débit volumique total de #quan[4000 m^3/h] et une température de $#quan[500 K]$.
 
 #question[
     Compléter le code Python suivant pour résoudre numériquement le problème.
@@ -199,11 +199,11 @@ Les réactifs sont introduits dans le réacteur dans les proportions stœchiomé
 ]
 
 *Données*
-- $R = qty("8.314", "J/mol/K")$
-- $E_a = #qty("160", "kJ/mol")$
-- $A = #qty("1e-8", "mol/s/m^3/Pa^4")$ le facteur préexponentiel
-- $Delta_r H^circ = #qty("-92.2", "kJ/mol")$
-- $Delta_r S^circ = #qty("-198", "J/mol/K")$
+- $R = #quan[8.314 J/mol/K]$
+- $E_a = #quan[160 kJ/mol]$
+- $A = #quan[1e-8 mol/s/m^3/Pa^4]$ le facteur préexponentiel
+- $Delta_r H^circ = #quan[-92.2 kJ/mol]$
+- $Delta_r S^circ = #quan[-198 J/mol/K]$
 
 #figure(
     table(

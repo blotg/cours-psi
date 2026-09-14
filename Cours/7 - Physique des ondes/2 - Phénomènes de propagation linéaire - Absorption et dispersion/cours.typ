@@ -45,7 +45,7 @@ La loi d'Ohm locale a été démontrée en supposant le champ électrique unifor
 ]
 
 #application[
-    On peut supposer le champ uniforme à condition qu'il varie peu à l'échelle du libre parcours moyen des porteurs de charge ($qty("e-8","m")$). Calculer jusqu'à quelle fréquence cette hypothèse est valide dans le cuivre.
+    On peut supposer le champ uniforme à condition qu'il varie peu à l'échelle du libre parcours moyen des porteurs de charge ($#quan[e-8 m]$). Calculer jusqu'à quelle fréquence cette hypothèse est valide dans le cuivre.
 ]
 
 La loi d'Ohm locale reste valable à condition que le temps moyen entre deux chocs soit très petit devant la période de l'onde.
@@ -56,7 +56,7 @@ La loi d'Ohm locale reste valable à condition que le temps moyen entre deux cho
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
-        [La fréquence $f < qty("e14","Hz")$],
+        [La fréquence $f < #quan[e14 Hz]$],
         [La conductivité est du même ordre de grandeur que celle du cuivre],
     ),
     grandeurs: sub-dictionary(grandeurs, ("rho",))
@@ -69,7 +69,7 @@ La loi d'Ohm locale reste valable à condition que le temps moyen entre deux cho
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
-        [La fréquence $f < qty("e14","Hz")$],
+        [La fréquence $f < #quan[e14 Hz]$],
         [La conductivité est du même ordre de grandeur que celle du cuivre],
     ),
     grandeurs: sub-dictionary(grandeurs, ("va(E)", "D", "mu_0", "gamma")),
@@ -219,23 +219,23 @@ Au fur et à mesure de la propagation dans un conducteur ohmique, l'onde électr
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
-        [La conductivité du cuivre est #qty("6e7","S/m")],
+        [La conductivité du cuivre est #quan[6e7 S/m]],
         [La fréquence est celle du secteur (50 Hz)],
     ),
 )[
-    $ delta_"cuivre" approx qty("1","cm") $
+    $ delta_"cuivre" approx #quan[1 cm] $
 ]
 
 #flashcard(
-    recto: [Profondeur de peau dans le cuivre à #qty("50","Hz")],
-    verso: [#qty("1","cm")]
+    recto: [Profondeur de peau dans le cuivre à #quan[50 Hz]],
+    verso: [#quan[1 cm]]
 )
 
 #application[
-    Calculer la profondeur de peau pour une onde thermique dans un sol de diffusivité thermique #qty("1e-6","m^2/s") en considérant les variations journalières de température.
+    Calculer la profondeur de peau pour une onde thermique dans un sol de diffusivité thermique #quan[1e-6 m^2/s] en considérant les variations journalières de température.
 ]
 
-#question-de-colle([Pour une O(P)PH vérifiant une équation de diffusion, établir la relation de dispersion. En déduire la profondeur de peau. Donner sa valeur dans le cuivre à #qty("50","Hz").])
+#question-de-colle([Pour une O(P)PH vérifiant une équation de diffusion, établir la relation de dispersion. En déduire la profondeur de peau. Donner sa valeur dans le cuivre à #quan[50 Hz].])
 
 
 == Vitesse de groupe
@@ -334,10 +334,10 @@ Un plasma ne reçoit en moyenne pas de puissance du champ électromagnétique.
 Les solutions de la relation de dispersion dépendent du signe de $1- omega_p^2/omega^2$.
 
 #application[
-    Calculer la pulsation plasma pour l'ionosphère ($n approx qty("e5","/cm^3")$).
+    Calculer la pulsation plasma pour l'ionosphère ($n approx #quan[e5 /cm^3]$).
 ]
 
-La fréquence de coupure correspondant à la pulsation plasma est de l'ordre de #qty("10","MHz") pour l'ionosphère.
+La fréquence de coupure correspondant à la pulsation plasma est de l'ordre de #quan[10 MHz] pour l'ionosphère.
 
 == Pulsation supérieure à la pulsation plasma
 Dans ce cas, la relation de dispersion a deux solutions réelles : $underline(k)= plus.minus omega/c sqrt((1-omega_p^2/ omega^2))$.

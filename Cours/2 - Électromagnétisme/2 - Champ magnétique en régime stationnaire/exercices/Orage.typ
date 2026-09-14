@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Orage", difficulté: 1)
 
-Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique rectiligne de rayon $a = qty("10", "cm")$ parcouru par un courant $I = qty("1e5", "A")$ de densité volumique de courant uniforme. On suppose dans un premier temps le courant ascendant et on néglige les effets de bord. On se place en coordonnées cylindriques d'axe $(O z)$ celui du conduit.
+Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique rectiligne de rayon $a = #quan[10 cm]$ parcouru par un courant $I = #quan[1e5 A]$ de densité volumique de courant uniforme. On suppose dans un premier temps le courant ascendant et on néglige les effets de bord. On se place en coordonnées cylindriques d'axe $(O z)$ celui du conduit.
 
 #question(coups-de-pouce: (
   "Quelle est la direction de la vitesse des électrons ? Celle du champ magnétique créé par le courant ?",
@@ -80,8 +80,8 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
 ))[
   Faire l'application numérique de cette force volumique et la comparer au poids volumique de l'air. Pourquoi les éclairs causent-ils le tonnerre#footnote[L'éclair est le résultat visible du passage du courant ; le tonnerre est le son produit.] ?
 ][
-  $ norm(va(f)_"vol") = (mu_0 I^2)/(2 pi^2 a^3) = (4 pi times 10^(-7) times (10^5)^2)/(2 pi^2 times (0.1)^3) approx qty("6e5", "N/m^3") $
-  Le poids volumique de l'air vaut $rho_"air" g approx 1.2 times 9.8 approx qty("12", "N/m^3")$, soit environ $50 000$ fois moins.
+  $ norm(va(f)_"vol") = (mu_0 I^2)/(2 pi^2 a^3) = (4 pi times 10^(-7) times (10^5)^2)/(2 pi^2 times (0.1)^3) approx #quan[6e5 N/m^3] $
+  Le poids volumique de l'air vaut $rho_"air" g approx 1.2 times 9.8 approx #quan[12 N/m^3]$, soit environ $50 000$ fois moins.
 
   La force de pincement comprime donc très violemment le gaz du canal ionisé, qui est en outre porté à très haute température par effet Joule. Cette compression brutale suivie d'une détente engendre une onde de choc dans l'air : c'est le tonnerre.
 ]

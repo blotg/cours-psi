@@ -143,7 +143,7 @@ Pour les applications industrielles, il est souvent plus pratique de travailler 
 )
 
 #application[
-    Un panneau solaire thermique reçoit une puissance de #qty("1026", "W") et est parcouru par de l'eau avec un débit #qty("60", "L/h"). L'eau (de capacité thermique massique $c=qty("4.18e3", "J/K/kg")$) rentre avec une température #qty("35", "Celsius") et circule lentement et horizontalement dans le panneau. Avec quelle température sort-elle du panneau ?
+    Un panneau solaire thermique reçoit une puissance de #quan[1026 W] et est parcouru par de l'eau avec un débit #quan[60 L/h]. L'eau (de capacité thermique massique $c=#quan[4.18e3 J/K/kg]$) rentre avec une température #quan[35 °C] et circule lentement et horizontalement dans le panneau. Avec quelle température sort-elle du panneau ?
 ]
 
 == Second principe de la thermodynamique
@@ -263,7 +263,7 @@ Le modèle de l'écoulement parfait donne des résultats conformes à l'expérie
 La relation de Bernoulli traduit la conservation de l'énergie mécanique volumique.
 
 #application[
-    Une bassine de #qty("20", "cm") de haut et remplie d'eau est percée d'un trou de #qty("1", "cm") de diamètre. L'écoulement est supposé parfait, stationnaire, incompressible et homogène. Quel est le débit d'eau passant par le trou ?
+    Une bassine de #quan[20 cm] de haut et remplie d'eau est percée d'un trou de #quan[1 cm] de diamètre. L'écoulement est supposé parfait, stationnaire, incompressible et homogène. Quel est le débit d'eau passant par le trou ?
 ]
 
 == Effet Venturi
@@ -314,7 +314,7 @@ Il est possible de faire des bilans de quantités de mouvement en écrivant le p
 )
 
 #application[
-    La fusée Ariane se propulse en éjectant des gaz vers le bas avec un débit de #qty("10", "t/s") et une vitesse de #qty("4000", "m/s"). Ariane a une masse de #qty("750", "t") dont #qty("620", "t") de carburant. Exprimer la vitesse de la fusée au cours du temps en supposant qu'elle part avec une vitesse nulle au décollage. Quelle est la vitesse de la fusée lorsqu'elle a consommé tout son carburant ?
+    La fusée Ariane se propulse en éjectant des gaz vers le bas avec un débit de #quan[10 t/s] et une vitesse de #quan[4000 m/s]. Ariane a une masse de #quan[750 t] dont #quan[620 t] de carburant. Exprimer la vitesse de la fusée au cours du temps en supposant qu'elle part avec une vitesse nulle au décollage. Quelle est la vitesse de la fusée lorsqu'elle a consommé tout son carburant ?
 ]
 
 #question-de-colle(
@@ -345,7 +345,7 @@ Il est possible de faire des bilans de moment cinétique en écrivant le théor�
 )
 
 #application[
-    Les turbines Pelton sont utilisées pour produire de l'électricité dans les centrales hydroélectriques. Elles permettent de convertir l'énergie cinétique de l'eau en travail mécanique avec un bon rendement (de l'ordre de #qty("90", "%")) lorsque les débits sont faibles mais que la pression est importante. Elles sont constituées de plusieurs augets fixés sur une roue. L'eau arrive avec une vitesse $v$ et frappe les augets puis retombe sans vitesse. Relier le couple exercé par la turbine sur l'alternateur au débit massique d'eau $D_m$, à la vitesse d'arrivée de l'eau $v$ et au rayon $R$ de la roue.
+    Les turbines Pelton sont utilisées pour produire de l'électricité dans les centrales hydroélectriques. Elles permettent de convertir l'énergie cinétique de l'eau en travail mécanique avec un bon rendement (de l'ordre de #quan[90 %]) lorsque les débits sont faibles mais que la pression est importante. Elles sont constituées de plusieurs augets fixés sur une roue. L'eau arrive avec une vitesse $v$ et frappe les augets puis retombe sans vitesse. Relier le couple exercé par la turbine sur l'alternateur au débit massique d'eau $D_m$, à la vitesse d'arrivée de l'eau $v$ et au rayon $R$ de la roue.
 
     #grid(
         columns: (1fr, 1fr),

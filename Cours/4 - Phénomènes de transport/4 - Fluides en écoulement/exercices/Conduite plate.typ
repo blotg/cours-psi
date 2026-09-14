@@ -165,7 +165,7 @@ Les effets de la gravité sont négligés et on suppose que le gradient de press
         "Relier la différence de pression entre les deux extrémités de la conduite à la dérivée de la pression (l'énoncé précise que le gradient de pression est uniforme)."
     ),
 )[
-    Calculer la résistance hydraulique de cette conduite plate pour $e=qty("1", "mm")$, $L = qty("2", "m")$ et $l = qty("2", "cm")$ et dans laquelle circule de l'eau à #qty("20", "Celsius").
+    Calculer la résistance hydraulique de cette conduite plate pour $e=#quan[1 mm]$, $L = #quan[2 m]$ et $l = #quan[2 cm]$ et dans laquelle circule de l'eau à #quan[20 °C].
 ][
     $
         R_H = (Delta P)/D_V

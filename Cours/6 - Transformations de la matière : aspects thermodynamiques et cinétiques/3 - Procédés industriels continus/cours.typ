@@ -158,7 +158,7 @@ Le temps de passage représente le temps moyen qu'un réactif passe dans le réa
 )
 
 #application[
-    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. La réaction est menée dans un #strong[RPAC]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #qty("95", "%") sachant que $k=qty("1.0e-3", "/s")$ ?
+    On s'intéresse à la solvolyse du tert-butylchlorure #ce("(CH3)3CCl + H2O <=> (CH3)3COH + H+ + Cl-") dont la loi de vitesse est $v=k[ce("(CH3)3CCl")]$. La réaction est menée dans un #strong[RPAC]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de la constante de vitesse $k$ et du temps de passage $tau$. Quel temps de passage faut-il prévoir pour avoir un taux de conversion de #quan[95 %] sachant que $k=#quan[1.0e-3 /s]$ ?
 ]
 
 == Réacteur en écoulement piston
@@ -204,7 +204,7 @@ Dans un réacteur en écoulement piston (RP), le fluide progresse dans le réact
 )
 
 #application[
-    On reprend la solvolyse du tert-butylchlorure de l'application précédente, cette fois dans un #strong[réacteur en écoulement piston]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de $k$ et de $tau$. Quel temps de passage faut-il prévoir pour un taux de conversion de #qty("95", "%") ? Comparer au RPAC.
+    On reprend la solvolyse du tert-butylchlorure de l'application précédente, cette fois dans un #strong[réacteur en écoulement piston]. Exprimer le taux de conversion de #ce("(CH3)3CCl") en fonction de $k$ et de $tau$. Quel temps de passage faut-il prévoir pour un taux de conversion de #quan[95 %] ? Comparer au RPAC.
 ]
 
 == Comparaison RPAC et RP
@@ -264,9 +264,9 @@ L'avancement d'une réaction chimique peut s'accompagner d'un dégagement ou d'u
     $
         ce("HCl + HO- -> Cl- + H2O")
     $
-    Cette réaction est exothermique avec une enthalpie de réaction $Delta_r H^circ = qty("-57", "kJ/mol")$.
+    Cette réaction est exothermique avec une enthalpie de réaction $Delta_r H^circ = #quan[-57 kJ/mol]$.
 
     Les effluents sont traités dans un réacteur adiabatique. Calculer l'élévation de température lors de cette opération pour des effluents de $pH = num("14")$.
 
-    La capacité thermique massique de l'eau est $c_P = qty("4.18e3", "J/kg/K")$. On supposera que la présence de solutés n'influence pas la capacité thermique massique et la masse volumique de l'eau.
+    La capacité thermique massique de l'eau est $c_P = #quan[4.18e3 J/kg/K]$. On supposera que la présence de solutés n'influence pas la capacité thermique massique et la masse volumique de l'eau.
 ]

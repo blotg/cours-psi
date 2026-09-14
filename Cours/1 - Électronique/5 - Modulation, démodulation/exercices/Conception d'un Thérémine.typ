@@ -11,7 +11,7 @@
 
 Un Thérémine est un instrument de musique électronique produisant un son dont la fréquence dépend de la distance entre l'instrument et la main du joueur.
 
-Les Thérémines analogiques sont constitués de deux oscillateurs identiques. La capacité d'un des oscillateurs est reliée à une antenne et voit donc sa valeur changer faiblement (variation de l'ordre de #qty("10", "pF")) lorsque la main s'approche. Les signaux des deux oscillateurs sont combinés pour produire un signal sonore dont la fréquence change entre $0$ et #qty("2", "kHz") en fonction de la position de la main.
+Les Thérémines analogiques sont constitués de deux oscillateurs identiques. La capacité d'un des oscillateurs est reliée à une antenne et voit donc sa valeur changer faiblement (variation de l'ordre de #quan[10 pF]) lorsque la main s'approche. Les signaux des deux oscillateurs sont combinés pour produire un signal sonore dont la fréquence change entre $0$ et #quan[2 kHz] en fonction de la position de la main.
 
 #question()[
     Proposer un montage permettant de réaliser un Thérémine comportant des ALI, résistors, condensateurs et multiplieur. Les valeurs des résistances et capacités seront portées sur le schéma du montage et seront choisies parmi les valeurs réalistes utilisables en TP.
@@ -42,5 +42,5 @@ Les Thérémines analogiques sont constitués de deux oscillateurs identiques. L
         }),
     )
 
-    On choisit, comme dans l'exercice « Thérémine », $R_a=qty("1","kO")$, $R_b=qty("2","kO")$ et $R=qty("100","kO")$ pour les deux oscillateurs, ainsi que $C_1 approx qty("160","pF")$ (valeur réaliste, bien qu'un peu faible, obtenue à l'exercice « Thérémine » pour une variation de fréquence de sortie entre $0$ et #qty("2", "kHz")). Le filtre passe-bas final doit avoir une fréquence de coupure grande devant #qty("2", "kHz") (pour ne pas couper le signal utile) mais petite devant la fréquence des oscillateurs eux-mêmes (plusieurs dizaines de kHz), par exemple $R'=qty("1","kO")$ et $C'=qty("10","nF")$ ($f_c approx qty("16","kHz")$).
+    On choisit, comme dans l'exercice « Thérémine », $R_a=#quan[1 kΩ]$, $R_b=#quan[2 kΩ]$ et $R=#quan[100 kΩ]$ pour les deux oscillateurs, ainsi que $C_1 approx #quan[160 pF]$ (valeur réaliste, bien qu'un peu faible, obtenue à l'exercice « Thérémine » pour une variation de fréquence de sortie entre $0$ et #quan[2 kHz]). Le filtre passe-bas final doit avoir une fréquence de coupure grande devant #quan[2 kHz] (pour ne pas couper le signal utile) mais petite devant la fréquence des oscillateurs eux-mêmes (plusieurs dizaines de kHz), par exemple $R'=#quan[1 kΩ]$ et $C'=#quan[10 nF]$ ($f_c approx #quan[16 kHz]$).
 ]

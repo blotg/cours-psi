@@ -4,7 +4,7 @@
     titre: "Lubrification",
 )
 
-Le but de cet exercice est de comprendre l'intérêt de la lubrification. On considère un mobile parallélépipédique de masse $M=qty("30", "kg")$ en translation sur un support horizontal.
+Le but de cet exercice est de comprendre l'intérêt de la lubrification. On considère un mobile parallélépipédique de masse $M=#quan[30 kg]$ en translation sur un support horizontal.
 
 #figure(
     canvas({
@@ -21,7 +21,7 @@ Le but de cet exercice est de comprendre l'intérêt de la lubrification. On con
     caption: "Mobile en frottement solide avec son support.",
 )
 
-Dans un premier temps, on étudie le contact sec entre le mobile et la surface. La force de frottement est de type frottement solide. Elle obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=qty("10", "km/h")$.
+Dans un premier temps, on étudie le contact sec entre le mobile et la surface. La force de frottement est de type frottement solide. Elle obéit à la loi de Coulomb : $R_T=f R_N$ avec un coefficient $f=num("0.20")$. En $x=0$, $v=v_0=#quan[10 km/h]$.
 
 #question(
     coups-de-pouce: (
@@ -81,9 +81,9 @@ Dans un premier temps, on étudie le contact sec entre le mobile et la surface. 
     caption: "Mobile sur une couche de fluide.",
 )
 
-On introduit maintenant une couche d'huile d'épaisseur $e=#qty("1.0", "mm")$ entre le mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du mobile constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bord. La surface du mobile en contact avec l'huile est $S=qty("400", "cm^2")$. Le mobile a une vitesse $v_m=v_0=qty("10", "km/h")$.
+On introduit maintenant une couche d'huile d'épaisseur $e=#quan[1.0 mm]$ entre le mobile et la surface. On suppose que le régime est permanent (un opérateur maintient la vitesse du mobile constante) et que la vitesse du fluide s'écrit $va(v)=v(x,y) ex$. On néglige les effets de bord. La surface du mobile en contact avec l'huile est $S=#quan[400 cm^2]$. Le mobile a une vitesse $v_m=v_0=#quan[10 km/h]$.
 
-La densité de l'huile est #num("0.9") et sa viscosité cinématique est $qty("60e-6", "m^2/s")$.
+La densité de l'huile est #num("0.9") et sa viscosité cinématique est $#quan[60e-6 m^2/s]$.
 #let viscosité = 60e-6 * 0.9e3
 
 #question[

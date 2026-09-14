@@ -41,9 +41,9 @@
     #let m = 10e-2
     #let g = 1e-3
     We study a magnetic circuit whose section $S$ is constant, composed of
-    - a magnet of length $m=qty("10", "cm")$ described by its hysteresis cycle given below ;
+    - a magnet of length $m=#quan[10 cm]$ described by its hysteresis cycle given below ;
     - electrical steel#footnote["fer doux" in French] of length $l_e$ considered linear, homogeneous and isotropic, of infinite magnetic permeability ;
-    - an air gap of length $g=qty("1", "mm")$.
+    - an air gap of length $g=#quan[1 mm]$.
 
     #figure[
         #image("hysteresis.png", height: 13cm)
@@ -97,7 +97,7 @@
     ][
         #let mu0 = 4 * calc.pi * 1e-7
         #let pente = -m * mu0 / g
-        On trace la droite de pente $-(m mu_0)/g = #num(pente, chiffres: 1)$ sur la courbe. Elle coupe le cycle d'hystérésis en deux points de coordonnées opposées : $B_m = plus.minus qty("5e-3", "T")$ et $H_m = minus.plus qty("4e1", "A/m")$.
+        On trace la droite de pente $-(m mu_0)/g = #num(pente, chiffres: 1)$ sur la courbe. Elle coupe le cycle d'hystérésis en deux points de coordonnées opposées : $B_m = plus.minus #quan[5e-3 T]$ et $H_m = minus.plus #quan[4e1 A/m]$.
     ]
 
     #question(coups-de-pouce: (
@@ -106,7 +106,7 @@
         What are the values of $B_g$ and $H_g$ in the air gap ?
     ][
         $ B_g = B_m $
-        $ H_g = -m/g H_m = plus.minus qty("4e3", "A/m") $
+        $ H_g = -m/g H_m = plus.minus #quan[4e3 A/m] $
     ]
 
 ]

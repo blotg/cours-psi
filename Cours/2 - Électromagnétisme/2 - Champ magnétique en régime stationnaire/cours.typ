@@ -148,7 +148,7 @@ Un fil infiniment fin est parcouru par un courant électrique.
 #flashcard(recto: [Force de Laplace sur un élément de fil], verso: [$ va(dd(F)) = I va(dd(l)) and va(B) $])
 
 #application[
-    Dans les rails de Laplace, une barre traversée par un courant $qty("5", "A")$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $qty("10", "cm")$, en présence d'un champ magnétique vertical $qty("3e-2", "T")$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
+    Dans les rails de Laplace, une barre traversée par un courant $#quan[5 A]$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $#quan[10 cm]$, en présence d'un champ magnétique vertical $#quan[3e-2 T]$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
 ]
 
 === Description volumique
@@ -168,7 +168,7 @@ Le déplacement des charges est décrit par le vecteur densité volumique de cou
 #question-de-colle([Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.])
 
 #application[
-    Un fil épais de section $qty("6", "mm^2")$ et de longueur $qty("10", "m")$ est parcouru par un vecteur densité de courant uniforme $va(j) = j va(e_x)$, le courant total valant $qty("10", "A")$. Calculer la norme de la force exercée par le champ magnétique terrestre ($qty("5e-5", "T")$ selon $va(e_z)$), supposé orthogonal au courant.
+    Un fil épais de section $#quan[6 mm^2]$ et de longueur $#quan[10 m]$ est parcouru par un vecteur densité de courant uniforme $va(j) = j va(e_x)$, le courant total valant $#quan[10 A]$. Calculer la norme de la force exercée par le champ magnétique terrestre ($#quan[5e-5 T]$ selon $va(e_z)$), supposé orthogonal au courant.
 ]
 
 = Théorème d'Ampère

@@ -4,7 +4,7 @@
     titre: "Élaboration d'un ciment",
 )
 
-Ce problème s’intéresse à l’étude de quelques propriétés physico-chimiques du ciment et des bétons armés. Le clinker est le principal constituant d’un ciment, il est obtenu à partir d’un mélange de #qty("80", "%") de calcaire (#ce("CaCO3(s)")) et de #qty("20", "%") d’argile (silicoaluminates).
+Ce problème s’intéresse à l’étude de quelques propriétés physico-chimiques du ciment et des bétons armés. Le clinker est le principal constituant d’un ciment, il est obtenu à partir d’un mélange de #quan[80 %] de calcaire (#ce("CaCO3(s)")) et de #quan[20 %] d’argile (silicoaluminates).
 
 Le ciment est principalement utilisé pour fabriquer le béton qui est un mélange de ciment, sable, granulats et eau. Le béton forme après la "prise" une véritable roche artificielle. La "prise" est le phénomène de durcissement en présence d’eau.
 
@@ -15,7 +15,7 @@ Le ciment est modélisé par la seule espèce : #ce("[Ca3SiO5](s)"). La réactio
     block: true,
 ) <equation1>
 
-L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélange $m_1 = #qty("228.0", "g")$ de ciment et $m_2 = #qty("90.0", "g")$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = qty("15.0", "Celsius")$.
+L’hydroxyde de calcium #ce("Ca(OH)2(s)") est appelé _portlandite_. On mélange $m_1 = #quan[228.0 g]$ de ciment et $m_2 = #quan[90.0 g]$ d’eau liquide. On mélange rapidement dans un calorimètre et on place un dispositif de mesure de la température. On mesure une élévation de la température : $Delta theta = #quan[15.0 °C]$.
 
 #let M_Ca3SiO5 = 3 * 40.0 + 28.0 + 5 * 16.0
 #let M_H2O = 2 * 1.00 + 16.0

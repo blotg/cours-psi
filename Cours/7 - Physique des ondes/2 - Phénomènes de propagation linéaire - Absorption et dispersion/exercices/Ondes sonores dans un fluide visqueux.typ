@@ -84,7 +84,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
         "Quelle relation relie l'épaisseur de peau avec le nombre d'onde complexe ?"
     ),
 )[
-    L'onde est plane, progressive et harmonique de fréquence $f=qty("1.0e3", "Hz")$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir la relation de dispersion puis l'épaisseur de peau, dont on effectuera l'application numérique pour l'air à #qty("20", "Celsius"). On donne la viscosité de l'air $eta = qty("1.85e-5", "Pl")$.
+    L'onde est plane, progressive et harmonique de fréquence $f=#quan[1.0e3 Hz]$ et se propage dans le sens des $x$ croissants. On suppose le milieu faiblement dispersif, c'est-à-dire $eta chi_S omega << 1$. Établir la relation de dispersion puis l'épaisseur de peau, dont on effectuera l'application numérique pour l'air à #quan[20 °C]. On donne la viscosité de l'air $eta = #quan[1.85e-5 Pl]$.
 ][
     En complexe l'équation d'onde donne
     $
@@ -115,7 +115,7 @@ On tient compte de la viscosité du fluide. La résultante volumique des forces 
     $
         delta = 1/(|k_i|) = (2c)/(omega^2 eta chi_S) = (2 c)/(4 pi^2 f^2 eta 1/(rho_0 c^2))
     $
-    Avec $c = qty("340", "m/s")$, $rho_0=qty("1", "kg/m^3")$, on obtient
+    Avec $c = #quan[340 m/s]$, $rho_0=#quan[1 kg/m^3]$, on obtient
     $
         delta = #qty(d, "m", chiffres: 2)
     $

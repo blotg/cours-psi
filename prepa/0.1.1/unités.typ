@@ -1,18 +1,23 @@
 // Unités et nombres, rendus par zero.
 //
 // Module FEUILLE : il n'importe que zero. C'est nécessaire — `scope-des-chaines`
-// (helper-functions.typ) doit l'ouvrir pour que `qty(…)` marche dans une
+// (helper-functions.typ) doit l'ouvrir pour que `quan[…]` marche dans une
 // flashcard ou une signification de grandeur, et helper-functions est lui-même
 // importé par types-documents. Poser cette couche dans types-documents fermait
 // le cycle.
 
-#import "@preview/zero:0.6.1": num as _num-zero, zi
+#import "@preview/zero:0.7.0": num as _num-zero, format-table, zi, quan as _quan-zero, impl
 
 //
-// Le cours écrit ses unités en chaines — `unit("m/s")`, `qty("1.3", "T")` —
-// comme le voulait unify. C'est désormais zero qui les rend, et il lit la même
-// syntaxe à deux graphies près : unify notait l'ohm « O » et le micro « u ».
-// D'où la table ci-dessous, qui traduit jeton par jeton, et rien de plus.
+// Une grandeur écrite en toutes lettres suit la syntaxe de zero :
+// `#quan[1.3 T]`, `#quan[4.7 kΩ]`, `#quan[20 °C]`. En mode maths aussi, le `#`
+// est obligatoire : `$quan[1 s]$` ne serait pas un appel de fonction, et
+// imprimerait « quan[1 s] » sans erreur.
+//
+// `unit("m/s")` et les grandeurs calculées, `qty(x, "T", chiffres: 2)`, gardent
+// la syntaxe de chaine d'unify, que zero lit à deux graphies près : unify notait
+// l'ohm « O » et le micro « u ». D'où la table ci-dessous, qui traduit jeton par
+// jeton, et rien de plus.
 //
 // zero fait mieux qu'unify sur deux points au passage : `zi.declare` rend
 // « tr/min » et « an » sans rien déclarer, là où unify les perdait
@@ -62,6 +67,62 @@
         .join(" ")
 }
 
+// zero 0.7.0 décrit chaque unité pour les lecteurs d'écran, et arrête la
+// compilation (« Failed to auto-generate alt description ») sur un symbole
+// qu'il ne connait pas. Les unités hors SI du cours reçoivent leur description
+// ici. Le poiseuille n'est connu que du dictionnaire français de zero : les
+// flashcards Anki, exportées en HTML sans `lang: "fr"`, butaient dessus.
+#let UNITÉS-HORS-SI = (
+    "an": "an",
+    "bar": "bar",
+    "cal": "calorie",
+    "kcal": "kilocalorie",
+    "Pl": "poiseuille",
+    "tog": "tog",
+    "tr": "tour",
+    "USI": "unité SI",
+)
+
+// La description d'une unité qui contient un symbole hors SI (« tr/min » donne
+// « tour par min ») ; `auto` sinon, et zero la génère lui-même.
+#let _description(unité) = {
+    let symbole(jeton) = jeton.split("^").first()
+    let jetons = unité.split(regex("[ /]")).filter(j => j != "")
+    if not jetons.any(j => symbole(j) in UNITÉS-HORS-SI) { return auto }
+    unité
+        .split("/")
+        .map(morceau => morceau
+            .split(" ")
+            .filter(j => j != "")
+            .map(j => UNITÉS-HORS-SI.at(symbole(j), default: j))
+            .join(" "))
+        .filter(m => m != "")
+        .join(" par ")
+}
+
+// Une grandeur écrite en toutes lettres : `quan[1.3 T]`, `quan[1500 tr/min]`.
+//
+// C'est le `quan` de zero, qui n'accepte pas de description : pour une unité
+// hors SI, on sépare la valeur de l'unité (le cours met toujours une espace
+// entre les deux) et on passe par `zi.declare`, qui en accepte une.
+#let quan(entrée) = {
+    let texte = if type(entrée) == content { impl.parsing.content-to-string(entrée) } else { entrée }
+    let (tête, ..reste) = texte.trim().split(" ")
+    let (valeur, unité) = if tête.contains(regex("\d")) {
+        (tête, reste.join(" "))
+    } else {
+        (none, texte.trim())
+    }
+    let description = if unité == none { auto } else { _description(unité) }
+    if description == auto {
+        _quan-zero(entrée)
+    } else if valeur == none {
+        (zi.declare(unité, alt: description))()
+    } else {
+        (zi.declare(unité, alt: description))(valeur)
+    }
+}
+
 // Arrondi à un nombre de chiffres significatifs, appliqué à la VALEUR avant que
 // zero ne la mette en forme.
 //
@@ -69,7 +130,8 @@
 // sur la valeur d'entrée et ne renormalise pas la mantisse quand l'arrondi la
 // porte à 10 : 9,96·10⁵ à deux chiffres sortait « 10,0·10⁵ » au lieu de
 // « 1,0·10⁶ ». En arrondissant d'abord, zero voit un nombre déjà propre et
-// retombe sur le bon exposant. Tout le rendu, lui, est à lui.
+// retombe sur le bon exposant. Tout le rendu, lui, est à lui. Toujours vrai
+// avec zero 0.7.0 : 0,999 à deux chiffres y sort « 10·10⁻¹ ».
 #let arrondi-significatif(valeur, chiffres) = {
     if type(valeur) not in (int, float) or valeur == 0 { return valeur }
     // Le pas de l'arrondi, puis `round(v / pas) * pas`. Surtout PAS l'inverse
@@ -78,11 +140,6 @@
     let pas = calc.pow(10.0, int(calc.floor(calc.log(calc.abs(valeur), base: 10))) - chiffres + 1)
     calc.round(valeur / pas) * pas
 }
-
-// unify tolérait l'exposant en E majuscule (« 6.0E-2 ») ; zero, lui, refuse
-// net — il y lit le début d'une incertitude asymétrique et s'arrête. Le cours
-// en contient, on les ramène donc à la casse que zero attend.
-#let _normalise-nombre(valeur) = if type(valeur) == str { valeur.replace("E", "e") } else { valeur }
 
 // Les réglages de rendu d'un nombre à `chiffres` significatifs.
 //
@@ -95,12 +152,14 @@
 )
 
 // Une unité seule : `unit("m/s")`.
-#let unit(unité) = (zi.declare(normalise-unité(unité)))()
+#let unit(unité) = {
+    let unité = normalise-unité(unité)
+    (zi.declare(unité, alt: _description(unité)))()
+}
 
-// Un nombre : `num("1.3")`, ou `num(x, chiffres: 2)` pour l'arrondir à deux
-// chiffres significatifs et le mettre en notation scientifique.
+// Un nombre calculé : `num(x, chiffres: 2)` l'arrondit à deux chiffres
+// significatifs et le met en notation scientifique.
 #let num(valeur, chiffres: none, ..args) = {
-    let valeur = _normalise-nombre(valeur)
     if chiffres == none {
         _num-zero(valeur, ..args)
     } else {
@@ -108,14 +167,25 @@
     }
 }
 
-// Un nombre et son unité : `qty("1.3", "T")`, ou `qty(x, "T", chiffres: 2)`.
+// Une grandeur calculée : `qty(x, "T")`, ou `qty(x, "T", chiffres: 2)`.
+// zero n'offre pas mieux : son `quan` ne prend qu'un texte, sans arrondi, et
+// l'arrondi natif de `zi.declare` bute sur la renormalisation (cf.
+// `arrondi-significatif`).
+//
+// Un flottant de 10¹⁹ ou plus est passé en chaine « mantisse e exposant » :
+// zero 0.7.0 convertit sinon sa partie entière en `int` pour la description
+// et déborde (« integer value is too large »).
 #let qty(valeur, unité, chiffres: none, ..args) = {
-    let valeur = _normalise-nombre(valeur)
-    let u = zi.declare(normalise-unité(unité))
+    let unité = normalise-unité(unité)
+    let u = zi.declare(unité, alt: _description(unité))
+    let valeur = if chiffres == none { valeur } else { arrondi-significatif(valeur, chiffres) }
+    let entrée = if type(valeur) == float and calc.abs(valeur) >= 1e15 {
+        let exposant = int(calc.floor(calc.log(calc.abs(valeur), base: 10)))
+        repr(valeur / calc.pow(10.0, exposant)) + "e" + str(exposant)
+    } else { valeur }
     if chiffres == none {
-        u(valeur, ..args)
+        u(entrée, ..args)
     } else {
-        u(arrondi-significatif(valeur, chiffres), .._réglages-chiffres(valeur, chiffres), ..args)
+        u(entrée, .._réglages-chiffres(valeur, chiffres), ..args)
     }
 }
-

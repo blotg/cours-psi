@@ -4,7 +4,7 @@
     titre: "Troposphère",
 )
 
-La troposphère est la partie inférieure de l'atmosphère, située sous #qty("11", "km") d'altitude. On note $(O z)$ l'axe vertical ascendant, dont l'origine est au niveau de la mer.
+La troposphère est la partie inférieure de l'atmosphère, située sous #quan[11 km] d'altitude. On note $(O z)$ l'axe vertical ascendant, dont l'origine est au niveau de la mer.
 
 On suppose dans un premier temps que la température est uniforme dans la troposphère.
 
@@ -28,10 +28,10 @@ On suppose dans un premier temps que la température est uniforme dans la tropos
 #question(
     coups-de-pouce: (
         "On considère un cylindre de section $S$ et de hauteur $z$. Exprimer la masse contenue dans ce cylindre comme une intégrale.",
-        "On souhaite montrer que la masse contenue dans un cylindre de hauteur #qty(\"10\", \"km\") est égale à #qty(\"70\", \"%\") de la masse contenue dans un cylindre de hauteur infinie.",
+        "On souhaite montrer que la masse contenue dans un cylindre de hauteur #quan[10 km] est égale à #quan[70 %] de la masse contenue dans un cylindre de hauteur infinie.",
     ),
 )[
-    Montrer que #qty("70", "%") de la masse totale de l'air se situe en dessous de #qty("10", "km") dans ce modèle.
+    Montrer que #quan[70 %] de la masse totale de l'air se situe en dessous de #quan[10 km] dans ce modèle.
 ][
     La masse contenue dans un cylindre de section $S$ et de hauteur $h$ est donnée par l'intégrale
     $ m(h) = integral.triple_V mu dd(V) = S integral_0^h mu(z) dd(z) $
@@ -41,14 +41,14 @@ On suppose dans un premier temps que la température est uniforme dans la tropos
         m(h) = (S P_0 M_"air") / (R T) integral_0^h exp(- (M_"air" g z) / (R T)) dd(z) = (S P_0)/g (1- exp(-(M_"air" g h)/(R T)))
     $
 
-    On veut montrer que $m(qty("10", "km")) = num("0.70") times m(infinity)$. On calcule le quotient :
+    On veut montrer que $m(#quan[10 km]) = num("0.70") times m(infinity)$. On calcule le quotient :
     #let M-air = 29e-3
     #let g = 9.81
     #let R = 8.314
     #let T = 288
     #let q = 1 - calc.exp(-M-air * g * 10e3 / (R * T))
     $
-        m(qty("10", "km")) / m(infinity) = 1 - exp(-(M_"air" g qty("10", "km"))/(R T)) approx #num(q, chiffres: 2)
+        m(#quan[10 km]) / m(infinity) = 1 - exp(-(M_"air" g #quan[10 km])/(R T)) approx #num(q, chiffres: 2)
     $
 ]
 
@@ -126,7 +126,7 @@ On renonce à l'hypothèse isotherme pour passer à une atmosphère adiabatique.
     $
         T(z) = T_0 - ((gamma - 1)/gamma) (M_"air" g)/R z
     $
-    En remplaçant les valeurs numériques et en prenant $T_0 = #qty("288","K")$ comme plus haut :
+    En remplaçant les valeurs numériques et en prenant $T_0 = #quan[288 K]$ comme plus haut :
     #let gam = 1.4
     #let M-air = 29e-3
     #let g = 9.81
@@ -135,8 +135,8 @@ On renonce à l'hypothèse isotherme pour passer à une atmosphère adiabatique.
     #let z = 11e3
     #let Ttop = T0 - ((gam - 1)/gam) * (M-air * g) / R * z
     $
-        T(qty("11", "km")) = #qty(Ttop, "K", chiffres: 3)
+        T(#quan[11 km]) = #qty(Ttop, "K", chiffres: 3)
     $
 
-    La tropopause est en réalité à #qty("217", "K") environ : le modèle adiabatique sec surestime le refroidissement, l'air réel étant humide.
+    La tropopause est en réalité à #quan[217 K] environ : le modèle adiabatique sec surestime le refroidissement, l'air réel étant humide.
 ]

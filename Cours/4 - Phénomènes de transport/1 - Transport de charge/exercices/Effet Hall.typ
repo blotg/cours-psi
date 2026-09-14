@@ -100,11 +100,11 @@ On considère un conducteur ohmique parallélépipédique parcouru par un couran
 #question(
     coups-de-pouce: (),
 )[
-    L'épaisseur du conducteur vaut $b = qty("1", "mm")$.
+    L'épaisseur du conducteur vaut $b = #quan[1 mm]$.
 
-    Évaluer la valeur de $R_"Hall"$ pour le champ magnétique terrestre dans le cas du cuivre ($M_ce("Cu")=qty("63.5", "g/mol")$ ; $mu_ce("Cu")=qty("8.96", "g/cm^3")$) *puis* d'un semi-conducteur de densité particulaire de porteurs $n=qty("1.6e22", "/m^3")$. Est-il possible d'utiliser ce dispositif pour mesurer le champ magnétique terrestre dans les deux cas ?
+    Évaluer la valeur de $R_"Hall"$ pour le champ magnétique terrestre dans le cas du cuivre ($M_ce("Cu")=#quan[63.5 g/mol]$ ; $mu_ce("Cu")=#quan[8.96 g/cm^3]$) *puis* d'un semi-conducteur de densité particulaire de porteurs $n=#quan[1.6e22 /m^3]$. Est-il possible d'utiliser ce dispositif pour mesurer le champ magnétique terrestre dans les deux cas ?
 ][
-    Le champ magnétique terrestre vaut environ $B = qty("5e-5", "T")$.
+    Le champ magnétique terrestre vaut environ $B = #quan[5e-5 T]$.
 
     #let mu-Cu = 8.96e3
     #let na = 6.02e23

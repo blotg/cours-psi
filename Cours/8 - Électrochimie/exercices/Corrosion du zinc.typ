@@ -3,18 +3,18 @@
 
 #show: exercice.with(titre: "Corrosion du zinc", difficulté: 3)
 
-On considère $qty("1", "L")$ d'eau désaérée par barbotage d'argon (#ce("O2") dissous chassé), à $"pH" = 6.0$, à $T = qty("298", "K")$. On y introduit une tôle en acier électro-zingué (acier recouvert de zinc). On admet $ce("[Zn^2+]") = qty("1e-6", "mol/L")$ (seuil de corrosion). Les pressions des gaz valent $qty("1", "bar")$.
+On considère $#quan[1 L]$ d'eau désaérée par barbotage d'argon (#ce("O2") dissous chassé), à $"pH" = 6.0$, à $T = #quan[298 K]$. On y introduit une tôle en acier électro-zingué (acier recouvert de zinc). On admet $ce("[Zn^2+]") = #quan[1e-6 mol/L]$ (seuil de corrosion). Les pressions des gaz valent $#quan[1 bar]$.
 
-Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+", "Fe")) = qty("-0.44", "V")$, $E^circ(ce("O2/H2O")) = qty("1.23", "V")$. Surtensions cathodiques (à vide) de dégagement de #ce("H2") : $qty("-0.75", "V")$ sur #ce("Zn"), $qty("-0.25", "V")$ sur #ce("Fe"). On prend $(R T \/ cal(F)) ln 10 approx qty("0.06", "V")$.
+Données : $E^circ(cpl("Zn^2+", "Zn")) = #quan[-0.76 V]$, $E^circ(cpl("Fe^2+", "Fe")) = #quan[-0.44 V]$, $E^circ(ce("O2/H2O")) = #quan[1.23 V]$. Surtensions cathodiques (à vide) de dégagement de #ce("H2") : $#quan[-0.75 V]$ sur #ce("Zn"), $#quan[-0.25 V]$ sur #ce("Fe"). On prend $(R T \/ cal(F)) ln 10 approx #quan[0.06 V]$.
 
 #question(coups-de-pouce: (
   "Écrire la relation de Nernst pour chaque couple.",
 ))[
   À $"pH" = 6.0$, calculer les potentiels d'équilibre des couples #cpl("H+", "H2"), #ce("O2/H2O") et #cpl("Zn^2+", "Zn").
 ][
-  $ E(cpl("H+", "H2")) &= 0 - 0.06 "pH" = qty("-0.36", "V") \
-    E(ce("O2/H2O")) &= 1.23 - 0.06 "pH" = qty("0.87", "V") \
-    E(cpl("Zn^2+", "Zn")) &= -0.76 + 0.03 log ce("[Zn^2+]") = -0.76 - 0.18 = qty("-0.94", "V") $
+  $ E(cpl("H+", "H2")) &= 0 - 0.06 "pH" = #quan[-0.36 V] \
+    E(ce("O2/H2O")) &= 1.23 - 0.06 "pH" = #quan[0.87 V] \
+    E(cpl("Zn^2+", "Zn")) &= -0.76 + 0.03 log ce("[Zn^2+]") = -0.76 - 0.18 = #quan[-0.94 V] $
 ]
 
 #question(coups-de-pouce: (
@@ -22,7 +22,7 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
 ))[
   Écrire la réaction qui peut #emph[a priori] être observée.
 ][
-  L'eau étant désaérée, le seul oxydant disponible est #ce("H+") ($qty("-0.36", "V")$), situé au-dessus de #ce("Zn") ($qty("-0.94", "V")$) sur l'échelle :
+  L'eau étant désaérée, le seul oxydant disponible est #ce("H+") ($#quan[-0.36 V]$), situé au-dessus de #ce("Zn") ($#quan[-0.94 V]$) sur l'échelle :
   $ ce("Zn") + 2 ce("H+") -> ce("Zn^2+") + ce("H2") $
 ]
 
@@ -33,10 +33,10 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
   En fait, aucun dégagement gazeux n'est observé. L'expliquer en calculant le potentiel de début de dégagement gazeux. Tracer l'allure de la courbe $i$–$E$. Dans quel domaine se situe le potentiel de la tôle ?
 ][
   Sur le zinc, le dégagement de #ce("H2") ne débute qu'à
-  $ E(cpl("H+", "H2")) + eta_c = -0.36 - 0.75 = qty("-1.11", "V") $
-  L'oxydation du zinc débute quant à elle à $E(cpl("Zn^2+", "Zn")) = qty("-0.94", "V")$.
+  $ E(cpl("H+", "H2")) + eta_c = -0.36 - 0.75 = #quan[-1.11 V] $
+  L'oxydation du zinc débute quant à elle à $E(cpl("Zn^2+", "Zn")) = #quan[-0.94 V]$.
 
-  Ces deux branches ne se recouvrent pas : l'oxydation exige $E > qty("-0.94", "V")$, la réduction de #ce("H+") exige $E < qty("-1.11", "V")$. Entre les deux, le courant est négligeable. La corrosion est donc quasi nulle : pas de dégagement gazeux. Le potentiel de la tôle se situe dans l'intervalle $[-1.11 ; -0.94]$ V, où $i approx 0$. (De plus, à $"pH" = 6$, #ce("H+") est très dilué : sa réduction est en outre limitée par un palier de diffusion très bas.)
+  Ces deux branches ne se recouvrent pas : l'oxydation exige $E > #quan[-0.94 V]$, la réduction de #ce("H+") exige $E < #quan[-1.11 V]$. Entre les deux, le courant est négligeable. La corrosion est donc quasi nulle : pas de dégagement gazeux. Le potentiel de la tôle se situe dans l'intervalle $[-1.11 ; -0.94]$ V, où $i approx 0$. (De plus, à $"pH" = 6$, #ce("H+") est très dilué : sa réduction est en outre limitée par un palier de diffusion très bas.)
 
   #figure(canvas({
     import cetz.draw: *
@@ -57,9 +57,9 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
 #question(coups-de-pouce: (
   "Relation de Nernst.",
 ))[
-  La tôle est rayée, l'acier est mis à nu au fond de la rayure. Déterminer le potentiel du couple #cpl("Fe^2+", "Fe") (concentrations solubles $qty("1e-6", "mol/L")$).
+  La tôle est rayée, l'acier est mis à nu au fond de la rayure. Déterminer le potentiel du couple #cpl("Fe^2+", "Fe") (concentrations solubles $#quan[1e-6 mol/L]$).
 ][
-  $ E(cpl("Fe^2+", "Fe")) = -0.44 + 0.03 log ce("[Fe^2+]") = -0.44 - 0.18 = qty("-0.62", "V") $
+  $ E(cpl("Fe^2+", "Fe")) = -0.44 + 0.03 log ce("[Fe^2+]") = -0.44 - 0.18 = #quan[-0.62 V] $
 ]
 
 #question(coups-de-pouce: (
@@ -70,7 +70,7 @@ Données : $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$, $E^circ(cpl("Fe^2+"
 ][
   Fer et zinc étant électriquement reliés, ils se portent à un même potentiel mixte $E_m$ tel que le courant anodique total égale le courant cathodique total.
 
-  Potentiels : $E(cpl("Zn^2+", "Zn")) = qty("-0.94", "V")$, $E(cpl("Fe^2+", "Fe")) = qty("-0.62", "V")$. Le dégagement de #ce("H2") débute à $qty("-1.11", "V")$ sur #ce("Zn") et à $-0.36 - 0.25 = qty("-0.61", "V")$ sur #ce("Fe").
+  Potentiels : $E(cpl("Zn^2+", "Zn")) = #quan[-0.94 V]$, $E(cpl("Fe^2+", "Fe")) = #quan[-0.62 V]$. Le dégagement de #ce("H2") débute à $#quan[-1.11 V]$ sur #ce("Zn") et à $-0.36 - 0.25 = #quan[-0.61 V]$ sur #ce("Fe").
 
-  Le zinc, plus réducteur, s'oxyde préférentiellement : $ce("Zn") -> ce("Zn^2+") + 2 e^-$ (#strong[anode sacrificielle]). Les électrons libérés servent à la réduction $2 ce("H+") + 2 e^- -> ce("H2")$, qui se produit sur le fer (surtension de #ce("H2") plus faible sur #ce("Fe")) : le fer est la #strong[cathode]. L'équilibre des courants place donc $E_m$ entre $qty("-0.94", "V")$ (début de l'oxydation du zinc) et $qty("-0.61", "V")$ (début du dégagement de #ce("H2") sur le fer). À $"pH" = 6$ la réduction de #ce("H+") est limitée par un palier de diffusion très bas, ce qui cale $E_m$ tout près de $qty("-0.94", "V")$ : on a bien $E_m < E(cpl("Fe^2+", "Fe")) = qty("-0.62", "V")$, donc le fer #strong[ne peut pas s'oxyder]. Il est protégé tant qu'il reste du zinc.
+  Le zinc, plus réducteur, s'oxyde préférentiellement : $ce("Zn") -> ce("Zn^2+") + 2 e^-$ (#strong[anode sacrificielle]). Les électrons libérés servent à la réduction $2 ce("H+") + 2 e^- -> ce("H2")$, qui se produit sur le fer (surtension de #ce("H2") plus faible sur #ce("Fe")) : le fer est la #strong[cathode]. L'équilibre des courants place donc $E_m$ entre $#quan[-0.94 V]$ (début de l'oxydation du zinc) et $#quan[-0.61 V]$ (début du dégagement de #ce("H2") sur le fer). À $"pH" = 6$ la réduction de #ce("H+") est limitée par un palier de diffusion très bas, ce qui cale $E_m$ tout près de $#quan[-0.94 V]$ : on a bien $E_m < E(cpl("Fe^2+", "Fe")) = #quan[-0.62 V]$, donc le fer #strong[ne peut pas s'oxyder]. Il est protégé tant qu'il reste du zinc.
 ]

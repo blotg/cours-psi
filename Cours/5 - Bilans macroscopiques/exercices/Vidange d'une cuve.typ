@@ -51,7 +51,7 @@ Un agriculteur souhaite vidanger une cuve cubique d'un mètre cube remplie d'eau
     $ [2 sqrt(h)]_(h=a)^(h=0) = - (S sqrt(2 g))/a^2 t_f $
     $ -2 sqrt(a) = - (S sqrt(2 g))/a^2 t_f $
     $ t_f = (2 a^(5/2))/(S sqrt(2 g)) $
-    On estime la section de la vanne à $S approx qty("10","cm^2")$ et le côté de la cuve à $a = #qty("1", "m")$. On trouve alors
+    On estime la section de la vanne à $S approx #quan[10 cm^2]$ et le côté de la cuve à $a = #quan[1 m]$. On trouve alors
     #let a = 1
     #let S = 10e-4
     #let g = 9.81

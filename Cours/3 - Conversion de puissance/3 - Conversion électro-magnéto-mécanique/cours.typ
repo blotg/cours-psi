@@ -162,7 +162,7 @@ La force électromagnétique est toujours attractive. La force électromagnétiq
 )
 
 #application[
-    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=qty("5", "um")$. On donne $i=qty("20", "mA")$, $mu_r=num("1e5")$, $N=num("2000")$, $S=qty("4", "cm^2")$, $l_"fixe"+l_"mobile"=qty("30", "cm")$.
+    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=#quan[5 um]$. On donne $i=#quan[20 mA]$, $mu_r=num("1e5")$, $N=num("2000")$, $S=#quan[4 cm^2]$, $l_"fixe"+l_"mobile"=#quan[30 cm]$.
 ]
 
 = Machine synchrone
@@ -202,7 +202,7 @@ La machine synchrone est constituée d'une partie fixe, appelée stator et d'une
 
 Sur le rotor, un circuit électrique est enroulé orthogonalement à l'axe de rotation.
 
-Sur le stator, plusieurs circuits électriques sont enroulés orthogonalement à l'axe de rotation. Sur une machine diphasée, il y a deux enroulements tournés de #qty("90", "deg") l'un par rapport à l'autre.
+Sur le stator, plusieurs circuits électriques sont enroulés orthogonalement à l'axe de rotation. Sur une machine diphasée, il y a deux enroulements tournés de #quan[90 °] l'un par rapport à l'autre.
 
 Les circuits électriques peuvent donner naissance à plusieurs paires de pôles. Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
@@ -683,7 +683,7 @@ Par analogie avec la machine synchrone, le couple électromagnétique subi par l
 ]
 
 #application[
-    Pour réaliser un treuil, on utilise un moteur à courant continu de constante de couplage #qty("0.11", "Wb") pour faire tourner un réducteur de rapport de transmission $1/100$ qui fait à son tour tourner une poulie de rayon #qty("3", "cm") sur lequel est enroulé un câble. Sachant que le moteur à courant continu a un courant maximum de #qty("6", "A"), quelle masse maximale le treuil peut-il soulever ?
+    Pour réaliser un treuil, on utilise un moteur à courant continu de constante de couplage #quan[0.11 Wb] pour faire tourner un réducteur de rapport de transmission $1/100$ qui fait à son tour tourner une poulie de rayon #quan[3 cm] sur lequel est enroulé un câble. Sachant que le moteur à courant continu a un courant maximum de #quan[6 A], quelle masse maximale le treuil peut-il soulever ?
 ]
 
 La conservation de l'énergie dans une machine sans perte permet d'en déduire le lien entre force contre-électromotrice et vitesse angulaire.
@@ -720,7 +720,7 @@ La conservation de l'énergie dans une machine sans perte permet d'en déduire l
 )
 
 #application[
-    Le moteur de treuil de l'application précédente a une tension d'alimentation de #qty("12", "V"). À quelle vitesse maximale le câble s'enroule-t-il ?
+    Le moteur de treuil de l'application précédente a une tension d'alimentation de #quan[12 V]. À quelle vitesse maximale le câble s'enroule-t-il ?
 ]
 
 == Pertes

@@ -5,7 +5,7 @@
     difficulté: 1,
 )
 
-Le circuit d'alimentation d'un séchoir électrique est composé d'une résistance $R$ branchée en parallèle avec une branche comprenant une bobine d'inductance $L$ et d'une résistance $r$. Le circuit est alimenté avec le secteur (#qty("230", "V") efficace, #qty("50", "Hz")). Le séchoir admet 3 modes de fonctionnement : mode froid F, mode I et mode II. On donne le tableau suivant :
+Le circuit d'alimentation d'un séchoir électrique est composé d'une résistance $R$ branchée en parallèle avec une branche comprenant une bobine d'inductance $L$ et d'une résistance $r$. Le circuit est alimenté avec le secteur (#quan[230 V] efficace, #quan[50 Hz]). Le séchoir admet 3 modes de fonctionnement : mode froid F, mode I et mode II. On donne le tableau suivant :
 
 #figure[
     #table(
@@ -13,7 +13,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
         align: (left, center, center, center),
         table.header([Mode], [F], [I], [II]),
         [Puissance moyenne absorbée (#unit("W"))], num("520"), num("2800"), num("10000"),
-        [Déphasage de la tension par rapport au courant total], $phi_"F"$, $phi_"I"$, $phi_"II"=qty("5", "deg")$,
+        [Déphasage de la tension par rapport au courant total], $phi_"F"$, $phi_"I"$, $phi_"II"=#quan[5 °]$,
         $R$, $infinity$, $R_"I"$, $R_"II"$,
     )
 ]
@@ -81,13 +81,13 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 )[
     Déterminer $R_"I"$ et $R_"II"$, et les calculer numériquement.
 ][
-    $P_"moteur" = P_"F" = qty("520", "W")$ donc $P_(R_"I") = P_"I" - P_"F" = qty("2800", "W") - qty("520", "W") = qty("2280", "W")$.
+    $P_"moteur" = P_"F" = #quan[520 W]$ donc $P_(R_"I") = P_"I" - P_"F" = #quan[2800 W] - #quan[520 W] = #quan[2280 W]$.
 
-    Or $P_(R_"I") = U_"eff"^2/R_"I"$. Donc $R_"I" = U_"eff"^2/P_(R_"I") = (qty("230", "V"))^2/qty("2280", "W") approx qty("23", "ohm")$.
+    Or $P_(R_"I") = U_"eff"^2/R_"I"$. Donc $R_"I" = U_"eff"^2/P_(R_"I") = (#quan[230 V])^2/#quan[2280 W] approx #quan[23 Ω]$.
 
-    De même, $P_(R_"II") = P_"II" - P_"F" = qty("10000", "W") - qty("520", "W") = qty("9480", "W")$.
+    De même, $P_(R_"II") = P_"II" - P_"F" = #quan[10000 W] - #quan[520 W] = #quan[9480 W]$.
 
-    Or $P_(R_"II") = U_"eff"^2/R_"II"$. Donc $R_"II" = U_"eff"^2/P_(R_"II") = (qty("230", "V"))^2/qty("9480", "W") approx qty("5.6", "ohm")$.
+    Or $P_(R_"II") = U_"eff"^2/R_"II"$. Donc $R_"II" = U_"eff"^2/P_(R_"II") = (#quan[230 V])^2/#quan[9480 W] approx #quan[5.6 Ω]$.
 ]
 
 #question(
@@ -120,7 +120,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
     $ cos(phi_"F") = Re(underline(Z)_"F")/(|underline(Z)_"F"|) $ or $ underline(Z)=r + j L omega $ donc $ cos(phi_"F") = r/sqrt(r^2 + (L omega)^2) $
 
     On a donc $ P_"F" = U_"eff"^2 Re(underline(Z)_"F")/(|underline(Z)_"F"^2|)=U_"eff"^2 r/(r^2 + (L omega)^2) $ et finalement
-    $ (L omega)^2 + r^2 = U_"eff"^2 r/P_"F" = (qty("230", "V"))^2/qty("520", "W") r approx 102 r $
+    $ (L omega)^2 + r^2 = U_"eff"^2 r/P_"F" = (#quan[230 V])^2/#quan[520 W] r approx 102 r $
 ]
 
 #question(
@@ -158,10 +158,10 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 
     On a alors
     $ tan(phi_"F") = (L omega)/r = (R_"II" + 102)/R_"II" tan(phi_"II") $
-    d'où $ phi_"F" = arctan((R_"II" + 102)/R_"II" tan(phi_"II")) = qty("59", "deg") $
+    d'où $ phi_"F" = arctan((R_"II" + 102)/R_"II" tan(phi_"II")) = #quan[59 °] $
 
     Et
     $ tan(phi_"I") = (L omega)/r (R_"I")/(R_"I" + 102) = (R_"II"+102)/(R_"II") tan(phi_"II") R_"I"/(R_"I" + 102) $
 
-    d'où $ phi_"I" = arctan((R_"II"+102)/(R_"II") tan(phi_"II") R_"I"/(R_"I" + 102)) = qty("17", "deg") $
+    d'où $ phi_"I" = arctan((R_"II"+102)/(R_"II") tan(phi_"II") R_"I"/(R_"I" + 102)) = #quan[17 °] $
 ]

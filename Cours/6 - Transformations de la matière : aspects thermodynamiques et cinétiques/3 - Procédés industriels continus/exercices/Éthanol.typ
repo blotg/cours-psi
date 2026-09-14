@@ -5,7 +5,7 @@
     ouvert: true,
 )
 
-On s'intéresse au métabolisme de l'éthanol ($M=qty("46","g/mol")$) par le corps humain. L'éthanol est transformé en acétaldéhyde dans le foie par l'enzyme alcool déshydrogénase (ADH) selon la réaction suivante :
+On s'intéresse au métabolisme de l'éthanol ($M=#quan[46 g/mol]$) par le corps humain. L'éthanol est transformé en acétaldéhyde dans le foie par l'enzyme alcool déshydrogénase (ADH) selon la réaction suivante :
 
 #figure(
     canvas({
@@ -19,9 +19,9 @@ On s'intéresse au métabolisme de l'éthanol ($M=qty("46","g/mol")$) par le cor
     }),
 )
 
-La cinétique de cette réaction est d'ordre $0$. Le foie est capable de métaboliser environ #qty("7", "g") d'éthanol par heure.
+La cinétique de cette réaction est d'ordre $0$. Le foie est capable de métaboliser environ #quan[7 g] d'éthanol par heure.
 
-Le débit sanguin hépatique est d'environ #qty("1.5", "L/min").
+Le débit sanguin hépatique est d'environ #quan[1.5 L/min].
 
 #question(
     coups-de-pouce: (
@@ -30,7 +30,7 @@ Le débit sanguin hépatique est d'environ #qty("1.5", "L/min").
         "Calculer la vitesse extensive de réaction à partir de la masse d'éthanol métabolisée par heure."
     )
 )[
-    Calculer le taux de conversion de l'éthanol pour une personne ayant un taux d'alcoolémie de #qty("0.2", "g/L") dans le sang entrant dans le foie (environ 1 verre d'alcool consommé).
+    Calculer le taux de conversion de l'éthanol pour une personne ayant un taux d'alcoolémie de #quan[0.2 g/L] dans le sang entrant dans le foie (environ 1 verre d'alcool consommé).
 ][
     La conservation de l'éthanol s'écrit
     $

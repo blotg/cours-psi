@@ -9,11 +9,11 @@
 #wrap-content(align: right)[
     #image("images/theremin.jpg", width: 6cm)
 ][
-    On s'intéresse à un Thérémine constitué de deux oscillateurs à relaxation de périodes d'oscillation $T_1=4 R_a/R_b R C_1$ et $T_2=4 R_a/R_b R C_2$ (voir le montage étudié en cours). Le condensateur $C_2$ est constitué d'un condensateur identique à $C_1$ en parallèle d'un condensateur $C'$, lui-même constitué de la main et de l'antenne, et variant entre $0$ et #qty("10", "pF").
+    On s'intéresse à un Thérémine constitué de deux oscillateurs à relaxation de périodes d'oscillation $T_1=4 R_a/R_b R C_1$ et $T_2=4 R_a/R_b R C_2$ (voir le montage étudié en cours). Le condensateur $C_2$ est constitué d'un condensateur identique à $C_1$ en parallèle d'un condensateur $C'$, lui-même constitué de la main et de l'antenne, et variant entre $0$ et #quan[10 pF].
 
     Les signaux issus des deux oscillateurs sont envoyés dans un multiplieur, dont on note $s(t)$ la sortie.
 
-    *Données :* $R_a=qty("1", "kO")$ ; $R_b=qty("2", "kO")$ ; $R=qty("100", "kO")$ ; $C' in [0, qty("10", "pF")]$.
+    *Données :* $R_a=#quan[1 kΩ]$ ; $R_b=#quan[2 kΩ]$ ; $R=#quan[100 kΩ]$ ; $C' in [0, #quan[10 pF]]$.
 ]
 
 #question(
@@ -63,9 +63,9 @@
 ]
 
 #question()[
-    Quelle valeur doit avoir $C_1$ pour que la fréquence du signal en sortie varie entre $0$ et #qty("2", "kHz") ?
+    Quelle valeur doit avoir $C_1$ pour que la fréquence du signal en sortie varie entre $0$ et #quan[2 kHz] ?
 ][
-    D'après la question 2, la fréquence de sortie est maximale lorsque $C'$ est maximal, soit $C'=#qty("10", "pF")$. On veut alors $f_1-f_2 = qty("2","kHz")$ :
+    D'après la question 2, la fréquence de sortie est maximale lorsque $C'$ est maximal, soit $C'=#quan[10 pF]$. On veut alors $f_1-f_2 = #quan[2 kHz]$ :
     #let Ra = 1e3
     #let Rb = 2e3
     #let R = 100e3

@@ -52,19 +52,19 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 #application[
     Associer les ordres de grandeurs de puissances et les émissions#footnote[Les émissions de gaz à effet de serre sont exprimées en équivalents #ce("CO2") et calculés sur l'ensemble du cycle de vie.] de #ce("CO2") aux systèmes de production suivants.
     #let puissances = (
-        qty("400", "W"),
-        qty("2", "MW"),
-        qty("100", "MW"),
-        qty("100", "MW"),
-        qty("100", "MW"),
-        qty("1", "GW"),
+        quan[400 W],
+        quan[2 MW],
+        quan[100 MW],
+        quan[100 MW],
+        quan[100 MW],
+        quan[1 GW],
     )
     #let moyens = (
         [barrage],
         [centrale au charbon],
         [centrale au gaz],
         [éolienne],
-        [panneau solaire #qty("1", "m^2")],
+        [panneau solaire #quan[1 m^2]],
         [réacteur nucléaire],
     )
     #let CO2 = (
@@ -97,27 +97,27 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 #question-de-début-de-cours(
     "La puissance délivrée par un réacteur nucléaire a pour ordre de grandeur",
     (
-        "$qty(\"1\", \"GW\")$",
-        "$qty(\"1\", \"MW\")$",
-        "$qty(\"1\", \"TW\")$",
-        "$qty(\"1\", \"kW\")$",
+        "$#quan[1 GW]$",
+        "$#quan[1 MW]$",
+        "$#quan[1 TW]$",
+        "$#quan[1 kW]$",
     ),
 )
 
 #question-de-début-de-cours(
-    "La puissance délivrée par $qty(\"1\", \"m^2\")$ de panneau photovoltaïque a pour ordre de grandeur",
+    "La puissance délivrée par $#quan[1 m^2]$ de panneau photovoltaïque a pour ordre de grandeur",
     (
-        "$qty(\"400\", \"W\")$",
-        "$qty(\"400\", \"mW\")$",
-        "$qty(\"400\", \"kW\")$",
-        "$qty(\"400\", \"GW\")$",
+        "$#quan[400 W]$",
+        "$#quan[400 mW]$",
+        "$#quan[400 kW]$",
+        "$#quan[400 GW]$",
     ),
 )
 = Convertisseur électronique statique de puissance
 == Structure générale
 Un convertisseur électrique statique est constitué d'interrupteurs intégrés dans un circuit de puissance. Les interrupteurs peuvent être commandés par un circuit de commande.
 
-Le circuit de commande fonctionne avec des petites tensions (de l'ordre de #qty("5", "V")) et des petits courants (de l'ordre de #qty("10", "mA")).
+Le circuit de commande fonctionne avec des petites tensions (de l'ordre de #quan[5 V]) et des petits courants (de l'ordre de #quan[10 mA]).
 
 #schéma(titre: "Structure générale d'un convertisseur", hauteur: 3cm)
 

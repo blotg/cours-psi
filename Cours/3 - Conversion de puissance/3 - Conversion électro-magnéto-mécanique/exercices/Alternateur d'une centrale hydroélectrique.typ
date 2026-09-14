@@ -7,11 +7,11 @@
 Une machine turbine hydraulique est accouplé à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau.
 
 Les caractéristiques de la machine synchrone diphasée sont les suivantes :
-- puissance apparente nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#qty("65", "MV A")$
-- tension nominale aux bornes d'une phase $V_n=#qty("10", "kV")$
-- fréquence des courants statoriques imposée par le réseau $f=qty("50", "Hz")$
-- résistance d'une phase statorique $R=#qty("0.01", "O")$
-- la fém à vide dépend du courant d'excitation selon la relation $E=k I_e$ avec $k=qty("290", "V/A")$
+- puissance apparente nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#quan[65 MV A]$
+- tension nominale aux bornes d'une phase $V_n=#quan[10 kV]$
+- fréquence des courants statoriques imposée par le réseau $f=#quan[50 Hz]$
+- résistance d'une phase statorique $R=#quan[0.01 Ω]$
+- la fém à vide dépend du courant d'excitation selon la relation $E=k I_e$ avec $k=#quan[290 V/A]$
 - courant de court-circuit $I_(c c) = 300 I_e$
 
 #let k = 290
@@ -67,7 +67,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 #question(
     coups-de-pouce: (),
 )[
-    Fonctionnement en charge. L'intensité du courant d'excitation vaut $I_e=qty("44", "A")$, la tension efficace aux bornes d'une phase est #qty("8.64", "kV") et le facteur de puissance du réseau vaut $cos(phi)=0.9$ arrière (charge inductive). Représenter le schéma électrique d'une phase en négligeant la résistance $R$.
+    Fonctionnement en charge. L'intensité du courant d'excitation vaut $I_e=#quan[44 A]$, la tension efficace aux bornes d'une phase est #quan[8.64 kV] et le facteur de puissance du réseau vaut $cos(phi)=0.9$ arrière (charge inductive). Représenter le schéma électrique d'une phase en négligeant la résistance $R$.
 ][
     #figure(
         circuit({
@@ -138,7 +138,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
         "Comment s'exprimer les pertes joules statoriques ?",
     ),
 )[
-    Calculer la puissance fournie au réseau et le rendement de l'alternateur sachant que l'ensemble des pertes mécaniques, ferromagnétiques et d'excitation valent $P_p=qty("2.4", "MW")$.
+    Calculer la puissance fournie au réseau et le rendement de l'alternateur sachant que l'ensemble des pertes mécaniques, ferromagnétiques et d'excitation valent $P_p=#quan[2.4 MW]$.
 ][
     La puissance fournie au réseau est $P_"utile" = 2V I cos(phi)$, le facteur 2 venant du fait que l'alternateur est diphasé.
 

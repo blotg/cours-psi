@@ -178,11 +178,11 @@ La variation d'entropie $dd(cal(S))$ est une petite variation et s'écrit bien a
 
 == Équilibre thermodynamique local
 === Les 3 échelles
-/ Échelle microscopique ($tilde qty("e-10", "m")$): C'est l'échelle des molécules du système. Ces molécules sont animées d'un mouvement erratique. Les grandeurs thermodynamiques n'ont pas de sens pour une molécule.
+/ Échelle microscopique ($tilde #quan[e-10 m]$): C'est l'échelle des molécules du système. Ces molécules sont animées d'un mouvement erratique. Les grandeurs thermodynamiques n'ont pas de sens pour une molécule.
 
-/ Échelle macroscopique ($tilde qty("e-2", "m")$): C'est l'échelle des systèmes étudiés dans leur ensemble.\ Si le système est à l'équilibre thermodynamique, on peut définir ses grandeurs thermodynamiques (température, pression, ...) et les étudier comme vu en première année. \ Lorsqu'il y a des transferts thermiques à l'intérieur d'un système, ce système n'est pas à l'équilibre thermodynamique. Certaines des grandeurs thermodynamiques de ce système (température, pression, ...) ne sont donc pas définies.
+/ Échelle macroscopique ($tilde #quan[e-2 m]$): C'est l'échelle des systèmes étudiés dans leur ensemble.\ Si le système est à l'équilibre thermodynamique, on peut définir ses grandeurs thermodynamiques (température, pression, ...) et les étudier comme vu en première année. \ Lorsqu'il y a des transferts thermiques à l'intérieur d'un système, ce système n'est pas à l'équilibre thermodynamique. Certaines des grandeurs thermodynamiques de ce système (température, pression, ...) ne sont donc pas définies.
 
-/ Échelle mésoscopique ($>> qty("e-10", "m")$ et $<< qty("e-2", "m")$): L'échelle mésoscopique est une échelle intermédiaire entre l'échelle microscopique et l'échelle macroscopique.\ Comme l'échelle mésoscopique est très grande devant l'échelle microscopique, les fluctuations dues à l'agitation des molécules sont faibles.\ Comme l'échelle mésoscopique est très petite devant l'échelle macroscopique, les grandeurs y sont uniformes (ce sont les mêmes en un point ou un autre du système mésoscopique).
+/ Échelle mésoscopique ($>> #quan[e-10 m]$ et $<< #quan[e-2 m]$): L'échelle mésoscopique est une échelle intermédiaire entre l'échelle microscopique et l'échelle macroscopique.\ Comme l'échelle mésoscopique est très grande devant l'échelle microscopique, les fluctuations dues à l'agitation des molécules sont faibles.\ Comme l'échelle mésoscopique est très petite devant l'échelle macroscopique, les grandeurs y sont uniformes (ce sont les mêmes en un point ou un autre du système mésoscopique).
 
 L'échelle mésoscopique sert
 - pour décrire les systèmes qui ne sont pas à l'équilibre thermodynamique
@@ -321,10 +321,10 @@ La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("lambda",)),
 )[
-    $ lambda_"air" tilde #qty("e-2", "J/s/m/K") $
-    $ lambda_"eau" tilde #qty("e-1", "J/s/m/K") $
-    $ lambda_"béton" tilde #qty("e0", "J/s/m/K") $
-    $ lambda_"acier" tilde #qty("e1", "J/s/m/K") $
+    $ lambda_"air" tilde #quan[e-2 J/s/m/K] $
+    $ lambda_"eau" tilde #quan[e-1 J/s/m/K] $
+    $ lambda_"béton" tilde #quan[e0 J/s/m/K] $
+    $ lambda_"acier" tilde #quan[e1 J/s/m/K] $
 ]
 
 #question-de-colle(
@@ -333,10 +333,10 @@ La conductivité thermique $lambda$ permet de mesurer la facilité avec laquelle
 
 #flashcard(
     recto: [Conductivité thermique de l'acier, de l'air, du béton et de l'eau (ordres de grandeur)],
-    verso: [$ lambda_"air" tilde #qty("e-2", "J/s/m/K") $
-    $ lambda_"eau" tilde #qty("e-1", "J/s/m/K") $
-    $ lambda_"béton" tilde #qty("e0", "J/s/m/K") $
-    $ lambda_"acier" tilde #qty("e1", "J/s/m/K") $],
+    verso: [$ lambda_"air" tilde #quan[e-2 J/s/m/K] $
+    $ lambda_"eau" tilde #quan[e-1 J/s/m/K] $
+    $ lambda_"béton" tilde #quan[e0 J/s/m/K] $
+    $ lambda_"acier" tilde #quan[e1 J/s/m/K] $],
 )
 
 #question-de-début-de-cours(
@@ -479,7 +479,7 @@ Si on analyse en ordres de grandeurs l'équation de diffusion thermique, on peut
 Comme la durée caractéristique dépend de $l^2$, l'onde de température ralentit en se propageant : elle met 4 fois plus de temps pour parcourir une distance 2 fois plus grande.
 
 #application[
-    Si je plonge une cuillère de #qty("20", "cm") en acier ($mu=#qty("8e3", "kg/m^3")$, $c_V=qty("4e2", "J/K/kg")$) dans une casserole d'eau bouillante, quel est l'ordre de grandeur de la durée au bout de laquelle la queue de la cuillère devient chaude ?
+    Si je plonge une cuillère de #quan[20 cm] en acier ($mu=#quan[8e3 kg/m^3]$, $c_V=#quan[4e2 J/K/kg]$) dans une casserole d'eau bouillante, quel est l'ordre de grandeur de la durée au bout de laquelle la queue de la cuillère devient chaude ?
 ]
 
 
@@ -636,7 +636,7 @@ Si deux résistances thermiques sont en série, elles sont traversées par le m�
 ]
 
 #application[
-    Déterminer la résistance thermique équivalente d'un double vitrage. Chaque vitre a une épaisseur #qty("1", "cm"), de même que l'air entre les deux. La surface de la fenêtre est #qty("1", "m^2"). $lambda_"verre"=qty("1", "W/m/K")$.
+    Déterminer la résistance thermique équivalente d'un double vitrage. Chaque vitre a une épaisseur #quan[1 cm], de même que l'air entre les deux. La surface de la fenêtre est #quan[1 m^2]. $lambda_"verre"=#quan[1 W/m/K]$.
 ]
 
 Si deux résistances thermiques sont en parallèle, elles sont soumises à la même différence de température.
@@ -660,7 +660,7 @@ Si deux résistances thermiques sont en parallèle, elles sont soumises à la m�
 ]
 
 #application[
-    Déterminer la résistance thermique équivalente d'une gigoteuse de surface #qty("0.5", "m^2") et de #qty("2", "tog")#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un tog correspond à #qty("0.1", "m^2 K/W").] et d'un bonnet de surface #qty("400", "cm^2") et de #qty("1", "tog").
+    Déterminer la résistance thermique équivalente d'une gigoteuse de surface #quan[0.5 m^2] et de #quan[2 tog]#footnote[Le #unit("tog") est une unité inverse de la résistance thermique surfacique. Un tog correspond à #quan[0.1 m^2 K/W].] et d'un bonnet de surface #quan[400 cm^2] et de #quan[1 tog].
 ]
 
 

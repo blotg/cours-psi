@@ -152,7 +152,7 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 Si on se place suffisamment loin, les champs créés par un aimant, par une spire et par un dipôle magnétique sont similaires. On définit le moment magnétique d'un aimant comme le moment magnétique du dipôle magnétique ayant le même champ magnétique à grande distance.
 
 #application[
-    Déterminer la norme du champ magnétique à la surface de la terre à Quimper ($47°59'N, 4°05'O$). On donne $cal(M)_"Terre"=qty("7.7e22", "A m^2")$ et $R_"Terre"=qty("6400", "km")$.
+    Déterminer la norme du champ magnétique à la surface de la terre à Quimper ($47°59'N, 4°05'O$). On donne $cal(M)_"Terre"=#quan[7.7e22 A m^2]$ et $R_"Terre"=#quan[6400 km]$.
 ]
 
 == Action subie par un moment magnétique
@@ -184,7 +184,7 @@ L'énergie potentielle est minimale lorsque le moment magnétique est aligné au
 On retrouve un couple nul lorsque le moment magnétique est aligné avec le champ magnétique.
 
 #application[
-    Déterminer la période d'oscillation d'une aiguille de boussole ($va(cal(M))=qty("15", "A m^2") va(e_r)$, $J=qty("1e-4", "kg m^2")$ selon $va(e_r)$) dans le champ magnétique terrestre. La liaison pivot entre l'aiguille et son support est supposée idéale.
+    Déterminer la période d'oscillation d'une aiguille de boussole ($va(cal(M))=#quan[15 A m^2] va(e_r)$, $J=#quan[1e-4 kg m^2]$ selon $va(e_r)$) dans le champ magnétique terrestre. La liaison pivot entre l'aiguille et son support est supposée idéale.
 ]
 
 #encadré(

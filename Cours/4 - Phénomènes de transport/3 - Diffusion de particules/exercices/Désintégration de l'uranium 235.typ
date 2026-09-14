@@ -140,7 +140,7 @@ On prend pour condition aux limites $n(r=R)=0$.
 #question(
     coups-de-pouce: (),
 )[
-    En déduire la masse critique d'uranium 235 nécessaire pour qu'une réaction en chaîne puisse se produire. La masse volumique de l'uranium 235 est #qty("19.1", "g/cm^3"), le coefficient de diffusion des neutrons dans l'uranium 235 est #qty("2e5", "m^2/s") et le temps moyen avant capture d'un neutron est #qty("5.4e-9", "s").
+    En déduire la masse critique d'uranium 235 nécessaire pour qu'une réaction en chaîne puisse se produire. La masse volumique de l'uranium 235 est #quan[19.1 g/cm^3], le coefficient de diffusion des neutrons dans l'uranium 235 est #quan[2e5 m^2/s] et le temps moyen avant capture d'un neutron est #quan[5.4e-9 s].
 ][
     #let D = 2e5
     #let ta = 5.4e-9

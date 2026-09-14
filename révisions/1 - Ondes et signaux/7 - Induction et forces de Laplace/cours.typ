@@ -8,7 +8,7 @@
 
 #flashcard(
     recto: [Ordres de grandeur de champs magnétiques],
-    verso: [Champ terrestre : quelques dizaines de #unit("uT"). Aimant usuel : #qty("10","mT") à #qty("1","T"). IRM : #qty("1","T").],
+    verso: [Champ terrestre : quelques dizaines de #unit("uT"). Aimant usuel : #quan[10 mT] à #quan[1 T]. IRM : #quan[1 T].],
 )
 #flashcard(
     recto: [Moment magnétique d'une boucle de courant],

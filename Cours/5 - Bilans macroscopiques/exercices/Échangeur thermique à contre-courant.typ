@@ -40,7 +40,7 @@ On considère une machine thermique ouverte dans laquelle circule lentement et h
     $
 ]
 
-On considère maintenant un échangeur thermique isobare et adiabatique. Dans le tuyau circule un gaz, supposé parfait, de coefficient $gamma= 7/5$, et de masse molaire $M=qty("29", "g/mol")$. Il entre à $T_1=qty("520", "K")$ et ressort à $T_2=qty("300", "K")$. Le fluide réfrigérant est de l'eau, de capacité thermique massique $c=qty("4.18", "kJ/kg/K")$, entrant à $theta_1=qty("12", "Celsius")$ et sortant à $theta_2$. Le régime est stationnaire de débit $D_g=qty("1.0", "kg/s")$ pour le gaz et $D_e=qty("4.0", "kg/s")$ pour l'eau.
+On considère maintenant un échangeur thermique isobare et adiabatique. Dans le tuyau circule un gaz, supposé parfait, de coefficient $gamma= 7/5$, et de masse molaire $M=#quan[29 g/mol]$. Il entre à $T_1=#quan[520 K]$ et ressort à $T_2=#quan[300 K]$. Le fluide réfrigérant est de l'eau, de capacité thermique massique $c=#quan[4.18 kJ/kg/K]$, entrant à $theta_1=#quan[12 °C]$ et sortant à $theta_2$. Le régime est stationnaire de débit $D_g=#quan[1.0 kg/s]$ pour le gaz et $D_e=#quan[4.0 kg/s]$ pour l'eau.
 
 
 #figure(

@@ -8,13 +8,13 @@
 
 La performance des puces électroniques utilisées dans les ordinateurs décroit avec leur température. Afin de dissiper une puissance élevée en limitant la température du composant, on installe un dissipateur de chaleur. Ce dissipateur est muni d'ailettes de refroidissement. On étudie une de ces ailettes.
 
-Une ailette de refroidissement en aluminium de conductivité thermique $lambda=qty("205", "W/m/K")$ est fixée en $x=0$ à un corps dont la température $T_0=qty("70", "Celsius")$ est constante et avec lequel le contact thermique est parfait. Elle baigne dans l'air ambiant de température $T_a=qty("20", "Celsius")$. L'ailette est en forme de parallélépipède, d'épaisseur $e=qty("1", "mm")$, de largeur $a=qty("5", "cm")$ et de longueur $l=qty("10", "cm")$.
+Une ailette de refroidissement en aluminium de conductivité thermique $lambda=#quan[205 W/m/K]$ est fixée en $x=0$ à un corps dont la température $T_0=#quan[70 °C]$ est constante et avec lequel le contact thermique est parfait. Elle baigne dans l'air ambiant de température $T_a=#quan[20 °C]$. L'ailette est en forme de parallélépipède, d'épaisseur $e=#quan[1 mm]$, de largeur $a=#quan[5 cm]$ et de longueur $l=#quan[10 cm]$.
 
 On émet les hypothèses suivantes :
 - le régime étudié est stationnaire
 - la température d'un point de l'ailette n'est fonction que de $x$
 - $a >> e$
-- la puissance cédée à l'air extérieur par un élément de surface latérale $dd(S)$ (échanges conducto-convectifs) obéit à la loi de Newton : $delta P=h(T(x)-T_a)dd(S)$ avec $h=qty("10", "W/m^2/K")$.
+- la puissance cédée à l'air extérieur par un élément de surface latérale $dd(S)$ (échanges conducto-convectifs) obéit à la loi de Newton : $delta P=h(T(x)-T_a)dd(S)$ avec $h=#quan[10 W/m^2/K]$.
 
 #figure(
     canvas({

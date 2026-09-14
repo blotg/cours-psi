@@ -35,14 +35,14 @@ L'objectif de ce TP est d'étudier le filtre de Wien et sa fonction de transfert
 = Réalisation et étude préliminaire
 
 Le filtre de Wien sera réalisé avec les composants accessibles dans la salle de TP (voir @annexe-composants) de sorte que
-+ sa fréquence caractéristique soit comprise entre #qty("10", "kHz") et #qty("20", "kHz") ;
-+ sa résistance soit très petite devant l'impédance d'entrée de l'oscilloscope (#qty("1", "MO")) ;
++ sa fréquence caractéristique soit comprise entre #quan[10 kHz] et #quan[20 kHz] ;
++ sa résistance soit très petite devant l'impédance d'entrée de l'oscilloscope (#quan[1 MΩ]) ;
 + son impédance d'entrée à haute fréquence soit suffisamment grande pour ne pas faire saturer en courant l'ALI.
 
 #application()[
     Choisir des valeurs pour $R$ et $C$.
 
-    Les composants utilisés en TP ont une incertitude-type de #qty("5", "%"). Calculer l'incertitude sur la fréquence caractéristique $f_0$.
+    Les composants utilisés en TP ont une incertitude-type de #quan[5 %]. Calculer l'incertitude sur la fréquence caractéristique $f_0$.
 ]<application-calcul-RC>
 
 #évaluation(
@@ -110,7 +110,7 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
     - la fréquence des signaux ;
     - le retard de la sortie par rapport à l'entrée.
 
-    On répartira les points pour des fréquences entre #qty("10", "Hz") et #qty("100", "kHz") en choisissant 5 points avant la fréquence caractéristique et 5 points après.
+    On répartira les points pour des fréquences entre #quan[10 Hz] et #quan[100 kHz] en choisissant 5 points avant la fréquence caractéristique et 5 points après.
 
     Les données seront rentrées directement dans des variables dans Python.
 
@@ -264,16 +264,16 @@ Il est maintenant possible de conclure sur l'adéquation des valeurs attendues a
 #figure(
     {
         let L = (
-            qty("100", "pF"),
-            qty("400", "pF"),
-            qty("1", "nF"),
-            qty("2.2", "nF"),
-            qty("4.7", "nF"),
-            qty("10", "nF"),
-            qty("22", "nF"),
-            qty("100", "nF"),
-            qty("220", "nF"),
-            qty("470", "nF"),
+            quan[100 pF],
+            quan[400 pF],
+            quan[1 nF],
+            quan[2.2 nF],
+            quan[4.7 nF],
+            quan[10 nF],
+            quan[22 nF],
+            quan[100 nF],
+            quan[220 nF],
+            quan[470 nF],
         )
 
         import "@preview/zero:0.7.0": *

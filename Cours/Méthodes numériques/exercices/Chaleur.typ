@@ -4,7 +4,7 @@
   titre: "Propagation de la chaleur",
   numérique: true
 )[
-On cherche à modéliser l'évolution de la température dans un barreau cylindrique en aluminium ($D=qty("99e-6","m^2/s")$) de longueur $l=qty("10","cm")$. L'évolution de la température est donnée par l'équation de diffusion $pdv(T,t)=D pdv(T,x,2)$.
+On cherche à modéliser l'évolution de la température dans un barreau cylindrique en aluminium ($D=#quan[99e-6 m^2/s]$) de longueur $l=#quan[10 cm]$. L'évolution de la température est donnée par l'équation de diffusion $pdv(T,t)=D pdv(T,x,2)$.
 
 On discrétise spatialement la barre en prenant $N_x=20$ points.
 
@@ -13,7 +13,7 @@ Le code Python pourra être saisi directement sur Capytale : #link("https://capy
 #question(coups-de-pouce: (
   "Quelle relation relie le pas spatial $Delta x$, la longueur de la barre $l$ et le nombre de points $N_x$ ?",
 ))[
-  Sachant que le schéma d'Euler est stable ssi $2D (Delta t)/(Delta x^2)<1$, quel pas temporel maximal peut-on choisir ? On choisira dans toute la suite $Delta t = #qty("0.1", "s")$. Compléter le code suivant.
+  Sachant que le schéma d'Euler est stable ssi $2D (Delta t)/(Delta x^2)<1$, quel pas temporel maximal peut-on choisir ? On choisira dans toute la suite $Delta t = #quan[0.1 s]$. Compléter le code suivant.
 ```python
 D = 99e-6
 l = 10e-2
@@ -28,7 +28,7 @@ Delta_t = 0.1 # pas temporel
 
   #let Delta-t = calc.pow(Delta-x, 2) / (2 * 99e-6)
   $ Delta t < (Delta x)^2/(2 D) = #qty(Delta-t, "s", chiffres: 2) $
-  Le pas $Delta t = #qty("0.1", "s")$ proposé convient donc.
+  Le pas $Delta t = #quan[0.1 s]$ proposé convient donc.
 ```python
 Delta_x = l/(N_x - 1) # pas spatial
 ```
@@ -56,7 +56,7 @@ T = np.zeros((N_t,N_x))
   "À quel endroit de la matrice $T_(i,j)$ correspond la température initiale de la barre ?",
   "On peut utiliser le \"slicing\" de Python pour sélectionner des sous-parties d'une matrice : `T[i,:]` sélectionne la `i`-ième ligne de T.",
 ))[
-  On initialise la simulation en supposant la température égale à #qty("298", "K") dans le barreau au début. Compléter le code suivant.
+  On initialise la simulation en supposant la température égale à #quan[298 K] dans le barreau au début. Compléter le code suivant.
 ```python
 T[...] = 298 # Température initiale de la barre
 ```
@@ -70,7 +70,7 @@ T[0, :] = 298 # Température initiale de la barre
   "À quel endroit de la matrice $T_(i,j)$ correspondent l'abscisse $x=0$ ? et l'abscisse $x=l$ ?",
   "On peut utiliser le \"slicing\" de Python pour sélectionner des sous-parties d'une matrice : `T[:,j]` sélectionne la `j`-ième colonne de T.",
 ))[
-  L'extrémité gauche du barreau ($x=0$) est maintenue à une température de #qty("350","K") tandis que son extrémité droite ($x=qty("10","cm")$) est maintenue à #qty("298","K"). Compléter le code suivant.
+  L'extrémité gauche du barreau ($x=0$) est maintenue à une température de #quan[350 K] tandis que son extrémité droite ($x=#quan[10 cm]$) est maintenue à #quan[298 K]. Compléter le code suivant.
 ```python
 T[...] = 350 # Température de la barre en x=0
 T[...] = 298 # Température de la barre en x=10cm
@@ -105,14 +105,14 @@ for i in range(len(T)-1):
 ][
   La boucle sur `i` remplit la ligne `i+1` à chaque tour : elle doit donc s'arrêter à l'avant-dernière ligne, sinon `T[i+1]` sortirait de la matrice. C'est ce que donne `range(len(T)-1)`.
 
-  La boucle sur `j` utilise les voisins `T[i,j-1]` et `T[i,j+1]` : elle ne peut pas traiter la première ni la dernière colonne, qui n'ont qu'un seul voisin. Ces deux colonnes sont précisément celles des extrémités du barreau, dont la température est imposée par les conditions aux limites (#qty("350", "K") et #qty("298", "K")) : il ne faut surtout pas les recalculer.
+  La boucle sur `j` utilise les voisins `T[i,j-1]` et `T[i,j+1]` : elle ne peut pas traiter la première ni la dernière colonne, qui n'ont qu'un seul voisin. Ces deux colonnes sont précisément celles des extrémités du barreau, dont la température est imposée par les conditions aux limites (#quan[350 K] et #quan[298 K]) : il ne faut surtout pas les recalculer.
 ]
 
 #question(coups-de-pouce: (
-  "Où dans la matrice T se trouve le profil de température à l'instant $t = #qty(\"15\", \"s\")$ ?",
+  "Où dans la matrice T se trouve le profil de température à l'instant $t = #quan[15 s]$ ?",
   "Pour générer les abscisses de la courbe, on peut utiliser la fonction `np.linspace(a,b,n)` pour créer un tableau de `n` valeurs régulièrement espacées entre `a` et `b`.",
 ))[
-  Tracer sur le même graphe le profil de température dans la barre au bout de #qty("15","s"), #qty("30","s"), #qty("1","min"), #qty("2","min") et #qty("4","min").
+  Tracer sur le même graphe le profil de température dans la barre au bout de #quan[15 s], #quan[30 s], #quan[1 min], #quan[2 min] et #quan[4 min].
 ][
   ```python
 import matplotlib.pyplot as plt

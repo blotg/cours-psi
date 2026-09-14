@@ -18,7 +18,7 @@
     #let C = 10e-6
     #let R = 66e3
     #let T = 4 * R1 / R2 * R * C
-    La période de clignotement est de l'ordre de #qty("1", "s"). Il faut choisir les valeurs de composants pour avoir $T = 4R_1/R_2 R C approx qty("1", "s")$ avec $R_1 > R_2$ pour avoir des oscillations. On peut par exemple choisir $R_1 = qty("10", "kO")$, $R_2 = qty("22", "kO")$, $C = qty("10", "uF")$ et $R = qty("66", "kO")$ ce qui donne une période de clignotement de
+    La période de clignotement est de l'ordre de #quan[1 s]. Il faut choisir les valeurs de composants pour avoir $T = 4R_1/R_2 R C approx #quan[1 s]$ avec $R_1 > R_2$ pour avoir des oscillations. On peut par exemple choisir $R_1 = #quan[10 kΩ]$, $R_2 = #quan[22 kΩ]$, $C = #quan[10 uF]$ et $R = #quan[66 kΩ]$ ce qui donne une période de clignotement de
     $
         T approx #qty(T, "s", chiffres: 2)
     $
@@ -28,16 +28,16 @@
             import zap: *
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
-            resistor("R2", (-2, 1.5), (2, 1.5), label: qty("22", "kO"))
-            resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: qty("10", "kO"))
+            resistor("R2", (-2, 1.5), (2, 1.5), label: quan[22 kΩ])
+            resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: quan[10 kΩ])
             frame("G1", (rel: (-.5, -.5), to: "ALI.minus"))
             swire("G1", "ALI.minus", axis: "y")
             swire("ALI.out", "R2.out")
             swire("R2.in", "ALI.plus", axis: "y")
 
             opamp("ALI2", (-7, 0))
-            resistor("R", (rel: (-1, 0), to: "ALI2.minus"), (rel: (-3, 0)), label: qty("66", "kO"))
-            capacitor("C", (-9, 2), (-5, 2), label: qty("10", "uF"))
+            resistor("R", (rel: (-1, 0), to: "ALI2.minus"), (rel: (-3, 0)), label: quan[66 kΩ])
+            capacitor("C", (-9, 2), (-5, 2), label: quan[10 uF])
             frame("G2", (rel: (-.5, -.5), to: "ALI2.plus"))
             swire("G2", "ALI2.plus", axis: "y")
             swire("ALI2.out", "C.out")
@@ -52,5 +52,5 @@
         }),
     )
 
-    La tension de sortie $u(t)$ est une tension créneau variant entre #qty("-15", "V") et #qty("15", "V") avec une période de #qty(T, "s", chiffres: 2). On peut l'envoyer aux ampoules LED avec un circuit de puissance placé en aval, les LED ne s'allumant que la moitié du temps.
+    La tension de sortie $u(t)$ est une tension créneau variant entre #quan[-15 V] et #quan[15 V] avec une période de #qty(T, "s", chiffres: 2). On peut l'envoyer aux ampoules LED avec un circuit de puissance placé en aval, les LED ne s'allumant que la moitié du temps.
 ]

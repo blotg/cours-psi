@@ -116,7 +116,7 @@ In the previous exercise, we have seen the necessity for a summing system in ord
                 "R3",
                 (-1.5,1.5),
                 (1.5,1.5),
-                label: $R_3 = qty("10","kO")$,
+                label: $R_3 = #quan[10 kΩ]$,
             )
             swire("ALI2.minus", "R3.in")
             swire("R3.out", (rel: (0, -1.5)), "ALI2.out")
@@ -125,7 +125,7 @@ In the previous exercise, we have seen the necessity for a summing system in ord
                 "R4",
                 (rel: (-1, 0), to: "ALI2.minus"),
                 (rel: (-2.3, 0)),
-                label: (content: $R_4 = qty("10","kO")$, anchor: "south"),
+                label: (content: $R_4 = #quan[10 kΩ]$, anchor: "south"),
             )
             swire("ALI2.minus", "R4.in")
             content("R4.out", $v_s$, anchor: "east", padding: .3em)

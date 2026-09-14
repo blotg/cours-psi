@@ -26,7 +26,7 @@
     [Pour un porteur de charge dans un champ électrique uniforme, exprimer son accélération et déterminer sa trajectoire.],
 )
 #question-de-colle(
-    [Un électron est lâché sans vitesse initiale à l'électrode négative d'un condensateur plan. Par un raisonnement énergétique, déterminer sa vitesse à l'arrivée à l'électrode positive. Effectuer l'application numérique pour une différence de potentiel de #qty("1","kV") entre les électrodes.],
+    [Un électron est lâché sans vitesse initiale à l'électrode négative d'un condensateur plan. Par un raisonnement énergétique, déterminer sa vitesse à l'arrivée à l'électrode positive. Effectuer l'application numérique pour une différence de potentiel de #quan[1 kV] entre les électrodes.],
 )
 #question-de-colle(
     [Pour une particule chargée dans un champ magnétostatique uniforme, lancée avec une vitesse initiale perpendiculaire au champ, déterminer le rayon de la trajectoire et le sens du parcours en admettant qu'elle est circulaire.],

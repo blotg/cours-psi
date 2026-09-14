@@ -16,9 +16,9 @@
     ),
 )
 
-Les poteaux d'incendie doivent pouvoir délivrer un débit de #qty("30", "m^3/h") minimum sous une pression dynamique de #qty("1", "bar") minimum.
+Les poteaux d'incendie doivent pouvoir délivrer un débit de #quan[30 m^3/h] minimum sous une pression dynamique de #quan[1 bar] minimum.
 
-Un château d'eau de #qty("20", "m") de haut alimente un village en eau par une conduite en fonte de diamètre intérieur #qty("200", "mm") et de longueur #qty("3", "km") puis par une conduite en fonte de diamètre intérieur #qty("150", "mm") et de longueur #qty("2", "km"). La rugosité de la fonte est de #qty("0.15", "mm").
+Un château d'eau de #quan[20 m] de haut alimente un village en eau par une conduite en fonte de diamètre intérieur #quan[200 mm] et de longueur #quan[3 km] puis par une conduite en fonte de diamètre intérieur #quan[150 mm] et de longueur #quan[2 km]. La rugosité de la fonte est de #quan[0.15 mm].
 
 On pourra utiliser le diagramme de Moody du cours.
 
@@ -41,7 +41,7 @@ On pourra utiliser le diagramme de Moody du cours.
     $
         R_(e,1) = (U D)/nu = (D_V/S D mu)/eta = (D_V D mu)/(eta pi D^2/4) = (4 D_V mu)/(eta pi D) = #num(Re1, chiffres: 2)
     $
-    Le coefficient de perte de charge peut être lu sur le diagramme de Moody (rugosité relative de $qty("0.15", "mm")/qty("200", "mm") = #num(0.15 / 200, chiffres: 1)$) : #num("0.02").
+    Le coefficient de perte de charge peut être lu sur le diagramme de Moody (rugosité relative de $#quan[0.15 mm]/#quan[200 mm] = #num(0.15 / 200, chiffres: 1)$) : #num("0.02").
     La perte de charge dans la première conduite est donc :
     #let xi1 = 0.02
     #let L1 = 3e3
@@ -60,7 +60,7 @@ On pourra utiliser le diagramme de Moody du cours.
     $
         R_(e,2) = #num(Re2, chiffres: 2)
     $
-    Le coefficient de perte de charge peut être lu sur le diagramme de Moody (rugosité relative de $qty("0.15", "mm")/qty("150", "mm") = #num(0.15 / 150, chiffres: 1)$) : #num("0.02").
+    Le coefficient de perte de charge peut être lu sur le diagramme de Moody (rugosité relative de $#quan[0.15 mm]/#quan[150 mm] = #num(0.15 / 150, chiffres: 1)$) : #num("0.02").
     La perte de charge dans la seconde conduite est donc :
     #let xi2 = 0.02
     #let L2 = 2e3
@@ -85,7 +85,7 @@ On pourra utiliser le diagramme de Moody du cours.
     La norme porte sur la pression #strong[dynamique], c'est-à-dire la pression relative à l'atmosphère :
     #let Pdyn = Pc - (DP1 + DP2) - P0
     $
-      P_"poteau" - P_0 = #qty(Pdyn, "Pa", chiffres: 2) = #qty(Pdyn / 1e5, "bar", chiffres: 2) > #qty("1", "bar")
+      P_"poteau" - P_0 = #qty(Pdyn, "Pa", chiffres: 2) = #qty(Pdyn / 1e5, "bar", chiffres: 2) > #quan[1 bar]
     $
     Les poteaux d'incendie sont donc aux normes.
 ]

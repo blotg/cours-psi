@@ -56,7 +56,7 @@ On se place dans le cadre de l'ARQS.
 #question( coups-de-pouce: (
   "Quelle relation relie le flux propre et l'inductance propre ?",
 ))[
-  En déduire l'expression de l'inductance propre $L$. Calculer numériquement $L$ pour $N=num("100")$ et $N=num("1000")$. On donne $a=qty("1","cm")$ et $R=qty("5","cm")$.
+  En déduire l'expression de l'inductance propre $L$. Calculer numériquement $L$ pour $N=num("100")$ et $N=num("1000")$. On donne $a=#quan[1 cm]$ et $R=#quan[5 cm]$.
 ][
   $ Phi_(1 "spire")=integral.double_S va(B).va(dd(S)) = integral_(r=R)^(R+a)dd(r) integral_(z=0)^a dd(z) B = (mu_0 N i a)/(2 pi) ln((R+a)/R) $
   $ Phi_"tot" = N Phi_(1 "spire") = (mu_0 N^2 i a)/(2 pi) ln((R+a)/R) $

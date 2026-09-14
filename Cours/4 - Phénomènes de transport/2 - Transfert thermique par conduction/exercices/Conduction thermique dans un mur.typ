@@ -4,9 +4,9 @@
     titre: "Conduction thermique dans un mur",
 )
 
-On s'intéresse à un mur de surface $S=qty("30", "m^2")$ qui sépare l'intérieur d'une maison de son extérieur. Le mur est constitué d'une épaisseur $e_p=#qty("30", "cm")$ de pierre de conductivité thermique $lambda_p=qty("2.2", "W/m/K")$ et d'une épaisseur $e_l=qty("15", "cm")$ de laine de verre de conductivité thermique $lambda_l=qty("0.03", "W/m/K")$.
+On s'intéresse à un mur de surface $S=#quan[30 m^2]$ qui sépare l'intérieur d'une maison de son extérieur. Le mur est constitué d'une épaisseur $e_p=#quan[30 cm]$ de pierre de conductivité thermique $lambda_p=#quan[2.2 W/m/K]$ et d'une épaisseur $e_l=#quan[15 cm]$ de laine de verre de conductivité thermique $lambda_l=#quan[0.03 W/m/K]$.
 
-L'intérieur de la maison est à une température $T_i=qty("20", "Celsius")$ et l'extérieur à $T_e=qty("5", "Celsius")$. Pour un fluide en contact avec un solide, le vecteur densité de courant thermique $va(j)$ suit la loi de Newton : $va(j)=h(T_s-T_infinity) va(e)$ où $va(e)$ est un vecteur unitaire dirigé du solide vers le fluide, $h=qty("10", "W/m^2/K")$ pour l'air, $T_s$ la température du solide à sa surface et $T_infinity$ la température du fluide loin du solide. Le contact thermique entre la pierre et la laine de verre est parfait.
+L'intérieur de la maison est à une température $T_i=#quan[20 °C]$ et l'extérieur à $T_e=#quan[5 °C]$. Pour un fluide en contact avec un solide, le vecteur densité de courant thermique $va(j)$ suit la loi de Newton : $va(j)=h(T_s-T_infinity) va(e)$ où $va(e)$ est un vecteur unitaire dirigé du solide vers le fluide, $h=#quan[10 W/m^2/K]$ pour l'air, $T_s$ la température du solide à sa surface et $T_infinity$ la température du fluide loin du solide. Le contact thermique entre la pierre et la laine de verre est parfait.
 
 L'étude s'intéresse au régime stationnaire.
 

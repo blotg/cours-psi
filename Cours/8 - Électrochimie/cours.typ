@@ -7,7 +7,7 @@
     "Delta_r G": (signification: "l'enthalpie libre de réaction", unité: unit("J/mol")),
     "n": (signification: "le nombre d'électrons échangés (sans unité)"),
     "U": (signification: "$= E_+ - E_-$ la différence des potentiels des couples", unité: unit("V")),
-    "cal(F)": (signification: "$= cal(N)_a e$ la constante de Faraday ($approx qty(\"96500\", \"C/mol\")$)"),
+    "cal(F)": (signification: "$= cal(N)_a e$ la constante de Faraday ($approx #quan[96500 C/mol]$)"),
     "W": (signification: "le travail électrique reçu par le système chimique", unité: unit("J")),
     "Delta G": (signification: "la variation d'enthalpie libre", unité: unit("J")),
     "i": (signification: "le courant électrique arrivant à l'électrode", unité: unit("A")),
@@ -35,7 +35,7 @@ Pour une réaction électrochimique, les potentiels des couples redox sont liés
 #flashcard(recto: [Enthalpie libre de réaction pour une réaction électrochimique], verso: [$ Delta_r G = - n cal(F) U $])
 
 #application[
-    Déterminer l'enthalpie libre de réaction de #ce("2 Fe^3+ + Zn -> 2 Fe^2+ + Zn^2+"). Données : $ce("[Fe^2+]") = ce("[Fe^3+]") = ce("[Zn^2+]") = qty("0.1", "mol/L")$, $E^circ(cpl("Fe^3+", "Fe^2+")) = qty("0.77", "V")$, $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$.
+    Déterminer l'enthalpie libre de réaction de #ce("2 Fe^3+ + Zn -> 2 Fe^2+ + Zn^2+"). Données : $ce("[Fe^2+]") = ce("[Fe^3+]") = ce("[Zn^2+]") = #quan[0.1 mol/L]$, $E^circ(cpl("Fe^3+", "Fe^2+")) = #quan[0.77 V]$, $E^circ(cpl("Zn^2+", "Zn")) = #quan[-0.76 V]$.
 ]
 
 #application[
@@ -148,13 +148,13 @@ Lorsque le réactif ne peut pas manquer (solvant, ou électrode elle-même), il 
 ]
 
 === Mur du solvant
-Si le solvant participe à un couple redox, on peut tracer sa courbe intensité-potentiel : le #strong[mur du solvant]. C'est le cas de l'eau, oxydant du couple #ce("H2O/H2") ($E^circ = qty("0", "V")$) et réducteur du couple #ce("O2/H2O") ($E^circ = qty("1.23", "V")$) ; ces courbes dépendent fortement de l'électrode, qui catalyse plus ou moins la réaction.
+Si le solvant participe à un couple redox, on peut tracer sa courbe intensité-potentiel : le #strong[mur du solvant]. C'est le cas de l'eau, oxydant du couple #ce("H2O/H2") ($E^circ = #quan[0 V]$) et réducteur du couple #ce("O2/H2O") ($E^circ = #quan[1.23 V]$) ; ces courbes dépendent fortement de l'électrode, qui catalyse plus ou moins la réaction.
 
 #schéma(titre: "Mur du solvant", hauteur: 4cm)
 
 #application[
-    Tracer l'allure de la courbe intensité-potentiel d'une électrode d'argent dans une solution de nitrate d'argent à $qty("0.01", "mol/L")$ acidifiée à $"pH" = 1$. Faire figurer le mur du solvant, les paliers de diffusion et les surpotentiels éventuels.
-    Données : $E^circ(cpl("Ag+", "Ag")) = qty("0.80", "V")$, surpotentiel de #ce("H2O/H2") sur l'argent $qty("-0.22", "V")$, surpotentiel de #ce("O2/H2O") sur l'argent $qty("0.91", "V")$, #cpl("Ag+", "Ag") rapide.
+    Tracer l'allure de la courbe intensité-potentiel d'une électrode d'argent dans une solution de nitrate d'argent à $#quan[0.01 mol/L]$ acidifiée à $"pH" = 1$. Faire figurer le mur du solvant, les paliers de diffusion et les surpotentiels éventuels.
+    Données : $E^circ(cpl("Ag+", "Ag")) = #quan[0.80 V]$, surpotentiel de #ce("H2O/H2") sur l'argent $#quan[-0.22 V]$, surpotentiel de #ce("O2/H2O") sur l'argent $#quan[0.91 V]$, #cpl("Ag+", "Ag") rapide.
 ]
 
 = Piles, accumulateurs et électrolyseurs
@@ -171,27 +171,27 @@ Un #strong[électrolyseur] convertit de l'énergie électrique en énergie chimi
 On construit la caractéristique d'une pile ou d'un électrolyseur à partir des courbes intensité-potentiel de ses deux électrodes.
 
 #application[
-    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $qty("0", "A")$, $qty("0.2", "A")$ et $qty("0.4", "A")$, en faisant apparaitre la saturation en courant.
+    Pile Daniell (électrodes de cuivre et de zinc), courbes intensité-potentiel fournies. Quel courant maximal la pile peut-elle débiter ? Quelle est sa tension à vide ? Tracer sa caractéristique courant-tension pour les courants $#quan[0 A]$, $#quan[0.2 A]$ et $#quan[0.4 A]$, en faisant apparaitre la saturation en courant.
     #figure(image("images/courbes_i-E_Daniell.png", width: 85%))
 ]
 
 #application[
-    Le procédé chlore-soude produit de la soude, du dihydrogène et du dichlore à partir d'une solution de chlorure de sodium. Quelle tension minimale faut-il appliquer pour amorcer la réaction voulue ? Quel courant maximal peut-on faire passer ? Quelle tension imposer pour un courant de $qty("200", "A")$ ?
+    Le procédé chlore-soude produit de la soude, du dihydrogène et du dichlore à partir d'une solution de chlorure de sodium. Quelle tension minimale faut-il appliquer pour amorcer la réaction voulue ? Quel courant maximal peut-on faire passer ? Quelle tension imposer pour un courant de $#quan[200 A]$ ?
     #figure(image("images/courbes_i-E_chlore-soude.png", width: 85%))
 ]
 
 La tension mesurée aux bornes d'une pile peut être plus faible que celle prévue par les courbes intensité-potentiel : une #strong[résistance interne], due surtout au pont ionique, s'y ajoute. Elle est d'autant plus faible que les ions sont mobiles et concentrés et que le pont salin est court.
 
 == Capacité et masse électrolysée
-La #strong[capacité] d'une pile est la quantité d'électricité qu'elle peut débiter avant d'atteindre l'équilibre chimique. Elle se mesure en coulombs, usuellement en ampères-heures ($qty("1", "A h") = qty("3600", "C")$), et se déduit d'un tableau d'avancement.
+La #strong[capacité] d'une pile est la quantité d'électricité qu'elle peut débiter avant d'atteindre l'équilibre chimique. Elle se mesure en coulombs, usuellement en ampères-heures ($#quan[1 A h] = #quan[3600 C]$), et se déduit d'un tableau d'avancement.
 
 #application[
-    Pile Daniell : électrode de cuivre dans $qty("100", "mL")$ de sulfate de cuivre à $qty("1", "mol/L")$, électrode de zinc dans $qty("100", "mL")$ de sulfate de zinc à $qty("1", "mol/L")$. Déterminer l'avancement à l'équilibre et en déduire la capacité de la pile.
-    Données : $E^circ(cpl("Cu^2+", "Cu")) = qty("0.34", "V")$, $E^circ(cpl("Zn^2+", "Zn")) = qty("-0.76", "V")$.
+    Pile Daniell : électrode de cuivre dans $#quan[100 mL]$ de sulfate de cuivre à $#quan[1 mol/L]$, électrode de zinc dans $#quan[100 mL]$ de sulfate de zinc à $#quan[1 mol/L]$. Déterminer l'avancement à l'équilibre et en déduire la capacité de la pile.
+    Données : $E^circ(cpl("Cu^2+", "Cu")) = #quan[0.34 V]$, $E^circ(cpl("Zn^2+", "Zn")) = #quan[-0.76 V]$.
 ]
 
 #application[
-    Un électrolyseur industriel produit $qty("7", "kg")$ de #ce("Al(s)") par jour à partir de #ce("Al^3+(aq)"). Déterminer le courant, en l'absence de réactions parasites. Donnée : $M(ce("Al")) = qty("27", "g/mol")$.
+    Un électrolyseur industriel produit $#quan[7 kg]$ de #ce("Al(s)") par jour à partir de #ce("Al^3+(aq)"). Déterminer le courant, en l'absence de réactions parasites. Donnée : $M(ce("Al")) = #quan[27 g/mol]$.
 ]
 
 == Rendement faradique
@@ -200,7 +200,7 @@ Le #strong[rendement faradique] est la proportion des électrons participant à 
 #flashcard(recto: [Rendement faradique], verso: [Proportion du courant participant à la réaction désirée.])
 
 #application[
-    Dans l'électrolyseur précédent, le courant réel est $qty("1000", "A")$. Déterminer le rendement faradique.
+    Dans l'électrolyseur précédent, le courant réel est $#quan[1000 A]$. Déterminer le rendement faradique.
 ]
 
 = Corrosion humide

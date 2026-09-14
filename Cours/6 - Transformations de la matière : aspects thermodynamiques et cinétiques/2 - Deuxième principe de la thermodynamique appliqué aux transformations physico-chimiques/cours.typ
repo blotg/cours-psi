@@ -387,7 +387,7 @@ La réaction est à l'équilibre ssi $Q = K^circ$ (c'est-à-dire $Delta_r G =0$)
 #question-de-colle([Exprimer l'enthalpie libre de réaction en fonction du quotient réactionnel puis établir la loi de Guldberg-Waage.])
 
 #application[
-    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("0.17")$ à #qty("500","K"). Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = qty("1","mol")$, $n_ce("H2") = qty("3","mol")$ et $n_ce("NH3") = qty("0.5","mol")$, sous une pression totale de #qty("200","bar") ?
+    Pour la réaction #ce("N2(g)") + 3 #ce("H2(g)") #ce("<=>") 2 #ce("NH3(g)"), la constante d'équilibre vaut $K^circ = #num("0.17")$ à #quan[500 K]. Dans quel sens évolue le système si les quantités initiales sont $n_ce("N2") = #quan[1 mol]$, $n_ce("H2") = #quan[3 mol]$ et $n_ce("NH3") = #quan[0.5 mol]$, sous une pression totale de #quan[200 bar] ?
 ]
 
 = Déplacement d'équilibre

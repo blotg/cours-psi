@@ -15,7 +15,7 @@ En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la
         "Écrire la loi des mailles en utilisant les amplitudes complexes.",
     ),
 )[
-    La force contre-électromotrice induite efficace est #qty("250", "V"), la résistance de l'induit est négligeable, l'inductance de l'induit est #qty("0.10", "H"), la fréquence de rotation est #qty("3000", "tr/min") et le courant est #qty("10", "A"). L'angle de pilotage est nul. Le calcul effectué par Python pourra être vérifié à la main de ce premier cas simple.
+    La force contre-électromotrice induite efficace est #quan[250 V], la résistance de l'induit est négligeable, l'inductance de l'induit est #quan[0.10 H], la fréquence de rotation est #quan[3000 tr/min] et le courant est #quan[10 A]. L'angle de pilotage est nul. Le calcul effectué par Python pourra être vérifié à la main de ce premier cas simple.
 ][
     ```python
     from math import pi
@@ -35,7 +35,7 @@ En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la
 #question(
     coups-de-pouce: (),
 )[
-    La force contre-électromotrice induite efficace est #qty("250", "V"), la résistance de l'induit est négligeable, l'inductance de l'induit est #qty("0.1", "H"), la fréquence de rotation est #qty("3000", "tr/min") et le courant est #qty("10", "A"). L'angle de pilotage vaut #qty("30", "deg").
+    La force contre-électromotrice induite efficace est #quan[250 V], la résistance de l'induit est négligeable, l'inductance de l'induit est #quan[0.1 H], la fréquence de rotation est #quan[3000 tr/min] et le courant est #quan[10 A]. L'angle de pilotage vaut #quan[30 °].
 ][
     ```python
     from math import pi
@@ -54,7 +54,7 @@ En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la
 #question(
     coups-de-pouce: (),
 )[
-    La force contre-électromotrice induite efficace est #qty("250", "V"), la résistance de l'induit est #qty("0.1", "O"), l'inductance de l'induit est #qty("0.1", "H"), la fréquence de rotation est #qty("3000", "tr/min") et le courant est #qty("10", "A"). L'angle de pilotage vaut #qty("30", "deg").
+    La force contre-électromotrice induite efficace est #quan[250 V], la résistance de l'induit est #quan[0.1 Ω], l'inductance de l'induit est #quan[0.1 H], la fréquence de rotation est #quan[3000 tr/min] et le courant est #quan[10 A]. L'angle de pilotage vaut #quan[30 °].
 ][
     ```python
     from math import pi

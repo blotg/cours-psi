@@ -55,7 +55,7 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
         "Relier la tension aux bornes de l'induit à la force contre-électromotrice pour cet essai.",
     ),
 )[
-    Afin de mesurer $Phi$, on réalise un essai en circuit ouvert, le rotor de la machine synchrone étant entrainé par un moteur auxiliaire à la vitesse de #qty("6.0e3", "tr/min"), on mesure la tension efficace aux bornes d'une phase égale à #qty("1.2e2", "V"). Calculer la valeur de $Phi$.
+    Afin de mesurer $Phi$, on réalise un essai en circuit ouvert, le rotor de la machine synchrone étant entrainé par un moteur auxiliaire à la vitesse de #quan[6.0e3 tr/min], on mesure la tension efficace aux bornes d'une phase égale à #quan[1.2e2 V]. Calculer la valeur de $Phi$.
 ][
     #let E = 1.2e2
     #let O = 6.0e3 * 2 * calc.pi / 60
@@ -68,13 +68,13 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
         "Grâce à une loi des mailles, relier $underline(E)$ à $L$, $omega$ et $underline(I)$ pour cet essai.",
     ),
 )[
-    Pour mesurer la valeur de l'inductance d'une phase, on réalise un essai en court-circuit, le rotor étant toujours entrainé par le moteur auxiliaire à #qty("6.0e3", "tr/min"). Le dipôle de sortie d'une phase étant court-circuité, la mesure de l'intensité efficace du courant de court-circuit dans une phase donne la valeur $I_(c c)=qty("1.2e2", "A")$. Calculer l'inductance $L$ d'une phase.
+    Pour mesurer la valeur de l'inductance d'une phase, on réalise un essai en court-circuit, le rotor étant toujours entrainé par le moteur auxiliaire à #quan[6.0e3 tr/min]. Le dipôle de sortie d'une phase étant court-circuité, la mesure de l'intensité efficace du courant de court-circuit dans une phase donne la valeur $I_(c c)=#quan[1.2e2 A]$. Calculer l'inductance $L$ d'une phase.
 ][
     #let E = 1.2e2
     #let Icc = 1.2e2
     #let O = 6.0e3 * 2 * calc.pi / 60
     #let L = E/(Icc*O)
     La loi des mailles appliquée au circuit de la phase en court-circuit donne $underline(U)=0 = underline(E) + j omega L underline(I)$. On en déduit que $underline(E) = - j omega L underline(I)$. La valeur efficace de la force contre-électromotrice s'écrit donc $E = omega L I$.
-    $E$ ne dépend que de la vitesse de rotation du rotor et du flux magnétique $Phi$ créé par le rotor, on a donc toujours $E = #qty("1.2e2","V")$.
+    $E$ ne dépend que de la vitesse de rotation du rotor et du flux magnétique $Phi$ créé par le rotor, on a donc toujours $E = #quan[1.2e2 V]$.
     On en déduit que $L = E / (omega I_(c c)) = #qty(L, "H", chiffres: 2)$.
 ]

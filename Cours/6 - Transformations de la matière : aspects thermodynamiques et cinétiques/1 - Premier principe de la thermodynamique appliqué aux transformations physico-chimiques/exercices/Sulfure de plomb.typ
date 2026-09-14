@@ -27,7 +27,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
 #question(
     coups-de-pouce: "Utiliser la loi de Hess.",
 )[
-    Calculer l’enthalpie standard de réaction $standard(Delta_r H)$ à #qty("298", "K") pour la réaction écrite à la question précédente.
+    Calculer l’enthalpie standard de réaction $standard(Delta_r H)$ à #quan[298 K] pour la réaction écrite à la question précédente.
 ][
     La loi de Hess s'écrit
     $
@@ -46,7 +46,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
         "Relier les variations d'enthalpie sur les trois transformations.",
     ),
 )[
-    On part d’un mélange #ce("PbS(s) / O2(g)") dans les proportions stœchiométriques, à la température initiale $T_i = qty("298", "K")$. La réaction est menée de façon isobare adiabatique et les capacités thermiques sont supposées indépendantes de la température, calculer la température de flamme (température finale atteinte).
+    On part d’un mélange #ce("PbS(s) / O2(g)") dans les proportions stœchiométriques, à la température initiale $T_i = #quan[298 K]$. La réaction est menée de façon isobare adiabatique et les capacités thermiques sont supposées indépendantes de la température, calculer la température de flamme (température finale atteinte).
 ][
     On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans les proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. La réaction est totale donc les réactifs sont tous les deux entièrement consommés.
 
@@ -128,7 +128,7 @@ On s’intéresse ici à la réaction de grillage du sulfure de plomb #ce("PbS(s
         "Par rapport à la question précédente, quelles sont les grandeurs qui seront différentes ?",
     ),
 )[
-    Reprendre le calcul de la question précédente en supposant que le mélange initial est constitué d’air (#qty("80", "%") de diazote et #qty("20", "%") de dioxygène). La quantité d’air ajoutée est juste suffisante pour provoquer la disparition de la totalité de #ce("PbS(s)").
+    Reprendre le calcul de la question précédente en supposant que le mélange initial est constitué d’air (#quan[80 %] de diazote et #quan[20 %] de dioxygène). La quantité d’air ajoutée est juste suffisante pour provoquer la disparition de la totalité de #ce("PbS(s)").
 ][
     On note $n$ la quantité initiale de #ce("PbS(s)"). Les réactifs ont été introduits dans les proportions stœchiométriques, donc la quantité initiale de #ce("O2(g)") est $3/2 n$. Dans l'air, il y a 4 fois plus de diazote que de dioxygène, donc la quantité initiale de #ce("N2(g)") est $6 n$.
     

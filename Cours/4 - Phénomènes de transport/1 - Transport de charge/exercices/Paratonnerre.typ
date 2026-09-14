@@ -5,7 +5,7 @@
     difficulté: 1,
 )
 
-Un paratonnerre est relié à une demi-boule métallique supposée parfaitement conductrice qui sert de contact entre le paratonnerre et le sol. Le sol a une conductivité $gamma=#qty("1e-2", "S/m")$. On se place en régime stationnaire.
+Un paratonnerre est relié à une demi-boule métallique supposée parfaitement conductrice qui sert de contact entre le paratonnerre et le sol. Le sol a une conductivité $gamma=#quan[1e-2 S/m]$. On se place en régime stationnaire.
 
 #grid(
     columns: (50%, 50%),
@@ -85,7 +85,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 #question(
     coups-de-pouce: (),
 )[
-    Cette résistance ne doit pas dépasser #qty("30", "O"). Déterminer le rayon minimum de la demi-sphère.
+    Cette résistance ne doit pas dépasser #quan[30 Ω]. Déterminer le rayon minimum de la demi-sphère.
 ][
 
     $ R=1/(2 pi gamma R_"sol") = #qty(R, "m", chiffres: 2) $
@@ -95,7 +95,7 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
 #question(
     coups-de-pouce: (),
 )[
-    Pour un éclair, le courant peut atteindre #qty("300", "kA"). Tracer $V(r)$ et faire l'application numérique de $V(R)$ pour une résistance du sol de #qty("30", "O").
+    Pour un éclair, le courant peut atteindre #quan[300 kA]. Tracer $V(r)$ et faire l'application numérique de $V(R)$ pour une résistance du sol de #quan[30 Ω].
 ][
     #let R-sol = 30
     #let V-R = R-sol * I
@@ -132,17 +132,17 @@ Un paratonnerre est relié à une demi-boule métallique supposée parfaitement 
         "Dans le pire des cas, les pieds sont \"l'un derrière l'autre\" : leurs coordonnées $r$ sont séparées de $d$.",
     ),
 )[
-    Une personne qui n'a pas les deux pieds à la même distance de la demi-sphère peut avoir ses pieds à un potentiel différent. Sachant que la résistance entre ses pieds est de l'ordre #qty("5", "kO") et qu'un courant de #qty("25", "mA") à travers le corps peut être dangereux, calculer la distance minimum à laquelle un homme doit se tenir de la demi-sphère en cas d'orage. Comparer à la valeur proposée sur la photo et proposer une explication à l'éventuel écart.
+    Une personne qui n'a pas les deux pieds à la même distance de la demi-sphère peut avoir ses pieds à un potentiel différent. Sachant que la résistance entre ses pieds est de l'ordre #quan[5 kΩ] et qu'un courant de #quan[25 mA] à travers le corps peut être dangereux, calculer la distance minimum à laquelle un homme doit se tenir de la demi-sphère en cas d'orage. Comparer à la valeur proposée sur la photo et proposer une explication à l'éventuel écart.
 ][
     La différence de potentiel maximale admissible entre les deux pieds est
     #let R-corps = 5e3
     #let I-seuil = 25e-3
     #let V-max = R-corps * I-seuil
     $
-        V_"max" = R_"corps" I_"seuil" = #qty(125, "V")
+        V_"max" = R_"corps" I_"seuil" = #quan[125 V]
     $
 
-    La distance typique entre les deux pieds est d'environ $d=#qty("0.3", "m")$.
+    La distance typique entre les deux pieds est d'environ $d=#quan[0.3 m]$.
 
     Dans le pire des cas, les pieds sont l'un derrière l'autre : leurs coordonnées $r$ sont séparées de $d$. On a donc
     $

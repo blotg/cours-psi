@@ -33,7 +33,7 @@ L'antenne radioélectrique de la zone 51 a reçu un mystérieux signal radio. Vo
     plt.show()
     ```
 
-    Une lecture graphique au tout début du signal permet de trouver la fréquence de la porteuse : #qty("2", "kHz"). On peut alors reconstruire la porteuse puis effectuer la première étape de la démodulation par détection d'enveloppe : la multiplication par la porteuse.
+    Une lecture graphique au tout début du signal permet de trouver la fréquence de la porteuse : #quan[2 kHz]. On peut alors reconstruire la porteuse puis effectuer la première étape de la démodulation par détection d'enveloppe : la multiplication par la porteuse.
     ```python
     fp = 2000 # fréquence de la porteuse en Hz
     sp = np.cos(2 * np.pi * fp *t)
@@ -48,7 +48,7 @@ L'antenne radioélectrique de la zone 51 a reçu un mystérieux signal radio. Vo
     s = lfilter(*L, s2) # signal filtré
     ```
 
-    Normalement il faut encore faire un filtre passe-haut mais les notes disent que ce n'est pas nécessaire ici. En revanche, les notes précisent qu'il faut retirer les premières #qty("0.05", "s") du signal filtré. On peut le faire ainsi :
+    Normalement il faut encore faire un filtre passe-haut mais les notes disent que ce n'est pas nécessaire ici. En revanche, les notes précisent qu'il faut retirer les premières #quan[0.05 s] du signal filtré. On peut le faire ainsi :
     ```python
     i0 = int( 0.05 / (t[1] - t[0]) ) # nombre d'échantillons à retirer
     t = t[i0:]

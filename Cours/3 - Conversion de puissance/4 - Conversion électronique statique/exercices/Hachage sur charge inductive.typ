@@ -19,7 +19,7 @@
 
 Le hacheur ci-dessus sert à transférer de la puissance électrique depuis un générateur de tension $E$ continu vers un récepteur inductif de résistance $r$ et d'inductance $L$.
 
-Le fonctionnement est périodique de fréquence $f=#qty("2.0", "kHz")$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=0.3$. On précise $E=#qty("100", "V")$ et $r=#qty("10", "O")$.
+Le fonctionnement est périodique de fréquence $f=#quan[2.0 kHz]$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=0.3$. On précise $E=#quan[100 V]$ et $r=#quan[10 Ω]$.
 #let RC = 0.3
 #let E = 100
 #let r = 10

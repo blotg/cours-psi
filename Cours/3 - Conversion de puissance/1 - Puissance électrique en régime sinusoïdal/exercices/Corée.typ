@@ -9,7 +9,7 @@
 #let P = 2000
 #let cos-phi = 0.8
 
-En France, le réseau électrique a une tension efficace de #qty("230", "V") et une fréquence de #qty("50", "Hz"). En Corée du Sud, la tension efficace est de #qty("220", "V") et la fréquence de #qty("60", "Hz").
+En France, le réseau électrique a une tension efficace de #quan[230 V] et une fréquence de #quan[50 Hz]. En Corée du Sud, la tension efficace est de #quan[220 V] et la fréquence de #quan[60 Hz].
 
 Un appareil modélisé par une bobine réelle consomme #qty(P, "W") et a un facteur de puissance de #num(cos-phi, chiffres: 2) en France.
 

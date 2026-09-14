@@ -114,7 +114,7 @@ Dans le modèle à constantes réparties sans pertes, on étudie une portion mé
 #question-de-colle([Établir l'équation aux dérivées partielles vérifiée par une onde de tension dans un câble coaxial, en précisant les hypothèses et approximations effectuées.])
 
 #application[
-    Calculer la vitesse de propagation d'une onde dans un câble coaxial de capacité linéique $qty("40", "pF/m")$ et d'inductance linéique $qty("0.4", "uH/m")$.
+    Calculer la vitesse de propagation d'une onde dans un câble coaxial de capacité linéique $#quan[40 pF/m]$ et d'inductance linéique $#quan[0.4 uH/m]$.
 ]
 
 == Ondes sonores
@@ -213,10 +213,10 @@ La surpression vérifie une équation de d'Alembert. On admet que la vitesse vé
 #question-de-colle([Montrer que les ondes sonores sont longitudinales et établir la célérité d'une onde sonore dans un gaz parfait.])
 
 #application[
-    Déterminer la célérité d'une onde sonore dans l'air, considéré comme un gaz parfait diatomique, à la température de référence. L'air est constitué de $qty("80", "%")$ de diazote ($M(N) = qty("14", "g/mol")$) et de $qty("20", "%")$ de dioxygène ($M(O) = qty("16", "g/mol")$).
+    Déterminer la célérité d'une onde sonore dans l'air, considéré comme un gaz parfait diatomique, à la température de référence. L'air est constitué de $#quan[80 %]$ de diazote ($M(N) = #quan[14 g/mol]$) et de $#quan[20 %]$ de dioxygène ($M(O) = #quan[16 g/mol]$).
 ]
 
-La célérité d'une onde sonore dans l'eau est environ $c_"eau" = qty("1400", "m/s")$.
+La célérité d'une onde sonore dans l'eau est environ $c_"eau" = #quan[1400 m/s]$.
 
 == Ondes électromagnétiques dans le vide
 Les ondes électromagnétiques sont la variation couplée des champs électrique et magnétique ; elles se propagent dans le vide ou dans un milieu.
@@ -582,14 +582,14 @@ Les intensités sonores usuelles s'étalant sur de nombreux ordres de grandeur, 
 
 #flashcard(recto: [Niveau sonore (en dB)], verso: [$ 10 log(I \/ I_0) $])
 
-$I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille humaine.
+$I_0 = #quan[1e-12 W/m^2]$ est le plus faible son perceptible par l'oreille humaine.
 
 #exemple[
     Quelques ordres de grandeur :
-    - pièce calme : $qty("20", "dB")$ ;
-    - conversation à $qty("1", "m")$ : $qty("60", "dB")$ ;
-    - rue animée (réflexe stapédien) : $qty("80", "dB")$ ;
-    - avion à quelques mètres (seuil de douleur) : $qty("120", "dB")$.
+    - pièce calme : $#quan[20 dB]$ ;
+    - conversation à $#quan[1 m]$ : $#quan[60 dB]$ ;
+    - rue animée (réflexe stapédien) : $#quan[80 dB]$ ;
+    - avion à quelques mètres (seuil de douleur) : $#quan[120 dB]$.
 ]
 
 #question-de-colle([Établir l'expression du vecteur de Poynting acoustique. Définir l'intensité acoustique et le niveau sonore. Citer quelques ordres de grandeur.])
@@ -600,7 +600,7 @@ $I_0 = qty("1e-12", "W/m^2")$ est le plus faible son perceptible par l'oreille h
     savoir-faire: true,
     hypothèses: (
         "Pour une OPPH.",
-        [Dans l'air à la température de référence ($D_"th" = qty("2e-5", "m^2/s")$).],
+        [Dans l'air à la température de référence ($D_"th" = #quan[2e-5 m^2/s]$).],
     ),
 )[
     Aux niveaux sonores usuels, l'évolution est adiabatique et $P_1 << P_0$, $norm(va(v)) << c$.
@@ -664,7 +664,7 @@ Le photon est une particule élémentaire de masse nulle qui transporte l'énerg
 
 #flashcard(recto: [Relation de Planck-Einstein], verso: [$ cal(E) = h nu $])
 
-#application[Déterminer le débit de photons d'un pointeur laser rouge de puissance $qty("5", "mW")$.]
+#application[Déterminer le débit de photons d'un pointeur laser rouge de puissance $#quan[5 mW]$.]
 
 === Énergie d'une OPPH
 #encadré(

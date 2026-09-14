@@ -31,11 +31,11 @@
 )
 #flashcard(
     recto: [Activité d'un soluté très dilué],
-    verso: [$ a_i = c_i/standard(c) $ avec $standard(c) = qty("1", "mol/L")$.],
+    verso: [$ a_i = c_i/standard(c) $ avec $standard(c) = #quan[1 mol/L]$.],
 )
 #flashcard(
     recto: [Activité d'un gaz parfait],
-    verso: [$ a_i = P_i/standard(P) $ avec $standard(P) = qty("1", "bar")$ et $P_i = n_i / n_"total de gaz" P$ la pression partielle du gaz.],
+    verso: [$ a_i = P_i/standard(P) $ avec $standard(P) = #quan[1 bar]$ et $P_i = n_i / n_"total de gaz" P$ la pression partielle du gaz.],
 )
 #flashcard(
     recto: [Quotient réactionnel],

@@ -14,7 +14,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
 #question(
     coups-de-pouce: "Utiliser la loi de Hess.",
 )[
-    Calculer l’enthalpie standard de réaction $Delta_r H^circ$ et l’entropie standard de réaction $Delta_r S^circ$ à #qty("298", "K"). Commenter leur signe.
+    Calculer l’enthalpie standard de réaction $Delta_r H^circ$ et l’entropie standard de réaction $Delta_r S^circ$ à #quan[298 K]. Commenter leur signe.
 ][
     D'après la loi de Hess,
     $
@@ -88,7 +88,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
 ]
 
 #question()[
-    À quelle température doit-on opérer pour avoir un coefficient de dissociation $alpha = #num("0.05")$ sous la pression totale $P = qty("1", "bar")$ ?
+    À quelle température doit-on opérer pour avoir un coefficient de dissociation $alpha = #num("0.05")$ sous la pression totale $P = #quan[1 bar]$ ?
     Même question pour $alpha = #num("0.95")$.
 
     Comparer ces valeurs au regard du signe de l'enthalpie de réaction.
@@ -117,7 +117,7 @@ On appelle $alpha = xi/xi_"max"$ le coefficient de dissociation du nickel carbon
     La réaction est endothermique, son équilibre est donc déplacé dans le sens direct en augmentant la température, ce qui est cohérent avec le fait que le coefficient de dissociation augmente avec la température.
 ]
 
-* Données à #qty("298", "K")*
+* Données à #quan[298 K]*
 #table(
     columns: 4,
     align: (left,) + (center,) * 3,

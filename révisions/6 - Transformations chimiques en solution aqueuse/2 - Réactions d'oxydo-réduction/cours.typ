@@ -12,7 +12,7 @@
 )
 #flashcard(
     recto: [Formule de Nernst],
-    verso: [$ E = E^circ + (R T)/(n cal(F)) log (product a_("ox"))/(product a_("red")) $ À #qty("25", "Celsius"), $(R T)/cal(F)=#num("0.06")$ ; $n$ est le nombre d'électrons échangés.],
+    verso: [$ E = E^circ + (R T)/(n cal(F)) log (product a_("ox"))/(product a_("red")) $ À #quan[25 °C], $(R T)/cal(F)=#num("0.06")$ ; $n$ est le nombre d'électrons échangés.],
 )
 #flashcard(
     recto: [Prévision du sens d'une réaction],

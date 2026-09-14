@@ -47,13 +47,13 @@
 )
 #flashcard(
     recto: [Pulsation de coupure et bande passante],
-    verso: [La pulsation de coupure à #qty("-3", "dB") est celle où $G = G_max/sqrt(2)$.
+    verso: [La pulsation de coupure à #quan[-3 dB] est celle où $G = G_max/sqrt(2)$.
 
     La bande passante est l'intervalle de pulsations où $G >= G_max/sqrt(2)$.],
 )
 
 #question-de-colle(
-    [Définir la fonction de transfert, le gain, le gain en décibels et le déphasage d'un filtre, en précisant les unités. Définir la pulsation de coupure à #qty("-3", "dB") et la bande passante.],
+    [Définir la fonction de transfert, le gain, le gain en décibels et le déphasage d'un filtre, en précisant les unités. Définir la pulsation de coupure à #quan[-3 dB] et la bande passante.],
 )
 
 = Filtres usuels

@@ -33,7 +33,7 @@
 
 #flashcard(
     recto: [Poids],
-    verso: [$ va(P) = m va(g) $ avec $g approx qty("9.8", "m/s^2")$],
+    verso: [$ va(P) = m va(g) $ avec $g approx #quan[9.8 m/s^2]$],
 )
 #flashcard(
     recto: [Force de gravitation],

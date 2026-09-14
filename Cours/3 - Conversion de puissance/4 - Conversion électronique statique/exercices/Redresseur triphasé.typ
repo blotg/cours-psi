@@ -85,7 +85,7 @@ $
 #question(
     coups-de-pouce: ()
 )[
-    Tracer avec Python la forme d'onde de la tension de sortie $v(t)$ sur une période pour $U = qty("230","V")$ et $f = qty("50","Hz")$.
+    Tracer avec Python la forme d'onde de la tension de sortie $v(t)$ sur une période pour $U = #quan[230 V]$ et $f = #quan[50 Hz]$.
 ][
     La pulsation est donnée par $omega = 2pi f$.
 

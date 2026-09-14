@@ -11,7 +11,7 @@
     "q_1": (signification: "la charge de la particule 1", unité: unit("C")),
     "q_2": (signification: "la charge de la particule 2", unité: unit("C")),
     "q": (signification: "la charge de la particule", unité: unit("C")),
-    "epsilon_0": (signification: "$= qty(\"8.85e-12\", \"F/m\")$ la permittivité diélectrique du vide", unité: unit("F/m")),
+    "epsilon_0": (signification: "$= #quan[8.85e-12 F/m]$ la permittivité diélectrique du vide", unité: unit("F/m")),
     "va(e)": (signification: "le vecteur unitaire dirigé de la particule 1 vers la particule 2"),
     "va(E)": (signification: "le champ électrique", unité: unit("V/m")),
     "va(B)": (signification: "le champ magnétique", unité: unit("T")),
@@ -24,7 +24,7 @@
     "S": (signification: "une surface fermée orientée vers l'extérieur"),
     "Q_text(\"int\")": (signification: "la charge contenue à l'intérieur de $S$", unité: unit("C")),
     "va(g)": (signification: "le champ gravitationnel", unité: unit("m/s^2")),
-    "cal(G)": (signification: "$= qty(\"6.67e-11\", \"m^3/kg/s^2\")$ la constante gravitationnelle", unité: unit("m^3/kg/s^2")),
+    "cal(G)": (signification: "$= #quan[6.67e-11 m^3/kg/s^2]$ la constante gravitationnelle", unité: unit("m^3/kg/s^2")),
     "M_text(\"int\")": (signification: "la masse contenue à l'intérieur de $S$", unité: unit("kg")),
     "C": (signification: "la capacité du condensateur", unité: unit("F")),
     "va(n)": (signification: "un vecteur unitaire allant de l'armature positive vers l'armature négative"),
@@ -36,7 +36,7 @@
 )
 
 = Notion de charge électrique
-La charge est une grandeur extensive. Au niveau microscopique, elle est portée par des porteurs de charge dont la charge est quantifiée : $q = k e$ avec $k in ZZ$ et $e = qty("1.6e-19", "C")$ la charge élémentaire. Un électron porte la charge $q_(e^-) = -e$.
+La charge est une grandeur extensive. Au niveau microscopique, elle est portée par des porteurs de charge dont la charge est quantifiée : $q = k e$ avec $k in ZZ$ et $e = #quan[1.6e-19 C]$ la charge élémentaire. Un électron porte la charge $q_(e^-) = -e$.
 
 == Description de la charge
 === Distribution volumique
@@ -493,7 +493,7 @@ Champ électrique et champ gravitationnel sont analogues.
 #question-de-colle([Dresser les analogies entre les champs électrique et gravitationnel. Énoncer le théorème de Gauss gravitationnel.])
 
 #application[
-    La Terre a une masse $m_T = qty("6.0e24", "kg")$ et un rayon $R = qty("6.4e3", "km")$. Déterminer le champ gravitationnel qu'elle crée dans tout l'espace, en supposant sa masse volumique uniforme.
+    La Terre a une masse $m_T = #quan[6.0e24 kg]$ et un rayon $R = #quan[6.4e3 km]$. Déterminer le champ gravitationnel qu'elle crée dans tout l'espace, en supposant sa masse volumique uniforme.
 ]
 #question-de-colle([Déterminer le champ gravitationnel créé par une boule de masse volumique uniforme $mu$.])
 
@@ -545,7 +545,7 @@ Lorsque l'espace entre les armatures est occupé par un isolant, il faut prendre
 #question-de-colle([Établir le champ électrique entre les armatures d'un condensateur plan. En déduire la capacité. Généraliser au cas où l'isolant entre les armatures n'est pas du vide.])
 
 #application[
-    Un condensateur céramique de capacité $qty("470", "pF")$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $qty("1", "um")$. Déterminer le diamètre des armatures.
+    Un condensateur céramique de capacité $#quan[470 pF]$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $#quan[1 um]$. Déterminer le diamètre des armatures.
 ]
 
 == Aspect énergétique

@@ -36,11 +36,11 @@
 )
 #flashcard(
     recto: [Ordres de grandeur des rendements pour des moteurs thermiques],
-    verso: [Moteur à essence ou diesel #qty("25","%") à #qty("45","%").],
+    verso: [Moteur à essence ou diesel #quan[25 %] à #quan[45 %].],
 )
 #flashcard(
     recto: [Ordres de grandeur de l'efficacité d'une pompe à chaleur],
-    verso: [#qty("300","%") à #qty("400","%").],
+    verso: [#quan[300 %] à #quan[400 %].],
 )
 
 #question-de-colle(

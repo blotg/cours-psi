@@ -133,7 +133,7 @@ On souhaite exprimer $delta P_x$ en fonction des températures $T_p(x)$ et $T_g(
 ]
 
 #question()[
-    On suppose que l'eau potable entre à #qty("10", "Celsius") et que les eaux grises entrent à #qty("25", "Celsius"). Compléter la fonction suivante qui doit renvoyer [0,0] lorsque les conditions aux limites sont satisfaites.
+    On suppose que l'eau potable entre à #quan[10 °C] et que les eaux grises entrent à #quan[25 °C]. Compléter la fonction suivante qui doit renvoyer [0,0] lorsque les conditions aux limites sont satisfaites.
     ```python
     def conditionsLimites(Y0, YL): # Si Y0 = [Tg(0), Tp(0)] et YL = [Tg(L), Tp(L)], la fonction retourne
                                    # [0,0] si et seulement si les conditions aux limites sont vérifiées.

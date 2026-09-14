@@ -14,7 +14,7 @@ Les amortisseurs de Stockbridge sont utilisés pour réduire les vibrations dans
     ),
 )
 
-On s'intéresse à un câble en aluminium (de masse volumique $qty("2.7", "g/cm^3")$) de section #qty("500", "mm^2") sur lequel on veut installer un amortisseur de Stockbridge pour éliminer les vibrations. On suppose que le câble est tendu par une force de #qty("1000", "N").
+On s'intéresse à un câble en aluminium (de masse volumique $#quan[2.7 g/cm^3]$) de section #quan[500 mm^2] sur lequel on veut installer un amortisseur de Stockbridge pour éliminer les vibrations. On suppose que le câble est tendu par une force de #quan[1000 N].
 
 
 #question()[

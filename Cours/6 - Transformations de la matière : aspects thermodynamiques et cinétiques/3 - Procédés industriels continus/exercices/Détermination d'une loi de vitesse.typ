@@ -7,7 +7,7 @@
 
 La réaction de décomposition du dioxyde d'azote en phase gazeuse a pour équation
 $ ce("2 NO2 -> O2 + 2 NO") $
-On effectue cette réaction en réacteur ouvert parfaitement agité de volume constant à température constante. On obtient les résultats rassemblés dans le @tab-vitesse pour une concentration d'entrée en dioxyde d'azote de $[ce("NO2")]_e = qty("0.010", "mol/L")$.
+On effectue cette réaction en réacteur ouvert parfaitement agité de volume constant à température constante. On obtient les résultats rassemblés dans le @tab-vitesse pour une concentration d'entrée en dioxyde d'azote de $[ce("NO2")]_e = #quan[0.010 mol/L]$.
 
 #figure(
     table(
@@ -101,6 +101,6 @@ On effectue cette réaction en réacteur ouvert parfaitement agité de volume co
 
     L'ordonnée à l'origine donne alors
     $
-        k = e^B / 2 = #qty("3.96e-2", "L/mol/s")
+        k = e^B / 2 = #quan[3.96e-2 L/mol/s]
     $
 ]

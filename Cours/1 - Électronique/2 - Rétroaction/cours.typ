@@ -24,7 +24,7 @@
 == Découverte
 L'ALI est aussi appelé amplificateur opérationnel.
 
-L'ALI est un composant électronique actif#footnote[Un composant actif est un composant qui fournit de l'énergie au circuit dans lequel il est connecté.], donc il doit être alimenté. L'alimentation de l'ALI est symétrique $+V_"cc"$, $-V_"cc"$. Souvent $V_"cc"=qty("15", "V")$.
+L'ALI est un composant électronique actif#footnote[Un composant actif est un composant qui fournit de l'énergie au circuit dans lequel il est connecté.], donc il doit être alimenté. L'alimentation de l'ALI est symétrique $+V_"cc"$, $-V_"cc"$. Souvent $V_"cc"=#quan[15 V]$.
 
 #schéma(titre: "Symboles de l'ALI", hauteur: 5cm)
 
@@ -44,7 +44,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
         "Caméra pour projection",
     ),
 )[
-    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions et dont la sortie va à un ALI alimenté en #qty("15", "V") et #qty("-15", "V") et on observe la tension de sortie sur un oscilloscope.
+    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions et dont la sortie va à un ALI alimenté en #quan[15 V] et #quan[-15 V] et on observe la tension de sortie sur un oscilloscope.
     #carreaux(4cm)
 ]
 
@@ -59,7 +59,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
     $
 ]
 
-La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible pour la plupart des applications et le gain est très élevé et ne peut pas être réglé. L'ALI ne peut donc pas être utilisé seul. On utilise l'ALI dans des montages permettant de surmonter ces limitations.
+La fréquence de coupure $1/(2 pi tau) tilde #quan[10 Hz]$ est trop faible pour la plupart des applications et le gain est très élevé et ne peut pas être réglé. L'ALI ne peut donc pas être utilisé seul. On utilise l'ALI dans des montages permettant de surmonter ces limitations.
 
 #manipulation(titre: "Saturation de l'ALI")[
     On reprend la manipulation précédente et on augmente l'amplitude du GBF.
@@ -79,7 +79,7 @@ La fréquence de coupure $1/(2 pi tau) tilde qty("10", "Hz")$ est trop faible po
 )
 #flashcard(
     recto: [Ordre de grandeur du gain statique et du temps de réponse d'un ALI],
-    verso: [$A_0 tilde num("e5")$, $tau tilde qty("e-2", "s")$.],
+    verso: [$A_0 tilde num("e5")$, $tau tilde #quan[e-2 s]$.],
 )
 
 #question-de-début-de-cours(

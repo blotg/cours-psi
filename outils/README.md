@@ -189,25 +189,45 @@ incluent (cf. [D'où viennent les données](#doù-viennent-les-données)).
 
 Les unités et les nombres du cours sont rendus par
 [`zero`](https://typst.app/universe/package/zero) ; `unify` a disparu, et avec
-lui la fonction maison `scientifique()`. Les appels gardent leur forme —
-`unit("m/s")`, `qty("1.3", "T")`, `num("42")` — parce que `zi.declare` lit la
-même syntaxe de chaine. La couche de traduction tient dans
-[`prepa/0.1.1/unités.typ`](../prepa/0.1.1/unités.typ) ; elle ne fait que deux
+lui la fonction maison `scientifique()`.
+
+Une grandeur écrite en toutes lettres suit la syntaxe de zero : `#quan[1.3 T]`,
+`#quan[4.7 kΩ]`, `#quan[20 °C]`, `#quan[6.0e24 kg]`. Deux pièges :
+
+- en mode maths, le `#` est **obligatoire** : `$quan[1 s]$` n'est pas un appel
+  de fonction, et s'imprime tel quel sans la moindre erreur ;
+- un `;` collé derrière (`$[#quan[20 Hz]; #quan[20 kHz]]$`) termine
+  l'expression et disparait : écrire `#quan[20 Hz] ;`.
+
+Les unités seules, les nombres et les grandeurs **calculées** gardent la syntaxe
+de chaine d'unify, que `zi.declare` lit aussi : `unit("m/s")`, `num("42")`,
+`qty(x, "T", chiffres: 2)`. La couche de traduction tient dans
+[`prepa/0.1.1/unités.typ`](../prepa/0.1.1/unités.typ) ; elle fait trois
 choses :
 
-- **Les graphies d'unify**, dans `UNITÉS-COMPLÉMENTAIRES` : unify écrivait
-  l'ohm « O » et le micro « u », zero veut le symbole et le préfixe « mu ». Une
-  quinzaine de jetons, plus le degré et le degré Celsius.
-- **L'exposant en E majuscule** (« 6.0E-2 ») qu'unify tolérait et que zero
-  refuse.
+- **Les graphies d'unify**, dans `UNITÉS-COMPLÉMENTAIRES`, pour `unit` et
+  `qty` : unify écrivait l'ohm « O » et le micro « u », zero veut le symbole et
+  le préfixe « mu ». Une quinzaine de jetons, plus le degré et le degré Celsius.
+  Dans `quan`, on écrit directement « Ω » et « °C » ; le micro « u » y reste
+  accepté (`#quan[10 uF]`).
+- **Les unités hors SI**, dans `UNITÉS-HORS-SI` (bar, tr, an, cal, kcal, Pl,
+  tog, USI) : zero 0.7.0 décrit chaque unité pour les lecteurs d'écran et
+  arrête la compilation sur un symbole qu'il ne connait pas — dans la langue du
+  document : le poiseuille passe en français mais pas dans l'export HTML des
+  flashcards. Ces unités reçoivent leur description ; `quan`, qui n'en accepte
+  pas, passe alors par `zi.declare`.
+- **Les chiffres significatifs**, que zero ne sait pas bien arrondir.
 
-Les chiffres significatifs se demandent maintenant à l'appel :
-`qty(x, "T", chiffres: 2)` au lieu de `qty(scientifique(x, 2), "T")`. La valeur
-est arrondie avant d'être passée à zero, qui la met seul en notation
-scientifique (à partir de l'exposant 1 — « 3,14 » ne devient pas « 3,14·10⁰ »).
-Cet arrondi préalable n'est pas un reste de l'ancienne fonction : zero fixe
-l'exposant sur son entrée et ne renormalise pas la mantisse quand l'arrondi la
-porte à 10, si bien que 9,96·10⁵ à deux chiffres sortait « 10,0·10⁵ ».
+Les chiffres significatifs se demandent à l'appel : `qty(x, "T", chiffres: 2)`
+au lieu de `qty(scientifique(x, 2), "T")`. `quan` ne convient pas ici : il ne
+prend qu'un texte, sans arrondi. La valeur est arrondie avant d'être passée à
+zero, qui la met seul en notation scientifique (à partir de l'exposant 1 —
+« 3,14 » ne devient pas « 3,14·10⁰ »). Cet arrondi préalable n'est pas un reste
+de l'ancienne fonction : zero fixe l'exposant sur son entrée et ne renormalise
+pas la mantisse quand l'arrondi la porte à 10, si bien que 9,96·10⁵ à deux
+chiffres sortait « 10,0·10⁵ ». C'est toujours le cas avec zero 0.7.0 (0,999 à
+deux chiffres : « 10·10⁻¹ »). Le même `qty` passe en chaine les flottants de
+10¹⁵ et plus, sur lesquels la description de zero 0.7.0 déborde.
 
 Trois différences de rendu par rapport à unify, toutes voulues :
 

@@ -215,15 +215,15 @@ La condition d'existence d'oscillations sinusoïdales apparait comme un cas limi
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
             resistor("R2", (-1.5, -1.5), (1.5, -1.5), label: (content: $R_2$, anchor: "south"), variable: true)
-            resistor("R1", (-1.5, -1.5), (-1.5, -4), label: qty("10", "kO"))
+            resistor("R1", (-1.5, -1.5), (-1.5, -4), label: quan[10 kΩ])
             swire("R1.in", "ALI.minus", axis: "y")
             swire("ALI.out", "R2.out")
             frame("G1", "R1.out")
 
-            resistor("Rs", (3, 0), (5, 0), label: qty("10", "kO"))
-            capacitor("Cs", (5, 0), (7, 0), label: qty("100", "nF"))
-            resistor("Rp", (7, -0), (7, -3), label: (content: qty("10", "kO"), anchor: "south"))
-            capacitor("Cp", (8.5, 0), (8.5, -3), label: qty("100", "nF"))
+            resistor("Rs", (3, 0), (5, 0), label: quan[10 kΩ])
+            capacitor("Cs", (5, 0), (7, 0), label: quan[100 nF])
+            resistor("Rp", (7, -0), (7, -3), label: (content: quan[10 kΩ], anchor: "south"))
+            capacitor("Cp", (8.5, 0), (8.5, -3), label: quan[100 nF])
             frame("GR", "Rp.out")
             frame("GC", "Cp.out")
             wire("Cs.out", "Cp.in")
@@ -363,22 +363,22 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
 ]
 
 #manipulation(titre: "Forme des signaux de sortie")[
-    On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=qty("22","kO")$.
+    On réalise le montage de l'oscillateur à relaxation et on observe les signaux de sortie du comparateur à hystérésis et de l'intégrateur. On prend initialement $R_2=#quan[22 kΩ]$.
     #figure(
         circuit({
             import zap: *
             import cetz.draw: *
             opamp("ALI", (0, 0), invert: true)
             resistor("R2", (-2, 1.5), (2, 1.5), label: $R_2$, variable: true)
-            resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: qty("10", "kO"))
+            resistor("R1", (rel: (-1, 0), to: "ALI.plus"), (rel: (-2.5, 0)), label: quan[10 kΩ])
             frame("G1", (rel: (-.5, -.5), to: "ALI.minus"))
             swire("G1", "ALI.minus", axis: "y")
             swire("ALI.out", "R2.out")
             swire("R2.in", "ALI.plus", axis: "y")
 
             opamp("ALI2", (8, 0))
-            resistor("R", (rel: (-1, 0), to: "ALI2.minus"), (rel: (-3, 0)), label: qty("10", "kO"))
-            capacitor("C", (6, 2), (10, 2), label: qty("100", "nF"))
+            resistor("R", (rel: (-1, 0), to: "ALI2.minus"), (rel: (-3, 0)), label: quan[10 kΩ])
+            capacitor("C", (6, 2), (10, 2), label: quan[100 nF])
             frame("G2", (rel: (-.5, -.5), to: "ALI2.plus"))
             swire("G2", "ALI2.plus", axis: "y")
             swire("ALI2.out", "C.out")

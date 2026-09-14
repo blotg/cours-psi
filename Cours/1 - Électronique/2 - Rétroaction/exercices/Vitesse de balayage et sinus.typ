@@ -8,7 +8,7 @@
 
 On s'intéresse ici à un montage suiveur dont l'entrée est sinusoïdale. Si la fréquence de la sinusoïde est trop élevée, la vitesse de balayage de l'ALI va déformer le signal. On cherche à simuler numériquement la forme du signal de sortie obtenu.
 
-Le signal d'entrée noté $e(t) = A sin(2 pi f t)$ avec $A = qty("10", "V")$ et $f=qty("300", "kHz")$ est envoyé à l'entrée du montage suiveur.
+Le signal d'entrée noté $e(t) = A sin(2 pi f t)$ avec $A = #quan[10 V]$ et $f=#quan[300 kHz]$ est envoyé à l'entrée du montage suiveur.
 
 #question(
     coups-de-pouce: (
@@ -28,7 +28,7 @@ Le signal d'entrée noté $e(t) = A sin(2 pi f t)$ avec $A = qty("10", "V")$ et 
     Sa valeur maximale est donc $2 pi f A = #qty(dv, "V/s", chiffres: 2)$, la vitesse de balayage doit être au moins égale à cette valeur pour ne pas avoir de déformation.
 ]
 
-L'ALI simulé a une vitesse de balayage de #qty("14", "V/us").
+L'ALI simulé a une vitesse de balayage de #quan[14 V/us].
 
 #question(
     coups-de-pouce: (

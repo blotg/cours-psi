@@ -92,7 +92,7 @@ Dans le modèle du transformateur idéal,
 )
 
 #application[
-    Quel rapport de transformation doit avoir un transformateur permettant d'alimenter un moteur $#qty("12", "V") _"eff"$ à partir du secteur ?
+    Quel rapport de transformation doit avoir un transformateur permettant d'alimenter un moteur $#quan[12 V] _"eff"$ à partir du secteur ?
 ]
 
 Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le transformateur est dit "abaisseur de tension".
@@ -131,7 +131,7 @@ Si $m > 1$, le transformateur est dit "élévateur de tension". Si $m < 1$, le t
 )
 
 #application[
-    Un transformateur permet de passer du réseau moyenne tension à #qty("25", "kV") au réseau basse tension #qty("600", "V"). Le courant efficace au secondaire est de #qty("75", "A"). Déterminer le courant efficace au primaire.
+    Un transformateur permet de passer du réseau moyenne tension à #quan[25 kV] au réseau basse tension #quan[600 V]. Le courant efficace au secondaire est de #quan[75 A]. Déterminer le courant efficace au primaire.
 ]
 
 == Transfert de puissance entre primaire et secondaire
@@ -276,6 +276,6 @@ Le transformateur d'isolement sert à isoler électriquement deux parties d'un c
 == Transport du courant à haute tension
 Afin de limiter les pertes par effet Joule lors du transport, on utilise une tension aussi élevée que possible. Pour ce faire, un transformateur augmente la tension en sortie de centrale de production et un transformateur abaisse la tension avant de la distribuer au client.
 
-#exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #qty("400","kV").]
+#exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #quan[400 kV].]
 
-#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #qty("20","kV") (ligne moyenne tension) plutôt que de #qty("230","V") ?]
+#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #quan[20 kV] (ligne moyenne tension) plutôt que de #quan[230 V] ?]

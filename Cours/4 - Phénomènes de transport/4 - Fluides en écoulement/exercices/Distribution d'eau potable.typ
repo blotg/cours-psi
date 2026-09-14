@@ -4,7 +4,7 @@
     titre: "Distribution d'eau potable",
 )
 
-Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau potable. On suppose l'écoulement incompressible et homogène.
+Un château d'eau de hauteur $h = #quan[25 m]$, alimente un village en eau potable. On suppose l'écoulement incompressible et homogène.
 
 #let mv = 1e3
 #let g = 9.81
@@ -58,7 +58,7 @@ Un château d'eau de hauteur $h = qty("25", "m")$, alimente un village en eau po
         "Utiliser la loi de Hagen-Poiseuille."
     ),
 )[
-    Soit une conduite de longueur $L = qty("100", "m")$ et de section $S = qty("1", "cm^2")$ partant du pied de ce château d'eau. L'autre extrémité est à l'air libre. Quel débit peut-on attendre, en supposant _a priori_ l'écoulement laminaire ? Calculer la vitesse débitante $U$.
+    Soit une conduite de longueur $L = #quan[100 m]$ et de section $S = #quan[1 cm^2]$ partant du pied de ce château d'eau. L'autre extrémité est à l'air libre. Quel débit peut-on attendre, en supposant _a priori_ l'écoulement laminaire ? Calculer la vitesse débitante $U$.
 ][
 
     #let U = mv * g * h * S / (8 * calc.pi * viscosité * L)

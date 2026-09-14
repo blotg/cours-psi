@@ -20,7 +20,7 @@ La notation "Pno" indique la puissance absorbée par le transformateur lorsqu'il
 )[
     Calculer les pertes cuivres et les pertes fer du transformateur lorsqu'il alimente une charge de puissance maximale.
 ][
-    Les pertes fer ne dépendent pas du courant dans le secondaire. Elles sont donc égales à la puissance absorbée par le transformateur en circuit ouvert : #qty("0.47", "W").
+    Les pertes fer ne dépendent pas du courant dans le secondaire. Elles sont donc égales à la puissance absorbée par le transformateur en circuit ouvert : #quan[0.47 W].
 
     #let U1eff = 230
     #let I1eff = 0.26

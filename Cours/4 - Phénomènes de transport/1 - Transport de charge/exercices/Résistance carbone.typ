@@ -6,7 +6,7 @@
     difficulté: 2,
 )
 
-Les résistances à film de carbone (qui sont celles utilisées en travaux pratiques) sont constituées d'un cylindre en céramique recouvert d'un film de graphite ($gamma = #qty("2e4", "S/m")$) de #qty("200", "um") d'épaisseur, découpé en spirale. Le pas de la spirale est ajusté pour obtenir la résistance désirée.
+Les résistances à film de carbone (qui sont celles utilisées en travaux pratiques) sont constituées d'un cylindre en céramique recouvert d'un film de graphite ($gamma = #quan[2e4 S/m]$) de #quan[200 um] d'épaisseur, découpé en spirale. Le pas de la spirale est ajusté pour obtenir la résistance désirée.
 
 #grid(
     columns: (1fr, 1fr),
@@ -20,7 +20,7 @@ Les résistances à film de carbone (qui sont celles utilisées en travaux prati
         "Exprimer la longueur de la spirale en fonction du pas, du rayon et de la hauteur du cylindre.",
     ),
 )[
-    Quel pas la spirale doit-elle avoir pour obtenir une résistance de #qty("1", "kO") ?
+    Quel pas la spirale doit-elle avoir pour obtenir une résistance de #quan[1 kΩ] ?
 ][
     #let r = 4e-3
     #let h = 16e-3
@@ -29,7 +29,7 @@ Les résistances à film de carbone (qui sont celles utilisées en travaux prati
     #let R = 1e3
     #let l = calc.sqrt((2 * calc.pi * r * h) / (e * R * gamma-gr))
 
-    Le résistor a une longueur $h = #qty("16", "mm")$ et un rayon $r = #qty("4", "mm")$.
+    Le résistor a une longueur $h = #quan[16 mm]$ et un rayon $r = #quan[4 mm]$.
 
     La spirale déroulée sera un parallélépipède de largeur $l$ et de longueur $L$. La surface reste la même une fois déroulée donc $l L = 2 pi r h$. On en déduit que $L = (2 pi r h)/l$.
 

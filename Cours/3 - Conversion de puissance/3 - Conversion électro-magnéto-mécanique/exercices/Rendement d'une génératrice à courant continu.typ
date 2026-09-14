@@ -4,11 +4,11 @@
     titre: "Rendement d'une génératrice à courant continu",
 )
 
-Une génératrice à courant continu de constante de couplage $phi_0=qty("0.12", "Wb")$, de résistance interne $r=qty("0.45", "O")$, d'inductance propre $L=qty("20", "mH")$ et dont les valeurs nominales de tension et courant sont $U_n=qty("40", "V")$ et $I_n=qty("6", "A")$, est utilisée pour alimenter une charge électrique symbolisée par une résistance $R_c=qty("3", "O")$.
+Une génératrice à courant continu de constante de couplage $phi_0=#quan[0.12 Wb]$, de résistance interne $r=#quan[0.45 Ω]$, d'inductance propre $L=#quan[20 mH]$ et dont les valeurs nominales de tension et courant sont $U_n=#quan[40 V]$ et $I_n=#quan[6 A]$, est utilisée pour alimenter une charge électrique symbolisée par une résistance $R_c=#quan[3 Ω]$.
 
 On néglige les pertes mécaniques.
 
-La machine est entrainée par une turbine qui exerce sur son rotor un couple de moment $Gamma_t=qty("0.5", "N m")$. La MCC tourne à la vitesse de rotation $Omega > 0$.
+La machine est entrainée par une turbine qui exerce sur son rotor un couple de moment $Gamma_t=#quan[0.5 N m]$. La MCC tourne à la vitesse de rotation $Omega > 0$.
 
 #question(
     coups-de-pouce: (
@@ -75,6 +75,6 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
     #let i = Gamma-t / phi-0
     #let u = Rc * i
     La tension $u$ s'écrit
-    $ u = R_c i = #qty(u, "V", chiffres: 2) < #qty("40","V") = U_n $
+    $ u = R_c i = #qty(u, "V", chiffres: 2) < #quan[40 V] = U_n $
     La machine ne fonctionne pas dans les conditions nominales.
 ]

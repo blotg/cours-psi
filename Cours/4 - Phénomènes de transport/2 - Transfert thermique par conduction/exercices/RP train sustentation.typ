@@ -5,23 +5,23 @@
     ouvert: true,
 )
 
-Dans les trains à sustentation magnétique, le train lévite au-dessus des rails grâce à des forces magnétiques générées par des bobines supraconductrices placées dans le train. Pour que le train puisse léviter, le champ magnétique produit doit dépasser #qty("4", "T").
+Dans les trains à sustentation magnétique, le train lévite au-dessus des rails grâce à des forces magnétiques générées par des bobines supraconductrices placées dans le train. Pour que le train puisse léviter, le champ magnétique produit doit dépasser #quan[4 T].
 
 #question(
     coups-de-pouce: (),
 )[
     Expliquer pourquoi il n'est pas possible d'utiliser des bobines constituées de fils résistifs pour générer ce champ magnétique.
 ][
-    Si on néglige les effets de bord (un peu limite ici car #qty("0.5", "m") n'est pas très grand devant #qty("0.2", "m") mais pas le choix pour pouvoir résoudre), $B = mu_0 N/l i$.
+    Si on néglige les effets de bord (un peu limite ici car #quan[0.5 m] n'est pas très grand devant #quan[0.2 m] mais pas le choix pour pouvoir résoudre), $B = mu_0 N/l i$.
 
     #let B = 4
     #let mu0 = 4 * calc.pi * 1e-7
     #let N = 10000
     #let l = 0.5
     #let i = (B * l) / (mu0 * N)
-    Pour obtenir un champ magnétique de #qty("4", "T"), il faut un courant $i = (B l)/(mu_0 N) = #qty(i, "A", chiffres: 1)$.
+    Pour obtenir un champ magnétique de #quan[4 T], il faut un courant $i = (B l)/(mu_0 N) = #qty(i, "A", chiffres: 1)$.
 
-    Pour illustrer à quel point ce courant est grand pour un câble de #qty("2", "mm") de diamètre, on va calculer le temps que mettrait ce câble à fondre sous l'effet de l'échauffement par effet Joule. Pour ce faire, on néglige tout échange thermique avec l'extérieur.
+    Pour illustrer à quel point ce courant est grand pour un câble de #quan[2 mm] de diamètre, on va calculer le temps que mettrait ce câble à fondre sous l'effet de l'échauffement par effet Joule. Pour ce faire, on néglige tout échange thermique avec l'extérieur.
 
     La résistance du fil est $R = l/(gamma S)$, la puissance dissipée par effet Joule est $P = R i^2 = l/(gamma S) ((B l)/(mu_0 N))^2 = (4l)/(gamma pi d^2)((B l)/(mu_0 N))^2$.
 
@@ -48,16 +48,16 @@ Dans les trains à sustentation magnétique, le train lévite au-dessus des rail
     columns: (1fr, 1fr),
     [
         Données sur le solénoïde
-        - Diamètre : #qty("0.2", "m")
-        - Longueur : #qty("0.5", "m")
+        - Diamètre : #quan[0.2 m]
+        - Longueur : #quan[0.5 m]
         - Nombre de spires : #num("10000")
-        - Diamètre du fil : #qty("2.0", "mm")
+        - Diamètre du fil : #quan[2.0 mm]
     ],
     [
         Données sur le cuivre
-        - Masse volumique : #qty("8.96", "g/cm^3")
-        - Capacité thermique massique : #qty("385", "J/kg K")
-        - Résistivité électrique : #qty("1.68e-8", "O m")
-        - Température de fusion : #qty("1357", "K")
+        - Masse volumique : #quan[8.96 g/cm^3]
+        - Capacité thermique massique : #quan[385 J/kg K]
+        - Résistivité électrique : #quan[1.68e-8 Ω m]
+        - Température de fusion : #quan[1357 K]
     ],
 )

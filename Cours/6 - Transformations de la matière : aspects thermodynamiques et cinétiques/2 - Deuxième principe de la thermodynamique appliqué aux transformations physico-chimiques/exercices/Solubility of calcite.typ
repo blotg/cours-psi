@@ -35,7 +35,7 @@ We consider the reaction #ce("CaCO3(s) = Ca^2+(aq) + CO3^2-(aq)").
     $
 ]
 
-*Data at $T=#qty("298", "K")$*
+*Data at $T=#quan[298 K]$*
 
 The chemical species are solutes in water.
 

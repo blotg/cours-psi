@@ -47,5 +47,5 @@ Composante horizontale du champ magnétique terrestre : $B = #qty(B, "T", chiffr
 
     La période des oscillations est donc $ T = (2 pi) / omega = 2 pi sqrt(J/(cal(M) B)) $
 
-    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx qty("3", "s")$, soit $ cal(M) = 4 pi^2J/(B T^2) approx #qty(M, "A m^2", chiffres: 1) $
+    Avec la vidéo, on peut estimer la période des oscillations à environ $T approx #quan[3 s]$, soit $ cal(M) = 4 pi^2J/(B T^2) approx #qty(M, "A m^2", chiffres: 1) $
 ]

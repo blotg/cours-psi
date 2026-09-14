@@ -141,11 +141,11 @@
 )
 #flashcard(
     recto: [Limite de résolution de l'œil],
-    verso: [La limite de résolution angulaire de l'œil est de l'ordre de la minute d'arc, soit #qty("3e-4", "rad").],
+    verso: [La limite de résolution angulaire de l'œil est de l'ordre de la minute d'arc, soit #quan[3e-4 rad].],
 )
 #flashcard(
     recto: [Plage d'accommodation de l'œil],
-    verso: [Ponctum proximum à #qty("25", "cm"), ponctum remotum à l'infini.],
+    verso: [Ponctum proximum à #quan[25 cm], ponctum remotum à l'infini.],
 )
 #flashcard(
     recto: [Modèle de l'appareil photographique],

@@ -38,13 +38,13 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
 #question[
     Tracer le cycle sur le diagramme $(P,h)$.
 ][
-    Pour la sortie du compresseur, (#qty("19", "bar") et #qty("65", "Celsius")), on place le point à l'intersection de l'isotherme #qty("65", "Celsius") et de l'isobare #qty("19", "bar").
+    Pour la sortie du compresseur, (#quan[19 bar] et #quan[65 °C]), on place le point à l'intersection de l'isotherme #quan[65 °C] et de l'isobare #quan[19 bar].
 
-    Pour la sortie du condenseur, (#qty("19", "bar") et #qty("27", "Celsius")), on place le point à l'intersection de l'isotherme (quasiment verticale sur le diagramme) #qty("27", "Celsius") et de l'isobare #qty("19", "bar").
+    Pour la sortie du condenseur, (#quan[19 bar] et #quan[27 °C]), on place le point à l'intersection de l'isotherme (quasiment verticale sur le diagramme) #quan[27 °C] et de l'isobare #quan[19 bar].
 
-    Pour la sortie du détendeur, (#qty("5", "bar") et #qty("2", "Celsius")), l'isobare et l'isotherme sont confondues sur le diagramme, on ne peut donc pas utiliser leur intersection. La détente est isenthalpique, donc la courbe est verticale jusqu'à atteindre l'isobare #qty("5", "bar").
+    Pour la sortie du détendeur, (#quan[5 bar] et #quan[2 °C]), l'isobare et l'isotherme sont confondues sur le diagramme, on ne peut donc pas utiliser leur intersection. La détente est isenthalpique, donc la courbe est verticale jusqu'à atteindre l'isobare #quan[5 bar].
 
-    Pour la sortie de l'évaporateur, (#qty("5", "bar") et #qty("10", "Celsius")), on place le point à l'intersection de l'isotherme #qty("10", "Celsius") et de l'isobare #qty("5", "bar").
+    Pour la sortie de l'évaporateur, (#quan[5 bar] et #quan[10 °C]), on place le point à l'intersection de l'isotherme #quan[10 °C] et de l'isobare #quan[5 bar].
 
     #figure(
         image("../images/R290 - corrigé.pdf"),
@@ -60,7 +60,7 @@ La détente dans le détendeur et la compression dans le compresseur s'effectuen
 #let Dh-cond = 270 - 650
 #let Dm = -4000 / (Dh-cond * 1000)
 #question[
-    Calculer la chaleur massique reçue par le propane dans le condenseur. Quel débit massique le propane doit-il avoir pour fournir une puissance de chauffage de #qty("4", "kW") à l'habitation ?
+    Calculer la chaleur massique reçue par le propane dans le condenseur. Quel débit massique le propane doit-il avoir pour fournir une puissance de chauffage de #quan[4 kW] à l'habitation ?
 ][
     Pour la condensation, on lit une variation d'enthalpie massique
     $

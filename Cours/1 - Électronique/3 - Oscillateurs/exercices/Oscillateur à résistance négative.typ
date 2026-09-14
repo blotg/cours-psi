@@ -76,7 +76,7 @@ On considère le montage ci-dessous, appelé montage à résistance négative. O
     Ce montage se comporte donc, vu de son entrée, comme une résistance négative $-R$.
 ]
 
-Ce montage, qui se comporte comme une « résistance négative », est placé dans le circuit suivant où $R=qty("10", "kO")$ et $r=qty("10", "kO")$.
+Ce montage, qui se comporte comme une « résistance négative », est placé dans le circuit suivant où $R=#quan[10 kΩ]$ et $r=#quan[10 kΩ]$.
 
 #figure(
     circuit({

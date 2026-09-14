@@ -112,7 +112,7 @@ Lorsque $Z_1=Z_2$, la puissance transmise est maximale, on dit qu'il y a *adapta
 
 #application[
     Calculer le coefficient de transmission en puissance pour l'interface air-eau.
-    $Z_"air" = qty("4e2","Pa s/m")$ $Z_"eau" = qty("1.5e6","Pa s/m")$.
+    $Z_"air" = #quan[4e2 Pa s/m]$ $Z_"eau" = #quan[1.5e6 Pa s/m]$.
 ]
 
 #application[
@@ -244,7 +244,7 @@ La réflexion sur un métal parfait engendre une force surfacique sur lui appel�
 ]
 
 #application[
-    La sonde spatiale IKAROS est le premier prototype utilisant une voile solaire comme moyen de propulsion. Sa voile mesure #qty("173","m^2"). On assimile la lumière du Soleil à une onde électromagnétique monochromatique d'amplitude #qty("600","V/m"). Calculer la force subie par la sonde.
+    La sonde spatiale IKAROS est le premier prototype utilisant une voile solaire comme moyen de propulsion. Sa voile mesure #quan[173 m^2]. On assimile la lumière du Soleil à une onde électromagnétique monochromatique d'amplitude #quan[600 V/m]. Calculer la force subie par la sonde.
 ]
 
 #question-de-colle(

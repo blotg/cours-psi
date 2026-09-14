@@ -117,7 +117,7 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
         "On peut utiliser les fonctions np.linspace et np.zeros de la bibliothèque numpy.",
     ),
 )[
-    Compléter le code Python ci-dessous pour simuler la désintégration de l'uranium 235 dans la boule. On prendra comme condition initiale une densité de neutrons uniforme dans la boule égale à #qty("1e12", "/m^3") (sauf aux conditions aux limites où elle est nulle).
+    Compléter le code Python ci-dessous pour simuler la désintégration de l'uranium 235 dans la boule. On prendra comme condition initiale une densité de neutrons uniforme dans la boule égale à #quan[1e12 /m^3] (sauf aux conditions aux limites où elle est nulle).
     #show raw.where(block: true): numérote-code
     ```python
     import numpy as np
@@ -217,13 +217,13 @@ Pour résoudre numériquement l'équation de diffusion, on discrétise l'espace 
         "Le profil initial n'est pas le mode fondamental : il commence par se déformer, ce qui masque la croissance ou la décroissance exponentielle. Il faut donc simuler assez longtemps.",
     )
 )[
-    Pour de petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour de grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #qty("0.5", "cm") près.
+    Pour de petites valeurs de $R$, la densité de neutrons tend vers $0$ avec le temps. Pour de grandes valeurs de $R$, la densité de neutrons croît exponentiellement avec le temps. Déterminer la valeur critique de $R$ séparant ces deux comportements. On pourra procéder par essais successifs et on la déterminera à #quan[0.5 cm] près.
 ][
     Avec $N_t = #num("1000")$, la simulation ne dure que quelques nanosecondes : le profil initial $y = n_0 r$ n'est pas le mode fondamental $sin(pi r\/R)$, il se déforme d'abord, et cette relaxation masque complètement la tendance exponentielle près du rayon critique. Il faut allonger la simulation, par exemple `Nt = 20000`.
 
-    Pour $R = #qty("0.08", "m")$, la densité de neutrons tend vers $0$ avec le temps.
+    Pour $R = #quan[0.08 m]$, la densité de neutrons tend vers $0$ avec le temps.
 
-    Pour $R = #qty("0.09", "m")$, la densité de neutrons croît exponentiellement avec le temps.
+    Pour $R = #quan[0.09 m]$, la densité de neutrons croît exponentiellement avec le temps.
 
-    Le rayon critique est situé entre ces deux valeurs : $R_c = #qty("8.5+-0.5", "cm")$, en accord avec la valeur analytique $pi sqrt(D tau\/(nu-1)) = #qty("8.4", "cm")$.
+    Le rayon critique est situé entre ces deux valeurs : $R_c = #quan[8.5+-0.5 cm]$, en accord avec la valeur analytique $pi sqrt(D tau\/(nu-1)) = #quan[8.4 cm]$.
 ]

@@ -19,7 +19,7 @@ La plaque signalétique d'un moteur à courant continu indique les caractéristi
 )[
     Calculer le rendement du moteur lorsqu'il fonctionne à sa puissance nominale.
 ][
-    Dans les conditions nominales, le moteur fournit une puissance mécanique de #qty("36.3", "kW").
+    Dans les conditions nominales, le moteur fournit une puissance mécanique de #quan[36.3 kW].
 
     #let Pc = 440*95.5+360*3
     Dans les conditions nominales, le moteur absorbe une puissance électrique de $440 times 95.5 + 360 times 3 = #qty(Pc, "W", chiffres: 2)$.

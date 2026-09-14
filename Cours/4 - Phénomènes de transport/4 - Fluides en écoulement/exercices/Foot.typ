@@ -6,7 +6,7 @@
     numérique: true,
 )
 
-On étudie un tir au football. La vitesse initiale du ballon est de #qty("20", "m/s") selon l'axe $x$ (horizontal) et de #qty("12", "m/s") selon l'axe $z$ (vertical). Le ballon est sur le sol juste avant le tir.
+On étudie un tir au football. La vitesse initiale du ballon est de #quan[20 m/s] selon l'axe $x$ (horizontal) et de #quan[12 m/s] selon l'axe $z$ (vertical). Le ballon est sur le sol juste avant le tir.
 
 Dans un premier temps, on ne prend en compte que la gravité.
 
@@ -126,10 +126,10 @@ plt.show()
 ]
 
 On prend maintenant en compte les frottements avec l'air. On donne les valeurs numériques suivantes :
-$rho = #qty("1.2", "kg/m^3")$,
+$rho = #quan[1.2 kg/m^3]$,
 $C_x = #num("0.47")$,
-$R = #qty("0.11", "m")$ et
-$m = #qty("145", "g")$
+$R = #quan[0.11 m]$ et
+$m = #quan[145 g]$
 
 #question(
     coups-de-pouce: (
@@ -156,7 +156,7 @@ $m = #qty("145", "g")$
     Le tir n'est toujours pas cadré, il passe à côté des cages.
 ]
 
-Le footballeur a mis de l'effet dans la balle en lui imprimant une rotation de $Omega = #qty("100", "tr/min")$ autour de l'axe $(O z)$. Cette rotation engendre une force de portance appelée force de Magnus et s'exprimant comme $1/2 C rho R^3 va(Omega) and va(v)$ avec $C approx #num(1)$.
+Le footballeur a mis de l'effet dans la balle en lui imprimant une rotation de $Omega = #quan[100 tr/min]$ autour de l'axe $(O z)$. Cette rotation engendre une force de portance appelée force de Magnus et s'exprimant comme $1/2 C rho R^3 va(Omega) and va(v)$ avec $C approx #num(1)$.
 
 #question(
     coups-de-pouce: (),

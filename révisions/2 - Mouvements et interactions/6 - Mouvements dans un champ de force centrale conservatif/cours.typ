@@ -66,5 +66,5 @@
     [Définir un satellite géostationnaire et déterminer l'expression de son altitude.],
 )
 #question-de-colle(
-    [Établir les expressions des deux vitesses cosmiques et effectuer leur application numérique. On donne $cal(G) = qty("6.7e-11", "m^3/kg/s^2")$, $M_T = qty("6.0e24", "kg")$, $R_T = qty("6.4e3", "km")$.],
+    [Établir les expressions des deux vitesses cosmiques et effectuer leur application numérique. On donne $cal(G) = #quan[6.7e-11 m^3/kg/s^2]$, $M_T = #quan[6.0e24 kg]$, $R_T = #quan[6.4e3 km]$.],
 )

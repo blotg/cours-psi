@@ -104,13 +104,13 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
     hypothèses: "Dans les conditions normales de température et de pression.",
     grandeurs: sub-dictionary(grandeurs, ("mu",)),
 )[
-    - $mu_"eau"=qty("1e3", "kg/m^3")$
-    - $mu_"air"=qty("1", "kg/m^3")$
+    - $mu_"eau"=#quan[1e3 kg/m^3]$
+    - $mu_"air"=#quan[1 kg/m^3]$
 ]
 
 #flashcard(
     recto: [Masse volumique de l'eau et de l'air],
-    verso: [$ mu_"eau" = qty("1e3", "kg/m^3") $ $mu_"air"=qty("1", "kg/m^3")$],
+    verso: [$ mu_"eau" = #quan[1e3 kg/m^3] $ $mu_"air"=#quan[1 kg/m^3]$],
 )
 
 #encadré(
@@ -137,7 +137,7 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 )
 
 #application[
-    Le débit maximal de l'Odet a été mesuré le 13 décembre 2000. La vitesse (supposée uniforme) valait #qty("4", "m/s"). Sa largeur est de #qty("10", "m") et sa profondeur #qty("4", "m"). Déterminer le débit massique.
+    Le débit maximal de l'Odet a été mesuré le 13 décembre 2000. La vitesse (supposée uniforme) valait #quan[4 m/s]. Sa largeur est de #quan[10 m] et sa profondeur #quan[4 m]. Déterminer le débit massique.
 ]
 
 == Débit volumique
@@ -165,7 +165,7 @@ Attention : de manière générale, les lignes de courant ne sont pas forcément
 )
 
 #application[
-    Le débit maximal de l'Odet a été mesuré le 13 décembre 2000. La vitesse (supposée uniforme) valait #qty("4", "m/s"). Sa largeur est de #qty("10", "m") et sa profondeur #qty("4", "m"). Déterminer le débit volumique.
+    Le débit maximal de l'Odet a été mesuré le 13 décembre 2000. La vitesse (supposée uniforme) valait #quan[4 m/s]. Sa largeur est de #quan[10 m] et sa profondeur #quan[4 m]. Déterminer le débit volumique.
 ]
 
 == Conservation de la masse
@@ -328,15 +328,15 @@ Cette formule doit être adaptée en fonction des axes du problème.
 #encadré(
     titre: "Viscosité de l'eau",
     connaitre: true,
-    hypothèses: [À #qty("20", "Celsius")],
+    hypothèses: [À #quan[20 °C]],
     grandeurs: sub-dictionary(grandeurs, ("eta",)),
 )[
-    $ eta_"eau" = qty("1e-3", "Pl") $
+    $ eta_"eau" = #quan[1e-3 Pl] $
 ]
 
 #flashcard(
     recto: [Viscosité dynamique de l'eau],
-    verso: [$ eta_"eau" = qty("1e-3", "Pl") $],
+    verso: [$ eta_"eau" = #quan[1e-3 Pl] $],
 )
 
 #encadré(
@@ -462,7 +462,7 @@ Dans le cas d'un écoulement interne, $L$ désigne le *diamètre* de la conduite
 Pour un écoulement interne, l'ordre de grandeur de la vitesse $scr(V)$ est la vitesse débitante.
 
 #application[
-    De l'eau à #qty("20", "Celsius") circule dans une conduite de diamètre #qty("5", "cm") et de longueur #qty("30", "m") à la vitesse débitante de #qty("0.1", "m/s"). Calculer le nombre de Reynolds.
+    De l'eau à #quan[20 °C] circule dans une conduite de diamètre #quan[5 cm] et de longueur #quan[30 m] à la vitesse débitante de #quan[0.1 m/s]. Calculer le nombre de Reynolds.
 ]
 
 #encadré(
@@ -496,7 +496,7 @@ Si $R_e>2000$ l'écoulement est turbulent],
 )
 
 #application[
-    De l'eau à #qty("20", "Celsius") circule dans une conduite de diamètre #qty("5", "cm") et de longueur #qty("30", "m") à la vitesse débitante de #qty("0.1", "m/s"). L'écoulement est-il laminaire ou turbulent ?
+    De l'eau à #quan[20 °C] circule dans une conduite de diamètre #quan[5 cm] et de longueur #quan[30 m] à la vitesse débitante de #quan[0.1 m/s]. L'écoulement est-il laminaire ou turbulent ?
 ]
 
 == Chute de pression dans une conduite horizontale à faible nombre de Reynolds
@@ -546,7 +546,7 @@ Par analogie avec l'électrocinétique, on peut définir la résistance hydrauli
 ]
 
 #application[
-    De l'eau à #qty("20", "Celsius") circule dans une conduite de diamètre #qty("5", "cm") et de longueur #qty("30", "m") à la vitesse débitante de #qty("0.01", "m/s"). Quelle est la chute de pression entre les deux extrémités de la conduite ?
+    De l'eau à #quan[20 °C] circule dans une conduite de diamètre #quan[5 cm] et de longueur #quan[30 m] à la vitesse débitante de #quan[0.01 m/s]. Quelle est la chute de pression entre les deux extrémités de la conduite ?
 ]
 
 == Chute de pression pour un écoulement quelconque
@@ -555,7 +555,7 @@ Lorsque l'écoulement n'est pas laminaire, la loi de Hagen–Poiseuille n'est pl
 #figure(image("images/Moody.png", width: 100%))
 
 #application[
-    De l'eau à #qty("20", "Celsius") circule dans une conduite en fonte de diamètre #qty("1.5", "cm") et de longueur #qty("3", "m") à la vitesse débitante de #qty("2", "m/s"). Quelle est la chute de pression entre les deux extrémités de la conduite ?
+    De l'eau à #quan[20 °C] circule dans une conduite en fonte de diamètre #quan[1.5 cm] et de longueur #quan[3 m] à la vitesse débitante de #quan[2 m/s]. Quelle est la chute de pression entre les deux extrémités de la conduite ?
 ]
 
 = Écoulement externe incompressible et homogène autour d’un obstacle

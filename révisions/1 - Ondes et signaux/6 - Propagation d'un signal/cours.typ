@@ -26,7 +26,7 @@
 )
 #flashcard(
     recto: [Fréquences des ondes sonores du domaine audible],
-    verso: [Environ de #qty("20","Hz") à #qty("20","kHz").],
+    verso: [Environ de #quan[20 Hz] à #quan[20 kHz].],
 )
 #flashcard(
     recto: [Fréquences des ondes mécaniques],
@@ -34,7 +34,7 @@
 )
 #flashcard(
     recto: [Fréquences des ondes électromagnétiques],
-    verso: [De #qty("3","kHz") à #qty("300","GHz") pour les ondes radio, de #qty("430","THz") à #qty("770","THz") pour le visible, au-delà pour les ultraviolets, les rayons X puis les rayons gamma.],
+    verso: [De #quan[3 kHz] à #quan[300 GHz] pour les ondes radio, de #quan[430 THz] à #quan[770 THz] pour le visible, au-delà pour les ultraviolets, les rayons X puis les rayons gamma.],
 )
 #flashcard(
     recto: [Exemples de situation de propagation dispersive],

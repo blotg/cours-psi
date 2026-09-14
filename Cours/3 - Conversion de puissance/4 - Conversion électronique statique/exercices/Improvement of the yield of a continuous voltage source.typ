@@ -37,7 +37,7 @@
 
 We want to deliver electric power from a voltage source of electromotive force $e$ to a resistor $R$. We use a commandable switch $K$ that works periodically (closed between $n T$ and $n T+alpha T$).
 
-The values of the components are $r=#qty("5", "O")$, $R=#qty("10", "O")$, $E=#qty("12", "V")$, $alpha=#num("0.5")$, $T=#qty("1", "us")$ and $C=#qty("100", "uF")$.
+The values of the components are $r=#quan[5 Ω]$, $R=#quan[10 Ω]$, $E=#quan[12 V]$, $alpha=#num("0.5")$, $T=#quan[1 us]$ and $C=#quan[100 uF]$.
 
 #question(
     coups-de-pouce: (),

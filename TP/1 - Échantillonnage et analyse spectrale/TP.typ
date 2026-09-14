@@ -111,15 +111,15 @@ et le nombre de barreaux des roues. Voir par exemple : #link("https://youtu.be/C
 ]
 
 #application[
-    Quelle fréquence d'échantillonnage minimale faut-il pour représenter correctement un signal audio ? Est-ce cohérent avec la fréquence utilisée par les CD musicaux (#qty("44100", "Hz")) ?
+    Quelle fréquence d'échantillonnage minimale faut-il pour représenter correctement un signal audio ? Est-ce cohérent avec la fréquence utilisée par les CD musicaux (#quan[44100 Hz]) ?
 ]
 
 = Choix d'une fréquence d'échantillonnage
 
-Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisition, on va acquérir un signal sinusoïdal de fréquence #qty("10", "kHz") connue produit par un GBF puis en tracer le spectre grâce à Latis-Pro (voir @annexe-spectre-latis-pro).
+Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisition, on va acquérir un signal sinusoïdal de fréquence #quan[10 kHz] connue produit par un GBF puis en tracer le spectre grâce à Latis-Pro (voir @annexe-spectre-latis-pro).
 
 #manipulation(titre: "Acquisition correcte")[
-    Réaliser une acquisition d'un signal sinusoïdal de fréquence #qty("10", "kHz") produit par un GBF en respectant *largement* le critère de Shannon.
+    Réaliser une acquisition d'un signal sinusoïdal de fréquence #quan[10 kHz] produit par un GBF en respectant *largement* le critère de Shannon.
 
     En tracer le spectre et vérifier que la fréquence observée est bien la fréquence réelle.
 
@@ -127,7 +127,7 @@ Pour visualiser l'influence de la fréquence d'échantillonnage sur l'acquisitio
 ]
 
 #manipulation(titre: "Acquisition incorrecte")[
-    Réaliser une acquisition d'un signal sinusoïdal de fréquence #qty("10", "kHz") produit par un GBF en ne respectant pas le critère de Shannon.
+    Réaliser une acquisition d'un signal sinusoïdal de fréquence #quan[10 kHz] produit par un GBF en ne respectant pas le critère de Shannon.
 
     En tracer le spectre et vérifier que la fréquence observée est bien différente de la fréquence réelle.
 ]
@@ -193,8 +193,8 @@ freqs = np.fft.rfftfreq(len(s), Te) # Calcul des fréquences en Hz
 ]
 
 = Visualisation du critère de Shannon avec Python
-On souhaite tracer le signal $cos(2 pi f t)$ avec $f = #qty("100", "Hz")$ sur une durée de $#qty("0.5", "s")$.
-Réaliser le tracé pour des périodes d'échantillonnage de #qty("0.001", "s"), #qty("0.01", "s") et #qty("0.011", "s").
+On souhaite tracer le signal $cos(2 pi f t)$ avec $f = #quan[100 Hz]$ sur une durée de $#quan[0.5 s]$.
+Réaliser le tracé pour des périodes d'échantillonnage de #quan[0.001 s], #quan[0.01 s] et #quan[0.011 s].
 On pourra utiliser les fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.arange.html")[`arange`] ou #link("https://numpy.org/doc/stable/reference/generated/numpy.linspace.html")[`linspace`] pour créer les vecteurs de temps.
 
 #manipulation(titre: "Simulation numérique d'un repliement de spectre")[
@@ -207,7 +207,7 @@ On pourra utiliser les fonctions #link("https://numpy.org/doc/stable/reference/g
 
 = Tracé de spectre avec Latis-Pro<annexe-spectre-latis-pro>
 
-Pour tracer le spectre avec Latis-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, Latis-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #qty("0", "%"). Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
+Pour tracer le spectre avec Latis-Pro, il faut cliquer sur "Traitements" puis "Calculs spécifiques" puis "Analyse de Fourier" ou appuyer sur la touche F6 du clavier. Une fenêtre s'ouvre alors. On peut alors ouvrir le menu "Avancé" et mettre le niveau de validité#footnote[Par défaut, Latis-Pro retire du spectre tous les points inférieurs à ce seuil ce qui n'est généralement pas un comportement désiré.] à #quan[0 %]. Il ne reste alors plus qu'à faire glisser la courbe dont on souhaite tracer le spectre dans le cadre "Courbe".
 
 #figure(
     grid(

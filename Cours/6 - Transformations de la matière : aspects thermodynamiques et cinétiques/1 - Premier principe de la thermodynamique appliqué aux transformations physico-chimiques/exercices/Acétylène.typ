@@ -57,7 +57,7 @@ L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en rai
     car l'enthalpie standard de formation du dioxygène est nulle (corps simple dans son état standard).
 ]
 
-La capacité thermique molaire à pression constante de l'eau et du dioxyde de carbone change beaucoup entre la température ambiante (prise à #qty("25", "Celsius")) et la température de flamme. Pour rendre compte de cette variation, on introduit les polynômes NASA dont les coefficients ont été déterminés expérimentalement pour coller au mieux aux données expérimentales :
+La capacité thermique molaire à pression constante de l'eau et du dioxyde de carbone change beaucoup entre la température ambiante (prise à #quan[25 °C]) et la température de flamme. Pour rendre compte de cette variation, on introduit les polynômes NASA dont les coefficients ont été déterminés expérimentalement pour coller au mieux aux données expérimentales :
 $
     c_(P,m) / R = a_0 T^(-2) + a_1 T^(-1) + a_2 + a_3 T + a_4 T^2 + a_5 T^3 + a_6 T^4
 $
@@ -104,7 +104,7 @@ Les coefficients $a_i$ sont répertoriés dans les données à la fin de l'exerc
 #question(
     coups-de-pouce: (),
 )[
-    On considère un mélange de $n_1 unit("mol")$ de #ce("CO2") et $n_2 unit("mol")$ de #ce("H2O") passant de la température $T_i=#qty("25", "Celsius")$ à une température $T_f$. Écrire l'expression de la variation d'enthalpie $Delta H$ du mélange comme une intégrale faisant intervenir $c_(P,m)(ce("CO2"))(T)$, $c_(P,m)(ce("H2O"))(T)$, $n_1$ et $n_2$.
+    On considère un mélange de $n_1 unit("mol")$ de #ce("CO2") et $n_2 unit("mol")$ de #ce("H2O") passant de la température $T_i=#quan[25 °C]$ à une température $T_f$. Écrire l'expression de la variation d'enthalpie $Delta H$ du mélange comme une intégrale faisant intervenir $c_(P,m)(ce("CO2"))(T)$, $c_(P,m)(ce("H2O"))(T)$, $n_1$ et $n_2$.
 ][
     La variation d'enthalpie du mélange s'écrit
     $
@@ -220,7 +220,7 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
 ]
 
 #question()[
-    En utilisant la méthode de Newton, déterminer une valeur approchée de la température de flamme $T_f$ du mélange acétylène/dioxygène. On arrêtera l'itération lorsque la différence entre deux estimations successives de la température sera inférieure à #qty("0.1", "K").
+    En utilisant la méthode de Newton, déterminer une valeur approchée de la température de flamme $T_f$ du mélange acétylène/dioxygène. On arrêtera l'itération lorsque la différence entre deux estimations successives de la température sera inférieure à #quan[0.1 K].
 ][
     ```python
     xk = 0
@@ -233,12 +233,12 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
 ]
 
 #question[
-    La température de flamme oxyacétylénique mesurée est d'environ #qty("3500", "K"). Commenter l'écart avec le modèle.
+    La température de flamme oxyacétylénique mesurée est d'environ #quan[3500 K]. Commenter l'écart avec le modèle.
 ][
     Le modèle donne une température près de deux fois trop grande, pour deux raisons.
 
-    - Au-delà de #qty("3000", "K"), le dioxyde de carbone et l'eau se *dissocient* (#ce("CO2") #ce("->") #ce("CO") + 1\/2 #ce("O2"), #ce("H2O") #ce("->") #ce("OH") + #ce("H")…). Ces réactions sont fortement endothermiques : elles absorbent une part importante de l'énergie libérée par la combustion et plafonnent la température de flamme. Le modèle, qui suppose la combustion complète et les produits inertes, les ignore complètement.
-    - Les polynômes NASA ne sont ajustés que jusqu'à #qty("6000", "K") : la valeur trouvée est hors de leur domaine de validité.
+    - Au-delà de #quan[3000 K], le dioxyde de carbone et l'eau se *dissocient* (#ce("CO2") #ce("->") #ce("CO") + 1\/2 #ce("O2"), #ce("H2O") #ce("->") #ce("OH") + #ce("H")…). Ces réactions sont fortement endothermiques : elles absorbent une part importante de l'énergie libérée par la combustion et plafonnent la température de flamme. Le modèle, qui suppose la combustion complète et les produits inertes, les ignore complètement.
+    - Les polynômes NASA ne sont ajustés que jusqu'à #quan[6000 K] : la valeur trouvée est hors de leur domaine de validité.
 ]
 
 *Données*
@@ -250,11 +250,11 @@ On cherche à évaluer numériquement le zéro de cette fonction, qui correspond
     [$Delta_f H^circ$ (#unit("kJ/mol"))], num("227"), [...], num("-394"), num("-286"),
 )
 
-Chaleur latente de vaporisation de l'eau : #qty("2257", "kJ/kg")
+Chaleur latente de vaporisation de l'eau : #quan[2257 kJ/kg]
 
-Masse molaire de l'eau : #qty("18.0", "g/mol")
+Masse molaire de l'eau : #quan[18.0 g/mol]
 
-Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
+Constante des gaz parfaits : $R = #quan[8.314 J/mol/K]$
 
 #{
     set text(size: 10pt)
@@ -262,7 +262,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         columns: 8,
         align: (left + horizon,) + (center + horizon,) * 7,
         table.header([], $a_0$, $a_1$, $a_2$, $a_3$, $a_4$, $a_5$, $a_6$),
-        [#ce("CO2(g)")\ entre #qty("300", "K") et #qty("1000", "K")],
+        [#ce("CO2(g)")\ entre #quan[300 K] et #quan[1000 K]],
         num("4.94e4"),
         num("-6.26e2"),
         num("5.30"),
@@ -271,7 +271,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("-7.69e-10"),
         num("2.85e-13"),
 
-        [#ce("CO2(g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
+        [#ce("CO2(g)")\ entre #quan[1000 K] et #quan[6000 K]],
         num("1.18e5"),
         num("-1.79e3"),
         num("8.29"),
@@ -280,7 +280,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("-1.89e-12"),
         num("6.33e-16"),
 
-        [#ce("H2O(g)")\ entre #qty("300", "K") et #qty("1000", "K")],
+        [#ce("H2O(g)")\ entre #quan[300 K] et #quan[1000 K]],
         num("-3.95e4"),
         num("5.76e2"),
         num("9.32e-1"),
@@ -289,7 +289,7 @@ Constante des gaz parfaits : $R = #qty("8.314", "J/mol/K")$
         num("4.96e-9"),
         num("-1.34e-12"),
 
-        [#ce("H2O(g)")\ entre #qty("1000", "K") et #qty("6000", "K")],
+        [#ce("H2O(g)")\ entre #quan[1000 K] et #quan[6000 K]],
         num("1.03e6"),
         num("-2.41e3"),
         num("4.65"),

@@ -117,11 +117,11 @@ $
     (t, m) => (1 + 0.3 * m) * calc.cos(2 * calc.pi * 10 * t),
 )
 
-#exemple[La radio en mode grandes ondes (GO) utilise la modulation d'amplitude avec une porteuse entre #qty("150", "kHz") et #qty("300", "kHz").]
+#exemple[La radio en mode grandes ondes (GO) utilise la modulation d'amplitude avec une porteuse entre #quan[150 kHz] et #quan[300 kHz].]
 
 #flashcard(
     recto: [Application de la modulation d'amplitude.],
-    verso: [Radio en mode grandes ondes (GO) avec une porteuse entre $qty("150","kHz")$ et $qty("300","kHz")$.],
+    verso: [Radio en mode grandes ondes (GO) avec une porteuse entre $#quan[150 kHz]$ et $#quan[300 kHz]$.],
 )
 
 === La modulation de fréquence
@@ -135,11 +135,11 @@ $
     (t, m) => calc.cos(2 * calc.pi * 10 * (1 + 0.3 * m) * t),
 )
 
-#exemple[La radio en mode FM utilise la modulation de fréquence avec une porteuse entre #qty("87", "MHz") et #qty("108", "MHz").]
+#exemple[La radio en mode FM utilise la modulation de fréquence avec une porteuse entre #quan[87 MHz] et #quan[108 MHz].]
 
 #flashcard(
     recto: [Application de la modulation de fréquence.],
-    verso: [Radio en mode FM avec une porteuse entre $qty("87","MHz")$ et $qty("108","MHz")$.],
+    verso: [Radio en mode FM avec une porteuse entre $#quan[87 MHz]$ et $#quan[108 MHz]$.],
 )
 
 #question-de-début-de-cours(
@@ -163,11 +163,11 @@ $
     (t, m) => calc.cos(2 * calc.pi * 10 * t + 4 * (1 + 0.3 * m)),
 )
 
-#exemple[La téléphonie mobile utilise la modulation de phase avec une porteuse à environ #qty("900", "MHz").]
+#exemple[La téléphonie mobile utilise la modulation de phase avec une porteuse à environ #quan[900 MHz].]
 
 #flashcard(
     recto: [Application de la modulation de phase.],
-    verso: [Téléphonie mobile avec une porteuse à environ $qty("900","MHz")$.],
+    verso: [Téléphonie mobile avec une porteuse à environ $#quan[900 MHz]$.],
 )
 
 #question-de-début-de-cours(
