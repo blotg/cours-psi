@@ -104,10 +104,31 @@ def _imprimable(args) -> int:
     return code
 
 
+def _numéro_du_dossier(sujet: Path) -> int | None:
+    """« TP/12 - Filtre de Wien/TP.typ » donne 12 ; None sans nombre en tête.
+
+    `absolute` plutôt que `resolve` : lancé depuis le dossier du TP, le
+    parent de « TP.typ » serait « . », sans nom ; et suivre un lien
+    symbolique pourrait tomber sur un dossier autrement nommé.
+    """
+    import re
+
+    trouvé = re.match(r"\d+", sujet.absolute().parent.name)
+    return int(trouvé.group()) if trouvé else None
+
+
 def _tp(args) -> int:
     from .tp import TP
 
-    tp = TP(sujet=args.sujet, élèves=args.élèves, numéro=args.numéro)
+    numéro = args.numéro if args.numéro is not None else _numéro_du_dossier(args.sujet)
+    if numéro is None:
+        print(
+            f"  tp  {args.sujet} : son dossier ne commence pas par un nombre, "
+            "passer --numéro",
+            file=sys.stderr,
+        )
+        return 2
+    tp = TP(sujet=args.sujet, élèves=args.élèves, numéro=numéro)
     for binôme in tp.binômes():
         print(f"Copie {binôme.numéro_copie:02d} (groupe {binôme.groupe}) : {binôme}")
     print(f"\nSujet          : {tp.simple()}")
@@ -206,7 +227,11 @@ def main(argv: list[str] | None = None) -> int:
     p = sous.add_parser("tp", help="fascicules de TP personnalisés par binôme")
     p.add_argument("sujet", type=Path)
     p.add_argument("élèves", type=Path, help="CSV « Prénom, Nom, Groupe »")
-    p.add_argument("--numéro", type=int, default=1, help="numéro du TP (graine du tirage)")
+    p.add_argument(
+        "--numéro",
+        type=int,
+        help="numéro du TP, graine du tirage (défaut : le nombre qui ouvre le nom du dossier du sujet)",
+    )
     p.set_defaults(fonction=_tp)
 
     p = sous.add_parser("colles", help="programme de colle de la semaine")

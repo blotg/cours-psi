@@ -36,7 +36,7 @@ python3 -m outils imprimable --quadrillage "Cours/8 - ..."  # poly-quadrillé - 
 python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils questions-de-colle                # toutes les questions de colle de l'année
 python3 -m outils questions-de-colle -r             # celles des révisions de PCSI
-python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv --numéro 1
+python3 -m outils tp "TP/1 - .../TP.typ" péda/élèves.csv   # --numéro : défaut, le 1 du dossier
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
 ```
