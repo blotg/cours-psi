@@ -11,7 +11,5 @@
 - Format des mails
 
 - questions de colle manquantes ( Électronique 4 )
-- schémas dans les révisions
-
 
 - README du dépôt
