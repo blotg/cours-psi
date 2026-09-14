@@ -3,7 +3,9 @@
 // Alimenté par `outils questions-de-colle`, qui passe en `--input données` les
 // chapitres et le chemin de leur cours :
 //
-//     {"chapitres": [{"titre": "...", "cours": "/Cours/.../cours.typ"}, ...]}
+//     {"révisions": false, "chapitres": [{"titre": "...", "cours": "/Cours/.../cours.typ"}, ...]}
+//
+// `révisions` fait titrer le document « révisions de PCSI » plutôt que « PSI ».
 //
 // Les questions elles-mêmes n'y sont pas : elles portent du content, que `typst
 // query` ne restitue qu'avec perte. Les cours sont donc tous inclus à la suite
@@ -25,11 +27,12 @@
 
 #let données = json(bytes(sys.inputs.données))
 #let chapitres = données.at("chapitres", default: ())
+#let classe = if données.at("révisions", default: false) { "révisions de PCSI" } else { "PSI" }
 
 #let _gris = luma(45%)
 #let _pâle = luma(65%)
 
-#show: init-document.with(titre: "Questions de colle")
+#show: init-document.with(titre: "Questions de colle — " + classe)
 #show: cours-en-annexe.with(..chapitres.map(chapitre => include chapitre.cours))
 
 #set par(justify: true)
@@ -52,7 +55,9 @@
     #line(length: 100%, stroke: 0.5pt + luma(80%))
 ]
 
-#titre-document[Questions de cours à travailler prioritairement]
+// La classe sur sa propre ligne : à la suite, « révisions de PCSI » faisait
+// déborder le titre et laissait « PCSI » seul sur la seconde.
+#titre-document[Questions de cours à travailler prioritairement \ #classe]
 
 #context {
     let questions = par-cours(<question-de-colle>)
@@ -83,7 +88,7 @@
         heading(level: 1, markup(chapitre.at("titre", default: "")))
         if questions.at(i).len() == 0 {
             block(inset: (left: largeur-numéro + 0.5em), text(fill: _pâle, style: "italic")[
-                Aucune question pour l'instant.
+                Aucune question
             ])
         } else {
             grid(

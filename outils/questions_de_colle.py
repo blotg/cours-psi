@@ -30,8 +30,15 @@ def données(liste: list[Chapitre]) -> dict:
 
     Les chapitres sans question restent dans la liste : le gabarit les signale
     « à venir » plutôt que de les taire.
+
+    `révisions` dit au gabarit de titrer « révisions de PCSI » plutôt que
+    « PSI » : c'est le cas quand tous les chapitres sont sous `révisions/`,
+    `-r` ou non.
     """
-    return {"chapitres": [{"titre": c.titre(inline=True), "cours": c.inclusion()} for c in liste]}
+    return {
+        "révisions": bool(liste) and all(c.révision for c in liste),
+        "chapitres": [{"titre": c.titre(inline=True), "cours": c.inclusion()} for c in liste],
+    }
 
 
 def génère(

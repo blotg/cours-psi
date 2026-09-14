@@ -30,9 +30,11 @@
 
 #flashcard(
     recto: [Lois de Snell-Descartes],
-    verso: [- Les rayons incident, réfléchi et réfracté sont dans le plan d'incidence.
-    - Réflexion : $i'_1 = i_1$
-    - Réfraction : $n_1 sin i_1 = n_2 sin i_2$],
+    verso: [
+        - Les rayons incident, réfléchi et réfracté sont dans le plan d'incidence.
+        - Réflexion : $i'_1 = i_1$
+        - Réfraction : $n_1 sin i_1 = n_2 sin i_2$
+    ],
 )
 #flashcard(
     recto: [Condition de réflexion totale],
@@ -68,8 +70,60 @@
 )
 #flashcard(
     recto: [Théorème de Thalès],
-    verso: [],//TODO avec 2 schémas
+    verso: [
+        #grid(
+            columns: (1fr, 1fr),
+            [#figure(
+                canvas({
+                    import cetz.draw: *
+                    let (A, B, C) = ((0, 2.6), (-2, 0), (2.4, 0))
+                    let (M, N) = ((-1, 1.3), (1.2, 1.3))
+                    line(B, A, C)
+                    line(B, C, stroke: 1.2pt + blue)
+                    line(M, N, stroke: 1.2pt + blue)
+                    for (p, nom, ancre) in (
+                        (A, "A", "south"),
+                        (B, "B", "north-east"),
+                        (C, "C", "north-west"),
+                        (M, "M", "east"),
+                        (N, "N", "west"),
+                    ) {
+                        circle(p, radius: 0.04, fill: black)
+                        content(p, $#nom$, anchor: ancre, padding: 0.15)
+                    }
+                }),
+
+                caption: [Configuration emboîtée],
+            )],
+
+            [#figure(
+                canvas({
+                    import cetz.draw: *
+                    let (A, B, C) = ((0, 0), (2.2, 1.6), (2.2, -1.1))
+                    let (M, N) = ((-1.1, -0.8), (-1.1, 0.55))
+                    line(M, B)
+                    line(N, C)
+                    line(B, C, stroke: 1.2pt + blue)
+                    line(M, N, stroke: 1.2pt + blue)
+                    for (p, nom, ancre) in (
+                        (A, "A", "north"),
+                        (B, "B", "south-west"),
+                        (C, "C", "north-west"),
+                        (M, "M", "north-east"),
+                        (N, "N", "south-east"),
+                    ) {
+                        circle(p, radius: 0.04, fill: black)
+                        content(p, $#nom$, anchor: ancre, padding: 0.15)
+                    }
+                }),
+                caption: [Configuration papillon],
+            )],
+        )
+
+        $ (M N) parallel (B C) => (A M)/(A B) = (A N)/(A C) = (M N)/(B C) $
+    ],
 )
+
 
 #question-de-colle(
     [Construire géométriquement l'image d'un objet $A B$ perpendiculaire à l'axe optique par une lentille convergente ou divergente (au choix du colleur), dans quatre cas suivant la position de l'objet $A B$ par rapport aux foyers et au centre optique. Les propriétés permettant le tracé (foyers, centre optique, aplanétisme, stigmatisme) seront explicitées.],

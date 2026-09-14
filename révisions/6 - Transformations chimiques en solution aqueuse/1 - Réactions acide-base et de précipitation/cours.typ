@@ -25,11 +25,22 @@
 #flashcard(
     recto: [Diagramme de prédominance],
     verso: [
+        #figure(canvas({
+            import cetz.draw: *
+            line((0, 0), (8, 0), mark: (end: ">", fill: black), name: "pH")
+            content("pH.end", $"pH"$, anchor: "north-east", padding: 0.2)
+            line((4, -0.15), (4, 0.15))
+            content((4, -0.15), $"p"K_a$, anchor: "north", padding: 0.15)
+            content((2, 0.2), ce("AH"), anchor: "south", padding: 0.1)
+            content((6, 0.2), ce("A-"), anchor: "south", padding: 0.1)
+        }))
+
         / Pour $"pH" < "p"K_a$: l'acide prédomine
         / Pour $"pH" > "p"K_a$: la base prédomine
         / À $"pH" = "p"K_a$: les deux espèces ont même concentration.
-    ], // TODO schéma
+    ],
 )
+
 #flashcard(
     recto: [Produit ionique de l'eau],
     verso: [$K_e = a(ce("H3O+"))_"éq" a(ce("HO-"))_"éq" = #num("e-14")$ à #qty("25", "Celsius"). C'est la constante d'équilibre de la réaction de autoprotolyse de l'eau #ce("2 H2O = H3O+ + HO-").],
