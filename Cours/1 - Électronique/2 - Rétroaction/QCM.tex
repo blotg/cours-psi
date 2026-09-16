@@ -89,3 +89,24 @@
     \end{multicols}
   \end{questionmult}
 }
+
+\element{1.2.4}{
+  \begin{question}{pontDiviseur}\bareme{1}
+    On considère deux résistances en série. Aucun courant n'est prélevé au point de potentiel $V$.
+    \begin{center}
+      \begin{circuitikz}
+        \draw (0,0) node[left] {$e$} to[R=$R_1$,o-*] (2.5,0) node[below] {$V$} to[R=$R_2$,-o] (5,0) node[right] {$s$};
+      \end{circuitikz}
+    \end{center}
+    Le pont diviseur de tension s'écrit
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{$V-s=\frac{R_2}{R_1+R_2}(e-s)$}
+        \mauvaise{$V-s=\frac{R_1}{R_1+R_2}(s-e)$}
+        \mauvaise{$V=\frac{R_1}{R_1+R_2}e$}
+        \mauvaise{$V-s=\frac{R_1}{R_1+R_2}(e-s)$}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+
