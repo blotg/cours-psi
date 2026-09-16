@@ -29,17 +29,17 @@ Pour émettre et recevoir une onde électromagnétique, il est nécessaire d'avo
 )[
     Calculer la taille de l'antenne qui serait nécessaire sans modulation.
 ][
-    Ces fréquences correspondent à des longueurs d'onde
+    La taille de l'antenne vaut une demi-longueur d'onde :
     $
-        lambda = c/f = (3 times 10^8)/20 approx #quan[15000 km] "(pour " #quan[20 Hz] ")"
+        "Pour " #quan[20 Hz] " : " lambda/2 = c/(2f) = (3 times 10^8)/(2 times 20) approx #zi.km(3e8/(2*20)/1000)
     $
     $
-        lambda = (3 times 10^8)/(20 times 10^3) approx #quan[15 km] "(pour " #quan[20 kHz] ")"
+        "Pour " #quan[20 kHz] " : " lambda/2 = (3 times 10^8)/(2 times 20 times 10^3) approx #zi.km(3e8/(2*20e3)/1000)
     $
-    Il faudrait donc une antenne de #quan[15000 km] !
+    Il faudrait donc une antenne de #zi.km(3e8/(2*20)/1000) !
 ]
 
-On module le signal $v_e (t)$ (appelé signal modulant) en amplitude avec la porteuse $v_p (t) = A_p cos(2 pi f_p t)$ avant de l'émettre. La modulation peut se schématiser ainsi :
+On module le signal $v_e (t)$ en amplitude avec la porteuse $v_p (t) = A_p cos(2 pi f_p t)$ avant de l'émettre. La modulation peut se schématiser ainsi :
 
 #figure(
     canvas({
@@ -221,7 +221,7 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                 x-max: 6,
                 y-min: 0,
                 y-max: 2,
-                x-label: $f "(kHz)"$,
+                x-label: $f$,
                 {
                     plot.add(
                         f => audio-shape((f - 0.5) / 4),
@@ -231,8 +231,8 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                     )
                     plot.annotate(resize: false, {
                         import cetz.draw: *
-                        content((0.5, 0), num("20"), anchor: "north", padding: .2em)
-                        content((4.5, 0), num("20000"), anchor: "north", padding: .2em)
+                        content((0.5, 0), quan[20 Hz], anchor: "north", padding: .2em)
+                        content((4.5, 0), quan[20 kHz], anchor: "north", padding: .2em)
                     })
                 },
             )

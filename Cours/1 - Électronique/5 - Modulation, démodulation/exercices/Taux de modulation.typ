@@ -5,7 +5,7 @@
     difficulté: 1,
 )
 
-La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, dont le signal modulant est sinusoïdal.
+La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, dont le signal à transmettre est sinusoïdal.
 
 #figure(
     canvas({
@@ -43,9 +43,9 @@ La figure ci-dessous représente un signal modulé en amplitude $s_"AM" (t)$, do
 ]
 
 #question()[
-    Quelle est la fréquence du signal modulant ?
+    Quelle est la fréquence du signal à transmettre ?
 ][
-    On compte $2$ oscillations lentes (l'enveloppe, donc la modulante) sur une durée de #quan[1 ms] : la fréquence du signal modulant vaut donc $f_s = #quan[2.0e3 Hz]$.
+    On compte $2$ oscillations lentes (l'enveloppe, donc la modulante) sur une durée de #quan[1 ms] : la fréquence du signal à transmettre vaut donc $f_s = #quan[2.0e3 Hz]$.
 ]
 
 #question(

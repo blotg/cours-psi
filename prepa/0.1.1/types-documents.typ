@@ -78,10 +78,7 @@
     )
     show link: underline
     import "lib.typ": *
-    set-round(mode: "figures")
-    // Le point de multiplication d'unify plutôt que la croix, défaut de zero :
-    // c'est la notation du cours, et tous les documents déjà tirés l'ont.
-    set-num(product: sym.dot.op)
+    set-round(mode: "figures", product: sym.dot.op, decimal-separator: ",")
     show: styles-blocs
     if logotype {
         let largeur = 30mm

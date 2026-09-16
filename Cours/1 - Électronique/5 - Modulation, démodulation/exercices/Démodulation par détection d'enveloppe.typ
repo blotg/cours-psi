@@ -56,7 +56,7 @@ On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi 
     Le condensateur $C$, chargé lorsque la diode conduisait, se décharge alors dans $R$.
 ]
 
-On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal modulant sinusoïdal : $e(t) = cos(omega_p t) (1+k cos(omega_s t))$
+On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal à transmettre sinusoïdal : $e(t) = cos(omega_p t) (1+m cos(omega_s t))$
 
 #question(
     coups-de-pouce: (
@@ -69,7 +69,7 @@ On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal 
     import matplotlib.pyplot as plt
     omega_p = 2*np.pi*200 # (rad/s) pulsation de la porteuse
     omega_s = 2*np.pi*1.5 # (rad/s) pulsation du signal
-    k = 0.7 # taux de modulation
+    m = 0.7 # taux de modulation
 
     t = np.linspace(0,1,2000) # temps (s)
     e = ... # signal modulé en amplitude
@@ -85,10 +85,10 @@ On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal 
     import matplotlib.pyplot as plt
     omega_p = 2*np.pi*200 # pulsation de la porteuse
     omega_s = 2*np.pi*1.5 # pulsation du signal
-    k = 0.7 # taux de modulation
+    m = 0.7 # taux de modulation
 
     t = np.linspace(0,1,2000) # temps (s)
-    e = np.cos(omega_p*t) * (1+k*np.cos(omega_s*t)) # signal modulé en amplitude
+    e = np.cos(omega_p*t) * (1+m*np.cos(omega_s*t)) # signal modulé en amplitude
 
     plt.clf() #effacement de précédents tracés
     plt.plot(t, e, label="signal modulé")
@@ -181,16 +181,16 @@ Pour résoudre numériquement l'équation différentielle obtenue précédemment
     ```
 ]
 
-En fonctions de valeurs de $k$, le signal démodulé peut être plus ou moins fidèle au signal modulant.
+En fonctions de valeurs de $m$, le signal démodulé peut être plus ou moins fidèle au signal à transmettre.
 
 #question(
     coups-de-pouce: (
-        "Pour $k=0.8$, le signal est-il correctement démodulé ? Même question pour $k=1.2$.",
+        "Pour $m=0.8$, le signal est-il correctement démodulé ? Même question pour $m=1.2$.",
     )
 )[
-    En modifiant les valeurs de $k$ dans le programme, dans quelle plage de valeurs le signal démodulé $s(t)$ suit-il correctement l'enveloppe du signal modulé $e(t)$ ?
+    En modifiant les valeurs de $m$ dans le programme, dans quelle plage de valeurs le signal démodulé $s(t)$ suit-il correctement l'enveloppe du signal modulé $e(t)$ ?
 ][
-    Pour que le signal démodulé $s(t)$ suive correctement l'enveloppe du signal modulé $e(t)$, il faut que le taux de modulation $k$ soit inférieur à 1.
+    Pour que le signal démodulé $s(t)$ suive correctement l'enveloppe du signal modulé $e(t)$, il faut que le taux de modulation $m$ soit inférieur à 1.
 ]
 
 #question(
@@ -202,7 +202,7 @@ En fonctions de valeurs de $k$, le signal démodulé peut être plus ou moins fi
 )[
     Quelle#underline[s] condition#underline[s] doit vérifier le produit $R C$ pour que le signal démodulé $s(t)$ suive correctement l'enveloppe du signal modulé $e(t)$ ?
 ][
-    Pour que le signal démodulé $s(t)$ suive correctement l'enveloppe du signal modulé $e(t)$, il faut que le produit $R C$ soit grand devant la période de la porteuse et petit devant la période du signal modulant.
+    Pour que le signal démodulé $s(t)$ suive correctement l'enveloppe du signal modulé $e(t)$, il faut que le produit $R C$ soit grand devant la période de la porteuse et petit devant la période du signal à transmettre.
 
     $
         (2 pi)/omega_s >> R C >> (2 pi)/omega_p

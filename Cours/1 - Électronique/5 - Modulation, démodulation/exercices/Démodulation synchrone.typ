@@ -86,11 +86,11 @@ On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une port
 
     #spectre(bumps: ((4, 2, 1, true), (6, 2, 1)), lignes: ((5, 2, $f_p$),), x-max: 10)
 
-    En multipliant par $s_p (t)$, $s_i (t) = A_p^2 cos^2 (2 pi f_p t)(1+k s(t))$. Or $cos^2(2 pi f_p t) = (1+cos(4 pi f_p t))/2$, donc
+    En multipliant par $s_p (t)$ : $s_i (t) = k A_p^2 cos^2 (2 pi f_p t)(1+k s(t))$. Or $cos^2(2 pi f_p t) = (1+cos(4 pi f_p t))/2$, donc
     $
-        s_i (t) = A_p^2/2 (1+k s(t)) + A_p^2/2 cos(4 pi f_p t) + (A_p^2 k)/2 s(t) cos(4 pi f_p t)
+        s_i (t) = k A_p^2/2 (1+k s(t)) + k A_p^2/2 cos(4 pi f_p t) + k (A_p^2 k)/2 s(t) cos(4 pi f_p t)
     $
-    Le premier terme redonne le spectre de $s$ en bande de base (autour de $f=0$). Le deuxième terme est une raie à $2f_p$. Le troisième terme est, comme pour $s_"AM"$, une modulation d'amplitude de $s$ sur la porteuse $2f_p$ : il donne deux bandes latérales symétriques autour de $2f_p$, chacune deux fois moins haute que la copie en bande de base (le facteur $(A_p^2 k)/2$ du troisième terme se répartissant pour moitié entre les deux bandes latérales).
+    Le premier terme redonne le spectre de $s$ en bande de base (autour de $f=0$). Le deuxième terme est une raie à $2f_p$. Le troisième terme est, comme pour $s_"AM"$, une modulation d'amplitude de $s$ sur la porteuse $2f_p$ : il donne deux bandes latérales symétriques autour de $2f_p$, chacune deux fois moins haute que la copie en bande de base (le facteur $k (A_p^2 k)/2$ du troisième terme se répartissant pour moitié entre les deux bandes latérales).
 
     #spectre(
         bumps: ((1, 2, 1), (9, 2, 0.5, true), (11, 2, 0.5)),
@@ -111,5 +111,5 @@ On souhaite démoduler un signal modulé en amplitude $s_"AM" (t)$ avec une port
 )[
     Proposer des valeurs réalistes pour $R$ et $C$ afin que le signal démodulé $s(t)$ s'approche convenablement du signal modulant.
 ][
-    Il faut que la fréquence de coupure du filtre passe-bas soit très grande devant #quan[10 kHz] (pour ne pas couper le signal utile) et très petite devant $2 f_p = #quan[400 kHz]$ (pour éliminer la composante haute fréquence). On peut par exemple prendre $f_c=#quan[16 kHz]=1/(2 pi R C)$, avec $R=#quan[1 kΩ]$ et $C=#quan[10 nF]$.
+    Il faut que la fréquence de coupure du filtre passe-bas soit supérieure à #quan[10 kHz] (pour ne pas couper le signal utile) et très petite devant $2 f_p = #quan[400 kHz]$ (pour éliminer la composante haute fréquence). On peut par exemple prendre $f_c=#quan[16 kHz]=1/(2 pi R C)$, avec $R=#quan[1 kΩ]$ et $C=#quan[10 nF]$.
 ]

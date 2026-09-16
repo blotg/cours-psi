@@ -104,31 +104,45 @@ def _imprimable(args) -> int:
     return code
 
 
-def _numéro_du_dossier(sujet: Path) -> int | None:
-    """« TP/12 - Filtre de Wien/TP.typ » donne 12 ; None sans nombre en tête.
+def _sujet_et_dossier(chemin: Path) -> tuple[Path, Path]:
+    """Le fichier du sujet et le dossier du TP, qui porte le numéro.
+
+    Le dossier du TP est accepté aussi bien que le « TP.typ » qu'il
+    contient : les autres sous-commandes prennent des dossiers.
 
     `absolute` plutôt que `resolve` : lancé depuis le dossier du TP, le
     parent de « TP.typ » serait « . », sans nom ; et suivre un lien
     symbolique pourrait tomber sur un dossier autrement nommé.
     """
+    if chemin.is_dir():
+        return chemin / "TP.typ", chemin.absolute()
+    return chemin, chemin.absolute().parent
+
+
+def _numéro_du_dossier(dossier: Path) -> int | None:
+    """« TP/12 - Filtre de Wien » donne 12 ; None sans nombre en tête."""
     import re
 
-    trouvé = re.match(r"\d+", sujet.absolute().parent.name)
+    trouvé = re.match(r"\d+", dossier.name)
     return int(trouvé.group()) if trouvé else None
 
 
 def _tp(args) -> int:
     from .tp import TP
 
-    numéro = args.numéro if args.numéro is not None else _numéro_du_dossier(args.sujet)
+    sujet, dossier = _sujet_et_dossier(args.sujet)
+    if not sujet.is_file():
+        print(f"  tp  {sujet} : sujet introuvable", file=sys.stderr)
+        return 2
+    numéro = args.numéro if args.numéro is not None else _numéro_du_dossier(dossier)
     if numéro is None:
         print(
-            f"  tp  {args.sujet} : son dossier ne commence pas par un nombre, "
+            f"  tp  {dossier.name} : ce dossier ne commence pas par un nombre, "
             "passer --numéro",
             file=sys.stderr,
         )
         return 2
-    tp = TP(sujet=args.sujet, élèves=args.élèves, numéro=numéro)
+    tp = TP(sujet=sujet, élèves=args.élèves, numéro=numéro)
     for binôme in tp.binômes():
         print(f"Copie {binôme.numéro_copie:02d} (groupe {binôme.groupe}) : {binôme}")
     print(f"\nSujet          : {tp.simple()}")
@@ -225,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(fonction=_étapes("DM"))
 
     p = sous.add_parser("tp", help="fascicules de TP personnalisés par binôme")
-    p.add_argument("sujet", type=Path)
+    p.add_argument("sujet", type=Path, help="le « TP.typ », ou le dossier qui le contient")
     p.add_argument("élèves", type=Path, help="CSV « Prénom, Nom, Groupe »")
     p.add_argument(
         "--numéro",

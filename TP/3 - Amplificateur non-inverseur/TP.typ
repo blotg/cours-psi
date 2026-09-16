@@ -33,8 +33,10 @@
 
 L'objectif de ce TP est d'étudier le montage amplificateur non-inverseur et sa fonction de transfert afin de la confronter à son expression théorique. On étudiera notamment son produit gain-bande et les différentes saturations.
 
+Les caractéristiques de l'ALI (produit gain-bande, tension de saturation, courant de saturation et vitesse de balayage) observées seront ensuite confrontées aux valeurs indiquées par le fabricant.
+
 = Réalisation et étude préliminaire
-    
+
 Le montage amplificateur non-inverseur sera réalisé avec les composants accessibles dans la salle de TP (voir @annexe-composants) de sorte que
 + son gain soit égal à #num[100] ;
 + l'ALI ne sature pas en courant.
@@ -55,6 +57,8 @@ Le montage amplificateur non-inverseur sera réalisé avec les composants access
 )[
     Choix des valeurs de $R_1$ et $R_2$ et calcul de l'incertitude sur le gain théorique.
 ]
+
+Pour vérifier rapidement le montage, on place en entrée un signal sinusoïdal produit par un GBF et on observe sa sortie.
 
 #application()[
     Quelle tension d'entrée maximale peut-on appliquer sans que la tension de sortie de l'ALI ne sature ?
@@ -182,13 +186,15 @@ Plusieurs grandeurs de l'ALI peuvent saturer. On souhaite observer l'effet de ce
 == Saturation en tension
 
 #manipulation[
-    En se plaçant à une fréquence de #zi.kHz[1], choisir une amplitude d'entrée permettant d'observer la saturation en tension de l'ALI. Mesurer la tension de saturation de l'ALI.
+    En se plaçant à une fréquence de #quan[1 kHz], choisir une amplitude d'entrée permettant d'observer la saturation en tension de l'ALI. Mesurer la tension de saturation de l'ALI.
 ]
 
 == Saturation en vitesse de balayage
 
+À haute fréquence, la vitesse de balayage de l'ALI peut engendrer une déformation du signal de sortie.
+
 #manipulation[
-    À haute fréquence, augmenter l'amplitude de la tension d'entrée et observer la saturation en vitesse de balayage de l'ALI.
+    À haute fréquence, augmenter l'amplitude de la tension d'entrée et observer l'effet de la saturation en vitesse de balayage de l'ALI sur la forme du signal de sortie.
 ]
 
 #manipulation[
@@ -196,6 +202,8 @@ Plusieurs grandeurs de l'ALI peuvent saturer. On souhaite observer l'effet de ce
 ]
 
 == Saturation en courant
+
+Lorsque les résistances placées en sortie de l'ALI sont trop faibles, le courant de sortie peut saturer l'amplificateur.
 
 #manipulation[
     Placer une résistance de #zi.ohm[10] entre la sortie de l'ALI et la masse. Observer l'effet de la saturation du courant sur la tension de sortie. Mesurer le courant de saturation.

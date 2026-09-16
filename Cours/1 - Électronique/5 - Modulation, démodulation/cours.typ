@@ -38,7 +38,7 @@
                 y-min: -1.3,
                 y-max: 1.3,
                 x-label: [],
-                y-label: [signal modulant],
+                y-label: [signal à transmettre],
                 {
                     plot.add(modulante, domain: (0, tmax), samples: 800, style: (stroke: blue))
                 },
@@ -77,12 +77,12 @@ L'objectif de ce chapitre est de comprendre comment un signal peut être transmi
 #exemple[Un câble coaxial, une ligne bifilaire, des ondes électromagnétiques, … sont des canaux.]
 
 La modulation permet de
-- transporter plusieurs signaux sur un canal
-- adapter la fréquence du signal pour qu'elle soit compatible avec le canal
+- transporter plusieurs signaux sur un canal,
+- adapter la fréquence du signal pour qu'elle soit compatible avec le canal.
 
 La modulation consiste à combiner
-- le signal qu'on souhaite transmettre
-- un signal sinusoïdal dont la fréquence est adaptée au canal, appelé "porteuse"
+- le signal qu'on souhaite transmettre,
+- un signal sinusoïdal dont la fréquence est adaptée au canal, appelé "porteuse".
 
 #question-de-début-de-cours(
     "La modulation NE permet PAS de",
@@ -195,7 +195,7 @@ $
     $
         s_"AM" (t) = (1+k s(t)) s_p (t)
     $
-    Le facteur $(1+k s(t))$ est appelé l'*enveloppe* (sans unité). Le signal $s(t)$ qui la fait varier est la *modulante*.
+    Le facteur $(1+k s(t))$ est appelé *modulante* (sans unité). Elle dépend du *signal à transmettre* $s(t)$.
 ]
 
 #flashcard(
@@ -311,7 +311,7 @@ La modulation en amplitude est la multiplication de deux signaux. La multiplicat
         $f_p >> f_s$,
     ),
 )[
-    #schéma(hauteur: 4cm)
+    #carreaux(4cm)
 ]
 
 #encadré(
@@ -323,7 +323,7 @@ La modulation en amplitude est la multiplication de deux signaux. La multiplicat
         $f_p >> f_"max"$,
     ),
 )[
-    #schéma(hauteur: 4cm)
+    #carreaux(4cm)
 ]
 
 #flashcard(
@@ -357,7 +357,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
         "le signal à transmettre est sinusoïdal",
     ),
 )[
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 #question-de-colle(
@@ -375,7 +375,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
         "le signal à transmettre est sinusoïdal",
     ),
 )[
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 #application[
@@ -383,7 +383,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
 ]
 
 #question-de-début-de-cours(
-    "Lors de la démodulation synchrone, un filtrage passe-bas est nécessaire. Quelle condition doit remplir la fréquence de coupure $f_c$ ?",
+    "Lors de la démodulation synchrone, un filtrage passe-bas est nécessaire. Quelle condition doit remplir la fréquence de coupure $f_c$ ? $f_\"min\"$ et $f_\"max\"$ sont les fréquences minimale et maximale du signal $s$ à transmettre.",
     (
         "$f_\"max\" < f_c << 2 f_p$",
         "$f_\"max\" << f_c < 2 f_p$",
@@ -403,7 +403,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
         "le signal à transmettre est sinusoïdal",
     ),
 )[
-    #schéma(hauteur: 3cm)
+    #carreaux(3cm)
 ]
 
 #application[
@@ -412,7 +412,7 @@ La démodulation ne peut pas être une opération linéaire : un filtre modifie 
 
 === Schéma récapitulatif
 
-#schéma(titre: "Démodulation synchrone", hauteur: 6cm)
+#schéma(titre: "Démodulation synchrone", hauteur: 15cm)
 
 #question-de-colle(
     [Pour un signal de départ sinusoïdal de fréquence $f$, représenter sur un schéma les différentes étapes de la démodulation synchrone en précisant les exigences sur les fréquences de coupure et en représentant leurs effets sur le spectre du signal.],

@@ -33,7 +33,7 @@ L'antenne radioélectrique de la zone 51 a reçu un mystérieux signal radio. Vo
     plt.show()
     ```
 
-    Une lecture graphique au tout début du signal permet de trouver la fréquence de la porteuse : #quan[2 kHz]. On peut alors reconstruire la porteuse puis effectuer la première étape de la démodulation par détection d'enveloppe : la multiplication par la porteuse.
+    Une lecture graphique au tout début du signal permet de trouver la fréquence de la porteuse : #quan[2 kHz]. On peut alors reconstruire la porteuse puis effectuer la première étape de la démodulation synchrone : la multiplication par la porteuse.
     ```python
     fp = 2000 # fréquence de la porteuse en Hz
     sp = np.cos(2 * np.pi * fp *t)
