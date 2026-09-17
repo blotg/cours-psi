@@ -5,7 +5,7 @@
     difficulté: 1,
 )
 
-On étudie le circuit suivant, où $R_1=#quan[100 kΩ]$, $R_2=#quan[10 kΩ]$, $R_3=#quan[10 kΩ]$ et $C=#quan[10 nF]$.
+On étudie le circuit suivant, où $R_1=#quan[100 kΩ]$, $R_2=#quan[10 kΩ]$, $R_3=#quan[10 kΩ]$ et $C=#quan[10 nF]$. L'ALI est supposé idéal.
 
 #figure(
     circuit({

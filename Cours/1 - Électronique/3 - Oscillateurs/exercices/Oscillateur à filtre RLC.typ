@@ -6,6 +6,8 @@
 
 On considère le montage suivant, constitué d'un montage amplificateur non-inverseur et d'un filtre RLC-série.
 
+L'ALI est supposé idéal
+
 #figure(
     circuit({
         import zap: *

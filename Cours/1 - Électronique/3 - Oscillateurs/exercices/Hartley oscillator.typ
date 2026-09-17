@@ -88,7 +88,7 @@ First, we will study the electronic filter below, named Hartley filter.
     $
 ]
 
-The complete Hartley oscillator's electrical schema is shown below.
+The complete Hartley oscillator's electrical schema is shown below. The operational amplifier is assumed to be ideal.
 
 #figure(
     circuit({
