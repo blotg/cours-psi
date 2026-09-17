@@ -96,24 +96,6 @@ On considère le montage suivant, constitué d'un montage amplificateur non-inve
 
 #question(
     coups-de-pouce: (
-        "Qu'est-ce qui limite l'amplitude des oscillations ?",
-        "Quelle est l'amplitude maximale de la tension de sortie d'un ALI ?",
-        "Utiliser une des fonctions de transfert pour relier les amplitudes de $s$ et de $e$.",
-    ),
-)[
-    Quelle est l'amplitude de $e(t)$ ? Quelle est celle de $s(t)$ ?
-][
-    La tension $e$ est directement la tension de sortie de l'ALI : c'est donc la saturation de l'ALI qui limite son amplitude, qui vaut $V_"sat"$.
-
-    À la pulsation $omega_0$, le dénominateur de $H$ vaut, d'après la question précédente, $1-L C omega_0^2+(R+r) C j omega_0 = j(R+r) C omega_0$. On a donc
-    $
-        H(j omega_0) = (R C j omega_0)/(j (R+r) C omega_0) = R/(R+r)
-    $
-    L'amplitude de $s$ vaut donc $R/(R+r) V_"sat"$
-]
-
-#question(
-    coups-de-pouce: (
         "Est-ce le filtre passe-bande ou l'ALI qui a tendance à \"purifier\" le spectre ?",
     ),
 )[
@@ -146,4 +128,18 @@ On considère le montage suivant, constitué d'un montage amplificateur non-inve
         (R+r)-R(1+R_2/R_1) < 0 arrow.double R_2/R_1 > r/R
     $
     On retrouve, sous forme d'inégalité stricte, la condition de la question 3.
+]
+
+#question(
+    coups-de-pouce: (
+        "Qu'est-ce qui limite l'amplitude des oscillations ?",
+        "Quelle est l'amplitude maximale de la tension de sortie d'un ALI ?",
+        "Utiliser une des fonctions de transfert pour relier les amplitudes de $s$ et de $e$.",
+    ),
+)[
+    Lorsque la condition de démarrage des oscillations est tout juste vérifiée, quelle est l'amplitude de $e(t)$ ? Quelle est celle de $s(t)$ ?
+][
+    La tension $e$ est directement la tension de sortie de l'ALI : c'est donc la saturation de l'ALI qui limite son amplitude, qui vaut $V_"sat"$.
+
+    $e/s = 1+R_2/R_1$ donc $s = e/(1+R_2/R_1) = e R_1/(R_1+R_2)$ L'amplitude de $s$ vaut donc $V_"sat" R_1/(R_1+R_2)$.
 ]
