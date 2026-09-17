@@ -422,7 +422,7 @@ Cette expression est valable tant que la période est très grande devant la dur
 #schéma(titre: "Influence de la vitesse de balayage sur le signal créneau", hauteur: 3cm)
 
 #application[
-    Déterminer la durée de commutation de l'ALI.
+    Déterminer la durée de commutation de l'ALI TL081.
 ]
 
 #question-de-colle(

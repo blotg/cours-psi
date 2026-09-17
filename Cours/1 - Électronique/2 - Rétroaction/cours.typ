@@ -44,7 +44,7 @@ L'entrée différentielle est la différence de potentiel entre l'entrée non-in
         "Caméra pour projection",
     ),
 )[
-    On place un signal sinusoïdal venant d'un GBF en entrée d'un pont diviseur de tensions et dont la sortie va à un ALI alimenté en #quan[15 V] et #quan[-15 V] et on observe la tension de sortie sur un oscilloscope.
+    On place un signal sinusoïdal venant d'un GBF en entrée d'un ALI alimenté en #quan[15 V] et #quan[-15 V] et on observe la tension de sortie sur un oscilloscope.
     #carreaux(4cm)
 ]
 
@@ -458,5 +458,10 @@ En physique, le mot "hystérésis" renvoie à la notion de mémoire : l'état du
 #figure(
     image("images/datasheet.pdf", page: 3, width: 100%),
     caption: "Notice du TL081 - caractéristiques électriques (page 3)",
+)
+
+#figure(
+    box(image("images/datasheet.pdf", page: 2, width: 100%), inset:(top:-15cm), height: 7cm, clip: true),
+    caption: "Notice du TL081 - caractéristiques électriques (page 2)",
 )
 
