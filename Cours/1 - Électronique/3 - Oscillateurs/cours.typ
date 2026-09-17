@@ -255,6 +255,12 @@ La saturation de l'ALI est un phénomène non linéaire, qui modifie donc les sp
 
 La tension $v_2$ est "plus sinusoïdale" que $v_1$ car c'est la sortie du filtre passe-bande, qui diminue l'amplitude relative des harmoniques.
 
+#manipulation(
+    titre: "Richesse spectrale relative",
+)[
+    Le spectre des deux tensions est affiché sur l'oscilloscope. On modifie la valeur de $R_2$.
+]
+
 #question-de-début-de-cours(
     "La tension la plus sinusoïdale est celle",
     ("qui sort du filtre passe-bande.", "qui sort de l'amplificateur."),
