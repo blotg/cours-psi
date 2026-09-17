@@ -38,3 +38,6 @@ site/
 # Ce qui a servi à fabriquer chaque page du site, pour ne recompiler que ce qui
 # a bougé (cf. outils/site.py). Purement local : l'effacer refait tout.
 .site-manifeste.json
+
+# Liste de taches personnelle, purement locale.
+TODO.md
