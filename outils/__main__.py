@@ -131,7 +131,9 @@ def _tp(args) -> int:
     from .tp import TP
 
     sujet, dossier = _sujet_et_dossier(args.sujet)
-    if not sujet.is_file():
+    # Les binômes ne tiennent qu'au CSV et au numéro : les afficher n'exige pas
+    # que le sujet soit écrit, seulement que son dossier porte le bon numéro.
+    if not sujet.is_file() and not args.binômes:
         print(f"  tp  {sujet} : sujet introuvable", file=sys.stderr)
         return 2
     numéro = args.numéro if args.numéro is not None else _numéro_du_dossier(dossier)
@@ -145,6 +147,8 @@ def _tp(args) -> int:
     tp = TP(sujet=sujet, élèves=args.élèves, numéro=numéro)
     for binôme in tp.binômes():
         print(f"Copie {binôme.numéro_copie:02d} (groupe {binôme.groupe}) : {binôme}")
+    if args.binômes:
+        return 0
     print(f"\nSujet          : {tp.simple()}")
     print(f"Prêt à imprimer: {tp.génère()}")
     return 0
@@ -245,6 +249,12 @@ def main(argv: list[str] | None = None) -> int:
         "--numéro",
         type=int,
         help="numéro du TP, graine du tirage (défaut : le nombre qui ouvre le nom du dossier du sujet)",
+    )
+    p.add_argument(
+        "-b",
+        "--binômes",
+        action="store_true",
+        help="afficher les binômes tirés au sort, sans compiler de document",
     )
     p.set_defaults(fonction=_tp)
 

@@ -37,6 +37,7 @@ python3 -m outils colles Colles 2026-09-29 "Cours/8 - Électrochimie"
 python3 -m outils questions-de-colle                # toutes les questions de colle de l'année
 python3 -m outils questions-de-colle -r             # celles des révisions de PCSI
 python3 -m outils tp "TP/1 - ..." péda/élèves.csv   # ou .../TP.typ ; --numéro : défaut, le 1 du dossier
+python3 -m outils tp -b "TP/1 - ..." péda/élèves.csv  # les binômes seuls, sans rien compiler
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
 ```
@@ -128,6 +129,15 @@ commande qu'on lance quand on en a besoin.
 face, à imprimer en recto-verso (retournement sur le bord court) puis à plier.
 `--quadrillage` donne l'autre mise en page : le poly A4 tel quel, avec une page
 quadrillée en regard de chaque page de cours (pour écrire face au texte).
+
+`tp` forme les binômes — tirage aléatoire au sein de chaque groupe, mais
+reproductible : la graine est le numéro du TP —, puis compile un sujet
+personnalisé par élève et les impose tous en un seul PDF à imprimer. Les
+binômes sont affichés au passage ; `-b` (`--binômes`) s'arrête là, sans rien
+compiler, pour les consulter (ou les projeter en début de séance) sans attendre
+une compilation par élève. Le sujet n'a alors pas besoin d'exister : seuls le
+CSV et le numéro comptent, ce dernier venant toujours du nom du dossier à
+défaut de `--numéro`.
 
 ## Modules
 
