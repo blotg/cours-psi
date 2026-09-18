@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Détermination d'une loi de vitesse",
     numérique: true,
+    capytale: "cfa6-11678471",
 )
 
 La réaction de décomposition du dioxyde d'azote en phase gazeuse a pour équation

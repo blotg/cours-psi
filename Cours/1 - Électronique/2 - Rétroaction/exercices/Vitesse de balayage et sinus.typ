@@ -4,6 +4,7 @@
     titre: "Effet de la vitesse de balayage sur un signal sinusoïdal",
     numérique: true,
     difficulté: 1,
+    capytale: "506a-11678445",
 )
 
 On s'intéresse ici à un montage suiveur dont l'entrée est sinusoïdale. Si la fréquence de la sinusoïde est trop élevée, la vitesse de balayage de l'ALI va déformer le signal. On cherche à simuler numériquement la forme du signal de sortie obtenu.

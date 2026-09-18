@@ -254,6 +254,10 @@
     numérique: false,
     ouvert: false,
     explique: false,
+    // Code de partage de l'activité Capytale qui porte le notebook de
+    // l'exercice (« 2253-2586522 »). C'est `outils capytale` qui l'écrit ici,
+    // à la création de l'activité : on n'a pas à le saisir.
+    capytale: none,
 ) = [
     #import "helper-functions.typ": markup
     #numQuestion.update(0)
@@ -270,6 +274,12 @@
         #markup(titre)
         #text(fill: _gris)[#for _ in range(difficulté) { sym.star.filled }]
     ]) <titre-exercice>
+    // L'étiquette sert au notebook, qui masque ce lien : il y pointerait sur
+    // lui-même. Le bloc le sépare du corps, qui peut commencer sans saut de
+    // paragraphe — `#exercice(…)[Pour rappel…]`.
+    #if capytale != none [
+        #block(text(fill: _gris)[_Notebook Capytale de cet exercice : #link("https://capytale2.ac-paris.fr/web/c/" + capytale, capytale)_]) <lien-capytale>
+    ]
     #if ouvert [
         #text(
             fill: _gris,

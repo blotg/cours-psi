@@ -4,6 +4,7 @@
     titre: "Couplage thermocinétique",
     numérique: true,
     difficulté: 1,
+    capytale: "0085-11678472",
 )
 
 Le peroxyde de ditertiobutyle (DTBP) est utilisé comme amorceur radicalaire lors des réactions de polymérisation. Il se décompose selon la réaction chimique

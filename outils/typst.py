@@ -115,6 +115,12 @@ def compile_source(
     _exécute(["typst", "compile", *options, "-", str(sortie)], entrée=source.encode("utf-8"))
 
 
+def html_source(source: str, racine: Path | str) -> str:
+    """Le HTML d'un document passé sous forme de chaîne, sans fichier de sortie."""
+    commande = ["typst", "compile", "--root", str(racine), *_HTML, "-", "-"]
+    return _exécute(commande, entrée=source.encode("utf-8")).decode("utf-8")
+
+
 def lit_dépendances(fichier: Path | str) -> list[str]:
     """Les chemins listés par `--make-deps`, au format Makefile.
 

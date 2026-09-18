@@ -39,5 +39,13 @@ site/
 # a bougé (cf. outils/site.py). Purement local : l'effacer refait tout.
 .site-manifeste.json
 
+# Empreinte du dernier notebook envoyé sur Capytale pour chaque exercice (cf.
+# outils/capytale.py). L'effacer fait tout renvoyer, et sauvegarder d'abord le
+# contenu des activités.
+.capytale-manifeste.json
+
+# Contenu des activités Capytale avant qu'un premier envoi ne les écrase.
+.capytale-sauvegardes/
+
 # Liste de taches personnelle, purement locale.
 TODO.md

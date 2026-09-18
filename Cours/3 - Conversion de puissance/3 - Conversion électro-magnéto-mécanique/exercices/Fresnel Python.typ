@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Calculs numériques sur un diagramme de Fresnel",
     numérique: true,
+    capytale: "531c-11678456",
 )
 
 En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.

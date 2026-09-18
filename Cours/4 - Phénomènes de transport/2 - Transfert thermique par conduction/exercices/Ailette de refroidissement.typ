@@ -4,6 +4,7 @@
     titre: "Ailette de refroidissement",
     difficulté: 1,
     numérique: true,
+    capytale: "ac85-11678459",
 )
 
 La performance des puces électroniques utilisées dans les ordinateurs décroit avec leur température. Afin de dissiper une puissance élevée en limitant la température du composant, on installe un dissipateur de chaleur. Ce dissipateur est muni d'ailettes de refroidissement. On étudie une de ces ailettes.

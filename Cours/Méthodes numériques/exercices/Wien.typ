@@ -4,7 +4,8 @@
 #exercice(
   titre: "Oscillateur de Wien",
   numérique: true,
-  difficulté: 2
+  difficulté: 2,
+  capytale: "2253-2586522",
 )[
   Pour rappel, un oscillateur de Wien est constitué d'un montage amplificateur non-inverseur et d'un filtre de Wien.
 
@@ -31,8 +32,6 @@ On pose $w=dv(u,t)$. On cherche à mettre le problème sous la forme d'un probl�
   $ dv(v,t) = A_0/tau u - 1/((1+R_2/R_1)tau/A_0) v $
   $ dv(w,t) = (-1/(R^2C^2)+1/(R C) A_0/tau) u - 1/(R C) 1/((1+R_2/R_1) tau/A_0) v - 3/(R C) w $
 ]
-
-Les questions suivantes se font en ligne, sur Capytale : #link("https://capytale2.ac-paris.fr/web/c/2253-2586522", "2253-2586522")
 
 Avec Python, on représente le vecteur $va(Y)$ par un array numpy à 3 éléments.
 

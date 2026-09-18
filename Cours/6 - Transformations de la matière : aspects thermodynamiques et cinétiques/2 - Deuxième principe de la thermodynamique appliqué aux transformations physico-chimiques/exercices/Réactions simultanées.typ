@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Réactions simultanées",
     numérique: true,
+    capytale: "6434-11678463",
 )
 
 On envisage la conversion du méthane par la vapeur d'eau à $T = #quan[900 K]$, sous une pression totale $P_"tot"$, à partir d'un mélange initial contenant #quan[4.0 mol] d'eau et #quan[1.0 mol] de méthane. On doit envisager les deux équilibres chimiques suivants, dans lesquels les constituants sont des gaz parfaits :

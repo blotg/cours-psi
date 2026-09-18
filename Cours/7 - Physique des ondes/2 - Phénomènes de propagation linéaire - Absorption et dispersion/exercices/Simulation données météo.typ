@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Simulation de la température dans le sol",
     numérique: true,
+    capytale: "b601-11678469",
 )
 
 Dans le sol, la température vérifie une équation de diffusion de coefficient $D approx #quan[1e-6 m^2/s]$. Les données à la surface sont acquises régulièrement par des stations météorologiques. Les données pour Quimper sont disponibles à l'adresse suivante : https://nuage03.apps.education.fr/index.php/s/LgXjiwkxJxcrZmz. Le temps est donné en secondes depuis le 1er janvier 1970 à 00:00:00 UTC. La température est donnée en degrés Celsius. Les mesures sont effectuées toutes les heures.

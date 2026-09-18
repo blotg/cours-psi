@@ -3,12 +3,13 @@
 #show: exercice.with(
     titre: "Circuit électrique d'ordre 3",
     numérique: true,
+    capytale: "afd4-11678457",
 )
 
 On s'intéresse au circuit électrique d'ordre 3 représenté ci-dessous.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("E", (0, 0), (0, 2), u: $E$)
         capacitor("C1", (0, 2), (2, 2), label: $C$)

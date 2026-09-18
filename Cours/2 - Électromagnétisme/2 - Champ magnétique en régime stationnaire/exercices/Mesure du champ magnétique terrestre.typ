@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-#show: exercice.with(titre: "Mesure du champ magnétique terrestre", difficulté: 1, numérique: true)
+#show: exercice.with(titre: "Mesure du champ magnétique terrestre", difficulté: 1, numérique: true, capytale: "f598-11678453")
 
 Pour mesurer la composante horizontale du champ magnétique terrestre, on utilise une boussole. On place un solénoïde autour de la boussole, son axe étant horizontal et orthogonal à l'aiguille au repos. Lorsqu'un courant circule dans le solénoïde, l'aiguille tourne d'un angle $alpha = #quan[40 °]$.
 

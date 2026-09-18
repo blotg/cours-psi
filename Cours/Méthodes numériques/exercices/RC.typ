@@ -3,12 +3,13 @@
 #show: exercice.with(
     titre: "Circuit RC",
     numérique: true,
+    capytale: "b4cf-11678437",
 )
 
 On cherche à modéliser la charge d'un condensateur dans un circuit RC série soumis à une tension continue $E$.
 
 #figure(
-    zap.circuit({
+    circuit({
         import zap: *
         vsource("E", (0, 0), (0, 2), u: $E$)
         switch("K", (0, 2), (2, 2), label: $K$)

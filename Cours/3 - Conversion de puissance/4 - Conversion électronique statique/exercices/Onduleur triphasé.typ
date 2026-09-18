@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Onduleur triphasé",
     numérique: true,
+    capytale: "45a1-11678465",
 )
 
 Les onduleurs triphasés sont utilisés pour alimenter des moteurs électriques à partir d'une source de tension continue. Ils peuvent par exemple être utilisés dans les voitures électriques où une batterie fournit l'énergie alimentant un moteur triphasé.

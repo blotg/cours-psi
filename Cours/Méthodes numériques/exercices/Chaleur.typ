@@ -2,13 +2,12 @@
 
 #exercice(
   titre: "Propagation de la chaleur",
-  numérique: true
+  numérique: true,
+  capytale: "1285-5360170",
 )[
 On cherche à modéliser l'évolution de la température dans un barreau cylindrique en aluminium ($D=#quan[99e-6 m^2/s]$) de longueur $l=#quan[10 cm]$. L'évolution de la température est donnée par l'équation de diffusion $pdv(T,t)=D pdv(T,x,2)$.
 
 On discrétise spatialement la barre en prenant $N_x=20$ points.
-
-Le code Python pourra être saisi directement sur Capytale : #link("https://capytale2.ac-paris.fr/web/c/1285-5360170", "1285-5360170")
 
 #question(coups-de-pouce: (
   "Quelle relation relie le pas spatial $Delta x$, la longueur de la barre $l$ et le nombre de points $N_x$ ?",

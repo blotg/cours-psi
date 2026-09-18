@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Traitement antireflet",
     numérique: true,
+    capytale: "9df6-11678468",
 )
 
 On réalise un traitement antireflet sur un verre d'indice de réfraction $n = 1.5$ en déposant une couche d'indice optique $n_c in ]1, n[$ et d'épaisseur $e$ de l'ordre de la centaine de #unit("nm"). Le but de ce traitement est d'annuler la réflexion dans l'air pour la longueur d'onde $lambda = #quan[550 nm]$ (longueur d'onde pour laquelle l'œil est le plus sensible en vision diurne).

@@ -4,6 +4,7 @@
     titre: "Stabilité d'un système non linéaire, bifurcation fourche",
     numérique: true,
     difficulté: 1,
+    capytale: "fe00-11678444",
 )
 
 On étudie un système régi par l'équation différentielle

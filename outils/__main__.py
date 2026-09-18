@@ -56,6 +56,12 @@ def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
     return code
 
 
+def _notebooks(chapitre) -> list:
+    from .notebook import notebooks
+
+    return notebooks(chapitre)
+
+
 #: Les documents qu'un chapitre tire de son cours, hors compilation directe.
 ÉTAPES = (
     ("DM", lambda c: c.DM()),
@@ -63,6 +69,7 @@ def _pour_chaque(dossiers, étapes, processus: int | None = None) -> int:
     ("manipulations", lambda c: [c.liste_des_manipulations()]),
     ("diapo", lambda c: [p for p in (c.diapo(),) if p]),
     ("imprimable", lambda c: [c.poly_imprimable()]),
+    ("notebooks", _notebooks),
 )
 
 
@@ -186,6 +193,60 @@ def _site(args) -> int:
     return 0
 
 
+def _cibles_capytale(chemins: list[Path]) -> list[tuple[Path, list[Path] | None]]:
+    """(chapitre, exercices) pour chaque chemin donné.
+
+    Un dossier est un chapitre, dont on prend tous les exercices numériques
+    du TD (None) ; un fichier est un exercice, pris tel quel, même hors TD :
+    on l'a nommé.
+    """
+    cibles: dict[Path, list[Path] | None] = {}
+    for chemin in chemins:
+        if chemin.is_dir():
+            cibles[chemin] = None
+        else:
+            # <chapitre>/exercices/<exercice>.typ
+            chapitre = chemin.parent.parent
+            if cibles.get(chapitre, []) is not None:
+                cibles.setdefault(chapitre, []).append(chemin)
+    return list(cibles.items())
+
+
+def _capytale(args) -> int:
+    import traceback
+    from concurrent.futures import ThreadPoolExecutor
+
+    from . import notebook
+    from .capytale import Capytale, ErreurCapytale, envoie_chapitre
+    from .chapitre import Chapitre
+
+    capytale = Capytale(simulation=args.simulation, indexer=args.indexer)
+
+    def un(cible):
+        dossier, exercices = cible
+        chapitre = Chapitre(dossier)
+        try:
+            if not args.depuis_build:
+                for exercice in exercices if exercices is not None else notebook.exercices(chapitre):
+                    notebook.écrit(chapitre, exercice)
+            return [f"  capytale      {ligne}" for ligne in envoie_chapitre(capytale, chapitre, exercices)], []
+        except (ErreurCapytale, notebook.ErreurNotebook) as e:
+            return [], [f"  capytale      {dossier} : {e}"]
+        except Exception:  # noqa: BLE001 - imprévue : toute la trace, pour savoir d'où
+            return [], [f"  capytale      {dossier} :\n{traceback.format_exc()}"]
+
+    with ThreadPoolExecutor(max_workers=args.processus or 4) as pool:
+        résultats = list(pool.map(un, _cibles_capytale(args.chemins)))
+    code = 0
+    for lignes, erreurs in résultats:
+        for ligne in lignes:
+            print(ligne)
+        for erreur in erreurs:
+            print(erreur, file=sys.stderr)
+            code = 1
+    return code
+
+
 def _qcm(args) -> int:
     from .qcm_cam import depuis_yaml
 
@@ -227,6 +288,39 @@ def main(argv: list[str] | None = None) -> int:
     p = sous.add_parser("diapo", help="diaporama des questions de début de cours")
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_étapes("diapo"))
+
+    p = sous.add_parser("notebooks", help="notebooks Jupyter des exercices numériques du TD")
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.set_defaults(fonction=_étapes("notebooks"))
+
+    p = sous.add_parser(
+        "capytale",
+        help="notebooks des exercices numériques, créés ou mis à jour sur Capytale",
+    )
+    p.add_argument(
+        "chemins",
+        nargs="+",
+        type=Path,
+        help="chapitres (tous les exercices numériques de leur TD) ou fichiers d'exercices",
+    )
+    p.add_argument(
+        "-n",
+        "--simulation",
+        action="store_true",
+        help="dire ce qui serait envoyé, sans rien envoyer ni écrire",
+    )
+    p.add_argument(
+        "--indexer",
+        action="store_true",
+        help="ajouter à l'index de git un exercice dont on vient d'écrire le code (hook pre-commit)",
+    )
+    p.add_argument(
+        "--depuis-build",
+        action="store_true",
+        help="envoyer les notebooks déjà dans build/, sans les refaire",
+    )
+    _option_processus(p)
+    p.set_defaults(fonction=_capytale)
 
     p = sous.add_parser("imprimable", help="poly en fascicule A3, prêt à imprimer")
     p.add_argument("chapitres", nargs="+", type=Path)

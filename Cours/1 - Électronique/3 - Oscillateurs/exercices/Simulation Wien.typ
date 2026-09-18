@@ -4,6 +4,7 @@
     titre: "Simulation numérique d'un oscillateur de Wien",
     numérique: true,
     difficulté: 1,
+    capytale: "42b7-11678447",
 )
 
 Dans cet exercice, on cherche à simuler numériquement l'évolution des tensions dans l'oscillateur de Wien à l'aide de la méthode d'Euler.

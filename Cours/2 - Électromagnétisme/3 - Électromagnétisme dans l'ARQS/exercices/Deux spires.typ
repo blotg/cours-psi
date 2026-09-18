@@ -3,6 +3,7 @@
 #exercice(
   titre: "Inductance mutuelle entre deux spires",
   numérique: true,
+  capytale: "6e41-7604729",
 )[
 
 #figure[
@@ -79,7 +80,7 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
 La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. Son appel est de la forme ```python dblquad(func, a, b, c, d)```, où ```python func(x,y)``` est la fonction à intégrer pour `x` allant de `a` à `b` et pour `y` allant de `c` à  `d`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.
 
 #question()[
-  Compléter le programme Python sur Capytale (code #link("https://capytale2.ac-paris.fr/web/c/6e41-7604729")[6e41-7604729]) pour calculer numériquement l'inductance mutuelle.
+  Compléter le programme Python sur Capytale pour calculer numériquement l'inductance mutuelle.
 ][
   ```python
   from scipy.integrate import dblquad

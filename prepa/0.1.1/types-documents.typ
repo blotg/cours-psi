@@ -40,6 +40,17 @@
     sys.inputs.at("inclus", default: "") != "" or state("racine").get() == "full-poly"
 )
 
+// L'écriture des nombres du cours. Hors d'`init-document` parce qu'un
+// document qui ne passe pas par lui en a besoin aussi : une page d'exercice du
+// site ou un notebook n'incluent que l'exercice, sans TD autour. Sans ces
+// réglages, ils sortaient « 99 × 10⁻⁶ » et « 0.1 s ».
+#let réglages-nombres() = {
+    set-round(mode: "figures")
+    // Le point de multiplication d'unify plutôt que la croix, défaut de zero :
+    // c'est la notation du cours, et tous les documents déjà tirés l'ont.
+    set-num(product: sym.dot.op, decimal-separator: ",")
+}
+
 // `logotype` : bandeau d'en-tête sur la première page. À couper pour les
 // documents qui ne sont pas des feuilles de cours — la planche de
 // flashcards, les pages quadrillées — où il tomberait au travers.
@@ -78,10 +89,7 @@
     )
     show link: underline
     import "lib.typ": *
-    set-round(mode: "figures")
-    // Le point de multiplication d'unify plutôt que la croix, défaut de zero :
-    // c'est la notation du cours, et tous les documents déjà tirés l'ont.
-    set-num(product: sym.dot.op, decimal-separator: ",")
+    réglages-nombres()
     show: styles-blocs
     if logotype {
         let largeur = 30mm

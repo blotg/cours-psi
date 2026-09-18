@@ -4,6 +4,7 @@
     titre: "Bruit thermique",
     numérique: true,
     difficulté: 2,
+    capytale: "3e74-11678458",
 )
 
 Le bruit thermique, ou bruit de Johnson-Nyquist, est un phénomène physique qui se manifeste par des fluctuations aléatoires des grandeurs électriques dans un conducteur en raison de l'agitation des porteurs de charge (électrons).

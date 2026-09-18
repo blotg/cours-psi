@@ -4,6 +4,7 @@
     titre: "Tir cadré ?",
     difficulté: 1,
     numérique: true,
+    capytale: "f85b-11678455",
 )
 
 On étudie un tir au football. La vitesse initiale du ballon est de #qty("20", "m/s") selon l'axe $x$ (horizontal) et de #qty("12", "m/s") selon l'axe $z$ (vertical). Le ballon est sur le sol juste avant le tir.

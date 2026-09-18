@@ -4,6 +4,7 @@
     titre: "Onduleur alimentant une charge inductive",
     numérique: true,
     difficulté: 1,
+    capytale: "7d99-11678467",
 )
 
 On s'intéresse à un onduleur alimentant une charge inductive avec $R=#quan[10 Ω]$, $L=#quan[100 mH]$ et $E = #quan[100 V]$.

@@ -17,6 +17,9 @@ python3 -m venv outils/.venv
 outils/.venv/bin/pip install -r outils/requirements.txt
 ```
 
+Les notebooks demandent en plus `pandoc` dans le PATH (paquet `pandoc-cli`
+sous Arch) : sans lui, l'étape `notebooks` échoue et le reste passe.
+
 Le hook `pre-commit` utilise ce venv s'il existe, sinon le `python3` du système.
 Sans les dépendances, il se contente d'un avertissement : les PDF sont quand
 même produits, seules les flashcards et la copie des DM manquent.
@@ -40,12 +43,15 @@ python3 -m outils tp "TP/1 - ..." péda/élèves.csv   # ou .../TP.typ ; --numé
 python3 -m outils tp -b "TP/1 - ..." péda/élèves.csv  # les binômes seuls, sans rien compiler
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
+python3 -m outils notebooks "Cours/8 - Électrochimie"   # notebook - <exercice>.ipynb, un par exercice numérique
+python3 -m outils capytale -n "Cours/8 - Électrochimie" # ce qui partirait sur Capytale, sans rien envoyer
+python3 -m outils capytale "Cours/8 - Électrochimie"    # crée ou met à jour les activités Capytale
 ```
 
 Toutes ces commandes acceptent plusieurs chapitres à la suite.
 
 `build` est ce qu'appelle le hook : il enchaine `dm`, `flashcards`,
-`manipulations`, `diapo` et `imprimable` sur un même objet `Chapitre`, donc une seule
+`manipulations`, `diapo`, `imprimable` et `notebooks` sur un même objet `Chapitre`, donc une seule
 requête `typst query` par chapitre — c'est de loin le poste le plus cher.
 
 Un chapitre de **révision** — sous `révisions/`, rangé comme `Cours/` en thèmes
@@ -139,6 +145,56 @@ une compilation par élève. Le sujet n'a alors pas besoin d'exister : seuls le
 CSV et le numéro comptent, ce dernier venant toujours du nom du dossier à
 défaut de `--numéro`.
 
+## Notebooks et Capytale
+
+Chaque exercice **numérique** (`numérique: true`) que le TD inclut donne un
+notebook Jupyter, `build/notebook - <fichier de l'exercice>.ipynb` :
+
+- une cellule de texte par question, et d'autres pour le texte qui les
+  entoure (introduction, transitions) ;
+- chaque bloc de code Python de l'énoncé dans sa propre cellule de code ;
+- ni corrigé, ni coup de pouce.
+
+Comme les pages du site, le notebook n'est pas une réécriture : c'est
+l'exercice compilé en HTML, à travers `gabarits/notebook.typ`, qui retire ce
+que l'élève ne doit pas voir et marque le début et la fin des questions.
+pandoc lit ce HTML, traduit le MathML de typst en LaTeX pour le MathJax 2 de
+Capytale, et écrit le notebook ; `notebook.py` découpe les cellules entre les
+deux et retouche ce que pandoc rend mal (virgule décimale, `\text{}` vides,
+soulignés, tableaux sans en-tête, schémas en SVG passés en image `data:`).
+
+`capytale` envoie ces notebooks sur Capytale. Une activité est créée pour un
+exercice qui n'en a pas, et son code de partage écrit dans l'exercice :
+`capytale: "2253-2586522"`, que `exercice()` affiche sous le titre. Un exercice
+qui a déjà un code voit son activité **écrasée** — c'est par ce code qu'on la
+retrouve. Seul un notebook qui a changé repart : `.capytale-manifeste.json`
+note l'empreinte du dernier envoi. Le premier envoi vers une activité que ce
+manifeste ne connaît pas encore (faite à la main, ou manifeste effacé)
+sauvegarde d'abord son contenu dans `.capytale-sauvegardes/`.
+
+Trois limites, qui tiennent à Capytale :
+
+- **Pas d'API publique.** On parle à celle qu'utilise l'interface de Capytale,
+  dont le client est publié (`forge.apps.education.fr/capytale/activity-js`).
+  Elle peut changer sans prévenir.
+- **Pas de jeton d'API.** On reprend la session ouverte dans le navigateur :
+  l'en-tête Cookie de `capytale2.ac-paris.fr` dans la variable d'environnement
+  `CAPYTALE_COOKIE`, ou à défaut lu dans le navigateur par `browser_cookie3`
+  (dans `requirements.txt`). Session expirée : se
+  reconnecter à Capytale dans le navigateur.
+- **Copies figées.** Une copie qu'un élève a déjà enregistrée ne suit plus le
+  modèle : une mise à jour n'atteint que ceux qui n'ont pas encore commencé.
+
+`-n` (`--simulation`) dit ce qui serait créé ou mis à jour, sans rien envoyer
+ni écrire. On peut aussi nommer des fichiers d'exercices plutôt que des
+chapitres, même hors TD.
+
+Le hook `pre-commit` envoie les notebooks des chapitres du commit si on le lui
+demande (`git config hooks.capytale true`) ; un code nouvellement écrit dans
+un exercice part alors dans le commit en cours, sauf si l'exercice a des
+modifications non indexées — le hook le signale et laisse le `git add` à
+faire. Un échec d'envoi n'annule pas le commit.
+
 ## Modules
 
 | Module | Rôle |
@@ -152,6 +208,8 @@ défaut de `--numéro`.
 | `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
 | `qcm_cam.py` | questions au format QCMCam |
 | `site.py` | site statique du cours, en HTML |
+| `notebook.py` | notebook Jupyter d'un exercice numérique |
+| `capytale.py` | dépôt des notebooks sur Capytale, lien dans l'exercice |
 
 `site` produit le site statique dans `site/`, ignoré par git : une page par
 exercice et par cours, plus un sommaire par chapitre. L'accueil aiguille vers

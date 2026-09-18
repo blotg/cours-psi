@@ -4,6 +4,7 @@
     titre: "Procédé Haber-Bosch",
     numérique: true,
     difficulté: 2,
+    capytale: "44de-11678473",
 )
 
 On s'intéresse à la synthèse de l'ammoniac #ce("NH3") par le procédé Haber-Bosch, qui combine l'azote #ce("N2") et l'hydrogène #ce("H2") selon la réaction chimique

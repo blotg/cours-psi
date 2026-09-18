@@ -3,7 +3,8 @@
 #show: exercice.with(
     titre: "Chute d'une bille dans un fluide peu visqueux",
     numérique: true,
-    difficulté: 1
+    difficulté: 1,
+    capytale: "78a6-11678462",
 )
 
 On lâche sans vitesse initiale une bille sphérique de rayon $R$, de masse $m$, dans un fluide peu visqueux, de masse volumique $mu$ très faible devant celle de la bille, et de viscosité cinématique $nu$.

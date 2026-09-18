@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-#show: exercice.with(titre: "Champ de gravitation d'une planète", difficulté: 2, numérique: true)
+#show: exercice.with(titre: "Champ de gravitation d'une planète", difficulté: 2, numérique: true, capytale: "f4b2-11678448")
 
 La masse volumique d'une planète de rayon $R = #quan[6400 km]$ varie avec la distance $r$ au centre selon $mu(r) = mu_0 (1 - a (r/R)^2)$. La masse volumique moyenne de la planète vaut $mu_"moy" = m_"planète" \/ V_"planète" = #quan[5.52e3 kg/m^3]$ et celle des roches superficielles vaut $mu(R) = #quan[2.67e3 kg/m^3]$.
 

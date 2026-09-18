@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 
-#show: exercice.with(titre: "Câble coaxial", difficulté: 2, numérique: true)
+#show: exercice.with(titre: "Câble coaxial", difficulté: 2, numérique: true, capytale: "b763-11678452")
 
 On considère un câble coaxial cylindrique de longueur supposée infinie, constitué d'un conducteur central plein de rayon $R_1$ parcouru par un courant uniforme d'intensité $I$, et d'un conducteur périphérique évidé, de rayon intérieur $R_2$ et de rayon extérieur $R_3$ (avec $R_1 < R_2 < R_3$), parcouru par un courant uniforme d'intensité $I$ circulant en sens inverse. On note $va(e_z)$ le vecteur unitaire de l'axe commun et $M$ un point à la distance $r$ de l'axe.
 

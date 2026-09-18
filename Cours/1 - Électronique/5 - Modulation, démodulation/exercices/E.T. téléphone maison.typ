@@ -5,6 +5,7 @@
     difficulté: 3,
     numérique: true,
     ouvert: true,
+    capytale: "0243-11678451",
 )
 
 L'antenne radioélectrique de la zone 51 a reçu un mystérieux signal radio. Votre collègue chargé de l'enquête a mystérieusement disparu et c'est à vous que revient l'enquête. Vos seuls indices sont le signal reçu (téléchargeable ici : #link("https://nuage03.apps.education.fr/index.php/s/5Kj4bFWCHtcD2Pf")) et les notes de votre collègue ci-dessous.

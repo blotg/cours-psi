@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Démodulation par détection d'enveloppe",
     numérique: true,
+    capytale: "2a1c-11678449",
 )
 
 On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi f_s t)] cos(2 pi f_p t)$. On utilise pour cela le montage ci-dessous, appelé détecteur d'enveloppe.

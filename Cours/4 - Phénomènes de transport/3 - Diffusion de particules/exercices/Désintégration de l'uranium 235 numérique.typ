@@ -4,6 +4,7 @@
     titre: "Désintégration de l'uranium 235 : résolution numérique",
     difficulté: 1,
     numérique: true,
+    capytale: "2c37-11678460",
 )
 
 On étudie une boule de rayon $R$ constituée d'uranium 235.

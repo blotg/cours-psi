@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Récupérateur de chaleur sur eaux grises",
     numérique: true,
+    capytale: "b3e2-11678446",
 )
 
 Les eaux usées issues d'une douche ou d'un bain contiennent une quantité importante de chaleur qui est généralement perdue dans les canalisations d'évacuation. Un récupérateur de chaleur sur eaux grises permet de récupérer une partie de cette chaleur pour préchauffer l'eau froide entrant dans le chauffe-eau, réduisant ainsi la consommation énergétique globale.

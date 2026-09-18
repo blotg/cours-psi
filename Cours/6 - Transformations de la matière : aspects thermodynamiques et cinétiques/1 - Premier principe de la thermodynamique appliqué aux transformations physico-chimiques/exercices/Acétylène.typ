@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Combustion de l'acétylène",
     numérique: true,
+    capytale: "02ae-11678461",
 )
 
 L'acétylène #ce("C2H2") est un gaz très utilisé en soudure, notamment en raison de la température élevée de la flamme qu'il produit lorsqu'il brûle en présence d'oxygène.

@@ -3,7 +3,8 @@
 #show: exercice.with(
     titre: "Simulation de la propagation d'un paquet d'onde dans un plasma",
     numérique: true,
-    difficulté: 1
+    difficulté: 1,
+    capytale: "b8f7-11678470",
 )
 
 On s'intéresse à la propagation d'un paquet d'onde $s(x,t)$ dans un milieu pouvant être dispersif.

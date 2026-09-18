@@ -147,15 +147,18 @@ def _fil(entrées) -> str:
     return "(" + ", ".join(morceaux) + ("," if morceaux else "") + ")"
 
 
-def _arguments_exercice(texte: str) -> str:
-    """Le texte des arguments de `#show: exercice.with(…)`.
+def bornes_arguments(texte: str, appel: bool = True) -> tuple[int, int] | None:
+    """Où commencent et finissent, dans la source, les arguments de
+    `#show: exercice.with(…)` ou, avec `appel`, de `#exercice(…)[…]` —
+    parenthèses exclues.
 
     Un compteur de parenthèses, mais qui saute les chaines : un titre peut
     contenir une parenthèse, et le décompte naïf s'arrêtait dessus.
     """
-    début = re.search(r"#show:\s*exercice\.with\(", texte)
+    motif = r"#show:\s*exercice\.with\(" + (r"|#exercice\(" if appel else "")
+    début = re.search(motif, texte)
     if not début:
-        return ""
+        return None
     i, profondeur, dans_chaine, échappe = début.end(), 1, False, False
     while i < len(texte) and profondeur:
         c = texte[i]
@@ -173,25 +176,41 @@ def _arguments_exercice(texte: str) -> str:
         elif c == ")":
             profondeur -= 1
         i += 1
-    return texte[début.end() : i - 1]
+    return début.end(), i - 1
 
 
-def _infos_exercice(source: Path) -> dict:
+def arguments_exercice(texte: str, appel: bool = True) -> str:
+    """Le texte des arguments de l'exercice, vide s'il n'y en a pas."""
+    bornes = bornes_arguments(texte, appel)
+    return texte[bornes[0] : bornes[1]] if bornes else ""
+
+
+def hors_chaines(texte: str) -> str:
+    """Le texte, chaines vidées : un titre qui contiendrait « ouvert: » ne doit
+    pas passer pour un drapeau. Les positions ne changent pas."""
+    return re.sub(r'"(?:[^"\\]|\\.)*"', lambda m: '"' + " " * (len(m.group()) - 2) + '"', texte)
+
+
+def _infos_exercice(source: Path, appel: bool = False) -> dict:
     """Titre, type et difficulté d'un exercice, lus dans sa source.
 
     De quoi afficher dans la liste ce que le titre de l'exercice montre déjà —
     l'emoji du type, les étoiles de difficulté — sans avoir à ouvrir la page.
+
+    Le site ne lit que la forme `#show: exercice.with(…)` (`appel` à faux) :
+    un exercice écrit `#exercice(…)[…]` y garde le nom de son fichier pour
+    titre. Le titre donne l'adresse de la page ; lire le vrai déplacerait
+    celles qui sont déjà publiées.
     """
-    arguments = _arguments_exercice(source.read_text(encoding="utf-8"))
+    arguments = arguments_exercice(source.read_text(encoding="utf-8"), appel)
     titre = re.search(r'titre:\s*"((?:[^"\\]|\\.)*)"', arguments)
-    # Les drapeaux se cherchent hors des chaines : un titre qui contiendrait
-    # « ouvert: » ne doit pas passer pour un problème ouvert.
-    hors_chaines = re.sub(r'"(?:[^"\\]|\\.)*"', '""', arguments)
-    difficulté = re.search(r"difficulté:\s*(\d+)", hors_chaines)
+    # Les drapeaux se cherchent hors des chaines.
+    drapeaux = hors_chaines(arguments)
+    difficulté = re.search(r"difficulté:\s*(\d+)", drapeaux)
 
     emojis, gloses = "", []
     for nom, emoji, glose in DRAPEAUX_EXERCICE:
-        if re.search(nom + r":\s*true", hors_chaines):
+        if re.search(nom + r":\s*true", drapeaux):
             emojis += emoji
             gloses.append(glose)
     étoiles = ÉTOILE * int(difficulté.group(1) if difficulté else 0)

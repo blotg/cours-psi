@@ -4,6 +4,7 @@
     titre: "Redresseur triphasé",
     numérique: true,
     difficulté: 1,
+    capytale: "6b7c-11678466",
 )
 
 On s'intéresse à un redresseur triphasé représenté ci-dessous.

@@ -166,6 +166,9 @@
     show: styles-html
     show <coups-de-pouce>: coups-de-pouce
     show <correction>: it => if corrigés { corrigé(it) } else { none }
+    // Un cours ou un TP les pose déjà par `init-document`, mais une page
+    // d'exercice n'inclut que l'exercice.
+    réglages-nombres()
 
     fil-ariane(fil)
     // Pas de <main> autour du document : `init-document` pose un

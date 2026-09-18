@@ -4,6 +4,7 @@
     titre: "Computing effective values",
     difficulté: 0,
     numérique: true,
+    capytale: "80f6-11678454",
 )
 
 With the help of Python, calculate the effective (RMS) values of the following periodic signals.
