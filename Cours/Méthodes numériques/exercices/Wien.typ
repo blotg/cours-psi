@@ -3,7 +3,8 @@
 
 #exercice(
   titre: "Oscillateur de Wien",
-  numérique: true
+  numérique: true,
+  difficulté: 2
 )[
   Pour rappel, un oscillateur de Wien est constitué d'un montage amplificateur non-inverseur et d'un filtre de Wien.
 
