@@ -77,10 +77,25 @@ On peut approximer le champ magnétique créé par la spire 1, parcourue par un 
   Le flux du champ magnétique à travers la spire 2 est $ Phi_(1 arrow 2) = integral_("spire" 2) va(B_1) dot va(dd(S)) = integral_0^(2 pi) dd(theta_2) integral_0^R dd(r_2) r_2 B_1(r_2, theta_2) $ avec $B_1(r_2, theta_2) = mu_0/(4 pi) (pi R^2 I_1)/(d^2 + r_2^2 + 2 d r_2 cos theta_2)^(3/2)$. On en déduit l'expression demandée avec $A = mu_0/(4) R^2 I_1$.
 ]
 
-La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. Son appel est de la forme ```python dblquad(func, a, b, c, d)```, où ```python func(x,y)``` est la fonction à intégrer pour `x` allant de `a` à `b` et pour `y` allant de `c` à  `d`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.
+La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``` permet de calculer numériquement des intégrales doubles. L'appel ```python dblquad(func, a, b, c, d)``` calcule $integral_a^b dd(x) integral_c^d dd(y) "func"(y, x)$. Attention à l'ordre : ```python func``` prend d'abord la variable `y` de l'intégrale intérieure, qui va de `c` à `d`, puis la variable `x` de l'intégrale extérieure, qui va de `a` à `b`. ```python dblquad``` retourne un couple dont le premier élément est la valeur de l'intégrale.
 
 #question()[
-  Compléter le programme Python sur Capytale pour calculer numériquement l'inductance mutuelle.
+  Compléter le programme Python suivant pour calculer numériquement l'inductance mutuelle.
+  ```python
+  from scipy.integrate import dblquad
+  from math import cos, pi
+
+  mu_0 = ...  # Perméabilité du vide en H/m
+  R = 1e-2    # Rayon des spires en m
+
+  def M(d):
+      """Inductance mutuelle (en H) de deux spires dont les centres sont distants de d (en m)."""
+      def f(r_2, theta_2):
+          return ...  # Fonction à intégrer
+
+      intégrale, _ = dblquad(f, ..., ..., ..., ...)
+      return ...
+  ```
 ][
   ```python
   from scipy.integrate import dblquad
@@ -102,7 +117,18 @@ La fonction ```python dblquad``` de la bibliothèque ```python scipy.integrate``
 ]
 
 #question()[
-  Tracer sur Capytale l'évolution de l'inductance mutuelle $M$ en fonction de la distance $d$ entre les deux spires. On prendra $20$ points avec $d$ variant de $5 R$ à $50 R$.
+  Tracer l'évolution de l'inductance mutuelle $M$ en fonction de la distance $d$ entre les deux spires. On prendra $20$ points avec $d$ variant de $5 R$ à $50 R$.
+  ```python
+  import numpy as np
+  import matplotlib.pyplot as plt
+
+  distances = np.linspace(..., ..., ...)  # Distances en m
+  inductances = [... for d in distances]  # Inductances mutuelles en H
+  plt.plot(..., ...)
+  plt.xlabel('Distance d (m)')
+  plt.ylabel('Inductance mutuelle M (H)')
+  plt.show()
+  ```
 ][
   ```python
   import numpy as np

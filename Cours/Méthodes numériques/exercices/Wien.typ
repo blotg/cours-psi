@@ -40,6 +40,16 @@ Avec Python, on représente le vecteur $va(Y)$ par un array numpy à 3 élément
   "Utiliser les résultats de la question précédente pour écrire la fonction `F`.",
 ))[
     Écrire une fonction Python qui prend en entrée Y et renvoie sa dérivée. On pourra supposer les variables $R$, $C$, $R_1$, $R_2$, $A_0$ et $tau$ déjà définies.
+  ```python
+import numpy as np
+def F(t, Y):
+  """
+  t : le temps (inutile ici, mais solve_ivp le fournit)
+  Y : array numpy à 3 éléments contenant u, v et w
+  Renvoie un array numpy contenant la dérivée de Y par rapport au temps.
+  """
+  ...
+  ```
 ][
   ```python
 import numpy as np
@@ -70,6 +80,14 @@ La fonction `solve_ivp` renvoie un objet. Si on le stocke dans la variable `solu
   "Quelle est la condition de démarrage des oscillations vue en cours ?"
 ))[
   Définir et affecter les variables $R=#quan[1 kΩ]$, $C=#quan[10 nF]$, $R_1$, $R_2$, $A_0=num("100000")$ et $tau=#quan[0.01 s]$ avec des valeurs vraisemblables satisfaisant la condition de démarrage des oscillations.
+  ```python
+R = ... # Ohm
+C = ... # F
+R1 = ... # Ohm
+R2 = ... # Ohm
+A0 = ...
+tau = ... # s
+  ```
 ][
   La condition de démarrage vue en cours est $1 + R_2/R_1 > 3$, soit $R_2 > 2 R_1$. Il faut la prendre avec une marge : la bande passante finie de l'ALI atténue légèrement le gain à $omega_0$, ce qui relève le seuil (ici à $R_2 approx #quan[2002 Ω]$).
   ```python
@@ -85,6 +103,9 @@ Vsat = 15 # V, tension de saturation de l'ALI
 
 #question(coups-de-pouce: ())[
   Définir `Y0` avec de très petites valeurs pour $u$, $v$ et $w$ ($num("0.0001")$ par exemple).
+  ```python
+Y0 = ...
+  ```
 ][
   ```python
 Y0 = np.array([0.0001, 0.0001, 0.0001])
@@ -95,6 +116,9 @@ Y0 = np.array([0.0001, 0.0001, 0.0001])
   "Quelle relation relie la période des oscillations à $R$ et $C$ lorsque la condition d'existence d'oscillations sinusoïdales est satisfaite ?",
 ))[
     Définir tf pour observer une dizaine d'oscillations.
+  ```python
+tf = ... # s
+  ```
 ][
   $T=(2 pi) /omega = 2 pi R C$
   ```python
@@ -106,6 +130,18 @@ tf = 10 * 2 * np.pi * R * C
   "`solution.y[0]` correspond à $u$ et `solution.y[1]` à $v$.",
 ))[
     Tracer $u$ et $v$ en fonction du temps.
+  ```python
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+solution = solve_ivp(..., ..., ...)
+plt.plot(..., ..., label='u(t)')
+plt.plot(..., ..., label='v(t)')
+plt.xlabel('Temps (s)')
+plt.ylabel('Tension (V)')
+plt.legend()
+plt.show()
+  ```
 ][
   ```python
 import matplotlib.pyplot as plt
@@ -160,6 +196,17 @@ On note $Y_i=Y(i dot Delta t)$ où $Delta t$ est la durée entre deux échantill
 
 #question(coups-de-pouce: ())[
   Implémenter la méthode d'Euler pour simuler l'évolution des tensions pour un oscillateur de Wien. $Delta t$ sera choisi de sorte qu'il y ait environ $200$ échantillons par période.
+  ```python
+Delta_t = ... # s, environ 200 échantillons par période
+N = int(tf / Delta_t) # Nombre d'échantillons
+t = np.zeros(N)
+Y = np.zeros((N,3))
+t[0] = 0
+Y[0] = Y0
+for i in range(1,N):
+    Y[i] = ...
+    t[i] = ...
+  ```
 ][
   Le schéma d'Euler explicite n'est stable que si $Delta t$ est petit devant la plus courte constante de temps du système. Ici la plus rapide n'est pas la période d'oscillation mais le pôle de l'ALI, $A_0 \/ ((1+R_2\/R_1) tau)$ : à $50$ échantillons par période la simulation diverge. Il en faut environ $120$ au minimum, d'où le choix de $200$.
   ```python
@@ -177,6 +224,9 @@ for i in range(1,N):
 
 #question(coups-de-pouce: ())[
   Adapter le code précédent pour prendre en compte la saturation de l'ALI.
+  ```python
+Vsat = 15 # V, tension de saturation de l'ALI
+  ```
 ][
   Il ne suffit pas d'écrêter $v$ après chaque pas : l'expression de $dv(w,t)$ a été obtenue en y *substituant* $dv(v,t)$ du régime linéaire, et cette substitution n'est plus valable dès que l'ALI sature. Il faut calculer $dv(v,t)$ d'abord — nul quand la sortie est bloquée — puis l'injecter dans $dv(w,t)$.
 

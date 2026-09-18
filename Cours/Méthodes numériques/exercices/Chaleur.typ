@@ -111,7 +111,20 @@ for i in range(len(T)-1):
   "Où dans la matrice T se trouve le profil de température à l'instant $t = #quan[15 s]$ ?",
   "Pour générer les abscisses de la courbe, on peut utiliser la fonction `np.linspace(a,b,n)` pour créer un tableau de `n` valeurs régulièrement espacées entre `a` et `b`.",
 ))[
-  Tracer sur le même graphe le profil de température dans la barre au bout de #quan[15 s], #quan[30 s], #quan[1 min], #quan[2 min] et #quan[4 min].
+  Tracer sur le même graphe le profil de température dans la barre au bout de #quan[15 s], #quan[30 s], #quan[1 min], #quan[2 min] et #quan[4 min]. Compléter le code suivant.
+```python
+import matplotlib.pyplot as plt
+x = ... # Positions des points de la barre (m)
+plt.plot(x, ..., label='t=15s')
+plt.plot(x, ..., label='t=30s')
+plt.plot(x, ..., label='t=1min')
+plt.plot(x, ..., label='t=2min')
+plt.plot(x, ..., label='t=4min')
+plt.xlabel('Position le long de la barre (m)')
+plt.ylabel('Température (K)')
+plt.legend()
+plt.show()
+```
 ][
   ```python
 import matplotlib.pyplot as plt
@@ -130,7 +143,14 @@ plt.show()
   "Où dans la matrice T se trouve le profil de température à l'abscisse $x=l/2$ ?",
   "L'abscisse de la courbe est le temps : il y a une valeur par ligne de `T`, espacées de $Delta t$.",
 ))[
-  Tracer la température du point central de la barre en fonction du temps.
+  Tracer la température du point central de la barre en fonction du temps. Compléter le code suivant.
+```python
+t = ... # Instants simulés (s)
+plt.plot(t, ...)
+plt.xlabel('Temps (s)')
+plt.ylabel('Température au centre de la barre (K)')
+plt.show()
+```
 ][
   ```python
 import matplotlib.pyplot as plt
