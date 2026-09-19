@@ -6,7 +6,8 @@ pages de contenu sont les sources typst du cours compilées vers une autre
 cible, les pages de liens viennent du gabarit `gabarits/site-liens.typ`.
 
 Le seul post-traitement est l'insertion, dans le `<head>` que typst produit, du
-lien vers la feuille de style : typst n'expose pas encore ce `<head>`.
+lien vers la feuille de style — et, sur l'accueil, de la balise qui prouve à
+Google que le site est à nous : typst n'expose pas encore ce `<head>`.
 """
 
 import hashlib
@@ -20,6 +21,8 @@ from pathlib import Path
 from shutil import copyfile
 from tempfile import TemporaryDirectory
 from threading import Lock
+from urllib.parse import quote
+from xml.sax.saxutils import escape
 
 from . import animations, typst
 from .chapitre import GABARITS, RACINE_COURS, RACINE_RÉVISIONS, Chapitre, chapitres
@@ -39,6 +42,22 @@ FORMAT_MANIFESTE = 1
 #: Compilations menées de front. Une page ne tient pas douze cœurs occupés,
 #: mais le gain plafonne vers huit : au-delà on ne fait que se marcher dessus.
 PROCESSUS = min(8, os.cpu_count() or 1)
+
+#: Où le site est publié (GitHub Pages, branche gh-pages). Le plan du site
+#: donne des adresses absolues, qu'il faut donc bien connaître.
+ADRESSE_PUBLIQUE = "https://blotg.github.io/cours-psi/"
+
+#: Le plan du site, à déclarer dans la Search Console de Google. Un
+#: `robots.txt` ne servirait à rien : il se lit à la racine du domaine,
+#: blotg.github.io, qui n'est pas ce dépôt.
+PLAN = "sitemap.xml"
+
+#: La balise qui ouvre à ce site la Search Console de Google. Elle doit rester
+#: sur l'accueil tant qu'on veut y garder accès : Google revient la vérifier.
+VÉRIFICATION_GOOGLE = (
+    '<meta name="google-site-verification" '
+    'content="gPGsYb52FYJGwcDfD4ILxu8w7LkKPv2Z_TDDj3j_ZS0">'
+)
 
 #: Racine du dépôt : les `#include` des pages s'y résolvent.
 RACINE = Path(__file__).resolve().parent.parent
@@ -282,11 +301,12 @@ class Site:
 
     # -- Une page ---------------------------------------------------------
 
-    def _style(self, cible: Path, profondeur: int) -> None:
-        """Accroche la feuille de style au <head> que typst vient d'écrire."""
+    def _style(self, cible: Path, profondeur: int, en_tête: str = "") -> None:
+        """Accroche la feuille de style au <head> que typst vient d'écrire,
+        et ce que la page demande d'y ajouter en plus (`en_tête`)."""
         lien = "../" * profondeur + "styles.css"
         html = cible.read_text(encoding="utf-8")
-        html = html.replace("</head>", f'<link rel="stylesheet" href="{lien}"></head>', 1)
+        html = html.replace("</head>", f'<link rel="stylesheet" href="{lien}">{en_tête}</head>', 1)
         # typst écrit `lang="en"` en dur. La langue commande la coupure des mots
         # et le rendu de certains symboles : elle doit dire le vrai.
         html = html.replace('<html lang="en">', '<html lang="fr">', 1)
@@ -320,7 +340,7 @@ class Site:
             recette, cible, html=True, racine=RACINE, dépendances=deps
         ))
 
-    def page_liens(self, chemin: str, données: dict, profondeur: int) -> Path:
+    def page_liens(self, chemin: str, données: dict, profondeur: int, en_tête: str = "") -> Path:
         """Une page qui n'est qu'un titre et des listes de liens."""
         entrée = json.dumps(données, ensure_ascii=False)
         return self._page(chemin, profondeur, entrée, lambda cible, deps: typst.compile_fichier(
@@ -329,17 +349,19 @@ class Site:
             entrées={"données": entrée},
             html=True,
             dépendances=deps,
-        ))
+        ), en_tête=en_tête)
 
-    def _page(self, chemin: str, profondeur: int, recette: str, compile) -> Path:
+    def _page(self, chemin: str, profondeur: int, recette: str, compile, en_tête: str = "") -> Path:
         """Fabrique une page, sauf si elle est encore bonne.
 
         `recette` est ce qui la décrit hors fichiers — la source typst montée
         pour l'occasion, ou le JSON passé en `--input`. Les fichiers, eux, sont
-        ceux que typst déclare avec `--make-deps`.
+        ceux que typst déclare avec `--make-deps`. `en_tête` s'ajoute au
+        <head> après coup ; il entre dans le condensé, mais seulement s'il y en
+        a un, pour ne pas faire recompiler tout le site pour une seule page.
         """
         cible = self.sortie / chemin
-        empreinte = _condensé(str(profondeur), recette)
+        empreinte = _condensé(str(profondeur), recette, *([en_tête] if en_tête else []))
         if self._à_jour(chemin, empreinte):
             self._note(chemin, empreinte, None)
             self._retient(cible)
@@ -350,7 +372,7 @@ class Site:
             deps = Path(tampon) / "deps.mk"
             compile(cible, deps)
             dépendances = typst.lit_dépendances(deps)
-        self._style(cible, profondeur)
+        self._style(cible, profondeur, en_tête)
         self._note(chemin, empreinte, dépendances)
         self._retient(cible)
         with self._verrou:
@@ -485,6 +507,32 @@ class Site:
                 chemin.rmdir()
         return effacés
 
+    def _plan(self) -> None:
+        """Écrit le plan du site : l'adresse de chacune de ses pages.
+
+        Sans date de modification : une page se recompile dès qu'un paquet
+        typst bouge, sans que rien n'y change pour le lecteur, et Google cesse
+        de croire des dates qui bougent pour rien.
+        """
+        pages = sorted(
+            p.relative_to(self.sortie).as_posix() for p in self.produits if p.suffix == ".html"
+        )
+        adresses = "".join(
+            f"<url><loc>{escape(ADRESSE_PUBLIQUE + ('' if p == 'index.html' else quote(p)))}</loc></url>\n"
+            for p in pages
+        )
+        plan = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            f"{adresses}</urlset>\n"
+        )
+        cible = self.sortie / PLAN
+        # Réécrire à l'identique ne coûte rien à git, mais un partage réseau
+        # s'en passe volontiers.
+        if not cible.is_file() or cible.read_text(encoding="utf-8") != plan:
+            cible.write_text(plan, encoding="utf-8")
+        self._retient(cible)
+
     def construit(self) -> list[Path]:
         self.sortie.mkdir(parents=True, exist_ok=True)
         self._charge_manifeste()
@@ -575,13 +623,27 @@ class Site:
             },
             profondeur=1,
         ))
-        # L'accueil ne fait qu'aiguiller : le cours, la paillasse, et ce qu'il
-        # faut avoir retenu de PCSI. Le détail de chacun tient sur sa page.
+        # L'accueil aiguille : le cours, la paillasse, et ce qu'il faut avoir
+        # retenu de PCSI. Le détail de chacun tient sur sa page. Il est aussi
+        # la page qu'un moteur de recherche lit en premier : d'où le paragraphe
+        # qui dit de quoi il s'agit, la description et la balise de Google.
         tâches.append(partial(
             self.page_liens,
             "index.html",
             {
-                "titre": "Cours de PSI",
+                "titre": "Cours de physique-chimie en PSI",
+                "description": (
+                    "Cours de physique-chimie de PSI du lycée Brizeux, à Quimper : "
+                    "cours, exercices corrigés, TP, flashcards Anki et révisions de PCSI, "
+                    "en ligne et en PDF."
+                ),
+                "présentation": (
+                    "Le cours de physique-chimie de la classe préparatoire PSI du lycée "
+                    "Brizeux, à Quimper. Chaque chapitre se lit en ligne, avec ses "
+                    "exercices, leurs coups de pouce et leurs corrigés ; on y trouve "
+                    "aussi le poly en PDF et les flashcards, à imprimer ou à importer "
+                    "dans Anki. S'y ajoutent les sujets de TP et les révisions de PCSI."
+                ),
                 "fil": [],
                 "sections": [{"titre": "", "liens": [
                     {
@@ -602,9 +664,11 @@ class Site:
                 ]}],
             },
             profondeur=0,
+            en_tête=VÉRIFICATION_GOOGLE,
         ))
 
         self._exécute(tâches)
+        self._plan()
         self.effacés = self._nettoie()
         self._écrit_manifeste()
         return self.produits

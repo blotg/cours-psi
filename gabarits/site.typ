@@ -161,8 +161,10 @@
 
 // -- Gabarit de page --------------------------------------------------------
 
-#let page-site(titre: "", fil: (), corrigés: true, doc) = {
-    set document(title: titre)
+#let page-site(titre: "", description: none, fil: (), corrigés: true, doc) = {
+    // `description` devient la <meta name="description"> : le résumé que les
+    // moteurs de recherche affichent sous le lien.
+    set document(title: titre, description: description)
     show: styles-html
     show <coups-de-pouce>: coups-de-pouce
     show <correction>: it => if corrigés { corrigé(it) } else { none }
@@ -188,7 +190,8 @@
 
 // Alimentée par `--input données` :
 //
-//     {"titre": "...", "fil": [["texte", "url"], ...],
+//     {"titre": "...", "description": "...", "présentation": "...",
+//      "fil": [["texte", "url"], ...],
 //      "sections": [{"titre": "...", "url": "...", "liens": [{"texte": "...",
 //                       "url": "...", "détail": "...", "marque": "...",
 //                       "infobulle": "..."}]}]}
@@ -199,12 +202,18 @@
 // lieu de liens : son titre devient alors le lien — c'est le cas d'un thème
 // qui tient en un seul chapitre du même nom, où la liste ne ferait que
 // répéter l'intitulé.
+//
+// `description` et `présentation` sont facultatives : la première ne va que
+// dans le <head>, la seconde est un paragraphe sous le titre.
 #let page-liens(données) = {
     show: page-site.with(
         titre: données.titre,
+        description: données.at("description", default: none),
         fil: données.at("fil", default: ()).map(e => (e.at(0), e.at(1))),
     )
     html.elem("h1", markup(données.titre))
+    let présentation = données.at("présentation", default: "")
+    if présentation != "" { html.elem("p", attrs: (class: "présentation"), markup(présentation)) }
     for section in données.at("sections", default: ()) {
         let url = section.at("url", default: "")
         if "titre" in section and section.titre != "" {

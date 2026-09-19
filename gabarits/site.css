@@ -98,6 +98,8 @@ ul.liens .détail { margin-left: auto; padding-left: 1em; color: var(--gris); fo
    en toutes lettres. */
 ul.liens .détail[title] { cursor: help; }
 p.vide { color: var(--gris); font-style: italic; }
+/* Le paragraphe de l'accueil, qui dit ce qu'est le site avant d'aiguiller. */
+h1 + p.présentation { margin: -1rem 0 2rem; }
 
 /* -- Grilles et piles ----------------------------------------------------- */
 /* `grid` et `stack` disparaissent à l'export HTML : gabarits/site.typ les

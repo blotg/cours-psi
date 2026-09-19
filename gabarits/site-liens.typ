@@ -2,7 +2,8 @@
 //
 // Alimenté par `outils site`, qui passe en `--input données` :
 //
-//     {"titre": "...", "fil": [["texte", "url ou null"], ...],
+//     {"titre": "...", "description": "...", "présentation": "...",
+//      "fil": [["texte", "url ou null"], ...],
 //      "sections": [{"titre": "...",
 //                    "liens": [{"texte": "...", "url": "...", "détail": "..."}]}]}
 
