@@ -451,10 +451,6 @@ function machineSynchrone(section) {
     const pointCouple = couple.point(COULEURS.noir);
     réglages.ajoute(couple.élément);
     const bilan = réglages.texte();
-    réglages.texte(
-        'La formule du cours vaut pour des champs sinusoïdaux ; avec des champs en marches, ' +
-            'le couple ondule, et sa moyenne reste proportionnelle à sin α.',
-    ).className = 'note';
 
     réglages.groupe('Courants statoriques');
     const courants = graphique({
