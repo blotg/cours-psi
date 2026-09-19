@@ -3,8 +3,10 @@
 //
 // Le rendu ne se refait que lorsqu'il le faut — la caméra a bougé, un réglage
 // a changé (`redessine`), ou la scène est animée (`àChaqueImage`) —, et
-// s'arrête tant que la scène est hors de l'écran : une page en porte
-// plusieurs, et un téléphone n'a pas de batterie à perdre.
+// seulement quand la scène est à l'écran : une page en porte plusieurs, et
+// un téléphone n'a pas de batterie à perdre. Une animation, elle, continue
+// tant que son cadre est à l'écran : sur un téléphone, ses réglages et ses
+// courbes sont sous la scène, et doivent suivre quand on y descend.
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -78,7 +80,12 @@ export class Scène {
         this.horloge = new THREE.Timer();
         this.vueDeDépart();
         new ResizeObserver(() => this.redimensionne()).observe(scène);
-        new IntersectionObserver(([entrée]) => this.anime(entrée.isIntersecting)).observe(scène);
+        new IntersectionObserver(([entrée]) => {
+            this.àLÉcran = entrée.isIntersecting;
+            this.redessine();
+        }).observe(scène);
+        const cadre = conteneur.closest('.corps') ?? scène;
+        new IntersectionObserver(([entrée]) => this.anime(entrée.isIntersecting)).observe(cadre);
     }
 
     /** Un bouton de plus dans la barre sous la scène. */
@@ -148,7 +155,7 @@ export class Scène {
         const dt = Math.min(this.horloge.update(instant).getDelta(), 0.1);
         const bougé = this.contrôles.update();
         if (this.rappel) this.rappel(dt);
-        if (!(this.rappel || bougé || this.àRefaire) || !this.dimensions) return;
+        if (!(this.rappel || bougé || this.àRefaire) || !this.dimensions || !this.àLÉcran) return;
         this.àRefaire = false;
         // L'épaisseur des traits (cf. `Trait`) se compte en pixels : il leur
         // faut la taille de l'image, y compris aux traits ajoutés depuis.

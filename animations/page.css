@@ -68,6 +68,9 @@ section.animation > p { margin: 0 0 0.75rem; }
 .curseur input { width: 100%; margin: 0; accent-color: var(--texte); }
 .curseur output { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .désactivé { opacity: 0.4; }
+/* Un contrôle masqué (`montre(false)`) : l'attribut `hidden` ne l'emporte pas
+   sur le `display` que lui donnent les règles ci-dessus. */
+.panneau [hidden] { display: none; }
 
 .case { display: flex; align-items: center; gap: 0.5rem; min-height: 1.8rem; cursor: pointer; }
 .case input { margin: 0; accent-color: var(--texte); }
@@ -97,4 +100,9 @@ button:hover { background: var(--fond-bandeau); }
 .formule { padding: 0.4rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; }
 .panneau p { margin: 0.3rem 0; }
 .panneau .note { color: var(--gris); font-size: 0.8rem; margin-top: -0.2rem; }
-.panneau > .groupe > svg { margin: 0.3rem 0; }
+
+/* Un petit graphique : le dessin en SVG, ses légendes en KaTeX par-dessus,
+   placées en proportion de sa taille. */
+.graphique { position: relative; margin: 0.4rem 0; }
+.graphique svg { display: block; margin: 0; width: 100%; height: auto; }
+.graphique .légende { position: absolute; font-size: 0.72rem; line-height: 1; white-space: nowrap; color: var(--gris); }

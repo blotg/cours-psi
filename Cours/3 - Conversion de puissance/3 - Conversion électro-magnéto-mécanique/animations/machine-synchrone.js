@@ -1,77 +1,92 @@
 // La machine synchrone diphasée et bipolaire du cours, en fonctionnement.
 //
-// Dans l'entrefer, les deux champs du cours, en flèches radiales dont la
-// longueur suit leur valeur :
+// Dans l'entrefer, les deux champs, en flèches radiales dont la longueur suit
+// leur valeur : le champ statorique B_s, créé par les courants i₁ = I cos(ωt)
+// et i₂ = I cos(ωt + π/2), et le champ rotorique B_r, créé par le courant
+// continu I_e du rotor. Chaque circuit a N spires, dans N encoches de part et
+// d'autre de son axe : ses champs sont en marches — le théorème d'Ampère les
+// fait sauter d'un cran à chaque conducteur. Quand N → ∞, ils tendent vers
+// ceux du cours : B_s ∝ cos(ωt − θ), le champ glissant, et B_r ∝ cos(θ − θ_r).
 //
-//   B_s(θ, t) ∝ cos(ωt − θ)   le champ glissant, créé par les courants
-//                             i₁ = I cos(ωt) et i₂ = I cos(ωt + π/2) ;
-//   B_r(θ, t) ∝ cos(θ − θ_r)  le champ du rotor, qui tourne avec lui.
-//
-// Le rotor tourne à Ω, avec θ_r = Ωt − α. Au synchronisme (Ω = ω), l'angle α
-// entre le maximum du champ glissant et l'axe du rotor reste constant, et le
-// couple Γ_ém = Γ_max sin(ωt − θ_r) = Γ_max sin α aussi. Hors synchronisme,
-// cet angle défile, le couple change de signe et sa moyenne est nulle.
+// Le rotor tourne au synchronisme : θ_r = ωt − α, l'angle α entre le maximum
+// du champ glissant et l'axe du rotor reste constant, et le couple vaut
+// Γ_ém = Γ_max sin α.
 
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { Arc, COULEURS, Étiquette, Flèche, Trait, vecteur } from '#animations/objets.js';
+import { Arc, COULEURS, Étiquette, Flèche, Trait, écritTex, vecteur } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
 import { Réglages } from '#animations/reglages.js';
 import { Scène } from '#animations/scene.js';
-import {
-    ANGLES_ENCOCHES,
-    ENCOCHES_DU_ROTOR,
-    R_ARBRE,
-    R_CONDUCTEUR,
-    R_CONDUCTEUR_ROTOR,
-    R_ENTREFER,
-    R_ROTOR,
-    R_STATOR,
-    bobinage,
-    machine,
-} from './machine.js';
+import { R_ARBRE, R_ENTREFER, R_ROTOR, R_STATOR, machine } from './machine.js';
 
-const COULEUR_BS = COULEURS.bleu;
-const COULEUR_BR = COULEURS.vermillon;
-const COULEUR_PHASE = { 1: COULEURS.vert, 2: COULEURS.pourpre };
+/** Une couleur par circuit — celle de ses fils, de son courant —, et une par
+ *  champ. */
+const COULEUR = {
+    1: COULEURS.vert,
+    2: COULEURS.bleu,
+    rotor: COULEURS.vermillon,
+    Bs: COULEURS.violet,
+    Br: COULEURS.orange,
+};
 
 const deg = THREE.MathUtils.degToRad;
+const DEUX_PI = 2 * Math.PI;
 /** Un angle ramené dans ]−π, π]. */
-const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, 2 * Math.PI) - Math.PI;
+const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, DEUX_PI) - Math.PI;
 const direction = (a) => vecteur(Math.cos(a), Math.sin(a), 0);
 
 /** Ce qui se dessine par-dessus le plan de coupe, juste devant lui, et les
  *  étiquettes qui ne se lisent que devant lui. */
 const Z_SCHÉMA = 0.03;
 const DEVANT = vecteur(0, 0, 1);
-/** Des flèches de champ tous les 15° ; celles de B_r entre celles de B_s. */
-const FLÈCHES = 24;
-/** La longueur d'une flèche de champ maximal. */
+/** Des flèches de champ tous les 10° ; celles de B_r entre celles de B_s. */
+const FLÈCHES = 36;
+/** La longueur d'une flèche pour un champ égal à l'amplitude de sa limite
+ *  sinusoïdale. */
 const LONGUEUR_MAX = 0.85;
+/** Les points du contour qui relie les pointes des flèches. */
+const ÉCHANTILLONS = 720;
+const N_DÉPART = 5;
 
-const VUE_DE_TROIS_QUARTS = { position: [6, -9.3, 20.5], cible: [0, -0.4, -1.5] };
-const VUE_DE_FACE = { position: [0, 0, 22.5], cible: [0, 0, -1] };
+const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
+const VUE_DE_TROIS_QUARTS = { position: [9, -14, 26], cible: [0, -0.3, -1.5] };
+
+/**
+ * Le champ dans l'entrefer en θ, créé par des conducteurs parcourus par
+ * `courant(c)` (positif s'il sort du plan de coupe) : quand on franchit un
+ * conducteur dans le sens trigonométrique, le champ baisse de son courant
+ * (théorème d'Ampère), et il est de moyenne nulle (conservation du flux).
+ * Les courants d'un circuit étant de somme nulle, cela donne
+ * B(θ) = Σ I_c · frac((θ − θ_c) / 2π). `décalage` tourne les conducteurs :
+ * ceux du rotor, de θ_r.
+ */
+function champEnMarches(conducteurs, courant, θ, décalage = 0) {
+    let B = 0;
+    for (const c of conducteurs) B += courant(c) * THREE.MathUtils.euclideanModulo((θ - c.angle - décalage) / DEUX_PI, 1);
+    return B;
+}
 
 // -- Le sens des courants : ⊙ et ⊗ --------------------------------------------
 
 /** Le symbole d'un courant qui sort du plan (⊙) ou y entre (⊗), sur un disque
- *  blanc qui le détache du cuivre. */
+ *  blanc qui le détache du fil. */
 function textureCourant(sortant, couleur) {
     const toile = document.createElement('canvas');
     toile.width = toile.height = 128;
     const c = toile.getContext('2d');
     c.fillStyle = '#fff';
     c.beginPath();
-    c.arc(64, 64, 62, 0, 2 * Math.PI);
+    c.arc(64, 64, 62, 0, DEUX_PI);
     c.fill();
     c.strokeStyle = c.fillStyle = couleur;
     c.lineWidth = 9;
     c.beginPath();
-    c.arc(64, 64, 50, 0, 2 * Math.PI);
+    c.arc(64, 64, 50, 0, DEUX_PI);
     c.stroke();
     if (sortant) {
         c.beginPath();
-        c.arc(64, 64, 15, 0, 2 * Math.PI);
+        c.arc(64, 64, 15, 0, DEUX_PI);
         c.fill();
     } else {
         c.lineWidth = 10;
@@ -87,16 +102,15 @@ function textureCourant(sortant, couleur) {
     return texture;
 }
 
-const DISQUE = new THREE.CircleGeometry(0.13, 32);
 const texturesCourant = new Map();
 
 /** Le sens du courant dans un conducteur, posé sur sa section. */
 class Courant extends THREE.Mesh {
-    constructor(couleur) {
+    constructor(couleur, disque) {
         if (!texturesCourant.has(couleur)) {
             texturesCourant.set(couleur, [textureCourant(true, couleur), textureCourant(false, couleur)]);
         }
-        super(DISQUE, new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false }));
+        super(disque, new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false }));
         [this.sortant, this.entrant] = texturesCourant.get(couleur);
     }
 
@@ -120,37 +134,50 @@ function svg(balise, attributs, parent) {
 }
 
 /**
- * Un graphique de `largeur` × `hauteur` pixels, x de x0 à x1, y de −1 à 1.
+ * Un graphique, x de x0 à x1, y de −1 à 1 : le dessin en SVG, ses légendes en
+ * KaTeX par-dessus. Les graduations sont des couples (valeur, tex).
  * `trace(f, couleur)` y trace y = f(x) ; `vers(x, y)` donne les coordonnées
- * d'un point dans le dessin.
+ * d'un point dans le dessin ; `légende(tex, x, y, ancre)` y écrit.
  */
-function graphique({ x0, x1, graduations, largeur = 272, hauteur = 132, nomX, nomY }) {
-    const marge = { gauche: 22, droite: 14, haut: 16, bas: 20 };
-    const racine = svg('svg', { viewBox: `0 0 ${largeur} ${hauteur}`, width: '100%', class: 'graphique' });
+function graphique({ x0, x1, graduationsX, graduationsY, nomX, nomY, hauteur = 140 }) {
+    const largeur = 272;
+    const marge = { gauche: 44, droite: 14, haut: 22, bas: 20 };
+    const conteneur = Object.assign(document.createElement('div'), { className: 'graphique' });
+    const racine = svg('svg', { viewBox: `0 0 ${largeur} ${hauteur}` }, conteneur);
     const X = (x) => marge.gauche + ((x - x0) / (x1 - x0)) * (largeur - marge.gauche - marge.droite);
     const Y = (y) => marge.haut + ((1.15 - y) / 2.3) * (hauteur - marge.haut - marge.bas);
-    const texte = (contenu, x, y, attributs = {}) => {
-        const t = svg('text', { x, y, 'font-size': 11, fill: COULEURS.gris, ...attributs }, racine);
-        t.textContent = contenu;
-        return t;
+    const décalages = { gauche: '0', centre: '-50%', droite: '-100%' };
+    const légende = (tex, x, y, ancre = 'centre', couleur = '') => {
+        const span = écritTex(Object.assign(document.createElement('span'), { className: 'légende' }), tex);
+        Object.assign(span.style, {
+            left: `${(100 * x) / largeur}%`,
+            top: `${(100 * y) / hauteur}%`,
+            translate: `${décalages[ancre]} -50%`,
+            color: couleur,
+        });
+        conteneur.append(span);
+        return span;
     };
     const fond = svg('g', {}, racine);
-    for (const [x, étiquette] of graduations) {
-        svg('line', { x1: X(x), x2: X(x), y1: Y(1.15), y2: Y(-1.15), stroke: '#e3e3e3' }, racine);
-        texte(étiquette, X(x), hauteur - 6, { 'text-anchor': 'middle' });
+    const trait = (xa, ya, xb, yb, attributs = {}) =>
+        svg('line', { x1: xa, y1: ya, x2: xb, y2: yb, stroke: '#e3e3e3', ...attributs }, racine);
+    for (const [x, tex] of graduationsX) {
+        trait(X(x), Y(1.15), X(x), Y(-1.15));
+        légende(tex, X(x), hauteur - 9);
     }
-    for (const y of [-1, 1]) {
-        svg('line', { x1: X(x0), x2: X(x1), y1: Y(y), y2: Y(y), stroke: '#e3e3e3' }, racine);
-        texte(y === 1 ? '1' : '−1', marge.gauche - 5, Y(y) + 4, { 'text-anchor': 'end' });
+    for (const [y, tex] of graduationsY) {
+        trait(X(x0), Y(y), X(x1), Y(y));
+        légende(tex, marge.gauche - 5, Y(y), 'droite');
     }
-    svg('line', { x1: X(x0), x2: X(x1), y1: Y(0), y2: Y(0), stroke: '#555' }, racine);
-    texte(nomX, largeur - 2, Y(0) - 5, { 'text-anchor': 'end', 'font-style': 'italic' });
-    texte(nomY, marge.gauche + 3, 11, { 'font-style': 'italic' });
+    trait(X(x0), Y(0), X(x1), Y(0), { stroke: '#555' });
+    légende(nomX, largeur - 2, Y(0) - 8, 'droite');
+    légende(nomY, marge.gauche, 9, 'gauche', COULEURS.noir);
     return {
-        racine,
+        élément: conteneur,
         fond,
         vers: (x, y) => [X(x), Y(y)],
-        texte,
+        légende,
+        trait,
         trace(f, couleur) {
             const points = Array.from({ length: 121 }, (_, k) => {
                 const x = x0 + ((x1 - x0) * k) / 120;
@@ -159,7 +186,7 @@ function graphique({ x0, x1, graduations, largeur = 272, hauteur = 132, nomX, no
             svg('polyline', { points: points.join(' '), fill: 'none', stroke: couleur, 'stroke-width': 2 }, racine);
         },
         point: (couleur) => svg('circle', { r: 4, fill: couleur }, racine),
-        curseur: () => svg('line', { y1: Y(1.15), y2: Y(-1.15), stroke: '#000', 'stroke-dasharray': '3 3' }, racine),
+        curseur: () => trait(0, Y(1.15), 0, Y(-1.15), { stroke: '#000', 'stroke-dasharray': '3 3' }),
     };
 }
 
@@ -167,91 +194,95 @@ function graphique({ x0, x1, graduations, largeur = 272, hauteur = 132, nomX, no
 
 function machineSynchrone(section) {
     const { vue, réglages: panneau } = cadre(section);
-    const scène = new Scène(vue, {
-        perspective: true,
-        rapport: 1.12,
-        taille: 30,
-        haut: [0, 1, 0],
-        ...VUE_DE_TROIS_QUARTS,
-        éclairage: 0.45,
-    });
-    scène.bouton('De face', () => scène.regarde(VUE_DE_FACE));
+    const scène = new Scène(vue, { rapport: 1.12, taille: 12.6, haut: [0, 1, 0], ...VUE_DE_FACE, éclairage: 0.45 });
+    scène.bouton('Vue de trois quarts', () => scène.regarde(VUE_DE_TROIS_QUARTS));
     // Un rendu photographique pour la machine : des reflets pour les métaux —
-    // une pièce éclairée, que les tôles, le cuivre et l'arbre renvoient —, et
+    // une pièce éclairée, que les tôles, les fils et l'arbre renvoient —, et
     // une exposition qui ne brûle pas les faces claires.
     const pmrem = new THREE.PMREMGenerator(scène.rendu);
     scène.scène.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     scène.scène.environmentIntensity = 0.35;
     scène.rendu.toneMapping = THREE.NeutralToneMapping;
 
-    const { stator, rotor } = machine();
-    scène.ajoute(stator, rotor);
+    const état = { N: N_DÉPART, ωt: 0, α: 45, f: 0.15, pause: false, courants: true };
 
-    // Le sens des courants, sur la section des conducteurs.
-    const courantsStator = ANGLES_ENCOCHES.map((a) => {
-        const { phase, sens } = bobinage(a);
-        const symbole = new Courant(COULEUR_PHASE[phase]);
-        symbole.position.copy(direction(a).multiplyScalar(R_CONDUCTEUR)).setZ(0.01);
-        return { symbole, phase, sens };
-    });
-    const courantsRotor = ENCOCHES_DU_ROTOR.map(({ angle, sens }) => {
-        const symbole = new Courant(COULEURS.noir).montre(sens);
-        symbole.position.copy(direction(angle).multiplyScalar(R_CONDUCTEUR_ROTOR)).setZ(0.01);
-        return symbole;
-    });
-    stator.add(...courantsStator.map((c) => c.symbole));
-    rotor.add(...courantsRotor);
+    // La machine, reconstruite quand N change, et le sens des courants sur
+    // la section de ses conducteurs.
+    let modèle = null;
+    let symboles = [];
+    function construis() {
+        if (modèle) {
+            scène.scène.remove(modèle.stator, modèle.rotor);
+            modèle.libère();
+            for (const { symbole } of symboles) symbole.material.dispose();
+        }
+        modèle = machine(état.N, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
+        symboles = [];
+        for (const partie of ['stator', 'rotor']) {
+            const disque = new THREE.CircleGeometry(modèle.symboles[partie], 32);
+            for (const c of modèle.conducteurs[partie]) {
+                const symbole = new Courant(COULEUR[c.circuit], disque);
+                symbole.position.copy(direction(c.angle).multiplyScalar(c.rayon)).setZ(0.01);
+                symbole.visible = état.courants;
+                modèle[partie].add(symbole);
+                symboles.push({ symbole, c });
+            }
+        }
+        scène.ajoute(modèle.stator, modèle.rotor);
+    }
+    construis();
 
-    // Le nom des bandes de conducteurs de chaque enroulement, et les pôles du
-    // rotor.
+    // Le nom des bandes de conducteurs des circuits statoriques, et les pôles
+    // du rotor, qui tournent avec lui.
     const bandes = [
         ['1', 90, 1],
         ["1'", 270, 1],
         ['2', 0, 2],
         ["2'", 180, 2],
-    ].map(([tex, a, phase]) =>
-        new Étiquette(tex, { couleur: COULEUR_PHASE[phase], face: DEVANT }).place(
+    ].map(([tex, a, circuit]) =>
+        new Étiquette(tex, { couleur: COULEUR[circuit], face: DEVANT }).place(
             direction(deg(a)).multiplyScalar(R_STATOR + 0.55),
         ),
     );
-    const pôles = [
+    const pôles = new THREE.Group().add(
         new Étiquette('\\mathrm{N}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(1.55, 0, Z_SCHÉMA)),
         new Étiquette('\\mathrm{S}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(-1.55, 0, Z_SCHÉMA)),
-    ];
-    scène.ajoute(...bandes);
-    rotor.add(...pôles);
+    );
 
-    // Les champs dans l'entrefer.
-    const flèche = (couleur) => new Flèche({ couleur, rayon: 0.026, tête: 0.18, largeur: 0.07 });
+    // Les champs dans l'entrefer : des flèches, le contour qui relie leurs
+    // pointes, et en pointillés la limite sinusoïdale.
+    const flèches = (couleur, décalage) =>
+        Array.from({ length: FLÈCHES }, (_, k) => ({
+            θ: (DEUX_PI * (k + décalage)) / FLÈCHES,
+            flèche: new Flèche({ couleur, rayon: 0.026, tête: 0.18, largeur: 0.07 }),
+        }));
     const champs = {
-        Bs: Array.from({ length: FLÈCHES }, (_, k) => ({
-            θ: (2 * Math.PI * k) / FLÈCHES,
-            flèche: flèche(COULEUR_BS),
-        })),
-        Br: Array.from({ length: FLÈCHES }, (_, k) => ({
-            θ: (2 * Math.PI * (k + 0.5)) / FLÈCHES,
-            flèche: flèche(COULEUR_BR),
-        })),
+        Bs: { flèches: flèches(COULEUR.Bs, 0), contour: new Trait({ couleur: COULEUR.Bs, épaisseur: 2 }) },
+        Br: { flèches: flèches(COULEUR.Br, 0.5), contour: new Trait({ couleur: COULEUR.Br, épaisseur: 2 }) },
     };
-    const groupeBs = new THREE.Group().add(...champs.Bs.map((c) => c.flèche));
-    const groupeBr = new THREE.Group().add(...champs.Br.map((c) => c.flèche));
+    const limites = {
+        Bs: new Trait({ couleur: COULEUR.Bs, épaisseur: 1.5, pointillés: true, tiret: 0.1 }),
+        Br: new Trait({ couleur: COULEUR.Br, épaisseur: 1.5, pointillés: true, tiret: 0.1 }),
+    };
+    const groupeBs = new THREE.Group().add(...champs.Bs.flèches.map((f) => f.flèche), champs.Bs.contour);
+    const groupeBr = new THREE.Group().add(...champs.Br.flèches.map((f) => f.flèche), champs.Br.contour);
+    const groupeLimites = new THREE.Group().add(limites.Bs, limites.Br);
 
     // L'angle α, du rotor au maximum du champ glissant, et le couple.
     const schéma = new THREE.Group();
-    const axeRotor = new Trait({ couleur: COULEUR_BR, épaisseur: 2, pointillés: true, tiret: 0.15 });
-    const maximumBs = new Trait({ couleur: COULEUR_BS, épaisseur: 2, pointillés: true, tiret: 0.15 });
+    const axeRotor = new Trait({ couleur: COULEUR.rotor, épaisseur: 2, pointillés: true, tiret: 0.15 });
+    const maximumBs = new Trait({ couleur: COULEUR.Bs, épaisseur: 2, pointillés: true, tiret: 0.15 });
     const arcα = new Arc('\\alpha', { face: DEVANT });
     const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
-    schéma.add(axeRotor, maximumBs, arcα, arcΓ);
-    scène.ajoute(groupeBs, groupeBr, schéma);
+    schéma.add(axeRotor, maximumBs, arcα, arcΓ, pôles);
+    scène.ajoute(...bandes, groupeBs, groupeBr, groupeLimites, schéma);
 
     // -- Réglages --------------------------------------------------------------
 
-    const état = { ωt: 0, θr: 0, α: 45, rapport: 1, f: 0.15, pause: false };
     const réglages = new Réglages(panneau);
 
     réglages.groupe('Fonctionnement');
-    const curseurα = réglages.curseur({
+    réglages.curseur({
         tex: '\\alpha',
         min: -180,
         max: 180,
@@ -259,17 +290,6 @@ function machineSynchrone(section) {
         valeur: état.α,
         unité: '°',
         auChangement: (v) => (état.α = v),
-    });
-    réglages.curseur({
-        tex: '\\Omega/\\omega',
-        min: 0,
-        max: 2,
-        pas: 0.05,
-        valeur: état.rapport,
-        auChangement: (v) => {
-            état.rapport = v;
-            curseurα.désactive(v !== 1);
-        },
     });
     réglages.curseur({
         tex: 'f',
@@ -280,66 +300,108 @@ function machineSynchrone(section) {
         unité: ' Hz',
         auChangement: (v) => (état.f = v),
     });
-    réglages.texte('La fréquence des courants, très ralentie.').className = 'note';
+    réglages.texte('La fréquence des courants, très ralentie. Le rotor tourne au synchronisme : Ω = ω.').className =
+        'note';
     const pause = réglages.bouton('Pause', () => {
         état.pause = !état.pause;
         pause.textContent = état.pause ? 'Reprendre' : 'Pause';
     });
 
+    réglages.groupe('Enroulements');
+    réglages.curseur({
+        tex: 'N',
+        min: 1,
+        max: 20,
+        pas: 1,
+        valeur: état.N,
+        auChangement: (v) => {
+            état.N = v;
+            construis();
+        },
+    });
+    réglages.texte(
+        'Encoches de chaque côté de chaque circuit. Le champ saute d’un cran à chaque conducteur : ' +
+            'il est en marches, qui tendent vers le champ sinusoïdal du cours quand N → ∞.',
+    ).className = 'note';
+
     réglages.groupe('Couple électromagnétique');
-    réglages.formule('\\Gamma_{\\text{ém}} = \\Gamma_{\\max} \\sin(\\omega t - \\theta_r)');
+    réglages.formule('\\Gamma_{\\text{ém}} = \\Gamma_{\\max} \\sin\\alpha');
     const couple = graphique({
         x0: -180,
         x1: 180,
-        graduations: [
-            [-180, '−180°'],
-            [-90, '−90°'],
+        graduationsX: [
+            [-180, '-180^\\circ'],
+            [-90, '-90^\\circ'],
             [0, '0'],
-            [90, '90°'],
-            [180, '180°'],
+            [90, '90^\\circ'],
+            [180, '180^\\circ'],
         ],
-        nomX: 'α',
-        nomY: 'Γ / Γmax',
+        graduationsY: [
+            [1, '\\Gamma_{\\max}'],
+            [-1, '-\\Gamma_{\\max}'],
+        ],
+        nomX: '\\alpha',
+        nomY: '\\Gamma_{\\text{ém}}',
+        hauteur: 150,
     });
-    // La zone stable, |α| < 90° : le couple y croît avec α.
+    // La zone stable, |α| < 90° : le couple y croît avec α. Le signe de α
+    // sépare les deux fonctionnements, de part et d'autre du pointillé.
     const [xs0, ys0] = couple.vers(-90, 1.15);
     const [xs1, ys1] = couple.vers(90, -1.15);
     svg('rect', { x: xs0, y: ys0, width: xs1 - xs0, height: ys1 - ys0, fill: '#f0f0f0' }, couple.fond);
-    couple.texte('stable', (xs0 + xs1) / 2, ys0 + 10, { 'text-anchor': 'middle' });
-    // Le signe du couple sépare les deux fonctionnements.
-    couple.texte('moteur →', ...couple.vers(175, -0.78), { 'text-anchor': 'end' });
-    couple.texte('← générateur', ...couple.vers(-175, 0.66), { 'text-anchor': 'start' });
+    couple.trait(...couple.vers(0, 1.15), ...couple.vers(0, -1.15), { stroke: '#000', 'stroke-dasharray': '4 3' });
+    couple.légende('\\text{générateur}', ...couple.vers(-90, 1.3), 'centre', COULEURS.noir);
+    couple.légende('\\text{moteur}', ...couple.vers(90, 1.3), 'centre', COULEURS.noir);
+    // Chaque zone nommée là où la courbe n'est pas : du côté opposé au signe
+    // du couple.
+    for (const [α, y, tex] of [
+        [-135, 0.55, 'instable'],
+        [-45, 0.55, 'stable'],
+        [45, -0.55, 'stable'],
+        [135, -0.55, 'instable'],
+    ]) {
+        couple.légende(`\\text{${tex}}`, ...couple.vers(α, y));
+    }
     couple.trace((α) => Math.sin(deg(α)), '#000');
     const pointCouple = couple.point(COULEURS.noir);
-    réglages.ajoute(couple.racine);
+    réglages.ajoute(couple.élément);
     const bilan = réglages.texte();
+    réglages.texte(
+        'La formule du cours vaut pour des champs sinusoïdaux ; avec des champs en marches, ' +
+            'le couple ondule, et sa moyenne reste proportionnelle à sin α.',
+    ).className = 'note';
 
     réglages.groupe('Courants statoriques');
     const courants = graphique({
         x0: 0,
         x1: 360,
-        graduations: [
+        graduationsX: [
             [0, '0'],
-            [90, '90°'],
-            [180, '180°'],
-            [270, '270°'],
-            [360, '360°'],
+            [90, '90^\\circ'],
+            [180, '180^\\circ'],
+            [270, '270^\\circ'],
+            [360, '360^\\circ'],
         ],
-        nomX: 'ωt',
-        nomY: 'i / I',
+        graduationsY: [
+            [1, 'I'],
+            [-1, '-I'],
+        ],
+        nomX: '\\omega t',
+        nomY: `{\\color{${COULEUR[1]}} i_1}, {\\color{${COULEUR[2]}} i_2}`,
     });
-    courants.trace((x) => Math.cos(deg(x)), COULEUR_PHASE[1]);
-    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), COULEUR_PHASE[2]);
+    courants.trace((x) => Math.cos(deg(x)), COULEUR[1]);
+    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), COULEUR[2]);
     const curseurTemps = courants.curseur();
-    const points = [1, 2].map((phase) => courants.point(COULEUR_PHASE[phase]));
-    réglages.ajoute(courants.racine);
+    const points = [1, 2].map((circuit) => courants.point(COULEUR[circuit]));
+    réglages.ajoute(courants.élément);
     réglages.formule(
-        `\\begin{gathered} {\\color{${COULEUR_PHASE[1]}} i_1 = I\\cos(\\omega t)} \\\\ {\\color{${COULEUR_PHASE[2]}} i_2 = I\\cos(\\omega t + \\pi/2)} \\end{gathered}`,
+        `\\begin{gathered} {\\color{${COULEUR[1]}} i_1 = I\\cos(\\omega t)} \\\\ ` +
+            `{\\color{${COULEUR[2]}} i_2 = I\\cos(\\omega t + \\pi/2)} \\end{gathered}`,
     );
     réglages.texte(
-        'Dans les encoches, ⊙ : le courant sort du plan de coupe, ⊗ : il y entre ; ' +
-            'le symbole pâlit avec l’intensité. En vert l’enroulement 1 (conducteurs 1 et 1′), ' +
-            'en rose l’enroulement 2 (2 et 2′) ; en noir, l’enroulement du rotor, parcouru par le courant continu Iₑ.',
+        'Dans les encoches, ⊙ : le courant sort du plan de coupe, ⊗ : il y entre ; le symbole pâlit avec ' +
+            'l’intensité. En vert le circuit statorique 1 (conducteurs 1 et 1′), en bleu le circuit 2 (2 et 2′), ' +
+            'en rouge le circuit rotorique, parcouru par le courant continu Iₑ.',
     ).className = 'note';
 
     réglages.groupe('Afficher');
@@ -347,48 +409,55 @@ function machineSynchrone(section) {
         objets.forEach((o) => (o.visible = visible));
         scène.redessine();
     };
-    réglages.case({ texte: 'Champ statorique ', tex: 'B_s', couleur: COULEUR_BS, auChangement: montre([groupeBs]) });
-    réglages.case({ texte: 'Champ rotorique ', tex: 'B_r', couleur: COULEUR_BR, auChangement: montre([groupeBr]) });
+    réglages.case({ texte: 'Champ statorique ', tex: 'B_s', couleur: COULEUR.Bs, auChangement: montre([groupeBs]) });
+    réglages.case({ texte: 'Champ rotorique ', tex: 'B_r', couleur: COULEUR.Br, auChangement: montre([groupeBr]) });
+    réglages.case({ texte: 'Limite sinusoïdale (N → ∞)', auChangement: montre([groupeLimites]) });
     réglages.case({
         texte: 'Sens des courants',
-        auChangement: montre([...courantsStator.map((c) => c.symbole), ...courantsRotor]),
+        auChangement: (visible) => {
+            état.courants = visible;
+            montre(symboles.map((s) => s.symbole))(visible);
+        },
     });
-    réglages.case({ texte: 'Angle α et couple', auChangement: montre([schéma, ...pôles]) });
+    réglages.case({ texte: 'Angle α et couple', auChangement: montre([schéma]) });
 
     // -- À chaque image ----------------------------------------------------------
 
     scène.àChaqueImage((dt) => {
-        if (!état.pause) {
-            const dφ = 2 * Math.PI * état.f * dt;
-            état.ωt += dφ;
-            état.θr += état.rapport * dφ;
-        }
+        if (!état.pause) état.ωt += DEUX_PI * état.f * dt;
         // Au synchronisme, le rotor garde son retard α sur le champ glissant.
-        if (état.rapport === 1) état.θr = état.ωt - deg(état.α);
-        const { ωt, θr } = état;
-        const ψ = angleSigné(ωt - θr);
+        const ωt = état.ωt;
+        const θr = ωt - deg(état.α);
+        const i = { 1: Math.cos(ωt), 2: Math.cos(ωt + Math.PI / 2), rotor: 1 };
 
-        rotor.rotation.z = θr;
-        const i = { 1: Math.cos(ωt), 2: Math.cos(ωt + Math.PI / 2) };
-        for (const { symbole, phase, sens } of courantsStator) symbole.montre(sens * i[phase]);
+        modèle.rotor.rotation.z = θr;
+        pôles.rotation.z = θr;
+        for (const { symbole, c } of symboles) symbole.montre(c.sens * i[c.circuit]);
 
-        for (const { θ, flèche } of champs.Bs) champ(flèche, θ, Math.cos(ωt - θ));
-        for (const { θ, flèche } of champs.Br) champ(flèche, θ, Math.cos(θ - θr));
+        // Chaque conducteur porte 2/N du courant de son circuit : la limite
+        // sinusoïdale a pour amplitude 1, quel que soit N.
+        const poids = 2 / état.N;
+        const { stator, rotor } = modèle.conducteurs;
+        const Bs = (θ) => champEnMarches(stator, (c) => poids * c.sens * i[c.circuit], θ);
+        const Br = (θ) => champEnMarches(rotor, (c) => poids * c.sens, θ, θr);
+        dessineChamp(champs.Bs, Bs, limites.Bs, (θ) => Math.cos(ωt - θ));
+        dessineChamp(champs.Br, Br, limites.Br, (θ) => Math.cos(θ - θr));
 
         const centre = vecteur(0, 0, Z_SCHÉMA);
         const rayon = (a) => [R_ARBRE + 0.15, R_ROTOR - 0.1].map((r) => direction(a).multiplyScalar(r).setZ(Z_SCHÉMA));
         axeRotor.trace(rayon(θr));
         maximumBs.trace(rayon(ωt));
-        arcα.place(centre, direction(θr), direction(θr + Math.PI / 2), ψ, 2.05);
+        const α = deg(état.α);
+        arcα.place(centre, direction(θr), direction(θr + Math.PI / 2), α, 2.05);
         // Le couple, en arc autour de l'arbre : dans le sens de rotation
         // quand il entraîne le rotor.
-        const Γ = Math.sin(ψ);
+        const Γ = Math.sin(α);
         arcΓ.place(centre, direction(θr + Math.PI), direction(θr + (3 * Math.PI) / 2), 1.7 * Γ, 1.05);
 
-        const [x, y] = couple.vers(THREE.MathUtils.radToDeg(ψ), Γ);
+        const [x, y] = couple.vers(état.α, Γ);
         pointCouple.setAttribute('cx', x);
         pointCouple.setAttribute('cy', y);
-        const t = THREE.MathUtils.radToDeg(THREE.MathUtils.euclideanModulo(ωt, 2 * Math.PI));
+        const t = THREE.MathUtils.radToDeg(THREE.MathUtils.euclideanModulo(ωt, DEUX_PI));
         const [xt] = courants.vers(t, 0);
         curseurTemps.setAttribute('x1', xt);
         curseurTemps.setAttribute('x2', xt);
@@ -397,27 +466,34 @@ function machineSynchrone(section) {
             p.setAttribute('cx', xt);
             p.setAttribute('cy', yi);
         });
-        const texte = régime(état.rapport, état.α);
+        const texte = régime(état.α);
         if (bilan.textContent !== texte) bilan.textContent = texte;
     });
 }
 
-/** Une flèche de champ : radiale, vers l'extérieur si le champ est positif,
- *  partant du milieu de l'entrefer. */
-function champ(flèche, θ, valeur) {
-    const e = direction(θ);
-    const origine = e.clone().multiplyScalar(R_ENTREFER).setZ(Z_SCHÉMA);
-    flèche.place(origine, e.multiplyScalar(Math.sign(valeur) || 1), LONGUEUR_MAX * Math.abs(valeur));
+/**
+ * Un champ dans l'entrefer : ses flèches, radiales, vers l'extérieur s'il est
+ * positif, partant du milieu de l'entrefer ; le contour qui relie leurs
+ * pointes, et la limite sinusoïdale `limite(θ)`.
+ */
+function dessineChamp({ flèches, contour }, champ, pointillés, limite) {
+    for (const { θ, flèche } of flèches) {
+        const valeur = champ(θ);
+        const e = direction(θ);
+        const origine = e.clone().multiplyScalar(R_ENTREFER).setZ(Z_SCHÉMA);
+        flèche.place(origine, e.multiplyScalar(Math.sign(valeur) || 1), LONGUEUR_MAX * Math.abs(valeur));
+    }
+    const autour = (f) =>
+        Array.from({ length: ÉCHANTILLONS + 1 }, (_, k) => {
+            const θ = (DEUX_PI * k) / ÉCHANTILLONS;
+            return direction(θ).multiplyScalar(R_ENTREFER + LONGUEUR_MAX * f(θ)).setZ(Z_SCHÉMA);
+        });
+    contour.trace(autour(champ));
+    pointillés.trace(autour(limite));
 }
 
 /** Ce que le cours dit du régime de fonctionnement. */
-function régime(rapport, α) {
-    if (rapport !== 1) {
-        return (
-            'Ω ≠ ω : l’angle entre le rotor et le champ glissant défile, ' +
-            'le couple change sans cesse de signe ; sa moyenne est nulle.'
-        );
-    }
+function régime(α) {
     if (α === 0) return 'α = 0 : le couple est nul, la machine tourne à vide.';
     const sens =
         α > 0

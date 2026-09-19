@@ -14,7 +14,8 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 /** La palette d'Okabe et Ito : des couleurs qui restent distinctes pour les
- *  daltoniens, et sur le papier blanc du site. */
+ *  daltoniens, et sur le papier blanc du site. Plus un violet, qui n'en est
+ *  pas, pour une cinquième couleur vive. */
 export const COULEURS = {
     noir: '#000000',
     gris: '#6b6b6b',
@@ -23,6 +24,7 @@ export const COULEURS = {
     bleu: '#0072b2',
     vert: '#009e73',
     pourpre: '#cc79a7',
+    violet: '#8b44ac',
     orange: '#e69f00',
     ciel: '#56b4e9',
 };
