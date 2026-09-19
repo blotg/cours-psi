@@ -32,6 +32,9 @@ export const LONGUEUR = 3.2;
 const R_FOND = 4; // le fond des encoches du stator
 const PROFONDEUR_ROTOR = 0.72; // la profondeur des encoches du rotor
 const LARGEUR_MAX = { stator: 0.34, rotor: 0.3 };
+/** Le rayon des fils des têtes de bobines pour N = 1 : ils s'affinent en 1/N,
+ *  et leur faisceau garde la même largeur. */
+const RAYON_FIL = { stator: 0.15, rotor: 0.12 };
 /** L'isolant entre le conducteur et les bords de son encoche : une fine
  *  bordure sombre, à la mesure de l'encoche. */
 const isolant = (l) => Math.min(0.035, 0.15 * l);
@@ -51,7 +54,8 @@ const tourPositif = (a) => THREE.MathUtils.euclideanModulo(a, 2 * Math.PI);
  * qui saute du même cran à chaque conducteur (théorème d'Ampère), descende
  * en N marches égales qui épousent un cosinus. Le k-ième conducteur aller est
  * à l'angle φ tel que cos φ = 1 − (2k + 1)/N ; son retour, à −φ. Pour N = 1,
- * c'est la spire unique du cours, à ±90° de l'axe.
+ * c'est la spire unique du cours, à ±90° de l'axe. Au stator, `répartis` les
+ * décale un peu, pour faire place aux deux circuits.
  */
 function positions(N) {
     return Array.from({ length: N }, (_, k) => Math.acos(1 - (2 * k + 1) / N));
@@ -70,15 +74,33 @@ export function circuits(N) {
             { circuit: nom, angle: axe + φ, sens: 1, via: φ <= Math.PI / 2 + 1e-9 ? axe : axe + Math.PI },
             { circuit: nom, angle: axe - φ, sens: -1 },
         ]);
-    return { stator: [...circuit(1, 0), ...circuit(2, -Math.PI / 2)], rotor: circuit('rotor', 0) };
+    return { stator: répartis([...circuit(1, 0), ...circuit(2, -Math.PI / 2)], N), rotor: circuit('rotor', 0) };
 }
 
-/** La largeur des encoches : la plus grande qui laisse une dent entre les
- *  deux conducteurs les plus proches, sans dépasser `max`. */
-function largeur(conducteurs, rayon, max) {
-    const angles = conducteurs.map((c) => tourPositif(c.angle)).sort((a, b) => a - b);
-    const écart = Math.min(...angles.map((a, k) => (k ? a - angles[k - 1] : a + 2 * Math.PI - angles.at(-1))));
-    return Math.min(max, 0.7 * écart * rayon);
+/**
+ * À leur place idéale, des conducteurs des deux circuits statoriques
+ * tomberaient presque les uns sur les autres — à 0,2° près pour N = 17 : plus
+ * la place d'une encoche entre eux. On garde leur ordre autour de l'alésage,
+ * mais on les espace selon leur densité moyenne, N/2 (|sin θ| + |cos θ|) par
+ * radian — |sin θ| pour le circuit 1, |cos θ| pour le 2. Aucun ne bouge de
+ * plus d'un écart entre encoches : les champs tendent toujours vers le champ
+ * sinusoïdal quand N → ∞. Et deux encoches voisines sont à √2/N radian au
+ * moins l'une de l'autre, là où la densité est la plus forte, à 45° des axes.
+ */
+function répartis(conducteurs, N) {
+    // L'angle où le nombre moyen de conducteurs, compté depuis θ = 0, atteint
+    // n : il en passe N par quart de tour.
+    const angle = (n) => {
+        const quarts = Math.floor(n / N);
+        const x = (2 * (n - quarts * N)) / N - 1;
+        return (quarts * Math.PI) / 2 + Math.PI / 4 + Math.asin(THREE.MathUtils.clamp(x / Math.SQRT2, -1, 1));
+    };
+    // Pour N impair, un conducteur du circuit 2 est en θ = 0 : il y reste.
+    const départ = N % 2 ? 0 : 0.5;
+    [...conducteurs]
+        .sort((a, b) => tourPositif(a.angle) - tourPositif(b.angle))
+        .forEach((c, k) => (c.angle = angle(k + départ)));
+    return conducteurs;
 }
 
 // -- Matériaux ----------------------------------------------------------------
@@ -215,7 +237,9 @@ export function machine(N, couleurs) {
     // Le stator : les tôles, et dans chaque encoche le conducteur, qui
     // dépasse du paquet vers les têtes de bobines.
     const stator = new THREE.Group();
-    const lStator = largeur(conducteursStator, R_ALÉSAGE, LARGEUR_MAX.stator);
+    // Les encoches occupent 70 % de l'écart entre les deux plus proches,
+    // √2/N radian (cf. `répartis`).
+    const lStator = Math.min(LARGEUR_MAX.stator, (0.7 * R_ALÉSAGE * Math.SQRT2) / N);
     const tôles = new THREE.Shape(Array.from({ length: 192 }, (_, k) => polaire(R_STATOR, (2 * Math.PI * k) / 192)));
     tôles.holes.push(contourEncoché(new THREE.Path(), conducteursStator, R_ALÉSAGE, R_FOND, lStator));
     stator.add(extrude(tôles, -LONGUEUR, 0, MATÉRIAUX.flanc, MATÉRIAUX.coupe));
@@ -231,7 +255,7 @@ export function machine(N, couleurs) {
             têteDeBobine(c.angle, c.via, {
                 r: rStator,
                 z: -LONGUEUR - 0.25,
-                épaisseur: Math.min(0.075, 0.3 * lStator),
+                épaisseur: RAYON_FIL.stator / N,
                 matériau: fils[c.circuit],
                 ...têtes[c.circuit],
             }),
@@ -246,8 +270,11 @@ export function machine(N, couleurs) {
 
     // Le rotor : ses tôles, creusées d'encoches ouvertes sur l'entrefer.
     const rotor = new THREE.Group();
-    const lRotor = largeur(conducteursRotor, R_ROTOR, LARGEUR_MAX.rotor);
     const fond = R_ROTOR - PROFONDEUR_ROTOR;
+    // Au rotor, deux conducteurs voisins sont à 2/N radian au moins (cf.
+    // `positions`). Les dents s'amincissent vers l'axe : c'est au fond des
+    // encoches qu'on mesure leur écart.
+    const lRotor = Math.min(LARGEUR_MAX.rotor, (0.7 * fond * 2) / N);
     const profil = contourEncoché(new THREE.Shape(), conducteursRotor, R_ROTOR, fond, lRotor);
     profil.holes.push(new THREE.Path().absarc(0, 0, R_ARBRE, 0, 2 * Math.PI, true));
     // Les pôles couvrent jusqu'à 90° d'un seul arc : il leur faut plus de
@@ -264,7 +291,7 @@ export function machine(N, couleurs) {
                 z: -LONGUEUR - 0.2,
                 hauteur: 0.3,
                 écart: -0.25,
-                épaisseur: Math.min(0.065, 0.3 * lRotor),
+                épaisseur: RAYON_FIL.rotor / N,
                 matériau: fils.rotor,
             }),
         );

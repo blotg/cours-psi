@@ -168,6 +168,19 @@ sinusoïdale » trace en pointillés. Le couple affiché reste celui du cours,
 Γ_max sin α : avec des champs en marches, il ondule autour d'une moyenne
 proportionnelle à sin α.
 
+À leur place exacte, des conducteurs des deux circuits statoriques
+tomberaient presque les uns sur les autres (à 0,2° pour N = 17), et la
+largeur des encoches, réglée sur les deux plus proches, sautait d'un N à
+l'autre. On garde leur ordre autour de l'alésage, mais on les espace selon
+leur densité moyenne, N/2 (|sin θ| + |cos θ|) par radian : deux encoches
+voisines sont toujours à √2/N radian au moins, la largeur ne dépend plus que
+de N, et aucun conducteur ne bouge de plus d'un écart entre encoches — les
+champs tendent toujours vers la sinusoïde. Les fils des têtes de bobines ont
+un diamètre en 1/N.
+
+Le panneau trace aussi B_s et B_r en fonction de θ, avec des amplitudes
+différentes (B_r vaut 0,6 B_s) : rien ne les lie, B_s suit I, B_r suit I_e.
+
 Chaque circuit a sa couleur, celle de ses fils et de son courant : vert pour
 le circuit 1, bleu pour le 2, rouge pour le rotor ; les champs, violet (B_s)
 et orange (B_r). La caméra est orthographique, de face au départ.
