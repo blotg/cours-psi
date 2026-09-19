@@ -104,9 +104,12 @@ Quelques partis pris :
 
 - **Rendu à la demande.** Une `Scène` ne redessine que si la caméra a bougé,
   si l'on a appelé `redessine()` après un réglage, ou si elle est animée
-  (`àChaqueImage(dt => …)`). Hors de l'écran, elle s'arrête ; et `lance` ne
-  crée une scène qu'à l'approche de l'écran : un téléphone limite le nombre de
-  contextes WebGL ouverts.
+  (`àChaqueImage(dt => …)`). Hors de l'écran, elle ne dessine plus ; une
+  scène animée continue pourtant de tourner tant que son cadre — la scène et
+  son panneau — est à l'écran : sur un téléphone, les courbes sont sous la
+  scène, et doivent suivre quand on y descend. `lance` ne crée une scène qu'à
+  l'approche de l'écran : un téléphone limite le nombre de contextes WebGL
+  ouverts.
 - **Des couleurs de schéma.** La palette d'Okabe et Ito, lisible par les
   daltoniens. Les tracés (flèches, traits, points) échappent au rendu
   photographique qu'une scène peut choisir pour ses objets réalistes
@@ -128,6 +131,9 @@ Quelques partis pris :
 - **Rien ne cache une étiquette** : c'est du HTML posé sur l'image. Celle qui
   nomme un dessin posé sur une face prend l'option `face` (la normale de la
   face) et s'efface quand on la regarde de dos.
+- **`hidden` ne cache pas un contrôle du panneau** : ses règles lui donnent
+  un `display` qui l'emporte sur celui de l'attribut. `page.css` le rétablit
+  (`.panneau [hidden]`).
 - `THREE.Clock` est déprécié : `Scène` emploie `THREE.Timer`, qu'il faut
   mettre à jour (`update()`) à chaque image.
 
@@ -145,8 +151,23 @@ l'arc de rayon r, pas sur celui de rayon r + dr.
 
 **Conversion 3** — `machine.js` dessine la machine synchrone diphasée et
 bipolaire, coupée en son milieu ; `machine-synchrone.js` la fait tourner. Les
-conventions sont celles du cours : l'enroulement 1 d'axe θ = 0, l'enroulement
-2 d'axe θ = −90°, parcourus par i₁ = I cos(ωt) et i₂ = I cos(ωt + π/2), ce qui
-donne le champ glissant B_s ∝ cos(ωt − θ) ; le rotor à θ_r = Ωt − α, son champ
-B_r ∝ cos(θ − θ_r), et le couple Γ = Γ_max sin(ωt − θ_r). Le rotor est lisse,
-comme le veut l'hypothèse d'un entrefer constant.
+conventions sont celles du cours : le circuit statorique 1 d'axe θ = 0, le
+circuit 2 d'axe θ = −90°, parcourus par i₁ = I cos(ωt) et i₂ = I cos(ωt + π/2) ;
+le rotor tourne toujours au synchronisme, θ_r = ωt − α. Il est lisse, comme le
+veut l'hypothèse d'un entrefer constant.
+
+Chaque circuit a N spires (curseur, 5 au départ), logées dans N encoches de
+part et d'autre de son axe. Les champs ne sont pas supposés sinusoïdaux : ils
+se calculent à partir des conducteurs, par le théorème d'Ampère — le champ
+saute d'un cran à chaque conducteur et reste de moyenne nulle —, et sont donc
+en marches. Les spires sont placées pour que ces marches soient égales et
+épousent un cosinus (cos φ_k = 1 − (2k + 1)/N) : pour N = 1, c'est la spire
+unique du cours et son champ en créneau ; quand N → ∞, on retrouve le champ
+glissant B_s ∝ cos(ωt − θ) et B_r ∝ cos(θ − θ_r), que la case « Limite
+sinusoïdale » trace en pointillés. Le couple affiché reste celui du cours,
+Γ_max sin α : avec des champs en marches, il ondule autour d'une moyenne
+proportionnelle à sin α.
+
+Chaque circuit a sa couleur, celle de ses fils et de son courant : vert pour
+le circuit 1, bleu pour le 2, rouge pour le rotor ; les champs, violet (B_s)
+et orange (B_r). La caméra est orthographique, de face au départ.

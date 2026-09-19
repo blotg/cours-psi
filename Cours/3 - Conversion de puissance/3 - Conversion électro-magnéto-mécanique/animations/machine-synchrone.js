@@ -23,7 +23,7 @@ import { R_ARBRE, R_ENTREFER, R_ROTOR, R_STATOR, machine } from './machine.js';
 /** Une couleur par circuit — celle de ses fils, de son courant —, et une par
  *  champ. */
 const COULEUR = {
-    1: COULEURS.vert,
+    1: '#1e9a3c',
     2: COULEURS.bleu,
     rotor: COULEURS.vermillon,
     Bs: COULEURS.violet,
@@ -32,8 +32,6 @@ const COULEUR = {
 
 const deg = THREE.MathUtils.degToRad;
 const DEUX_PI = 2 * Math.PI;
-/** Un angle ramené dans ]−π, π]. */
-const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, DEUX_PI) - Math.PI;
 const direction = (a) => vecteur(Math.cos(a), Math.sin(a), 0);
 
 /** Ce qui se dessine par-dessus le plan de coupe, juste devant lui, et les
@@ -171,7 +169,9 @@ function graphique({ x0, x1, graduationsX, graduationsY, nomX, nomY, hauteur = 1
     }
     trait(X(x0), Y(0), X(x1), Y(0), { stroke: '#555' });
     légende(nomX, largeur - 2, Y(0) - 8, 'droite');
-    légende(nomY, marge.gauche, 9, 'gauche', COULEURS.noir);
+    // Le nom de l'axe au-dessus de ses graduations : le haut du graphique
+    // reste libre pour ses propres légendes.
+    légende(nomY, marge.gauche - 5, 9, 'droite', COULEURS.noir);
     return {
         élément: conteneur,
         fond,
@@ -411,7 +411,8 @@ function machineSynchrone(section) {
     };
     réglages.case({ texte: 'Champ statorique ', tex: 'B_s', couleur: COULEUR.Bs, auChangement: montre([groupeBs]) });
     réglages.case({ texte: 'Champ rotorique ', tex: 'B_r', couleur: COULEUR.Br, auChangement: montre([groupeBr]) });
-    réglages.case({ texte: 'Limite sinusoïdale (N → ∞)', auChangement: montre([groupeLimites]) });
+    groupeLimites.visible = false;
+    réglages.case({ texte: 'Limite sinusoïdale (N → ∞)', valeur: false, auChangement: montre([groupeLimites]) });
     réglages.case({
         texte: 'Sens des courants',
         auChangement: (visible) => {

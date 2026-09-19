@@ -32,7 +32,9 @@ export const LONGUEUR = 3.2;
 const R_FOND = 4; // le fond des encoches du stator
 const PROFONDEUR_ROTOR = 0.72; // la profondeur des encoches du rotor
 const LARGEUR_MAX = { stator: 0.34, rotor: 0.3 };
-const RETRAIT = 0.035; // l'écart entre le conducteur et les bords de son encoche
+/** L'isolant entre le conducteur et les bords de son encoche : une fine
+ *  bordure sombre, à la mesure de l'encoche. */
+const isolant = (l) => Math.min(0.035, 0.15 * l);
 
 const polaire = (r, a) => new THREE.Vector2(r * Math.cos(a), r * Math.sin(a));
 /** Le point à la distance r de l'axe, décalé de s de côté par rapport à la
@@ -112,6 +114,7 @@ const MATÉRIAUX = {
     arbre: new THREE.MeshStandardMaterial({ color: '#a4a9ae', metalness: 0.9, roughness: 0.3 }),
     bague: new THREE.MeshStandardMaterial({ color: '#c9a150', metalness: 1, roughness: 0.28 }),
     balai: new THREE.MeshStandardMaterial({ color: '#2e2e30', metalness: 0.1, roughness: 0.85 }),
+    isolant: new THREE.MeshStandardMaterial({ color: '#33383d', metalness: 0, roughness: 0.8 }),
 };
 
 /** Un profil extrudé de `z0` à `z1`, coupe et flancs chacun leur matériau.
@@ -127,6 +130,19 @@ function extrude(forme, z0, z1, flanc, coupe = flanc, segments = 10) {
 /** Un rectangle d'axe `a`, entre les distances r0 et r1 à l'axe, de largeur l. */
 function barreau(a, r0, r1, l) {
     return new THREE.Shape([local(a, r0, -l / 2), local(a, r1, -l / 2), local(a, r1, l / 2), local(a, r0, l / 2)]);
+}
+
+/**
+ * Ce qui remplit une encoche d'axe `a`, entre r0 et r1, de largeur l : le
+ * conducteur, du matériau `fil`, qui dépasse de `dépassement` derrière le
+ * paquet de tôles, et l'isolant qui l'entoure.
+ */
+function encoche(a, r0, r1, l, fil, dépassement) {
+    const e = isolant(l);
+    const cuivre = barreau(a, r0 + e, r1 - e, l - 2 * e);
+    const gaine = barreau(a, r0, r1, l);
+    gaine.holes.push(cuivre);
+    return [extrude(cuivre, -LONGUEUR - dépassement, 0, fil), extrude(gaine, -LONGUEUR, 0, MATÉRIAUX.isolant)];
 }
 
 /**
@@ -192,7 +208,7 @@ export function machine(N, couleurs) {
     const fils = Object.fromEntries(
         Object.entries(couleurs).map(([nom, couleur]) => [
             nom,
-            new THREE.MeshStandardMaterial({ color: couleur, metalness: 0.55, roughness: 0.35 }),
+            new THREE.MeshStandardMaterial({ color: couleur, metalness: 0.35, roughness: 0.45 }),
         ]),
     );
 
@@ -209,8 +225,7 @@ export function machine(N, couleurs) {
     const têtes = { 1: { hauteur: 0.45, écart: 0.1 }, 2: { hauteur: 0.8, écart: 0.45 } };
     for (const c of conducteursStator) {
         c.rayon = rStator;
-        const section = barreau(c.angle, R_ALÉSAGE + RETRAIT, R_FOND - RETRAIT, lStator - 2 * RETRAIT);
-        stator.add(extrude(section, -LONGUEUR - 0.25, 0, fils[c.circuit]));
+        stator.add(...encoche(c.angle, R_ALÉSAGE, R_FOND, lStator, fils[c.circuit], 0.25));
         if (c.via === undefined) continue;
         stator.add(
             têteDeBobine(c.angle, c.via, {
@@ -241,8 +256,7 @@ export function machine(N, couleurs) {
     const rRotor = (R_ROTOR + fond) / 2;
     for (const c of conducteursRotor) {
         c.rayon = rRotor;
-        const section = barreau(c.angle, fond + RETRAIT, R_ROTOR - RETRAIT, lRotor - 2 * RETRAIT);
-        rotor.add(extrude(section, -LONGUEUR - 0.2, 0, fils.rotor));
+        rotor.add(...encoche(c.angle, fond, R_ROTOR, lRotor, fils.rotor, 0.2));
         if (c.via === undefined) continue;
         rotor.add(
             têteDeBobine(c.angle, c.via, {
