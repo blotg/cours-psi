@@ -19,6 +19,7 @@ Les coups de pouce et les corrigés sont floutés : il faut maintenir le survol,
 | [`TP/`](TP) | les sujets de TP |
 | [`prepa/`](prepa) | le paquet typst `@local/prepa`, qui donne leur forme à tous les documents |
 | [`gabarits/`](gabarits) | les gabarits des documents tirés du cours : planche de flashcards, diaporama, questions de colle, pages du site, notebooks |
+| [`animations/`](animations) | la bibliothèque commune des animations 3D des chapitres, et leur construction par vite |
 | [`outils/`](outils) | les outils Python de production et de publication |
 | [`.githooks/`](.githooks) | les hooks qui recompilent les documents au commit et publient le site au push |
 
@@ -30,8 +31,9 @@ Un chapitre de `Cours/` contient :
 - `compétences.typ` et `méthodes.typ` ;
 - `TD.typ`, qui rassemble les exercices du dossier `exercices/` ;
 - `poly.typ`, qui assemble le tout en un seul document ;
-- éventuellement `DM/` (sujets et corrigés en PDF) et `Simulations/` (scripts
-  Python, et parfois les figures qu'ils produisent).
+- éventuellement `DM/` (sujets et corrigés en PDF), `Simulations/` (scripts
+  Python, et parfois les figures qu'ils produisent) et `animations/` (pages
+  animées en 3D, liées depuis le sommaire du chapitre sur le site).
 
 Les documents produits atterrissent dans un dossier `build/` propre à chaque
 chapitre, ignoré par git.
@@ -67,19 +69,21 @@ Pour que les documents d'un chapitre se recompilent à chaque commit qui le touc
 git config core.hooksPath .githooks
 ```
 
+Les animations demandent en plus [Node.js](https://nodejs.org) (version >= 20.19) ; leurs dépendances s'installent seules à la première construction (cf. [`animations/README.md`](animations/README.md)).
+
 Toutes les commandes, les hooks et leurs réglages sont décrits dans [`outils/README.md`](outils/README.md).
 
 ## Usage de l'IA
 
-**Cours et exercices.** La rédaction est entièrement manuelle. Une IA (Claude Opus) a ensuite ensuite le texte pour y chercher des erreurs, et les corrections sont faites à la main.
+**Cours et exercices :** La rédaction est entièrement manuelle. Une IA (Claude Opus) a ensuite ensuite le texte pour y chercher des erreurs, et les corrections sont faites à la main.
 
-**Simulations.** Les scripts des dossiers `Simulations/` ont été conçus par une IA (Claude Opus). La cohérence physique des résultats est vérifiée à la main, et le code est relu manuellement.
+**Simulations et animations :** Les scripts des dossiers `Simulations/` ont été conçus par une IA (Claude Opus). La cohérence physique des résultats est vérifiée à la main, et le code est relu manuellement.
 
-**Outils de publication et gabarits.** Une première version, écrite à la main, a servi de version alpha. Elle a ensuite été réécrite presque entièrement par une IA (Claude Opus), sans relecture manuelle du code. Cela concerne le paquet [`prepa/`](prepa), les [`gabarits/`](gabarits), les [`outils/`](outils) et les [`.githooks/`](.githooks).
+**Outils de publication et gabarits :** Une première version, écrite à la main, a servi de version alpha. Elle a ensuite été réécrite presque entièrement par une IA (Claude Opus), sans relecture manuelle du code. Cela concerne le paquet [`prepa/`](prepa), les [`gabarits/`](gabarits), les [`outils/`](outils) et les [`.githooks/`](.githooks).
 
 ## Licences
 
-- Le code (`prepa/`, `gabarits/`, `outils/`, `.githooks/`) est sous [EUPL-1.2](LICENCES/EUPL-1.2.txt).
+- Le code (`prepa/`, `gabarits/`, `outils/`, `animations/`, `.githooks/`) est sous [EUPL-1.2](LICENCES/EUPL-1.2.txt).
 - Le cours et ses documents (`Cours/`, `révisions/`, `TP/`, et tout ce qui en est tiré) sont sous [CC BY-NC 4.0](LICENCES/CC-BY-NC-4.0.txt) : libres de réutilisation et d'adaptation, y compris pour son propre enseignement, en citant l'auteur et sans usage commercial.
 - Le logo du lycée et les énoncés d'origine externe (concours, ouvrages) ne relèvent d'aucune de ces deux licences.
 

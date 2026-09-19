@@ -1,0 +1,17 @@
+{
+  "name": "cours-psi-animations",
+  "private": true,
+  "description": "Animations 3D du cours de PSI, construites par vite (cf. animations/README.md)",
+  "license": "EUPL-1.2",
+  "type": "module",
+  "imports": {
+    "#animations/*": "./animations/*"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "katex": "^0.18.7",
+    "three": "^0.186.0"
+  }
+}

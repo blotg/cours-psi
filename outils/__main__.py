@@ -62,6 +62,12 @@ def _notebooks(chapitre) -> list:
     return notebooks(chapitre)
 
 
+def _animations(chapitre, forcer: bool = False) -> list:
+    from . import animations
+
+    return animations.construit(chapitre, forcer=forcer)
+
+
 #: Les documents qu'un chapitre tire de son cours, hors compilation directe.
 ÉTAPES = (
     ("DM", lambda c: c.DM()),
@@ -70,6 +76,7 @@ def _notebooks(chapitre) -> list:
     ("diapo", lambda c: [p for p in (c.diapo(),) if p]),
     ("imprimable", lambda c: [c.poly_imprimable()]),
     ("notebooks", _notebooks),
+    ("animations", _animations),
 )
 
 
@@ -94,6 +101,28 @@ def _build(args) -> int:
     return _pour_chaque(
         args.chapitres,
         lambda chapitre: [e for e in ÉTAPES if not chapitre.révision or e[0] in ÉTAPES_RÉVISION],
+        processus=args.processus,
+    )
+
+
+def _commande_animations(args) -> int:
+    """Construit les animations des chapitres — sauf celles qui n'ont pas
+    bougé, à moins de `--forcer` —, ou lance le serveur de développement."""
+    if args.serveur:
+        from .animations import ErreurAnimations, serveur
+        from .chapitre import Chapitre
+
+        if len(args.chapitres) != 1:
+            print("  animations  --serveur ne prend qu'un chapitre", file=sys.stderr)
+            return 2
+        try:
+            return serveur(Chapitre(args.chapitres[0]))
+        except ErreurAnimations as e:
+            print(f"  animations  {e}", file=sys.stderr)
+            return 1
+    return _pour_chaque(
+        args.chapitres,
+        lambda chapitre: [("animations", lambda c: _animations(c, forcer=args.forcer))],
         processus=args.processus,
     )
 
@@ -321,6 +350,24 @@ def main(argv: list[str] | None = None) -> int:
     )
     _option_processus(p)
     p.set_defaults(fonction=_capytale)
+
+    p = sous.add_parser(
+        "animations",
+        help="animations 3D du dossier animations/ des chapitres, construites par vite",
+    )
+    p.add_argument("chapitres", nargs="+", type=Path)
+    p.add_argument(
+        "--forcer",
+        action="store_true",
+        help="reconstruire même ce qui n'a pas bougé depuis la dernière fois",
+    )
+    p.add_argument(
+        "--serveur",
+        action="store_true",
+        help="lancer le serveur de développement de vite sur le chapitre (un seul)",
+    )
+    _option_processus(p)
+    p.set_defaults(fonction=_commande_animations)
 
     p = sous.add_parser("imprimable", help="poly en fascicule A3, prêt à imprimer")
     p.add_argument("chapitres", nargs="+", type=Path)

@@ -1,0 +1,100 @@
+/* Mise en page des animations : celle du site (gabarits/site.css), noir sur
+   blanc comme le poly, élargie pour laisser la place à la scène et à ses
+   réglages. */
+@import "../gabarits/site.css";
+
+:root {
+    --largeur: 70rem;
+    --panneau: 17rem;
+}
+
+/* KaTeX dessine certains accents (la flèche de \vec) en SVG. La feuille du
+   site donne à tout SVG des marges de figure, qui les feraient sauter, et une
+   largeur plafonnée à celle du bloc qui le contient : pour la flèche de \vec,
+   un bloc de largeur nulle, qui l'effaçait. */
+.katex svg { margin: 0; max-width: none; }
+
+/* -- Une animation --------------------------------------------------------- */
+
+section.animation { margin: 2rem 0 3.5rem; }
+section.animation > h2 { margin: 0 0 0.25rem; }
+section.animation > p { margin: 0 0 0.75rem; }
+
+.corps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--panneau);
+    gap: 1.25rem;
+    align-items: start;
+}
+@media (max-width: 52rem) {
+    .corps { grid-template-columns: minmax(0, 1fr); }
+}
+
+.vue { border: 1px solid var(--filet); }
+.scène { position: relative; overflow: hidden; background: var(--fond); }
+.scène canvas { display: block; }
+.scène .étiquettes { position: absolute; inset: 0; pointer-events: none; }
+.étiquette { white-space: nowrap; line-height: 1; }
+
+/* La barre sous la scène : mode d'emploi et retour à la vue de départ. */
+.barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.75rem;
+    padding: 0.35rem 0.6rem;
+    border-top: 1px solid var(--filet-clair);
+    font-size: 0.8rem;
+    color: var(--gris);
+    text-align: left;
+}
+.barre .aide { margin-right: auto; }
+
+/* -- Réglages -------------------------------------------------------------- */
+
+.panneau { font-size: 0.92rem; text-align: left; hyphens: manual; }
+.groupe { padding: 0.55rem 0 0.7rem; border-top: 1px solid var(--filet-clair); }
+.groupe:first-child { border-top: none; padding-top: 0; }
+.groupe > .intitulé { margin-bottom: 0.35rem; color: var(--gris); font-size: 0.85rem; }
+
+.curseur {
+    display: grid;
+    grid-template-columns: 2.9rem minmax(0, 1fr) 3.4rem;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 1.9rem;
+}
+.curseur .nom { text-align: right; }
+.curseur input { width: 100%; margin: 0; accent-color: var(--texte); }
+.curseur output { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.désactivé { opacity: 0.4; }
+
+.case { display: flex; align-items: center; gap: 0.5rem; min-height: 1.8rem; cursor: pointer; }
+.case input { margin: 0; accent-color: var(--texte); }
+.case .témoin { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 2px; }
+
+button {
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--texte);
+    background: var(--fond);
+    border: 1px solid var(--filet);
+    border-radius: 3px;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+}
+button:hover { background: var(--fond-bandeau); }
+.barre button { font-size: 0.8rem; padding: 0.1rem 0.5rem; }
+
+/* Un choix entre quelques options : des boutons accolés, l'option retenue
+   en noir, comme les bandeaux du poly. */
+.choix { display: flex; flex-wrap: wrap; }
+.choix button { flex: 1 1 0; border-radius: 0; margin-left: -1px; padding: 0.3rem 0.4rem; }
+.choix button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.choix button:last-child { border-radius: 0 3px 3px 0; }
+.choix button[aria-pressed="true"] { background: var(--texte); color: var(--fond); }
+
+.formule { padding: 0.4rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; }
+.panneau p { margin: 0.3rem 0; }
+.panneau .note { color: var(--gris); font-size: 0.8rem; margin-top: -0.2rem; }
+.panneau > .groupe > svg { margin: 0.3rem 0; }

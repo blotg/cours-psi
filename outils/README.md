@@ -46,12 +46,14 @@ python3 -m outils site                              # site/ : le cours en HTML
 python3 -m outils notebooks "Cours/8 - Électrochimie"   # notebook - <exercice>.ipynb, un par exercice numérique
 python3 -m outils capytale -n "Cours/8 - Électrochimie" # ce qui partirait sur Capytale, sans rien envoyer
 python3 -m outils capytale "Cours/8 - Électrochimie"    # crée ou met à jour les activités Capytale
+python3 -m outils animations "Cours/Systèmes de coordonnées"            # build/animations/, par vite
+python3 -m outils animations --serveur "Cours/Systèmes de coordonnées"  # serveur de développement
 ```
 
 Toutes ces commandes acceptent plusieurs chapitres à la suite.
 
 `build` est ce qu'appelle le hook : il enchaine `dm`, `flashcards`,
-`manipulations`, `diapo`, `imprimable` et `notebooks` sur un même objet `Chapitre`, donc une seule
+`manipulations`, `diapo`, `imprimable`, `notebooks` et `animations` sur un même objet `Chapitre`, donc une seule
 requête `typst query` par chapitre — c'est de loin le poste le plus cher.
 
 Un chapitre de **révision** — sous `révisions/`, rangé comme `Cours/` en thèmes
@@ -195,6 +197,17 @@ un exercice part alors dans le commit en cours, sauf si l'exercice a des
 modifications non indexées — le hook le signale et laisse le `git add` à
 faire. Un échec d'envoi n'annule pas le commit.
 
+## Animations
+
+Un chapitre peut porter un dossier `animations/` : des pages HTML animées en
+three.js, que `animations` construit avec vite dans `build/animations/`. Il y
+faut Node.js ; les dépendances s'installent seules à la première
+construction. Seul ce qui a bougé se reconstruit (`build/animations/.empreinte`),
+si bien que les deux hooks peuvent s'en charger sans compter : le pre-commit
+pour les chapitres du commit — tous, si la bibliothèque commune `animations/`
+a bougé —, le pre-push avant de recopier les animations dans le site. Tout le
+détail, et la façon d'en écrire, dans [`animations/README.md`](../animations/README.md).
+
 ## Modules
 
 | Module | Rôle |
@@ -210,6 +223,7 @@ faire. Un échec d'envoi n'annule pas le commit.
 | `site.py` | site statique du cours, en HTML |
 | `notebook.py` | notebook Jupyter d'un exercice numérique |
 | `capytale.py` | dépôt des notebooks sur Capytale, lien dans l'exercice |
+| `animations.py` | animations 3D d'un chapitre, construites par vite |
 
 `site` produit le site statique dans `site/`, ignoré par git : une page par
 exercice et par cours, plus un sommaire par chapitre. L'accueil aiguille vers
@@ -223,7 +237,10 @@ page se refait en CSS (cf. `gabarits/site.css`, noir sur blanc comme le
 papier). Le sommaire d'un chapitre offre en plus le poly et les flashcards
 (planche à découper et paquet Anki) au téléchargement : ce sont les fichiers
 de `build/`, donc ceux qu'`outils build` a produits — un chapitre jamais
-construit est signalé et son lien omis.
+construit est signalé et son lien omis. Un chapitre qui a des animations les
+offre dans une section « Animations » de son sommaire : ses pages de
+`build/animations/`, recopiées dans `<chapitre>/animations/` du site, et
+d'abord reconstruites si leurs sources ont bougé.
 
 Coups de pouce et corrigés y figurent, mais floutés : il faut tenir le survol
 — ou l'appui, sur écran tactile — cinq secondes pour un coup de pouce, quinze

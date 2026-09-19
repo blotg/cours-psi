@@ -21,7 +21,7 @@ from shutil import copyfile
 from tempfile import TemporaryDirectory
 from threading import Lock
 
-from . import typst
+from . import animations, typst
 from .chapitre import GABARITS, RACINE_COURS, RACINE_RÉVISIONS, Chapitre, chapitres
 
 #: Dossier produit, ignoré par git (cf. .gitignore) et publié par le hook pre-push.
@@ -230,6 +230,7 @@ class Site:
         self.processus = max(1, processus)
         self.produits: list[Path] = []
         self.absents: list[Path] = []
+        self.avertissements: list[str] = []
         self.effacés: list[Path] = []
         self.recompilées = 0
         self._verrou = Lock()
@@ -384,6 +385,33 @@ class Site:
         self._copie(source, self.sortie / dossier / nom)
         return nom
 
+    def _animations(self, chapitre: Chapitre, dossier: str) -> list[dict]:
+        """Les animations du chapitre : construites si elles ont bougé depuis
+        la dernière fois, recopiées dans `<dossier>/animations/`. Renvoie
+        leurs liens pour le sommaire.
+
+        La construction se fait ici, avant que les pages ne partent de front :
+        quand rien n'a bougé — le cas courant —, elle ne coûte que le condensé
+        des sources. Sans Node.js, on publie ce que `build/` garde de la
+        dernière construction, plutôt que de retirer du site des animations
+        qui y sont déjà.
+        """
+        pages = animations.pages(chapitre)
+        if not pages:
+            return []
+        try:
+            animations.construit(chapitre)
+        except animations.NodeAbsent as e:
+            self.avertissements.append(f"{chapitre.titre_court} : {e} ; animations de build/ reprises telles quelles")
+        construction = animations.sortie(chapitre)
+        for fichier in animations.fichiers(chapitre):
+            self._copie(fichier, self.sortie / dossier / animations.DOSSIER / fichier.relative_to(construction))
+        return [
+            {"texte": page.titre, "url": f"{animations.DOSSIER}/{page.fichier}", "détail": page.description}
+            for page in pages
+            if (construction / page.fichier).is_file()
+        ]
+
     # -- Lecture des sources ----------------------------------------------
 
     @staticmethod
@@ -476,14 +504,13 @@ class Site:
         # programme. `dict` conserve l'ordre d'insertion.
         thèmes: dict[str, list[dict]] = {}
         for chapitre in chapitres(RACINE / "Cours"):
-            dossier = adresse(chapitre.titre_court)
             thème, numéro, titre = self.rangement(chapitre)
             thèmes.setdefault(thème, []).append({
                 "texte": titre,
-                "url": f"{dossier}/index.html",
+                "url": f"{dossier_du_chapitre(chapitre)}/index.html",
                 "marque": numéro,
             })
-            tâches += self._chapitre(chapitre, dossier)
+            tâches += self._chapitre(chapitre)
         nombre_de_chapitres = sum(len(liens) for liens in thèmes.values())
 
         # Les révisions se rangent comme le cours, thème par thème ; les liens
@@ -497,11 +524,7 @@ class Site:
                 "url": f"{dossier}/index.html",
                 "marque": numéro,
             })
-            tâches += self._chapitre(
-                chapitre,
-                f"{RÉVISIONS}/{dossier}",
-                sommaire=("Révisions de PCSI", "../index.html"),
-            )
+            tâches += self._chapitre(chapitre)
         nombre_de_révisions = sum(len(liens) for liens in révisions.values())
 
         tp_liens = []
@@ -586,21 +609,12 @@ class Site:
         self._écrit_manifeste()
         return self.produits
 
-    def _chapitre(
-        self,
-        chapitre: Chapitre,
-        dossier: str,
-        sommaire: tuple[str, str] = ("Chapitres", f"../{CHAPITRES_INDEX}"),
-    ) -> list:
-        """Les pages d'un chapitre, qui vivent dans `dossier`.
-
-        `sommaire` est l'entrée du fil d'Ariane entre l'accueil et le
-        chapitre, son adresse relative à `dossier`.
-        """
+    def _chapitre(self, chapitre: Chapitre) -> list:
+        """Les pages d'un chapitre, qui vivent dans son dossier du site."""
+        dossier = dossier_du_chapitre(chapitre)
         profondeur = dossier.count("/") + 1
-        accueil = "../" * profondeur + "index.html"
         titre = chapitre.titre(inline=True)
-        base = [("Accueil", accueil), sommaire, (titre, "index.html")]
+        base = fil_du_chapitre(chapitre)
         tâches: list = []
         documents, exercices = [], []
 
@@ -628,6 +642,8 @@ class Site:
                     "détail": f"{mention} · {_poids(source)}",
                 })
 
+        liens_animations = self._animations(chapitre, dossier)
+
         for source, infos in self.exercices(chapitre):
             fichier = f"{adresse(infos['titre'])}.html"
             tâches.append(partial(
@@ -652,8 +668,9 @@ class Site:
             f"{dossier}/index.html",
             {
                 "titre": titre,
-                "fil": [["Accueil", accueil], list(sommaire), [titre, None]],
+                "fil": [list(entrée) for entrée in base[:-1]] + [[titre, None]],
                 "sections": [{"titre": "", "liens": documents}]
+                + ([{"titre": "Animations", "liens": liens_animations}] if liens_animations else [])
                 # Une révision n'a pas de TD : « Exercices — rien pour
                 # l'instant » laisserait croire qu'il en viendra.
                 + ([] if chapitre.révision else [{"titre": "Exercices", "liens": exercices}]),
@@ -661,6 +678,29 @@ class Site:
             profondeur=profondeur,
         ))
         return tâches
+
+
+def dossier_du_chapitre(chapitre: Chapitre) -> str:
+    """Où vivent les pages d'un chapitre dans le site : un dossier à la racine
+    pour un chapitre de PSI, sous `revisions/` pour une révision de PCSI."""
+    dossier = adresse(chapitre.titre_court)
+    return f"{RÉVISIONS}/{dossier}" if chapitre.révision else dossier
+
+
+def fil_du_chapitre(chapitre: Chapitre) -> list[tuple[str, str]]:
+    """Le fil d'Ariane jusqu'au sommaire d'un chapitre, adresses relatives au
+    dossier du chapitre. Ses pages y ajoutent leur propre titre."""
+    profondeur = dossier_du_chapitre(chapitre).count("/") + 1
+    sommaire = (
+        ("Révisions de PCSI", "../index.html")
+        if chapitre.révision
+        else ("Chapitres", f"../{CHAPITRES_INDEX}")
+    )
+    return [
+        ("Accueil", "../" * profondeur + "index.html"),
+        sommaire,
+        (chapitre.titre(inline=True), "index.html"),
+    ]
 
 
 def _section(thème: str, liens: list[dict]) -> dict:
@@ -683,6 +723,8 @@ def construit(sortie: Path | str = SORTIE, processus: int = PROCESSUS) -> list[P
     # signale sans prescrire : c'est `outils build` qui remplit `build/`.
     for absent in site.absents:
         print(f"  sans lien      {absent.parent.parent.name} : pas de « {absent.name} » dans build/")
+    for avertissement in site.avertissements:
+        print(f"  avertissement  {avertissement}")
     for effacé in site.effacés:
         print(f"  retiré         {effacé}")
     pages = sum(1 for p in produits if p.suffix == ".html")

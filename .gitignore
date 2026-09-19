@@ -49,3 +49,7 @@ site/
 
 # Liste de taches personnelle, purement locale.
 TODO.md
+
+# Dépendances des animations (vite, three.js, KaTeX), installées par npm à
+# partir de package-lock.json (cf. animations/README.md).
+node_modules/

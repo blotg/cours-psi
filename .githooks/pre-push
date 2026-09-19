@@ -5,6 +5,9 @@
 #
 # - Le site est produit dans site/, ignore par git (cf. .gitignore) : il ne
 #   part jamais dans un commit de la branche de travail.
+# - Les animations des chapitres (cf. animations/README.md) y sont recopiees
+#   depuis build/animations/, et d'abord reconstruites si leurs sources ont
+#   bouge depuis leur derniere construction.
 # - La publication est *desactivee par defaut*. Le site est public : y pousser
 #   le cours est une decision, pas un effet de bord d'un push. Pour l'activer :
 #       git config hooks.site true

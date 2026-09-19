@@ -13,6 +13,7 @@ La bibliothèque typst, les outils et l'automatisation sont sous
 | `prepa/` | le paquet typst `@local/prepa` |
 | `gabarits/` | les gabarits typst des documents produits |
 | `outils/` | les outils python |
+| `animations/` | la bibliothèque des animations 3D et leur construction |
 | `.githooks/` | le hook de compilation |
 
 L'EUPL est une licence copyleft : une œuvre dérivée distribuée doit l'être sous

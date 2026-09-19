@@ -16,6 +16,10 @@
 #   revisions/) n'en tire que ses flashcards.
 # - Les notebooks des exercices numeriques du TD en font partie. Leur envoi
 #   sur Capytale est desactive par defaut (git config hooks.capytale true).
+# - Les animations (<chapitre>/animations/, cf. animations/README.md) se
+#   construisent avec vite, dans <chapitre>/build/animations/, des qu'une de
+#   leurs sources change -- ou la bibliotheque commune animations/, et alors
+#   toutes. Il y faut Node.js ; sans lui, simple avertissement.
 # - Une modif sous prepa/ => tous les chapitres sont recompiles.
 # - Un chapitre qui ne compile pas : simple avertissement, le commit continue.
 #   Pour annuler le commit dans ce cas :
@@ -83,7 +87,17 @@ else
         done | sort -u
     )
 fi
-[ -n "$dirs" ] || exit 0
+
+# --- Chapitres dont les animations sont a reconstruire -----------------------
+# La bibliotheque commune, les dependances npm et la feuille du site, que la
+# mise en page importe, valent pour toutes les animations.
+if printf '%s\n' "$changed" | grep -qE '^(animations/|package(-lock)?\.json$|gabarits/site\.css$)'; then
+    anims=$(git ls-files '*/animations/*.html' | sed 's#/animations/[^/]*$##' | sort -u)
+else
+    anims=$(printf '%s\n' "$changed" | grep '/animations/' | sed 's#/animations/.*$##' | sort -u)
+fi
+
+[ -n "$dirs" ] || [ -n "$anims" ] || exit 0
 
 # --- Compilation ---------------------------------------------------------
 # Les documents ne dependent pas les uns des autres : on les compile de front.
@@ -164,6 +178,17 @@ $d"
                 }
         fi
     fi
+fi
+
+# --- Animations ------------------------------------------------------------
+# `outils build` vient de construire celles des chapitres ci-dessus ; restent
+# les chapitres dont seules les animations ont bouge. `outils animations` ne
+# refait que ce qui a change : repasser sur les premiers ne coute rien.
+if [ -n "$PY" ] && [ -d outils ] && [ -n "$anims" ]; then
+    printf '%s\n' "$anims" | tr '\n' '\0' | xargs -0 "$PY" -m outils animations || {
+        printf '\n  Avertissement : construction des animations en echec, le commit continue.\n'
+        printf '  Il faut Node.js (node et npm) ; le detail :  %s -m outils animations <chapitre>\n\n' "$PY"
+    }
 fi
 
 if [ "$fail" -ne 0 ]; then
