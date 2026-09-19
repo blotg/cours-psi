@@ -15,15 +15,15 @@ La mémoire des ordinateurs étant finie, il est indispensable de discrétiser l
 
 Un problème d'Euler est une équation différentielle d'ordre 1 munie d'une condition initiale : on cherche la fonction $y$ telle que $y'(t) = f(y, t)$ et $y(t=0) = y_0$. La fonction recherchée peut éventuellement être un vecteur et donc avoir plusieurs composantes.
 
-#exemple[$ dv(u,t) =- 1/tau u $ $ dv(va(v),t)=va(g)-k/m va(v) $]
+#exemple[$ dv(u, t) =- 1/tau u $ $ dv(va(v), t)=va(g)-k/m va(v) $]
 
 Les équations différentielles d'ordre supérieur peuvent être mises sous la forme de problème d'Euler en introduisant un vecteur dont les coordonnées sont des dérivées successives.
 
 #application[
     Mettre sous forme de problème d'Euler les équations différentielles suivantes.
-    $ m dv(x,t,2) = -k v^2 $
-    $ m dv(va(O M),t,2) =-k va(v)+m va(g) $
-    $ a dv(y,t,3)+b dv(y,t,2)+c dv(y,t)+d y=e $
+    $ m dv(x, t, 2) = -alpha dv(x, t)^2 - k x " avec " lr(dv(x, t)|)_(t=0) = v_0 " et " x(t=0) = x_0 $
+    $ m dv(va(O M), t, 2) =-k va(v)+m va(g) " avec " lr(dv(va(O M), t)|)_(t=0) = v_0 ex " et " va(O M)(t=0) = va(0) $
+    $ a dv(y, t, 3)+b dv(y, t, 2)+c dv(y, t)+d y=e " avec " lr(dv(y, t, 2)|)_(t=0) = a_0 ", " lr(dv(y, t)|)_(t=0) = v_0 " et " y(t=0) = y_0 $
 ]
 
 == Méthode d'Euler
@@ -40,20 +40,22 @@ Les équations différentielles d'ordre supérieur peuvent être mises sous la f
             axis-style: "left",
             x-tick-step: none,
             y-tick-step: none,
-            x-label:$t$,
-            y-label:$y$,
-            x-ticks: ((0, $t_i$), (1, $t_(i+1)$)), {
-                add(t => 1-calc.exp(-t), domain: (-0.5, 1.5))
+            x-label: $t$,
+            y-label: $y$,
+            x-ticks: ((0, $t_i$), (1, $t_(i+1)$)),
+            {
+                add(t => 1 - calc.exp(-t), domain: (-0.5, 1.5))
                 add(t => t, domain: (0, 1))
-                add-vline(0, max: 0, style:(stroke:(dash: "dashed")))
-                add-vline(1, max: 1-calc.exp(-1), style: (stroke:(dash: "dashed")))
-            add-anchor("yi", (0,0))
-            add-anchor("y-i", (1,1))
-        })
-        circle(("plot.yi"), radius:2pt, fill: red, stroke: none)
-        circle(("plot.y-i"), radius:2pt, fill: red, stroke: none)
-        content("plot.yi", text(red,$y_i$), anchor:"south-east")
-        content("plot.y-i", text(red,$y_(i+1)$), anchor:"south-west")
+                add-vline(0, max: 0, style: (stroke: (dash: "dashed")))
+                add-vline(1, max: 1 - calc.exp(-1), style: (stroke: (dash: "dashed")))
+                add-anchor("yi", (0, 0))
+                add-anchor("y-i", (1, 1))
+            },
+        )
+        circle("plot.yi", radius: 2pt, fill: red, stroke: none)
+        circle("plot.y-i", radius: 2pt, fill: red, stroke: none)
+        content("plot.yi", text(red, $y_i$), anchor: "south-east")
+        content("plot.y-i", text(red, $y_(i+1)$), anchor: "south-west")
     })
 ]
 
@@ -73,7 +75,7 @@ La méthode d'Euler consiste à approximer la courbe localement par sa tangente.
 )
 
 #question-de-colle(
-    [Sur un exemple précis fourmi par le colleur, mettre une équation différentielle d'ordre 2 sous la forme d'un problème d'Euler. Établir le schéma d'Euler explicite.]
+    [Sur un exemple précis fourmi par le colleur, mettre une équation différentielle d'ordre 2 sous la forme d'un problème d'Euler. Établir le schéma d'Euler explicite.],
 )
 
 = Résolution numérique d'équations aux dérivées partielles
@@ -85,7 +87,7 @@ Une double discrétisation, spatiale et temporelle, est nécessaire pour résoud
 
 == Résolution numérique de l'équation de diffusion
 
-Dans cette partie, on s'appuie sur l'exemple de l'équation de diffusion $pdv(T,t)=D pdv(T,x,2)$ mais la méthode peut être adaptée à toute équation aux dérivées partielles.
+Dans cette partie, on s'appuie sur l'exemple de l'équation de diffusion $pdv(T, t)=D pdv(T, x, 2)$ mais la méthode peut être adaptée à toute équation aux dérivées partielles.
 
 Dans l'équation de diffusion, une dérivée seconde spatiale est présente. On l'approxime en utilisant une formule de Taylor à l'ordre 2.
 
@@ -94,12 +96,12 @@ Dans l'équation de diffusion, une dérivée seconde spatiale est présente. On 
     connaitre: true,
     savoir-faire: true,
 )[
-    $ pdv(T,x,2)_(i,j) approx (T_(i,j+1)-2 T_(i,j)+T_(i,j-1))/(Delta x^2) $
+    $ pdv(T, x, 2)_(i,j) approx (T_(i,j+1)-2 T_(i,j)+T_(i,j-1))/(Delta x^2) $
 ]
 
 #flashcard(
     recto: [Approximation de la dérivée seconde spatiale],
-    verso: [$ pdv(T,x,2)_(i,j) approx (T_(i,j+1)-2 T_(i,j)+T_(i,j-1))/(Delta x^2) $],
+    verso: [$ pdv(T, x, 2)_(i,j) approx (T_(i,j+1)-2 T_(i,j)+T_(i,j-1))/(Delta x^2) $],
 )
 
 #encadré(
@@ -107,7 +109,9 @@ Dans l'équation de diffusion, une dérivée seconde spatiale est présente. On 
     connaitre: false,
     savoir-faire: true,
 )[
-    $ T_(i+1,j)=D (Delta t)/(Delta x^2) T_(i,j+1) + D (Delta t)/(Delta x^2) T_(i,j-1) + (1-2 D(Delta t)/(Delta x^2))T_(i,j) $
+    $
+        T_(i+1,j)=D (Delta t)/(Delta x^2) T_(i,j+1) + D (Delta t)/(Delta x^2) T_(i,j-1) + (1-2 D(Delta t)/(Delta x^2))T_(i,j)
+    $
 ]
 
 Afin que ce schéma soit stable, il est nécessaire que $2 D (Delta t)/(Delta x^2) < 1$.
@@ -115,5 +119,5 @@ Afin que ce schéma soit stable, il est nécessaire que $2 D (Delta t)/(Delta x^
 On peut interpréter $T_(i,j)$ sous la forme d'une matrice. Chaque ligne $i$ correspond alors à la température à un instant $i dot Delta t$ partout dans le milieu. Chaque colonne $j$ correspond à la température à une position $j dot Delta x$ à tous les instants.
 
 #question-de-colle(
-    [Établir une approximation numérique de la dérivée seconde spatiale. Sur l'exemple de l'équation de diffusion, établir le schéma permettant de résoudre une équation aux dérivées partielles.]
+    [Établir une approximation numérique de la dérivée seconde spatiale. Sur l'exemple de l'équation de diffusion, établir le schéma permettant de résoudre une équation aux dérivées partielles.],
 )
