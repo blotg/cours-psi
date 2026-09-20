@@ -6,6 +6,7 @@
 #include "exercices/La sélection des stations de radio.typ"
 #include "exercices/Summing amplifier.typ"
 #include "exercices/Démodulation synchrone.typ"
+#include "exercices/Spectre d'un signal musical.typ"
 #include "exercices/Démodulation par détection d'enveloppe.typ"
 #include "exercices/Taux de modulation.typ"
 #include "exercices/Thérémine.typ"
