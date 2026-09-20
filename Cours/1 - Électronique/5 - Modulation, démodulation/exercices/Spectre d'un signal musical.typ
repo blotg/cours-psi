@@ -8,9 +8,9 @@
 
 Dans cet exercice, on étudie le spectre d'un signal musical réel ainsi que les effets d'une limitation de spectre sur son écoute.
 
-Cet exercice peut être fait avec votre musique favorite au format WAV. A défaut, vous pouvez télécharger une musique libre de droit au lien suivant : #link("https://www.free-stock-music.com/fsm-team-escp-enlia-take-me-to-the-moon.html")
+Cet exercice peut être fait avec votre musique favorite au format WAV. À défaut, vous pouvez télécharger une musique libre de droits au lien suivant : #link("https://www.free-stock-music.com/fsm-team-escp-enlia-take-me-to-the-moon.html")
 
-La première étape consiste à charger votre fichier dans Python grace aux instructions suivantes.
+La première étape consiste à charger votre fichier dans Python grâce aux instructions suivantes.
 
 ```python
 from scipy.io import wavfile
@@ -25,7 +25,7 @@ La plupart des fichiers musicaux sont stéréo et contiennent donc deux canaux. 
 #question(
     coups-de-pouce: (
         "Conventionnellement, on note `s[i,j]` pour la valeur de `s` à la `i`-ème ligne et la `j`-ème colonne.",
-        "On peut utiliser les notation `[:]`",
+        "On peut utiliser la notation `[:]`",
     )
 )[
     Définir une variable `signal` qui contient le signal d'un seul canal (par exemple le canal gauche) du fichier audio.
@@ -43,7 +43,7 @@ La plupart des fichiers musicaux sont stéréo et contiennent donc deux canaux. 
 )[
     Tracer le signal en fonction du temps.
 ][
-    La première étape est de recréer le tableau des temps. La période d'échantillonnage est l'inverse de la fréquence d'échantillonnage. Les temps sont des valeurs espacées de la période d'échantillonnage et sont au même nombre que les points du signal.
+    La première étape est de recréer le tableau des temps. La période d'échantillonnage est l'inverse de la fréquence d'échantillonnage. Les temps sont des valeurs espacées de la période d'échantillonnage et sont en même nombre que les points du signal.
 
     ```python
     import numpy as np
@@ -51,7 +51,7 @@ La plupart des fichiers musicaux sont stéréo et contiennent donc deux canaux. 
     t = np.arange(len(signal)) * Te
     ```
 
-    On peut ensuite tracer le signal en fonction du temps grace à la bibliothèque matplotlib.
+    On peut ensuite tracer le signal en fonction du temps grâce à la bibliothèque matplotlib.
 
     ```python
     import matplotlib.pyplot as plt
@@ -76,7 +76,7 @@ display(Audio(signal, rate=fe))
         "Quand on trace un spectre, on ne prend que son module, obtenu avec la fonction `np.abs`."
     )
 )[
-    Calculer et tracer le spectre du signal audio en utilisant les fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html")[`np.fft.rfft`] et #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.fftfreq.html")[`np.fft.rfftfreq`]. Le spectre sera stocké dans un tableau nommé `spectre`.
+    Calculer et tracer le spectre du signal audio en utilisant les fonctions #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html")[`np.fft.rfft`] et #link("https://numpy.org/doc/stable/reference/generated/numpy.fft.rfftfreq.html")[`np.fft.rfftfreq`]. Le spectre sera stocké dans un tableau nommé `spectre`.
 ][
     Le spectre est calculé avec
     ```python
@@ -99,29 +99,29 @@ display(Audio(signal, rate=fe))
 Les grandes ondes ont des bandes de #quan[9 kHz] de large.
 
 #question(
-    coups-de-pouce: "Quelle est le lien entre la largeur de bande et la fréquence maximale du signal ?"
+    coups-de-pouce: "Quel est le lien entre la largeur de bande et la fréquence maximale du signal ?"
 )[
     Calculer la fréquence maximale d'un signal émis sur les grandes ondes.
 ][
     La largeur de bande est le double de la fréquence maximale d'où
     $
-        f_"max" = l/2 = #zi.kHz(9/2)
+        f_"max" = (Delta f)/2 = #zi.kHz(9/2)
     $
 ]
 
 #question(
     coups-de-pouce: (
-        "On peut commencer d'un tableau ne contenant que des 0 et remplir les valeurs correspondant aux fréquences que l'on souhaite conserver.",
-        "Initialiser un tableau de zéros avec `np.zeros`. Parcourir le spectre original et recopier les valeurs si la fréquence est inférieure à #zi.kHz(9/2)."
+        "On peut copier le spectre original puis mettre à zero les valeurs correspondant aux fréquences que l'on ne souhaite pas conserver.",
+        "Copier le spectre initial avec `np.copy`. Parcourir le spectre original et mettre à zero pour les fréquences supérieures à #zi.kHz(9/2)."
     )
 )[
-    Pour simuler l'effet de ce filtrage, définir un signal `spectre_filtré` qui correspond à `spectre` pour les fréquences inférieurs à #zi.kHz(9/2) et nul pour les fréquences supérieures. `spectre_filtré` aura autant d'éléments que `spectre`.
+    Pour simuler l'effet de ce filtrage, définir un tableau `spectre_filtré` qui correspond à `spectre` pour les fréquences inférieures à #zi.kHz(9/2) et nul pour les fréquences supérieures. `spectre_filtré` aura autant d'éléments que `spectre`.
 ][
     ```python
-    spectre_filtré = np.zeros(len(spectre))
+    spectre_filtré = np.copy(spectre)
     for i in range(len(spectre)):
-        if fréquences[i] <= 9/2e3:
-            spectre_filtré[i] = spectre[i]
+        if fréquences[i] > 9e3/2:
+            spectre_filtré[i] = 0
     ```
 ]
 
@@ -139,13 +139,14 @@ Les grandes ondes ont des bandes de #quan[9 kHz] de large.
     Reprendre les questions précédentes pour une diffusion sur la bande FM, avec un spectre audio limité à #zi.kHz(15).
 ][
     ```python
-    spectre_filtré_FM = np.zeros(len(spectre))
+    spectre_filtré_FM = np.copy(spectre)
     for i in range(len(spectre)):
-        if fréquences[i] <= 15e3:
-            spectre_filtré_FM[i] = spectre[i]
+        if fréquences[i] > 15e3:
+            spectre_filtré_FM[i] = 0
+
 
     signal_filtré_FM = np.fft.irfft(spectre_filtré_FM)
     display(Audio(signal_filtré_FM, rate=fe))
     ```
-    L'altération du signal est imperceptible (par moi en tous cas), la diffusion en FM préserve mieux l'intégrité du signal
+    L'altération du signal est imperceptible (par moi en tout cas), la diffusion en FM préserve mieux l'intégrité du signal.
 ]
