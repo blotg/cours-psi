@@ -435,17 +435,23 @@
 
 // `matériel` n'apparait pas dans le bloc : il alimente la liste des
 // manipulations, tirée du document par `typst query ... <manipulation>`.
-#let manipulation(titre: "", matériel: (), contenu) = {
-    [#metadata((titre: titre, matériel: matériel)) <manipulation>]
-    _bloc(
-        [Manipulation #_numéro-bloc("manipulation")],
-        contenu,
-        titre: titre,
-        marqueur: text(font: "Noto Emoji", emoji.hands.raised),
-        genre: "manipulation",
-        supplement: "manipulation",
-    )
-}
+//
+// Ce metadata est posé dans le corps, et non à côté du bloc : mis à côté, la
+// fonction rendrait une séquence (metadata + figure) et le label d'un appel
+// `#manipulation(...)[...] <ma-manip>` se collerait à cette séquence — @ma-manip
+// échouait alors sur « cannot reference sequence ». Dans le corps, la fonction
+// rend la seule figure, référençable comme les autres blocs.
+#let manipulation(titre: "", matériel: (), contenu) = _bloc(
+    [Manipulation #_numéro-bloc("manipulation")],
+    {
+        [#metadata((titre: titre, matériel: matériel)) <manipulation>]
+        contenu
+    },
+    titre: titre,
+    marqueur: text(font: "Noto Emoji", emoji.hands.raised),
+    genre: "manipulation",
+    supplement: "manipulation",
+)
 
 // préparatoire et matériel : uniques dans un document, donc pas de numéro
 // affiché dans le bandeau (mais restent référençables : @label => « … 1 »).

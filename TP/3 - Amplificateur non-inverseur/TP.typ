@@ -63,7 +63,7 @@ Pour vérifier rapidement le montage, on place en entrée un signal sinusoïdal 
 #application()[
     Quelle tension d'entrée maximale peut-on appliquer sans que la tension de sortie de l'ALI ne sature ?
 
-    Pour une fréquence de #zi.kHz[500], quelle amplitude maximale peut-on appliquer sans que la vitesse de balayage ne sature ?
+    Pour une fréquence de #quan[500 kHz], quelle amplitude maximale peut-on appliquer sans que la vitesse de balayage ne sature ?
 ]<application-tension-max>
 
 #manipulation()[
@@ -206,7 +206,7 @@ Plusieurs grandeurs de l'ALI peuvent saturer. On souhaite observer l'effet de ce
 Lorsque les résistances placées en sortie de l'ALI sont trop faibles, le courant de sortie peut saturer l'amplificateur.
 
 #manipulation[
-    Placer une résistance de #zi.ohm[10] entre la sortie de l'ALI et la masse. Observer l'effet de la saturation du courant sur la tension de sortie. Mesurer le courant de saturation.
+    Placer une résistance de #quan[10 Ω] entre la sortie de l'ALI et la masse. Observer l'effet de la saturation du courant sur la tension de sortie. Mesurer le courant de saturation.
 ]
 
 = Conclusion
