@@ -1,9 +1,22 @@
 # Animations
 
-Les animations 3D du cours, écrites en JavaScript avec
-[three.js](https://threejs.org) et construites par [vite](https://vite.dev).
-Sur le site, le sommaire d'un chapitre les propose dans une section
-« Animations ».
+Les animations du cours, écrites en JavaScript et construites par
+[vite](https://vite.dev). Sur le site, le sommaire d'un chapitre les propose
+dans une section « Animations ».
+
+Trois façons de dessiner, selon ce que le chapitre demande :
+
+- une **scène en trois dimensions** ([three.js](https://threejs.org)), pour ce
+  qui ne se comprend que dans l'espace — un élément de volume, une machine,
+  un plan de symétrie ;
+- une **vue plane** (un canevas), pour une carte de champ, un écoulement, un
+  schéma que l'on manipule ;
+- des **graphiques** (SVG), pour les chronogrammes, les spectres et les
+  cycles, dans le panneau de réglages comme à la place d'une scène.
+
+Les trois se ressemblent à dessein : même façon de se construire une fois
+pour toutes puis de tout replacer à chaque réglage, mêmes couleurs, mêmes
+étiquettes en LaTeX.
 
 ## Où elles vivent
 
@@ -96,9 +109,29 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 |---|---|
 | `page.js`, `page.css` | la mise en page : celle du site (`gabarits/site.css`), élargie ; `cadre` et `lance` |
 | `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt |
-| `objets.js` | ce qui se dessine : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
+| `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
+| `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`) |
+| `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres, zones, cotes |
 | `reglages.js` | `Réglages` : curseurs, cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
+
+`Plan` reprend les partis pris de `Scène` : rendu à la demande, rien hors de
+l'écran, tout se replace. Une animation plane n'a pas besoin de WebGL, et
+tient donc sur les machines qui ne l'ont pas.
+
+Un `Graphe` se construit avec ses deux axes, puis distribue des tracés à
+replacer :
+
+```js
+const spectre = new Graphe({
+    x: { min: 0, max: 2.4, nom: 'f', graduations: [0, [1, 'f_p']] },
+    y: { min: 0, max: 1.25, graduations: [[1, 'A_p']] },
+    grand: true,          // dans une vue plutôt que dans le panneau
+});
+const raies = spectre.raies({ couleur: COULEURS.vermillon });
+raies.place([[1, 1], [1 - fs, h / 2], [1 + fs, h / 2]]);   // à chaque réglage
+spectre.grilleX.place([0, [fs, 'f_s'], [1, 'f_p']]);       // même les graduations
+```
 
 Quelques partis pris :
 
@@ -128,6 +161,9 @@ Quelques partis pris :
 - **Le `CSS2DRenderer` place une étiquette avant d'appeler son
   `onBeforeRender`** : la déplacer là ne prend effet qu'à l'image suivante.
   `Étiquette.àCôté` la décale donc à l'écran, par un `translate` CSS.
+- **Un graphique ne prend pas de remplissage** : ses légendes sont du HTML
+  placé en proportion de sa taille, et un `padding` les décalerait par rapport
+  au dessin. On l'espace par des marges (cf. `.vue > .graphique`).
 - **Rien ne cache une étiquette** : c'est du HTML posé sur l'image. Celle qui
   nomme un dessin posé sur une face prend l'option `face` (la normale de la
   face) et s'efface quand on la regarde de dos.
@@ -138,6 +174,37 @@ Quelques partis pris :
   mettre à jour (`update()`) à chaque image.
 
 ## Les animations du cours
+
+**Électronique 5** — `modulation.js` montre les trois modulations sur les
+mêmes signaux (seul change, en couleur dans la formule, le paramètre de la
+porteuse qui varie), puis le signal modulé en amplitude avec son enveloppe et
+son spectre — dont les graduations suivent f_s —, puis les quatre spectres de
+la chaîne de démodulation synchrone. Les filtres sont du premier ordre, leur
+gain est tracé par-dessus le spectre qu'ils reçoivent, et le panneau dit ce
+qui ressort du signal utile et ce qui reste des raies autour de 2 f_p.
+
+**Électromagnétisme 1** — deux pages, qui partagent `champ.js` : la physique
+d'un jeu de charges vues comme des fils rectilignes infinis, pour que le plan
+de l'écran soit un plan de coupe où tout est exact — le champ d'un fil
+décroît en 1/r, et le flux se conserve dans le plan.
+
+`cartes-de-champ.js` (vues planes) trace les lignes de champ — une par part
+égale de flux, d'où « une charge double en émet deux fois plus » —, les
+équipotentielles par carrés marchants, toujours du même écart de potentiel
+(c'est leur resserrement qui dit le champ), et un dégradé peint sur la grille
+du potentiel. Le tube de champ s'appuie sur deux lignes ; le flux à travers
+chacune de ses deux sections est *calculé*, non supposé, et on le retrouve le
+même. Le condensateur plan est fait de fils, ce qui donne ses effets de bord.
+
+`symetries.js` (scènes 3D) travaille les obstacles de la vision dans
+l'espace, et sa tête de fichier dit lesquels : le plan y est une surface
+quadrillée et non un trait, des boutons ramènent à des vues toutes faites
+sans avoir à tourner la scène, la symétrie se joue (un fantôme glisse de M
+jusqu'à M′), le vecteur se décompose en part parallèle et part normale, et le
+cas limite — M dans le plan — s'atteint au curseur, où la conclusion s'écrit.
+On regarde toujours la distribution avant le champ : l'image de chaque charge
+est dessinée en fil de fer, et c'est elle qui décide si le plan est de
+symétrie, d'antisymétrie, ou ni l'un ni l'autre.
 
 **Systèmes de coordonnées** — `systemes.js` décrit les trois systèmes par des
 données : coordonnées et bornes, position, base locale, longueurs des arêtes,

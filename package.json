@@ -1,7 +1,7 @@
 {
   "name": "cours-psi-animations",
   "private": true,
-  "description": "Animations 3D du cours de PSI, construites par vite (cf. animations/README.md)",
+  "description": "Animations du cours de PSI, construites par vite (cf. animations/README.md)",
   "license": "EUPL-1.2",
   "type": "module",
   "imports": {

@@ -101,8 +101,15 @@ button:hover { background: var(--fond-bandeau); }
 .panneau p { margin: 0.3rem 0; }
 .panneau .note { color: var(--gris); font-size: 0.8rem; margin-top: -0.2rem; }
 
-/* Un petit graphique : le dessin en SVG, ses légendes en KaTeX par-dessus,
-   placées en proportion de sa taille. */
+/* Un graphique : le dessin en SVG, ses légendes en KaTeX par-dessus, placées
+   en proportion de sa taille — d'où un cadre sans remplissage, qui décalerait
+   les unes par rapport à l'autre. */
 .graphique { position: relative; margin: 0.4rem 0; }
 .graphique svg { display: block; margin: 0; width: 100%; height: auto; }
 .graphique .légende { position: absolute; font-size: 0.72rem; line-height: 1; white-space: nowrap; color: var(--gris); }
+.graphique.grand .légende { font-size: 0.95rem; }
+
+/* Une vue faite de tracés plutôt que d'une scène : des graphiques empilés,
+   dans le cadre où une animation en trois dimensions met son canevas. */
+.vue > .graphique { margin: 0.7rem 0.8rem; }
+.vue > .graphique:first-child { margin-top: 0.8rem; }

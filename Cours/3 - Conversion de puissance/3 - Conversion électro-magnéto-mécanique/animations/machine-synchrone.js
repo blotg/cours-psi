@@ -14,7 +14,8 @@
 
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { Arc, COULEURS, Étiquette, Flèche, Trait, écritTex, vecteur } from '#animations/objets.js';
+import { Graphe, échantillons } from '#animations/graphe.js';
+import { Arc, COULEURS, Étiquette, Flèche, Trait, vecteur } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
 import { Réglages } from '#animations/reglages.js';
 import { Scène } from '#animations/scene.js';
@@ -137,89 +138,6 @@ class Courant extends THREE.Mesh {
         this.material.opacity = Math.min(1, Math.abs(i));
         return this;
     }
-}
-
-// -- Petits graphiques -----------------------------------------------------------
-
-const SVG = 'http://www.w3.org/2000/svg';
-
-function svg(balise, attributs, parent) {
-    const élément = document.createElementNS(SVG, balise);
-    for (const [clé, valeur] of Object.entries(attributs)) élément.setAttribute(clé, valeur);
-    parent?.append(élément);
-    return élément;
-}
-
-/**
- * Un graphique, x de x0 à x1, y de −`étendue` à `étendue` : le dessin en SVG,
- * ses légendes en KaTeX par-dessus. Les graduations sont des couples (valeur,
- * tex). `trace(f, couleur)` y trace y = f(x) ; `courbe(couleur)` donne une
- * courbe à retracer, par sa méthode `place([[x, y], …])` ; `vers(x, y)` donne
- * les coordonnées d'un point dans le dessin ; `légende(tex, x, y, ancre)` y
- * écrit.
- */
-function graphique({ x0, x1, graduationsX, graduationsY, nomX, nomY, hauteur = 140, étendue = 1.15 }) {
-    const largeur = 272;
-    const marge = { gauche: 44, droite: 14, haut: 22, bas: 20 };
-    const conteneur = Object.assign(document.createElement('div'), { className: 'graphique' });
-    const racine = svg('svg', { viewBox: `0 0 ${largeur} ${hauteur}` }, conteneur);
-    const X = (x) => marge.gauche + ((x - x0) / (x1 - x0)) * (largeur - marge.gauche - marge.droite);
-    const Y = (y) => marge.haut + ((étendue - y) / (2 * étendue)) * (hauteur - marge.haut - marge.bas);
-    const décalages = { gauche: '0', centre: '-50%', droite: '-100%' };
-    const légende = (tex, x, y, ancre = 'centre', couleur = '') => {
-        const span = écritTex(Object.assign(document.createElement('span'), { className: 'légende' }), tex);
-        Object.assign(span.style, {
-            left: `${(100 * x) / largeur}%`,
-            top: `${(100 * y) / hauteur}%`,
-            translate: `${décalages[ancre]} -50%`,
-            color: couleur,
-        });
-        conteneur.append(span);
-        return span;
-    };
-    const fond = svg('g', {}, racine);
-    const trait = (xa, ya, xb, yb, attributs = {}) =>
-        svg('line', { x1: xa, y1: ya, x2: xb, y2: yb, stroke: '#e3e3e3', ...attributs }, racine);
-    for (const [x, tex] of graduationsX) {
-        trait(X(x), Y(étendue), X(x), Y(-étendue));
-        légende(tex, X(x), hauteur - 9);
-    }
-    for (const [y, tex] of graduationsY) {
-        trait(X(x0), Y(y), X(x1), Y(y));
-        légende(tex, marge.gauche - 5, Y(y), 'droite');
-    }
-    trait(X(x0), Y(0), X(x1), Y(0), { stroke: '#555' });
-    légende(nomX, largeur - 2, Y(0) - 8, 'droite');
-    // Le nom de l'axe au-dessus de ses graduations : le haut du graphique
-    // reste libre pour ses propres légendes.
-    légende(nomY, marge.gauche - 5, 9, 'droite', COULEURS.noir);
-    const courbe = (couleur, attributs = {}) => {
-        const ligne = svg('polyline', { fill: 'none', stroke: couleur, 'stroke-width': 2, ...attributs }, racine);
-        return {
-            élément: ligne,
-            place(points) {
-                ligne.setAttribute('points', points.map(([x, y]) => `${X(x).toFixed(1)},${Y(y).toFixed(1)}`).join(' '));
-            },
-        };
-    };
-    return {
-        élément: conteneur,
-        fond,
-        vers: (x, y) => [X(x), Y(y)],
-        légende,
-        trait,
-        courbe,
-        trace(f, couleur) {
-            courbe(couleur).place(échantillons(x0, x1, 120).map((x) => [x, f(x)]));
-        },
-        point: (couleur) => svg('circle', { r: 4, fill: couleur }, racine),
-        curseur: () => trait(0, Y(étendue), 0, Y(-étendue), { stroke: '#000', 'stroke-dasharray': '3 3' }),
-    };
-}
-
-/** n + 1 valeurs régulièrement espacées, de a à b. */
-function échantillons(a, b, n) {
-    return Array.from({ length: n + 1 }, (_, k) => a + ((b - a) * k) / n);
 }
 
 // -- L'animation -------------------------------------------------------------------
@@ -358,29 +276,31 @@ function machineSynchrone(section) {
 
     // Le graphique des champs, en fonction de θ : la case « Limite
     // sinusoïdale » en montre aussi les pointillés.
-    const champsEnθ = graphique({
-        x0: 0,
-        x1: 360,
-        graduationsX: TOUR,
-        graduationsY: [
-            [AMPLITUDE.Bs, `{\\color{${COULEUR.Bs}} B_{s,\\max}}`],
-            [AMPLITUDE.Br, `{\\color{${COULEUR.Br}} B_{r,\\max}}`],
-            [-AMPLITUDE.Br, `{\\color{${COULEUR.Br}} -B_{r,\\max}}`],
-            [-AMPLITUDE.Bs, `{\\color{${COULEUR.Bs}} -B_{s,\\max}}`],
-        ],
-        nomX: '\\theta',
-        nomY: `{\\color{${COULEUR.Bs}} B_s}, {\\color{${COULEUR.Br}} B_r}`,
+    const champsEnθ = new Graphe({
+        x: { min: 0, max: 360, nom: '\\theta', graduations: TOUR },
+        y: {
+            // Pour N = 1, B_s monte jusqu'à √2 : les créneaux des deux
+            // circuits s'ajoutent.
+            min: -1.5,
+            max: 1.5,
+            nom: `{\\color{${COULEUR.Bs}} B_s}, {\\color{${COULEUR.Br}} B_r}`,
+            graduations: [
+                [AMPLITUDE.Bs, `{\\color{${COULEUR.Bs}} B_{s,\\max}}`],
+                [AMPLITUDE.Br, `{\\color{${COULEUR.Br}} B_{r,\\max}}`],
+                [-AMPLITUDE.Br, `{\\color{${COULEUR.Br}} -B_{r,\\max}}`],
+                [-AMPLITUDE.Bs, `{\\color{${COULEUR.Bs}} -B_{s,\\max}}`],
+            ],
+        },
         hauteur: 170,
-        // Pour N = 1, B_s monte jusqu'à √2 : les créneaux des deux circuits
-        // s'ajoutent.
-        étendue: 1.5,
     });
-    const pointillés = { 'stroke-width': 1.2, 'stroke-dasharray': '4 3', style: 'display: none' };
     const courbesLimites = {
-        Bs: champsEnθ.courbe(COULEUR.Bs, pointillés),
-        Br: champsEnθ.courbe(COULEUR.Br, pointillés),
+        Bs: champsEnθ.courbe({ couleur: COULEUR.Bs, épaisseur: 1.2, pointillés: true, visible: false }),
+        Br: champsEnθ.courbe({ couleur: COULEUR.Br, épaisseur: 1.2, pointillés: true, visible: false }),
     };
-    const courbesChamps = { Bs: champsEnθ.courbe(COULEUR.Bs), Br: champsEnθ.courbe(COULEUR.Br) };
+    const courbesChamps = {
+        Bs: champsEnθ.courbe({ couleur: COULEUR.Bs }),
+        Br: champsEnθ.courbe({ couleur: COULEUR.Br }),
+    };
 
     réglages.groupe('Afficher');
     const montre = (objets) => (visible) => {
@@ -395,7 +315,7 @@ function machineSynchrone(section) {
         valeur: false,
         auChangement: (visible) => {
             état.limites = visible;
-            for (const courbe of Object.values(courbesLimites)) courbe.élément.style.display = visible ? '' : 'none';
+            for (const courbe of Object.values(courbesLimites)) courbe.montre(visible);
             montre([groupeLimites])(visible);
         },
     });
@@ -417,26 +337,25 @@ function machineSynchrone(section) {
 
     réglages.groupe('Couple électromagnétique');
     réglages.formule('\\Gamma_{\\text{ém}} = \\Gamma_{\\max} \\sin\\alpha');
-    const couple = graphique({
-        x0: -180,
-        x1: 180,
-        graduationsX: [-180, -90, 0, 90, 180].map(degrés),
-        graduationsY: [
-            [1, '\\Gamma_{\\max}'],
-            [-1, '-\\Gamma_{\\max}'],
-        ],
-        nomX: '\\alpha',
-        nomY: '\\Gamma_{\\text{ém}}',
+    const couple = new Graphe({
+        x: { min: -180, max: 180, nom: '\\alpha', graduations: [-180, -90, 0, 90, 180].map(degrés) },
+        y: {
+            min: -1.15,
+            max: 1.15,
+            nom: '\\Gamma_{\\text{ém}}',
+            graduations: [
+                [1, '\\Gamma_{\\max}'],
+                [-1, '-\\Gamma_{\\max}'],
+            ],
+        },
         hauteur: 150,
     });
     // La zone stable, |α| < 90° : le couple y croît avec α. Le signe de α
     // sépare les deux fonctionnements, de part et d'autre du pointillé.
-    const [xs0, ys0] = couple.vers(-90, 1.15);
-    const [xs1, ys1] = couple.vers(90, -1.15);
-    svg('rect', { x: xs0, y: ys0, width: xs1 - xs0, height: ys1 - ys0, fill: '#f0f0f0' }, couple.fond);
-    couple.trait(...couple.vers(0, 1.15), ...couple.vers(0, -1.15), { stroke: '#000', 'stroke-dasharray': '4 3' });
-    couple.légende('\\text{générateur}', ...couple.vers(-90, 1.3), 'centre', COULEURS.noir);
-    couple.légende('\\text{moteur}', ...couple.vers(90, 1.3), 'centre', COULEURS.noir);
+    couple.zone().place(-90, 90);
+    couple.verticale({ couleur: COULEURS.noir }).place(0);
+    couple.légende('\\text{générateur}', { x: -90, y: 1.3, couleur: COULEURS.noir });
+    couple.légende('\\text{moteur}', { x: 90, y: 1.3, couleur: COULEURS.noir });
     // Chaque zone nommée là où la courbe n'est pas : du côté opposé au signe
     // du couple.
     for (const [α, y, tex] of [
@@ -445,29 +364,30 @@ function machineSynchrone(section) {
         [45, -0.55, 'stable'],
         [135, -0.55, 'instable'],
     ]) {
-        couple.légende(`\\text{${tex}}`, ...couple.vers(α, y));
+        couple.légende(`\\text{${tex}}`, { x: α, y });
     }
-    couple.trace((α) => Math.sin(deg(α)), '#000');
-    const pointCouple = couple.point(COULEURS.noir);
+    couple.trace((α) => Math.sin(deg(α)), { couleur: COULEURS.noir });
+    const pointCouple = couple.point({ couleur: COULEURS.noir });
     réglages.ajoute(couple.élément);
     const bilan = réglages.texte();
 
     réglages.groupe('Courants statoriques');
-    const courants = graphique({
-        x0: 0,
-        x1: 360,
-        graduationsX: TOUR,
-        graduationsY: [
-            [1, 'I'],
-            [-1, '-I'],
-        ],
-        nomX: '\\omega t',
-        nomY: `{\\color{${COULEUR[1]}} i_1}, {\\color{${COULEUR[2]}} i_2}`,
+    const courants = new Graphe({
+        x: { min: 0, max: 360, nom: '\\omega t', graduations: TOUR },
+        y: {
+            min: -1.15,
+            max: 1.15,
+            nom: `{\\color{${COULEUR[1]}} i_1}, {\\color{${COULEUR[2]}} i_2}`,
+            graduations: [
+                [1, 'I'],
+                [-1, '-I'],
+            ],
+        },
     });
-    courants.trace((x) => Math.cos(deg(x)), COULEUR[1]);
-    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), COULEUR[2]);
-    const curseurTemps = courants.curseur();
-    const points = [1, 2].map((circuit) => courants.point(COULEUR[circuit]));
+    courants.trace((x) => Math.cos(deg(x)), { couleur: COULEUR[1] });
+    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), { couleur: COULEUR[2] });
+    const curseurTemps = courants.verticale();
+    const points = [1, 2].map((circuit) => courants.point({ couleur: COULEUR[circuit] }));
     réglages.ajoute(courants.élément);
     réglages.formule(
         `\\begin{gathered} {\\color{${COULEUR[1]}} i_1 = I\\cos(\\omega t)} \\\\ ` +
@@ -524,18 +444,10 @@ function machineSynchrone(section) {
         const Γ = Math.sin(α);
         arcΓ.place(centre, direction(θr + Math.PI), direction(θr + (3 * Math.PI) / 2), 1.7 * Γ, 1.05);
 
-        const [x, y] = couple.vers(état.α, Γ);
-        pointCouple.setAttribute('cx', x);
-        pointCouple.setAttribute('cy', y);
+        pointCouple.place(état.α, Γ);
         const t = THREE.MathUtils.radToDeg(THREE.MathUtils.euclideanModulo(ωt, DEUX_PI));
-        const [xt] = courants.vers(t, 0);
-        curseurTemps.setAttribute('x1', xt);
-        curseurTemps.setAttribute('x2', xt);
-        points.forEach((p, k) => {
-            const [, yi] = courants.vers(t, i[k + 1]);
-            p.setAttribute('cx', xt);
-            p.setAttribute('cy', yi);
-        });
+        curseurTemps.place(t);
+        points.forEach((p, k) => p.place(t, i[k + 1]));
         const texte = régime(état.α);
         if (bilan.textContent !== texte) bilan.textContent = texte;
     });

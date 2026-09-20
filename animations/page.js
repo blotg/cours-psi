@@ -6,6 +6,15 @@ import './page.css';
 
 const créé = (balise, classe) => Object.assign(document.createElement(balise), { className: classe });
 
+/** Ce navigateur sait-il dessiner en trois dimensions ? */
+function dessineEn3D() {
+    try {
+        return Boolean(document.createElement('canvas').getContext('webgl2'));
+    } catch {
+        return false;
+    }
+}
+
 /**
  * Le cadre d'une animation, sous le titre de sa section : la scène, et ses
  * réglages à côté — dessous sur un écran étroit.
@@ -35,8 +44,11 @@ export function lance(sélecteur, fabrique) {
                 } catch (erreur) {
                     console.error(erreur);
                     const message = créé('p', 'vide');
-                    message.textContent =
-                        'Cette animation ne peut pas s’afficher : le navigateur ne permet pas le dessin en 3D (WebGL).';
+                    // Une animation en trois dimensions demande WebGL, qu'un
+                    // navigateur peut refuser ; une animation plane, non.
+                    message.textContent = dessineEn3D()
+                        ? 'Cette animation ne peut pas s’afficher dans ce navigateur.'
+                        : 'Cette animation ne peut pas s’afficher : le navigateur ne permet pas le dessin en 3D (WebGL).';
                     target.append(message);
                 }
             }
