@@ -336,6 +336,47 @@ export class Graphe {
         return verticale.montre(visible);
     }
 
+    /**
+     * Une aire sous une courbe, fermée sur l'axe : le spectre continu d'un
+     * signal qui ne se répète pas, une énergie, une bande de fréquences.
+     */
+    aire({ couleur = COULEURS.noir, opacité = 0.25, bord = true, visible = true } = {}) {
+        const forme = svg(
+            'polygon',
+            {
+                fill: couleur,
+                'fill-opacity': opacité,
+                stroke: bord ? couleur : 'none',
+                'stroke-width': 1.5,
+                'stroke-linejoin': 'round',
+            },
+            this.couches.tracés,
+        );
+        const aire = {
+            élément: forme,
+            couleur,
+            place: (points) => {
+                if (points.length < 2) {
+                    forme.setAttribute('points', '');
+                    return aire;
+                }
+                const base = this.Y(Math.min(Math.max(0, this.domaine.y.min), this.domaine.y.max));
+                const bord0 = `${this.X(points[0][0]).toFixed(1)},${base.toFixed(1)}`;
+                const bord1 = `${this.X(points.at(-1)[0]).toFixed(1)},${base.toFixed(1)}`;
+                forme.setAttribute(
+                    'points',
+                    [bord0, ...points.map(([x, y]) => `${this.X(x).toFixed(1)},${this.Y(y).toFixed(1)}`), bord1].join(' '),
+                );
+                return aire;
+            },
+            montre(oui = true) {
+                forme.style.display = oui ? '' : 'none';
+                return aire;
+            },
+        };
+        return aire.montre(visible);
+    }
+
     /** Un aplat rectangulaire, derrière la grille : une zone remarquable. */
     zone({ couleur = '#f0f0f0', opacité = 1, visible = true } = {}) {
         const rect = svg('rect', { fill: couleur, 'fill-opacity': opacité }, this.couches.fond);

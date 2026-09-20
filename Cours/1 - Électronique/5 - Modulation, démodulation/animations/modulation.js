@@ -2,10 +2,12 @@
 // en phase ; le signal modulé en amplitude, son enveloppe et son spectre ; et
 // le spectre qui voyage le long de la chaîne de démodulation synchrone.
 //
-// Les fréquences se comptent en fréquences de porteuse : f_p = 1. La
-// fréquence du signal à transmettre est le réglage f_s, et le temps se compte
-// en périodes T_s = 1/f_s du signal à transmettre — l'écran garde ainsi deux
-// périodes du signal, quelle que soit sa fréquence.
+// Le temps se compte en périodes de porteuse T_p, et les fréquences en
+// fréquences de porteuse. L'écran garde donc toujours le même nombre
+// d'oscillations de la porteuse : quand on change f_s, c'est bien la période
+// du signal à transmettre que l'on voit changer, et elle seule.
+//
+// Le taux de modulation est noté h, comme dans le cours.
 
 import { Graphe, échantillons } from '#animations/graphe.js';
 import { COULEURS } from '#animations/objets.js';
@@ -14,23 +16,19 @@ import { Réglages } from '#animations/reglages.js';
 
 const TAU = 2 * Math.PI;
 
-/** Les couleurs des figures du cours : le signal à transmettre en bleu, le
- *  signal modulé en rouge ; les filtres, qui n'y sont pas, en vert. */
+/** Les couleurs : le signal à transmettre en bleu et la porteuse en gris,
+ *  comme les figures du poly ; l'enveloppe en rouge, d'où le noir du signal
+ *  modulé là où les deux se croisent ; les filtres en vert. */
 const COULEUR = {
     signal: COULEURS.bleu,
     porteuse: COULEURS.gris,
     modulé: COULEURS.vermillon,
-    enveloppe: COULEURS.bleu,
+    porté: COULEURS.noir,
+    enveloppe: COULEURS.vermillon,
     filtre: COULEURS.vert,
 };
 
 const LARGEUR = 640;
-
-/** Les graduations du temps, compté en périodes du signal à transmettre. */
-const PÉRIODES = [
-    [1, 'T_s'],
-    [2, '2T_s'],
-];
 
 // -- Les trois modulations ----------------------------------------------------
 
@@ -38,16 +36,31 @@ const PÉRIODES = [
 const F_P = 10;
 
 const MODULANTES = {
-    créneau: (t) => (t % 1 < 0.5 ? 1 : -1),
-    sinus: (t) => Math.cos(TAU * t),
+    créneau: {
+        valeur: (t) => (t % 1 < 0.5 ? 1 : -1),
+        // Une rampe qui monte puis redescend : la phase de la porteuse reste
+        // continue là même où sa fréquence saute.
+        primitive: (t) => (t % 1 < 0.5 ? t % 1 : 1 - (t % 1)),
+    },
+    sinus: {
+        valeur: (t) => Math.cos(TAU * t),
+        primitive: (t) => Math.sin(TAU * t) / TAU,
+    },
 };
 
-/** Les trois modulations, telles que le cours les écrit : l'amplitude, la
- *  fréquence ou la phase de la porteuse suit le signal à transmettre. */
+/**
+ * Les trois modulations : l'amplitude, la fréquence ou la phase de la porteuse
+ * suit le signal à transmettre.
+ *
+ * La fréquence instantanée est la dérivée de la phase, et non le facteur de
+ * `t` : la modulation de fréquence s'écrit donc avec la primitive du signal.
+ * L'écrire cos(2π f(t) t) donnerait, avec un créneau, une phase qui saute à
+ * chaque alternance — une courbe qui ne serait celle d'aucun signal.
+ */
 const MODULÉS = {
-    AM: (t, m, p) => (1 + p * m) * Math.cos(TAU * F_P * t),
-    FM: (t, m, p) => Math.cos(TAU * F_P * (1 + p * m) * t),
-    PM: (t, m, p) => Math.cos(TAU * F_P * t + p * m),
+    AM: (t, m, p) => (1 + p * m.valeur(t)) * Math.cos(TAU * F_P * t),
+    FM: (t, m, p) => Math.cos(TAU * F_P * (t + p * m.primitive(t))),
+    PM: (t, m, p) => Math.cos(TAU * F_P * t + p * m.valeur(t)),
 };
 
 const TYPES = ['AM', 'FM', 'PM'];
@@ -60,18 +73,31 @@ const FORMULES = {
     PM: 's_{\\text{PM}} = A_p\\cos(2\\pi f_p t + {\\color{VARIE} \\varphi(t)})',
 };
 
+/** Ce que règle le curseur, selon la modulation. */
+const RÉGLAGES = {
+    AM: { intitulé: 'Taux de modulation', tex: 'h', min: 0, max: 1.6, pas: 0.01 },
+    FM: { intitulé: 'Excursion en fréquence', tex: '\\Delta f', min: 0, max: 0.6, pas: 0.005, unité: ' f_p' },
+    PM: { intitulé: 'Excursion en phase', tex: '\\Delta\\varphi', min: 0, max: 3.2, pas: 0.02, unité: ' rad' },
+};
+
+/** Les graduations du temps, compté en périodes du signal à transmettre. */
+const PÉRIODES_DU_SIGNAL = [
+    [1, 'T_s'],
+    [2, '2T_s'],
+];
+
 function troisModulations(section) {
     const { vue, réglages: panneau } = cadre(section);
     const état = { type: 'AM', forme: 'créneau', profondeur: { AM: 0.3, FM: 0.3, PM: 2 } };
 
-    const axeT = { min: 0, max: 2, nom: 't', graduations: PÉRIODES };
+    const axeT = { min: 0, max: 2, nom: 't', graduations: PÉRIODES_DU_SIGNAL };
     const commun = { largeur: LARGEUR, hauteur: 118, grand: true };
     const signal = new Graphe({ ...commun, x: axeT, y: { min: -1.3, max: 1.3, nom: 's' } });
     const porteuse = new Graphe({ ...commun, x: axeT, y: { min: -1.3, max: 1.3, nom: 's_p' } });
     // Un graphique par modulation : le signal modulé en amplitude monte
     // jusqu'à 1 + h, les deux autres restent dans l'amplitude de la porteuse.
     const modulés = {
-        AM: new Graphe({ ...commun, x: axeT, y: { min: -1.9, max: 1.9, nom: 's_{\\text{AM}}' }, hauteur: 140 }),
+        AM: new Graphe({ ...commun, x: axeT, y: { min: -2.8, max: 2.8, nom: 's_{\\text{AM}}' }, hauteur: 168 }),
         FM: new Graphe({ ...commun, x: axeT, y: { min: -1.3, max: 1.3, nom: 's_{\\text{FM}}' } }),
         PM: new Graphe({ ...commun, x: axeT, y: { min: -1.3, max: 1.3, nom: 's_{\\text{PM}}' } }),
     };
@@ -87,18 +113,25 @@ function troisModulations(section) {
 
     const réglages = new Réglages(panneau);
     const formule = réglages.formule();
+    const note = réglages.texte(
+        'La fréquence instantanée est la dérivée de la phase : pour tracer la courbe, c’est la phase ' +
+            '2π∫f qu’il faut accumuler. L’écrire cos(2π f(t) t) la ferait sauter à chaque alternance du créneau.',
+    );
+    note.className = 'note';
     const curseurs = {};
 
     function dessine() {
         const m = MODULANTES[état.forme];
         const profondeur = état.profondeur[état.type];
-        courbes.signal.place(échantillons(0, 2, 1200).map((t) => [t, m(t)]));
-        courbes[état.type].place(échantillons(0, 2, 2400).map((t) => [t, MODULÉS[état.type](t, m(t), profondeur)]));
+        courbes.signal.place(échantillons(0, 2, 1200).map((t) => [t, m.valeur(t)]));
+        courbes[état.type].place(échantillons(0, 2, 2400).map((t) => [t, MODULÉS[état.type](t, m, profondeur)]));
         for (const type of TYPES) {
             modulés[type].montre(type === état.type);
             curseurs[type].montre(type === état.type);
         }
+        réglage.écrit(RÉGLAGES[état.type].intitulé);
         formule.écrit(FORMULES[état.type].replace('VARIE', COULEUR.modulé));
+        note.hidden = état.type !== 'FM';
     }
 
     réglages.groupe('Modulation');
@@ -124,54 +157,169 @@ function troisModulations(section) {
         },
     });
 
-    réglages.groupe('Profondeur de la modulation');
-    const profondeur = (type, options) =>
-        (curseurs[type] = réglages.curseur({
+    const réglage = réglages.groupe(RÉGLAGES.AM.intitulé);
+    for (const type of TYPES) {
+        const { intitulé, ...options } = RÉGLAGES[type];
+        curseurs[type] = réglages.curseur({
             ...options,
             valeur: état.profondeur[type],
             auChangement: (v) => {
                 état.profondeur[type] = v;
                 dessine();
             },
-        }));
-    profondeur('AM', { tex: 'h', min: 0, max: 0.8, pas: 0.05 });
-    profondeur('FM', { tex: '\\Delta f', min: 0, max: 0.5, pas: 0.05, unité: ' f_p' });
-    profondeur('PM', { tex: '\\Delta\\varphi', min: 0, max: 3, pas: 0.1, unité: ' rad' });
-    réglages.texte(
-        'Une seule des trois grandeurs de la porteuse varie : son amplitude (AM), sa fréquence (FM) ou sa ' +
-            'phase (PM). Avec un créneau, la modulation de fréquence change la largeur des alternances, la ' +
-            'modulation de phase les décale.',
-    ).className = 'note';
+        });
+    }
 
     dessine();
 }
 
+// -- Le signal à transmettre ---------------------------------------------------
+//
+// Deux formes, partagées par les deux sections qui suivent.
+//
+//   - sinusoïdal : une seule composante, de fréquence f_s ;
+//   - quelconque : une bande continue de fréquences, entre 0,25 f_max et
+//     f_max. On se donne son spectre, et le signal s'en déduit : c'est la
+//     transformée de Fourier inverse, ici la somme de ses composantes. Il ne
+//     se répète pas à l'échelle de l'écran, et son spectre se dessine comme
+//     une aire et non comme des raies.
+
+/** Le bas de la bande, en fractions de f_max : un signal réel n'a pas de
+ *  composantes jusqu'à la fréquence nulle. */
+const BAS_DE_BANDE = 0.25;
+const COMPOSANTES = 64;
+
+/**
+ * Le profil du spectre : deux bosses inégales, séparées par un creux. Il est
+ * volontairement dissymétrique — la bande du bas, que la modulation renverse,
+ * se distingue alors au premier coup d'œil de celle du haut.
+ *
+ * Il s'annule aux deux bords de la bande, pour que l'aire retombe sur l'axe.
+ */
+function profil(u) {
+    const x = (u - BAS_DE_BANDE) / (1 - BAS_DE_BANDE);
+    if (x <= 0 || x >= 1) return 0;
+    const bosse = (centre, largeur) => Math.exp(-(((x - centre) / largeur) ** 2));
+    return Math.sin(Math.PI * x) ** 0.4 * (bosse(0.24, 0.16) + 0.55 * bosse(0.66, 0.1));
+}
+
+/** La densité spectrale, ramenée à un maximum de 1. */
+const PIC = Math.max(...échantillons(BAS_DE_BANDE, 1, 400).map(profil));
+const densité = (u) => profil(u) / PIC;
+
+/** Les fréquences de la bande, en fractions de f_max. Les deux extrémités,
+ *  de densité nulle, font retomber l'aire du spectre sur l'axe. */
+const BANDE = échantillons(BAS_DE_BANDE, 1, COMPOSANTES);
+
+/**
+ * Des phases tirées au hasard, une fois pour toutes : le signal est toujours
+ * le même d'un chargement à l'autre, mais ses composantes n'ont aucun rapport
+ * entre elles et leur somme est erratique.
+ *
+ * Il y faut un vrai tirage. Des phases en progression arithmétique — l'angle
+ * d'or, par exemple — ne décalent le signal que dans le temps : toutes les
+ * composantes restent en phase au même instant, et leur somme est une
+ * impulsion bien lisse, tout le contraire de ce qu'on veut montrer.
+ */
+function tirage(graine) {
+    let x = graine;
+    return () => {
+        x = (Math.imul(x, 1103515245) + 12345) & 0x7fffffff;
+        return x / 0x7fffffff;
+    };
+}
+
+const hasard = tirage(20250920);
+const PHASES = BANDE.map(() => hasard() * TAU);
+
+/** La fenêtre de temps affichée : trente périodes de porteuse, toujours les
+ *  mêmes — c'est le signal à transmettre qui change de période, pas elle.
+ *  Assez large pour que la bande de fréquences y déploie ses battements. */
+const FENÊTRE = 30;
+
+/** Le signal à transmettre, somme de ses composantes [fréquence, amplitude]. */
+function signalDe(comps) {
+    return (t) => comps.reduce((somme, [f, a], k) => somme + a * Math.cos(TAU * f * t + (PHASES[k] ?? 0)), 0);
+}
+
+/**
+ * Les composantes [fréquence, amplitude] du signal à transmettre, pour la
+ * fréquence caractéristique `f` — f_s si le signal est sinusoïdal, f_max
+ * s'il est quelconque.
+ *
+ * Elles sont ramenées à un signal d'amplitude 1 *sur la fenêtre affichée* :
+ * le taux de modulation h vaut alors le réglage lui-même, et l'enveloppe
+ * touche zéro exactement à h = 1, là où l'élève la regarde. Le battement de
+ * la bande est bien plus long que la fenêtre : normaliser sur lui donnerait
+ * à l'écran un signal presque plat.
+ */
+function composantes(forme, f) {
+    if (forme === 'sinus') return [[f, 1]];
+    const brutes = BANDE.map((u) => [u * f, densité(u)]);
+    const s = signalDe(brutes);
+    const maximum = Math.max(...échantillons(0, FENÊTRE, 900).map((t) => Math.abs(s(t))));
+    return brutes.map(([fréquence, a]) => [fréquence, a / maximum]);
+}
+
+/**
+ * La bande telle qu'elle se dessine : une aire, centrée sur `centre` et
+ * étalée du côté `sens`, de la forme de la densité spectrale.
+ *
+ * Sa `hauteur` est celle qu'aurait la raie d'un signal sinusoïdal — c'est la
+ * convention du cours, et il n'y en a pas d'autre : le spectre d'un signal
+ * qui ne se répète pas est une densité, qui ne se compte pas en volts. Les
+ * amplitudes de ses composantes, elles, sont d'autant plus petites qu'on les
+ * prend nombreuses.
+ */
+function aireDeBande(centre, sens, f, hauteur, gain = () => 1) {
+    return BANDE.map((u) => {
+        const fréquence = centre + sens * u * f;
+        return [fréquence, hauteur * densité(u) * gain(fréquence)];
+    }).sort((a, b) => a[0] - b[0]);
+}
+
+/**
+ * Le curseur de fréquence de l'une des deux formes du signal. Chacune garde la
+ * sienne — f_s pour une sinusoïde, f_max pour une bande — et seul le curseur
+ * de la forme choisie s'affiche.
+ */
+function curseurDeF(réglages, état, forme, tex, options, dessine) {
+    const curseur = réglages.curseur({
+        ...options,
+        tex,
+        valeur: état.f[forme],
+        couleur: COULEUR.signal,
+        auChangement: (v) => {
+            état.f[forme] = v;
+            dessine();
+        },
+    });
+    curseur.montre(état.forme === forme);
+    return curseur;
+}
+
+const montreLeBon = (curseurs, forme) => {
+    for (const [nom, curseur] of Object.entries(curseurs)) curseur.montre(nom === forme);
+};
+
 // -- Modulation d'amplitude ---------------------------------------------------
 
-/** Le signal à transmettre, périodique, dans ses deux formes : sinusoïdal, ou
- *  riche en harmoniques. Les harmoniques sont impaires, ce qui garde le
- *  signal symétrique — max(s) = -min(s), comme le suppose le cours. */
-const HARMONIQUES = { sinus: [1], riche: [1, 0, 0.4, 0, 0.2] };
-
-/** Les amplitudes des harmoniques, ramenées à un signal de maximum 1 : le
- *  taux de modulation h = k·max(s) vaut alors le réglage k lui-même. */
-function amplitudes(forme) {
-    const brut = HARMONIQUES[forme];
-    const s = (τ) => brut.reduce((somme, a, k) => somme + a * Math.cos(TAU * (k + 1) * τ), 0);
-    const maximum = Math.max(...échantillons(0, 1, 720).map(s));
-    return brut.map((a) => a / maximum);
-}
+const PÉRIODES_DE_PORTEUSE = [
+    [0, '0'],
+    [15, '15\\,T_p'],
+    [30, '30\\,T_p'],
+];
 
 function modulationAmplitude(section) {
     const { vue, réglages: panneau } = cadre(section);
-    const état = { h: 0.3, fs: 0.1, forme: 'sinus' };
+    const état = { h: 0.3, f: { sinus: 0.1, quelconque: 0.3 }, forme: 'sinus', enveloppe: true };
 
-    const axeT = { min: 0, max: 2, nom: 't', graduations: PÉRIODES };
+    const axeT = { min: 0, max: FENÊTRE, nom: 't', graduations: PÉRIODES_DE_PORTEUSE };
     const signal = new Graphe({
         x: axeT,
-        y: { min: -1.25, max: 1.25, nom: 's', graduations: [[1, 'A_s']] },
+        y: { min: -1.35, max: 1.35, nom: 's', graduations: [[1, 'A_s']] },
         largeur: LARGEUR,
-        hauteur: 118,
+        hauteur: 126,
         grand: true,
     });
     const modulé = new Graphe({
@@ -192,48 +340,70 @@ function modulationAmplitude(section) {
     vue.append(signal.élément, modulé.élément, spectre.élément);
 
     const courbeSignal = signal.courbe({ couleur: COULEUR.signal });
-    const courbeModulé = modulé.courbe({ couleur: COULEUR.modulé, épaisseur: 1.4 });
-    const enveloppes = [0, 1].map(() => modulé.courbe({ couleur: COULEUR.enveloppe, épaisseur: 2 }));
+    const période = signal.cote('T_s', { couleur: COULEUR.signal });
+    const courbeModulé = modulé.courbe({ couleur: COULEUR.porté, épaisseur: 1.2 });
+    // La modulante 1 + k s(t) en haut et en bas du signal modulé, et
+    // par-dessus, en pointillés rouges, sa valeur absolue : l'enveloppe,
+    // celle que ressort une détection d'enveloppe. Elle se confond avec la
+    // modulante du haut tant que le taux de modulation ne dépasse pas 1 ;
+    // au-delà, la modulante passe sous zéro et l'enveloppe la reflète.
+    const modulantes = [0, 1].map(() => modulé.courbe({ couleur: COULEUR.signal, épaisseur: 1.6 }));
+    const enveloppe = modulé.courbe({ couleur: COULEUR.enveloppe, épaisseur: 2, pointillés: true });
     const raies = spectre.raies({ couleur: COULEUR.modulé });
-    const bande = spectre.cote('2f_s');
-    const nomsLatéraux = ['f_p - f_s', 'f_p + f_s'].map((tex) =>
-        spectre.légende(tex, { couleur: COULEURS.gris }),
-    );
+    const bandes = [0, 1].map(() => spectre.aire({ couleur: COULEUR.modulé, visible: false }));
+    const largeurDeBande = spectre.cote('2f_s');
+    const nomsLatéraux = ['f_p - f_s', 'f_p + f_s'].map((tex) => spectre.légende(tex, { couleur: COULEURS.gris }));
 
     const réglages = new Réglages(panneau);
 
     function dessine() {
-        const a = amplitudes(état.forme);
-        const { h, fs } = état;
-        // Le signal à transmettre, et la modulante qui en découle.
-        const s = (τ) => a.reduce((somme, ai, k) => somme + ai * Math.cos(TAU * (k + 1) * τ), 0);
-        courbeSignal.place(échantillons(0, 2, 1200).map((τ) => [τ, s(τ)]));
-        const modulante = (τ) => 1 + h * s(τ);
-        courbeModulé.place(échantillons(0, 2, 2600).map((τ) => [τ, modulante(τ) * Math.cos((TAU * τ) / fs)]));
-        for (const [i, enveloppe] of enveloppes.entries()) {
-            enveloppe.place(échantillons(0, 2, 600).map((τ) => [τ, (i ? 1 : -1) * modulante(τ)]));
-        }
+        const { h, forme } = état;
+        const f = état.f[forme];
+        const sinusoïdal = forme === 'sinus';
+        const comps = composantes(forme, f);
+        const s = signalDe(comps);
 
-        // Le spectre : la porteuse, et deux raies par harmonique du signal.
-        const latérales = a.flatMap((ai, k) =>
-            ai ? [[1 - (k + 1) * fs, (h * ai) / 2], [1 + (k + 1) * fs, (h * ai) / 2]] : [],
+        // Le signal à transmettre, et sa période quand il en a une.
+        courbeSignal.place(échantillons(0, FENÊTRE, 1400).map((t) => [t, s(t)]));
+        période.montre(sinusoïdal).place(0, 1 / f, 1.15);
+
+        // Le signal modulé et son enveloppe. La porteuse, elle, ne bouge
+        // jamais : vingt oscillations, quoi qu'on règle.
+        const modulante = (t) => 1 + h * s(t);
+        courbeModulé.place(échantillons(0, FENÊTRE, 3200).map((t) => [t, modulante(t) * Math.cos(TAU * t)]));
+        const instants = échantillons(0, FENÊTRE, 1400);
+        for (const [i, courbe] of modulantes.entries()) {
+            courbe.place(instants.map((t) => [t, (i ? 1 : -1) * modulante(t)]));
+        }
+        enveloppe.montre(état.enveloppe).place(instants.map((t) => [t, Math.abs(modulante(t))]));
+
+        // Le spectre : la porteuse, et de part et d'autre le spectre du
+        // signal à transmettre — deux raies, ou deux bandes.
+        raies.place(
+            sinusoïdal
+                ? [
+                      [1, 1],
+                      [1 - f, h / 2],
+                      [1 + f, h / 2],
+                  ]
+                : [[1, 1]],
         );
-        raies.place([[1, 1], ...latérales]);
-        // Le rang de la dernière harmonique présente donne f_max.
-        const fMax = (a.findLastIndex((ai) => ai > 0) + 1) * fs;
-        bande.place(1 - fMax, 1 + fMax, 1.15).écrit(état.forme === 'sinus' ? '2f_s' : '2f_{\\max}');
-        // Les raies latérales de la fondamentale, nommées de part et d'autre
-        // de la porteuse — seulement quand il n'y en a qu'une paire.
+        for (const [i, bande] of bandes.entries()) {
+            bande.montre(!sinusoïdal);
+            if (!sinusoïdal) bande.place(aireDeBande(1, i ? 1 : -1, f, h / 2));
+        }
+        largeurDeBande.place(1 - f, 1 + f, 1.15).écrit(sinusoïdal ? '2f_s' : '2f_{\\max}');
         for (const [i, nom] of nomsLatéraux.entries()) {
-            nom.montre(état.forme === 'sinus' && h > 0.05).place(1 + (i ? fs : -fs), (h * a[0]) / 2 + 0.12);
+            nom.montre(sinusoïdal && h > 0.05).place(1 + (i ? f : -f), h / 2 + 0.12);
         }
         spectre.grilleY.place(
-            état.forme === 'sinus' && h > 0.15 ? [[1, 'A_p'], [h / 2, '\\frac{h\\,A_p}{2}']] : [[1, 'A_p']],
+            sinusoïdal && h > 0.15 ? [[1, 'A_p'], [h / 2, '\\frac{h\\,A_p}{2}']] : [[1, 'A_p']],
         );
+
         verdict.textContent =
             h <= 1
-                ? 'L’enveloppe reproduit le signal à transmettre : une détection d’enveloppe suffit à le retrouver.'
-                : 'Surmodulation : l’enveloppe s’annule puis se retourne, elle ne reproduit plus le signal.';
+                ? 'L’enveloppe se confond avec la modulante et reproduit le signal à transmettre : une détection d’enveloppe suffit à le retrouver.'
+                : 'Surmodulation : là où la modulante passe sous zéro, l’enveloppe diffère de la modulante.';
     }
 
     réglages.groupe('Modulation');
@@ -241,45 +411,57 @@ function modulationAmplitude(section) {
         tex: 'h',
         min: 0,
         max: 1.6,
-        pas: 0.05,
+        pas: 0.01,
         valeur: état.h,
         auChangement: (v) => {
             état.h = v;
             dessine();
         },
     });
-    réglages.curseur({
-        tex: 'f_s',
-        min: 0.04,
-        max: 0.16,
-        pas: 0.01,
-        unité: ' f_p',
-        valeur: état.fs,
+    réglages.formule('s_{\\text{AM}} = \\bigl(1 + k\\,s(t)\\bigr)\\,s_p(t)');
+    // réglages.formule('h = k \\cdot \\max(s)');
+    const verdict = réglages.texte();
+    réglages.case({
+        texte: 'Enveloppe',
+        tex: '\\bigl|1 + k\\,s(t)\\bigr|',
+        couleur: COULEUR.enveloppe,
+        valeur: état.enveloppe,
         auChangement: (v) => {
-            état.fs = v;
+            état.enveloppe = v;
             dessine();
         },
     });
-    réglages.formule('s_{\\text{AM}} = \\bigl(1 + k\\,s(t)\\bigr)\\,s_p(t)');
-    réglages.formule('h = k \\cdot \\max(s)');
-    const verdict = réglages.texte();
 
     réglages.groupe('Signal à transmettre');
     réglages.choix({
         options: [
             ['sinus', '\\text{sinusoïdal}'],
-            ['riche', '\\text{quelconque}'],
+            ['quelconque', '\\text{quelconque}'],
         ],
         valeur: état.forme,
         auChangement: (forme) => {
             état.forme = forme;
+            fréquence.écrit(forme === 'sinus' ? 'Fréquence du signal' : 'Largeur du spectre du signal');
+            montreLeBon(curseurs, forme);
             dessine();
         },
     });
-    réglages.texte(
-        'Un signal périodique quelconque est une somme d’harmoniques : chacune donne sa paire de raies ' +
-            'latérales, et la largeur de bande vaut 2 f_max.',
-    ).className = 'note';
+    // réglages.texte(
+    //     'Un signal quelconque n’est pas périodique et son spectre est continu : il occupe toute une bande de ' +
+    //         'fréquences, que la modulation reporte de part et d’autre de la porteuse. Ce spectre-ci n’est pas ' +
+    //         'symétrique, et l’on voit que la bande du bas est renversée — celle du haut, non. La hauteur de la ' +
+    //         'bande est conventionnelle : une densité spectrale ne se compte pas en volts.',
+    // ).className = 'note';
+
+    const fréquence = réglages.groupe('Fréquence du signal');
+    const U = (min, max) => ({ min, max, pas: 0.002, unité: ' f_p' });
+    const curseurs = {
+        sinus: curseurDeF(réglages, état, 'sinus', 'f_s', U(0.04, 0.25), dessine),
+        quelconque: curseurDeF(réglages, état, 'quelconque', 'f_{\\max}', U(0.1, 0.32), dessine),
+    };
+    // réglages.texte(
+    //     'La porteuse, elle, garde la même fréquence : l’écran montre toujours trente de ses oscillations.',
+    // ).className = 'note';
 
     dessine();
 }
@@ -299,13 +481,17 @@ const ÉTAPES = [
     '\\text{après le filtre passe-haut : le signal retrouvé}',
 ];
 
+/** La largeur de l'axe des fréquences, en unités arbitraires : elle ne bouge
+ *  pas, c'est la porteuse qui s'y déplace. */
+const AXE = 2.8;
+
 function démodulationSynchrone(section) {
     const { vue, réglages: panneau } = cadre(section);
-    const état = { h: 0.6, fs: 0.1, bas: 0.3, haut: 0.02 };
+    const état = { h: 0.6, f: { sinus: 0.1, quelconque: 0.13 }, fp: 1, bas: 0.3, haut: 0.006, forme: 'sinus' };
 
     const spectres = ÉTAPES.map((titre) => {
         const graphe = new Graphe({
-            x: { min: 0, max: 2.4, nom: 'f', graduations: [0, [1, 'f_p'], [2, '2f_p']] },
+            x: { min: 0, max: AXE, nom: 'f' },
             y: {
                 min: 0,
                 max: 1.25,
@@ -322,9 +508,10 @@ function démodulationSynchrone(section) {
         graphe.légende(titre, { x: 0.02, y: 1.42, ancre: 'gauche', couleur: COULEURS.noir });
         return graphe;
     });
-
     vue.append(...spectres.map((g) => g.élément));
+
     const raies = spectres.map((g) => g.raies({ couleur: COULEUR.modulé }));
+    const bandes = spectres.map((g) => [0, 1, 2].map(() => g.aire({ couleur: COULEUR.modulé, visible: false })));
     const filtres = [2, 3].map((i) => ({
         courbe: spectres[i].courbe({ couleur: COULEUR.filtre, épaisseur: 1.5 }),
         coupure: spectres[i].verticale({ couleur: COULEUR.filtre }),
@@ -338,43 +525,86 @@ function démodulationSynchrone(section) {
     const réglages = new Réglages(panneau);
 
     function dessine() {
-        const { h, fs, bas, haut } = état;
-        // Le signal modulé, puis son produit par la porteuse : chaque raie de
-        // fréquence f donne deux raies, en |f_p - f| et f_p + f, de moitié
-        // d'amplitude.
-        const modulé = [
-            [1, 1],
-            [1 - fs, h / 2],
-            [1 + fs, h / 2],
+        const { h, fp, bas, haut, forme } = état;
+        const f = état.f[forme];
+        const sinusoïdal = forme === 'sinus';
+
+        // Le gain de chaque étape : la multiplication ne filtre rien, le
+        // passe-bas puis le passe-haut s'ajoutent.
+        const gains = [
+            () => 1,
+            () => 1,
+            (ν) => GAIN.bas(ν, bas),
+            (ν) => GAIN.bas(ν, bas) * GAIN.haut(ν, haut),
         ];
-        const multiplié = [
-            [0, 0.5],
-            [fs, h / 2],
-            [2 - fs, h / 4],
-            [2, 0.5],
-            [2 + fs, h / 4],
-        ];
-        const filtré = multiplié.map(([f, a]) => [f, a * GAIN.bas(f, bas)]);
-        const démodulé = filtré.map(([f, a]) => [f, a * GAIN.haut(f, haut)]);
-        [modulé, multiplié, filtré, démodulé].forEach((composantes, i) => raies[i].place(composantes));
-        for (const g of spectres.slice(1)) {
-            g.grilleX.place([0, [fs, 'f_s'], [1, 'f_p'], [2, '2f_p']]);
+
+        for (const [étape, gain] of gains.entries()) {
+            // Les raies : la porteuse avant multiplication, la composante
+            // continue et celle de 2 f_p après ; plus les raies latérales si
+            // le signal à transmettre est sinusoïdal.
+            const discrètes =
+                étape === 0
+                    ? [[fp, 1]]
+                    : [
+                          [0, 0.5],
+                          [2 * fp, 0.5],
+                      ];
+            if (sinusoïdal) {
+                discrètes.push(
+                    ...(étape === 0
+                        ? [
+                              [fp - f, h / 2],
+                              [fp + f, h / 2],
+                          ]
+                        : [
+                              [f, h / 2],
+                              [2 * fp - f, h / 4],
+                              [2 * fp + f, h / 4],
+                          ]),
+                );
+            }
+            raies[étape].place(discrètes.map(([ν, a]) => [ν, a * gain(ν)]));
+
+            // Les bandes, quand le signal à transmettre est quelconque : son
+            // spectre continu, reporté autour de la porteuse puis ramené
+            // autour de 0 et de 2 f_p.
+            const aires =
+                étape === 0
+                    ? [aireDeBande(fp, -1, f, h / 2, gain), aireDeBande(fp, 1, f, h / 2, gain)]
+                    : [
+                          aireDeBande(0, 1, f, h / 2, gain),
+                          aireDeBande(2 * fp, -1, f, h / 4, gain),
+                          aireDeBande(2 * fp, 1, f, h / 4, gain),
+                      ];
+            bandes[étape].forEach((bande, i) => {
+                bande.montre(!sinusoïdal && i < aires.length);
+                if (!sinusoïdal && i < aires.length) bande.place(aires[i]);
+            });
+
+            // Les graduations suivent la porteuse ; les étapes qui suivent la
+            // multiplication montrent aussi où est le signal utile.
+            const graduations = [0, [fp, 'f_p'], [2 * fp, '2f_p']];
+            if (étape > 0) graduations.splice(1, 0, [f, sinusoïdal ? 'f_s' : 'f_{\\max}']);
+            spectres[étape].grilleX.place(graduations);
         }
 
         // Le gain des filtres, par-dessus le spectre qu'ils reçoivent.
-        filtres[0].courbe.place(échantillons(0, 2.4, 240).map((f) => [f, GAIN.bas(f, bas)]));
-        filtres[1].courbe.place(échantillons(0, 2.4, 240).map((f) => [f, GAIN.haut(f, haut)]));
+        filtres[0].courbe.place(échantillons(0, AXE, 260).map((ν) => [ν, GAIN.bas(ν, bas)]));
+        filtres[1].courbe.place(échantillons(0, AXE, 260).map((ν) => [ν, GAIN.haut(ν, haut)]));
         filtres[0].coupure.place(bas);
         filtres[1].coupure.place(haut);
         filtres[0].nom.place(bas, 1.12);
         filtres[1].nom.place(haut, 1.12);
 
-        const utile = GAIN.bas(fs, bas) * GAIN.haut(fs, haut);
-        const résidu = Math.max(...[2 - fs, 2, 2 + fs].map((f) => GAIN.bas(f, bas)));
+        // Ce qui ressort : la composante utile la plus malmenée par les deux
+        // filtres, et la plus grosse de celles qui auraient dû disparaître.
+        const utiles = sinusoïdal ? [f] : BANDE.filter((u) => densité(u) > 0.05).map((u) => u * f);
+        const utile = Math.min(...utiles.map((ν) => GAIN.bas(ν, bas) * GAIN.haut(ν, haut)));
+        const résidu = Math.max(...[2 * fp - f, 2 * fp, 2 * fp + f].map((ν) => GAIN.bas(ν, bas)));
         const pour = (x) => `${Math.round(100 * x)} %`;
         verdict.textContent =
-            `Le signal utile ressort à ${pour(utile)} de son amplitude, et les raies autour de 2 f_p à ` +
-            `${pour(résidu)} de la leur. ` +
+            `Le signal utile ressort à ${pour(utile)} au moins de son amplitude, et les raies autour de ` +
+            `2 f_p à ${pour(résidu)} de la leur. ` +
             (utile > 0.9 && résidu < 0.2
                 ? 'La condition f_s ≪ f_c ≪ 2 f_p est bien remplie.'
                 : utile <= 0.9
@@ -385,9 +615,9 @@ function démodulationSynchrone(section) {
     réglages.groupe('Signal modulé');
     réglages.curseur({
         tex: 'h',
-        min: 0.1,
+        min: 0,
         max: 1,
-        pas: 0.05,
+        pas: 0.01,
         valeur: état.h,
         auChangement: (v) => {
             état.h = v;
@@ -395,25 +625,49 @@ function démodulationSynchrone(section) {
         },
     });
     réglages.curseur({
-        tex: 'f_s',
-        min: 0.05,
-        max: 0.3,
-        pas: 0.01,
-        unité: ' f_p',
-        valeur: état.fs,
+        tex: 'f_p',
+        min: 0.5,
+        max: 1.2,
+        pas: 0.005,
+        valeur: état.fp,
         auChangement: (v) => {
-            état.fs = v;
+            état.fp = v;
             dessine();
         },
     });
+    réglages.texte(
+        'Rapprocher la porteuse du signal à transmettre fait se chevaucher ce que les filtres doivent séparer.',
+    ).className = 'note';
+
+    réglages.groupe('Signal à transmettre');
+    réglages.choix({
+        options: [
+            ['sinus', '\\text{sinusoïdal}'],
+            ['quelconque', '\\text{quelconque}'],
+        ],
+        valeur: état.forme,
+        auChangement: (forme) => {
+            état.forme = forme;
+            montreLeBon(curseurs, forme);
+            dessine();
+        },
+    });
+    const V = (min, max) => ({ min, max, pas: 0.002 });
+    const curseurs = {
+        sinus: curseurDeF(réglages, état, 'sinus', 'f_s', V(0.02, 0.3), dessine),
+        quelconque: curseurDeF(réglages, état, 'quelconque', 'f_{\\max}', V(0.04, 0.3), dessine),
+    };
+    réglages.texte(
+        'Le spectre du signal quelconque n’est pas symétrique : on suit ainsi, d’une étape à l’autre, ' +
+            'laquelle de ses deux copies est renversée.',
+    ).className = 'note';
 
     réglages.groupe('Filtres du premier ordre');
     réglages.curseur({
         tex: 'f_c',
-        min: 0.05,
-        max: 2.4,
-        pas: 0.05,
-        unité: ' f_p',
+        min: 0.02,
+        max: AXE,
+        pas: 0.02,
         valeur: état.bas,
         couleur: COULEUR.filtre,
         auChangement: (v) => {
@@ -423,10 +677,9 @@ function démodulationSynchrone(section) {
     });
     réglages.curseur({
         tex: "f_c'",
-        min: 0.005,
-        max: 0.1,
-        pas: 0.005,
-        unité: ' f_p',
+        min: 0.001,
+        max: 0.11,
+        pas: 0.001,
         valeur: état.haut,
         couleur: COULEUR.filtre,
         auChangement: (v) => {
@@ -435,12 +688,12 @@ function démodulationSynchrone(section) {
         },
     });
     const verdict = réglages.texte();
-    réglages.texte(
-        'La multiplication ramène une partie du spectre autour de 0 : c’est elle qui déplace les fréquences, ' +
-            'ce qu’aucun filtre ne sait faire. Le passe-bas écarte ensuite ce qui est resté autour de 2 f_p, et ' +
-            'le passe-haut la composante continue. Un filtre du premier ordre ne coupe que de 20 dB par ' +
-            'décade : il faut vraiment f_s ≪ f_c ≪ 2 f_p pour qu’il fasse les deux à la fois.',
-    ).className = 'note';
+    // réglages.texte(
+    //     'La multiplication ramène une partie du spectre autour de 0 : c’est elle qui déplace les fréquences, ' +
+    //         'ce qu’aucun filtre ne sait faire. Le passe-bas écarte ensuite ce qui est resté autour de 2 f_p, et ' +
+    //         'le passe-haut la composante continue. Un filtre du premier ordre ne coupe que de 20 dB par ' +
+    //         'décade : il faut vraiment f_s ≪ f_c ≪ 2 f_p pour qu’il fasse les deux à la fois.',
+    // ).className = 'note';
 
     dessine();
 }

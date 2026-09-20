@@ -174,6 +174,13 @@ note l'empreinte du dernier envoi. Le premier envoi vers une activité que ce
 manifeste ne connaît pas encore (faite à la main, ou manifeste effacé)
 sauvegarde d'abord son contenu dans `.capytale-sauvegardes/`.
 
+Une activité qui part est rangée dans le dossier **PSI/TD** de Capytale
+(`DOSSIER`, dans `capytale.py`). Un dossier y est un mot-clé, et l'y ranger
+remplace ceux de l'activité, comme le fait un déplacement dans l'interface :
+elle ne reste pas là où elle était. Le dossier doit exister — l'outil n'en crée
+pas —, et une activité dont le notebook n'a pas changé ne repart pas, donc
+n'est pas vérifiée : déplacée à la main, elle le reste jusqu'au prochain envoi.
+
 Trois limites, qui tiennent à Capytale :
 
 - **Pas d'API publique.** On parle à celle qu'utilise l'interface de Capytale,
@@ -187,8 +194,9 @@ Trois limites, qui tiennent à Capytale :
 - **Copies figées.** Une copie qu'un élève a déjà enregistrée ne suit plus le
   modèle : une mise à jour n'atteint que ceux qui n'ont pas encore commencé.
 
-`-n` (`--simulation`) dit ce qui serait créé ou mis à jour, sans rien envoyer
-ni écrire. On peut aussi nommer des fichiers d'exercices plutôt que des
+`-n` (`--simulation`) dit ce qui serait créé, mis à jour ou rangé, sans rien
+envoyer ni écrire — il lit quand même Capytale, pour savoir où en sont les
+activités. On peut aussi nommer des fichiers d'exercices plutôt que des
 chapitres, même hors TD.
 
 Le hook `pre-commit` envoie les notebooks des chapitres du commit si on le lui

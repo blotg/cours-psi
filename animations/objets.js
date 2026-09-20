@@ -73,6 +73,12 @@ export class Étiquette extends CSS2DObject {
         return this;
     }
 
+    /** Sa couleur, quand ce qu'elle nomme change de rôle avec un réglage. */
+    couleur(couleur) {
+        this.element.style.color = couleur;
+        return this;
+    }
+
     /**
      * À côté d'un segment, du côté opposé à `loin` : la cote d'une arête,
      * hors de la figure. Parmi les `segments` [a, b] candidats, c'est celui
@@ -140,12 +146,20 @@ function matériauUni(couleur, dessus) {
 export class Flèche extends THREE.Group {
     constructor({ couleur = COULEURS.noir, rayon = 0.025, tête = 0.24, largeur = 0.085, dessus = false } = {}) {
         super();
-        Object.assign(this, { rayon, tête, largeur });
+        Object.assign(this, { rayon, tête, largeur, dessus });
         const matériau = matériauUni(couleur, dessus);
         this.tige = new THREE.Mesh(TIGE, matériau);
         this.pointe = new THREE.Mesh(POINTE, matériau);
         if (dessus) this.tige.renderOrder = this.pointe.renderOrder = 10;
         this.add(this.tige, this.pointe);
+    }
+
+    /** Sa couleur, quand son rôle change avec un réglage. Les matériaux étant
+     *  partagés par couleur, elle en prend un autre plutôt que de teindre
+     *  celui qu'elle a — qui est aussi celui des autres. */
+    couleur(couleur) {
+        this.tige.material = this.pointe.material = matériauUni(couleur, this.dessus);
+        return this;
     }
 
     /** De `origine`, dans la direction `direction`, sur `longueur`. */
@@ -179,6 +193,11 @@ export class Trait extends Line2 {
                 dashed: pointillés,
                 dashSize: tiret,
                 gapSize: 0.7 * tiret,
+                // Un trait épais est un ruban tourné vers l'œil, et un ruban
+                // a un endroit : sous une matrice qui retourne l'espace — la
+                // symétrie par un plan —, il serait présenté par l'envers, et
+                // le rendu l'écarterait. Un trait n'a pas d'envers.
+                side: THREE.DoubleSide,
                 toneMapped: false,
             }),
         );

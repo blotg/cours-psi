@@ -109,11 +109,11 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | Module | Rôle |
 |---|---|
 | `page.js`, `page.css` | la mise en page : celle du site (`gabarits/site.css`), élargie ; `cadre` et `lance` |
-| `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt |
+| `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt, poignées que l'on déplace dans l'espace |
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
 | `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`) |
-| `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres, zones, cotes |
-| `reglages.js` | `Réglages` : curseurs, cases, choix et formules, nommés en LaTeX |
+| `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
+| `reglages.js` | `Réglages` : curseurs (avec leurs aimants), cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
 
 `Plan` reprend les partis pris de `Scène` : rendu à la demande, rien hors de
@@ -171,6 +171,21 @@ Quelques partis pris :
 - **`hidden` ne cache pas un contrôle du panneau** : ses règles lui donnent
   un `display` qui l'emporte sur celui de l'attribut. `page.css` le rétablit
   (`.panneau [hidden]`).
+- **Des phases en progression arithmétique ne font pas un signal
+  quelconque** : ajouter le même écart de phase d'une composante à la
+  suivante ne fait que décaler la somme dans le temps. Les composantes
+  restent en phase au même instant et leur somme est une impulsion bien
+  lisse. Il faut un vrai tirage pseudo-aléatoire, de graine fixe pour que le
+  signal ne change pas d'un chargement à l'autre (`modulation.js`).
+- **Une matrice qui retourne l'espace efface les traits épais** : un `Trait`
+  est un ruban tourné vers l'œil, et un ruban a un endroit ; sous la symétrie
+  par un plan (déterminant négatif), il était présenté par l'envers et le
+  rendu l'écartait. D'où `side: DoubleSide` dans `LineMaterial` — un trait
+  n'a pas d'envers. Les `Mesh`, eux, n'en souffraient pas.
+- **Les contrôles de la caméra attrapent le pointeur les premiers** :
+  `OrbitControls` écoute sur le canevas. Les poignées de `Scène` écoutent
+  donc sur le cadre, **en capture**, et arrêtent l'événement avant qu'il
+  n'atteigne le canevas quand le pointeur en tient une.
 - `THREE.Clock` est déprécié : `Scène` emploie `THREE.Timer`, qu'il faut
   mettre à jour (`update()`) à chaque image.
 
@@ -179,33 +194,116 @@ Quelques partis pris :
 **Électronique 5** — `modulation.js` montre les trois modulations sur les
 mêmes signaux (seul change, en couleur dans la formule, le paramètre de la
 porteuse qui varie), puis le signal modulé en amplitude avec son enveloppe et
-son spectre — dont les graduations suivent f_s —, puis les quatre spectres de
-la chaîne de démodulation synchrone. Les filtres sont du premier ordre, leur
-gain est tracé par-dessus le spectre qu'ils reçoivent, et le panneau dit ce
-qui ressort du signal utile et ce qui reste des raies autour de 2 f_p.
+son spectre, puis les quatre spectres de la chaîne de démodulation synchrone.
 
-**Électromagnétisme 1** — deux pages, qui partagent `champ.js` : la physique
-d'un jeu de charges vues comme des fils rectilignes infinis, pour que le plan
-de l'écran soit un plan de coupe où tout est exact — le champ d'un fil
-décroît en 1/r, et le flux se conserve dans le plan.
+La modulation de fréquence s'écrit avec la **primitive** du signal, et non
+avec le produit f(t)·t du cours : la fréquence instantanée est la dérivée de
+la phase, et la formule abrégée ferait sauter la phase à chaque alternance
+d'un créneau. Une note le dit dans le panneau, sous la formule du cours.
+
+Le temps se compte en périodes de porteuse : l'écran en garde toujours trente,
+de sorte que le curseur f_s ne fasse varier que la période du signal à
+transmettre — une cote la mesure sur le tracé. Sur le signal modulé, la
+**modulante** 1 + k s(t) est tracée en bleu de part et d'autre, et
+l'**enveloppe** |1 + k s(t)| par-dessus, en pointillés rouges : les deux se
+confondent jusqu'à h = 1, au-delà la modulante passe sous zéro et l'enveloppe
+la reflète. L'enveloppe n'est tracée qu'en haut — ±|A| et ±A sont le même
+couple de courbes, les tracer toutes les deux ne montrerait jamais rien.
+
+Le signal à transmettre est au choix sinusoïdal (deux raies latérales) ou
+quelconque : on se donne son spectre, une bande continue, et le signal en est
+la somme des composantes — une transformée de Fourier inverse. Son tracé
+temporel est normalisé sur la fenêtre affichée, pour que l'enveloppe touche
+zéro exactement à h = 1 ; la hauteur de sa bande est celle qu'aurait une raie,
+comme dans le poly — une densité spectrale ne se compte pas en volts, et les
+amplitudes des composantes d'une bande dense sont bien plus petites que cela.
+Le profil de la bande est volontairement **dissymétrique** (deux bosses
+inégales) : on voit ainsi, sur le spectre du signal modulé, que la bande du
+bas est renversée et celle du haut non, et on suit chacune le long de la
+chaîne de démodulation.
+
+À la démodulation, un curseur déplace aussi la porteuse : rapprocher f_p de
+f_s fait se chevaucher ce que les filtres doivent séparer. Les filtres sont du
+premier ordre, leur gain est tracé par-dessus le spectre qu'ils reçoivent, et
+le panneau dit ce qui ressort du signal utile et ce qui reste des raies autour
+de 2 f_p.
+
+**Électromagnétisme 1** — deux pages, dont une s'appuie sur `champ.js` : la
+physique d'un jeu de charges dans le plan de l'écran, sous deux lois au choix.
+Des charges **ponctuelles** (`PONCTUELLES`), celles du cours, comptées en
+nanocoulombs et placées à quelques centimètres : le champ sort alors en volts
+par mètre et le potentiel en volts, que la carte affiche tels quels sous une
+règle de 5 cm. Ou des **fils** infinis perpendiculaires à l'écran (`FILS`),
+que l'on juxtapose pour faire une plaque vue par la tranche — c'est le
+condensateur plan, et rien d'autre ne donnerait un champ uniforme entre deux
+armatures.
 
 `cartes-de-champ.js` (vues planes) trace les lignes de champ — une par part
-égale de flux, d'où « une charge double en émet deux fois plus » —, les
+égale de charge, d'où « une charge double en émet deux fois plus » —, les
 équipotentielles par carrés marchants, toujours du même écart de potentiel
 (c'est leur resserrement qui dit le champ), et un dégradé peint sur la grille
-du potentiel. Le tube de champ s'appuie sur deux lignes ; le flux à travers
-chacune de ses deux sections est *calculé*, non supposé, et on le retrouve le
-même. Le condensateur plan est fait de fils, ce qui donne ses effets de bord.
+du potentiel. Le condensateur plan est fait de fils, ce qui donne ses effets
+de bord.
 
-`symetries.js` (scènes 3D) travaille les obstacles de la vision dans
-l'espace, et sa tête de fichier dit lesquels : le plan y est une surface
-quadrillée et non un trait, des boutons ramènent à des vues toutes faites
-sans avoir à tourner la scène, la symétrie se joue (un fantôme glisse de M
-jusqu'à M′), le vecteur se décompose en part parallèle et part normale, et le
-cas limite — M dans le plan — s'atteint au curseur, où la conclusion s'écrit.
-On regarde toujours la distribution avant le champ : l'image de chaque charge
-est dessinée en fil de fer, et c'est elle qui décide si le plan est de
-symétrie, d'antisymétrie, ou ni l'un ni l'autre.
+Deux écueils, qui ont chacun leur remède dans `champ.js` :
+
+- **Une ligne coupée au bord du cadre part sans jamais revenir.** Entre deux
+  charges opposées, celle qui s'élance à l'opposé de sa partenaire s'éloigne
+  de cent fois la vue avant de revenir s'y poser — plus de six mètres pour
+  deux charges de 3 nC distantes de 5 cm. Hors de la vue, le pas grandit donc
+  avec la distance : la ligne y va et en revient en quelques centaines de pas,
+  et ce qu'elle fait là-bas ne se voit pas. Une ligne qui s'échappe pour de
+  bon s'arrête dès que la charge totale, seule chose qui compte de si loin,
+  la pousse vers le dehors.
+- **Le potentiel d'une charge ponctuelle varie en 1/r.** À écart fixé, les
+  équipotentielles se tassent en un pâté autour des charges, ou désertent la
+  carte quand la charge est faible. L'écart suit donc la plus forte des
+  charges (une valeur ronde, 1, 2 ou 5 fois une puissance de dix), et le
+  panneau l'annonce : c'est lui l'échelle du potentiel.
+
+`symetries.js` (scènes 3D) porte les deux gestes du chapitre, sur les mêmes
+six distributions (charge, boule, fil, plan, spire, deux charges opposées) et
+les mêmes trois systèmes de coordonnées.
+
+**Invariances** : chaque curseur applique à la distribution la transformation
+qui fait varier une coordonnée — la translation selon x, la rotation autour
+de (Oz)… Les coordonnées qui ne correspondent à aucune isométrie (r) n'ont
+pas de curseur : hors des cartésiennes, il n'y en a donc que deux. La
+position de départ reste en fil de fer, le geste lui-même est dessiné (une
+flèche, un arc), et le panneau écrit ce qu'on en déduit : les invariances
+trouvées, puis les variables dont le champ dépend encore, `E(M) = E(r)`.
+
+**Plans de symétrie** : un point M que l'on déplace à la main (poignée de
+`Scène`), sa base locale, et les trois plans passant par M que dirigent ses
+vecteurs de base. Le plan choisi s'affiche et le symétrique de la
+distribution est tracé par-dessus. Le panneau donne la nature des trois
+plans, puis les composantes qui survivent — le champ est contenu dans tout
+plan de symétrie passant par M, et perpendiculaire à tout plan
+d'antisymétrie. La scène ne dessine pas le champ : c'est au lecteur de
+conclure, et une flèche donnerait d'ailleurs un sens que la symétrie ne
+donne pas.
+
+Trois partis pris, sans lesquels rien ne se verrait :
+
+- **Aucun bord ne doit bouger quand la distribution ne bouge pas.** Le fil
+  est dessiné bien au-delà de la vue ; le plan, qui ne saurait en sortir de
+  tous les côtés, est posé autour de **son point le plus proche de l'origine**
+  et s'efface vers le bord. Ce point et cette normale ne dépendent que du
+  plan : le glisser le long de lui-même ou le tourner autour de sa normale ne
+  déplace alors pas un pixel — ce qui est exactement ce qu'une invariance
+  doit donner à voir.
+- **Une image posée sur son original doit se voir**, sans changer de couleur —
+  c'est la couleur qui dit le signe de la charge. Elle est donc en fil de fer,
+  de la même couleur en plus sombre, et rien ne la cache (`depthTest: false`).
+  Sa carcasse est plus large que ce qu'elle recouvre et à peine maillée : une
+  carcasse serrée ferait une boule pleine, et cacherait la couleur d'en
+  dessous.
+- **Les positions remarquables s'atteignent exactement.** Une symétrie se
+  calcule, sur les formes qui décrivent la distribution (un point, une
+  droite, un plan, une sphère, un cercle) ; à un millième près, ce n'en est
+  plus une. La main n'y arriverait jamais : M se pose donc de lui-même sur
+  l'axe (Oz) et dans le plan (O x y), qui sont le plan médiateur des deux
+  charges, celui de la spire et le plan chargé.
 
 **Systèmes de coordonnées** — `systemes.js` décrit les trois systèmes par des
 données : coordonnées et bornes, position, base locale, longueurs des arêtes,

@@ -6,7 +6,9 @@ interface, dont le client est publié sur la forge de l'Éducation nationale
 
 - `POST /web/c-act/api/activity` crée une activité ;
 - `PUT /web/c-act/api/n/<nid>/fields/content` en remplace le notebook ;
-- `GET /web/node/<nid>?_format=json` en donne le code de partage.
+- `GET /web/node/<nid>?_format=json` en donne le code de partage ;
+- `GET /web/c-hdls/api/my-tags` liste les dossiers de l'enseignant, et
+  `POST /web/c-hdls/api/my-activities` y range une activité.
 
 Elle peut changer sans prévenir : c'est le prix de l'automatisme.
 
@@ -29,6 +31,12 @@ caractère.
 envoi vers une activité que le manifeste ne connaît pas encore — une activité
 faite à la main, avant cet outil — sauvegarde d'abord son contenu dans
 .capytale-sauvegardes/.
+
+**Rangement.** Une activité déposée va dans le dossier PSI/TD de Capytale.
+Un dossier y est un mot-clé ; un déplacement remplace ceux de l'activité, qui
+ne reste donc pas là où elle était. Le dossier doit exister : cet outil n'en
+crée pas. Une activité dont le notebook n'a pas changé n'est pas renvoyée, donc
+pas vérifiée : une activité déplacée à la main le reste jusqu'au prochain envoi.
 
 **Copies des élèves.** Une copie qu'un élève a déjà enregistrée ne suit plus le
 modèle : une mise à jour n'atteint que ceux qui n'ont pas encore commencé.
@@ -58,6 +66,10 @@ ADRESSE = "https://capytale2.ac-paris.fr"
 
 #: L'identifiant du type « notebook Python » chez Capytale.
 TYPE_ACTIVITÉ = "notebook.python3"
+
+#: Le dossier de Capytale où ranger les activités, sous « Mes activités »,
+#: dossier après sous-dossier.
+DOSSIER = ("PSI", "TD")
 
 MANIFESTE = RACINE / ".capytale-manifeste.json"
 SAUVEGARDES = RACINE / ".capytale-sauvegardes"
@@ -306,6 +318,41 @@ class Session:
         except (KeyError, IndexError, TypeError):
             raise ErreurCapytale(f"l'activité {nid} n'a pas de code de partage") from None
 
+    def dossier(self, chemin: tuple[str, ...]) -> int:
+        """Le numéro du dossier au bout du chemin, ex. ("PSI", "TD").
+
+        Les dossiers arrivent à plat, chacun avec son parent (nul à la
+        racine) : on descend le chemin d'un niveau à l'autre.
+        """
+        dossiers = self._json("GET", "/web/c-hdls/api/my-tags") or []
+        tid = 0
+        for nom in chemin:
+            suivant = next(
+                (d["id"] for d in dossiers if d["label"] == nom and (d.get("parentId") or 0) == tid),
+                None,
+            )
+            if suivant is None:
+                raise ErreurCapytale(
+                    f"pas de dossier « {'/'.join(chemin)} » dans Capytale : le créer dans « Mes activités »"
+                )
+            tid = suivant
+        return tid
+
+    def rangements(self) -> dict[int, list[int]]:
+        """Les dossiers de chacune des activités de l'enseignant."""
+        activités = self._json("GET", "/web/c-hdls/api/all-activities") or []
+        return {a["nid"]: a["tags"] for a in activités}
+
+    def range(self, nid: int, tid: int) -> None:
+        """Range une activité dans un dossier, comme le fait l'interface de
+        Capytale : les mots-clés de l'activité sont remplacés par celui-là."""
+        self._json(
+            "POST",
+            "/web/c-hdls/api/my-activities",
+            {"action": "replaceTags", "nids": [nid], "tids": [[tid]]},
+            attendus=(200, 204),
+        )
+
 
 # -- Le lien dans l'exercice ----------------------------------------------------
 
@@ -390,6 +437,8 @@ class Capytale:
         self.indexer = indexer
         self._session = session
         self._verrou = threading.RLock()
+        self._tid: int | None = None
+        self._rangements: dict[int, list[int]] | None = None
         try:
             self._manifeste: dict[str, dict] = json.loads(MANIFESTE.read_text(encoding="utf-8"))
         except (OSError, ValueError):
@@ -417,6 +466,28 @@ class Capytale:
                 refus.append("aucun cookie de capytale2.ac-paris.fr dans les profils de navigateur connus")
             détail = "".join(f"\n    {r}" for r in refus)
             raise ErreurCapytale(f"aucune session Capytale valable : se connecter à Capytale dans le navigateur{détail}")
+
+    def _dossier(self) -> int:
+        """Le numéro du dossier où vont les activités, demandé une fois."""
+        with self._verrou:
+            if self._tid is None:
+                self._tid = self.session.dossier(DOSSIER)
+            return self._tid
+
+    def _range(self, nid: int) -> str:
+        """Range l'activité si elle n'est pas déjà dans le dossier, et dit ce
+        qui a été fait — rien, le plus souvent : c'est là qu'elle est née."""
+        tid = self._dossier()
+        with self._verrou:
+            if self._rangements is None:
+                self._rangements = self.session.rangements()
+            if self._rangements.get(nid) == [tid]:
+                return ""
+            if self.simulation:
+                return f", à ranger dans {'/'.join(DOSSIER)}"
+            self.session.range(nid, tid)
+            self._rangements[nid] = [tid]
+        return f", rangée dans {'/'.join(DOSSIER)}"
 
     def _note(self, exercice: Path, nid: int, empreinte: str) -> None:
         with self._verrou:
@@ -455,24 +526,29 @@ class Capytale:
 
         if code is None:
             if self.simulation:
-                return "créerait l'activité et écrirait son code dans l'exercice"
+                self._dossier()  # le dossier doit exister : autant le dire tout de suite
+                return f"créerait l'activité dans {'/'.join(DOSSIER)} et écrirait son code dans l'exercice"
             titre = _infos_exercice(exercice, appel=True)["titre"]
             nid = self.session.crée(titre)
             self.session.dépose(nid, texte)
             code = self.session.code(nid)
             self._note(exercice, nid, empreinte)
-            return f"activité créée : {code}{self._écrit_code(exercice, code)}"
+            return f"activité créée : {code}{self._range(nid)}{self._écrit_code(exercice, code)}"
 
         nid = numéro(code)
         connue = note is not None and note.get("nid") == nid
         if connue and note.get("empreinte") == empreinte:
             return f"à jour ({code})"
         if self.simulation:
-            return f"mettrait à jour {code}" + ("" if connue else ", après avoir sauvegardé son contenu actuel")
+            return (
+                f"mettrait à jour {code}"
+                + ("" if connue else ", après avoir sauvegardé son contenu actuel")
+                + self._range(nid)
+            )
         sauvegarde = None if connue else self._sauvegarde(exercice, nid)
         self.session.dépose(nid, texte)
         self._note(exercice, nid, empreinte)
-        return f"mis à jour : {code}" + (
+        return f"mis à jour : {code}{self._range(nid)}" + (
             f", ancien contenu dans {sauvegarde.parent.name}/{sauvegarde.name}" if sauvegarde else ""
         )
 

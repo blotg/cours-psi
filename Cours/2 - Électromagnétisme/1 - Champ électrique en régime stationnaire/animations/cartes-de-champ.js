@@ -1,16 +1,20 @@
 // Les cartes du chapitre : lignes de champ et équipotentielles d'un jeu de
-// charges que l'on déplace, conservation du flux le long d'un tube de champ,
-// et le champ d'un condensateur plan, uniforme sauf près des bords.
+// charges que l'on déplace, et le champ d'un condensateur plan, uniforme sauf
+// près des bords.
 //
-// La physique est dans `champ.js` : des fils rectilignes infinis vus en
-// coupe, pour que tout ce qui se lit sur la carte vaille dans le plan.
+// La physique est dans `champ.js`. Les charges de la première carte sont
+// ponctuelles et posées dans le plan de l'écran : tout s'y lit en vraies
+// unités — des centimètres, que porte la règle dessinée sur la carte, des
+// nanocoulombs, des volts par mètre et des volts. Les armatures du
+// condensateur, elles, sont des plaques vues par la tranche, sans quoi le
+// champ entre elles ne serait pas uniforme ; son panneau ne parle qu'en σ/ε.
 
 import { Graphe, échantillons } from '#animations/graphe.js';
 import { COULEURS } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
-import { Plan, aplat, chemin, disque, flèche, pointe } from '#animations/plan.js';
+import { Plan, chemin, disque, flèche, pointe } from '#animations/plan.js';
 import { Réglages } from '#animations/reglages.js';
-import { champ, contour, flux, grilleDePotentiel, lignesDeChamp, ligneDeChamp, niveaux, potentiel } from './champ.js';
+import { champ, contours, FILS, grilleDePotentiel, lignesDeChamp, ligneDeChamp, niveaux, potentiel } from './champ.js';
 
 const COULEUR = {
     positive: COULEURS.vermillon,
@@ -18,24 +22,70 @@ const COULEUR = {
     ligne: COULEURS.noir,
     équipotentielle: COULEURS.vert,
     sonde: COULEURS.violet,
-    tube: 'rgba(230, 159, 0, 0.18)',
-    section: COULEURS.orange,
+    règle: COULEURS.gris,
 };
 
-/** L'espacement des équipotentielles : c'est lui qui fait parler la carte. */
-const PAS_DU_POTENTIEL = 0.4;
+/** La règle posée sur la carte, en centimètres. */
+const RÈGLE = 5;
 
-const format = new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3 });
+/** La valeur ronde la plus proche : 1, 2 ou 5 fois une puissance de dix. */
+function ronde(x) {
+    const décade = 10 ** Math.floor(Math.log10(x));
+    const mantisse = x / décade;
+    return décade * (mantisse < 1.5 ? 1 : mantisse < 3.5 ? 2 : mantisse < 7.5 ? 5 : 10);
+}
+
+/**
+ * L'écart entre équipotentielles, en volts. C'est lui qui fait parler la
+ * carte : toutes sont tracées du même écart, et leur resserrement dit le
+ * champ. Il suit la plus forte des charges, pour qu'une charge faible ne
+ * donne pas une carte vide et une charge forte un pâté illisible — le
+ * potentiel d'une charge ponctuelle varie en 1/r, et se resserre vite. La
+ * valeur retenue s'annonce dans le panneau : c'est l'échelle du potentiel.
+ */
+function pasDuPotentiel(charges) {
+    return ronde(100 * Math.max(...charges.map((c) => Math.abs(c.q)), 0.01));
+}
+
+/** Le nombre d'équipotentielles que porte la carte au plus ; `niveaux` les
+ *  répartit de part et d'autre du potentiel nul. */
+const ÉQUIPOTENTIELLES = 16;
+
+/** Le champ, en volts par mètre, où la flèche en M a pris la moitié de sa
+ *  longueur : elle sature, faute de quoi elle traverserait la carte dès
+ *  qu'on approche M d'une charge. */
+const CHAMP_DE_RÉFÉRENCE = 9e3;
+
+const format = new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3, useGrouping: false });
 /** Un nombre, écrit à la française et lisible par KaTeX. */
 const nombre = (x) => format.format(x).replace('−', '-').replace(',', '{,}');
 
+/** Les préfixes du système international, du plus grand au plus petit. */
+const PRÉFIXES = [
+    [1e9, 'G'],
+    [1e6, 'M'],
+    [1e3, 'k'],
+];
+
+/** Une mesure et son unité, sous le préfixe qui rend le nombre lisible. */
+function mesure(valeur, unité) {
+    const [facteur, préfixe] = PRÉFIXES.find(([seuil]) => Math.abs(valeur) >= seuil) ?? [1, ''];
+    return `${nombre(valeur / facteur)}\\,\\mathrm{${préfixe}${unité}}`;
+}
+
 // -- Ce qui se dessine ---------------------------------------------------------
 
+/** Le rayon du disque d'une charge, en pixels : il grandit avec elle, mais
+ *  lentement, pour qu'une charge triple ne dévore pas la carte — et il
+ *  s'annule avec elle, plutôt que de la faire disparaître d'un coup. */
+const rayonDeCharge = (q) => 11 * Math.cbrt(Math.abs(q));
+
 /** Les charges : un disque, plus le signe en blanc par-dessus. */
-function dessineCharges(c, plan, charges, rayon = 11) {
+function dessineCharges(c, plan, charges) {
     for (const charge of charges) {
         if (!charge.q) continue;
         const centre = plan.vers(charge.x, charge.y);
+        const rayon = rayonDeCharge(charge.q);
         disque(c, centre, rayon, { couleur: charge.q > 0 ? COULEUR.positive : COULEUR.négative });
         const barre = rayon * 0.55;
         const traits = [
@@ -50,7 +100,7 @@ function dessineCharges(c, plan, charges, rayon = 11) {
                 [centre[0], centre[1] + barre],
             ]);
         }
-        for (const trait of traits) chemin(c, trait, { couleur: '#fff', épaisseur: 2.4 });
+        for (const trait of traits) chemin(c, trait, { couleur: '#fff', épaisseur: Math.max(1.2, rayon * 0.22) });
     }
 }
 
@@ -66,13 +116,11 @@ function dessineLignes(c, plan, lignes, { couleur = COULEUR.ligne, épaisseur = 
 }
 
 /** Les équipotentielles, toutes espacées du même écart de potentiel. */
-function dessineÉquipotentielles(c, plan, grille, pas = PAS_DU_POTENTIEL) {
+function dessineÉquipotentielles(c, plan, grille, pas) {
     const trait = new Path2D();
-    for (const niveau of niveaux(grille, pas)) {
-        for (const [a, b] of contour(grille, niveau)) {
-            trait.moveTo(...plan.vers(...a));
-            trait.lineTo(...plan.vers(...b));
-        }
+    for (const [a, b] of contours(grille, niveaux(grille, pas, ÉQUIPOTENTIELLES))) {
+        trait.moveTo(...plan.vers(...a));
+        trait.lineTo(...plan.vers(...b));
     }
     c.save();
     c.strokeStyle = COULEUR.équipotentielle;
@@ -85,7 +133,7 @@ const TEINTE = { positif: [213, 94, 0], négatif: [0, 114, 178] };
 
 /** Le dégradé de potentiel, peint sur la grille puis étiré à la taille de la
  *  vue : le calculer pixel par pixel coûterait trente fois plus. */
-function dessineDégradé(c, plan, grille, toile) {
+function dessineDégradé(c, plan, grille, toile, saturation) {
     const { colonnes, lignes, valeurs, cadre: vue } = grille;
     if (toile.width !== colonnes || toile.height !== lignes) {
         toile.width = colonnes;
@@ -95,7 +143,7 @@ function dessineDégradé(c, plan, grille, toile) {
     const image = pinceau.createImageData(colonnes, lignes);
     for (let j = 0; j < lignes; j++) {
         for (let i = 0; i < colonnes; i++) {
-            const t = Math.tanh(valeurs[j * colonnes + i] / 2.5);
+            const t = Math.tanh(valeurs[j * colonnes + i] / saturation);
             const [r, v, b] = t >= 0 ? TEINTE.positif : TEINTE.négatif;
             const poids = Math.abs(t) * 0.55;
             // L'image se remplit de haut en bas, la grille de bas en haut.
@@ -113,9 +161,25 @@ function dessineDégradé(c, plan, grille, toile) {
     c.restore();
 }
 
-/** Le cadre où les lignes de champ continuent de se calculer : un peu plus
- *  large que la vue, pour qu'aucune ne s'arrête sur son bord. */
-const élargi = ({ x0, x1, y0, y1 }, marge = 3) => ({ x0: x0 - marge, x1: x1 + marge, y0: y0 - marge, y1: y1 + marge });
+/** L'échelle de la carte : une règle posée en bas à gauche. Sans elle, ni les
+ *  volts par mètre ni les volts affichés ne voudraient dire grand-chose. */
+function dessineÉchelle(c, plan, nom) {
+    const { x0, y0 } = plan.cadre();
+    const y = y0 + 0.5;
+    const bouts = [plan.vers(x0 + 0.6, y), plan.vers(x0 + 0.6 + RÈGLE, y)];
+    chemin(c, bouts, { couleur: COULEUR.règle, épaisseur: 2 });
+    for (const [px, py] of bouts) {
+        chemin(
+            c,
+            [
+                [px, py - 5],
+                [px, py + 5],
+            ],
+            { couleur: COULEUR.règle, épaisseur: 2 },
+        );
+    }
+    nom.place(x0 + 0.6 + RÈGLE / 2, y, [0, -13]);
+}
 
 // -- Lignes de champ et équipotentielles ---------------------------------------
 
@@ -148,6 +212,7 @@ function carteDeChamp(section) {
 
     const nomM = plan.étiquette('M');
     const nomE = plan.étiquette('\\vec{E}', { couleur: COULEUR.sonde });
+    const nomRègle = plan.étiquette(`${RÈGLE}\\,\\mathrm{cm}`, { couleur: COULEUR.règle, taille: '0.9rem' });
 
     // Les charges et le point M se prennent à la souris ; rien ne sort du
     // cadre, où le calcul a un sens.
@@ -167,15 +232,19 @@ function carteDeChamp(section) {
 
     plan.dessine((c) => {
         const vueDuPlan = plan.cadre();
+        const pas = pasDuPotentiel(charges);
         if (état.montre.équipotentielles || état.montre.dégradé) {
             const grille = grilleDePotentiel(charges, vueDuPlan, 130);
-            if (état.montre.dégradé) dessineDégradé(c, plan, grille, toile);
-            if (état.montre.équipotentielles) dessineÉquipotentielles(c, plan, grille);
+            // Le dégradé prend toute sa couleur à quelques équipotentielles
+            // du potentiel nul, quelle que soit la charge.
+            if (état.montre.dégradé) dessineDégradé(c, plan, grille, toile, 4 * pas);
+            if (état.montre.équipotentielles) dessineÉquipotentielles(c, plan, grille, pas);
         }
         if (état.montre.lignes) {
-            dessineLignes(c, plan, lignesDeChamp(charges, { cadre: élargi(vueDuPlan), pas: 0.07 }));
+            dessineLignes(c, plan, lignesDeChamp(charges, { vue: vueDuPlan, pas: 0.07 }));
         }
         dessineCharges(c, plan, charges);
+        dessineÉchelle(c, plan, nomRègle);
 
         // Le champ en M : une flèche qui sature, pour rester lisible partout.
         const [ex, ey] = champ(charges, ...état.M);
@@ -184,15 +253,17 @@ function carteDeChamp(section) {
         nomM.montre(état.montre.sonde).place(...état.M, [-15, 13]);
         nomE.montre(état.montre.sonde && norme > 1e-6);
         if (état.montre.sonde) {
-            const longueur = 12 + 104 * (norme / (norme + 0.9));
+            const longueur = 12 + 104 * (norme / (norme + CHAMP_DE_RÉFÉRENCE));
             disque(c, départ, 4, { couleur: COULEURS.noir });
             flèche(c, départ, [ex, -ey], longueur, { couleur: COULEUR.sonde, épaisseur: 2.5 });
             const bout = longueur + 14;
             nomE.place(...état.M, [(ex / norme) * bout, (-ey / norme) * bout]);
         }
         mesures.écrit(
-            `\\lVert\\vec{E}\\rVert = ${nombre(norme)} \\quad V = ${nombre(potentiel(charges, ...état.M))}`,
+            `\\begin{aligned} \\lVert\\vec{E}\\rVert &= ${mesure(norme, 'V\\,m^{-1}')} \\\\ ` +
+                `V &= ${mesure(potentiel(charges, ...état.M), 'V')} \\end{aligned}`,
         );
+        écritLaNote(pas);
     });
 
     // -- Réglages -------------------------------------------------------------
@@ -226,8 +297,10 @@ function carteDeChamp(section) {
                 tex: `q_${k + 1}`,
                 min: -3,
                 max: 3,
-                pas: 0.5,
+                pas: 0.05,
                 valeur: charges[k]?.q ?? 1,
+                unité: ' nC',
+                aimants: [-1, 1],
                 couleur: k ? COULEUR.négative : COULEUR.positive,
                 auChangement: (v) => {
                     if (charges[k]) charges[k].q = v;
@@ -256,165 +329,18 @@ function carteDeChamp(section) {
 
     réglages.groupe('En M');
     const mesures = réglages.formule();
-    réglages.texte('En unités arbitraires.').className = 'note';
-    réglages.texte(
-        'Les équipotentielles sont tracées de potentiel en potentiel, toujours du même écart : là où elles ' +
-            'se resserrent, le champ est intense. Le champ leur est perpendiculaire et descend les potentiels.',
-    ).className = 'note';
-}
+    const note = réglages.texte();
+    note.className = 'note';
 
-// -- Tube de champ -------------------------------------------------------------
-
-const TUBES = {
-    une: [{ x: -4, y: 0, q: 1 }],
-    opposées: [
-        { x: -4, y: 0, q: 1 },
-        { x: 4, y: -0.6, q: -1 },
-    ],
-};
-
-function tubeDeChamp(section) {
-    const { vue, réglages: panneau } = cadre(section);
-    const plan = new Plan(vue, { rapport: 16 / 10, étendue: 18, aide: 'Glisser les deux sections le long du tube.' });
-    const état = { configuration: 'une', θ: 12, ouverture: 22, sections: [0.25, 0.75] };
-
-    const noms = [1, 2].map((k) => plan.étiquette(`S_${k}`, { couleur: COULEUR.section }));
-
-    /** Les deux lignes qui bordent le tube. Elles ne se recalculent que
-     *  lorsque sa forme change : le pointeur interroge les poignées à chaque
-     *  mouvement, et suivre une ligne de champ coûte. */
-    let dernier = null;
-    function bords() {
-        const clé = `${état.configuration} ${état.θ} ${état.ouverture}`;
-        if (dernier?.clé === clé) return dernier;
-        const charges = TUBES[état.configuration];
-        const cadreLarge = élargi(plan.cadre(), 1);
-        const lignes = [-0.5, 0.5].map((côté) => {
-            const angle = ((état.θ + côté * état.ouverture) * Math.PI) / 180;
-            const départ = [charges[0].x + 0.18 * Math.cos(angle), charges[0].y + 0.18 * Math.sin(angle)];
-            return ligneDeChamp(charges, départ, { pas: 0.06, cadre: cadreLarge, maximum: 1500 });
-        });
-        dernier = { clé, charges, lignes, longueur: Math.min(...lignes.map((l) => l.length)) };
-        return dernier;
+    let pasÉcrit = null;
+    function écritLaNote(pas) {
+        if (pas === pasÉcrit) return;
+        pasÉcrit = pas;
+        note.textContent =
+            `Les équipotentielles sont tracées tous les ${pas.toLocaleString('fr-FR')} V, toujours du même ` +
+            'écart : là où elles se resserrent, le champ est intense. Le champ leur est perpendiculaire et ' +
+            'descend les potentiels.';
     }
-
-    /** Le tube et ses deux sections, aux places où les curseurs les ont mises. */
-    function tube() {
-        const { charges, lignes, longueur } = bords();
-        const sections = état.sections.map((part) => {
-            const i = Math.min(longueur - 1, Math.max(1, Math.round(part * (longueur - 1))));
-            return { i, a: lignes[0][i], b: lignes[1][i] };
-        });
-        return { charges, bords: lignes, longueur, sections };
-    }
-
-    plan.dessine((c) => {
-        const { charges, bords, sections } = tube();
-        // Le tube entre les deux sections : la portion dont on compare les
-        // deux bouts.
-        const [premier, second] = [...sections].sort((u, v) => u.i - v.i);
-        aplat(
-            c,
-            [
-                ...bords[0].slice(premier.i, second.i + 1).map(([x, y]) => plan.vers(x, y)),
-                ...bords[1]
-                    .slice(premier.i, second.i + 1)
-                    .reverse()
-                    .map(([x, y]) => plan.vers(x, y)),
-            ],
-            COULEUR.tube,
-        );
-        dessineLignes(c, plan, lignesDeChamp(charges, { cadre: élargi(plan.cadre()), pas: 0.07, parUnité: 10 }), {
-            couleur: '#b6b6b6',
-            épaisseur: 1,
-        });
-        dessineLignes(c, plan, bords, { épaisseur: 2 });
-        for (const [k, s] of sections.entries()) {
-            chemin(c, [plan.vers(...s.a), plan.vers(...s.b)], { couleur: COULEUR.section, épaisseur: 3 });
-            const milieu = [(s.a[0] + s.b[0]) / 2, (s.a[1] + s.b[1]) / 2];
-            disque(c, plan.vers(...milieu), 5, { couleur: COULEUR.section });
-            noms[k].place(...milieu, [14, -12]);
-        }
-        dessineCharges(c, plan, charges);
-
-        // Les mesures, en tableau : la longueur de la section, le champ en
-        // son milieu, et le flux qui la traverse — calculé, non supposé.
-        const colonne = sections.map((s) => {
-            const milieu = [(s.a[0] + s.b[0]) / 2, (s.a[1] + s.b[1]) / 2];
-            return {
-                ℓ: Math.hypot(s.b[0] - s.a[0], s.b[1] - s.a[1]),
-                E: Math.hypot(...champ(charges, ...milieu)),
-                Φ: Math.abs(flux(charges, s.a, s.b)),
-            };
-        });
-        const ligne = (nom, clé) => `${nom} & ${nombre(colonne[0][clé])} & ${nombre(colonne[1][clé])}`;
-        mesures.écrit(
-            `\\begin{array}{r|cc} & {\\color{${COULEUR.section}} S_1} & {\\color{${COULEUR.section}} S_2} \\\\ \\hline ` +
-                `${ligne('\\ell', 'ℓ')} \\\\ ${ligne('\\lVert\\vec{E}\\rVert', 'E')} \\\\ ` +
-                `${ligne('\\Phi', 'Φ')} \\end{array}`,
-        );
-    });
-
-    for (const k of [0, 1]) {
-        plan.poignée({
-            position: () => {
-                const s = tube().sections[k];
-                return [(s.a[0] + s.b[0]) / 2, (s.a[1] + s.b[1]) / 2];
-            },
-            auDéplacement: (x, y) => {
-                // La section suit le point du tube le plus proche du doigt.
-                const { bords, longueur } = tube();
-                let meilleure = état.sections[k];
-                let écart = Infinity;
-                for (let i = 1; i < longueur; i += 2) {
-                    const mx = (bords[0][i][0] + bords[1][i][0]) / 2;
-                    const my = (bords[0][i][1] + bords[1][i][1]) / 2;
-                    const d = Math.hypot(x - mx, y - my);
-                    if (d < écart) {
-                        écart = d;
-                        meilleure = i / (longueur - 1);
-                    }
-                }
-                état.sections[k] = meilleure;
-            },
-        });
-    }
-
-    const réglages = new Réglages(panneau);
-    réglages.groupe('Distribution');
-    réglages.choix({
-        options: [
-            ['une', '\\text{une charge}'],
-            ['opposées', '+\\,-'],
-        ],
-        valeur: état.configuration,
-        auChangement: (v) => {
-            état.configuration = v;
-            plan.redessine();
-        },
-    });
-
-    réglages.groupe('Tube');
-    for (const [clé, options] of [
-        ['θ', { tex: '\\theta', min: -180, max: 180, pas: 1, unité: '°' }],
-        ['ouverture', { tex: '\\Delta\\theta', min: 4, max: 60, pas: 1, unité: '°' }],
-    ]) {
-        réglages.curseur({
-            ...options,
-            valeur: état[clé],
-            auChangement: (v) => {
-                état[clé] = v;
-                plan.redessine();
-            },
-        });
-    }
-
-    réglages.groupe('Sections');
-    const mesures = réglages.formule();
-    réglages.texte(
-        'Le tube ne contient aucune charge : ce qui entre par une section ressort par l’autre. Quand le tube ' +
-            's’élargit, le champ faiblit d’autant — leur produit, le flux, ne bouge pas.',
-    ).className = 'note';
 }
 
 // -- Condensateur plan ---------------------------------------------------------
@@ -438,7 +364,6 @@ function condensateurPlan(section) {
     const { vue, réglages: panneau } = cadre(section);
     const plan = new Plan(vue, { rapport: 16 / 9, étendue: 15 });
     const état = { e: 2, largeur: 9, σ: 1, montre: { lignes: true, équipotentielles: true } };
-    const toile = document.createElement('canvas');
     let charges = armatures(état);
 
     const armature = [
@@ -449,17 +374,20 @@ function condensateurPlan(section) {
     plan.dessine((c) => {
         const vueDuPlan = plan.cadre();
         if (état.montre.équipotentielles) {
-            dessineÉquipotentielles(c, plan, grilleDePotentiel(charges, vueDuPlan, 110), 1.2);
+            dessineÉquipotentielles(c, plan, grilleDePotentiel(charges, vueDuPlan, 110, FILS), 1.2);
         }
         if (état.montre.lignes) {
             // Les lignes partent de l'armature positive, régulièrement
             // réparties, et de ses deux bords où le champ fuit au dehors.
+            // Celles-là s'en vont pour de bon : la carte s'arrête au cadre.
             const départs = échantillons(-0.98, 0.98, 21).map((t) => [(t * état.largeur) / 2, état.e / 2 - 0.05]);
             départs.push([-état.largeur / 2 - 0.05, état.e / 2 + 0.08], [état.largeur / 2 + 0.05, état.e / 2 + 0.08]);
             dessineLignes(
                 c,
                 plan,
-                départs.map((départ) => ligneDeChamp(charges, départ, { pas: 0.06, cadre: élargi(vueDuPlan, 1), arrivée: 0.06 })),
+                départs.map((départ) =>
+                    ligneDeChamp(charges, départ, { pas: 0.06, vue: vueDuPlan, portée: 1.2, arrivée: 0.06, loi: FILS }),
+                ),
                 { entreFlèches: 12 },
             );
         }
@@ -493,7 +421,7 @@ function condensateurPlan(section) {
         // L'abscisse se compte en largeurs d'armature : le tracé va donc
         // jusqu'au double de la demi-largeur, bien au-delà des bords.
         courbe.place(
-            échantillons(-1, 1, 200).map((u) => [u, Math.hypot(...champ(charges, u * état.largeur, 0)) / uniforme]),
+            échantillons(-1, 1, 200).map((u) => [u, Math.hypot(...champ(charges, u * état.largeur, 0, FILS)) / uniforme]),
         );
         plan.redessine();
     }
@@ -501,8 +429,8 @@ function condensateurPlan(section) {
     const réglages = new Réglages(panneau);
     réglages.groupe('Armatures');
     for (const [clé, options] of [
-        ['e', { tex: 'e', min: 0.6, max: 5, pas: 0.2 }],
-        ['largeur', { tex: 'L', min: 4, max: 13, pas: 0.5 }],
+        ['e', { tex: 'e', min: 0.6, max: 5, pas: 0.05 }],
+        ['largeur', { tex: 'L', min: 4, max: 13, pas: 0.1 }],
     ]) {
         réglages.curseur({
             ...options,
@@ -542,6 +470,6 @@ function condensateurPlan(section) {
     recalcule();
 }
 
-const ANIMATIONS = { carte: carteDeChamp, tube: tubeDeChamp, condensateur: condensateurPlan };
+const ANIMATIONS = { carte: carteDeChamp, condensateur: condensateurPlan };
 
 lance('section.animation', (section) => ANIMATIONS[section.dataset.animation](section));

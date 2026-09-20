@@ -18,23 +18,44 @@ export class Réglages {
         this.groupe();
     }
 
-    /** Ouvre un nouveau groupe de contrôles, sous un intitulé facultatif. */
+    /**
+     * Ouvre un nouveau groupe de contrôles, sous un intitulé facultatif.
+     * L'objet renvoyé permet de le réécrire — un groupe dont le contenu
+     * change de nom avec un réglage.
+     */
     groupe(intitulé = '') {
-        this.courant = créé('div', 'groupe');
-        if (intitulé) this.courant.append(créé('div', 'intitulé', intitulé));
-        this.conteneur.append(this.courant);
-        return this.courant;
+        const élément = créé('div', 'groupe');
+        const titre = créé('div', 'intitulé', intitulé);
+        titre.hidden = !intitulé;
+        élément.append(titre);
+        this.conteneur.append(élément);
+        this.courant = élément;
+        const groupe = {
+            élément,
+            écrit(texte) {
+                titre.textContent = texte;
+                titre.hidden = !texte;
+                return groupe;
+            },
+        };
+        return groupe;
     }
 
     /**
      * Un curseur. `tex` le nomme, `couleur` le relie à ce qu'il règle dans la
      * scène ; la valeur s'affiche à la française, suivie de son `unité`.
+     *
+     * `aimants` retient le curseur sur quelques valeurs remarquables : il y
+     * colle dès qu'il en approche de moins d'`attraction`. Un curseur au pas
+     * assez fin pour varier continûment garde ainsi ses valeurs rondes à
+     * portée de doigt.
      */
-    curseur({ tex, min, max, pas = 1, valeur, unité = '', couleur, auChangement }) {
+    curseur({ tex, min, max, pas = 1, valeur, unité = '', couleur, aimants = [], attraction = 3 * pas, auChangement }) {
         const ligne = créé('label', 'curseur');
         const nom = écritTex(créé('span', 'nom'), tex);
         if (couleur) nom.style.color = couleur;
-        const entrée = Object.assign(créé('input'), { type: 'range', min, max, step: pas, value: valeur });
+        const colle = (v) => aimants.find((a) => Math.abs(v - a) <= attraction) ?? v;
+        const entrée = Object.assign(créé('input'), { type: 'range', min, max, step: pas, value: colle(valeur) });
         const sortie = créé('output');
         const format = new Intl.NumberFormat('fr-FR', {
             minimumFractionDigits: décimales(pas),
@@ -42,8 +63,13 @@ export class Réglages {
         });
         const affiche = () => (sortie.textContent = format.format(Number(entrée.value)) + unité);
         entrée.addEventListener('input', () => {
+            // Le curseur repart de la position du pointeur à chaque
+            // mouvement : le replacer sur l'aimant ne l'empêche pas de s'en
+            // détacher, il faut seulement tirer un peu plus loin.
+            const collée = colle(Number(entrée.value));
+            if (collée !== Number(entrée.value)) entrée.value = collée;
             affiche();
-            auChangement?.(Number(entrée.value));
+            auChangement?.(collée);
         });
         affiche();
         ligne.append(nom, entrée, sortie);
@@ -54,7 +80,7 @@ export class Réglages {
                 return Number(entrée.value);
             },
             set valeur(v) {
-                entrée.value = v;
+                entrée.value = colle(v);
                 affiche();
             },
             désactive(oui = true) {
@@ -89,24 +115,32 @@ export class Réglages {
         };
     }
 
-    /** Un choix entre quelques options `[valeur, tex]`, en boutons accolés. */
+    /**
+     * Un choix entre quelques options `[valeur, tex]`, en boutons accolés.
+     * `réécrit` en change la liste : des options dont les noms dépendent
+     * d'un autre réglage.
+     */
     choix({ options, valeur, auChangement }) {
         const boutons = créé('div', 'choix');
         const sélectionne = (v) => {
             for (const b of boutons.children) b.setAttribute('aria-pressed', String(b.dataset.valeur === String(v)));
         };
-        for (const [v, tex] of options) {
-            const bouton = écritTex(Object.assign(créé('button'), { type: 'button' }), tex);
-            bouton.dataset.valeur = v;
-            bouton.addEventListener('click', () => {
-                sélectionne(v);
-                auChangement?.(v);
-            });
-            boutons.append(bouton);
-        }
-        sélectionne(valeur);
+        const réécrit = (liste, retenue = valeur) => {
+            boutons.replaceChildren();
+            for (const [v, tex] of liste) {
+                const bouton = écritTex(Object.assign(créé('button'), { type: 'button' }), tex);
+                bouton.dataset.valeur = v;
+                bouton.addEventListener('click', () => {
+                    sélectionne(v);
+                    auChangement?.(v);
+                });
+                boutons.append(bouton);
+            }
+            sélectionne(retenue);
+        };
+        réécrit(options);
         this.courant.append(boutons);
-        return { sélectionne };
+        return { sélectionne, réécrit };
     }
 
     /** Un bouton d'action. */
