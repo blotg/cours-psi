@@ -45,7 +45,8 @@ et `npm` dans le PATH. La première construction installe les dépendances
 (`npm ci`), et les réinstalle quand le verrou change.
 
 Le **serveur de développement** recharge la page à chaque enregistrement ; il
-indique son adresse en démarrant.
+indique son adresse en démarrant, et sert à la racine le sommaire des
+animations du chapitre (un dossier `animations/` n'a pas d'`index.html`).
 
 On ne reconstruit que ce qui a bougé : `build/animations/.empreinte` garde le
 condensé de tout ce dont la construction dépend — les sources du chapitre,

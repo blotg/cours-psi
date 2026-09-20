@@ -13,8 +13,8 @@
 // pied de page du site leur sont ajoutés ici, la feuille de style par
 // `#animations/page.js`, qu'importe leur script.
 
-import { readdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { readFileSync, readdirSync } from 'node:fs';
+import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 
@@ -63,13 +63,45 @@ function pageDuSite() {
     };
 }
 
-export default defineConfig({
+// Un dossier `animations/` de chapitre n'a pas d'`index.html` : à la racine,
+// le serveur de développement sert le sommaire de ses pages, pour que
+// l'adresse qu'il annonce mène quelque part.
+function sommaireDeDéveloppement() {
+    return {
+        name: 'sommaire-de-développement',
+        apply: 'serve',
+        configureServer(serveur) {
+            serveur.middlewares.use((requête, réponse, suite) => {
+                const chemin = requête.url.split('?')[0];
+                if (chemin !== '/' && chemin !== '/index.html') return suite();
+                const liens = Object.entries(pages)
+                    .map(([nom, fichier]) => {
+                        const html = readFileSync(fichier, 'utf-8');
+                        const titre = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? nom;
+                        return `<li><a href="./${échappe(nom)}.html">${échappe(titre)}</a></li>`;
+                    })
+                    .join('\n');
+                réponse.setHeader('Content-Type', 'text/html; charset=utf-8');
+                réponse.end(
+                    '<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n' +
+                        `<title>Animations — ${échappe(basename(resolve(source, '..')))}</title>\n` +
+                        '</head>\n<body>\n<h1>Animations</h1>\n' +
+                        `<ul>\n${liens}\n</ul>\n</body>\n</html>\n`,
+                );
+            });
+        },
+    };
+}
+
+export default defineConfig(({ command }) => ({
     root: source,
     // Des adresses relatives : les pages sont recopiées telles quelles dans
     // le site, à un endroit que vite n'a pas à connaître.
     base: './',
     publicDir: false,
-    logLevel: 'warn',
+    // vite annonce l'adresse du serveur en niveau `info` ; une
+    // construction, elle, n'a rien à dire tant qu'elle réussit.
+    logLevel: command === 'serve' ? 'info' : 'warn',
     clearScreen: false,
     build: {
         outDir: sortie,
@@ -81,5 +113,5 @@ export default defineConfig({
     // Le serveur de développement doit pouvoir lire la bibliothèque commune
     // et la feuille du site, hors du dossier du chapitre.
     server: { fs: { allow: [racine] } },
-    plugins: [pageDuSite()],
-});
+    plugins: [pageDuSite(), sommaireDeDéveloppement()],
+}));
