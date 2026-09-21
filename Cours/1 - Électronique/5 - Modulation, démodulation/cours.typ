@@ -19,6 +19,7 @@
     ),
 )
 
+
 #let figure-modulation(titre, f-modulé) = {
     let f-porteuse = 10
     let f-signal = 1
