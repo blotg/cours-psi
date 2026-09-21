@@ -9,8 +9,9 @@
   en effectif impair ;
 - compile le sujet pour chaque élève en lui passant les entrées Typst
   ``élève``, ``numéro-copie`` et, si l'élève n'est pas seul, ``binôme`` ;
-- impose chaque sujet A4 en fascicule (« booklet ») sur des feuilles A3 ;
-- concatène tous les fascicules en un unique PDF prêt pour une impression
+- impose chaque sujet A4 en fascicule (« booklet ») sur des feuilles A3 —
+  sauf si le sujet tient en deux pages, qui restent alors en A4 recto-verso ;
+- concatène toutes les copies en un unique PDF prêt pour une impression
   recto-verso, en complétant si besoin par des pages blanches.
 
 Voir :class:`TP` pour le point d'entrée.
@@ -161,7 +162,12 @@ class TP:
             destination: chemin du PDF final. Par défaut,
                 ``<dossier du sujet>/build/TP à imprimer - <titre court>.pdf``.
 
-        Les fascicules individuels (A4 et A3) sont produits dans un dossier
+        Un sujet de deux pages ou moins n'est pas mis en livret : il tient tel
+        quel sur une feuille A4 recto-verso, qui s'imprime sans A3 et se lit
+        sans pliage. S'il ne fait qu'une page, les copies se suivent sans page
+        blanche : c'est une impression en recto simple.
+
+        Les copies individuelles (A4 et A3) sont produites dans un dossier
         temporaire, supprimé en fin de traitement : seul le PDF final est
         écrit sur disque.
         """
@@ -172,23 +178,45 @@ class TP:
 
         final = PdfWriter()
         with TemporaryDirectory() as dossier:
+            copies = []
             for binôme in self.binômes():
                 for élève in binôme.membres:
                     nom = f"{binôme.numéro_copie:02d} - {élève.nom_complet}"
                     a4 = join(dossier, f"{nom} - A4.pdf")
-                    a3 = join(dossier, f"{nom} - fascicule A3.pdf")
-
                     self.compile_élève(binôme, élève, a4)
-                    fascicule(a4, a3)
+                    copies.append((nom, a4))
 
-                    faces = PdfReader(a3)
-                    final.append(faces)
-                    # Chaque fascicule compte un nombre pair de faces (2 par
-                    # feuille A3) : chaque copie démarre donc sur une nouvelle
-                    # feuille en recto-verso. Garde-fou au cas où :
-                    if len(faces.pages) % 2:
-                        boite = faces.pages[0].mediabox
-                        final.add_blank_page(width=float(boite.width), height=float(boite.height))
+            # Le mode d'impression vaut pour tout le paquet : il ne mélange pas
+            # des feuilles A3 et des A4. Les variantes d'un même sujet font en
+            # principe le même nombre de pages ; la plus longue tranche.
+            pages = max((len(PdfReader(a4).pages) for _, a4 in copies), default=0)
+            livret = pages > 2
+            # Un sujet d'une seule page s'imprime en recto simple, une copie
+            # par feuille : intercaler une page blanche ne ferait que gâcher du
+            # papier. Dès qu'une copie fait deux pages, on revient au
+            # recto-verso, et c'est la page blanche qui garde chaque copie sur
+            # sa propre feuille.
+            recto_seul = pages == 1
+
+            for nom, a4 in copies:
+                if livret:
+                    copie = fascicule(a4, join(dossier, f"{nom} - fascicule A3.pdf"))
+                else:
+                    copie = a4
+
+                faces = PdfReader(copie)
+                if not livret:
+                    # `fascicule` le fait déjà pour les feuilles A3 : sur
+                    # papier, les liens ne servent à rien, et pypdf proteste de
+                    # les voir passer d'un document à l'autre.
+                    for face in faces.pages:
+                        face.pop("/Annots", None)
+                final.append(faces)
+                # Un fascicule compte toujours un nombre pair de faces (2 par
+                # feuille A3) ; un sujet A4 de trois pages, non.
+                if not recto_seul and len(faces.pages) % 2:
+                    boite = faces.pages[0].mediabox
+                    final.add_blank_page(width=float(boite.width), height=float(boite.height))
 
         makedirs(dirname(destination) or ".", exist_ok=True)
         with open(destination, "wb") as f:

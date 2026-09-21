@@ -104,11 +104,12 @@ l'identifiant du paquet étant déduit de son nom, le renommer fait apparaitre u
 **nouveau** paquet dans Anki : les anciens restent à supprimer à la main.
 
 `diapo` produit le diaporama des questions de début de cours du chapitre :
-une question par diapo, en QCM, et le corrigé sur la dernière. Les réponses
-sont saisies avec **la bonne en tête** ; l'ordre d'affichage est tiré au sort
-par le gabarit, de façon déterministe — le tirage ne dépend que du texte de la
-question, donc une recompilation redonne le même corrigé. Un chapitre sans
-question ne produit rien.
+une question par diapo, en QCM, puis le corrigé, qui reprend les mêmes diapos
+dans le même ordre — l'énoncé reste sous les yeux pendant qu'on commente —,
+la bonne réponse en gras. Les réponses sont saisies avec **la bonne en tête** ;
+l'ordre d'affichage est tiré au sort par le gabarit, de façon déterministe — le
+tirage ne dépend que du texte de la question, donc une recompilation redonne le
+même corrigé. Un chapitre sans question ne produit rien.
 
 Les tirages au sort du dépôt — cet ordre-là, et la personne à qui l'on explique
 dans un exercice « J'explique à… » — sont ceux de
@@ -140,12 +141,15 @@ quadrillée en regard de chaque page de cours (pour écrire face au texte).
 
 `tp` forme les binômes — tirage aléatoire au sein de chaque groupe, mais
 reproductible : la graine est le numéro du TP —, puis compile un sujet
-personnalisé par élève et les impose tous en un seul PDF à imprimer. Les
-binômes sont affichés au passage ; `-b` (`--binômes`) s'arrête là, sans rien
-compiler, pour les consulter (ou les projeter en début de séance) sans attendre
-une compilation par élève. Le sujet n'a alors pas besoin d'exister : seuls le
-CSV et le numéro comptent, ce dernier venant toujours du nom du dossier à
-défaut de `--numéro`.
+personnalisé par élève et les impose tous en un seul PDF à imprimer. Un sujet
+de **deux pages ou moins** n'est pas mis en livret : il reste en A4
+recto-verso, sans feuille A3 ni pliage — et s'il tient sur **une seule page**,
+les copies se suivent sans page blanche, pour une impression en recto simple.
+Les binômes sont affichés au passage ; `-b` (`--binômes`) s'arrête là, sans
+rien compiler, pour les consulter (ou les projeter en début de séance) sans
+attendre une compilation par élève. Le sujet n'a alors pas besoin d'exister :
+seuls le CSV et le numéro comptent, ce dernier venant toujours du nom du
+dossier à défaut de `--numéro`.
 
 ## Notebooks et Capytale
 

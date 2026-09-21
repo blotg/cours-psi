@@ -1,7 +1,7 @@
 // Diaporama des questions de début de cours d'un chapitre.
 //
-// Une question par diapo, sous forme de QCM ; la dernière diapo porte le
-// corrigé, toutes les réponses ensemble.
+// Une question par diapo, sous forme de QCM ; puis le corrigé, qui reprend
+// les mêmes diapos dans le même ordre, la bonne réponse en gras.
 //
 // Alimenté par `outils diapo`, qui passe en `--input données` le JSON produit
 // par `typst query <question-de-début-de-cours>` sur le cours, augmenté du
@@ -111,44 +111,46 @@
 
 // -- Une diapo par question ------------------------------------------------
 
-#for (i, q) in _tirées.enumerate() {
-    pagebreak()
-    _diapo[
-        #text(size: 15pt, fill: _pâle)[Question #(i + 1) / #_tirées.len()]
-        #v(0.2em)
-        #block(width: 100%, below: 1.2em, text(size: 24pt, weight: "bold", markup(q.énoncé)))
-        #grid(
-            columns: (auto, 1fr),
-            column-gutter: 0.7em,
-            row-gutter: 0.8em,
-            ..q.réponses
-                .enumerate()
-                .map(((j, r)) => (text(fill: _gris, weight: "bold")[#_lettre(j).], markup(r)))
-                .flatten()
-        )
-    ]
+// `strong` épaissit bien le texte d'une réponse, mais pas les symboles d'une
+// formule : le gras des maths se demande à `math.bold`. Une réponse tout en
+// maths — « $2 pi$ » — resterait sinon identique aux autres.
+#let _gras(contenu) = {
+    show math.equation: math.bold
+    strong(contenu)
 }
 
-// -- Diapo de corrigé ------------------------------------------------------
+// Énoncé et réponses dans l'ordre tiré. Au corrigé, la même diapo revient à
+// l'identique — l'énoncé reste sous les yeux pendant qu'on commente —, la
+// bonne réponse seule passant en gras noir.
+#let _qcm(i, q, corrigé: false) = [
+    #text(size: 15pt, fill: _pâle)[#if corrigé [Réponse] else [Question] #(i + 1) / #_tirées.len()]
+    #v(0.2em)
+    #block(width: 100%, below: 1.2em, text(size: 24pt, weight: "bold", markup(q.énoncé)))
+    #grid(
+        columns: (auto, 1fr),
+        column-gutter: 0.7em,
+        row-gutter: 0.8em,
+        ..q.réponses
+            .enumerate()
+            .map(((j, r)) => {
+                let bonne = corrigé and _lettre(j) == q.bonne
+                (
+                    text(fill: if bonne { black } else { _gris }, weight: "bold")[#_lettre(j).],
+                    if bonne { _gras(markup(r)) } else { markup(r) },
+                )
+            })
+            .flatten()
+    )
+]
 
-#if _tirées.len() > 0 {
+#for (i, q) in _tirées.enumerate() {
     pagebreak()
-    _diapo[
-        #set align(center + horizon)
-        #text(size: 26pt, weight: "bold")[Réponses]
-        #v(1em)
-        // Au plus six colonnes, et jamais plus de colonnes que de questions :
-        // une grille de deux entrées ne s'étale pas sur toute la largeur.
-        #let colonnes = calc.min(6, _tirées.len())
-        #grid(
-            columns: colonnes,
-            column-gutter: 1.6em,
-            row-gutter: 1em,
-            .._tirées
-                .enumerate()
-                .map(((i, q)) => box(inset: (x: 0.5em, y: 0.35em), radius: 3pt, fill: luma(93%))[
-                    #text(fill: _gris)[#(i + 1)] #h(0.35em) #text(weight: "bold", size: 24pt, q.bonne)
-                ])
-        )
-    ]
+    _diapo(_qcm(i, q))
+}
+
+// -- Diapos de corrigé -----------------------------------------------------
+
+#for (i, q) in _tirées.enumerate() {
+    pagebreak()
+    _diapo(_qcm(i, q, corrigé: true))
 }

@@ -5,7 +5,7 @@
 )
 
 #préparatoire()[
-    Lire l'énoncé du TP et ses annexes et effectuer l'@application-condition-oscillations et l'@application-protocole-démarrage-oscillations.
+    Lire l'énoncé du TP et son annexe et effectuer l'@application-condition-oscillations et l'@application-protocole-démarrage-oscillations.
 ]
 
 #matériel(
@@ -13,8 +13,8 @@
         "Oscilloscope",
         "Platine d'essai et fils de connexion",
         "Résistances et condensateurs disponibles dans la salle de TP",
-        "Boite à décades de résistance",
-        [2 ALI et 1 alimentation symétrique $plus.minus #quan[15 V]$],
+        "Boite de résistance à décades",
+        [ALI et alimentation symétrique $plus.minus #quan[15 V]$],
         "Multimètre de poche"
     ),
 )
@@ -25,18 +25,18 @@ L'objectif de ce TP est de réaliser et d'étudier un oscillateur de Wien.
 
 = Réalisation et étude préliminaire
 
-Le montage amplificateur non-inverseur sera réalisé avec des condensateur de #quan[100 nF] et des résistances de #zi.kohm("10"), sauf $R_2$ qui sera réalisée par une boite à décade.
+Le montage oscillateur de Wien sera réalisé avec des condensateurs de #quan[2.2 nF] et des résistances de #quan[10 kΩ], sauf $R_2$ qui sera réalisée par une boite de résistance à décades.
 
 #application()[
-    A quelle condition s'attend-on à observer des oscillations quasi-sinusoïdales ? Quelle fréquence ont-elle dans ce cas ?
+    À quelle condition s'attend-on à observer des oscillations quasi-sinusoïdales ? Quelle fréquence ont-elles dans ce cas ?
 
-    Les deux réponses seront munies d'une incertitude. Les boites à décade ont une incertitude-type de #quan[5 %].
+    Les deux réponses seront munies d'une incertitude. La boite de résistance à décades, les résistances et les condensateurs ont une incertitude-type de #quan[5 %].
 ]<application-condition-oscillations>
 
 #manipulation()[
     Réaliser l'oscillateur de Wien sur une platine d'essai.
 
-    Pour vérifier que le montage est fonctionnel, régler $R_2 = #zi.kohm("22")$, et vérifier que des oscillations apparaissent.
+    Pour vérifier que le montage est fonctionnel, régler $R_2 = #quan[22 kΩ]$, et vérifier que des oscillations apparaissent.
 ]
 
 = Démarrage des oscillations
@@ -75,15 +75,15 @@ Lorsque la condition de démarrage des oscillations est tout juste vérifiée, d
 
 = Richesse spectrale
 
-Lorsque $R_2$ dépasse la condition de démarrage des oscillations est dépassée, le signal généré par l'oscillateur de Wien s'éloigne de plus en plus d'une sinusoïde.
+Lorsque la condition de démarrage des oscillations est dépassée, les signaux générés par l'oscillateur de Wien s'éloignent de plus en plus d'une sinusoïde.
 
 #manipulation()[
-    Observer le spectre des deux signaux à l'aide de l'oscilloscope. Quelle influence a $R_2$ sur les spectres ? Lequel des deux signaux présente des harmoniques les plus marquées ?
+    Observer à l'aide de l'oscilloscope le spectre des deux signaux produits par l'oscillateur (voir @annexe-spectre). Quelle influence a $R_2$ sur les spectres ? Lequel des deux signaux présente les harmoniques les plus marquées ?
 ]
 
 #show: appendix
 
-= Tracé de spectre avec l'oscilloscope
+= Tracé de spectre avec l'oscilloscope<annexe-spectre>
 
 Les oscilloscopes numériques utilisés en TP permettent de calculer le spectre des signaux mesurés. Pour cela, il faut accéder au menu math et, dans "opération", sélectionner "FFT" pour afficher le spectre du signal. Les options permettent de choisir une échelle linéaire (et non logarithmique), plus proche des spectres tracés en cours.
 
