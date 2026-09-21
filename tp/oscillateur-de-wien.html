@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Oscillateur de Wien</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="index.html">Travaux pratiques</a><span class="sep">›</span><span class="ici">Oscillateur de Wien</span></nav><div></div><h1>TP – Oscillateur de Wien</h1><section class="bloc" data-genre="préparatoire"><div class="bloc-bandeau noir"><strong>Travail préparatoire</strong></div><div class="bloc-corps">Lire l’énoncé du TP et son annexe et effectuer l’<span style="text-decoration: underline"><a href="#application-condition-oscillations">application 1</a></span> et l’<span style="text-decoration: underline"><a href="#application-protocole-démarrage-oscillations">application 2</a></span>.</div></section><section class="bloc" data-genre="matériel"><div class="bloc-bandeau"><strong>Matériel</strong></div><div class="bloc-corps"><div class="grille" style="grid-template-columns: minmax(0, 1fr)"><div><p><em>Par groupe</em></p><ul><li>Oscilloscope</li><li>Platine d'essai et fils de connexion</li><li>Résistances et condensateurs disponibles dans la salle de TP</li><li>Boite de résistance à décades</li><li>ALI et alimentation symétrique <math><mo>±</mo><mn>15</mn><mi> </mi><mtext>V</mtext></math></li><li>Multimètre de poche</li></ul></div></div></div></section><h2>1. Introduction</h2><p>L’objectif de ce TP est de réaliser et d’étudier un oscillateur de Wien.</p><h2>2. Réalisation et étude préliminaire</h2><p>Le montage oscillateur de Wien sera réalisé avec des condensateurs de <math><mn>2</mn><mtext>,2</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>nF</mtext></math> et des résistances de <math><mn>10</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>kΩ</mtext></math>, sauf <math><msub><mi>𝑅</mi><mn>2</mn></msub></math> qui sera réalisée par une boite de résistance à décades.</p><section id="application-condition-oscillations" class="bloc" data-genre="application"><div class="bloc-bandeau"><strong>Application 1</strong> ✍</div><div class="bloc-corps"><p>À quelle condition s’attend-on à observer des oscillations quasi-sinusoïdales ? Quelle fréquence ont-elles dans ce cas ?</p><p>Les deux réponses seront munies d’une incertitude. La boite de résistance à décades, les résistances et les condensateurs ont une incertitude-type de <math><mn>5</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>%</mtext></math>.</p></div></section><section class="bloc" data-genre="manipulation"><div class="bloc-bandeau"><strong>Manipulation 1</strong> 🙌</div><div class="bloc-corps"><p>Réaliser l’oscillateur de Wien sur une platine d’essai.</p><p>Pour vérifier que le montage est fonctionnel, régler <math><msub><mi>𝑅</mi><mn>2</mn></msub><mo>=</mo><mn>22</mn><mi> </mi><mtext>kΩ</mtext></math>, et vérifier que des oscillations apparaissent.</p></div></section><h2>3. Démarrage des oscillations</h2><p>En fonction des valeurs de <math><msub><mi>𝑅</mi><mn>2</mn></msub></math>, l’oscillateur de Wien peut osciller ou non. Dans cette partie, on cherche la valeur limite de <math><msub><mi>𝑅</mi><mn>2</mn></msub></math> pour laquelle les oscillations commencent.</p><section id="application-protocole-démarrage-oscillations" class="bloc" data-genre="application"><div class="bloc-bandeau"><strong>Application 2</strong> ✍</div><div class="bloc-corps">Rédiger un protocole permettant de mesurer aussi précisément que possible la valeur de <math><msub><mi>𝑅</mi><mn>2</mn></msub></math> pour laquelle les oscillations commencent.</div></section><section id="manip-démarrage-oscillations" class="bloc" data-genre="manipulation"><div class="bloc-bandeau"><strong>Manipulation 2</strong> 🙌</div><div class="bloc-corps">Mettre en œuvre le protocole. Cette valeur est-elle compatible avec la condition théorique pour l’apparition des oscillations ?</div></section><section class="bloc" data-genre="évaluation"><div class="bloc-bandeau noir"><strong>Évaluation</strong> ★★⯪</div><div class="bloc-corps"><div class="grille" style="grid-template-columns: minmax(0, 1fr) auto"><div>Le cahier de TP sera rendu à la fin de la séance et le compte-rendu <strong>de la <span style="text-decoration: underline"><a href="#manip-démarrage-oscillations">manipulation 2</a></span></strong> évalué <strong>par les pairs</strong>.</div><div><div class="grille" style="grid-template-columns: auto auto"><div><em>Le compte-rendu donne envie d’être lu.</em></div><div>/ 2</div><div><em>Il y a un protocole étape par étape qu’un technicien<br>pourrait suivre sans prendre d’initiative.</em></div><div>/ 2</div><div><em>Les calculs effectués sont détaillés (formules et valeurs).</em></div><div>/ 2</div><div><em>Les incertitudes sont prises en considération d’une façon<br>ou d’une autre.</em></div><div>/ 2</div><div><em>Une conclusion est apportée.</em></div><div>/ 2</div><div class="filet-grille"></div><div><strong>Total</strong></div><div>/ <strong>10</strong></div></div></div></div></div></section><h2>4. Fréquence des oscillations quasi-sinusoïdales</h2><p>Lorsque la condition de démarrage des oscillations est tout juste vérifiée, des oscillations quasi-sinusoïdales peuvent être observées. Leur fréquence dépend des paramètres <math><mi>𝑅</mi></math> et <math><mi>𝐶</mi></math> du filtre de Wien.</p><section class="bloc" data-genre="manipulation"><div class="bloc-bandeau"><strong>Manipulation 3</strong> 🙌</div><div class="bloc-corps"><p>Se placer dans des conditions où les oscillations sont quasi-sinusoïdales et mesurer leur fréquence.</p><p>Cette fréquence est-elle compatible avec la fréquence théorique prévue pour les oscillations quasi-sinusoïdales ?</p></div></section><h2>5. Richesse spectrale</h2><p>Lorsque la condition de démarrage des oscillations est dépassée, les signaux générés par l’oscillateur de Wien s’éloignent de plus en plus d’une sinusoïde.</p><section class="bloc" data-genre="manipulation"><div class="bloc-bandeau"><strong>Manipulation 4</strong> 🙌</div><div class="bloc-corps">Observer à l’aide de l’oscilloscope le spectre des deux signaux produits par l’oscillateur (voir <span style="text-decoration: underline"><a href="#annexe-spectre">Annexe A</a></span>). Quelle influence a <math><msub><mi>𝑅</mi><mn>2</mn></msub></math> sur les spectres ? Lequel des deux signaux présente les harmoniques les plus marquées ?</div></section><p id="annexe-spectre"><span style="font-variant-caps: small-caps">Annexe</span> A : Tracé de spectre avec l’oscilloscope</p><p>Les oscilloscopes numériques utilisés en TP permettent de calculer le spectre des signaux mesurés. Pour cela, il faut accéder au menu math et, dans « opération », sélectionner « FFT » pour afficher le spectre du signal. Les options permettent de choisir une échelle linéaire (et non logarithmique), plus proche des spectres tracés en cours.</p><p>Pour zoomer sur le spectre, on peut soit paramétrer le calcul du spectre pour n’en afficher qu’une partie, soit augmenter la durée par carreaux<sup id="loc-1" role="doc-noteref"><span style="text-decoration: underline"><a href="#loc-2">1</a></span></sup> en dézoomant l’axe du temps.</p><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-2"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>Le nombre de points acquis par l’oscilloscope étant constant, augmenter la durée d’acquisition diminue la fréquence d’échantillonnage. Sur le spectre, <math><mfrac><msub><mi>𝑓</mi><mi>𝑒</mi></msub><mn>2</mn></mfrac></math> est la fréquence maximale représentable qui se retrouve à droite de l’écran dans les réglages par défaut.</li></ol></section></body></html>
