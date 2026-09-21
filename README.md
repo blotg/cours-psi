@@ -4,7 +4,7 @@ Les sources du cours de physique-chimie de PSI de Guillaume Blot-Teyssedre : cou
 
 ## Le site
 
-**<https://blotg.github.io/cours-psi/>**
+[**https://blotg.github.io/cours-psi/**](https://blotg.github.io/cours-psi/)
 
 On y lit en ligne les cours et les exercices de chaque chapitre, les TP et les révisions de PCSI.
 
@@ -12,28 +12,25 @@ Les coups de pouce et les corrigés sont floutés : il faut maintenir le survol,
 
 ## Contenu
 
-| Dossier | Contenu |
-|---|---|
-| [`Cours/`](Cours) | les chapitres, rangés par thème et les chapitres d'outils (méthodes numériques, opérateurs vectoriels, systèmes de coordonnées) |
-| [`révisions/`](révisions) | les révisions de PCSI : flashcards et questions de colle, sans cours rédigé |
-| [`TP/`](TP) | les sujets de TP |
-| [`prepa/`](prepa) | le paquet typst `@local/prepa`, qui donne leur forme à tous les documents |
-| [`gabarits/`](gabarits) | les gabarits des documents tirés du cours : planche de flashcards, diaporama, questions de colle, pages du site, notebooks |
-| [`animations/`](animations) | la bibliothèque commune des animations 3D des chapitres, et leur construction par vite |
-| [`outils/`](outils) | les outils Python de production et de publication |
-| [`.githooks/`](.githooks) | les hooks qui recompilent les documents au commit et publient le site au push |
+| Dossier                        | Contenu                                                                                                                         |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| [`Cours/`](Cours)              | les chapitres, rangés par thème et les chapitres d'outils (méthodes numériques, opérateurs vectoriels, systèmes de coordonnées) |
+| [`révisions/`](r%C3%A9visions) | les révisions de PCSI : flashcards et questions de colle, sans cours rédigé                                                     |
+| [`TP/`](TP)                    | les sujets de TP                                                                                                                |
+| [`prepa/`](prepa)              | le paquet typst `@local/prepa`, qui donne leur forme à tous les documents                                                       |
+| [`gabarits/`](gabarits)        | les gabarits des documents tirés du cours : planche de flashcards, diaporama, questions de colle, pages du site, notebooks      |
+| [`animations/`](animations)    | la bibliothèque commune des animations 3D des chapitres, et leur construction par vite                                          |
+| [`outils/`](outils)            | les outils Python de production et de publication                                                                               |
+| [`.githooks/`](.githooks)      | les hooks qui recompilent les documents au commit et publient le site au push                                                   |
 
 Un chapitre de `Cours/` contient :
 
 - `infos.yml` : titre, titre court, DM, exercices du cahier d'entraînement ;
-- `cours.typ` : le cours, avec ses flashcards, questions de colle, questions de
-  début de cours et manipulations ;
+- `cours.typ` : le cours, avec ses flashcards, questions de colle, questions de début de cours et manipulations ;
 - `compétences.typ` et `méthodes.typ` ;
 - `TD.typ`, qui rassemble les exercices du dossier `exercices/` ;
 - `poly.typ`, qui assemble le tout en un seul document ;
-- éventuellement `DM/` (sujets et corrigés en PDF), `Simulations/` (scripts
-  Python, et parfois les figures qu'ils produisent) et `animations/` (pages
-  animées en 3D, liées depuis le sommaire du chapitre sur le site).
+- éventuellement `DM/` (sujets et corrigés en PDF), `Simulations/` (scripts Python, et parfois les figures qu'ils produisent) et `animations/` (pages animées en 3D, liées depuis le sommaire du chapitre sur le site).
 
 Les documents produits atterrissent dans un dossier `build/` propre à chaque
 chapitre, ignoré par git.
