@@ -1,7 +1,8 @@
 // Diaporama des questions de début de cours d'un chapitre.
 //
-// Une question par diapo, sous forme de QCM ; puis le corrigé, qui reprend
-// les mêmes diapos dans le même ordre, la bonne réponse en gras.
+// Une question par diapo, sous forme de QCM ; puis une diapo d'annonce, et le
+// corrigé, qui reprend les mêmes diapos dans le même ordre, la bonne réponse
+// encadrée en vert.
 //
 // Alimenté par `outils diapo`, qui passe en `--input données` le JSON produit
 // par `typst query <question-de-début-de-cours>` sur le cours, augmenté du
@@ -22,6 +23,11 @@
 
 #let _gris = luma(45%)
 #let _pâle = luma(70%)
+
+// Le vert du corrigé : un filet assez sombre pour tenir sur un vidéoprojecteur
+// qui délave, un fond assez clair pour que le texte reste noir sur blanc.
+#let _vert = rgb("#2e7d32")
+#let _vert-pâle = rgb("#dbf0dd")
 
 // -- Tirage déterministe ---------------------------------------------------
 
@@ -123,31 +129,54 @@
 // -- Une diapo par question ------------------------------------------------
 
 // `strong` épaissit bien le texte d'une réponse, mais pas les symboles d'une
-// formule : le gras des maths se demande à `math.bold`. Une réponse tout en
-// maths — « $2 pi$ » — resterait sinon identique aux autres.
+// formule : le gras des maths se demande à `math.bold`. Sans cela, une réponse
+// tout en maths — « $2 pi$ » — ne prendrait du corrigé que le cadre.
 #let _gras(contenu) = {
     show math.equation: math.bold
     strong(contenu)
 }
 
+// Le gras seul ne se voyait pas : sur un écran, de loin, un serif gras reste
+// un serif. La bonne réponse passe donc dans un cadre vert sur fond pâle.
+//
+// L'encart est réservé sur *toutes* les réponses, cadre transparent compris :
+// il compte dans la mise en page, et sans cela le corrigé décalerait ses
+// lignes — voire changerait de facteur de réduction — par rapport à la
+// question restée à l'écran juste avant. Le même encart vertical coiffe la
+// lettre, pour qu'elle reste sur la ligne de base de sa réponse.
+#let _encart = 0.3em
+
+// `contenant` passe à `box` pour la légende de la diapo d'annonce, qui montre
+// le cadre au milieu d'une phrase plutôt que de le décrire.
+#let _cadre(contenu, bonne: true, contenant: block) = contenant(
+    inset: (x: 0.45em, y: _encart),
+    radius: 0.3em,
+    fill: if bonne { _vert-pâle },
+    stroke: if bonne { 1.4pt + _vert },
+    contenu,
+)
+
 // Énoncé et réponses dans l'ordre tiré. Au corrigé, la même diapo revient à
 // l'identique — l'énoncé reste sous les yeux pendant qu'on commente —, la
-// bonne réponse seule passant en gras noir.
+// bonne réponse seule s'encadrant de vert.
 #let _qcm(i, q, corrigé: false) = [
     #text(size: 15pt, fill: _pâle)[#if corrigé [Réponse] else [Question] #(i + 1) / #_tirées.len()]
     #v(0.2em)
     #block(width: 100%, below: 1.2em, text(size: 24pt, weight: "bold", markup(q.énoncé)))
     #grid(
         columns: (auto, 1fr),
-        column-gutter: 0.7em,
-        row-gutter: 0.8em,
+        column-gutter: 0.3em,
+        row-gutter: 0.4em,
         ..q.réponses
             .enumerate()
             .map(((j, r)) => {
                 let bonne = corrigé and _lettre(j) == q.bonne
                 (
-                    text(fill: if bonne { black } else { _gris }, weight: "bold")[#_lettre(j).],
-                    if bonne { _gras(markup(r)) } else { markup(r) },
+                    block(
+                        inset: (y: _encart),
+                        text(fill: if bonne { _vert } else { _gris }, weight: "bold")[#_lettre(j).],
+                    ),
+                    _cadre(if bonne { _gras(markup(r)) } else { markup(r) }, bonne: bonne),
                 )
             })
             .flatten()
@@ -160,6 +189,19 @@
 }
 
 // -- Diapos de corrigé -----------------------------------------------------
+
+// La reprise repart de la question 1 : sans cette annonce, la diapo suivante
+// ressemble à s'y méprendre à celle du début de la série, et la classe croit
+// qu'on est revenu en arrière par erreur.
+#pagebreak()
+#_diapo[
+    #set align(center + horizon)
+    #text(size: 34pt, weight: "bold")[Réponses]
+    // #v(0.6em)
+    // #text(size: 22pt, fill: _gris)[Les mêmes questions, dans le même ordre]
+    // #v(0.4em)
+    // #text(size: 18pt, fill: _gris)[La bonne réponse est #_cadre(_gras(text(fill: black)[en vert]), contenant: box)]
+]
 
 #for (i, q) in _tirées.enumerate() {
     pagebreak()

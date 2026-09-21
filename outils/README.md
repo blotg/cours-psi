@@ -104,9 +104,9 @@ l'identifiant du paquet étant déduit de son nom, le renommer fait apparaitre u
 **nouveau** paquet dans Anki : les anciens restent à supprimer à la main.
 
 `diapo` produit le diaporama des questions de début de cours du chapitre :
-une question par diapo, en QCM, puis le corrigé, qui reprend les mêmes diapos
-dans le même ordre — l'énoncé reste sous les yeux pendant qu'on commente —,
-la bonne réponse en gras. Les réponses sont saisies avec **la bonne en tête** ;
+une question par diapo, en QCM, puis une diapo d'annonce et le corrigé, qui
+reprend les mêmes diapos dans le même ordre — l'énoncé reste sous les yeux
+pendant qu'on commente —, la bonne réponse encadrée de vert. Les réponses sont saisies avec **la bonne en tête** ;
 l'ordre d'affichage est tiré au sort par le gabarit, de façon déterministe — le
 tirage ne dépend que du texte de la question, donc une recompilation redonne le
 même corrigé. Un chapitre sans question ne produit rien.
