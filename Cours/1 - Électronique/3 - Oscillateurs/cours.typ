@@ -320,6 +320,16 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
         )],
 )
 
+#question-de-début-de-cours(
+    "L'oscillateur à relaxation est constitué",
+    (
+        "d'un comparateur à hystérésis et d'un intégrateur.",
+        "d'un comparateur à hystérésis et d'un dérivateur.",
+        "d'un amplificateur non-inverseur et d'un filtre passe-bande.",
+        "d'un intégrateur et d'un filtre passe-bas.",
+    ),
+)
+
 #encadré(
     titre: "Caractéristique du comparateur à hystérésis positif",
     grandeurs: sub-dictionary(grandeurs, ("u", "v", "R_1, R_2")),
@@ -331,6 +341,16 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
 )[
     #carreaux(3cm)
 ]
+
+// #question-de-début-de-cours(
+//     "Les tensions de basculement du comparateur à hystérésis positif de l'oscillateur à relaxation sont",
+//     (
+//         "$plus.minus R_1/R_2 V_\"sat\"$",
+//         "$plus.minus R_2/R_1 V_\"sat\"$",
+//         "$plus.minus R_1/(R_1+R_2) V_\"sat\"$",
+//         "$plus.minus V_\"sat\"$",
+//     ),
+// )
 
 #encadré(
     titre: "Fonction intégrateur",
@@ -346,6 +366,26 @@ L'oscillateur à relaxation est constitué d'un comparateur à hystérésis posi
         v(t) = v_0 - 1/(R C) integral_0^t u(x) dd(x)
     $
 ]
+
+// #question-de-début-de-cours(
+//     "L'entrée $u$ et la sortie $v$ de l'intégrateur sont reliées par",
+//     (
+//         "$dv(v, t) = -u/(R C)$",
+//         "$dv(v, t) = u/(R C)$",
+//         "$dv(v, t) = -R C u$",
+//         "$dv(u, t) = -v/(R C)$",
+//     ),
+// )
+
+#question-de-début-de-cours(
+    "Dans un oscillateur à relaxation,",
+    (
+        "l'ALI du comparateur à hystérésis est saturé et celui de l'intégrateur est en régime linéaire.",
+        "l'ALI du comparateur à hystérésis est en régime linéaire et celui de l'intégrateur est saturé.",
+        "les deux ALI sont en régime linéaire.",
+        "les deux ALI sont saturés.",
+    ),
+)
 
 #question-de-colle(
     [Schématiser le montage de l’oscillateur à relaxation et établir l'équation différentielle du montage intégrateur et la caractéristique du montage comparateur à hystérésis positif.],
@@ -399,6 +439,16 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
     )
 ]
 
+#question-de-début-de-cours(
+    "Dans un oscillateur à relaxation, la sortie du comparateur à hystérésis est",
+    (
+        "un signal créneau.",
+        "un signal triangulaire.",
+        "un signal sinusoïdal.",
+        "un signal en dents de scie.",
+    ),
+)
+
 == Période d'oscillation
 
 #encadré(
@@ -418,12 +468,32 @@ Son intégration par l'intégrateur donne un signal triangulaire en sortie de l'
     $
 ]
 
+#question-de-début-de-cours(
+    "La période des oscillations d'un oscillateur à relaxation vaut",
+    (
+        "$4 R_1/R_2 R C$",
+        "$4 R_2/R_1 R C$",
+        "$2 pi R C$",
+        "$4 R C$",
+    ),
+)
+
 Cette expression est valable tant que la période est très grande devant la durée de commutation de l'ALI.
 #schéma(titre: "Influence de la vitesse de balayage sur le signal créneau", hauteur: 3cm)
 
 #application[
     Déterminer la durée de commutation de l'ALI TL081.
 ]
+
+#question-de-début-de-cours(
+    "Si la période devient comparable à la durée de commutation de l'ALI, le signal créneau",
+    (
+        "devient trapézoïdal.",
+        "n'est pas modifié.",
+        "devient sinusoïdal.",
+        "voit son amplitude augmenter.",
+    ),
+)
 
 #question-de-colle(
     [L'équation différentielle de l'intégrateur et la caractéristique du comparateur à hystérésis étant données, établir la forme des signaux dans un oscillateur à relaxation et leur période.],
@@ -444,3 +514,13 @@ La tension $v(t)$ étant la sortie de l'ALI de l'intégrateur, $v in [-V_"sat",V
 #manipulation(titre: "Condition d'oscillation")[
     On reprend le montage précédent et on change la valeur de $R_2$.
 ]
+
+#question-de-début-de-cours(
+    "La tension de commutation du comparateur à hystérésis est $R_1/R_2 V_\"sat\"$. L'oscillateur à relaxation n'oscille que si",
+    (
+        "$R_1 < R_2$",
+        "$R_1 > R_2$",
+        "$R_2 = 2 R_1$",
+        "$R_2 > 2 R_1$",
+    ),
+)

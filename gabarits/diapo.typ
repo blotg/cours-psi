@@ -77,7 +77,18 @@
 // En style « inline », typst tasse les fractions : sur un écran de deux mètres
 // le dénominateur devient illisible. On force le style d'affichage — une diapo
 // ne porte que quelques lignes, l'interligne peut se le permettre.
-#show math.equation.where(block: false): math.display
+//
+// `math.display` ne suffit pas : il agrandit la formule sans changer la taille
+// qu'elle déclare, et une cellule de grille ne compte que celle-ci — deux
+// réponses fractionnaires se chevauchaient. On en fait donc de vraies
+// équations de bloc, que typst mesure juste, remises sur la ligne par un `box`
+// dont la ligne de base est recalculée : sans cela une formule au milieu d'une
+// phrase reposerait sur son propre bas.
+#show math.equation.where(block: false): it => context {
+    set block(spacing: 0pt)
+    let équation = math.equation(block: true, it.body)
+    box(baseline: measure(équation).height / 2 - 0.25em, équation)
+}
 
 // `layout` donne la place réellement disponible sur la page ; un bloc de cette
 // hauteur exacte permet ensuite de centrer verticalement (le contenu d'une page
