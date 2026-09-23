@@ -20,9 +20,9 @@
 
 #let _gris = luma(35%)
 #let _filet = 0.6pt + luma(20%)
-#let _fond-bandeau = luma(90%)
+#let _fond-bandeau = luma(95%)
 #let _fond-bandeau-noir = black
-#let _fond-encadré = black.lighten(90%) // teinte de la version d'origine
+#let _fond-encadré = luma(95%) // teinte de la version d'origine
 #let _rayon = 2pt
 #let _inset-x = 0.85em
 #let _écart = 1.4em // blanc avant / après un bloc
@@ -378,8 +378,8 @@
 // -- Schéma --------------------------------------------------------------
 
 #let _quadrillage = tiling(size: (0.5cm, 0.5cm))[
-    #place(line(start: (0%, 0%), end: (100%, 0%), stroke: 0.5pt + luma(80%)))
-    #place(line(start: (0%, 0%), end: (0%, 100%), stroke: 0.5pt + luma(80%)))
+    #place(line(start: (0%, 0%), end: (100%, 0%), stroke: 1pt + luma(20%)))
+    #place(line(start: (0%, 0%), end: (0%, 100%), stroke: 1pt + luma(20%)))
 ]
 
 #let schéma(titre: "", quadrillage: auto, hauteur: auto, ..contenu) = {
