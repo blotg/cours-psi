@@ -133,30 +133,28 @@ Le diagramme de Bode (en gain et en phase) sera tracé après un relevé point p
 
 L'analyse manuelle du diagramme de Bode ne peut être faite qu'à partir des asymptotes. Dans ce TP, comme les données sont numérisées, on peut faire des traitements plus avancés et notamment un ajustement de la fonction de transfert théorique sur les données expérimentales.
 
-Pour cela, il est nécessaire de définir en Python la fonction de Bode théorique du filtre de Wien.
+Pour cela, il est nécessaire de définir en Python la fonction de Bode théorique de l'amplificateur non-inverseur.
 
 #application()[
-    Compléter le code suivant qui renvoie le gain en décibels du filtre de Wien.
+    Compléter le code suivant qui renvoie le gain en décibels de l'amplificateur non-inverseur. On écrira la fonction de transfert de l'amplificateur non-inverseur sous sa forme canonique : $underline(H) = H_0/(1+j f/f_0)$.
     ```python
-    R1 = ...
-    R2 = ...
-    def GdB(f, A0, tau):
+    def GdB(f, H0, f0):
         # f   : fréquence en Hz
-        # A0  : gain statique de l'ALI
-        # tau : temps de réponse de l'ALI
+        # H0  : gain statique de l'amplificateur non-inverseur
+        # f0  : fréquence de coupure de l'amplificateur non-inverseur
         return ...
     ```
 ]<application-GdB-Python>
 
-Pour vérifier l'adéquation entre les diagrammes de Bode théorique et expérimental, et pour déterminer les paramètres $A_0$ et $tau$, on peut effectuer un ajustement (_fit_ en anglais), c'est-à-dire chercher la courbe théorique passant au plus près des points expérimentaux.
+Pour vérifier l'adéquation entre les diagrammes de Bode théorique et expérimental, et pour déterminer les paramètres $H_0$ et $f_0$, on peut effectuer un ajustement (_fit_ en anglais), c'est-à-dire chercher la courbe théorique passant au plus près des points expérimentaux.
 
 On utilisera la fonction `curve_fit` de la bibliothèque `scipy.optimize` (voir @annexe-fonctions-python).
 
 #manipulation()[
     Écrire des instructions Python permettant d'effectuer l'ajustement de la fonction définie à l'@application-GdB-Python.
 
-    Les instructions devront afficher les valeurs des paramètres $A_0$ et 
-    $tau$ pour lesquelles la fonction de transfert théorique passe au plus près des points expérimentaux.
+    Les instructions devront afficher les valeurs des paramètres $H_0$ et
+    $f_0$ pour lesquelles la fonction de transfert théorique passe au plus près des points expérimentaux puis afficher le produit gain-bande.
 ]
 
 #évaluation(appel-prof: true, barème: (
