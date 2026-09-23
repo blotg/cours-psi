@@ -6,7 +6,7 @@
     capytale: "2a1c-11678449",
 )
 
-On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi f_s t)] cos(2 pi f_p t)$. On utilise pour cela le montage ci-dessous, appelé détecteur d'enveloppe.
+On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 (1+k s(t)) cos(2 pi f_p t)$. On utilise pour cela le montage ci-dessous, appelé détecteur d'enveloppe.
 
 #figure(
     circuit({
@@ -57,7 +57,7 @@ On souhaite démoduler un signal modulé en amplitude $e(t) = A_0 [1+m cos(2 pi 
     Le condensateur $C$, chargé lorsque la diode conduisait, se décharge alors dans $R$.
 ]
 
-On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal à transmettre sinusoïdal : $e(t) = cos(omega_p t) (1+m cos(omega_s t))$
+On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal à transmettre sinusoïdal : $e(t) = A_0 cos(omega_p t) (1+m cos(omega_s t))$
 
 #question(
     coups-de-pouce: (
@@ -70,6 +70,7 @@ On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal 
     import matplotlib.pyplot as plt
     omega_p = 2*np.pi*200 # (rad/s) pulsation de la porteuse
     omega_s = 2*np.pi*1.5 # (rad/s) pulsation du signal
+    A0 = 2 # (V) amplitude du signal
     m = 0.7 # taux de modulation
 
     t = np.linspace(0,1,2000) # temps (s)
@@ -86,10 +87,11 @@ On utilise Python pour simuler l'évolution de $s(t)$ sur l'exemple d'un signal 
     import matplotlib.pyplot as plt
     omega_p = 2*np.pi*200 # pulsation de la porteuse
     omega_s = 2*np.pi*1.5 # pulsation du signal
+    A0 = 2 # (V) amplitude du signal
     m = 0.7 # taux de modulation
 
     t = np.linspace(0,1,2000) # temps (s)
-    e = np.cos(omega_p*t) * (1+m*np.cos(omega_s*t)) # signal modulé en amplitude
+    e = A0 * np.cos(omega_p*t) * (1+m*np.cos(omega_s*t)) # signal modulé en amplitude
 
     plt.clf() #effacement de précédents tracés
     plt.plot(t, e, label="signal modulé")

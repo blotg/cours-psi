@@ -84,6 +84,8 @@ La modulation consiste à combiner
 - le signal qu'on souhaite transmettre,
 - un signal sinusoïdal dont la fréquence est adaptée au canal, appelé "porteuse".
 
+La porteur a une fréquence bien plus grande que celle du signal à transmettre.
+
 #question-de-début-de-cours(
     "La modulation NE permet PAS de",
     (
@@ -235,7 +237,7 @@ Pour que le signal modulé puisse être démodulé "correctement", le taux de mo
         column-gutter: .5em,
         canvas({
             plot.plot(
-                size: (4, 3),
+                size: (5, 3),
                 axis-style: "school-book",
                 x-tick-step: none,
                 y-tick-step: none,
@@ -250,12 +252,24 @@ Pour que le signal modulé puisse être démodulé "correctement", le taux de mo
                         domain: (0, 2),
                         samples: 1600,
                     )
+                    plot.add(
+                        t => (1 + 0.3 * calc.cos(2 * calc.pi * t)),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: red),
+                    )
+                    plot.add(
+                        t => calc.abs((1 + 0.3 * calc.cos(2 * calc.pi * t))),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: (paint: green, thickness: 3pt, dash: "dotted")),
+                    )
                 },
             )
         }),
         canvas({
             plot.plot(
-                size: (4, 3),
+                size: (5, 3),
                 axis-style: "school-book",
                 x-tick-step: none,
                 y-tick-step: none,
@@ -270,12 +284,25 @@ Pour que le signal modulé puisse être démodulé "correctement", le taux de mo
                         domain: (0, 2),
                         samples: 1600,
                     )
+                    plot.add(
+                        t => (1 + 1 * calc.cos(2 * calc.pi * t)),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: red),
+                    )
+                    plot.add(
+                        t => calc.abs((1 + 1 * calc.cos(2 * calc.pi * t))),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: (paint: green, thickness: 3pt, dash: "dotted")),
+                    )
                 },
+                
             )
         }),
         canvas({
             plot.plot(
-                size: (4, 3),
+                size: (5, 3),
                 axis-style: "school-book",
                 x-tick-step: none,
                 y-tick-step: none,
@@ -290,14 +317,29 @@ Pour que le signal modulé puisse être démodulé "correctement", le taux de mo
                         domain: (0, 2),
                         samples: 1600,
                     )
+                    plot.add(
+                        t => (1 + 1.6 * calc.cos(2 * calc.pi * t)),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: red),
+                    )
+                    plot.add(
+                        t => calc.abs((1 + 1.6 * calc.cos(2 * calc.pi * t))),
+                        domain: (0, 2),
+                        samples: 1600,
+                        style: (stroke: (paint: green, thickness: 3pt, dash: "dotted")),
+                    )
                 },
             )
         }),
+        [$h=#num[0.3]$],
+        [$h=#num[1]$],
+        [$h=#num[1.6]$],
     ),
-    caption: [Signaux modulés en amplitude avec différents taux de modulation $h=0.3$, $h=1$ et $h=1.6$ (surmodulation).],
+    caption: [Signaux modulés en amplitude avec différents taux de modulation. Pour un taux de modulation dépassant #num[1], l'enveloppe ne coïncide plus avec la modulante.],
 )
 
-La modulation en amplitude est la multiplication de deux signaux. La multiplication est une opération non linéaire qui modifie leur spectre.
+La modulation en amplitude est la multiplication de deux signaux. La multiplication est une opération non linéaire qui modifie le contenu du spectre#footnote[Une opération linéaire, comme un filtrage, peut modifier l'amplitude des différentes composantes de spectre. Une opération non-linéaire peut déplacer ces composantes sur le spectre.].
 
 == Point de vue spectral
 
@@ -334,7 +376,7 @@ La modulation en amplitude est la multiplication de deux signaux. La multiplicat
 La *largeur de bande* est la plage de fréquence occupée par le signal modulé.
 
 #application[
-    Combien peut-il y avoir de stations de radio en grandes ondes (GO) ? Et dans la bande FM ?
+    Pour la radio en mode grandes ondes, les fréquences supérieures à #quan[4.5 kHz] sont supprimées. Quelle largeur de bande chaque station occupe-t-elle ? Combien peut-il y avoir de stations de radio en grandes ondes (GO) ?
 ]
 
 = Démodulation
