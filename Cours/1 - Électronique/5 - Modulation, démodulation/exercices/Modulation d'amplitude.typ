@@ -257,15 +257,15 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                 {
                     // bande latérale basse : image inversée en fréquence du spectre de v_e
                     plot.add(
-                        f => audio-shape((3 - f) / 2),
-                        domain: (1, 3),
+                        f => audio-shape((2.8 - f) / (2.8-1)),
+                        domain: (1, 2.9),
                         samples: 200,
                         style: (stroke: red),
                     )
                     // bande latérale haute : copie directe du spectre de v_e
                     plot.add(
-                        f => audio-shape((f - 3) / 2),
-                        domain: (3, 5),
+                        f => audio-shape((f - 3.2) / (5-3.2)),
+                        domain: (3.2, 5),
                         samples: 200,
                         style: (stroke: red),
                     )
@@ -276,6 +276,8 @@ Pour démoduler correctement le signal, il ne faut pas que son enveloppe s'annul
                         content((1, 0), $500$, anchor: "north", padding: .2em)
                         content((3, 0), $520$, anchor: "north", padding: .2em)
                         content((5, 0), $540$, anchor: "north", padding: .2em)
+                        content((2.5, -.5), num[519.980], anchor: "north", padding: .2em)
+                        content((3.5, -0.5), num[520.020], anchor: "north", padding: .2em)
                     })
                 },
             )
