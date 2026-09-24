@@ -1,6 +1,6 @@
 // Le champ et le potentiel d'une distribution de charges dans le plan de
-// l'écran, et de quoi les dessiner : lignes de champ, équipotentielles,
-// dégradé de potentiel.
+// l'écran, et de quoi les dessiner : lignes de champ, grille de potentiel
+// (les équipotentielles s'en tirent par `#animations/carte.js`).
 //
 // Deux distributions, deux lois :
 //
@@ -14,6 +14,8 @@
 //     champ uniforme entre elle et sa voisine. Les unités sont alors celles
 //     du dessin (1/(2πε₀) = 1), et seuls comptent les rapports — le panneau
 //     n'y affiche que des σ/ε.
+
+import { grille } from '#animations/carte.js';
 
 /** 1/(4πε₀), en unités SI. */
 const COULOMB = 8.9875517873681764e9;
@@ -152,101 +154,5 @@ export function lignesDeChamp(charges, { parUnité = 8, rayon = 0.16, maximumPar
 /** Le potentiel sur une grille régulière du cadre : de quoi en tirer les
  *  équipotentielles et le dégradé, sans le recalculer deux fois. */
 export function grilleDePotentiel(charges, cadre, colonnes = 150, loi = PONCTUELLES) {
-    const lignes = Math.max(2, Math.round((colonnes * (cadre.y1 - cadre.y0)) / (cadre.x1 - cadre.x0)));
-    const valeurs = new Float64Array(colonnes * lignes);
-    for (let j = 0; j < lignes; j++) {
-        const y = cadre.y0 + ((cadre.y1 - cadre.y0) * j) / (lignes - 1);
-        for (let i = 0; i < colonnes; i++) {
-            const x = cadre.x0 + ((cadre.x1 - cadre.x0) * i) / (colonnes - 1);
-            valeurs[j * colonnes + i] = potentiel(charges, x, y, loi);
-        }
-    }
-    return { colonnes, lignes, cadre, valeurs };
-}
-
-/**
- * Des potentiels régulièrement espacés, de `pas` en `pas` : c'est leur
- * espacement constant qui fait dire la carte — là où les équipotentielles se
- * resserrent, le champ est intense.
- *
- * Le potentiel diverge près des charges, et prendre toute l'étendue de la
- * grille donnerait des milliers de niveaux serrés sur quelques millimètres.
- * On s'en tient donc à une fenêtre centrée sur zéro, d'au plus `maximum`
- * niveaux : c'est loin des charges que la carte se lit.
- */
-export function niveaux(grille, pas, maximum = 40) {
-    let bas = Infinity;
-    let haut = -Infinity;
-    for (const v of grille.valeurs) {
-        if (v < bas) bas = v;
-        if (v > haut) haut = v;
-    }
-    const bord = Math.floor(maximum / 2);
-    const premier = Math.max(Math.ceil(bas / pas), -bord);
-    const dernier = Math.min(Math.floor(haut / pas), bord);
-    const trouvés = [];
-    for (let k = premier; k <= dernier; k++) trouvés.push(k * pas);
-    return trouvés;
-}
-
-/**
- * Les segments des équipotentielles, par la méthode des carrés marchants :
- * dans chaque maille, le contour coupe les arêtes dont les extrémités
- * encadrent le niveau, et l'interpolation linéaire dit où.
- *
- * Tous les niveaux se tracent en une seule passe sur la grille. Ils sont
- * régulièrement espacés : une maille en déduit par un calcul ceux qu'elle
- * traverse — jamais plus d'un ou deux — au lieu de les essayer tous. Avec une
- * quarantaine de niveaux, la carte se redessine quarante fois plus vite, et
- * suit les curseurs.
- */
-export function contours(grille, niveaux) {
-    const { colonnes, lignes, cadre, valeurs } = grille;
-    if (niveaux.length === 0) return [];
-    const base = niveaux[0];
-    const pas = niveaux.length > 1 ? niveaux[1] - niveaux[0] : 1;
-    const dx = (cadre.x1 - cadre.x0) / (colonnes - 1);
-    const dy = (cadre.y1 - cadre.y0) / (lignes - 1);
-    const segments = [];
-    const v = [0, 0, 0, 0];
-    for (let j = 0; j < lignes - 1; j++) {
-        for (let i = 0; i < colonnes - 1; i++) {
-            v[0] = valeurs[j * colonnes + i];
-            v[1] = valeurs[j * colonnes + i + 1];
-            v[2] = valeurs[(j + 1) * colonnes + i + 1];
-            v[3] = valeurs[(j + 1) * colonnes + i];
-            const bas = Math.min(v[0], v[1], v[2], v[3]);
-            const haut = Math.max(v[0], v[1], v[2], v[3]);
-            const premier = Math.max(0, Math.ceil((bas - base) / pas));
-            const dernier = Math.min(niveaux.length - 1, Math.floor((haut - base) / pas));
-            if (premier > dernier) continue;
-            const x = cadre.x0 + i * dx;
-            const y = cadre.y0 + j * dy;
-            // Les quatre coins de la maille, dans le sens trigonométrique.
-            const coins = [
-                [x, y],
-                [x + dx, y],
-                [x + dx, y + dy],
-                [x, y + dy],
-            ];
-            for (let n = premier; n <= dernier; n++) {
-                const niveau = niveaux[n];
-                const points = [];
-                for (let a = 0; a < 4; a++) {
-                    const b = (a + 1) % 4;
-                    if (v[a] === v[b] || v[a] < niveau === v[b] < niveau) continue;
-                    const t = (niveau - v[a]) / (v[b] - v[a]);
-                    points.push([
-                        coins[a][0] + t * (coins[b][0] - coins[a][0]),
-                        coins[a][1] + t * (coins[b][1] - coins[a][1]),
-                    ]);
-                }
-                // Deux points : un segment. Quatre (un col) : on relie dans
-                // l'ordre des arêtes, ce qui donne deux segments acceptables
-                // à l'échelle d'une maille.
-                for (let k = 0; k + 1 < points.length; k += 2) segments.push([points[k], points[k + 1]]);
-            }
-        }
-    }
-    return segments;
+    return grille((x, y) => potentiel(charges, x, y, loi), cadre, colonnes);
 }

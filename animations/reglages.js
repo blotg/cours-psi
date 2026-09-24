@@ -109,8 +109,12 @@ export class Réglages {
         if (tex) ligne.append(écritTex(créé('span'), tex));
         this.courant.append(ligne);
         return {
+            ligne,
             get valeur() {
                 return entrée.checked;
+            },
+            montre(oui = true) {
+                ligne.hidden = !oui;
             },
         };
     }

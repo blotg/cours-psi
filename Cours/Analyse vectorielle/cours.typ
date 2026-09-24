@@ -67,7 +67,7 @@ Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un 
 
 #application[Exprimer le gradient du champ $1/sqrt(x^2+y^2+z^2)$.]
 
-En coordonnées cylindriques ou sphériques, la première coordonnée (c'est-à-dire selon $va(e_r)$) de $grad f$ est la dérivée par rapport à $r$.
+En coordonnées cylindriques ou sphériques, la première composante de $grad f$ (c'est-à-dire selon $va(e_r)$) est la dérivée partielle de $f$ par rapport à $r$.
 
 #application[
     Exprimer le gradient du champ $1/r$ en coordonnées sphériques. Est-ce cohérent avec l'application précédente ? On pourra utiliser l'expression de $va(O M)$ dans les bases cartésienne et sphérique pour comparer les deux expressions.
@@ -86,7 +86,7 @@ La divergence est un opérateur s'appliquant aux champs vectoriels et renvoyant 
     ),
     grandeurs: grandeurs,
 )[
-    $ div arrow(A) = va(nabla) dprod va(A) = pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z) $
+    $ div va(A) = va(nabla) dprod va(A) = pdv(A_x, x) + pdv(A_y, y) + pdv(A_z, z) $
 ]
 
 #flashcard(
@@ -188,7 +188,7 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
     grandeurs: grandeurs,
 )[
     $
-        rot arrow(A) = va(nabla) and va(A) = vec(pdv(A_z, y)-pdv(A_y, z), pdv(A_x, z)-pdv(A_z, x), pdv(A_y, x)-pdv(A_x, y))
+        rot va(A) = va(nabla) and va(A) = vec(pdv(A_z, y)-pdv(A_y, z), pdv(A_x, z)-pdv(A_z, x), pdv(A_y, x)-pdv(A_x, y))
     $
 ]
 
@@ -234,12 +234,12 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
     ),
     grandeurs: grandeurs,
 )[
-    $ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $
+    $ integral.double_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $
 ]
 
 #flashcard(
     recto: [Théorème de Stokes],
-    verso: [$ integral.surf_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $],
+    verso: [$ integral.double_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $],
 )
 
 #schéma(titre: "Orientation relative entre une surface et sa frontière", hauteur: 3cm)
@@ -296,7 +296,7 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 )
 
 #question-de-colle(
-    [Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stockes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?]
+    [Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stokes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?]
 )
 
 = Laplacien scalaire
@@ -330,7 +330,7 @@ L'opérateur $va(A) dprod grad$ peut s'appliquer à un champ vectoriel, il renvo
     titre: $va(A) dprod grad$,
     connaitre: true,
     hypothèses: (
-        [$va(A)$ et $f$ sont des fonctions de $RR^3$ dérivables.],
+        [$va(A)$, $va(B)$ et $f$ sont des fonctions de $RR^3$ dérivables.],
     ),
     grandeurs: grandeurs,
 )[

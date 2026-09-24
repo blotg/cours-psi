@@ -113,6 +113,7 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
 | `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`) |
 | `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
+| `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, l'écart rond entre deux niveaux |
 | `reglages.js` | `Réglages` : curseurs (avec leurs aimants), cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
 
@@ -304,6 +305,41 @@ Trois partis pris, sans lesquels rien ne se verrait :
   plus une. La main n'y arriverait jamais : M se pose donc de lui-même sur
   l'axe (Oz) et dans le plan (O x y), qui sont le plan médiateur des deux
   charges, celui de la spire et le plan chargé.
+
+**Analyse vectorielle** — `operateurs.js` applique les opérateurs à des
+champs plans (`champs.js`) : le gradient et le laplacien à un champ scalaire,
+peint en dégradé d'une seule teinte, la divergence, le rotationnel et le
+laplacien vectoriel à un champ de flèches. On déplace un point M, et
+l'opérateur y est dessiné selon ce qu'il rend : un disque marqué de son signe
+pour un scalaire — rouge et +, comme une charge positive, car une divergence
+positive est une source —, une flèche pour un vecteur du plan, ⊙ ou ⊗ pour le
+rotationnel, seul vecteur qui sorte de l'écran. La case « dans tout le plan »
+répète ce dessin sur une grille.
+
+Les champs sont choisis pour ce qu'ils démentent : une source radiale partout,
+mais de divergence nulle hors des charges (le champ électrique d'un cylindre
+chargé) ; un tourbillon dont le rotationnel n'est non nul qu'au cœur (le champ
+magnétique d'un fil épais) ; un cisaillement aux lignes droites qui fait
+pourtant tourner la roue à aubes ; un col, courbé dans les deux sens, de
+laplacien nul. Les deux tubes ont un profil gaussien plutôt qu'une densité
+uniforme, qui ferait une arête à leur bord, où le laplacien vectoriel serait
+infini.
+
+Le contour autour de M fait le lien avec les théorèmes du chapitre : sur un
+cercle de rayon ρ, la composante normale (un flux) ou tangentielle (une
+circulation), et le rapport Φ/V ou C/S, qui tend vers l'opérateur quand ρ tend
+vers zéro — Ostrogradski et Stokes sur un cylindre d'axe (Mz). Ses flèches se
+mesurent à la plus longue d'entre elles, non au champ sur toute la carte :
+elles montrent l'équilibre d'un côté du cercle à l'autre, qui doit se lire
+même là où le champ est faible. Le laplacien vectoriel se décompose, sur
+demande, en grad(div A) et −rot(rot A), tracés en M avec leur parallélogramme.
+
+Tous les opérateurs se calculent par différences finies, sur n'importe quel
+champ : en ajouter un ne demande que sa formule. Ils ne s'annulent donc jamais
+tout à fait, et le seuil en deçà duquel ils sont nuls (`SEUIL`) se prend sur
+**l'échelle du champ**, jamais sur celle de l'opérateur : la divergence d'un
+tourbillon n'est que du bruit, et, rapportée à son propre maximum — du bruit
+lui aussi —, elle couvrait la carte de disques.
 
 **Systèmes de coordonnées** — `systemes.js` décrit les trois systèmes par des
 données : coordonnées et bornes, position, base locale, longueurs des arêtes,

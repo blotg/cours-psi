@@ -14,7 +14,8 @@ import { COULEURS } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
 import { Plan, chemin, disque, flèche, pointe } from '#animations/plan.js';
 import { Réglages } from '#animations/reglages.js';
-import { champ, contours, FILS, grilleDePotentiel, lignesDeChamp, ligneDeChamp, niveaux, potentiel } from './champ.js';
+import { contours, niveaux, ronde } from '#animations/carte.js';
+import { champ, FILS, grilleDePotentiel, lignesDeChamp, ligneDeChamp, potentiel } from './champ.js';
 
 const COULEUR = {
     positive: COULEURS.vermillon,
@@ -27,13 +28,6 @@ const COULEUR = {
 
 /** La règle posée sur la carte, en centimètres. */
 const RÈGLE = 5;
-
-/** La valeur ronde la plus proche : 1, 2 ou 5 fois une puissance de dix. */
-function ronde(x) {
-    const décade = 10 ** Math.floor(Math.log10(x));
-    const mantisse = x / décade;
-    return décade * (mantisse < 1.5 ? 1 : mantisse < 3.5 ? 2 : mantisse < 7.5 ? 5 : 10);
-}
 
 /**
  * L'écart entre équipotentielles, en volts. C'est lui qui fait parler la

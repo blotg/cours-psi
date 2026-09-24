@@ -10,4 +10,4 @@
 - Définir le laplacien à l’aide de la divergence et du gradient.
 - Exprimer le laplacien en coordonnées cartésiennes.
 - Exprimer le laplacien d’un champ de vecteurs en coordonnées cartésiennes.
-- Utiliser la formule d’analyse vectorielle : $rot(rot va(A)) = grad(div A) - Delta va(A)$.
+- Utiliser la formule d’analyse vectorielle : $rot(rot va(A)) = grad(div va(A)) - Delta va(A)$.
