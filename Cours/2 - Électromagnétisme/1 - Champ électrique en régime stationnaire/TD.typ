@@ -6,4 +6,5 @@
 #include "exercices/Champ de gravitation.typ"
 #include "exercices/Dipôle électrostatique.typ"
 #include "exercices/Condensateur cylindrique.typ"
+#include "exercices/Condensateur sphérique.typ"
 #include "exercices/Total Recall.typ"

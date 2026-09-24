@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Total Recall : Mémoires programmées", difficulté: 2, ouvert: true)
 
-Dans le film #emph[Total Recall : Mémoires programmées] (2012), les ouvriers empruntent quotidiennement un train gravitationnel, « The Fall », qui traverse la Terre de part en part. Ce train n'est mû que par la gravité et tombe en chute libre jusqu'à sa destination, qu'il atteint en $#quan[12 min]$.
+Dans le film #emph[Total Recall : Mémoires programmées] (2012), les ouvriers empruntent quotidiennement un train gravitationnel, « The Fall », qui traverse la Terre de part en part. Ce train n'est mû que par la gravité et tombe en chute libre jusqu'à sa destination, qu'il atteint en $#quan[17 min]$.
 
 Données : masse de la Terre $#quan[6.0e24 kg]$ ; rayon de la Terre $#quan[6400 km]$.
 
@@ -20,5 +20,5 @@ Données : masse de la Terre $#quan[6.0e24 kg]$ ; rayon de la Terre $#quan[6400 
   Le trajet d'un bout à l'autre correspond à une demi-période :
   $ tau = pi/omega = pi sqrt(R^3/(cal(G) M_T)) approx pi sqrt((6.4 times 10^6)^3/(6.67 times 10^(-11) times 6.0 times 10^(24))) approx #quan[2.5e3 s] approx #quan[42 min] $
 
-  Le résultat ne dépend ni de la masse du wagon ni du diamètre choisi : c'est toujours environ $42$ minutes. La durée de $12$ min annoncée dans le film n'est donc pas vraisemblable pour un train purement gravitationnel (il faudrait une gravité effective une dizaine de fois plus forte, ou une propulsion).
+  Le résultat ne dépend ni de la masse du wagon ni de la position des points de la Terre à relier : c'est toujours environ $42$ minutes. La durée de $17$ min annoncée dans le film n'est donc pas vraisemblable pour un train purement gravitationnel (il faudrait une gravité bien plus forte, ou une propulsion).
 ]

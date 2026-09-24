@@ -42,5 +42,5 @@ La masse volumique d'une planète de rayon $R = #quan[6400 km]$ varie avec la di
 ][
   Pour $r <= R$, $norm(va(g)) = 4 pi cal(G) mu_0 (r/3 - (a r^3)/(5 R^2))$. Sa dérivée s'annule pour
   $ 1/3 - (3 a r^2)/(5 R^2) = 0 quad => quad r_"max" = R sqrt(5/(9 a)) approx 0.87 R $
-  (La dérivée seconde est négative : c'est bien un maximum.) Le champ de gravitation est donc plus intense à mi-profondeur des roches qu'en surface.
+  (La dérivée seconde est négative : c'est bien un maximum.) Le champ de gravitation est donc plus intense à #zi.km(6400*(1-0.87), digits:0, exponent: "sci") de profondeur qu'en surface.
 ]

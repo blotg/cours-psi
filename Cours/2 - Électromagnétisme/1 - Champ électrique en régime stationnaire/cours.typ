@@ -24,7 +24,10 @@
     "S": (signification: "une surface fermée orientée vers l'extérieur"),
     "Q_text(\"int\")": (signification: "la charge contenue à l'intérieur de $S$", unité: unit("C")),
     "va(g)": (signification: "le champ gravitationnel", unité: unit("m/s^2")),
-    "cal(G)": (signification: "$= #quan[6.67e-11 m^3/kg/s^2]$ la constante gravitationnelle", unité: unit("m^3/kg/s^2")),
+    "cal(G)": (
+        signification: "$= #quan[6.67e-11 m^3/kg/s^2]$ la constante gravitationnelle",
+        unité: unit("m^3/kg/s^2"),
+    ),
     "M_text(\"int\")": (signification: "la masse contenue à l'intérieur de $S$", unité: unit("kg")),
     "C": (signification: "la capacité du condensateur", unité: unit("F")),
     "va(n)": (signification: "un vecteur unitaire allant de l'armature positive vers l'armature négative"),
@@ -33,6 +36,10 @@
     "epsilon": (signification: "$= epsilon_r epsilon_0$ la permittivité diélectrique de l'isolant", unité: unit("F/m")),
     "epsilon_r": (signification: "la permittivité diélectrique relative de l'isolant", unité: "sans unité"),
     "w": (signification: "la densité volumique d'énergie électrostatique", unité: unit("J/m^3")),
+    "tau": (signification: "le volume", unité: unit("m^3")),
+    "cal(E)": (signification: "l'énergie stockée", unité: unit("J")),
+    "U": (signification: "la tension aux bornes du condensateur", unité: unit("V")),
+    "E_p": (signification: "l'énergie potentielle électrostatique d'une particule chargée", unité: unit("J")),
 )
 
 = Notion de charge électrique
@@ -45,9 +52,9 @@ $rho(M, t)$ désigne la densité volumique de charge au point $M$ et à l'instan
 #encadré(
     titre: "Charge d'un système en description volumique",
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("Q", "rho")),
+    grandeurs: sub-dictionary(grandeurs, ("Q", "rho", "tau")),
 )[
-    $ Q = integral.triple rho dd(V) $
+    $ Q = integral.triple rho dd(tau) $
 ]
 
 === Distribution surfacique
@@ -89,7 +96,7 @@ $Q$ désigne la charge d'un objet ponctuel.
 #encadré(
     titre: "Force d'interaction électrostatique (loi de Coulomb)",
     connaitre: true,
-    hypothèses: "Les deux particules sont ponctuelles.",
+    hypothèses: "Les deux particules sont ponctuelles et immobiles.",
     grandeurs: sub-dictionary(grandeurs, ("va(F)_(1 slash 2)", "q_1", "q_2", "epsilon_0", "va(e)")),
 )[
     $ va(F)_(1 slash 2) = (q_1 q_2)/(4 pi epsilon_0) 1/(M_1 M_2)^2 va(e) $
@@ -106,7 +113,10 @@ La force est répulsive si les charges sont de même signe, attractive si elles 
     titre: "Champ électrique créé par une particule ponctuelle",
     connaitre: true,
     savoir-faire: true,
-    hypothèses: "La particule est placée à l'origine du repère.",
+    hypothèses: (
+        "La particule est placée à l'origine du repère.",
+        "La particule est ponctuelle et immobile.",
+    ),
     grandeurs: sub-dictionary(grandeurs, ("va(E)", "q", "epsilon_0", "r", "va(e_r)")),
 )[
     $ va(E) = q/(4 pi epsilon_0) 1/r^2 va(e_r) $
@@ -115,16 +125,6 @@ La force est répulsive si les charges sont de même signe, attractive si elles 
 #flashcard(
     recto: [Champ électrique créé par une particule ponctuelle],
     verso: [$ va(E) = q/(4 pi epsilon_0) 1/r^2 va(e_r) $],
-)
-
-#question-de-début-de-cours(
-    "Le champ électrique créé par une particule ponctuelle est",
-    (
-        "$q/(4 pi epsilon_0) 1/r^2 va(e_r)$",
-        "$(q_1 q_2)/(4 pi epsilon_0) 1/r^2 va(e_r)$",
-        "$q/(2 pi epsilon_0) 1/r^2 va(e_r)$",
-        "$(q_1 q_2)/(2 pi epsilon_0) 1/r^2 va(e_r)$",
-    ),
 )
 
 #question-de-début-de-cours(
@@ -192,9 +192,16 @@ Le champ électrique obéit aux équations de Maxwell.
     $ va(E) = - grad V $
 ]
 
-#flashcard(recto: [Lien entre potentiel électrique et champ électrique], verso: [$ va(E) = - grad V $ (en régime stationnaire)])
+#flashcard(
+    recto: [Lien entre potentiel électrique et champ électrique],
+    verso: [$ va(E) = - grad V $ (en régime stationnaire)],
+)
 
 Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est défini à une constante additive près : on choisit arbitrairement sa valeur en un point.
+
+#application[
+    Déterminer le potentiel électrique créé par une charge ponctuelle située à l'origine du repère. On choisira $V=0$ à l'infini.
+]
 
 #encadré(
     titre: [Circulation de $va(E)$],
@@ -206,7 +213,10 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
     $ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $
 ]
 
-#flashcard(recto: [Circulation du champ électrique], verso: [$ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $ (en régime stationnaire)])
+#flashcard(
+    recto: [Circulation du champ électrique],
+    verso: [$ integral_A^B va(E) dot va(dd(l)) = V_A - V_B $ (en régime stationnaire)],
+)
 
 #question-de-début-de-cours(
     "Laquelle de ces affirmations sur $va(E)$ est FAUSSE en régime stationnaire ?",
@@ -217,7 +227,9 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
     ),
 )
 
-#question-de-colle([Énoncer l'équation de Maxwell-Faraday, en déduire qu'en régime stationnaire $va(E) = - grad V$, puis exprimer la circulation du champ électrique.])
+#question-de-colle(
+    [Énoncer l'équation de Maxwell-Faraday, en déduire qu'en régime stationnaire $va(E) = - grad V$, puis exprimer la circulation du champ électrique.],
+)
 
 == Équation de Poisson
 #encadré(
@@ -230,7 +242,10 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
     $ Delta V = - rho/epsilon_0 $
 ]
 
-#flashcard(recto: [Équation de Poisson vérifiée par le potentiel électrique], verso: [$ Delta V = - rho/epsilon_0 $])
+#flashcard(
+    recto: [Équation de Poisson vérifiée par le potentiel électrique],
+    verso: [*En régime stationnaire :* $ Delta V = - rho/epsilon_0 $],
+)
 
 #encadré(
     titre: "Équation de Laplace",
@@ -242,9 +257,14 @@ Comme $grad K = va(0)$ pour toute constante $K$, le potentiel électrique est d�
     $ Delta V = 0 $
 ]
 
-#flashcard(recto: [Équation de Laplace vérifiée par le potentiel électrique dans le vide], verso: [$ Delta V = 0 $])
+#flashcard(
+    recto: [Équation de Laplace vérifiée par le potentiel électrique dans une zone vide de charges],
+    verso: [*En régime stationnaire :* $ Delta V = 0 $],
+)
 
-#question-de-colle([Énoncer les équations de Maxwell-Gauss et Maxwell-Faraday, puis établir les équations de Poisson et de Laplace vérifiées par le potentiel électrique.])
+#question-de-colle(
+    [Énoncer les équations de Maxwell-Gauss et Maxwell-Faraday, puis établir les équations de Poisson et de Laplace vérifiées par le potentiel électrique.],
+)
 
 == Topographie des cartes de champ
 === Tubes de champ en l'absence de sources
@@ -254,13 +274,16 @@ Une ligne de champ est une courbe tangente en tout point au champ. Un tube de ch
     titre: [Conservation du flux de $va(E)$],
     connaitre: true,
     savoir-faire: true,
-    hypothèses: ("En régime stationnaire.", "Dans une zone vide de charges."),
+    hypothèses: "Dans une zone vide de charges.",
     grandeurs: sub-dictionary(grandeurs, ("va(E)",)),
 )[
     Le flux de $va(E)$ est le même à travers chaque section d'un même tube de champ.
 ]
 
-#flashcard(recto: [Conditions pour que le champ électrique soit à flux conservatif], verso: [En régime stationnaire, dans une zone vide de charges.])
+#flashcard(
+    recto: [Conditions pour que le champ électrique soit à flux conservatif],
+    verso: [Dans une zone vide de charges.],
+)
 
 Un rétrécissement d'un tube de champ s'accompagne donc d'une augmentation de la norme du champ électrique.
 
@@ -310,7 +333,7 @@ Un rétrécissement d'un tube de champ s'accompagne donc d'une augmentation de l
 ]
 
 #application[
-    Déterminer la valeur, la direction et le sens du champ électrique aux points $M_1$ et $M_2$ à l'aide de la carte des équipotentielles.
+    Déterminer la valeur, la direction et le sens du champ électrique aux points $M_1$ et $M_2$ à l'aide de la carte des équipotentielles. La carte est à l'échelle 1:1.
     #figure(canvas({
         import cetz.draw: *
         set-style(stroke: 0.7pt)
@@ -340,6 +363,35 @@ Les équations de Maxwell étant linéaires, on peut appliquer le théorème de 
     Si les distributions $rho_1$ et $rho_2$ créent respectivement les champs $va(E_1)$ et $va(E_2)$, alors la distribution $rho_1 + rho_2$ crée le champ $va(E_1) + va(E_2)$.
 ]
 
+== Lien avec la mécanique
+
+Le champ électrique a été construit de sorte à être lié simplement à la force subie par une particule chargée. L'énergie potentielle d'une particule chargée peut, elle, être déduite simplement du potentiel électrique.
+
+#encadré(
+    titre: "Énergie potentielle électrostatique",
+    connaitre: true,
+    savoir-faire: true,
+    grandeurs: sub-dictionary(grandeurs, ("E_p", "q", "V")),
+    hypothèses: "En régime stationnaire."
+)[
+    $ E_p = q V $
+]
+
+#flashcard(
+    recto: "Énergie potentielle électrostatique",
+    verso: "$ E_p = q V $"
+)
+
+Cette expression peut être utilisée pour déterminer la vitesse d'une particule chargée après traversée d'une zone de champ.
+
+#application[
+    Les téléviseurs cathodiques couleur utilisaient des tensions de l'ordre de #quan[25 kV] entre deux électrodes pour accélérer les électrons ($m = #quan[9.11e-31 kg]$, $q = #quan[-1.60e-19 C]$) initialement immobiles. Calculer leur énergie cinétique puis leur vitesse après avoir traversé la zone séparant les électrodes#footnote[La valeur trouvée n'est pas négligeable devant la vitesse de la lumière. Pour faire les choses bien, il faudrait traiter ce calcul dans un cadre relativiste, on trouve alors une vitesse #quan[4 %] plus faible.].
+]
+
+#question-de-colle[
+    Déterminer l'énergie potentielle électrostatique d'une particule chargée en fonction du potentiel électrique. Calculer l'énergie cinétique puis la vitesse d'un électron ($m = #quan[9.11e-31 kg]$, $q = #quan[-1.60e-19 C]$) initialement immobile après traversée d'une zone soumise à une tension de #quan[25 kV].
+]
+
 = Théorème de Gauss
 == Symétries du champ électrique
 Les symétries de la distribution de charge contraignent le champ électrique.
@@ -356,7 +408,10 @@ Les symétries de la distribution de charge contraignent le champ électrique.
     Le champ électrique est inclus dans les plans de symétrie de la distribution de charge.
 ]
 
-#flashcard(recto: [Rapport du champ électrique aux plans de symétrie de la distribution de charge], verso: [Le champ électrique y est inclus.])
+#flashcard(
+    recto: [Rapport du champ électrique aux plans de symétrie de la distribution de charge],
+    verso: [Le champ électrique y est inclus.],
+)
 
 #application[
     On considère une boule uniformément chargée. Déterminer la direction du champ électrique en tout point de l'espace.
@@ -372,7 +427,10 @@ Si, pour chaque couple de points symétriques par un plan, la distribution de ch
     Le champ électrique est orthogonal aux plans d'antisymétrie de la distribution de charge.
 ]
 
-#flashcard(recto: [Rapport du champ électrique aux plans d'antisymétrie de la distribution de charge], verso: [Le champ électrique leur est orthogonal.])
+#flashcard(
+    recto: [Rapport du champ électrique aux plans d'antisymétrie de la distribution de charge],
+    verso: [Le champ électrique leur est orthogonal.],
+)
 
 #question-de-début-de-cours(
     "Le champ électrique est",
@@ -395,7 +453,10 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
     Les invariances des causes se retrouvent dans leurs effets : $va(E)$ possède (au moins) les invariances de la distribution de charge.
 ]
 
-#flashcard(recto: [Lien entre les invariances de $va(E)$ et celles de la distribution de charge], verso: [$va(E)$ a (au moins) les mêmes invariances que la distribution de charge.])
+#flashcard(
+    recto: [Lien entre les invariances de $va(E)$ et celles de la distribution de charge],
+    verso: [$va(E)$ a (au moins) les mêmes invariances que la distribution de charge.],
+)
 
 #application[
     De quelles variables d'espace dépend le champ électrique dans chacun des cas suivants ?
@@ -409,7 +470,6 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
     titre: "Théorème de Gauss",
     connaitre: true,
     savoir-faire: true,
-    hypothèses: "En régime stationnaire.",
     grandeurs: sub-dictionary(grandeurs, ("S", "va(E)", "Q_text(\"int\")", "epsilon_0")),
 )[
     $ integral.surf_S va(E) dot va(dd(S)) = Q_"int"/epsilon_0 $
@@ -421,9 +481,9 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
     "Le champ électrique créé par un cylindre infini uniformément chargé",
     (
         "dépend de $r$ et est selon $va(e_r)$",
-        "dépend de $r$ et est selon $va(e_phi)$",
+        "dépend de $r$ et est selon $va(e_theta)$",
         "dépend de $z$ et est selon $va(e_r)$",
-        "dépend de $z$ et est selon $va(e_phi)$",
+        "dépend de $z$ et est selon $va(e_theta)$",
     ),
 )
 
@@ -432,22 +492,26 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
 #application[
     Déterminer le champ électrique créé par une particule ponctuelle de charge $q$.
 ]
-#question-de-colle([Déterminer le champ électrique créé par une particule ponctuelle de charge $q$.])
+#question-de-colle([Déterminer le champ électrique créé par une particule ponctuelle de charge $q$. En déduire l'expression du potentiel électrique.])
 
 #application[
-    Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$.
+    Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$. En déduire l'expression du potentiel électrique.
 ]
-#question-de-colle([Déterminer le champ électrique créé par une boule uniformément chargée de densité volumique $rho$.])
+#question-de-colle([Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$. En déduire l'expression du potentiel électrique.])
 
 #application[
-    Déterminer le champ électrique créé par un cylindre plein de rayon $R$, infiniment long, uniformément chargé de densité volumique $rho$.
+    Déterminer le champ électrique créé par un cylindre plein de rayon $R$, infiniment long, uniformément chargé de densité volumique $rho$. En déduire l'expression du potentiel électrique.
 ]
-#question-de-colle([Déterminer le champ électrique créé par un cylindre plein uniformément chargé de densité volumique $rho$.])
+#question-de-colle(
+    [Déterminer le champ électrique créé par un cylindre plein de rayon $R$, infiniment long, uniformément chargé de densité volumique $rho$. En déduire l'expression du potentiel électrique.],
+)
 
 #application[
-    Déterminer le champ électrique créé par un plan infini uniformément chargé de densité surfacique $sigma$.
+    Déterminer le champ électrique créé par un plan infini uniformément chargé de densité surfacique $sigma$. En déduire l'expression du potentiel électrique.
 ]
-#question-de-colle([Déterminer le champ électrique créé par un plan infini uniformément chargé de densité surfacique $sigma$.])
+#question-de-colle(
+    [Déterminer le champ électrique créé par un plan infini uniformément chargé de densité surfacique $sigma$. En déduire l'expression du potentiel électrique.],
+)
 
 == Analogie avec le champ de gravitation
 Champ électrique et champ gravitationnel sont analogues.
@@ -478,7 +542,9 @@ Champ électrique et champ gravitationnel sont analogues.
     $ integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_"int" $
 ]
 
-#flashcard(recto: [Théorème de Gauss gravitationnel], verso: [$ integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_"int" $])
+#flashcard(recto: [Théorème de Gauss gravitationnel], verso: [$
+    integral.surf_S va(g) dot va(dd(S)) = - 4 pi cal(G) M_"int"
+$])
 
 #question-de-début-de-cours(
     "Le théorème de Gauss gravitationnel s'écrit",
@@ -490,7 +556,9 @@ Champ électrique et champ gravitationnel sont analogues.
     ),
 )
 
-#question-de-colle([Dresser les analogies entre les champs électrique et gravitationnel. Énoncer le théorème de Gauss gravitationnel.])
+#question-de-colle(
+    [Dresser les analogies entre les champs électrique et gravitationnel. Énoncer le théorème de Gauss gravitationnel.],
+)
 
 #application[
     La Terre a une masse $m_T = #quan[6.0e24 kg]$ et un rayon $R = #quan[6.4e3 km]$. Déterminer le champ gravitationnel qu'elle crée dans tout l'espace, en supposant sa masse volumique uniforme.
@@ -508,7 +576,7 @@ Champ électrique et champ gravitationnel sont analogues.
     ),
     grandeurs: sub-dictionary(grandeurs, ("va(E)", "Q", "epsilon_0", "va(n)", "S_a")),
 )[
-    $ va(E) = cases((Q/(epsilon_0 S_a)) va(n) & "entre les armatures", va(0) & "ailleurs") $
+    $ va(E) = cases(Q/(epsilon_0 S_a) va(n) & "entre les armatures", va(0) & "ailleurs") $
 ]
 
 == Capacité
@@ -540,16 +608,32 @@ Lorsque l'espace entre les armatures est occupé par un isolant, il faut prendre
     $ C = (epsilon S_a)/e $
 ]
 
-#flashcard(recto: [Capacité d'un condensateur plan], verso: [$ C = (epsilon S_a)/e $ avec $epsilon = epsilon_0 epsilon_r$])
+#flashcard(
+    recto: [Capacité d'un condensateur plan],
+    verso: [$ C = (epsilon S_a)/e $ avec $epsilon = epsilon_0 epsilon_r$],
+)
 
-#question-de-colle([Établir le champ électrique entre les armatures d'un condensateur plan. En déduire la capacité. Généraliser au cas où l'isolant entre les armatures n'est pas du vide.])
+#question-de-colle(
+    [Établir le champ électrique entre les armatures d'un condensateur plan. En déduire la capacité. Généraliser au cas où l'isolant entre les armatures n'est pas du vide.],
+)
 
 #application[
     Un condensateur céramique de capacité $#quan[470 pF]$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $#quan[1 um]$. Déterminer le diamètre des armatures.
 ]
 
 == Aspect énergétique
-L'énergie stockée dans un condensateur est $cal(E) = 1/2 C U^2$.
+L'énergie stockée dans un condensateur ne dépend que de la tension à ses bornes.
+
+#encadré(
+    titre: "Énergie stockée dans un condensateur",
+    connaitre: true,
+    savoir-faire: true,
+    grandeurs: sub-dictionary(grandeurs, ("cal(E)", "C", "U")),
+)[
+    $ cal(E) = 1/2 C U^2 $
+]
+
+L'énergie stockée dans un condensateur l'est sous forme électrostatique. L'énergie totale stockée dans un condensateur peut être utilisée pour déterminer la forme de l'énergie électrostatique volumique.
 
 #encadré(
     titre: "Densité volumique d'énergie électrostatique",
