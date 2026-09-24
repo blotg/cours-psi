@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Condensateur sphérique — Électromagnétisme 1 : Champ électrique en régime stationnaire</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électromagnétisme 1 : Champ électrique en régime stationnaire</a><span class="sep">›</span><span class="ici">Condensateur sphérique</span></nav><h2>Condensateur sphérique ★</h2><p>Un condensateur sphérique est formé de deux sphères concentriques de rayons <math><msub><mi>𝑅</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>𝑅</mi><mn>2</mn></msub></math>, séparées par du vide.</p><p><strong>1/</strong> Déterminer sa capacité en fonction de <math><msub><mi>𝑅</mi><mn>1</mn></msub></math> et <math><msub><mi>𝑅</mi><mn>2</mn></msub></math>. Montrer que lorsque l’écart <math><mi>𝑒</mi><mo>=</mo><msub><mi>𝑅</mi><mn>2</mn></msub><mo>−</mo><msub><mi>𝑅</mi><mn>1</mn></msub></math> entre les armatures est petit devant <math><msub><mi>𝑅</mi><mn>1</mn></msub></math>, on retrouve la capacité d’un condensateur plan.</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Noter <math><mi>𝑄</mi></math> la charge de l’armature intérieure et <math><mo>−</mo><mi>𝑄</mi></math> celle de l’armature extérieure.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Effectuer une analyse des symétries et des invariances.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 3</div><div class="volet-texte">Utiliser le théorème de Gauss.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 4</div><div class="volet-texte">Exprimer la différence de potentiel entre les armatures.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 5</div><div class="volet-texte">Utiliser la relation <math><mi>𝑄</mi><mo>=</mo><mi>𝐶</mi><mi>𝑈</mi></math>.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>On note <math><mi>𝑄</mi></math> la charge de l’armature intérieure et <math><mo>−</mo><mi>𝑄</mi></math> celle de l’armature extérieure.</p><p><strong>Invariances.</strong> La distribution est invariante par toute rotation autour du centre <math><mi>𝑂</mi></math> : <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover></math> ne dépend que de <math><mi>𝑟</mi></math>.</p><p><strong>Symétries.</strong> Tout plan contenant <math><mi>𝑂</mi></math> et <math><mi>𝑀</mi></math> est plan de symétrie de la distribution : <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mrow><mo>(</mo><mi>𝑀</mi><mo>)</mo></mrow></math> appartient à leur intersection, donc <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mi>𝐸</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></math>.</p><p><strong>Théorème de Gauss.</strong> Pour <math><msub><mi>𝑅</mi><mn>1</mn></msub><mo>&lt;</mo><mi>𝑟</mi><mo>&lt;</mo><msub><mi>𝑅</mi><mn>2</mn></msub></math>, la sphère de centre <math><mi>𝑂</mi></math> et de rayon <math><mi>𝑟</mi></math> contient la charge <math><mi>𝑄</mi></math>. Le théorème de Gauss donne <math><mi>𝐸</mi><mrow><mo>(</mo><mi>𝑟</mi><mo>)</mo></mrow><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mn>4</mn><mi>𝜋</mi><msup><mi>𝑟</mi><mn>2</mn></msup><mo>=</mo><mi>𝑄</mi><mi>/</mi><msub><mi>𝜀</mi><mn>0</mn></msub></math>, d’où</p><math display="block"><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac><msub><mover accent="true"><mi>𝑒</mi><mo stretchy="true">⃗</mo></mover><mi>𝑟</mi></msub></math><p><strong>Différence de potentiel.</strong> On fait circuler <math><mover accent="true"><mi>𝐸</mi><mo stretchy="true">⃗</mo></mover></math> d’une armature à l’autre :</p><math display="block"><mi>𝑈</mi><mo>=</mo><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>1</mn></msub><mo>)</mo></mrow><mo>−</mo><mi>𝑉</mi><mrow><mo>(</mo><msub><mi>𝑅</mi><mn>2</mn></msub><mo>)</mo></mrow><mo>=</mo><msubsup><mo form="prefix" lspace="0em">∫</mo><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub></msubsup><mfrac><mi>𝑄</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msup><mi>𝑟</mi><mn>2</mn></msup></mrow></mfrac><mspace width="0.16em"/><mi mathvariant="normal">d</mi><mi>𝑟</mi><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub></mrow></mfrac><mrow><mo>(</mo><mrow><mfrac><mn>1</mn><msub><mi>𝑅</mi><mn>1</mn></msub></mfrac><mo>−</mo><mfrac><mn>1</mn><msub><mi>𝑅</mi><mn>2</mn></msub></mfrac></mrow><mo>)</mo></mrow><mo>=</mo><mfrac><mi>𝑄</mi><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub></mrow></mfrac><mfrac><mrow><msub><mi>𝑅</mi><mn>2</mn></msub><mo>−</mo><msub><mi>𝑅</mi><mn>1</mn></msub></mrow><mrow><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub></mrow></mfrac></math><p><strong>Capacité.</strong> La relation <math><mi>𝑄</mi><mo>=</mo><mi>𝐶</mi><mi>𝑈</mi></math> donne</p><math display="block"><mi>𝐶</mi><mo>=</mo><mfrac><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub></mrow><mrow><msub><mi>𝑅</mi><mn>2</mn></msub><mo>−</mo><msub><mi>𝑅</mi><mn>1</mn></msub></mrow></mfrac></math><p><strong>Limite du condensateur plan.</strong> Si <math><mi>𝑒</mi><mo>=</mo><msub><mi>𝑅</mi><mn>2</mn></msub><mo>−</mo><msub><mi>𝑅</mi><mn>1</mn></msub><mo>≪</mo><msub><mi>𝑅</mi><mn>1</mn></msub></math>, alors <math><msub><mi>𝑅</mi><mn>2</mn></msub><mo>≈</mo><msub><mi>𝑅</mi><mn>1</mn></msub></math> et <math><msub><mi>𝑅</mi><mn>1</mn></msub><msub><mi>𝑅</mi><mn>2</mn></msub><mo>≈</mo><msubsup><mi>𝑅</mi><mn>1</mn><mn>2</mn></msubsup></math>, d’où</p><math display="block"><mi>𝐶</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>𝜋</mi><msub><mi>𝜀</mi><mn>0</mn></msub><msubsup><mi>𝑅</mi><mn>1</mn><mn>2</mn></msubsup></mrow><mi>𝑒</mi></mfrac><mo>=</mo><mfrac><mrow><msub><mi>𝜀</mi><mn>0</mn></msub><msub><mi>𝑆</mi><mi>𝑎</mi></msub></mrow><mi>𝑒</mi></mfrac></math><p>avec <math><msub><mi>𝑆</mi><mi>𝑎</mi></msub><mo>=</mo><mn>4</mn><mi>𝜋</mi><msubsup><mi>𝑅</mi><mn>1</mn><mn>2</mn></msubsup></math> l’aire des armatures en regard. C’est la capacité d’un condensateur plan de surface <math><msub><mi>𝑆</mi><mi>𝑎</mi></msub></math> et d’épaisseur <math><mi>𝑒</mi></math> : vues de près, deux sphères très proches ressemblent localement à deux plans parallèles.</p></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>
