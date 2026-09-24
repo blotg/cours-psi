@@ -55,56 +55,6 @@ export function laplacienVectoriel(A, x, y) {
     return [0, 1].map((k) => laplacien((u, v) => A(u, v)[k], x, y));
 }
 
-/** grad(div A), le premier terme de Δ⃗A = grad(div A) − rot(rot A). */
-export function gradientDeLaDivergence(A, x, y) {
-    return gradient((u, v) => divergence(A, u, v), x, y, H2);
-}
-
-/** −rot(rot A), le second. Pour un champ plan, rot A = ω e_z, et
- *  rot(ω e_z) = (∂ω/∂y, −∂ω/∂x). */
-export function moinsRotationnelDuRotationnel(A, x, y) {
-    const [ωx, ωy] = gradient((u, v) => rotationnel(A, u, v), x, y, H2);
-    return [-ωy, ωx];
-}
-
-// -- Flux et circulation sur un cercle -------------------------------------------
-
-/** Les `n` points d'un cercle de centre (x, y) et de rayon ρ, avec la normale
- *  sortante et la tangente dans le sens trigonométrique. */
-export function cercle(x, y, ρ, n) {
-    return Array.from({ length: n }, (_, k) => {
-        const θ = (2 * Math.PI * (k + 0.5)) / n;
-        const [c, s] = [Math.cos(θ), Math.sin(θ)];
-        return { point: [x + ρ * c, y + ρ * s], normale: [c, s], tangente: [-s, c] };
-    });
-}
-
-/**
- * Le flux de A sortant d'un cylindre d'axe (Mz) et de rayon ρ, rapporté à son
- * volume : ∮ A·n dl / (πρ²), la hauteur se simplifiant. Il tend vers div A(M)
- * quand ρ tend vers zéro — c'est le théorème d'Ostrogradski sur un volume qui
- * se resserre autour de M.
- */
-export function fluxParVolume(A, x, y, ρ, n = 360) {
-    let somme = 0;
-    for (const { point, normale } of cercle(x, y, ρ, n)) {
-        const [ax, ay] = A(...point);
-        somme += ax * normale[0] + ay * normale[1];
-    }
-    return (somme * 2 * Math.PI * ρ) / n / (Math.PI * ρ * ρ);
-}
-
-/** La circulation de A sur ce cercle, parcouru dans le sens trigonométrique,
- *  rapportée à l'aire du disque : elle tend vers (rot A)·e_z (Stokes). */
-export function circulationParSurface(A, x, y, ρ, n = 360) {
-    let somme = 0;
-    for (const { point, tangente } of cercle(x, y, ρ, n)) {
-        const [ax, ay] = A(...point);
-        somme += ax * tangente[0] + ay * tangente[1];
-    }
-    return (somme * 2 * Math.PI * ρ) / n / (Math.PI * ρ * ρ);
-}
-
 // -- Les champs scalaires --------------------------------------------------------
 
 /** Une bosse gaussienne de hauteur `h`, centrée en (x₀, y₀), de largeur² `l2`. */
@@ -113,7 +63,7 @@ const bosse = (h, x0, y0, l2) => (x, y) => h * Math.exp(-((x - x0) ** 2 + (y - y
 const relief = [bosse(1, -2.6, 1, 2.2), bosse(0.7, -0.4, -1.9, 1.3), bosse(-1, 2.6, 0.4, 2.6)];
 
 /**
- * Les champs scalaires, chacun avec sa formule et ce qu'il fait voir. On
+ * Les champs scalaires, chacun avec son nom et sa formule. On
  * passe de l'un à l'autre du plus simple au plus quelconque : un gradient
  * uniforme, un laplacien uniforme, un laplacien nul malgré la courbure, un
  * laplacien qui change de signe.
@@ -123,37 +73,26 @@ export const SCALAIRES = {
         nom: '\\text{pente}',
         tex: 'f = x + \\frac{y}{2}',
         f: (x, y) => x + y / 2,
-        note:
-            'Le gradient est le même partout, et le laplacien est nul : f ne s’écarte nulle part de la moyenne de ' +
-            'ses voisins.',
     },
     cuvette: {
         nom: '\\text{cuvette}',
         tex: 'f = x^2 + y^2',
         f: (x, y) => x * x + y * y,
-        note: 'Le laplacien vaut 4 partout : en tout point, f est inférieure à la moyenne de ses voisins.',
     },
     col: {
         nom: '\\text{col}',
         tex: 'f = x^2 - y^2',
         f: (x, y) => x * x - y * y,
-        note: 'f croît selon x et décroît selon y : les deux courbures se compensent, et le laplacien est nul partout.',
     },
     colline: {
         nom: '\\text{colline}',
         tex: 'f = e^{-(x^2 + y^2)/4}',
         f: bosse(1, 0, 0, 4),
-        note:
-            'Le laplacien est négatif près du sommet, positif au pied de la colline ; il s’annule sur le cercle ' +
-            'de rayon 2.',
     },
     relief: {
-        nom: '\\text{relief}',
-        tex: '\\text{deux collines et un creux}',
+        nom: '\\text{quelconque}',
+        tex: '',
         f: (x, y) => relief.reduce((somme, b) => somme + b(x, y), 0),
-        note:
-            'Le gradient monte vers les sommets. Le laplacien est négatif sur les sommets et positif au fond du ' +
-            'creux.',
     },
 };
 
@@ -200,37 +139,25 @@ export const VECTORIELS = {
         nom: '\\text{source}',
         tex: '\\vec A = \\frac{R^2}{r}\\left(1 - e^{-r^2/R^2}\\right)\\vec e_r',
         A: source(1, 0, 0, R2),
-        note:
-            'Le champ électrique d’un cylindre chargé, de rayon R = 1,5. Il est radial partout, mais sa ' +
-            'divergence n’est non nulle que là où sont les charges : div E = ρ/\u2060ε₀.',
     },
     tourbillon: {
         nom: '\\text{tourbillon}',
         tex: '\\vec A = \\frac{R^2}{r}\\left(1 - e^{-r^2/R^2}\\right)\\vec e_\\theta',
         A: tourbillon(1, 0, 0, R2),
-        note:
-            'Le champ magnétique d’un fil épais, de rayon R = 1,5. Il tourne autour du fil partout, mais son ' +
-            'rotationnel n’est non nul que dans le fil : rot B = μ₀ j.',
     },
     cisaillement: {
         nom: '\\text{cisaillement}',
         tex: '\\vec A = y\\,\\vec e_x',
         A: (x, y) => [y, 0],
-        note:
-            'Les lignes de champ sont droites, et pourtant le rotationnel n’est pas nul : le champ est plus fort ' +
-            'd’un côté de M que de l’autre.',
     },
     jet: {
         nom: '\\text{jet}',
         tex: '\\vec A = e^{-y^2/2}\\,\\vec e_x',
         A: (x, y) => [Math.exp(-(y * y) / 2), 0],
-        note:
-            'Le profil des vitesses d’un jet. Le laplacien vectoriel, qui porte la force de viscosité η Δv, ' +
-            'ralentit le cœur et entraîne les bords.',
     },
     quelconque: {
         nom: '\\text{quelconque}',
-        tex: '\\text{sources, puits et tourbillons}',
+        tex: '',
         A: (x, y) =>
             quelconque.reduce(
                 (somme, a) => {
@@ -239,6 +166,5 @@ export const VECTORIELS = {
                 },
                 [0.25, 0.1],
             ),
-        note: 'Une source, un puits et deux tourbillons de sens opposés, dans un courant uniforme.',
     },
 };

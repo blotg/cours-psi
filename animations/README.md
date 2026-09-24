@@ -313,8 +313,10 @@ laplacien vectoriel à un champ de flèches. On déplace un point M, et
 l'opérateur y est dessiné selon ce qu'il rend : un disque marqué de son signe
 pour un scalaire — rouge et +, comme une charge positive, car une divergence
 positive est une source —, une flèche pour un vecteur du plan, ⊙ ou ⊗ pour le
-rotationnel, seul vecteur qui sorte de l'écran. La case « dans tout le plan »
-répète ce dessin sur une grille.
+rotationnel, seul vecteur qui sorte de l'écran. Les vecteurs de l'opérateur
+sont orange : en violet, ils se confondaient avec le noir des flèches du
+champ. La case « dans tout le plan » répète ce dessin sur une grille serrée,
+au centre des cases que délimitent les flèches du champ.
 
 Les champs sont choisis pour ce qu'ils démentent : une source radiale partout,
 mais de divergence nulle hors des charges (le champ électrique d'un cylindre
@@ -324,15 +326,6 @@ pourtant tourner la roue à aubes ; un col, courbé dans les deux sens, de
 laplacien nul. Les deux tubes ont un profil gaussien plutôt qu'une densité
 uniforme, qui ferait une arête à leur bord, où le laplacien vectoriel serait
 infini.
-
-Le contour autour de M fait le lien avec les théorèmes du chapitre : sur un
-cercle de rayon ρ, la composante normale (un flux) ou tangentielle (une
-circulation), et le rapport Φ/V ou C/S, qui tend vers l'opérateur quand ρ tend
-vers zéro — Ostrogradski et Stokes sur un cylindre d'axe (Mz). Ses flèches se
-mesurent à la plus longue d'entre elles, non au champ sur toute la carte :
-elles montrent l'équilibre d'un côté du cercle à l'autre, qui doit se lire
-même là où le champ est faible. Le laplacien vectoriel se décompose, sur
-demande, en grad(div A) et −rot(rot A), tracés en M avec leur parallélogramme.
 
 Tous les opérateurs se calculent par différences finies, sur n'importe quel
 champ : en ajouter un ne demande que sa formule. Ils ne s'annulent donc jamais

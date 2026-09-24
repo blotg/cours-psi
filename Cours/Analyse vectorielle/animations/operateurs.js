@@ -23,15 +23,10 @@ import { cadre, lance } from '#animations/page.js';
 import { Plan, chemin, disque, flèche } from '#animations/plan.js';
 import { Réglages } from '#animations/reglages.js';
 import {
-    cercle,
-    circulationParSurface,
     divergence,
-    fluxParVolume,
     gradient,
-    gradientDeLaDivergence,
     laplacien,
     laplacienVectoriel,
-    moinsRotationnelDuRotationnel,
     rotationnel,
     SCALAIRES,
     SEUIL,
@@ -39,15 +34,13 @@ import {
 } from './champs.js';
 
 const COULEUR = {
-    opérateur: COULEURS.violet,
+    // Orange : le violet se confondait avec le noir des flèches du champ.
+    opérateur: COULEURS.orange,
     positif: COULEURS.vermillon,
     négatif: COULEURS.bleu,
     champ: '#3d3d3d',
     niveau: 'rgba(0, 0, 0, 0.4)',
-    contour: COULEURS.gris,
     roue: '#444',
-    gradDiv: COULEURS.vert,
-    rotRot: COULEURS.orange,
 };
 
 /** L'échelle de couleurs du champ scalaire : une seule teinte, du plus clair
@@ -69,23 +62,23 @@ function teinte(t) {
 /** Les tailles, en unités du problème : elles suivent la vue quand elle
  *  change de largeur, sur un téléphone comme au tableau. */
 const TAILLE = {
-    /** Écart entre deux flèches du champ (cf. `pasDesFlèches`). */
-    pas: 0.8,
+    /** Écart entre deux flèches du champ vectoriel ; l'opérateur, quand il
+     *  est partout, se dessine entre elles, au même pas. */
+    pas: 0.65,
+    /** Écart entre deux dessins de l'opérateur sur un champ scalaire : rien
+     *  d'autre n'occupe la vue, on les serre davantage. */
+    pasSurUnChampScalaire: 0.5,
     /** La plus longue flèche en M, et le plus grand disque. */
     flèche: 1.6,
     rayon: 0.4,
     /** La roue à aubes. */
     roue: 0.55,
-    /** La plus longue flèche sur le contour. */
-    contour: 0.6,
 };
 
-/** L'écart entre deux flèches d'une grille : celui de `TAILLE`, sauf sur un
- *  petit écran, où les flèches se toucheraient presque — on en met moins. */
-const pasDesFlèches = (plan) => (plan.long(TAILLE.pas) < 36 ? 1.5 : 1) * TAILLE.pas;
-
-/** Le nombre de flèches dessinées sur le contour autour de M. */
-const FLÈCHES_DU_CONTOUR = 16;
+/** L'écart entre deux dessins d'une grille, `pas` en unités du problème,
+ *  sauf sur un petit écran : on les espace alors d'au moins `minimum`
+ *  pixels, sans quoi ils se toucheraient. */
+const pasÀLÉcran = (plan, pas, minimum = 28) => pas * Math.max(1, minimum / plan.long(pas));
 
 /** La vitesse angulaire de la roue à aubes là où le rotationnel est le plus
  *  fort, en radians par seconde. */
@@ -212,6 +205,7 @@ function représente(c, plan, nature, valeur, { max, zéro }, point, { flèche: 
         flèche(c, centre, u, longueur, { couleur: COULEUR.opérateur, épaisseur });
         return { u, longueur };
     }
+    // L'aire du disque ou du symbole suit la valeur.
     const r = plan.long(rayon) * Math.sqrt(norme(valeur) / max);
     return { rayon: (nature === 'scalaire' ? signe : axial)(c, centre, r, valeur > 0) };
 }
@@ -228,45 +222,6 @@ function flèches(c, plan, points, vecteur, { max, zéro }, { longueur, couleur 
         const u = [v[0] / n, -v[1] / n];
         const [px, py] = plan.vers(...p);
         flèche(c, [px - (u[0] * l) / 2, py - (u[1] * l) / 2], u, l, { couleur, épaisseur, tête: 6 });
-    }
-}
-
-/**
- * Le contour autour de M : un cercle de rayon ρ, et sur son bord la
- * composante `normale` (un flux) ou `tangente` (une circulation) du champ
- * `vecteur`, rouge quand elle compte positivement, bleue sinon. Une
- * composante normale entrante arrive sur le cercle du dehors : on la voit
- * entrer.
- *
- * Les flèches se mesurent à la plus longue d'entre elles, et non au champ
- * sur toute la vue : ce qu'elles montrent, c'est l'équilibre d'un côté du
- * cercle à l'autre, qui doit se lire même là où le champ est faible. En deçà
- * de `zéro`, une composante est nulle.
- */
-function contour(c, plan, M, ρ, vecteur, zéro, composante) {
-    const [cx, cy] = plan.vers(...M);
-    c.save();
-    c.beginPath();
-    c.arc(cx, cy, plan.long(ρ), 0, 2 * Math.PI);
-    Object.assign(c, { strokeStyle: COULEUR.contour, lineWidth: 1.5 });
-    c.setLineDash([5, 4]);
-    c.stroke();
-    c.restore();
-    const flèches = cercle(...M, ρ, FLÈCHES_DU_CONTOUR).map(({ point, normale, tangente }) => {
-        const direction = composante === 'normale' ? normale : tangente;
-        const [ax, ay] = vecteur(...point);
-        return { point, direction, a: ax * direction[0] + ay * direction[1] };
-    });
-    const plus = Math.max(...flèches.map(({ a }) => Math.abs(a)));
-    if (!(plus > zéro)) return;
-    for (const { point, direction, a } of flèches) {
-        if (Math.abs(a) <= zéro) continue;
-        const l = plan.long(TAILLE.contour) * (Math.abs(a) / plus);
-        const u = [Math.sign(a) * direction[0], -Math.sign(a) * direction[1]];
-        let départ = plan.vers(...point);
-        if (composante === 'normale' && a < 0) départ = [départ[0] - u[0] * l, départ[1] - u[1] * l];
-        if (composante === 'tangente') départ = [départ[0] - (u[0] * l) / 2, départ[1] - (u[1] * l) / 2];
-        flèche(c, départ, u, l, { couleur: a > 0 ? COULEUR.positif : COULEUR.négatif, épaisseur: 2, tête: 6 });
     }
 }
 
@@ -363,10 +318,6 @@ const OPÉRATEURS_SCALAIRES = {
         tex: '\\Delta f',
         nature: 'scalaire',
         calcule: laplacien,
-        note:
-            'Le laplacien compare f(M) à la moyenne de f sur un petit cercle autour de M : il est positif (+) ' +
-            'si f(M) est plus basse que ses voisines, négatif (−) si elle est plus haute. C’est la divergence ' +
-            'du gradient.',
     },
 };
 
@@ -426,8 +377,7 @@ function surUnChampScalaire(section) {
         champ: 'colline',
         opérateur: 'gradient',
         M: [1.3, 0.7],
-        ρ: 1,
-        montre: { niveaux: true, partout: false, contour: true },
+        montre: { niveaux: true, partout: false },
     };
     const toile = document.createElement('canvas');
     const nomM = plan.étiquette('M');
@@ -490,7 +440,7 @@ function surUnChampScalaire(section) {
         }
 
         if (état.montre.partout) {
-            const pas = pasDesFlèches(plan);
+            const pas = pasÀLÉcran(plan, TAILLE.pasSurUnChampScalaire);
             if (opérateur.nature === 'vecteur') {
                 flèches(c, plan, réseau(vueDuPlan, pas, pas / 2), calcule, échelles[état.opérateur], {
                     longueur: 0.85 * pas,
@@ -505,11 +455,6 @@ function surUnChampScalaire(section) {
             }
         }
 
-        const laplacienEnM = état.opérateur === 'laplacien';
-        if (laplacienEnM && état.montre.contour) {
-            contour(c, plan, état.M, état.ρ, (x, y) => gradient(f, x, y), zéro, 'normale');
-        }
-
         const valeur = calcule(...état.M);
         const dessin = représente(c, plan, opérateur.nature, valeur, échelles[état.opérateur], état.M, {
             flèche: TAILLE.flèche,
@@ -519,15 +464,10 @@ function surUnChampScalaire(section) {
         dessineM(c, plan, état.M, nomM, dessin);
         nommeLaFlèche(nomFlèche, état.M, dessin);
 
-        // Le panneau : la valeur en M, et ce qu'en donne le contour.
-        const lignes = [`f(M) &= ${nombre(f(...état.M))}`];
         const enM = opérateur.nature === 'vecteur' ? colonne(valeur, zéro) : nombre(valeur, zéro);
-        lignes.push(`${opérateur.tex}(M) &= ${enM}`);
-        if (laplacienEnM && état.montre.contour) {
-            const flux = fluxParVolume((x, y) => gradient(f, x, y), ...état.M, état.ρ);
-            lignes.push(`\\frac{\\Phi}{V} &= ${nombre(flux, zéro)}`);
-        }
-        mesures.écrit(`\\begin{aligned} ${lignes.join(' \\\\ ')} \\end{aligned}`);
+        mesures.écrit(
+            `\\begin{aligned} f(M) &= ${nombre(f(...état.M))} \\\\ ${opérateur.tex}(M) &= ${enM} \\end{aligned}`,
+        );
     });
 
     // -- Réglages -------------------------------------------------------------
@@ -557,11 +497,7 @@ function surUnChampScalaire(section) {
     });
     const formule = réglages.formule();
     const écritLÉchelle = échelleDeCouleurs(réglages);
-    const noteDuChamp = note(réglages);
-    function écritLeChamp() {
-        formule.écrit(SCALAIRES[état.champ].tex);
-        noteDuChamp.textContent = SCALAIRES[état.champ].note;
-    }
+    const écritLeChamp = () => formule.écrit(SCALAIRES[état.champ].tex);
 
     réglages.groupe('Afficher');
     caseQuiRedessine(réglages, plan, état, 'niveaux', { texte: 'Équipotentielles', couleur: COULEURS.noir });
@@ -569,38 +505,13 @@ function surUnChampScalaire(section) {
         texte: 'L’opérateur dans tout le plan',
         couleur: COULEUR.opérateur,
     });
-    const caseContour = caseQuiRedessine(réglages, plan, état, 'contour', {
-        texte: 'Contour autour de M',
-        couleur: COULEUR.contour,
-    });
-    const curseurρ = réglages.curseur({
-        tex: '\\rho',
-        min: 0.2,
-        max: 2.5,
-        pas: 0.02,
-        valeur: état.ρ,
-        aimants: [1],
-        auChangement: (v) => {
-            état.ρ = v;
-            plan.redessine();
-        },
-    });
 
     réglages.groupe('En M');
     const mesures = réglages.formule();
     const noteDeLOpérateur = note(réglages);
-    const noteDuContour = note(réglages);
-    noteDuContour.textContent =
-        'Sur le cercle de rayon ρ, la composante normale de grad f, rouge quand elle sort, bleue quand elle ' +
-        'entre. Φ est son flux sortant d’un cylindre d’axe (Mz) de même rayon, V le volume du cylindre : ' +
-        'Φ/V tend vers Δf(M) = div(grad f) quand ρ tend vers zéro.';
 
     function montreCeQuiSert() {
-        const laplacien = état.opérateur === 'laplacien';
-        caseContour.montre(laplacien);
-        curseurρ.montre(laplacien);
-        noteDuContour.hidden = !laplacien;
-        noteDeLOpérateur.textContent = OPÉRATEURS_SCALAIRES[état.opérateur].note;
+        noteDeLOpérateur.textContent = OPÉRATEURS_SCALAIRES[état.opérateur].note ?? '';
     }
 
     poignéeM(plan, état);
@@ -612,42 +523,6 @@ function surUnChampScalaire(section) {
 
 // -- Sur un champ vectoriel -------------------------------------------------------
 
-/**
- * Les deux termes de Δ⃗A = grad(div A) − rot(rot A) en M, et le
- * parallélogramme qui les somme ; renvoie leurs lignes du panneau. Ils
- * passent par-dessus Δ⃗A, plus fins : l'un des deux est souvent Δ⃗A lui-même,
- * qu'il cacherait sinon. Ils se dessinent à l'`échelle` de Δ⃗A.
- */
-function dessineLesDeuxTermes(c, plan, A, M, { max, zéro }) {
-    const termes = [
-        [gradientDeLaDivergence(A, ...M), COULEUR.gradDiv, '\\overrightarrow{\\mathrm{grad}}(\\mathrm{div}\\,\\vec A)'],
-        [
-            moinsRotationnelDuRotationnel(A, ...M),
-            COULEUR.rotRot,
-            '-\\overrightarrow{\\mathrm{rot}}(\\overrightarrow{\\mathrm{rot}}\\,\\vec A)',
-        ],
-    ];
-    if (max > zéro) {
-        const bout = (v) => [M[0] + (TAILLE.flèche * v[0]) / max, M[1] + (TAILLE.flèche * v[1]) / max];
-        if (termes.every(([v]) => norme(v) > zéro)) {
-            const [a, b] = termes.map(([v]) => bout(v));
-            const somme = [a[0] + b[0] - M[0], a[1] + b[1] - M[1]];
-            for (const p of [a, b]) {
-                chemin(c, [plan.vers(...p), plan.vers(...somme)], { couleur: COULEURS.gris, pointillés: [4, 4] });
-            }
-        }
-        for (const [v, couleur] of termes) {
-            if (norme(v) <= zéro) continue;
-            flèche(c, plan.vers(...M), [v[0], -v[1]], plan.long(TAILLE.flèche) * (norme(v) / max), {
-                couleur,
-                épaisseur: 1.8,
-                tête: 6,
-            });
-        }
-    }
-    return termes.map(([v, couleur, tex]) => `\\textcolor{${couleur}}{${tex}} &= ${colonne(v, zéro)}`);
-}
-
 const OPÉRATEURS_VECTORIELS = {
     divergence: {
         tex: '\\mathrm{div}\\,\\vec A',
@@ -656,15 +531,6 @@ const OPÉRATEURS_VECTORIELS = {
         note:
             'La divergence dit ce qui sort du voisinage de M : positive (+), M est une source, le champ en ' +
             'sort plus qu’il n’y entre ; négative (−), M est un puits.',
-        contour: {
-            composante: 'normale',
-            tex: '\\frac{\\Phi}{V}',
-            mesure: fluxParVolume,
-            note:
-                'Sur le cercle de rayon ρ, la composante normale de A, rouge quand elle sort, bleue quand elle ' +
-                'entre. Φ est le flux sortant d’un cylindre d’axe (Mz) de même rayon, V son volume : Φ/V tend ' +
-                'vers div A(M) quand ρ tend vers zéro, c’est le théorème d’Ostrogradski.',
-        },
     },
     rotationnel: {
         tex: '\\overrightarrow{\\mathrm{rot}}\\,\\vec A',
@@ -672,27 +538,12 @@ const OPÉRATEURS_VECTORIELS = {
         calcule: rotationnel,
         note:
             'Le rotationnel d’un champ plan est perpendiculaire à l’écran : ⊙ s’il en sort, ⊗ s’il s’y ' +
-            'enfonce. Une roue à aubes plongée en M dans un écoulement de vitesse A tourne sur elle-même à la ' +
-            'vitesse angulaire ½ rot A : dans le sens trigonométrique pour ⊙.',
-        contour: {
-            composante: 'tangente',
-            tex: '\\frac{\\mathcal{C}}{S}',
-            mesure: circulationParSurface,
-            note:
-                'Sur le cercle de rayon ρ, la composante tangentielle de A, rouge dans le sens ' +
-                'trigonométrique, bleue dans l’autre. La circulation C sur le cercle, divisée par l’aire S du ' +
-                'disque, tend vers la composante de rot A sur e_z quand ρ tend vers zéro : c’est le théorème ' +
-                'de Stokes.',
-        },
+            'enfonce.',
     },
     laplacienVectoriel: {
         tex: '\\vec\\Delta\\,\\vec A',
         nature: 'vecteur',
         calcule: laplacienVectoriel,
-        note:
-            'Le laplacien vectoriel compare A(M) à la moyenne de A autour de M, composante par composante : ' +
-            'ses composantes sont les laplaciens de celles de A. C’est aussi la somme de grad(div A) et de ' +
-            '−rot(rot A), ses deux termes.',
     },
 };
 
@@ -703,9 +554,8 @@ function surUnChampVectoriel(section) {
         champ: 'source',
         opérateur: 'divergence',
         M: [1.2, 0.8],
-        ρ: 1,
         angle: 0,
-        montre: { champ: true, partout: false, contour: true, roue: true, décomposition: false },
+        montre: { champ: true, partout: false, roue: true },
     };
     const nomM = plan.étiquette('M');
     const nomFlèche = plan.étiquette(OPÉRATEURS_VECTORIELS.laplacienVectoriel.tex, { couleur: COULEUR.opérateur });
@@ -742,44 +592,37 @@ function surUnChampVectoriel(section) {
         const { zéro } = échelles.champ;
         const calcule = (x, y) => opérateur.calcule(A, x, y);
 
-        const pasDuChamp = pasDesFlèches(plan);
+        const pas = pasÀLÉcran(plan, TAILLE.pas);
         if (état.montre.champ) {
-            flèches(c, plan, réseau(vueDuPlan, pasDuChamp), A, échelles.champ, { longueur: 0.85 * pasDuChamp });
+            flèches(c, plan, réseau(vueDuPlan, pas), A, échelles.champ, { longueur: 0.85 * pas });
         }
-        // L'opérateur partout : entre les flèches du champ, une case sur deux.
+        // L'opérateur partout : au centre de chaque case que délimitent les
+        // flèches du champ.
         if (état.montre.partout) {
-            const pas = 2 * pasDuChamp;
-            const points = réseau(vueDuPlan, pas, pasDuChamp / 2);
+            const points = réseau(vueDuPlan, pas, pas / 2);
             if (opérateur.nature === 'vecteur') {
                 flèches(c, plan, points, calcule, échelles[état.opérateur], {
-                    longueur: 0.8 * pas,
+                    longueur: 0.85 * pas,
                     couleur: COULEUR.opérateur,
-                    épaisseur: 2,
+                    épaisseur: 1.8,
                 });
             } else {
                 for (const p of points) {
                     représente(c, plan, opérateur.nature, calcule(...p), échelles[état.opérateur], p, {
-                        rayon: 0.22 * pas,
+                        rayon: 0.3 * pas,
                     });
                 }
             }
         }
-        if (opérateur.contour && état.montre.contour) {
-            contour(c, plan, état.M, état.ρ, A, zéro, opérateur.contour.composante);
-        }
 
-        const valeur = calcule(...état.M);
-        const lignes = [`\\vec A(M) &= ${colonne(A(...état.M), zéro)}`];
         const avecRoue = état.opérateur === 'rotationnel' && état.montre.roue;
         if (avecRoue) roue(c, plan, état.M, état.angle);
+        const valeur = calcule(...état.M);
         const dessin = représente(c, plan, opérateur.nature, valeur, échelles[état.opérateur], état.M, {
             flèche: TAILLE.flèche,
             rayon: TAILLE.rayon,
             épaisseur: 3.5,
         });
-        if (état.opérateur === 'laplacienVectoriel' && état.montre.décomposition) {
-            lignes.push(...dessineLesDeuxTermes(c, plan, A, état.M, échelles.laplacienVectoriel));
-        }
         dessineM(c, plan, état.M, nomM, dessin, avecRoue ? plan.long(TAILLE.roue) : 0);
         nommeLaFlèche(nomFlèche, état.M, dessin);
 
@@ -787,12 +630,10 @@ function surUnChampVectoriel(section) {
             opérateur.nature === 'vecteur'
                 ? colonne(valeur, zéro)
                 : nombre(valeur, zéro) + (opérateur.nature === 'axial' ? '\\,\\vec e_z' : '');
-        lignes.push(`${opérateur.tex}(M) &= ${enM}`);
-        if (opérateur.contour && état.montre.contour) {
-            const { tex, mesure } = opérateur.contour;
-            lignes.push(`${tex} &= ${nombre(mesure(A, ...état.M, état.ρ), zéro)}`);
-        }
-        mesures.écrit(`\\begin{aligned} ${lignes.join(' \\\\ ')} \\end{aligned}`);
+        mesures.écrit(
+            `\\begin{aligned} \\vec A(M) &= ${colonne(A(...état.M), zéro)} \\\\ ` +
+                `${opérateur.tex}(M) &= ${enM} \\end{aligned}`,
+        );
     });
 
     // -- Réglages -------------------------------------------------------------
@@ -821,11 +662,7 @@ function surUnChampVectoriel(section) {
         },
     });
     const formule = réglages.formule();
-    const noteDuChamp = note(réglages);
-    function écritLeChamp() {
-        formule.écrit(VECTORIELS[état.champ].tex);
-        noteDuChamp.textContent = VECTORIELS[état.champ].note;
-    }
+    const écritLeChamp = () => formule.écrit(VECTORIELS[état.champ].tex);
 
     réglages.groupe('Afficher');
     caseQuiRedessine(réglages, plan, état, 'champ', { texte: 'Le champ', tex: '\\vec A', couleur: COULEUR.champ });
@@ -833,39 +670,15 @@ function surUnChampVectoriel(section) {
         texte: 'L’opérateur dans tout le plan',
         couleur: COULEUR.opérateur,
     });
-    const caseContour = caseQuiRedessine(réglages, plan, état, 'contour', {
-        texte: 'Contour autour de M',
-        couleur: COULEUR.contour,
-    });
-    const curseurρ = réglages.curseur({
-        tex: '\\rho',
-        min: 0.2,
-        max: 2.5,
-        pas: 0.02,
-        valeur: état.ρ,
-        aimants: [1],
-        auChangement: (v) => {
-            état.ρ = v;
-            plan.redessine();
-        },
-    });
     const caseRoue = caseQuiRedessine(réglages, plan, état, 'roue', { texte: 'Roue à aubes', couleur: COULEUR.roue });
-    const caseDécomposition = caseQuiRedessine(réglages, plan, état, 'décomposition', { texte: 'Ses deux termes' });
 
     réglages.groupe('En M');
     const mesures = réglages.formule();
     const noteDeLOpérateur = note(réglages);
-    const noteDuContour = note(réglages);
 
     function montreCeQuiSert() {
-        const opérateur = OPÉRATEURS_VECTORIELS[état.opérateur];
-        caseContour.montre(Boolean(opérateur.contour));
-        curseurρ.montre(Boolean(opérateur.contour));
         caseRoue.montre(état.opérateur === 'rotationnel');
-        caseDécomposition.montre(état.opérateur === 'laplacienVectoriel');
-        noteDeLOpérateur.textContent = opérateur.note;
-        noteDuContour.hidden = !opérateur.contour;
-        noteDuContour.textContent = opérateur.contour?.note ?? '';
+        noteDeLOpérateur.textContent = OPÉRATEURS_VECTORIELS[état.opérateur].note;
     }
 
     poignéeM(plan, état);
