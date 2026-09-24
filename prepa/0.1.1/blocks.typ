@@ -317,7 +317,7 @@
                     mode: "markup",
                     scope: scope-des-chaines,
                 )
-            } else { valeur.signification } #unité])
+            } else { valeur.signification }#unité])
     }
     items.join([ ; ])
 }

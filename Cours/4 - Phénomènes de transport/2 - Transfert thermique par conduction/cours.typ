@@ -42,7 +42,7 @@
     titre: "Différentielle d'une fonction d'une variable",
     connaitre: true,
     hypothèses: (
-        ["$f$ est une fonction de $x$ dérivable"],
+        [$f$ est une fonction de $x$ dérivable],
     ),
 )[
     $ dd(f) = dv(f, x) dd(x) $

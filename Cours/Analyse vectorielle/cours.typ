@@ -20,7 +20,7 @@ Les opérateurs vectoriels ont une expression simple en fonction de $va(nabla)$.
 
 #flashcard(
     recto: [Notation nabla],
-    verso: [$ va(nabla) = vec( pdv(,x), pdv(,y), pdv(,z) ) $],
+    verso: [$ va(nabla) = vec(pdv(, x), pdv(, y), pdv(, z)) $],
 )
 
 Le gradient est un opérateur s'appliquant aux champs scalaires et renvoyant un vecteur.
@@ -72,6 +72,36 @@ En coordonnées cylindriques ou sphériques, la première composante de $grad f$
 #application[
     Exprimer le gradient du champ $1/r$ en coordonnées sphériques. Est-ce cohérent avec l'application précédente ? On pourra utiliser l'expression de $va(O M)$ dans les bases cartésienne et sphérique pour comparer les deux expressions.
 ]
+
+== Gradient et différentielle
+
+La différentielle d'une fonction peut être déduite du gradient.
+
+#encadré(
+    titre: "Différentielle et gradient",
+    connaitre: true,
+    savoir-faire: true,
+    hypothèses: (
+        [$f$ est une fonction de $RR^3$ dérivable.],
+    ),
+)[
+    $
+        dd(f) = grad f dot va(dd(l))
+    $
+]
+
+#encadré(
+    titre: "Direction du gradient et iso-contours",
+    connaitre: true,
+    savoir-faire: true,
+    hypothèses: (
+        [$f$ est une fonction de $RR^3$ dérivable.],
+    ),
+)[
+    $grad f$ est perpendiculaire aux iso-$f$.
+]
+
+Le gradient pointe dans la direction où $f$ croît le plus rapidement.
 
 = Divergence
 == Définition
@@ -147,7 +177,7 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
     "D'après le théorème de Green-Ostrogradski",
     (
         "$integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S))$",
-        "$integral.triple_V grad A dd(V) = integral.surf_S A dd(S)$",
+        "$integral.triple_V div va(A) dd(V) = integral.cont_cal(C) va(A) dprod va(dd(l))$",
         "$integral.triple_V A dd(V) = integral.surf_S div va(A) dd(S)$",
         "$integral.triple_V A dd(V) = integral.surf_S grad A dprod va(dd(S))$",
     ),
@@ -171,7 +201,7 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
     )]
 
 #question-de-colle(
-    [Définir le gradient et la divergence en coordonnées cartésiennes. Énoncer le théorème d'Ostrogradski. Citer deux exemples de surfaces fermées et deux exemples de surfaces qui ne le sont pas.]
+    [Définir le gradient et la divergence en coordonnées cartésiennes. Énoncer le théorème d'Ostrogradski. Citer deux exemples de surfaces fermées et deux exemples de surfaces qui ne le sont pas.],
 )
 
 = Rotationnel
@@ -230,7 +260,7 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
     connaitre: true,
     hypothèses: (
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
-        [$S$ est une surface s'appuyant sur la courbe fermée $cal(C)$, orientée dans le sens positif par rapport à $cal(C)$.],
+        [$S$ est une surface s'appuyant sur la courbe fermée $cal(C)$, orientée par la règle de la main droite selon le sens de parcours de $cal(C)$.],
     ),
     grandeurs: grandeurs,
 )[
@@ -296,7 +326,7 @@ Un champ irrotationnel peut s'écrire comme un gradient.
 )
 
 #question-de-colle(
-    [Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stokes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?]
+    [Définir le rotationnel en coordonnées cartésiennes. Énoncer le théorème de Stokes. Énoncer la formule de la divergence d'un produit vectoriel. Comment peut s'exprimer un champ irrotationnel ?],
 )
 
 = Laplacien scalaire
@@ -379,5 +409,5 @@ Le laplacien vectoriel est parfois noté simplement $Delta$ (sans flèche), le c
 ]
 
 #question-de-colle(
-    [Définir l'opérateur $va(A) dprod grad$. Définir le laplacien scalaire et le laplacien vectoriel à partir des autres opérateurs vectoriels. Montrer que les composantes du laplacien vectoriel sont les laplaciens scalaires des composantes du champ vectoriel (on pourra se contenter d'une seule composante).]
+    [Définir l'opérateur $va(A) dprod grad$. Définir le laplacien scalaire et le laplacien vectoriel à partir des autres opérateurs vectoriels. Montrer que les composantes du laplacien vectoriel sont les laplaciens scalaires des composantes du champ vectoriel (on pourra se contenter d'une seule composante).],
 )
