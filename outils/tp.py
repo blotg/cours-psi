@@ -12,19 +12,23 @@
 - impose chaque sujet A4 en fascicule (« booklet ») sur des feuilles A3 —
   sauf si le sujet tient en deux pages, qui restent alors en A4 recto-verso ;
 - concatène toutes les copies en un unique PDF prêt pour une impression
-  recto-verso, en complétant si besoin par des pages blanches.
+  recto-verso, en complétant si besoin par des pages blanches ;
+- produit la fiche de notation de la séance : une ligne par binôme, avec les
+  critères de l'évaluation que sa copie a reçue, une page par groupe.
 
 Voir :class:`TP` pour le point d'entrée.
 """
 
+import json
 from dataclasses import dataclass
 from os import makedirs
 from os.path import dirname, join
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from .chapitre import Chapitre
+from .chapitre import GABARITS, RACINE, Chapitre
 from .pdf import fascicule
-from .typst import compile_fichier
+from .typst import compile_avec_annexe, compile_fichier
 
 
 @dataclass
@@ -221,4 +225,43 @@ class TP:
         makedirs(dirname(destination) or ".", exist_ok=True)
         with open(destination, "wb") as f:
             final.write(f)
+        return destination
+
+    def fiche_de_notation(self, destination: str | None = None) -> str:
+        """La fiche à remplir pendant la séance, et renvoie son chemin.
+
+        Une ligne par binôme — élève seul compris —, dans l'ordre des copies :
+        les critères de l'évaluation que sa copie a reçue, une case par
+        critère, et le total. Une page par groupe, si bien que deux groupes
+        tiennent sur une feuille A4 recto-verso. Par défaut dans
+        ``build/fiche de notation - <titre court>.pdf``.
+
+        Les critères se lisent dans le sujet, inclus à la suite de la fiche
+        (cf. ``gabarits/notation-TP.typ``) : deux compilations, l'une pour
+        savoir où s'arrête la fiche, l'autre pour ne produire qu'elle.
+        """
+        sujet = Path(self.sujet)
+        # Le dossier tel qu'on l'a nommé, pour que le chemin affiché reste
+        # relatif — sauf lancé depuis le dossier du TP, où il n'aurait pas de nom.
+        chapitre = Chapitre(sujet.parent if sujet.parent.name else sujet.absolute().parent)
+        if destination is None:
+            destination = str(chapitre.fichier("fiche de notation"))
+
+        groupes: dict[str, list[dict]] = {}
+        for binôme in self.binômes():
+            groupes.setdefault(binôme.groupe, []).append(
+                {"copie": binôme.numéro_copie, "membres": [m.nom_complet for m in binôme.membres]}
+            )
+        données = {
+            "titre": chapitre.titre_court,
+            "numéro": self.numéro,
+            "sujet": "/" + sujet.resolve().relative_to(RACINE).as_posix(),
+            "groupes": [{"nom": nom, "binômes": binômes} for nom, binômes in groupes.items()],
+        }
+        compile_avec_annexe(
+            GABARITS / "notation-TP.typ",
+            destination,
+            entrées={"données": json.dumps(données, ensure_ascii=False), "inclus": "1"},
+            racine=RACINE,
+        )
         return destination

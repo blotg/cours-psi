@@ -323,6 +323,16 @@
 }
 
 #let TP(numéro: none, titre: none, date: datetime.today(), liste-élèves: none, doc) = {
+    // Inclus en annexe de la fiche de notation (`--input inclus=1`, cf.
+    // `cours-en-annexe`), le sujet ne met pas la page en place : la fiche n'y
+    // lit que ses évaluations, et garde sa propre page et son titre. La
+    // numérotation des titres reste : un sujet renvoie à ses parties.
+    if sys.inputs.at("inclus", default: "") != "" {
+        return {
+            set heading(numbering: "1.")
+            doc
+        }
+    }
     let titre-doc = "TP"
     if numéro != none {
         titre-doc = titre-doc + [ #numéro]

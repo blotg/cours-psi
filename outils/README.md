@@ -41,6 +41,7 @@ python3 -m outils questions-de-colle                # toutes les questions de co
 python3 -m outils questions-de-colle -r             # celles des révisions de PCSI
 python3 -m outils tp "TP/1 - ..." péda/élèves.csv   # ou .../TP.typ ; --numéro : défaut, le 1 du dossier
 python3 -m outils tp -b "TP/1 - ..." péda/élèves.csv  # les binômes seuls, sans rien compiler
+python3 -m outils notation -e péda/élèves.csv "TP/1 - ..."  # fiche de notation - <titre court>.pdf
 python3 -m outils qcm questions.yaml dates/
 python3 -m outils site                              # site/ : le cours en HTML
 python3 -m outils notebooks "Cours/8 - Électrochimie"   # notebook - <exercice>.ipynb, un par exercice numérique
@@ -151,6 +152,28 @@ attendre une compilation par élève. Le sujet n'a alors pas besoin d'exister :
 seuls le CSV et le numéro comptent, ce dernier venant toujours du nom du
 dossier à défaut de `--numéro`.
 
+`tp` produit aussi la **fiche de notation** de la séance, à remplir à la main :
+`build/fiche de notation - <titre court>.pdf`. Une ligne par binôme — un élève
+seul a la sienne —, dans l'ordre des copies, avec un rappel de la consigne,
+les critères du barème et une case par critère, puis le total ; une page par groupe, si bien que deux
+groupes tiennent sur une feuille A4 recto-verso. Chaque binôme y a les
+critères de **sa** copie : les évaluations d'un sujet tournent d'une copie à
+l'autre (`évaluation`, dans `prepa/0.1.1/blocks.typ`), et la fiche applique la
+même règle, `copie-évaluée`. Quand tout un groupe a reçu la même évaluation,
+sa consigne et ses critères passent en tête du tableau, une fois pour toutes.
+
+`notation` ne produit que cette fiche, pour un ou plusieurs TP, le numéro pris
+au nom du dossier. C'est ce que lance le hook `pre-commit` pour les TP du
+commit — pas les copies, qui coûtent une compilation par élève. La liste des
+élèves vit hors du dépôt : le hook la trouve par
+`git config hooks.eleves "../2026 - 2027/péda/élèves.csv"` (chemin relatif à la
+racine du dépôt), et sans elle se contente de le rappeler.
+
+Comme la planche de flashcards, la fiche ne reçoit ni les critères ni les
+consignes en JSON — ils portent du content, `$f_0$`, un renvoi `@manip-…` — mais inclut le sujet en annexe
+(`cours-en-annexe`) et lit sur place les métadonnées `<évaluation>`. Avec
+`--input inclus=1`, `TP()` ne met pas la page en place.
+
 ## Notebooks et Capytale
 
 Chaque exercice **numérique** (`numérique: true`) que le TD inclut donne un
@@ -230,7 +253,7 @@ détail, et la façon d'en écrire, dans [`animations/README.md`](../animations/
 | `anki.py` | écriture d'un paquet `.apkg` |
 | `programme_de_colle.py` | programme de colle hebdomadaire (en typst) |
 | `questions_de_colle.py` | liste de toutes les questions de colle de l'année |
-| `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule |
+| `tp.py` | sujets de TP personnalisés par binôme, mis en fascicule ; fiche de notation |
 | `qcm_cam.py` | questions au format QCMCam |
 | `site.py` | site statique du cours, en HTML |
 | `notebook.py` | notebook Jupyter d'un exercice numérique |
@@ -276,8 +299,8 @@ indépendantes et le gain est d'un facteur trois à cinq.
 
 Les documents qui ne viennent pas d'une source propre au chapitre sont rendus
 depuis un gabarit typst de [`gabarits/`](../gabarits) — la planche de
-flashcards, la liste des manipulations, le diaporama, les questions de colle
-et les pages de liens du site. Les données leur arrivent en JSON par
+flashcards, la liste des manipulations, le diaporama, les questions de colle,
+la fiche de notation des TP et les pages de liens du site. Les données leur arrivent en JSON par
 `--input données`. La planche de flashcards et la liste des questions de colle
 n'y reçoivent pas les cartes ni les questions, mais le chemin des cours, qu'elles
 incluent (cf. [D'où viennent les données](#doù-viennent-les-données)).
@@ -349,6 +372,7 @@ incluant le cours (cf. plus bas) :
 | `<question-de-début-de-cours>` | `cours.typ` | `diapo` |
 | `<coups-de-pouce>` | `TD.typ` | `Chapitre.coups_de_pouce` |
 | `<manipulation>` | `cours.typ` | `manipulations` |
+| `<évaluation>` | `TP.typ`, inclus | `notation`, `tp` |
 | `titre-court` (infos.yml) | — | nom des documents produits, bandeau des flashcards |
 | `DM` (infos.yml) | — | `dm` |
 | `<première-page-cours>`, `<dernière-page-cours>`, `<première-page>`, `<dernière-page>` | `poly.typ` | `imprimable` |

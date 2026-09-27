@@ -187,7 +187,29 @@ def _tp(args) -> int:
         return 0
     print(f"\nSujet          : {tp.simple()}")
     print(f"Prêt à imprimer: {tp.génère()}")
+    print(f"Notation       : {tp.fiche_de_notation()}")
     return 0
+
+
+def _notation(args) -> int:
+    """La fiche de notation de chaque TP nommé : c'est ce qu'appelle le hook
+    pre-commit, qui n'a pas à produire les copies — une compilation par élève.
+
+    Le numéro, graine du tirage des binômes, est celui du dossier : c'est aussi
+    le défaut de `tp`, si bien que la fiche et les copies ont les mêmes binômes.
+    """
+    from .tp import TP
+
+    def fiche(chapitre):
+        sujet, dossier = _sujet_et_dossier(chapitre.chemin)
+        numéro = _numéro_du_dossier(dossier)
+        if numéro is None:
+            raise ValueError("ce dossier ne commence pas par un nombre")
+        if not sujet.is_file():
+            raise FileNotFoundError(f"{sujet.name} introuvable")
+        return [TP(sujet=sujet, élèves=args.élèves, numéro=numéro).fiche_de_notation()]
+
+    return _pour_chaque(args.tp, lambda chapitre: [("notation", fiche)], processus=args.processus)
 
 
 def _colles(args) -> int:
@@ -398,6 +420,18 @@ def main(argv: list[str] | None = None) -> int:
         help="afficher les binômes tirés au sort, sans compiler de document",
     )
     p.set_defaults(fonction=_tp)
+
+    p = sous.add_parser("notation", help="fiche de notation des TP, une ligne par binôme")
+    p.add_argument("tp", nargs="+", type=Path, help="dossiers de TP (ou leurs « TP.typ »)")
+    p.add_argument(
+        "-e",
+        "--élèves",
+        type=Path,
+        required=True,
+        help="CSV « Prénom, Nom, Groupe », le même que pour `tp`",
+    )
+    _option_processus(p)
+    p.set_defaults(fonction=_notation)
 
     p = sous.add_parser("colles", help="programme de colle de la semaine")
     p.add_argument("racine", type=Path, help="dossier où créer <AA.MM.JJ>/")

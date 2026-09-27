@@ -14,6 +14,8 @@
 #   produit dans la foulee par `python3 -m outils build`, si les dependances
 #   sont installees (cf. outils/README.md). Un chapitre de revision (sous
 #   revisions/) n'en tire que ses flashcards.
+# - Un TP y gagne sa fiche de notation (`outils notation`), si la liste des
+#   eleves est connue : git config hooks.eleves <CSV>.
 # - Les notebooks des exercices numeriques du TD en font partie. Leur envoi
 #   sur Capytale est desactive par defaut (git config hooks.capytale true).
 # - Les animations (<chapitre>/animations/, cf. animations/README.md) se
@@ -175,6 +177,36 @@ $d"
                 | xargs -0 "$PY" -m outils capytale --depuis-build --indexer || {
                     printf '\n  Avertissement : envoi sur Capytale en echec, le commit continue.\n'
                     printf '  Pour voir ce qui partirait :  %s -m outils capytale -n <chapitre>\n\n' "$PY"
+                }
+        fi
+    fi
+fi
+
+# --- Fiches de notation des TP ----------------------------------------------
+# Une ligne par binome, les criteres de sa copie et le total, une page par
+# groupe (cf. outils/README.md). Les binomes se tirent dans la liste des
+# eleves, qui vit hors du depot ; son chemin, relatif a la racine du depot :
+#     git config hooks.eleves "../2026 - 2027/péda/élèves.csv"
+# Sans lui, pas de fiche -- et un echec n'annule pas le commit.
+if [ -n "$PY" ] && [ -d outils ]; then
+    tps=""
+    IFS='
+'
+    for d in $dirs; do
+        [ -f "$d/TP.typ" ] && tps="$tps
+$d"
+    done
+    unset IFS
+    if [ -n "$tps" ]; then
+        eleves=$(git config hooks.eleves 2>/dev/null)
+        if [ -z "$eleves" ]; then
+            printf '  notation      pas de fiche : git config hooks.eleves <CSV des eleves>\n'
+        elif [ ! -f "$eleves" ]; then
+            printf '  notation      pas de fiche : %s introuvable (hooks.eleves)\n' "$eleves"
+        else
+            printf '%s' "$tps" | sed '/^$/d' | tr '\n' '\0' \
+                | xargs -0 "$PY" -m outils notation --élèves "$eleves" || {
+                    printf '\n  Avertissement : fiche de notation en echec, le commit continue.\n\n'
                 }
         fi
     fi

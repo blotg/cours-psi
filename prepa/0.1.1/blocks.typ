@@ -551,15 +551,31 @@
 // 1) ; la copie n° k reçoit l'évaluation dont le créneau contient
 // k modulo (total des créneaux). `nombre` > 1 ⇒ une même évaluation est
 // proposée à plusieurs binômes.
+//
+// La règle vaut aussi pour la fiche de notation (gabarits/notation-TP.typ),
+// qui doit donner à chaque binôme les critères de sa copie : d'où cette
+// fonction à part.
+#let copie-évaluée(copie, début, nombre, total, rotation: true) = {
+    let créneau = calc.rem(copie, total)
+    not rotation or (début <= créneau and créneau < début + nombre)
+}
+
+// Chaque évaluation laisse une métadonnée <évaluation> — ses créneaux, son
+// barème et sa consigne —, que la fiche de notation lit en incluant le sujet.
 #let évaluation(appel-prof: false, barème: (), rotation: true, nombre: 1, contenu) = {
     assert(type(nombre) == int and nombre >= 1, message: "évaluation : `nombre` doit être un entier ≥ 1")
     context {
         let total = i-évaluation.final().first()
-        let copie = if "numéro-copie" in sys.inputs {
-            calc.rem(int(sys.inputs.at("numéro-copie")), total)
-        }
         let début = i-évaluation.get().first()
-        if not rotation or copie == none or (début <= copie and copie < début + nombre) {
+        [#metadata((
+            début: début,
+            nombre: nombre,
+            rotation: rotation,
+            barème: barème,
+            consigne: contenu,
+        )) <évaluation>]
+        let copie = sys.inputs.at("numéro-copie", default: none)
+        if copie == none or copie-évaluée(int(copie), début, nombre, total, rotation: rotation) {
             _bloc(
                 if appel-prof { "Appel prof — Évaluation" } else { "Évaluation" },
                 if barème == () { contenu } else {
