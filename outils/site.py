@@ -6,8 +6,9 @@ pages de contenu sont les sources typst du cours compilées vers une autre
 cible, les pages de liens viennent du gabarit `gabarits/site-liens.typ`.
 
 Le seul post-traitement est l'insertion, dans le `<head>` que typst produit, du
-lien vers la feuille de style — et, sur l'accueil, de la balise qui prouve à
-Google que le site est à nous : typst n'expose pas encore ce `<head>`.
+lien vers la feuille de style, de l'adresse canonique de la page — et, sur
+l'accueil, de la balise qui prouve à Google que le site est à nous : typst
+n'expose pas encore ce `<head>`.
 """
 
 import hashlib
@@ -37,7 +38,7 @@ MANIFESTE = ".site-manifeste.json"
 #: À changer dès que la fabrication d'une page change autrement que par ses
 #: sources — la retouche du <head> dans `_style`, par exemple. Tout le site se
 #: reconstruit alors, au lieu de garder des pages fabriquées à l'ancienne.
-FORMAT_MANIFESTE = 1
+FORMAT_MANIFESTE = 2
 
 #: Compilations menées de front. Une page ne tient pas douze cœurs occupés,
 #: mais le gain plafonne vers huit : au-delà on ne fait que se marcher dessus.
@@ -106,6 +107,19 @@ def adresse(texte: str) -> str:
         c for c in unicodedata.normalize("NFD", texte.lower()) if unicodedata.category(c) != "Mn"
     )
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", sans_accent)).strip("-") or "page"
+
+
+def adresse_canonique(chemin: str) -> str:
+    """L'adresse publique d'une page, sous la forme unique qui fait référence.
+
+    Une page d'index se lit aussi bien par son dossier que par son nom de
+    fichier : `transport-2/` et `transport-2/index.html` servent la même page.
+    Les liens du site gardent le nom de fichier, pour qu'on puisse aussi le
+    parcourir depuis le disque ; la balise `canonical` et le plan du site, eux,
+    ne donnent que la forme en dossier, pour qu'un moteur de recherche n'y voie
+    qu'une seule page.
+    """
+    return ADRESSE_PUBLIQUE + quote(chemin.removesuffix("index.html"))
 
 
 def _poids(fichier: Path) -> str:
@@ -302,11 +316,19 @@ class Site:
     # -- Une page ---------------------------------------------------------
 
     def _style(self, cible: Path, profondeur: int, en_tête: str = "") -> None:
-        """Accroche la feuille de style au <head> que typst vient d'écrire,
-        et ce que la page demande d'y ajouter en plus (`en_tête`)."""
+        """Accroche au <head> que typst vient d'écrire la feuille de style,
+        l'adresse canonique de la page, et ce que la page demande d'y ajouter
+        en plus (`en_tête`)."""
         lien = "../" * profondeur + "styles.css"
+        canonique = adresse_canonique(cible.relative_to(self.sortie).as_posix())
         html = cible.read_text(encoding="utf-8")
-        html = html.replace("</head>", f'<link rel="stylesheet" href="{lien}">{en_tête}</head>', 1)
+        html = html.replace(
+            "</head>",
+            f'<link rel="stylesheet" href="{lien}">'
+            f'<link rel="canonical" href="{escape(canonique, {chr(34): "&quot;"})}">'
+            f"{en_tête}</head>",
+            1,
+        )
         # typst écrit `lang="en"` en dur. La langue commande la coupure des mots
         # et le rendu de certains symboles : elle doit dire le vrai.
         html = html.replace('<html lang="en">', '<html lang="fr">', 1)
@@ -518,8 +540,7 @@ class Site:
             p.relative_to(self.sortie).as_posix() for p in self.produits if p.suffix == ".html"
         )
         adresses = "".join(
-            f"<url><loc>{escape(ADRESSE_PUBLIQUE + ('' if p == 'index.html' else quote(p)))}</loc></url>\n"
-            for p in pages
+            f"<url><loc>{escape(adresse_canonique(p))}</loc></url>\n" for p in pages
         )
         plan = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
