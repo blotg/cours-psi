@@ -6,3 +6,4 @@
 #include "exercices/Bobine torique.typ"
 #include "exercices/Câble coaxial.typ"
 #include "exercices/Mesure du champ magnétique terrestre.typ"
+#include "exercices/Piège à neutrons.typ"
