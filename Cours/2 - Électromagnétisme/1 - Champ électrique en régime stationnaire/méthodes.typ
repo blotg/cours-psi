@@ -26,9 +26,7 @@
     - Symétrie sphérique : sphère de rayon $r$.
     - Symétrie cylindrique : cylindre coaxial de rayon $r$ et de hauteur $h$, fermé par deux disques.
     - Plan infini : cylindre traversant le plan, symétrique par rapport à lui.
-+ Calculer le flux.
-+ Calculer la charge (ou la masse) intérieure (en distinguant les cas zone par zone si nécessaire). Si $rho$ (ou $mu$) n'est pas uniforme, intégrer.
-+ Appliquer le théorème de Gauss.
++ Appliquer le théorème de Gauss : calculer le flux, puis la charge (ou la masse) intérieure, en distinguant les cas zone par zone si nécessaire. Si $rho$ (ou $mu$) n'est pas uniforme, intégrer.
 
 = Déterminer le potentiel électrique à partir du champ
 + Projeter $va(E) = - grad V$ dans le système de coordonnées adapté : $E(r) = - dv(V, r)$ en coordonnées sphériques ou cylindriques, $E(z) = - dv(V, z)$ en coordonnées cartésiennes.

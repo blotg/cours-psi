@@ -14,7 +14,7 @@ Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, l
     "Faire un schéma vu de dessus, avec les deux champs horizontaux.",
     "L'aiguille s'aligne sur le champ magnétique horizontal total.",
 ))[
-    Calculer la composante horizontale du champ magnétique terrestre.
+    Calculer la composante horizontale du champ magnétique terrestre, et la comparer à sa valeur en France, d'environ $#quan[2e-5 T]$.
 ][
     #figure(canvas({
         import cetz.draw: *
@@ -46,7 +46,7 @@ Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, l
     #let B-sol = mu0 * N * I / l
     #let B-H = B-sol / calc.tan(40deg)
     $ B_"sol" = (4 pi times 10^(-7) times 100 times 40 times 10^(-3))/(#num("0.30")) approx #qty(B-sol, "T", chiffres: 2) $
-    $ B_H = B_"sol"/(tan 40 degree) approx #qty(B-H, "T", chiffres: 2) $
+    $ B_H = B_"sol"/(tan 40 degree) approx #qty(B-H, "T", chiffres: 1) $
 
     La valeur mesurée est conforme à la valeur attendue pour la composante horizontale du champ magnétique terrestre.
 ]

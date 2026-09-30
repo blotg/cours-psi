@@ -13,6 +13,4 @@
 + Étudier les invariances de la distribution de courant pour déterminer les variables dont dépend $va(B)$, et choisir le système de coordonnées adapté.
 + Déterminer la direction de $va(B)(M)$ par les symétries.
 + Choisir un contour d'Ampère fermé et orienté, passant par $M$ et adapté aux symétries : sur chacune de ses parties, $va(B)$ est soit tangent au contour et de norme constante, soit orthogonal au contour, soit nul.
-+ Exprimer la circulation de $va(B)$ sur le contour.
-+ Exprimer le courant enlacé, zone par zone si nécessaire. Un courant compte positivement s'il traverse une surface s'appuyant sur le contour dans le sens donné par la règle de la main droite à partir de l'orientation du contour.
-+ Appliquer le théorème d'Ampère.
++ Appliquer le théorème d'Ampère : exprimer la circulation de $va(B)$ sur le contour, puis le courant enlacé, zone par zone si nécessaire. Un courant compte positivement s'il traverse une surface s'appuyant sur le contour dans le sens donné par la règle de la main droite à partir de l'orientation du contour.

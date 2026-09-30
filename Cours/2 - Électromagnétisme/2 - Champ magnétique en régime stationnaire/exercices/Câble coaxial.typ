@@ -71,8 +71,8 @@
             }
         }),
         [Photographie],
-        [Schéma en coupe],
-        [Vue latérale]
+        [Coupe transversale],
+        [Coupe longitudinale]
     )
 })
 
@@ -81,7 +81,7 @@ On considère un câble coaxial cylindrique de longueur supposée infinie, const
 #question[
     Montrer que le champ magnétique $va(B)$ créé au point $M$ est orthoradial.
 ][
-    Pour un point $M$, le plan $(M, va(e_r), va(e_z))$ contient les courants et est plan de symétrie de la distribution : $va(B)(M)$ lui est orthogonal, donc $va(B) = B va(e_theta)$.
+    Pour un point $M$, le plan $(M, va(e_r), va(e_z))$ contient l'axe et est plan de symétrie de la distribution : $va(B)(M)$ lui est orthogonal, donc $va(B) = B va(e_theta)$.
 ]
 
 #question[

@@ -72,7 +72,7 @@ Toutes les commandes, les hooks et leurs réglages sont décrits dans [`outils/R
 
 ## Usage de l'IA
 
-**Cours et exercices :** La rédaction est entièrement manuelle. Une IA (Claude Opus) a ensuite ensuite le texte pour y chercher des erreurs, et les corrections sont faites à la main.
+**Cours et exercices :** La rédaction est entièrement manuelle. Une IA (Claude Opus) a ensuite relu le texte pour y chercher des erreurs, et les corrections sont faites à la main.
 
 **Simulations et animations :** Les scripts des dossiers `Simulations/` ont été conçus par une IA (Claude Opus). La cohérence physique des résultats est vérifiée à la main, et le code est relu manuellement.
 

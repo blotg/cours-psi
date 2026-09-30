@@ -223,6 +223,9 @@ Le vecteur densité de courant électrique (propriété locale) peut être reli�
 #question-de-colle(
     [Relier le courant traversant une surface infinitésimale, puis finie, au vecteur densité de courant.],
 )
+#question-de-colle(
+    [Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.],
+)
 
 == Conservation de la charge
 La charge est une grandeur conservative. La variation de charge est uniquement due à un transfert de charge, c'est-à-dire un courant électrique.

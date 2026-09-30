@@ -34,7 +34,6 @@ Un piège à neutrons constitué de 6 fils rectilignes infinis, répartis aux so
     content((120deg, R / 2), anchor: "north-east", padding: 0.1, text(fill: gray)[$a$])
     for k in range(6) {
         if calc.even(k) { sortant((k * 60deg, R)) } else { entrant((k * 60deg, R)) }
-        content((k * 60deg + 15deg, R + 0.35), text(fill: olive, if calc.even(k) [$I$] else [$-I$]))
         content((k * 60deg - 15deg, R + 0.35), text(fill: gray)[#k])
     }
 }))

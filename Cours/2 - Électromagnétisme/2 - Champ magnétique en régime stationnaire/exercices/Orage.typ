@@ -40,8 +40,8 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
         entrant((1.1, 0.4))
         content((1.1, 0.53), anchor: "south", padding: 0.15em, $va(B)$)
         // force
-        line((0.45, -1.2), (-0.15, -1.2), mark: (end: "stealth", fill: olive), stroke: olive + 1pt)
-        content((-0.15, -1.2), anchor: "east", padding: 0.2em, text(fill: olive)[$va(f)$])
+        line((0.55, -1.2), (0.08, -1.2), mark: (end: "stealth", fill: olive), stroke: olive + 1pt)
+        content((0.6, -1.2), anchor: "west", padding: 0.2em, text(fill: olive)[$va(f)$])
     }))
 
     Le courant est ascendant donc $va(j) = j va(e_z)$ avec $j > 0$, et la vitesse des électrons est selon $-va(e_z)$. Le champ créé par le fil est orthoradial, $va(B) = B(r) va(e_theta)$ avec $B(r) > 0$. La force sur un électron est
@@ -88,7 +88,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
 ]
 
 #question(coups-de-pouce: (
-    "Relier le poids volumique à la masse volumique de l'air, environ 1,2 kg·m⁻³.",
+    "Relier le poids volumique à la masse volumique de l'air, environ #quan[1.2 kg/m^3].",
     "Que se passe-t-il quand un gaz est brutalement soumis à une force très intense ?",
 ))[
     Faire l'application numérique de cette force volumique et la comparer au poids volumique de l'air. Pourquoi les éclairs causent-ils le tonnerre#footnote[L'éclair est le résultat visible du passage du courant ; le tonnerre est le son produit.] ?
@@ -106,4 +106,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
     Le poids volumique de l'air vaut $rho_"air" g approx #num(rho-air) times #num(g) approx #qty(poids, "N/m^3", chiffres: 2, exponent: auto)$, soit environ #num(f-vol / poids, chiffres: 1) fois moins.
 
     La force de pincement comprime donc très violemment le gaz du canal ionisé, qui est en outre porté à très haute température par effet Joule. Cette compression brutale suivie d'une détente engendre une onde de choc dans l'air : c'est le tonnerre.
+
+    #let p-pincement = mu0 * I * I / (4 * calc.pi * calc.pi * calc.pow(a, 2))
+    *Remarque :* le pincement n'est pas le seul responsable, et l'effet de l'échauffement est même prépondérant. En quelques microsecondes, l'effet Joule porte le canal à près de #quan[30000 K] : sa pression atteint alors au moins une dizaine de fois la pression atmosphérique, quand la pression due au pincement, $(mu_0 I^2)/(4 pi^2 a^2)$ sur l'axe, ne vaut que #qty(p-pincement, "Pa", chiffres: 1). C'est surtout la brusque dilatation de ce gaz surchauffé qui produit l'onde de choc.
 ]

@@ -13,7 +13,7 @@
     "va(F)": (signification: "la partie magnétique de la force de Lorentz", unité: unit("N")),
     "q": (signification: "la charge de la particule", unité: unit("C")),
     "va(v)": (signification: "la vitesse de la particule chargée", unité: unit("m/s")),
-    "va(dd(l))": (signification: "l'élément de longueur orienté dans le sens du courant", unité: unit("m")),
+    "va(dd(l))": (signification: "l'élément de longueur orienté, dans le sens du courant pour un fil, dans le sens de parcours pour une courbe orientée", unité: unit("m")),
     "dd(V)": (signification: "l'élément de volume", unité: unit("m^3")),
     "va(dd(F))": (signification: "la force magnétique subie par l'élément de conducteur", unité: unit("N")),
     "cal(C)": (signification: "une courbe fermée orientée"),
@@ -136,7 +136,7 @@ Une particule chargée est animée d'une vitesse.
 #flashcard(recto: [Force de Lorentz], verso: [$ va(F) = q va(E) + q va(v) and va(B) $])
 
 #application[
-    Une particule de charge $q$ et de masse $m$ plongée dans un champ magnétique uniforme et stationnaire $va(B) = B va(e_z)$ a une trajectoire circulaire orthogonale à $va(B)$. Exprimer sa vitesse angulaire.
+    Une particule de charge $q$ et de masse $m$ plongée dans un champ magnétique uniforme et stationnaire $va(B) = B va(e_z)$ a une trajectoire circulaire dans un plan orthogonal à $va(B)$. Exprimer sa vitesse angulaire.
 ]
 
 === Description linéique
@@ -171,10 +171,8 @@ Le déplacement des charges est décrit par le vecteur densité volumique de cou
 
 #flashcard(recto: [Force de Laplace volumique], verso: [$ va(dd(F)) = (va(j) dd(V)) and va(B) $])
 
-#question-de-colle([Citer l'expression de la partie magnétique de la force de Lorentz. En déduire la force de Laplace exercée sur un élément de fil puis sur un élément de volume.])
-
 #application[
-    Un fil épais de section $#quan[6 mm^2]$ et de longueur $#quan[10 m]$ est parcouru par un vecteur densité de courant uniforme $va(j) = j va(e_x)$, le courant total valant $#quan[10 A]$. Calculer la norme de la force exercée par le champ magnétique terrestre ($#quan[5e-5 T]$ selon $va(e_z)$), supposé orthogonal au courant.
+    Un fil épais de section $#quan[6 mm^2]$ et de longueur $#quan[10 m]$ est parcouru par un courant de densité volumique uniforme $va(j) = j va(e_x)$, le courant total valant $#quan[10 A]$. Calculer la norme de la force exercée par le champ magnétique terrestre ($#quan[5e-5 T]$ selon $va(e_z)$), supposé orthogonal au courant.
 ]
 
 = Théorème d'Ampère
@@ -249,7 +247,7 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
     connaitre: true,
     savoir-faire: true,
     hypothèses: "En régime stationnaire.",
-    grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(B)", "mu_0", "I_text(\"enlacé\")")),
+    grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(B)", "va(dd(l))", "mu_0", "I_text(\"enlacé\")")),
 )[
     $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = mu_0 I_"enlacé" $
 ]
@@ -271,9 +269,9 @@ Le théorème d'Ampère permet de déterminer le champ magnétique à partir de 
 Le champ magnétique s'obtient alors par la méthode en quatre étapes : analyse des invariances, analyse des symétries, choix d'un contour d'Ampère adapté, application du théorème d'Ampère.
 
 #application[
-    Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$, rectiligne et infini, parcouru par un vecteur densité de courant $va(j)$ uniforme.
+    Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$, rectiligne et infini, parcouru par un courant de densité volumique $va(j)$ uniforme.
 ]
-#question-de-colle([Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$ et infini parcouru par un vecteur densité de courant $va(j)$ uniforme.])
+#question-de-colle([Déterminer le champ magnétique créé dans tout l'espace par un fil épais de rayon $R$ et infini parcouru par un courant de densité volumique $va(j)$ uniforme.])
 
 #application[
     Déterminer le champ magnétique créé dans tout l'espace par un solénoïde infini de rayon $R$ comportant $n$ spires par unité de longueur parcourues par un courant $I$. Le solénoïde est assimilé à une succession de spires circulaires jointives ; on admet que le champ magnétique est nul à l'extérieur.
