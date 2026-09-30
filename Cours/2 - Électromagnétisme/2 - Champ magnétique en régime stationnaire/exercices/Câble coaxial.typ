@@ -105,7 +105,7 @@ On considère un câble coaxial cylindrique de longueur supposée infinie, const
 ][
     On applique le théorème d'Ampère au cercle $cal(C)$ d'axe $(O z)$, de rayon $r$, orienté selon $va(e_theta)$ :
     $ 2 pi r B(r) = mu_0 I_"enlacé" $
-    Pour $r > R_3$, le contour enlace les deux conducteurs : $I_"enlacé" = I + (-I) = 0$, donc $va(B) = va(0)$. À l'extérieur, le câble coaxial ne rayonne pas de champ magnétique.
+    Pour $r > R_3$, le contour enlace les deux conducteurs : $I_"enlacé" = I + (-I) = 0$, donc $va(B) = va(0)$. À l'extérieur, le câble coaxial ne crée pas de champ magnétique.
 ]
 
 #question(coups-de-pouce: (

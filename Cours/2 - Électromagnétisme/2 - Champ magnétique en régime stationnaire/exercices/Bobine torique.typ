@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Bobine torique", difficulté: 1)
 
-Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur un tore circulaire à section carrée de côté $a$ et de rayon moyen $R$. On désigne par $n$ le nombre total de spires et par $I$ le courant qui les parcourt. On note $(O z)$ l'axe de symétrie du tore. On s'intéresse au champ magnétique à l'intérieur du tore et on repère un point $M(r, z)$ en coordonnées cylindriques.
+Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur un tore circulaire à section carrée de côté $a$ et de rayon moyen $R$. On désigne par $N$ le nombre total de spires et par $I$ le courant qui les parcourt. On note $(O z)$ l'axe de symétrie du tore. On s'intéresse au champ magnétique à l'intérieur du tore et on repère un point $M(r, z)$ en coordonnées cylindriques.
 
 #figure({
     grid(
@@ -43,9 +43,9 @@ Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur u
 #question(coups-de-pouce: (
     "Effectuer les quatre étapes : invariances, symétries, choix du contour d'Ampère, théorème d'Ampère.",
 ))[
-    Montrer que le champ magnétique en un point $M(r, z)$ à l'intérieur du tore se met sous la forme $B = (mu_0 n I)/(2 pi r)$.
+    Montrer que le champ magnétique en un point $M(r, z)$ à l'intérieur du tore se met sous la forme $B = (mu_0 N I)/(2 pi r)$.
 ][
-    #strong[Invariances.] La distribution de courant est (quasi) invariante par rotation d'angle $theta$ ($n gt.double 1$) : $va(B)$ ne dépend que de $r$ et $z$.
+    #strong[Invariances.] La distribution de courant est (quasi) invariante par rotation d'angle $theta$ ($N >> 1$) : $va(B)$ ne dépend que de $r$ et $z$.
 
     #strong[Symétries.] Pour un point $M$, le plan $(M, va(e_r), va(e_z))$ est plan de symétrie de la distribution de courant : $va(B)(M)$ lui est orthogonal, donc $va(B) = B(r, z) va(e_theta)$.
 
@@ -53,8 +53,8 @@ Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur u
 
     #strong[Théorème d'Ampère.]
     $ integral.cont_(cal(C)) va(B) dot va(dd(l)) = 2 pi r B(r, z) = mu_0 I_"enlacé" $
-    Le contour enlace les $n$ spires, chacune parcourue par $I$ : $I_"enlacé" = n I$ à l'intérieur du tore (et $0$ à l'extérieur). Donc $B$ ne dépend pas de $z$ et
-    $ va(B) = (mu_0 n I)/(2 pi r) va(e_theta) $
+    Le contour enlace les $N$ spires, chacune parcourue par $I$ : $I_"enlacé" = N I$ à l'intérieur du tore (et $0$ à l'extérieur). Donc $B$ ne dépend pas de $z$ et
+    $ va(B) = (mu_0 N I)/(2 pi r) va(e_theta) $
 ]
 
 #question(coups-de-pouce: (
@@ -66,7 +66,7 @@ Une bobine est constituée d'un fil conducteur bobiné en spires jointives sur u
     Une spire est un carré de côté $a$ situé dans un plan méridien, entre $r = R - a/2$ et $r = R + a/2$ et entre deux cotes distantes de $a$. Sa normale est $va(e_theta)$, donc $va(dd(S)) = dd(r) dd(z) va(e_theta)$ :
     $
         Phi = integral.double va(B) dot va(dd(S))
-        = integral_0^a dd(z) integral_(R - a/2)^(R + a/2) (mu_0 n I)/(2 pi r) dd(r)
-        = (mu_0 n I a)/(2 pi) ln((R + a/2)/(R - a/2))
+        = integral_0^a dd(z) integral_(R - a/2)^(R + a/2) (mu_0 N I)/(2 pi r) dd(r)
+        = (mu_0 N I a)/(2 pi) ln((R + a/2)/(R - a/2))
     $
 ]

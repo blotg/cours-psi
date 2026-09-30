@@ -113,7 +113,8 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
 | `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`) |
 | `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
-| `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, l'écart rond entre deux niveaux |
+| `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, mises bout à bout en lignes brisées (`polylignes`), l'écart rond entre deux niveaux |
+| `distributions.js` | les scènes « Invariances » et « Plans de symétrie » des chapitres d'électromagnétisme : formes d'une distribution de charges ou de courants, symétries calculées, systèmes de coordonnées |
 | `reglages.js` | `Réglages` : curseurs (avec leurs aimants), cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
 
@@ -262,7 +263,8 @@ Deux écueils, qui ont chacun leur remède dans `champ.js` :
   charges (une valeur ronde, 1, 2 ou 5 fois une puissance de dix), et le
   panneau l'annonce : c'est lui l'échelle du potentiel.
 
-`symetries.js` (scènes 3D) porte les deux gestes du chapitre, sur les mêmes
+`symetries.js` (scènes 3D) porte les deux gestes du chapitre — les scènes
+sont dans `distributions.js`, que le chapitre suivant reprend —, sur les mêmes
 six distributions (charge, boule, fil, plan, spire, deux charges opposées) et
 les mêmes trois systèmes de coordonnées.
 
@@ -305,6 +307,54 @@ Trois partis pris, sans lesquels rien ne se verrait :
   plus une. La main n'y arriverait jamais : M se pose donc de lui-même sur
   l'axe (Oz) et dans le plan (O x y), qui sont le plan médiateur des deux
   charges, celui de la spire et le plan chargé.
+
+**Électromagnétisme 2** — les mêmes deux pages, pour le champ magnétique,
+avec `champ.js` pour physique : des fils rectilignes (courants en ampères,
+longueurs en centimètres, champ en teslas) et des spires coaxiales, dont le
+champ et le flux s'écrivent avec les intégrales elliptiques K et E
+(moyenne arithmético-géométrique).
+
+`cartes-de-champ.js` ne suit pas les lignes de champ pas à pas : ce sont les
+lignes de niveau d'une fonction dont le champ dérive, A_z pour les fils,
+ψ = r A_θ pour les spires (2πψ est le flux à travers le disque de rayon r).
+Elles se ferment d'elles-mêmes, sans rien de ce qui compliquait `champ.js`
+au chapitre précédent, et `polylignes` les met bout à bout pour y poser des
+pointes à distance régulière, dans le sens du champ.
+
+- **Fils** : pour A_z, des niveaux régulièrement espacés font une carte à
+  flux constant — ce que suppose la méthode du cours pour lire la norme sur
+  le resserrement des lignes. L'écart suit le plus fort des courants (le
+  panneau l'annonce en µWb par mètre de fil), et l'on ne trace rien à moins
+  de 6 mm d'un fil, où les cercles s'entasseraient. La case « Champ en M »
+  trace aussi la ligne qui passe par M : posé sur le point de champ nul de
+  deux fils de même sens ou de l'hexagone (celui de l'exercice « Piège à
+  neutrons »), M montre deux lignes qui se croisent.
+- **Spires** : une coupe dans un plan qui contient l'axe ne peut pas être à
+  flux constant — la densité des lignes y vaut rB et non B. Les lignes sont
+  donc celles qui traversent le plan médian en des points régulièrement
+  espacés, entre l'axe et les spires : dans un champ uniforme, elles le
+  sont aussi. On empile N spires jointives (écart fixe, n fixé) ; deux
+  graphiques rapportent le champ à μ₀nI, sur l'axe et selon r au milieu —
+  pris entre deux spires, sans quoi il traverserait un fil. La grille de ψ
+  est symétrique : on n'en calcule qu'un quart.
+
+`symetries.js` fournit six distributions de courant (fil, spire, solénoïde,
+tore, nappe, deux fils opposés) à `distributions.js`. Le sens du courant se
+porte sur un vecteur `o`, transporté avec la forme — comme un vrai vecteur
+le long d'un fil, d'une nappe et d'un tore, comme un pseudo-vecteur autour
+d'une spire ou d'un solénoïde, dont une symétrie par un plan renverse la
+circulation. Les deux fils sont couchés selon (Ox), pour que leur plan
+médiateur soit (O x y), où M se pose de lui-même.
+
+Le sens du courant se dessine par des **pointes**, placées d'après les seules
+formes et non attachées au dessin : sans quoi une translation le long d'un
+fil ou une rotation autour de l'axe d'une spire les ferait glisser, et
+l'invariance ne se verrait plus. L'image par le plan porte les siennes aux
+mêmes places : quand elle recouvre l'original, chaque pointe pleine est dans
+une carcasse qui pointe dans le même sens (symétrie) ou à l'opposé
+(antisymétrie). Une case, décochée au départ, montre le champ en M et son
+reflet dans le plan : dans un plan de symétrie, le reflet est l'opposé du
+champ — c'est le pseudo-vecteur.
 
 **Analyse vectorielle** — `operateurs.js` applique les opérateurs à des
 champs plans (`champs.js`) : le gradient et le laplacien à un champ scalaire,

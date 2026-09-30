@@ -8,7 +8,7 @@
     "va(j_S)": (signification: "le vecteur densité surfacique de courant électrique", unité: unit("A/m")),
     "va(B)": (signification: "le champ magnétique", unité: unit("T")),
     "va(E)": (signification: "le champ électrique", unité: unit("V/m")),
-    "mu_0": (signification: "la perméabilité magnétique du vide ($4 pi times 10^(-7)$ H/m)"),
+    "mu_0": (signification: "la perméabilité magnétique du vide ($4 pi times 10^(-7) #unit(\"H/m\")$)"),
     "epsilon_0": (signification: "la permittivité diélectrique du vide", unité: unit("F/m")),
     "va(F)": (signification: "la partie magnétique de la force de Lorentz", unité: unit("N")),
     "q": (signification: "la charge de la particule", unité: unit("C")),
@@ -18,6 +18,9 @@
     "va(dd(F))": (signification: "la force magnétique subie par l'élément de conducteur", unité: unit("N")),
     "cal(C)": (signification: "une courbe fermée orientée"),
     "I_text(\"enlacé\")": (signification: "le courant enlacé par $cal(C)$, compté positivement dans le sens direct", unité: unit("A")),
+    "va(dd(S))": (signification: "le vecteur surface élémentaire, normal à la surface et orienté", unité: unit("m^2")),
+    "va(n)": (signification: "le vecteur unitaire normal à la courbe traversée par le courant, tangent à la surface et orienté"),
+    "dd(l)": (signification: "l'élément de longueur de la courbe traversée", unité: unit("m")),
 )
 
 = Notion de courant électrique
@@ -29,7 +32,7 @@ $va(j)(M, t)$ désigne le vecteur densité volumique de courant électrique au p
 #encadré(
     titre: "Courant en description volumique",
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("I", "va(j)")),
+    grandeurs: sub-dictionary(grandeurs, ("I", "va(j)", "va(dd(S))")),
 )[
     $ I = integral.double va(j) dot va(dd(S)) $
 ]
@@ -40,7 +43,7 @@ $va(j_S)(M, t)$ désigne le vecteur densité surfacique de courant électrique a
 #encadré(
     titre: "Courant en description surfacique",
     connaitre: true,
-    grandeurs: sub-dictionary(grandeurs, ("I", "va(j_S)")),
+    grandeurs: sub-dictionary(grandeurs, ("I", "va(j_S)", "va(n)", "dd(l)")),
 )[
     $ I = integral va(j_S) dot va(n) dd(l) $
 ]
@@ -72,6 +75,9 @@ Le comportement du champ magnétique est régi par les équations de Maxwell-Tho
 
 #flashcard(recto: [Équation de Maxwell-Ampère], verso: [$ rot va(B) = mu_0 va(j) + mu_0 epsilon_0 pdv(va(E), t) $])
 
+En régime stationnaire, $pdv(va(E), t) = va(0)$ et l'équation de Maxwell-Ampère se réduit à
+$ rot va(B) = mu_0 va(j) $
+
 #question-de-début-de-cours(
     "Le champ magnétique est créé par",
     (
@@ -102,7 +108,7 @@ Les équations de Maxwell sont linéaires : le champ magnétique résultant de p
 #question-de-début-de-cours(
     "Sur une ligne de champ magnétique",
     (
-        "$va(B)$ est colinéaire à la ligne de champ",
+        "$va(B)$ est tangent à la ligne de champ",
         "$norm(va(B))$ est uniforme",
         "$va(dd(l))$ est orthogonal à la ligne de champ",
         "les courants enlacés sont nuls",
@@ -148,7 +154,7 @@ Un fil infiniment fin est parcouru par un courant électrique.
 #flashcard(recto: [Force de Laplace sur un élément de fil], verso: [$ va(dd(F)) = I va(dd(l)) and va(B) $])
 
 #application[
-    Dans les rails de Laplace, une barre traversée par un courant $#quan[5 A]$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $#quan[10 cm]$, en présence d'un champ magnétique vertical $#quan[3e-2 T]$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
+    Dans les rails de Laplace, une barre traversée par un courant d'intensité $#quan[5 A]$ dirigé selon $va(e_y)$ roule sur des rails horizontaux distants de $#quan[10 cm]$, en présence d'un champ magnétique vertical de norme $#quan[3e-2 T]$ dirigé selon $va(e_z)$. Calculer la norme de la force magnétique subie par la barre.
 ]
 
 === Description volumique
@@ -191,7 +197,7 @@ Les invariances de la distribution de courant contraignent la forme du champ mag
 )
 
 == Symétries du champ magnétique
-Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rapport aux plans d'antisymétrie de la distribution de courant, et antisymétrique par rapport à ses plans de symétrie.
+Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rapport aux plans d'antisymétrie de la distribution de courant, et antisymétrique par rapport aux plans de symétrie de la distribution de courant.
 
 #encadré(
     titre: "Plans de symétrie et champ magnétique",

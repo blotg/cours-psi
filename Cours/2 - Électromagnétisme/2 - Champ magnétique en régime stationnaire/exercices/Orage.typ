@@ -4,7 +4,7 @@
     titre: "Orage",
 )
 
-Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique rectiligne de rayon $a = #quan[10 cm]$ parcouru par un courant $I = #quan[1e5 A]$ de densité volumique de courant uniforme. On suppose dans un premier temps le courant ascendant et on néglige les effets de bord. On se place en coordonnées cylindriques d'axe $(O z)$ celui du conduit.
+Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique rectiligne de rayon $a = #quan[10 cm]$ parcouru par un courant $I = #quan[1e5 A]$ de densité volumique de courant uniforme. On suppose dans un premier temps le courant ascendant et on néglige les effets de bord. On se place en coordonnées cylindriques d'axe $(O z)$, celui du conduit.
 
 #question(coups-de-pouce: (
     "Quelle est la direction de la vitesse des électrons ? Celle du champ magnétique créé par le courant ?",
@@ -84,7 +84,7 @@ Au cours d'un orage, un éclair peut être assimilé à un conduit cylindrique r
 ))[
     Le sens de la force change-t-il si le courant est descendant ?
 ][
-    Non. Si le courant est descendant, $va(j)$ change de sens (donc $va(B)$ aussi) et la vitesse des électrons change également de sens. La force $va(j) and va(B)$, quadratique en le courant, est inchangée : elle reste dirigée vers l'axe. L'effet de pincement ne dépend pas du sens du courant.
+    Non. Si le courant est descendant, $va(j)$ change de sens (donc $va(B)$ aussi) et la vitesse des électrons change également de sens. La force $va(j) and va(B)$, proportionnelle au carré du courant, est inchangée : elle reste dirigée vers l'axe. L'effet de pincement ne dépend pas du sens du courant.
 ]
 
 #question(coups-de-pouce: (

@@ -8,7 +8,7 @@
 
 Pour mesurer la composante horizontale du champ magnétique terrestre, on utilise une boussole. On place un solénoïde autour de la boussole, son axe étant horizontal et orthogonal à l'aiguille au repos. Lorsqu'un courant circule dans le solénoïde, l'aiguille tourne d'un angle $alpha = #quan[40 °]$.
 
-Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, longueur $l = #quan[30 cm]$, intensité $I = #quan[1 mA]$.
+Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, longueur $l = #quan[30 cm]$, intensité $I = #quan[40 mA]$.
 
 #question(coups-de-pouce: (
     "Faire un schéma vu de dessus, avec les deux champs horizontaux.",
@@ -42,11 +42,11 @@ Données : rayon du solénoïde $R = #quan[5 cm]$, nombre de spires $N = 100$, l
     #let mu0 = 4 * calc.pi * 1e-7
     #let N = 100
     #let l = 0.30
-    #let I = 1e-3
+    #let I = 40e-3
     #let B-sol = mu0 * N * I / l
     #let B-H = B-sol / calc.tan(40deg)
-    $ B_"sol" = (4 pi times 10^(-7) times 100 times 10^(-3))/(#num("0.30")) approx #qty(B-sol, "T", chiffres: 1) $
-    $ B_H = B_"sol"/(tan 40 degree) approx #qty(B-H, "T", chiffres: 1) $
+    $ B_"sol" = (4 pi times 10^(-7) times 100 times 40 times 10^(-3))/(#num("0.30")) approx #qty(B-sol, "T", chiffres: 2) $
+    $ B_H = B_"sol"/(tan 40 degree) approx #qty(B-H, "T", chiffres: 2) $
 
-    L'ordre de grandeur réel de la composante horizontale étant plutôt $#quan[2e-5 T]$, ce dispositif est ici trop peu sensible (courant et nombre de spires faibles) : en pratique on augmente $N I$ pour obtenir une déviation exploitable.
+    La valeur mesurée est conforme à la valeur attendue pour la composante horizontale du champ magnétique terrestre.
 ]

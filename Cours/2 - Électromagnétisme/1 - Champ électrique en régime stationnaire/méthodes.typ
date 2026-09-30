@@ -8,7 +8,7 @@
 = Exploiter une carte de champ
 + Tracer les équipotentielles orthogonales aux lignes de champ. Elles sont d'autant plus serrées que le champ est grand.
 + Dans une zone vide de charges, un tube de champ qui s'évase indique un champ qui diminue.
-+ Repérer les sources : les lignes de champ partent des charges positives et aboutissent aux charges négatives. Dans une zone vide de charges, un tube de champ qui s'évase indique un champ qui diminue.
++ Repérer les sources : les lignes de champ partent des charges positives et aboutissent aux charges négatives.
 
 = Déterminer la vitesse d'une particule chargée accélérée par une tension
 + Exprimer l'énergie potentielle $E_p = q V$ de la particule au point de départ $A$ et au point d'arrivée $B$.
@@ -37,7 +37,7 @@
 + Fixer les autres constantes par la continuité de $V$ aux frontières entre les zones.
 
 = Déterminer le potentiel électrique directement à partir de la distribution de charge
-+ Utiliser l'équation de Laplace (ou de Poisson dans une zone vide de charges), puis fixer les constantes par les conditions aux limites : potentiels imposés, continuité de $V$.
++ Utiliser l'équation de Poisson (ou de Laplace dans une zone vide de charges), puis fixer les constantes par les conditions aux limites : potentiels imposés, continuité de $V$.
 
 = Calculer une différence de potentiel
 + Écrire $V_A - V_B = integral_A^B va(E) dot va(dd(l))$.

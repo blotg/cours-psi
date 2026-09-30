@@ -137,15 +137,14 @@ La fonction `plt.streamplot(X, Y, Bx, By)` trace les lignes de champ d'un champ 
 
 #question(coups-de-pouce: (
     "Autour de chaque fil, le sens des lignes de champ est donné par la règle de la main droite.",
-    "Plus les lignes de champ sont serrées, plus le champ est intense.",
 ))[
-    Compléter le programme ci-dessous pour tracer la carte des lignes de champ, puis la commenter.
+    Compléter le programme ci-dessous pour tracer la carte des lignes de champ. Commenter leur allure au voisinage des fils.
     ```python
     x = np.linspace(-1.5 * a, 1.5 * a, 300)
     X, Y = np.meshgrid(x, x)  # grille de 300 × 300 points
     Bx, By = ...
     plt.streamplot(X, Y, Bx, By, density=2)
-    plt.axis('equal')
+    plt.axis('scaled')
     plt.show()
     ```
 ][
@@ -153,8 +152,6 @@ La fonction `plt.streamplot(X, Y, Bx, By)` trace les lignes de champ d'un champ 
     Bx, By = champ(X, Y)
     ```
     Près de chaque fil, on retrouve le champ créé par ce fil : les lignes de champ sont des cercles centrés sur le fil, parcourus dans le sens trigonométrique autour des fils pairs (courant $I$) et dans le sens horaire autour des fils impairs (courant $-I$).
-    
-    Au voisinage de $O$, les lignes de champ s'écartent les unes des autres : le champ y est faible, et il s'annule en $O$.
 ]
 
 Les neutrons ($m = #quan[1.675e-27 kg]$) portent un moment magnétique $mu = #quan[9.7e-27 J/T]$. Placé dans un champ magnétique, un neutron possède l'énergie potentielle magnétique $E_"mag" = mu B$.
@@ -236,7 +233,7 @@ On tient maintenant compte de la pesanteur. L'axe $(O y)$ est vertical et orient
     E_p = mu * np.sqrt(Bx**2 + By**2) + m * g * y
     plt.plot(y * 1e3, E_p)
     ```
-    Le long de l'axe, $E_p$ présente un minimum local en $y approx #quan[-3.6 mm]$, suivi d'une barrière en $y approx #quan[-7.5 mm]$. Sur la carte, les lignes de niveau se referment autour de ce point : c'est aussi un minimum selon $x$. C'est donc une position d'équilibre stable : un neutron qui s'en écarte un peu dans le plan $(O x y)$ y est ramené, et le piège le confine dans ce plan. Les fils étant infinis, rien ne le retient en revanche selon $(O z)$.
+    Le long de l'axe, $E_p$ présente un minimum local en $y approx #quan[-3.6 mm]$, suivi d'une barrière en $y approx #quan[-7.5 mm]$. Sur la carte, les lignes de niveau se referment autour de ce point : c'est aussi un minimum selon $x$. C'est donc une position d'équilibre stable : un neutron qui s'en écarte un peu dans le plan $(O x y)$ y est ramené, et le piège le confine selon $(O x)$ et $(O y)$. Les fils étant infinis, rien ne le retient en revanche selon $(O z)$.
 
     Ce n'est pas vrai pour toute intensité : pour $I = #quan[100 A]$, $E_p$ décroit continument quand on descend le long de l'axe. Il n'y a pas de minimum local, et les neutrons tombent entre les fils 4 et 5.
 ]

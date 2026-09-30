@@ -118,3 +118,47 @@ export function contours(grille, niveaux) {
     }
     return segments;
 }
+
+/**
+ * Les segments des lignes de niveau, mis bout à bout en lignes brisées : de
+ * quoi y poser des flèches de loin en loin, à distance régulière — une
+ * ligne de champ tracée comme ligne de niveau a un sens.
+ *
+ * Deux mailles voisines calculent chacune le point où la ligne coupe leur
+ * arête commune, et pas tout à fait par le même calcul : les extrémités se
+ * reconnaissent donc à un millionième près, et non à l'égalité exacte.
+ */
+export function polylignes(segments) {
+    const clé = ([x, y]) => `${Math.round(x * 1e6)}:${Math.round(y * 1e6)}`;
+    const bouts = new Map();
+    segments.forEach(([a, b], i) => {
+        for (const p of [a, b]) {
+            const k = clé(p);
+            if (!bouts.has(k)) bouts.set(k, []);
+            bouts.get(k).push(i);
+        }
+    });
+    const pris = new Uint8Array(segments.length);
+    // Prolonge la ligne par son dernier point, tant qu'un segment l'y attend.
+    const prolonge = (ligne) => {
+        for (;;) {
+            const bout = clé(ligne.at(-1));
+            const i = bouts.get(bout).find((j) => !pris[j]);
+            if (i === undefined) return;
+            pris[i] = 1;
+            const [a, b] = segments[i];
+            ligne.push(clé(a) === bout ? b : a);
+        }
+    };
+    const lignes = [];
+    for (let i = 0; i < segments.length; i++) {
+        if (pris[i]) continue;
+        pris[i] = 1;
+        const ligne = [segments[i][0], segments[i][1]];
+        prolonge(ligne);
+        ligne.reverse();
+        prolonge(ligne);
+        lignes.push(ligne);
+    }
+    return lignes;
+}
