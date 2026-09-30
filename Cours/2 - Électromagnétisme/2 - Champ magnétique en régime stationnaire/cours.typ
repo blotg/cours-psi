@@ -13,7 +13,7 @@
     "va(F)": (signification: "la partie magnétique de la force de Lorentz", unité: unit("N")),
     "q": (signification: "la charge de la particule", unité: unit("C")),
     "va(v)": (signification: "la vitesse de la particule chargée", unité: unit("m/s")),
-    "va(dd(l))": (signification: "l'élément de longueur orienté, dans le sens du courant pour un fil, dans le sens de parcours pour une courbe orientée", unité: unit("m")),
+    "va(dd(l))": (signification: "l'élément de longueur orienté dans le sens du courant", unité: unit("m")),
     "dd(V)": (signification: "l'élément de volume", unité: unit("m^3")),
     "va(dd(F))": (signification: "la force magnétique subie par l'élément de conducteur", unité: unit("N")),
     "cal(C)": (signification: "une courbe fermée orientée"),
@@ -195,7 +195,7 @@ Les invariances de la distribution de courant contraignent la forme du champ mag
 )
 
 == Symétries du champ magnétique
-Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rapport aux plans d'antisymétrie de la distribution de courant, et antisymétrique par rapport aux plans de symétrie de la distribution de courant.
+Le champ magnétique est un *pseudo-vecteur* : il est symétrique par rapport aux plans d'antisymétrie de la distribution de courant, et antisymétrique par rapport aux plans de symétrie de la distribution de courant.
 
 #encadré(
     titre: "Plans de symétrie et champ magnétique",
@@ -242,6 +242,7 @@ Le champ magnétique est un #emph[pseudo-vecteur] : il est symétrique par rappo
 == Théorème d'Ampère
 Le théorème d'Ampère permet de déterminer le champ magnétique à partir de la distribution de courant, lorsque celle-ci est suffisamment symétrique.
 
+#grandeurs.insert("va(dd(l))", (signification: "l'élément de longueur de $cal(C)$, orienté dans son sens de parcours", unité: unit("m")))
 #encadré(
     titre: "Théorème d'Ampère",
     connaitre: true,
