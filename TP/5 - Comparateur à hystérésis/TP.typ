@@ -12,7 +12,7 @@
     groupe: (
         "Oscilloscope et GBF",
         "Platine d'essai et fils de connexion",
-        "Résistances disponibles dans la salle de TP",
+        "Résistors et condensateurs disponibles dans la salle de TP",
         [ALI et alimentation symétrique $plus.minus #quan[15 V]$],
         [Thermistance],
         [Sonde différentielle],

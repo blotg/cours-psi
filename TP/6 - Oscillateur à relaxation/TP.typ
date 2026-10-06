@@ -1,21 +1,20 @@
 #import "@local/prepa:0.1.1": *
 
 #show: TP.with(
-    titre: "Comparateur à hystérésis",
+    titre: "Oscillateur à relaxation",
 )
 
-#préparatoire()[
-    Lire l'énoncé du TP et effectuer l'@application-R2 et l'@application-protocole.
-]
+// #préparatoire()[
+//     Lire l'énoncé du TP et effectuer l'@application-R2 et l'@application-protocole.
+// ]
 
 #matériel(
     groupe: (
         "Oscilloscope et GBF",
         "Platine d'essai et fils de connexion",
-        "Résistances disponibles dans la salle de TP",
+        "Résistors disponibles dans la salle de TP",
+        "Boîte à décades de condensateurs",
         [ALI et alimentation symétrique $plus.minus #quan[15 V]$],
-        [Thermistance],
-        [Sonde différentielle],
     ),
 )
 
