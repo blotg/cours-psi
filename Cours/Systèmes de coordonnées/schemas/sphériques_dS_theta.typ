@@ -1,4 +1,5 @@
 #import "@local/prepa:0.1.1": *
+#import "couleurs.typ": *
 
 #canvas({
   let block-circle = circle
@@ -37,20 +38,20 @@
       arc(((r+dr)*calc.sin(t),0), radius: (r+dr)*calc.sin(t), start:0deg, delta: dph)
     })
     on-xz(y:0, {
-      line((90deg-t,r), (90deg-t,r+dr), stroke: green.darken(20%), name:"l3")
-      line((90deg-t,r), (0,0), stroke:dotted+(paint:purple), name:"r")
-      content("r.mid", anchor: "west", padding:0.1, text(purple,$r$))
+      line((90deg-t,r), (90deg-t,r+dr), stroke: vermillon, name:"l3")
+      line((90deg-t,r), (0,0), stroke:dotted+(paint:vermillon), name:"r")
+      content("r.mid", anchor: "west", padding:0.1, text(vermillon,$r$))
       arc((90deg,0.4), radius:0.4, start:90deg, delta:-t, mark:(end: ">>", fill: black), name:"theta")
       content("theta.mid", anchor: "south-west", padding:0.05, $theta$)
-      content("l3.mid", anchor: "west", padding:0.1, text(green.darken(20%),$dd(r)$))
+      content("l3.mid", anchor: "west", padding:0.1, text(vermillon,$dd(r)$))
     })
     on-xy(z:(r) * calc.cos(t), {
-      arc((r*calc.sin(t),0), radius: r*calc.sin(t), start:0deg, delta: dph, stroke: red.darken(20%), name:"l1")
+      arc((r*calc.sin(t),0), radius: r*calc.sin(t), start:0deg, delta: dph, stroke: vert, name:"l1")
       line((), (0,0), stroke:dotted)
       line((r*calc.sin(t),0), (0,0), stroke:dotted)
       arc((0.35*calc.sin(t),0), radius: 0.35*calc.sin(t), start:0deg, delta: dph, mark:(end: ">>", fill: black), name:"r")
       content("r.mid", anchor: "south", padding:0.1, $dd(phi)$)
-      content("l1.end", anchor: "west", padding:0.4, text(red.darken(20%),$r sin(theta) dd(phi)$))
+      content("l1.end", anchor: "west", padding:0.4, text(vert,$r sin(theta) dd(phi)$))
     })
   })
   line((

@@ -1,4 +1,5 @@
 #import "@local/prepa:0.1.1": *
+#import "couleurs.typ": *
 
 #canvas({
   let block-circle = circle
@@ -49,26 +50,26 @@
     })
     on-xz(y:0, {
       arc((90deg-t,r+dr), radius:r+dr, start:90deg-t, delta: -dt)
-      line((90deg-t,r), (90deg-t,r+dr), stroke: green.darken(20%), name:"l3")
+      line((90deg-t,r), (90deg-t,r+dr), stroke: vermillon, name:"l3")
       line((90deg-t - dt,r), (90deg-t - dt,r+dr))
-      line((90deg-t,r), (0,0), stroke:dotted+(paint:purple), name:"r")
-      content("r.mid", anchor: "north-west", pad:0.1, text(purple,$r$))
+      line((90deg-t,r), (0,0), stroke:dotted+(paint:vermillon), name:"r")
+      content("r.mid", anchor: "north-west", pad:0.1, text(vermillon,$r$))
       line((90deg-t - dt,r), (0,0), stroke:dotted)
       arc((90deg,0.4), radius:0.4, start:90deg, delta:-t, mark:(end: ">>", fill: black), name:"theta")
-      arc((90deg-t,r), radius:r, start:90deg-t, delta: -dt, name:"l2", stroke: blue.darken(20%))
-      content("l2.mid", anchor: "south-west", pad:0.1, text(blue.darken(20%),$r dd(theta)$))
+      arc((90deg-t,r), radius:r, start:90deg-t, delta: -dt, name:"l2", stroke: bleu)
+      content("l2.mid", anchor: "south-west", pad:0.1, text(bleu,$r dd(theta)$))
       content("theta.mid", anchor: "south-west", pad:0.1, $theta$)
       arc((90deg-t,0.3), radius:0.3, start:90deg-t, delta:-dt, mark:(end: ">>", fill: black), name:"dtheta")
       content("dtheta.mid", anchor: "south-west", pad:0.1, $dd(theta)$)
-      content("l3.mid", anchor: "west", pad:0.1, text(green.darken(20%),$dd(r)$))
+      content("l3.mid", anchor: "west", pad:0.1, text(vermillon,$dd(r)$))
     })
     on-xy(z:(r) * calc.cos(t), {
-      arc((r*calc.sin(t),0), radius: r*calc.sin(t), start:0deg, delta: dph, stroke: (dash: "dashed",paint:red.darken(20%)), name:"l1")
+      arc((r*calc.sin(t),0), radius: r*calc.sin(t), start:0deg, delta: dph, stroke: (dash: "dashed",paint:vert), name:"l1")
       line((), (0,0), stroke:dotted)
       line((r*calc.sin(t),0), (0,0), stroke:dotted)
       arc((0.25*calc.sin(t),0), radius: 0.25*calc.sin(t), start:0deg, delta: dt, mark:(end: ">>", fill: black), name:"r")
       content("r.mid", anchor: "south-east", pad:0.1, $dd(phi)$)
-      content("l1.mid", anchor: "north-west", pad:0.1, text(red.darken(20%),$r sin(theta) dd(phi)$))
+      content("l1.mid", anchor: "north-west", pad:0.1, text(vert,$r sin(theta) dd(phi)$))
     })
   })
   

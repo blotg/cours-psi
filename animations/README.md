@@ -164,6 +164,13 @@ Quelques partis pris :
 - **Le `CSS2DRenderer` place une étiquette avant d'appeler son
   `onBeforeRender`** : la déplacer là ne prend effet qu'à l'image suivante.
   `Étiquette.àCôté` la décale donc à l'écran, par un `translate` CSS.
+- **Une étiquette ne se mesure qu'une fois dans la page**, et le
+  `CSS2DRenderer` ne l'y met qu'à sa première image, *après* son
+  `onBeforeRender` : `àCôté` la place alors comme si elle n'avait pas de
+  largeur, et elle chevauche son arête. Au démarrage, les images suivantes
+  rattrapaient l'erreur ; dans un dessin caché que l'on découvre (un autre
+  volume choisi dans le panneau), rien ne la rattrapait. `Scène` refait donc les étiquettes dès que l'une d'elles entre
+  dans la page.
 - **Un graphique ne prend pas de remplissage** : ses légendes sont du HTML
   placé en proportion de sa taille, et un `padding` les décalerait par rapport
   au dessin. On l'espace par des marges (cf. `.vue > .graphique`).
@@ -393,6 +400,19 @@ coordonnée a sa couleur, celle de son curseur, de son vecteur de base et des
 arêtes le long desquelles elle varie. Les cotes des arêtes (r dθ…) se placent
 à chaque image sur une arête du contour où la formule est exacte : r dθ sur
 l'arc de rayon r, pas sur celui de rayon r + dr.
+
+En cylindriques et en sphériques, l'animation `volume` propose aussi, au
+choix comme les éléments de surface, le volume creux — cylindre creux de hauteur h, boule creuse —, entre les
+rayons r et r + dr, c'est-à-dire l'élément de volume étendu à tout un tour.
+Il est décrit dans `systemes.js` (`creux`) par ses faces, ses bords et ses
+cotes, et garde les couleurs de l'élément : les cercles du cylindre sont
+bleus comme les arcs r dθ, r et dr vermillon, h vert. La sphère n'a pas de
+bord : ses équateurs, en gris, ne sont là que pour l'œil. Le rayon qui porte
+r et dr passe sous les parois translucides, et il est dessiné après elles —
+sous deux couches, on ne le voyait plus. Chaque volume a sa vue de départ
+(`Scène.vueDeDépart(vue)`) : la boule, centrée en O, ne tient pas dans celle
+de l'élément. Les figures du poly suivent les mêmes couleurs
+(`schemas/couleurs.typ`).
 
 **Conversion 3** — `machine.js` dessine la machine synchrone diphasée et
 bipolaire, coupée en son milieu ; `machine-synchrone.js` la fait tourner. Les

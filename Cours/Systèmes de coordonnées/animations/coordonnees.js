@@ -2,7 +2,9 @@
 // coordonnées (cf. systemes.js) :
 //
 // - point    : les coordonnées d'un point M et la base locale en M ;
-// - volume   : l'élément de volume, ses arêtes et leurs longueurs ;
+// - volume   : l'élément de volume, ses arêtes et leurs longueurs — ou, au
+//              choix, le volume creux du système (cylindre, boule), qui
+//              l'étend à tout un tour ;
 // - surface  : les éléments de surface, un par coordonnée tenue constante.
 //
 // Une page les appelle par des sections :
@@ -20,9 +22,19 @@ import { COULEURS_COORDONNÉES as COULEUR, SYSTÈMES } from './systemes.js';
  *  (O y) part à droite, (O z) monte. */
 const VUE = { taille: 8.4, position: [9, 3.5, 4.5], cible: [0, 0.9, 1.5] };
 
+/** La même vue, centrée sur `cible` et embrassant `taille` : celle d'un
+ *  volume creux, qui ne tient pas dans la première. */
+const vueSur = ({ cible, taille }) => ({
+    taille,
+    cible,
+    position: cible.map((c, i) => c + VUE.position[i] - VUE.cible[i]),
+});
+
 /** Chaque face se découpe en N × N quadrilatères : assez pour arrondir une
- *  portion de sphère. */
+ *  portion de sphère. Un volume creux fait un tour entier, il lui en faut
+ *  davantage. */
 const N = 24;
+const N_CREUX = 64;
 
 /** Les valeurs des curseurs, angles en radians. */
 const enRadians = (système, valeurs) =>
@@ -32,8 +44,20 @@ function nouvelleScène(section) {
     const { vue, réglages } = cadre(section);
     const scène = new Scène(vue, VUE);
     scène.ajoute(quadrillage(9, 9), repère(4.5));
-    return { scène, réglages: new Réglages(réglages) };
+    return { scène, panneau: réglages };
 }
+
+/** La matière d'un élément ou d'un volume creux : translucide, pour qu'on
+ *  voie les arêtes de derrière. */
+const matièreDesFaces = () =>
+    new THREE.MeshStandardMaterial({
+        color: '#a9bfdc',
+        roughness: 0.85,
+        transparent: true,
+        opacity: 0.6,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+    });
 
 /** Un curseur par coordonnée, ou par accroissement (`accroissement`), qui
  *  écrit dans `valeurs` puis appelle `rappel`. */
@@ -59,7 +83,8 @@ function curseurs(réglages, système, valeurs, rappel, accroissement = false) {
 // -- Un point et sa base locale ---------------------------------------------
 
 function animationPoint(section, système) {
-    const { scène, réglages } = nouvelleScène(section);
+    const { scène, panneau } = nouvelleScène(section);
+    const réglages = new Réglages(panneau);
     const valeurs = [...système.départ.point];
 
     réglages.groupe('Coordonnées du point M');
@@ -109,9 +134,9 @@ function animationPoint(section, système) {
  * où chaque coordonnée va de q à q + dq — la coordonnée `fixe` restant à q
  * pour une surface. Ses arêtes prennent la couleur de la coordonnée qui varie
  * le long d'elles, et celles qui partent du coin M portent leur longueur.
+ * Renvoie ce qu'il dessine, pour qu'un choix le montre ou le cache.
  */
-function animationÉlément(section, système, surface) {
-    const { scène, réglages } = nouvelleScène(section);
+function animationÉlément(scène, réglages, système, surface) {
     const q = [...système.départ.élément];
     const dq = [...système.départ.accroissements];
     let fixe = système.départ.surface;
@@ -128,10 +153,9 @@ function animationÉlément(section, système, surface) {
             },
         });
         formule = réglages.formule();
-    } else {
-        réglages.groupe('Volume élémentaire');
-        formule = réglages.formule(système.volume);
     }
+    // La formule d'un volume, elle, est écrite par `animationVolume`, qui
+    // en propose plusieurs.
     réglages.groupe('Coin M de l’élément');
     curseurs(réglages, système, q, miseÀJour);
     réglages.groupe('Accroissements');
@@ -139,17 +163,7 @@ function animationÉlément(section, système, surface) {
 
     const faces = surface ? 1 : 6;
     const géométrie = géométrieDesFaces(faces);
-    const élément = new THREE.Mesh(
-        géométrie,
-        new THREE.MeshStandardMaterial({
-            color: '#a9bfdc',
-            roughness: 0.85,
-            transparent: true,
-            opacity: 0.6,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-        }),
-    );
+    const élément = new THREE.Mesh(géométrie, matièreDesFaces());
     const arêtes = Array.from({ length: surface ? 4 : 12 }, () => new Trait({ épaisseur: 2.5 }));
     const cotes = système.arêtes.map(([tex], i) => new Étiquette(tex, { couleur: COULEUR[i] }));
     const coin = point(COULEURS.noir, 0.06);
@@ -158,8 +172,9 @@ function animationÉlément(section, système, surface) {
     // une flèche par couleur, dont on ne montre qu'une.
     const normales = COULEUR.map((couleur) => new Flèche({ couleur, rayon: 0.03, largeur: 0.09 }));
     const nomNormale = new Étiquette('\\overrightarrow{\\mathrm{d}S}');
-    scène.ajoute(élément, ...arêtes, ...cotes, coin, nomCoin);
-    if (surface) scène.ajoute(...normales, nomNormale);
+    const dessin = new THREE.Group().add(élément, ...arêtes, ...cotes, coin, nomCoin);
+    if (surface) dessin.add(...normales, nomNormale);
+    scène.ajoute(dessin);
 
     function miseÀJour() {
         // Les coordonnées bornées (θ des sphériques) ne dépassent pas leur
@@ -238,22 +253,134 @@ function animationÉlément(section, système, surface) {
         scène.redessine();
     }
     miseÀJour();
+    return dessin;
 }
 
-/** Une géométrie de `faces` grilles de (N + 1) × (N + 1) sommets, que
+// -- Volumes creux -----------------------------------------------------------
+
+/**
+ * Le volume creux d'un système, entre les rayons r et r + dr : l'élément de
+ * volume étendu à tout un tour, voire à toutes les directions. Ses bords ont
+ * la couleur de la coordonnée qui varie le long d'eux, comme les arêtes de
+ * l'élément, et ses cotes celle de la coordonnée qu'elles mesurent.
+ */
+function animationCreux(scène, réglages, système) {
+    const { creux } = système;
+    const valeurs = [...creux.départ];
+
+    réglages.groupe('Dimensions');
+    creux.dimensions.forEach(({ couleur, ...curseur }, i) =>
+        réglages.curseur({
+            ...curseur,
+            valeur: valeurs[i],
+            couleur: COULEUR[couleur],
+            auChangement: (v) => {
+                valeurs[i] = v;
+                miseÀJour();
+            },
+        }),
+    );
+
+    // Une construction compte toujours autant de morceaux : on les crée une
+    // fois, d'après celle de départ.
+    const départ = creux.construction(valeurs);
+    const géométrie = géométrieDesFaces(départ.faces.length, N_CREUX);
+    const volume = new THREE.Mesh(géométrie, matièreDesFaces());
+    const bords = départ.bords.map(([i]) => new Trait({ couleur: COULEUR[i], épaisseur: 2.5 }));
+    const aides = départ.aides.map(() => new Trait({ couleur: COULEURS.gris, épaisseur: 1.5 }));
+    const segments = départ.cotes.map(([i, , , , pointillés]) =>
+        pointillés
+            ? new Trait({ couleur: COULEURS.gris, épaisseur: 1.5, pointillés: true, tiret: 0.1 })
+            : new Trait({ couleur: COULEUR[i], épaisseur: 2.5 }),
+    );
+    // Un rayon passe sous une paroi, voire deux : ses segments sont dessinés
+    // après elles, sans quoi elles les effaceraient.
+    for (const segment of segments) {
+        segment.material.transparent = true;
+        segment.renderOrder = 1;
+    }
+    const cotes = départ.cotes.map(([i, tex]) => new Étiquette(tex, { couleur: COULEUR[i] }));
+    const centre = point(COULEURS.noir, 0.06);
+    const dessin = new THREE.Group().add(volume, ...bords, ...aides, ...segments, ...cotes, centre);
+    scène.ajoute(dessin);
+
+    /** Les points d'une courbe paramétrée sur [0, 1]. */
+    const parcourt = (courbe) => Array.from({ length: 2 * N_CREUX + 1 }, (_, p) => courbe(p / (2 * N_CREUX)));
+
+    function miseÀJour() {
+        const construction = creux.construction(valeurs);
+        construction.faces.forEach((nappe, f) => remplitFace(géométrie, f, nappe, N_CREUX));
+        géométrie.attributes.position.needsUpdate = true;
+        géométrie.computeVertexNormals();
+        géométrie.computeBoundingSphere();
+        construction.bords.forEach(([, courbe], k) => bords[k].trace(parcourt(courbe)));
+        construction.aides.forEach((courbe, k) => aides[k].trace(parcourt(courbe)));
+        construction.cotes.forEach(([, , segment, loin], k) => {
+            segments[k].trace(segment);
+            cotes[k].àCôté([segment], loin);
+        });
+        centre.position.copy(construction.centre);
+        scène.redessine();
+    }
+    miseÀJour();
+    return dessin;
+}
+
+/**
+ * L'élément de volume et, si le système en a un, son volume creux, au choix
+ * comme les éléments de surface. Les deux se partagent la scène et le
+ * panneau, chacun avec son dessin, ses curseurs et sa vue de départ.
+ */
+function animationVolume(section, système) {
+    const { scène, panneau } = nouvelleScène(section);
+    const réglages = new Réglages(panneau);
+    const volumes = [['élément', '\\text{Élément}', système.volume, VUE, () => animationÉlément(scène, réglages, système, false)]];
+    if (système.creux) {
+        const { nom, volume, vue } = système.creux;
+        volumes.push(['creux', `\\text{${nom}}`, volume, vueSur(vue), () => animationCreux(scène, réglages, système)]);
+    }
+
+    réglages.groupe('Volume élémentaire');
+    if (volumes.length > 1) {
+        réglages.choix({ options: volumes.map(([clé, nom]) => [clé, nom]), valeur: 'élément', auChangement: montre });
+    }
+    const formule = réglages.formule();
+    // Chaque volume ajoute ses groupes de curseurs au panneau : on les
+    // retient, pour ne montrer que ceux du volume choisi.
+    const contenus = volumes.map(([clé, , tex, vue, dessine]) => {
+        const avant = panneau.childElementCount;
+        const dessin = dessine();
+        return { clé, tex, vue, dessin, groupes: [...panneau.children].slice(avant) };
+    });
+
+    function montre(clé) {
+        for (const contenu of contenus) {
+            const montré = contenu.clé === clé;
+            contenu.dessin.visible = montré;
+            for (const groupe of contenu.groupes) groupe.hidden = !montré;
+            if (montré) {
+                formule.écrit(contenu.tex);
+                scène.vueDeDépart(contenu.vue);
+            }
+        }
+    }
+    montre('élément');
+}
+
+/** Une géométrie de `faces` grilles de (n + 1) × (n + 1) sommets, que
  *  `remplitFace` met en place : les tampons ne changent jamais de taille. */
-function géométrieDesFaces(faces) {
+function géométrieDesFaces(faces, n = N) {
     const géométrie = new THREE.BufferGeometry();
-    const sommets = (N + 1) * (N + 1);
+    const sommets = (n + 1) * (n + 1);
     géométrie.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3 * faces * sommets), 3));
     const indices = [];
     for (let f = 0; f < faces; f++) {
-        for (let i = 0; i < N; i++) {
-            for (let j = 0; j < N; j++) {
-                const a = f * sommets + i * (N + 1) + j;
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                const a = f * sommets + i * (n + 1) + j;
                 const b = a + 1;
-                const c = a + N + 2;
-                const d = a + N + 1;
+                const c = a + n + 2;
+                const d = a + n + 1;
                 indices.push(a, b, c, a, c, d);
             }
         }
@@ -263,13 +390,13 @@ function géométrieDesFaces(faces) {
 }
 
 /** La face `f`, image de (s, t) ∈ [0, 1]² par `nappe`. */
-function remplitFace(géométrie, f, nappe) {
+function remplitFace(géométrie, f, nappe, n = N) {
     const tampon = géométrie.attributes.position.array;
-    let n = 3 * f * (N + 1) * (N + 1);
-    for (let i = 0; i <= N; i++) {
-        for (let j = 0; j <= N; j++) {
-            nappe(i / N, j / N).toArray(tampon, n);
-            n += 3;
+    let k = 3 * f * (n + 1) * (n + 1);
+    for (let i = 0; i <= n; i++) {
+        for (let j = 0; j <= n; j++) {
+            nappe(i / n, j / n).toArray(tampon, k);
+            k += 3;
         }
     }
 }
@@ -278,5 +405,9 @@ lance('section.animation', (section) => {
     const système = SYSTÈMES[section.dataset.systeme];
     const animation = section.dataset.animation;
     if (animation === 'point') animationPoint(section, système);
-    else animationÉlément(section, système, animation === 'surface');
+    else if (animation === 'volume') animationVolume(section, système);
+    else {
+        const { scène, panneau } = nouvelleScène(section);
+        animationÉlément(scène, new Réglages(panneau), système, true);
+    }
 });

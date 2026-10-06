@@ -1,5 +1,6 @@
 #import "@preview/cetz:0.5.2": canvas, draw
 #import "@local/prepa:0.1.1": *
+#import "couleurs.typ": *
 
 #canvas({
   let block-circle = circle
@@ -25,11 +26,11 @@
   
   on-xy(z: z+dz, {
     arc((thet,r+dr), radius: r+dr, start: thet, delta: dthet)
-    arc((thet,r), radius: r, start: thet, delta: dthet, name:"rdthet", stroke:red.darken(30%))
-    content("rdthet.mid", text(red.darken(30%))[$r dd(theta)$], anchor:"north-west", padding: 0.1)
+    arc((thet,r), radius: r, start: thet, delta: dthet, name:"rdthet", stroke:bleu)
+    content("rdthet.mid", text(bleu)[$r dd(theta)$], anchor:"north-west", padding: 0.1)
     line((thet,r), (thet, r+dr))
-    line((thet+dthet,r), (thet+dthet, r+dr), name:"dr", stroke:blue)
-    content("dr.mid", text(blue)[$dd(r)$], anchor:"south", padding: 0.1)
+    line((thet+dthet,r), (thet+dthet, r+dr), name:"dr", stroke:vermillon)
+    content("dr.mid", text(vermillon)[$dd(r)$], anchor:"south", padding: 0.1)
     line((thet,r), (thet,0), stroke: (dash: "dashed"), name:"r")
     line((thet,0), (thet+dthet, r), stroke: (dash: "dashed"))
     content("r.mid", $r$, anchor:"north-east", padding: 0.1)
@@ -48,6 +49,6 @@
   line((r*calc.cos(thet),r*calc.sin(thet),z), (r*calc.cos(thet),r*calc.sin(thet),z+dz))
   line(((r+dr)*calc.cos(thet),(r+dr)*calc.sin(thet),z), ((r+dr)*calc.cos(thet),(r+dr)*calc.sin(thet),z+dz))
   line((r*calc.cos(thet+dthet),r*calc.sin(thet+dthet),z), (r*calc.cos(thet+dthet),r*calc.sin(thet+dthet),z+dz), stroke: (dash: "dashed"))
-  line(((r+dr)*calc.cos(thet+dthet),(r+dr)*calc.sin(thet+dthet),z), ((r+dr)*calc.cos(thet+dthet),(r+dr)*calc.sin(thet+dthet),z+dz), name:"dz", stroke:green.darken(30%))
-  content("dz.mid", text(green.darken(30%))[$dd(z)$], anchor:"west", padding: 0.1)
+  line(((r+dr)*calc.cos(thet+dthet),(r+dr)*calc.sin(thet+dthet),z), ((r+dr)*calc.cos(thet+dthet),(r+dr)*calc.sin(thet+dthet),z+dz), name:"dz", stroke:vert)
+  content("dz.mid", text(vert)[$dd(z)$], anchor:"west", padding: 0.1)
 })

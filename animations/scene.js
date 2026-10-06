@@ -44,7 +44,7 @@ export class Scène {
     ) {
         this.rapport = rapport;
         this.taille = taille;
-        this.départ = { position, cible };
+        this.départ = { position, cible, taille };
 
         this.scène = new THREE.Scene();
         this.scène.background = new THREE.Color(0xffffff);
@@ -142,15 +142,23 @@ export class Scène {
         this.àRefaire = true;
     }
 
-    vueDeDépart() {
+    /** Revient à la vue de départ — ou à `nouvelle`, qui le devient : une
+     *  scène qui montre autre chose se cadre autrement. */
+    vueDeDépart(nouvelle) {
+        if (nouvelle) this.départ = { ...this.départ, ...nouvelle };
         this.regarde(this.départ);
     }
 
-    /** Place la caméra en `position`, tournée vers `cible` : deux triplets. */
-    regarde({ position, cible }) {
+    /** Place la caméra en `position`, tournée vers `cible` : deux triplets.
+     *  `taille`, si on la donne, change aussi ce que la vue embrasse. */
+    regarde({ position, cible, taille = this.taille }) {
         this.caméra.position.set(...position);
         this.contrôles.target.set(...cible);
         this.caméra.zoom = 1;
+        if (taille !== this.taille) {
+            this.taille = taille;
+            this.redimensionne();
+        }
         this.caméra.updateProjectionMatrix();
         this.contrôles.update();
         this.redessine();
@@ -274,6 +282,7 @@ export class Scène {
             Object.assign(this.caméra, { left: -h * this.rapport, right: h * this.rapport, top: h, bottom: -h });
         } else {
             this.caméra.aspect = this.rapport;
+            this.caméra.fov = this.taille;
         }
         this.caméra.updateProjectionMatrix();
         this.redessine();
@@ -295,6 +304,12 @@ export class Scène {
         // faut la taille de l'image, y compris aux traits ajoutés depuis.
         this.scène.traverse((objet) => objet.material?.isLineMaterial && objet.material.resolution.copy(this.dimensions));
         this.rendu.render(this.scène, this.caméra);
+        // Une étiquette n'entre dans la page qu'à sa première image, après
+        // s'être placée (cf. `Étiquette.àCôté`) : elle n'a pas pu se mesurer.
+        // On la replace aussitôt — sinon, celles d'un dessin caché que l'on
+        // découvre resteraient de travers jusqu'au prochain mouvement.
+        const avant = this.étiquettes.domElement.childElementCount;
         this.étiquettes.render(this.scène, this.caméra);
+        if (this.étiquettes.domElement.childElementCount !== avant) this.étiquettes.render(this.scène, this.caméra);
     }
 }

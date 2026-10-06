@@ -5,7 +5,7 @@
 
 = Coordonnées cartésiennes
 == Définition
-En coordonnées cartésiennes, un point est repéré par la distance entre son projeté sur chacun des axes et l'origine du repère.
+En coordonnées cartésiennes, un point est repéré par la distance algébrique entre son projeté sur chacun des axes et l'origine du repère.
 
 Les coordonnées d'un point sont notées $x in RR$, $y in RR$ et $z in RR$.
 
@@ -64,7 +64,7 @@ L'élément de volume a pour volume $dd(V)=dd(x) dot dd(y) dot dd(z)$.
 )
 
 #application[
-    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $mu=mu_0(1+x y)$.
+    Déterminer la masse du parallélépipède précédent dont le sommet inférieur gauche derrière est à l'origine du repère. On donne sa masse volumique $mu=mu_0(1+(x y)/lambda^2)$.
 ]
 
 == Élément de surface
@@ -93,14 +93,14 @@ Les éléments de surface sont représentés sur la figure suivante.
 )
 
 #application[
-    Déterminer grâce à un calcul d'intégrale l'aire d'un triangle rectangle isocèle de hauteur $l$ situé dans le plan $(O y z)$.
+    Déterminer grâce à un calcul d'intégrale l'aire d'un triangle rectangle isocèle de hauteurs $l$ situé dans le plan $(O y z)$.
 ]
 
-#question-de-colle([Présenter les coordonnées cartésiennes d'un point et donner leur bornes. Donner  l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral l'aire d'un triangle rectangle isocèle de hauteur $l$ situé dans le plan $(O y z)$.])
+#question-de-colle([Présenter les coordonnées cartésiennes d'un point et donner leurs bornes. Donner  l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégrale l'aire d'un triangle rectangle isocèle de hauteurs $l$ situé dans le plan $(O y z)$.])
 
 = Coordonnées cylindriques
 == Définition
-En coordonnées cylindriques, un point est repéré par sa distance à l'axe $(O z)$, l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$ et la distance entre son projeté sur l'axe $z$ et l'origine du repère.
+En coordonnées cylindriques, un point est repéré par sa distance à l'axe $(O z)$, l'angle entre son projeté dans le plan $(O x y)$ et l'axe $(O x)$ et la distance algébrique entre son projeté sur l'axe $(O z)$ et l'origine du repère.
 
 Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,2pi[$ et $z in RR$.
 
@@ -158,9 +158,9 @@ Le déplacement élémentaire s'exprime comme $va(dd(l))=dd(r) va(e_r)+r dd(thet
     "En coordonnées cylindriques, $va(O M)$ a des composantes selon",
     (
         "$va(e_r)$ et $va(e_z)$",
-        "$va(e_r)$, $va(e_z)$ et $va(e_phi)$",
+        "$va(e_r)$, $va(e_z)$ et $va(e_theta)$",
         "$va(e_r)$ seulement",
-        "$va(e_z)$ et $va(e_phi)$",
+        "$va(e_z)$ et $va(e_theta)$",
     ),
 )
 
@@ -250,7 +250,7 @@ Les éléments de surface sont représentés sur la figure suivante.
 )
 
 == Coquille cylindrique
-Lorsque le problème étudié est invariant par rotation selon $theta$, il peut être plus aisé d'utiliser une coquille cylindrique.
+Lorsque le problème étudié ne dépend que de $r$, il peut être plus aisé d'utiliser une coquille cylindrique.
 
 Une coquille cylindrique est un volume infinitésimal contenu entre deux cylindres concentriques de rayons $r$ et $r+dd(r)$.
 
@@ -260,7 +260,7 @@ Une coquille cylindrique est un volume infinitésimal contenu entre deux cylindr
 
 L'aire intérieure de la coquille est $2 pi r h$, son aire extérieure est $2 pi (r+dd(r)) h$ et son volume est $ dd(V)= pi (r+dd(r))^2 h - pi r^2 h = pi h (r^2+2r dd(r) + dd(r)^2 - r^2) approx 2 pi r h dd(r) $
 
-On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindrique sur l'angle $theta$ : $ dd(V) = integral_0^h integral_0^(2 pi) r dd(r) dd(theta) dd(z) = 2 pi r h dd(r) $
+On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindrique selon $theta$ et $z$ : $ dd(V) = integral_0^h integral_0^(2 pi) r dd(r) dd(theta) dd(z) = 2 pi r h dd(r) $
 
 #flashcard(
     recto: [Volume d'une coquille cylindrique],
@@ -272,7 +272,7 @@ On peut aussi retrouver ce résultat en intégrant l'élément de volume cylindr
 ]
 
 #question-de-colle([
-    Présenter les coordonnées cylindriques d'un point et donner leurs bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral l'aire latérale d'un cylindre.
+    Présenter les coordonnées cylindriques d'un point et donner leurs bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégrale l'aire latérale d'un cylindre.
 ])
 
 = Coordonnées sphériques
@@ -289,10 +289,10 @@ Les coordonnées d'un point sont notées $r in RR^+$, $theta in [0,pi]$ et $phi 
 #question-de-début-de-cours(
     "En coordonnées sphériques",
     (
-        "$theta in [0, pi[$ et $phi in [0, 2 pi[$",
-        "$theta in [0, 2 pi[$ et $phi in [0, pi[$",
-        "$theta in [0, pi[$ et $phi in [0, pi/2[$",
-        "$theta in [0, pi[$ et $phi in [0, pi[$",
+        "$theta in [0, pi]$ et $phi in [0, 2 pi[$",
+        "$theta in [0, 2 pi]$ et $phi in [0, pi[$",
+        "$theta in [0, pi]$ et $phi in [0, pi/2[$",
+        "$theta in [0, pi]$ et $phi in [0, pi[$",
     ),
 )
 
@@ -410,7 +410,7 @@ Les éléments de surface sont représentés sur la figure suivante.
 ]
 
 == Coquille sphérique
-Lorsque le problème étudié est invariant par rotation selon $theta$ et $phi$, il peut être plus aisé d'utiliser une coquille sphérique.
+Lorsque le problème étudié est invariant par rotation d'angles $theta$ et $phi$, il peut être plus aisé d'utiliser une coquille sphérique.
 
 Une coquille sphérique est un volume infinitésimal contenu entre deux sphères concentriques de rayons $r$ et $r+dd(r)$.
 
@@ -432,5 +432,5 @@ On peut aussi retrouver ce résultat en intégrant l'élément de volume sphéri
 ]
 
 #question-de-colle([
-    Présenter les coordonnées sphériques d'un point et préciser leur bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégral le volume d'une boule.
+    Présenter les coordonnées sphériques d'un point et préciser leurs bornes. Donner l'expression et schématiser le vecteur position, le déplacement élémentaire, l'élément de volume et les 3 éléments de surface. Déterminer grâce à un calcul d'intégrale le volume d'une boule.
 ])

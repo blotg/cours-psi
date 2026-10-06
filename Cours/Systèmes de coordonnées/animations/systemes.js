@@ -14,8 +14,9 @@ export const COULEURS_COORDONNÉES = [COULEURS.vermillon, COULEURS.bleu, COULEUR
 const d = (tex) => `\\mathrm{d}${tex}`;
 const milieu = (a, b) => a.clone().add(b).multiplyScalar(0.5);
 
-/** Une coordonnée de longueur, et le curseur de son accroissement. */
-const longueur = (tex, min = -4) => ({ tex, min, max: 4, pas: 0.1, d: { min: 0.1, max: 2.5, pas: 0.1 } });
+/** Une coordonnée de longueur, et le curseur de son accroissement : au
+ *  centième, pour qu'ils glissent sans à-coups. */
+const longueur = (tex, min = -4) => ({ tex, min, max: 4, pas: 0.01, d: { min: 0.1, max: 2.5, pas: 0.01 } });
 
 /** Une coordonnée angulaire, en degrés pour les curseurs. `borné` : elle ne
  *  peut dépasser son maximum (θ des sphériques ne va pas au-delà de π). */
@@ -28,6 +29,10 @@ const angle = (tex, max, dmax, borné = false) => ({
     borné,
     d: { min: 1, max: dmax, pas: 1 },
 });
+
+/** Le curseur d'une dimension d'un volume creux ; `couleur` est l'indice de
+ *  la coordonnée qu'elle mesure. */
+const dimension = (tex, couleur, min, max) => ({ tex, couleur, min, max, pas: 0.01 });
 
 // -- Coordonnées cartésiennes ------------------------------------------------
 
@@ -100,6 +105,46 @@ const cylindriques = {
             arcs: [[1, '\\theta', ORIGINE, X, Y, θ, 1]],
         };
     },
+
+    // Le cylindre creux : l'élément de volume étendu à tout un tour et à
+    // toute la hauteur — r de r à r + dr, θ de 0 à 2π, z de 0 à h.
+    creux: {
+        nom: 'Cylindre creux',
+        volume: `${d('V')} = 2\\pi r h \\, ${d('r')}`,
+        dimensions: [dimension('r', 0, 1, 3), dimension(d('r'), 0, 0.05, 1.5), dimension('h', 2, 0.5, 4)],
+        départ: [2, 0.5, 2.5],
+        // Le centre de la vue de départ, et ce qu'elle embrasse.
+        vue: { cible: [0, 0, 1.6], taille: 9 },
+
+        /**
+         * Ses faces, nappes de [0, 1]² (les deux parois, les deux couronnes) ;
+         * ses bords, avec la coordonnée qui varie le long d'eux (les quatre
+         * cercles) ; ses cotes, avec la coordonnée qu'elles mesurent, le
+         * segment qui les porte, un point dont elles s'écartent et, pour r,
+         * des pointillés — sur la couronne du haut et sur une génératrice.
+         */
+        construction([r, dr, h]) {
+            const p = (ρ, θ, z) => cylindriques.position([ρ, θ, z]);
+            const tour = 2 * Math.PI;
+            const α = Math.PI / 2;
+            return {
+                faces: [
+                    (s, t) => p(r, s * tour, t * h),
+                    (s, t) => p(r + dr, s * tour, t * h),
+                    (s, t) => p(r + s * dr, t * tour, 0),
+                    (s, t) => p(r + s * dr, t * tour, h),
+                ],
+                bords: [r, r + dr].flatMap((ρ) => [0, h].map((z) => [1, (t) => p(ρ, t * tour, z)])),
+                aides: [],
+                centre: p(0, α, h),
+                cotes: [
+                    [0, 'r', [p(0, α, h), p(r, α, h)], ORIGINE, true],
+                    [0, d('r'), [p(r, α, h), p(r + dr, α, h)], ORIGINE],
+                    [2, 'h', [p(r + dr, α, 0), p(r + dr, α, h)], p(0, α, h / 2)],
+                ],
+            };
+        },
+    },
 };
 
 // -- Coordonnées sphériques --------------------------------------------------
@@ -135,6 +180,35 @@ const spheriques = {
                 [2, '\\varphi', ORIGINE, X, Y, φ, 1],
             ],
         };
+    },
+
+    // La boule creuse : l'élément de volume étendu à toutes les directions —
+    // r de r à r + dr, θ de 0 à π, φ de 0 à 2π.
+    creux: {
+        nom: 'Boule creuse',
+        volume: `${d('V')} = 4\\pi r^2 \\, ${d('r')}`,
+        dimensions: [dimension('r', 0, 1, 3), dimension(d('r'), 0, 0.05, 1.5)],
+        départ: [2.2, 0.5],
+        vue: { cible: [0, 0, 0.4], taille: 10 },
+
+        /** Deux sphères, qui n'ont pas de bord : leurs équateurs aident l'œil.
+         *  Les cotes sont sur un rayon du plan (O y z). */
+        construction([r, dr]) {
+            const p = (ρ, θ, φ) => spheriques.position([ρ, θ, φ]);
+            const tour = 2 * Math.PI;
+            const [θ, φ] = [Math.PI / 3, Math.PI / 2];
+            const loin = p(r, θ + Math.PI / 2, φ);
+            return {
+                faces: [r, r + dr].map((ρ) => (s, t) => p(ρ, s * Math.PI, t * tour)),
+                bords: [],
+                aides: [r, r + dr].map((ρ) => (t) => p(ρ, Math.PI / 2, t * tour)),
+                centre: ORIGINE,
+                cotes: [
+                    [0, 'r', [ORIGINE, p(r, θ, φ)], loin, true],
+                    [0, d('r'), [p(r, θ, φ), p(r + dr, θ, φ)], loin],
+                ],
+            };
+        },
     },
 };
 
