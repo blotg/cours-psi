@@ -4,6 +4,10 @@
   titre: "Le chargeur à induction",
   explique: true)[
 
+#figure[
+  #image(width: 40%, "../images/chargeur.jpg")
+]
+
 #question(coups-de-pouce: (
   "Décomposer la causalité (qu'est-ce qui provoque quoi ?)",
 ))[
