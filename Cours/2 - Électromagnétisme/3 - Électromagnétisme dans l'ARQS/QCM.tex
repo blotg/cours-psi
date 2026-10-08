@@ -5,10 +5,10 @@
       \begin{reponses}
         \bonne{$\text{div}\vv{E}=\frac{\rho}{\epsilon_0}$}
         \bonne{$\text{div}\vv{B}=0$}
-        \bonne{$\vv{\text{rot}}\vv{E}=-\frac{\partial B}{\partial t}$}
+        \bonne{$\vv{\text{rot}}\vv{E}=-\frac{\partial \vv{B}}{\partial t}$}
         \bonne{$\vv{\text{rot}}\vv{B}=\mu_0\vv{j}$}
-        \mauvaise{$\vv{\text{rot}}\vv{B}=\mu_0\vv{j}+\mu_0\epsilon_0\frac{\partial E}{\partial t}$}
-        \mauvaise{$\vv{\text{rot}}\vv{B}=-\frac{\partial E}{\partial t}$}
+        \mauvaise{$\vv{\text{rot}}\vv{B}=\mu_0\vv{j}+\mu_0\epsilon_0\frac{\partial \vv{E}}{\partial t}$}
+        \mauvaise{$\vv{\text{rot}}\vv{B}=-\frac{\partial \vv{E}}{\partial t}$}
         \mauvaise{$\vv{\text{rot}}\vv{E}=0$}
         \mauvaise{$\text{div}\vv{B}=\frac{\rho}{\epsilon_0}$}
         \mauvaise{$\text{div}\vv{E}=0$}
@@ -24,9 +24,12 @@
     La loi de Lenz-Faraday
     \begin{multicols}{2}
       \begin{reponses}
-        \bonne{s'écrit $e=-\frac{\partial \Phi}{\partial t}$}
-        \bonne{s'utilise en convension générateur}
+        \bonne{s'écrit $e=-\frac{d\Phi}{dt}$}
+        \bonne{s'utilise en convention générateur}
         \bonne{se démontre à partir de l'équation de Maxwell-Faraday}
+        \mauvaise{s'écrit $e=\frac{d\Phi}{dt}$}
+        \mauvaise{s'utilise en convention récepteur}
+        \mauvaise{se démontre à partir de l'équation de Maxwell-Ampère}
       \end{reponses}
     \end{multicols}
   \end{questionmult}
@@ -89,7 +92,7 @@
 
 \element{EM3.mutuelle}{
   \begin{question}{fluxMutuelle}\bareme{1}
-    Le flux reçu \textbf{par} un bobine 1 en inductance mutuelle avec une bobine 2 est
+    Le flux reçu \textbf{par} une bobine 1 en inductance mutuelle avec une bobine 2 est
     \begin{multicols}{2}
       \begin{reponses}
         \bonne{$L_1I_1+MI_2$}
@@ -102,7 +105,7 @@
 }
 \element{EM3.mutuelle}{
   \begin{question}{energieMutuelle}\bareme{1}
-    L'énergie stockée dans deux bobine en interaction est
+    L'énergie stockée dans deux bobines en interaction est
     \begin{multicols}{2}
       \begin{reponses}
         \bonne{$\frac{1}{2}L_1I_1^2+\frac{1}{2}L_2I_2^2+MI_1I_2$}

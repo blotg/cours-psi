@@ -44,7 +44,8 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
   Déterminer l'orientation du champ magnétique $va(B)(M)$ créé par ce câble ainsi que les variables dont il peut dépendre en un point $M$ quelconque de l'espace.
 ][
   *Analyse des invariances* La distribution des courants est invariante par translation selon l'axe $z$ du câble et par rotation autour de cet axe ($theta$). D'après le principe de Curie, il en va de même pour le champ magnétostatique $va(B)$. Par conséquent, $va(B)=va(B)(r)$.
-  *Analyse des symétries* Le câble est symétrique par rapport au plan passant par $M$ et perpendiculaire à $va(e_theta)$ (le plan $(M,va(e_r), va(e_z))$). Par conséquent, $va(B)(M)$ est dirigé selon $va(e_theta)$.
+
+  *Analyse des symétries* La distribution des courants est symétrique par rapport au plan passant par $M$ et perpendiculaire à $va(e_theta)$ (le plan $(M,va(e_r), va(e_z))$). Par conséquent, $va(B)(M)$ est dirigé selon $va(e_theta)$.
 ]
 
 #question(coups-de-pouce: (
@@ -71,7 +72,7 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
 ]
 
 #question(coups-de-pouce: (
-  "Quelle est l'expression du $va(d S)$ correspondant en coordonnées cylindriques ?",
+  "Quelle est l'expression du $va(dd(S))$ correspondant en coordonnées cylindriques ?",
 ))[
   Déterminer le flux de $va(B)(M)$ à travers une surface rectangulaire $P Q R S$ correspondant à une longueur $l$ du câble, orientée dans le sens de $+va(e_theta)$.
 ][

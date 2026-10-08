@@ -11,8 +11,8 @@
     mu_0: (signification: "la perméabilité magnétique du vide", unité: unit("H/m")),
     "va(E)": (signification: "le champ électrique", unité: unit("V/m")),
     "va(B)": (signification: "le champ magnétique", unité: unit("T")),
-    tau: (signification: "durée caractéristique de variation des grandeurs", unité: unit("s")),
-    lambda: (signification: "longueur caractéristique du système", unité: unit("m")),
+    tau: (signification: "la durée caractéristique de variation des grandeurs", unité: unit("s")),
+    lambda: (signification: "la longueur caractéristique du système", unité: unit("m")),
     c: (signification: "la célérité de la lumière dans le vide", unité: unit("m/s")),
     "cal(C)": (signification: "une courbe fermée orientée"),
     "va(dd(l))": (
@@ -75,7 +75,7 @@ Les équations de Maxwell permettent d'obtenir l'équation locale de conservatio
 
 == Courants de déplacement
 
-Le terme $epsilon_0 pdv(va(E), t)$ se nomme la densité de courant de déplacement#footnote[Il est parfois appelée simplement courant de déplacement par abus de langage.]. Son unité est $unit("A/m^2")$.
+Le terme $epsilon_0 pdv(va(E), t)$ se nomme la densité de courant de déplacement#footnote[Il est parfois appelé simplement courant de déplacement par abus de langage.]. Son unité est $unit("A/m^2")$.
 
 L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique consiste à négliger les courants de déplacement.
 
@@ -149,8 +149,6 @@ Dans l'ARQS magnétique, les équations de Maxwell-Thomson et Maxwell-Ampère so
 
 Dans l'ARQS, les courants créent des champs magnétiques (qu'on peut déterminer avec le théorème d'Ampère) qui induisent à leur tour des champs électriques (qu'on peut déterminer avec la loi de Maxwell-Faraday).
 
-Dans l'ARQS, le champ magnétique induit le champ électrique.
-
 #question-de-début-de-cours(
     "Dans l'ARQS magnétique",
     (
@@ -171,8 +169,8 @@ Dans l'ARQS, l'équation locale de conservation de la charge peut être simplifi
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("va(j)",)),
 )[
-    $ div(va(j)) = 0 $
-],
+    $ div va(j) = 0 $
+]
 
 
 = Induction
@@ -222,10 +220,10 @@ Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-
 )
 
 #application(
-    [Un circuit électrique carré de côté $a$ comportant un condensateur de capacité $C$ et un résistor de résistance $R$ est placé dans un champ magnétique $va(B)=B_0 cos(omega t)va(e)_z$ qui lui est orthogonal. Représenter le circuit électrique équivalent.],
+    [Un circuit électrique carré de côté $a$ comportant un condensateur de capacité $C$ et un résistor de résistance $R$ est placé dans un champ magnétique $va(B)=B_0 cos(omega t) va(e_z)$ qui lui est orthogonal. Représenter le circuit électrique équivalent.],
 )
 
-== Courant de Foucault
+== Courants de Foucault
 
 Lorsqu'un cylindre conducteur est placé dans un champ magnétique oscillant, des courants y apparaissent. Ces courants sont appelés courants de Foucault.
 
@@ -286,14 +284,14 @@ Les courants de Foucault ont la même direction et le même sens que le champ é
 
 Dans les transformateurs et dans les moteurs, des pièces métalliques sont placées dans des champs magnétiques variables et sont donc le siège de courants de Foucault. Ces courants de Foucault représentent des pertes qu'on souhaite limiter.
 
-Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le feuilletage consiste à découper la pièce métallique en feuillets séparés par de l'isolant électrique afin d’empêcher les courants de Foucault de circuler. Les feuillets doivent être parallèles au champ magnétique. Les boucles de courant de Foucault sont ainsi limitées.
+Pour limiter les pertes par courants de Foucault, on utilise le *feuilletage*. Le feuilletage consiste à découper la pièce métallique en feuillets séparés par de l'isolant électrique afin d'empêcher les courants de Foucault de circuler. Les feuillets doivent être parallèles au champ magnétique. Les boucles de courants de Foucault sont ainsi limitées.
 
 #figure(
     grid(
         columns: 2,
         image("images/transformateur.jpg"), image("images/rotor.jpg"),
     ),
-    caption: "Transformateur et rotor d’un moteur électrique dont le feuilletage est visible.",
+    caption: "Transformateur et rotor d'un moteur électrique dont le feuilletage est visible.",
 )
 
 #question-de-début-de-cours(
@@ -320,7 +318,7 @@ Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le
     ),
     grandeurs: sub-dictionary(grandeurs, ("va(B)", "mu_0", "N", "l", "i", "Phi", "R")),
     [
-        $ va(B)=mu_0 N/l i va(e_x) $
+        $ va(B)=mu_0 N/l i va(e_z) $
         $ Phi=pi R^2 mu_0 (N^2)/l i $
     ],
 )
@@ -422,11 +420,11 @@ L'inductance mutuelle $M$ dépend de la géométrie et de la position relative d
     connaitre: true,
     grandeurs: sub-dictionary(grandeurs, ("cal(E)", "L_1", "L_2", "i_1", "i_2", "M")),
     [
-        $ cal(E)=1/2 L_1 (i_1)^2 + 1/2 L_2 (i_2)^2 + M i_1 i_2 $
+        $ cal(E)=1/2 L_1 i_1^2 + 1/2 L_2 i_2^2 + M i_1 i_2 $
     ],
 )
 
-En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 L_2 i_2^2$, un troisième terme $M i_1 i_2$ correspondant à l’interaction des bobines apparait.
+En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 L_2 i_2^2$, un troisième terme $M i_1 i_2$ correspondant à l'interaction des bobines apparait.
 
 Cette expression permet de comprendre pourquoi l'inductance mutuelle d'un circuit 1 sur un circuit 2 est la même que celle du circuit 2 sur le circuit 1 : $Phi_(1 arrow 2)/i_1 = Phi_(2 arrow 1)/i_2 = M$.
 

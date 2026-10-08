@@ -8,6 +8,6 @@
 + L'inductance propre est le rapport entre le flux et l'intensité : $L=Phi/i$.
 
 = Déterminer l'inductance mutuelle entre deux bobinages
-+ Déterminer le champ magnétique $B$ créé par un des bobinages en fonction de l'intensité $i$ du courant qui le traverse. Le champ créé par l'un des bobinage peut être plus simple à déterminer que celui créé par l'autre bobinage.
++ Déterminer le champ magnétique $B$ créé par un des bobinages en fonction de l'intensité $i$ du courant qui le traverse. Le champ créé par l'un des bobinages peut être plus simple à déterminer que celui créé par l'autre bobinage.
 + Déterminer le flux magnétique $Phi$ de ce champ magnétique sur l'*autre* bobinage.
 + L'inductance mutuelle est le rapport entre le flux et l'intensité : $M=Phi/i$.
