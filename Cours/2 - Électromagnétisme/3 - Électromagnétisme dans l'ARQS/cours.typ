@@ -41,9 +41,9 @@
     u_L: (signification: "la tension aux bornes de la bobine", unité: unit("V")),
     "cal(E)": (signification: "l'énergie stockée", unité: unit("J")),
     w: (signification: "la densité volumique d'énergie magnétique", unité: unit("J/m^3")),
-    "Phi_1": (signification: "le flux magnétique sur la bobine 1", unité: unit("T m^2")),
+    "Phi_1": (signification: "le flux magnétique total à travers la bobine 1", unité: unit("T m^2")),
     "Phi_(1 arrow 1)": (signification: "le flux propre de la bobine 1", unité: unit("T m^2")),
-    "Phi_(2 arrow 1)": (signification: "le flux mutuel induit par la bobine 2 sur la bobine 1", unité: unit("T m^2")),
+    "Phi_(2 arrow 1)": (signification: "le flux mutuel, créé par la bobine 2 à travers la bobine 1", unité: unit("T m^2")),
     L_1: (signification: "l'inductance propre de la bobine 1", unité: unit("H")),
     L_2: (signification: "l'inductance propre de la bobine 2", unité: unit("H")),
     M: (signification: "l'inductance mutuelle entre la bobine 1 et la bobine 2", unité: unit("H")),
@@ -181,7 +181,10 @@ Dans l'ARQS, l'équation locale de conservation de la charge peut être simplifi
     titre: "Circulation du champ électrique",
     connaitre: true,
     savoir-faire: true,
-    hypothèses: "La courbe $cal(C)$ est fermée et immobile.",
+    hypothèses: (
+        [La courbe $cal(C)$ est fermée et immobile.],
+        [$Phi$ est le flux de $va(B)$ à travers une surface s'appuyant sur $cal(C)$, orientée par le sens de parcours de $cal(C)$ (règle de la main droite).],
+    ),
     grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(E)", "va(dd(l))", "Phi", "t")),
     [
         $ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $
@@ -208,6 +211,10 @@ Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-
 #encadré(
     titre: "Loi de Lenz-Faraday",
     connaitre: true,
+    hypothèses: (
+        [La force électromotrice $e$ est orientée dans le sens de parcours du circuit (convention générateur).],
+        [La surface sur laquelle on calcule $Phi$ est orientée par ce même sens de parcours.],
+    ),
     grandeurs: sub-dictionary(grandeurs, ("e", "Phi", "t")),
     [
         $ e=- dv(Phi, t) $
@@ -278,7 +285,12 @@ Les courants de Foucault ont la même direction et le même sens que le champ é
     [Établir l'expression du vecteur densité de courant puis de la puissance dissipée par les courants de Foucault dans un cylindre conducteur placé dans un champ magnétique uniforme et sinusoïdal.],
 )
 
-#application[Le fond d'une casserole en fer ($gamma_ce("Fe")=#quan[1e7 S/m]$) a un rayon de #quan[15 cm] et une épaisseur de #quan[1 cm]. La casserole est posée sur une plaque à induction qui émet un champ magnétique oscillant à la fréquence #quan[20 kHz]. Quelle amplitude doit avoir le champ magnétique pour que la puissance apportée à la casserole soit de #quan[1 kW] ?]
+#application[
+    Une casserole en aluminium ($gamma_ce("Al")=#quan[3.5e7 S/m]$) a un fond de rayon #quan[9 cm] et d'épaisseur #quan[3 mm]. Elle est posée sur une plaque à induction qui crée, au niveau du fond, un champ magnétique oscillant de fréquence #quan[25 kHz] et d'amplitude de l'ordre de #quan[10 mT]. Une plaque domestique fournit au plus quelques kilowatts.
+    + Calculer la puissance dissipée que prévoit le modèle du cours. Commenter.
+    + Le champ créé au centre du fond par les courants de Foucault vaut environ $mu_0 gamma omega B_0 a h \/ 4$. Le comparer à $B_0$. Le modèle est-il valable ?
+    + D'après la loi de Lenz, ce champ s'oppose au champ créé par la plaque. Conclure sur la possibilité d'utiliser des ustensiles en aluminium sur une plaque à induction.
+]
 
 == Intérêt du feuilletage
 
@@ -411,7 +423,7 @@ Lorsque deux bobines sont présentes simultanément, le champ magnétique créé
     verso: [$ Phi_(2 arrow 1)= integral.double(S_1) va(B_2).va(dd(S)) = M i_2 $],
 )
 
-L'inductance mutuelle $M$ dépend de la géométrie et de la position relative des deux bobines. Si les bobines sont infiniment éloignées, $M=0$.
+L'inductance mutuelle $M$ dépend de la géométrie et de la position relative des deux bobines. Elle est algébrique : changer le sens d'orientation d'une des bobines change son signe. Si les bobines sont infiniment éloignées, $M=0$.
 
 
 #encadré(
@@ -446,10 +458,10 @@ Cette expression permet de comprendre pourquoi l'inductance mutuelle d'un circui
 #question-de-début-de-cours(
     "L'inégalité vérifiée par l'inductance mutuelle est",
     (
-        "$M <= sqrt(L_1 L_2)$",
-        "$M <= L_1 L_2$",
-        "$M >= sqrt(L_1 L_2)$",
-        "$M >= L_1 L_2$",
+        "$M^2 <= L_1 L_2$",
+        "$M^2 <= (L_1 L_2)^2$",
+        "$M^2 >= L_1 L_2$",
+        "$M^2 >= (L_1 L_2)^2$",
     ),
 )
 

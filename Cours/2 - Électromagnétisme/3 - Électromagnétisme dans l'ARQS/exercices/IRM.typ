@@ -26,6 +26,8 @@
         #let pulsation = 2 * calc.pi / 10
         On estime la taille de l'IRM à $l=#quan[1 m]$. Le temps d'entrée dans la machine est donc $Delta t = l/v = #quan[5 s]$. Cette durée est la durée nécessaire pour passer du champ magnétique minimal au champ maximal. Pour un signal sinusoïdal, il s'agirait de la demi période. On note donc $T=#quan[10 s]$. La pulsation associée est donc $omega = 2 pi / T = #qty(pulsation, "rad/s", chiffres: 1)$.
 
+        Le champ passe de 0 à #quan[1 T] : le signal sinusoïdal équivalent a une amplitude de #quan[0.5 T] autour d'une valeur moyenne qui n'induit rien. Prendre $B_0 = #quan[1 T]$ surestime la puissance d'un facteur 4, ce qui va dans le sens de la sécurité.
+
         #let P = calc.pi * 0.2 * calc.pow(pulsation, 2) * 1.7 * calc.pow(0.2, 4) / 16
         La puissance moyenne dissipée par les courants de Foucault s'écrit alors
         $
