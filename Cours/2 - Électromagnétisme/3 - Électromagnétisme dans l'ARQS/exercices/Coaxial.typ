@@ -96,7 +96,7 @@ Un câble coaxial, considéré comme infiniment long et placé dans un milieu de
 #question()[
   Effectuer l'application numérique pour un câble standard, où $l=#qty(l, "m", chiffres: 1)$, $a=#qty(a, "m", chiffres: 1)$ et $b=#qty(b, "m", chiffres: 1)$.
 ][
-  #let L = (mu0 * l) / (2 * calc.pi) * calc.log(b / a)
+  #let L = (mu0 * l) / (2 * calc.pi) * calc.ln(b / a)
   On trouve $ L approx #qty(L, "H", chiffres: 1) $
 ]
 

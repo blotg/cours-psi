@@ -65,10 +65,10 @@ On se place dans le cadre de l'ARQS.
   #let a = 1e-2
   #let R = 5e-2
   #let N = 100
-  #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.log((R + a) / R)
+  #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.ln((R + a) / R)
   Pour $N=100$, $L=#qty(L, "H", chiffres: 1)$, 
   #let N=1000
-  #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.log((R + a) / R)
+  #let L = (mu0 * N*N * a) / (2 * calc.pi) * calc.ln((R + a) / R)
   pour $N=1000$, $L=#qty(L, "H", chiffres: 1)$
 ]
 

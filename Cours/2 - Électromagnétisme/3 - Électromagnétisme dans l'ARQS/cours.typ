@@ -5,30 +5,42 @@
 
 #let grandeurs = (
     t: (signification: "le temps", unité: unit("s")),
-    j: (signification: "le vecteur densité volumique de courant", unité: unit("A/m^2")),
+    "va(j)": (signification: "le vecteur densité volumique de courant", unité: unit("A/m^2")),
     rho: (signification: "la densité volumique de charge", unité: unit("C/m^3")),
     epsilon_0: (signification: "la permittivité diélectrique du vide", unité: unit("F/m")),
     mu_0: (signification: "la perméabilité magnétique du vide", unité: unit("H/m")),
-    E: (signification: "le champ électrique", unité: unit("V/m")),
-    B: (signification: "le champ magnétique", unité: unit("T")),
+    "va(E)": (signification: "le champ électrique", unité: unit("V/m")),
+    "va(B)": (signification: "le champ magnétique", unité: unit("T")),
     tau: (signification: "durée caractéristique de variation des grandeurs", unité: unit("s")),
     lambda: (signification: "longueur caractéristique du système", unité: unit("m")),
+    c: (signification: "la célérité de la lumière dans le vide", unité: unit("m/s")),
+    "cal(C)": (signification: "une courbe fermée orientée"),
+    "va(dd(l))": (
+        signification: "l'élément de longueur de $cal(C)$, orienté dans son sens de parcours",
+        unité: unit("m"),
+    ),
     "I_text(\"enlacé\")": (signification: "le courant électrique enlacé par la courbe d'Ampère", unité: unit("A")),
     Phi: (signification: "le flux du champ magnétique", unité: unit("T m^2")),
     e: (signification: "la force électromotrice", unité: unit("V")),
     B_0: (signification: "l'amplitude du champ magnétique extérieur", unité: unit("T")),
+    r: (signification: "la distance à l'axe du cylindre", unité: unit("m")),
     "cal(P)_text(\"vol\")": (
         signification: "la densité volumique de puissance dissipée par effet Joule",
         unité: unit("W/m^3"),
     ),
+    "P_text(\"moy\")": (signification: "la puissance moyenne dissipée dans le cylindre", unité: unit("W")),
     gamma: (signification: "la conductivité électrique", unité: unit("S/m")),
     omega: (signification: "la pulsation", unité: unit("rad/s")),
     h: (signification: "la hauteur du cylindre", unité: unit("m")),
     a: (signification: "le rayon du cylindre", unité: unit("m")),
+    N: (signification: "le nombre de spires", unité: "sans unité"),
+    l: (signification: "la longueur du solénoïde", unité: unit("m")),
+    R: (signification: "le rayon du solénoïde", unité: unit("m")),
     L: (signification: "l'inductance propre", unité: unit("H")),
     i: (signification: "l'intensité du courant", unité: unit("A")),
     u_L: (signification: "la tension aux bornes de la bobine", unité: unit("V")),
     "cal(E)": (signification: "l'énergie stockée", unité: unit("J")),
+    w: (signification: "la densité volumique d'énergie magnétique", unité: unit("J/m^3")),
     "Phi_1": (signification: "le flux magnétique sur la bobine 1", unité: unit("T m^2")),
     "Phi_(1 arrow 1)": (signification: "le flux propre de la bobine 1", unité: unit("T m^2")),
     "Phi_(2 arrow 1)": (signification: "le flux mutuel induit par la bobine 2 sur la bobine 1", unité: unit("T m^2")),
@@ -42,13 +54,13 @@
 = ARQS magnétique
 == Conservation de la charge
 
-Les équations de Maxwell sont compatibles avec l'équation locale de conservation de la charge.
+Les équations de Maxwell permettent d'obtenir l'équation locale de conservation de la charge.
 
 #encadré(
     titre: "Équation locale de conservation de la charge",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(j)", "rho", "t")),
 )[
     $ div va(j)+ pdv(rho, t)=0 $
 ]
@@ -63,7 +75,7 @@ Les équations de Maxwell sont compatibles avec l'équation locale de conservati
 
 == Courants de déplacement
 
-Le terme $epsilon_0 pdv(va(E), t)$ se nomme courant de déplacement. Son unité est $unit("A/m^2")$.
+Le terme $epsilon_0 pdv(va(E), t)$ se nomme la densité de courant de déplacement#footnote[Il est parfois appelée simplement courant de déplacement par abus de langage.]. Son unité est $unit("A/m^2")$.
 
 L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique consiste à négliger les courants de déplacement.
 
@@ -71,7 +83,7 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
     titre: "Équations de Maxwell dans l'ARQS",
     connaitre: true,
     hypothèses: ("Dans l'ARQS magnétique",),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(E)", "rho", "epsilon_0", "va(B)", "t", "mu_0", "va(j)")),
 )[
     $ div va(E)=rho / epsilon_0 $
     $ rot va(E)=-pdv(va(B), t) $
@@ -110,7 +122,7 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
 #encadré(
     titre: "Condition d'application de l'ARQS",
     savoir-faire: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("lambda", "tau", "c")),
     [
         $ lambda / tau << c $
     ],
@@ -128,7 +140,7 @@ Dans l'ARQS magnétique, les équations de Maxwell-Thomson et Maxwell-Ampère so
     titre: "Théorème d'Ampère",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(B)", "va(dd(l))", "mu_0", "I_text(\"enlacé\")")),
     hypothèses: ("Dans l'ARQS magnétique",),
     [ $ integral.cont_cal(C) va(B).va(dd(l))=mu_0 I_text("enlacé") $],
 )
@@ -149,6 +161,20 @@ Dans l'ARQS, le champ magnétique induit le champ électrique.
     ),
 )
 
+== Conservation de la charge dans l'ARQS
+
+Dans l'ARQS, l'équation locale de conservation de la charge peut être simplifiée.
+
+#encadré(
+    titre: [Équation locale de conservation de la charge],
+    connaitre: true,
+    savoir-faire: true,
+    grandeurs: sub-dictionary(grandeurs, ("va(j)",)),
+)[
+    $ div(va(j)) = 0 $
+],
+
+
 = Induction
 
 == Circulation du champ électrique
@@ -157,14 +183,15 @@ Dans l'ARQS, le champ magnétique induit le champ électrique.
     titre: "Circulation du champ électrique",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: grandeurs,
+    hypothèses: "La courbe $cal(C)$ est fermée et immobile.",
+    grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(E)", "va(dd(l))", "Phi", "t")),
     [
         $ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $
     ],
 )
 
 #flashcard(
-    recto: [Circulation du champ électrique dans l'ARQS],
+    recto: [Circulation du champ électrique],
     verso: [$ integral.cont_cal(C) va(E).va(dd(l))=- dv(Phi, t) $],
 )
 
@@ -183,7 +210,7 @@ Dans le cas où $cal(C)$ suit un circuit électrique, on obtient la loi de Lenz-
 #encadré(
     titre: "Loi de Lenz-Faraday",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("e", "Phi", "t")),
     [
         $ e=- dv(Phi, t) $
     ],
@@ -206,17 +233,20 @@ Lorsqu'un cylindre conducteur est placé dans un champ magnétique oscillant, de
     titre: "Courants de Foucault",
     savoir-faire: true,
     hypothèses: (
-        "À l'intérieur du cylindre",
-        "Dans l'ARQS",
-        [Le cylindre est plongé dans un champ magnétique $B=B_0 cos(omega t) va(e_z)$],
+        [À l'intérieur du cylindre.],
+        [Dans l'ARQS.],
+        [Le cylindre est plongé dans un champ magnétique uniforme $va(B)=B_0 cos(omega t) ez$ parallèle à son axe.],
+        [Le champ induit par les courants de Foucault est négligé.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(E)", "B_0", "omega", "r", "t")),
     [
         $ va(E)= 1/2 B_0 omega r sin(omega t) va(e_theta) $
     ],
 )
 
 La présence d'un champ électrique dans un milieu conducteur entraine la production de chaleur par effet Joule#footnote[Les détails de cette production de chaleur seront étudiés dans le chapitre "Transport de charge".].
+
+Les courants de Foucault ont la même direction et le même sens que le champ électrique induit. Ils forment des boucles orthogonales au champ magnétique.
 
 #encadré(
     titre: "Densité volumique de puissance dissipée par effet Joule",
@@ -225,7 +255,7 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
         "Dans un conducteur ohmique",
         "Dans l'ARQS",
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(P)_text(\"vol\")", "gamma", "va(E)")),
     [
         $ cal(P)_text("vol")=gamma E^2 $
     ],
@@ -235,10 +265,12 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
     titre: "Puissance moyenne dissipée par les courants de Foucault",
     savoir-faire: true,
     hypothèses: (
-        "Dans un conducteur ohmique",
-        "Dans l'ARQS",
+        [Dans un conducteur ohmique.],
+        [Dans l'ARQS.],
+        [Le cylindre est plongé dans un champ magnétique uniforme $va(B)=B_0 cos(omega t) ez$ parallèle à son axe.],
+        [Le champ induit par les courants de Foucault est négligé.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("P_text(\"moy\")", "gamma", "B_0", "omega", "h", "a")),
     [
         $ P_text("moy")= (pi gamma B_0^2 omega^2 h a^4)/16 $
     ],
@@ -254,7 +286,7 @@ La présence d'un champ électrique dans un milieu conducteur entraine la produc
 
 Dans les transformateurs et dans les moteurs, des pièces métalliques sont placées dans des champs magnétiques variables et sont donc le siège de courants de Foucault. Ces courants de Foucault représentent des pertes qu'on souhaite limiter.
 
-Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le feuilletage consiste à découper la pièce métallique en feuillets séparés par de l'isolant électrique afin d’empêcher les courants de Foucault de circuler. Le feuilletage doit être effectué dans une direction orthogonale aux courants de Foucault.
+Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le feuilletage consiste à découper la pièce métallique en feuillets séparés par de l'isolant électrique afin d’empêcher les courants de Foucault de circuler. Les feuillets doivent être parallèles au champ magnétique. Les boucles de courant de Foucault sont ainsi limitées.
 
 #figure(
     grid(
@@ -286,9 +318,9 @@ Pour limiter les pertes par courant de Foucault, on utilise le *feuilletage*. Le
         "Le champ magnétique est nul à l'extérieur du solénoïde.",
         "Le solénoïde est assimilé à une succession de spires resserrées et d'espacement constant.",
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(B)", "mu_0", "N", "l", "i", "Phi", "R")),
     [
-        $ B=mu_0 N/l i va(e_x) $
+        $ va(B)=mu_0 N/l i va(e_x) $
         $ Phi=pi R^2 mu_0 (N^2)/l i $
     ],
 )
@@ -299,7 +331,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
 #encadré(
     titre: "Inductance propre",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("Phi", "L", "i")),
     [
         $ Phi=L i $
     ],
@@ -317,7 +349,8 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
     titre: "Relation tension-courant pour une bobine",
     savoir-faire: true,
     connaitre: true,
-    grandeurs: grandeurs,
+    hypothèses: "En convention récepteur",
+    grandeurs: sub-dictionary(grandeurs, ("u_L", "L", "i", "t")),
     [
         $ u_L = L dv(i, t) $
     ],
@@ -329,7 +362,7 @@ Le flux magnétique propre est proportionnel au courant. Cette propriété peut 
     titre: "Énergie stockée dans une bobine",
     savoir-faire: true,
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(E)", "L", "i")),
     [
         $ cal(E)=1/2 L i^2 $
     ],
@@ -344,7 +377,7 @@ Dans l'exemple d'un solénoïde, l'énergie stockée s'écrit $cal(E)=1/2 mu_0 p
     hypothèses: (
         [L'expression obtenue pour un solénoïde peut être généralisée.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("w", "va(B)", "mu_0")),
     [
         $ w=B^2/(2 mu_0) $
     ],
@@ -365,7 +398,7 @@ Lorsque deux bobines sont présentes simultanément, le champ magnétique créé
 #encadré(
     titre: "Flux magnétique",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("Phi_1", "Phi_(1 arrow 1)", "Phi_(2 arrow 1)", "L_1", "i_1", "M", "i_2")),
     [
         $ Phi_1=Phi_(1 arrow 1)+Phi_(2 arrow 1)=L_1 i_1 + M i_2 $
     ],
@@ -387,7 +420,7 @@ L'inductance mutuelle $M$ dépend de la géométrie et de la position relative d
     titre: "Énergie stockée dans deux bobines en interaction",
     savoir-faire: true,
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(E)", "L_1", "L_2", "i_1", "i_2", "M")),
     [
         $ cal(E)=1/2 L_1 (i_1)^2 + 1/2 L_2 (i_2)^2 + M i_1 i_2 $
     ],
@@ -395,11 +428,13 @@ L'inductance mutuelle $M$ dépend de la géométrie et de la position relative d
 
 En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 L_2 i_2^2$, un troisième terme $M i_1 i_2$ correspondant à l’interaction des bobines apparait.
 
+Cette expression permet de comprendre pourquoi l'inductance mutuelle d'un circuit 1 sur un circuit 2 est la même que celle du circuit 2 sur le circuit 1 : $Phi_(1 arrow 2)/i_1 = Phi_(2 arrow 1)/i_2 = M$.
+
 #encadré(
     titre: "Valeur limite de l'inductance mutuelle",
     savoir-faire: true,
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("M", "L_1", "L_2")),
     [
         $ M^2 <= L_1 L_2 $
     ],
