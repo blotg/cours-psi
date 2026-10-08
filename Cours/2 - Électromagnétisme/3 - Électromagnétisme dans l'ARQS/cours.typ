@@ -164,9 +164,10 @@ Dans l'ARQS, les courants créent des champs magnétiques (qu'on peut détermine
 Dans l'ARQS, l'équation locale de conservation de la charge peut être simplifiée.
 
 #encadré(
-    titre: [Équation locale de conservation de la charge],
+    titre: [Équation locale de conservation de la charge dans l'ARQS],
     connaitre: true,
     savoir-faire: true,
+    hypothèses: ("Dans l'ARQS magnétique",),
     grandeurs: sub-dictionary(grandeurs, ("va(j)",)),
 )[
     $ div va(j) = 0 $
@@ -438,7 +439,7 @@ L'inductance mutuelle $M$ dépend de la géométrie et de la position relative d
 
 En plus de l'énergie stockée dans chacune des bobines $1/2 L_1 i_1^2$ et $1/2 L_2 i_2^2$, un troisième terme $M i_1 i_2$ correspondant à l'interaction des bobines apparait.
 
-Cette expression permet de comprendre pourquoi l'inductance mutuelle d'un circuit 1 sur un circuit 2 est la même que celle du circuit 2 sur le circuit 1 : $Phi_(1 arrow 2)/i_1 = Phi_(2 arrow 1)/i_2 = M$.
+L'inductance mutuelle d'un circuit 1 sur un circuit 2 est la même que celle du circuit 2 sur le circuit 1 : $Phi_(1 arrow 2)/i_1 = Phi_(2 arrow 1)/i_2 = M$.
 
 #encadré(
     titre: "Valeur limite de l'inductance mutuelle",
