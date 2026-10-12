@@ -10,6 +10,10 @@ classement (`2 - Filtre de Wien` donne `Filtre de Wien`). Le type vient en tête
 pour qu'un dossier de téléchargements regroupe les documents de même nature
 plutôt que ceux d'un même chapitre.
 
+`TD.typ` donne deux documents : `TD`, l'énoncé seul, à distribuer, et
+`TD corrigé`. C'est `--input sans-corrigé=1` qui retire les corrigés ; sans
+lui — dans l'aperçu de l'éditeur, par exemple — ils restent.
+
 ## Installation
 
 ```sh

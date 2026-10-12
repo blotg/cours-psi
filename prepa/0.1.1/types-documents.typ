@@ -348,15 +348,23 @@
     context [#metadata(here().page()) <dernière-page>]
 }
 
+// Le TD se tire en deux documents : l'énoncé seul, à distribuer, et le TD
+// corrigé. `--input sans-corrigé=1` demande le premier ; sans lui, les
+// corrigés restent — c'est ce que montre l'aperçu de l'éditeur, pendant qu'on
+// écrit les exercices. Le hook pre-commit produit les deux.
+//
+// Le titre dit lequel est lequel : sur papier, rien d'autre ne les distingue
+// avant la première question.
 #let TD(infos: (:), avec-corrigé: true, doc) = {
     let titre = infos.at("titre", default: "")
+    let avec-corrigé = avec-corrigé and sys.inputs.at("sans-corrigé", default: "") == ""
     context if inclus-dans-le-poly() {
         doc
     } else {
         show: init-document.with(titre: titre)
         set heading(numbering: "1.")
         show <correction>: it => if avec-corrigé { it } else {}
-        titre-document[#markup(titre) TD]
+        titre-document[#markup(titre) TD#if avec-corrigé [ corrigé]]
         doc
     }
 }

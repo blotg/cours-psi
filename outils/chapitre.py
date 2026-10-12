@@ -211,20 +211,25 @@ class Chapitre:
         """
         return self.sortie / f"{type_de_document} - {self.titre_court}.{extension}"
 
-    def document(self, nom: str) -> Path | None:
-        """Compile `<nom>.typ` vers `build/<nom>.pdf`. None si la source manque."""
+    def document(self, nom: str, type_de_document: str | None = None, entrées: dict | None = None) -> Path | None:
+        """Compile `<nom>.typ` vers `build/<type> - <titre court>.pdf`, le type
+        étant `nom` à défaut. None si la source manque."""
         source = self.chemin / f"{nom}.typ"
         if not source.is_file():
             return None
-        cible = self.fichier(nom)
-        typst.compile_fichier(source, cible)
+        cible = self.fichier(type_de_document or nom)
+        typst.compile_fichier(source, cible, entrées=entrées)
         return cible
 
     def cours(self) -> Path | None:
         return self.document("cours")
 
     def TD(self) -> Path | None:
-        return self.document("TD")
+        """L'énoncé du TD, sans ses corrigés : celui qu'on distribue."""
+        return self.document("TD", entrées={"sans-corrigé": "1"})
+
+    def TD_corrigé(self) -> Path | None:
+        return self.document("TD", "TD corrigé")
 
     def poly(self) -> Path | None:
         return self.document("poly")
