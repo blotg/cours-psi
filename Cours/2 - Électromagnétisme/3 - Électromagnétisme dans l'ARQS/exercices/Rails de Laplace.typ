@@ -181,6 +181,8 @@ On note $R$ la résistance totale du circuit (générateur, rails et barre) et o
     La puissance fournie par le générateur se répartit entre l'effet Joule et l'énergie cinétique de la barre. La puissance de la force de Laplace, $a B i v$, est exactement l'opposé de la puissance $e i$ de la force électromotrice induite : la conversion électromécanique se fait sans perte.
 
     Entre $t = 0$ et $t -> oo$, le générateur fournit
-    $ W = integral_0^oo E i dd(t) = E^2/R integral_0^oo exp(-t/tau) dd(t) = (E^2 tau)/R = (m E^2)/(a B)^2 = m v_text("lim")^2 $
+    $
+        W = integral_0^oo E i dd(t) = E^2/R integral_0^oo exp(-t/tau) dd(t) = (E^2 tau)/R = (m E^2)/(a B)^2 = m v_text("lim")^2
+    $
     tandis que la barre acquiert l'énergie cinétique $1/2 m v_text("lim")^2$. La moitié seulement de l'énergie fournie est convertie en énergie cinétique : l'autre moitié est dissipée par effet Joule, quelle que soit la valeur de $R$.
 ]

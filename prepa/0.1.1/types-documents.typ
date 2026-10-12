@@ -7,6 +7,7 @@
 #import "helper-functions.typ": markup
 #import "@preview/ccicons:1.0.1": *
 #import "@preview/zero:0.6.1": set-num, set-round
+#import "@preview/tiaoma:0.3.0": qrcode
 #let pied-de-page = context {
     set text(size: 7.5pt, fill: luma(45%))
     // init-document souligne les liens ; dans un pied de page c'est du bruit.
@@ -51,9 +52,49 @@
     set-num(product: sym.dot.op, decimal-separator: ",")
 }
 
+// Où le site est publié : la même adresse qu'`ADRESSE_PUBLIQUE` dans
+// outils/site.py.
+#let adresse-du-site = "https://blotg.github.io/cours-psi/"
+
+// Les lettres accentuées et leur lettre de base : ce que `adresse()`, dans
+// outils/site.py, obtient en décomposant le texte (NFD) puis en jetant les
+// accents. Typst ne sait pas décomposer : on énumère.
+#let _sans-accent = (
+    a: "àâäáã",
+    c: "ç",
+    e: "éèêë",
+    i: "îïíì",
+    n: "ñ",
+    o: "ôöóò",
+    u: "ùûüú",
+    y: "ÿý",
+)
+
+// L'adresse de la page d'un chapitre sur le site, tirée de son titre court
+// comme le fait `dossier_du_chapitre` dans outils/site.py — « Électromagnétisme
+// 3 » donne « electromagnetisme-3/ ». Les deux règles doivent rester les
+// mêmes : le QR code du poly mènerait sinon vers une page qui n'existe pas.
+//
+// Le calcul se fait ici plutôt que d'arriver par un `--input` : le poly se
+// compile aussi hors des outils Python — par le hook pre-commit, par l'aperçu
+// de l'éditeur —, et il y faut le même QR code.
+//
+// C'est la forme en dossier, sans `index.html` : celle que le site tient pour
+// canonique, et une adresse plus courte fait un QR code moins dense.
+#let page-du-chapitre(titre-court, révision: false) = {
+    let texte = lower(titre-court)
+    for (lettre, accentuées) in _sans-accent {
+        texte = texte.replace(regex("[" + accentuées + "]"), lettre)
+    }
+    let dossier = texte.replace(regex("[^a-z0-9]+"), "-").trim("-")
+    if dossier == "" { dossier = "page" }
+    adresse-du-site + (if révision { "revisions/" } else { "" }) + dossier + "/"
+}
+
 // `logotype` : bandeau d'en-tête sur la première page. À couper pour les
 // documents qui ne sont pas des feuilles de cours — la planche de
 // flashcards, les pages quadrillées — où il tomberait au travers.
+// `qr` : une adresse, que porte un QR code en regard du logotype, à droite.
 // C'est ICI, et nulle part ailleurs, que la page se règle.
 //
 // Un `set page` posé après coup par un document coupe la page dès qu'il change
@@ -65,6 +106,7 @@
 #let init-document(
     titre: "",
     logotype: true,
+    qr: none,
     format: "a4",
     marge: (x: 1cm, top: 1cm, bottom: 2cm),
     numérotation: "1",
@@ -100,8 +142,24 @@
         // hauteur explicitement réservée ci-dessous, et le titre remonte
         // d'autant. Les titres les plus longs occupent toute la largeur sur
         // deux lignes : le logotype ne peut pas se mettre à côté d'eux.
-        block[
+        // Toute la largeur, explicitement : rien n'y est dans le flux, le bloc
+        // n'aurait sinon aucune largeur, et la droite serait à gauche.
+        block(width: 100%)[
             #place(top + left, dy: -montée, image("logos/Logotype noir.svg", width: largeur))
+            #if qr != none {
+                // Aligné sur le dessin du logotype, et non sur sa boîte : le
+                // SVG l'entoure d'un blanc de 85 unités de tous côtés (mesuré).
+                // Le QR code, lui, n'a pas de marge : à la hauteur de la boîte,
+                // il dépassait le logotype et montait à 2 mm du bord du papier,
+                // là où une imprimante rogne ses repères.
+                let blanc = largeur * 85 / 969.344
+                place(
+                    top + right,
+                    dx: -blanc,
+                    dy: blanc - montée,
+                    link(qr, qrcode(qr, height: hauteur - 2 * blanc)),
+                )
+            }
             #v(hauteur - montée)
         ]
     }
@@ -139,17 +197,22 @@
     }
 }
 
-// `résumé: false` : la page de garde seule — titre, compétences, questions de
-// colle —, sans le résumé du cours. C'est le poly d'un chapitre de révision,
-// dont le cours ne porte que des flashcards et des questions de colle : rien
-// qui s'imprime, son résumé ne serait qu'une page de titres de sections.
-#let full-poly(infos: (:), résumé: true, doc) = {
+// `révision: true` : le poly d'un chapitre de révision de PCSI. D'une part la
+// page de garde seule — titre, compétences, questions de colle —, sans le
+// résumé du cours : celui-ci ne porte que des flashcards et des questions de
+// colle, rien qui s'imprime, son résumé ne serait qu'une page de titres de
+// sections. D'autre part sa page du site, rangée sous `revisions/`.
+#let full-poly(infos: (:), révision: false, doc) = {
     let titre = infos.at("titre", default: "")
     let révisions-sup = infos.at("révisions-sup", default: ())
     let cahier-entrainement = infos.at("cahier-entrainement", default: ())
     let cahier-entrainement-sup = infos.at("cahier-entrainement-sup", default: ())
     let DM = infos.at("DM", default: ())
-    show: init-document.with(titre: titre)
+    let titre-court = infos.at("titre-court", default: none)
+    show: init-document.with(
+        titre: titre,
+        qr: if titre-court != none { page-du-chapitre(str(titre-court), révision: révision) },
+    )
     state("racine").update("full-poly")
     show <compétences>: it => {
         set list(marker: checkbox)
@@ -236,7 +299,7 @@
             )
         }
     }
-    show <cours>: it => if not résumé {
+    show <cours>: it => if révision {
         // Tu, mais pas retiré : la page de garde tire ses questions de colle
         // des métadonnées du cours, qui doivent donc rester dans le document.
         //

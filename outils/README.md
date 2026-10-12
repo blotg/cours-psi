@@ -62,9 +62,10 @@ puis chapitres — n'en tire que ses **flashcards** (`ÉTAPES_RÉVISION` dans
 `__main__.py`). Son cours ne porte que des flashcards et des questions de
 colle : ni DM, ni manipulation, ni question de début de cours. Son poly se
 réduit à la page de garde — titre, compétences, questions de colle —, grâce à
-l'option `résumé: false` de `full-poly` dans son `poly.typ` : le résumé n'y
+l'option `révision: true` de `full-poly` dans son `poly.typ` : le résumé n'y
 serait qu'une page de titres de sections, puisque rien de ce qu'il contient ne
-s'imprime.
+s'imprime. La même option fait mener le QR code de la page de garde sous
+`revisions/` sur le site.
 
 `flashcards` produit deux fichiers : le paquet Anki (`.apkg`) et une planche à
 découper (`.pdf`), quatre cartes A6 par page A4. Les rectos d'un groupe de
