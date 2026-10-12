@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>L'ARQS dans une carte wifi — Électromagnétisme 3 : Électromagnétisme dans l'ARQS</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><link rel="stylesheet" href="../styles.css"><link rel="canonical" href="https://blotg.github.io/cours-psi/electromagnetisme-3/l-arqs-dans-une-carte-wifi.html"></head><body><nav class="fil"><a href="../index.html">Accueil</a><span class="sep">›</span><a href="../chapitres.html">Chapitres</a><span class="sep">›</span><a href="index.html">Électromagnétisme 3 : Électromagnétisme dans l’ARQS</a><span class="sep">›</span><span class="ici">L’ARQS dans une carte wifi</span></nav><h2>L’ARQS dans une carte wifi</h2><p>La carte wifi d’un ordinateur portable, au format M.2 2230, est un circuit imprimé de <math><mn>22</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>mm</mtext></math> sur <math><mn>30</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>mm</mtext></math>. Elle émet et reçoit des ondes électromagnétiques dans deux bandes de fréquences, autour de <math><mn>2</mn><mtext>,4</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math> et de <math><mn>5</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math>. Ses antennes, reliées à la carte par de fins câbles coaxiaux, sont logées dans le cadre de l’écran.</p><p><strong>1/</strong> L’ARQS est-elle vérifiée sur la carte wifi ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Rappeler la condition d’application de l’ARQS.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Quelle est la longueur caractéristique <math><mi>𝜆</mi></math> du système ? La durée caractéristique <math><mi>𝜏</mi></math> sur laquelle les grandeurs varient ?</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 3</div><div class="volet-texte">Faire le calcul pour les deux bandes de fréquences.</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>L’ARQS s’applique si <math><mi>𝜆</mi><mi>/</mi><mi>𝜏</mi><mo>≪</mo><mi>𝑐</mi></math>, où <math><mi>𝜆</mi></math> est la taille du système, et non la longueur d’onde. Ici, <math><mi>𝜆</mi><mo>=</mo><mn>3</mn><mi> </mi><mtext>cm</mtext></math>, la plus grande dimension de la carte. Les signaux sont sinusoïdaux : leur durée caractéristique de variation est la période <math><mi>𝜏</mi><mo>=</mo><mn>1</mn><mi>/</mi><mi>𝑓</mi></math>.</p><ul><li>à <math><mn>2</mn><mtext>,4</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math> : <math><mi>𝜆</mi><mi>/</mi><mi>𝜏</mi><mo>=</mo><mi>𝜆</mi><mi>𝑓</mi><mo>=</mo><mn>7</mn><mtext>,2</mtext><span style="display: inline-block"></span><mspace width="0.2222em"/><mi>⋅</mi><mspace width="0.2222em"/><msup><mn>10</mn><mn>7</mn></msup><mi> </mi><mtext>m</mtext><mi> </mi><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>≈</mo><mn>0</mn><mtext>,24</mtext><mspace width="0.2222em"/><mi>𝑐</mi></math> ;</li><li>à <math><mn>5</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math> : <math><mi>𝜆</mi><mi>/</mi><mi>𝜏</mi><mo>=</mo><mn>1</mn><mtext>,5</mtext><span style="display: inline-block"></span><mspace width="0.2222em"/><mi>⋅</mi><mspace width="0.2222em"/><msup><mn>10</mn><mn>8</mn></msup><mi> </mi><mtext>m</mtext><mi> </mi><msup><mtext>s</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mn>0</mn><mtext>,5</mtext><mspace width="0.2222em"/><mi>𝑐</mi></math>.</li></ul><p>Dans les deux cas, <math><mi>𝜆</mi><mi>/</mi><mi>𝜏</mi></math> n’est pas très petit devant <math><mi>𝑐</mi></math> : l’ARQS n’est pas vérifiée. De façon équivalente, la carte n’est pas petite devant la longueur d’onde <math><mi>𝑐</mi><mi>/</mi><mi>𝑓</mi></math>, qui vaut <math><mn>12</mn><mtext>,5</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>cm</mtext></math> et <math><mn>6</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>cm</mtext></math>.</p><p>À titre de comparaison, pour une installation électrique domestique à <math><mn>50</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>Hz</mtext></math>, <math><mi>𝑐</mi><mi>/</mi><mi>𝑓</mi><mo>=</mo><mn>6000</mn><mi> </mi><mtext>km</mtext></math> : l’ARQS y est largement vérifiée.</p></div></div></div></div><p><strong>2/</strong> Interpréter la condition d’ARQS en comparant deux durées. Dans les pistes en cuivre d’un circuit imprimé, les signaux se propagent à une vitesse d’environ <math><mi>𝑐</mi><mi>/</mi><mn>2</mn></math>. Calculer la durée que met un signal pour traverser la carte et conclure. Jusqu’à quelle fréquence l’ARQS serait-elle vérifiée sur cette carte ?</p><div class="volets"><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 1</div><div class="volet-texte">Réécrire la condition d’ARQS sous la forme d’une comparaison entre deux durées.</div></div><div class="volet pouce" tabindex="0" ontouchstart><div class="volet-titre">Coup de pouce 2</div><div class="volet-texte">Que représente la durée <math><mi>𝜆</mi><mi>/</mi><mi>𝑐</mi></math> ?</div></div></div><div class="volets"><div class="volet corrige" tabindex="0" ontouchstart><div class="volet-titre">Corrigé</div><div class="volet-texte"><div><p>La condition s’écrit <math><mi>𝜆</mi><mi>/</mi><mi>𝑐</mi><mo>≪</mo><mi>𝜏</mi></math> : la durée que met le champ électromagnétique pour traverser le système doit être négligeable devant la durée sur laquelle il varie. Tout se passe alors comme si les champs s’établissaient instantanément dans tout le système.</p><p>Dans les pistes, le signal se propage à <math><mi>𝑣</mi><mo>≈</mo><mi>𝑐</mi><mi>/</mi><mn>2</mn></math> : il traverse la carte en <math><mi>𝜆</mi><mi>/</mi><mi>𝑣</mi><mo>=</mo><mn>0</mn><mtext>,2</mtext><mi> </mi><mtext>ns</mtext></math>. C’est la moitié de la période à <math><mn>2</mn><mtext>,4</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math> (<math><mn>1</mn><mi>/</mi><mi>𝑓</mi><mo>=</mo><mn>0</mn><mtext>,42</mtext><mi> </mi><mtext>ns</mtext></math>), et autant que la période à <math><mn>5</mn></math>⁠<math><mi> </mi></math>⁠<math><mtext>GHz</mtext></math> (<math><mn>0</mn><mtext>,2</mtext></math>⁠<math><mi> </mi></math>⁠<math><mtext>ns</mtext></math>). La condition est encore moins bien vérifiée qu’avec <math><mi>𝑐</mi></math>.</p><p>En prenant un facteur 10 pour traduire « très petit devant », l’ARQS est vérifiée si <math><mi>𝜆</mi><mi>/</mi><mi>𝑣</mi><mo>≤</mo><mi>𝜏</mi><mi>/</mi><mn>10</mn></math>, soit</p><math display="block"><mi>𝑓</mi><mo>≤</mo><mfrac><mi>𝑣</mi><mrow><mn>10</mn><mi>𝜆</mi></mrow></mfrac><mo>=</mo><mn>500</mn><mi> </mi><mtext>MHz</mtext></math></div></div></div></div><footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer></body></html>
