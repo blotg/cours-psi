@@ -1,4 +1,3 @@
-- Établir la compatibilité des équations de Maxwell avec la conservation de la charge.
 - Simplifier les équations de Maxwell et l’équation de conservation de la charge dans l’ARQS en admettant que les courants de déplacement sont négligeables.
 - Étendre le domaine de validité des expressions des champs magnétiques obtenues en régime stationnaire.
 - Relier la circulation du champ électrique à la dérivée temporelle du flux magnétique.

@@ -163,7 +163,6 @@ Le théorème d'Ostrogradski est parfois appelé théorème de Green-Ostrogradsk
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
         [$V$ est le volume délimité par la surface fermée, orientée vers l'extérieur, $S$.],
     ),
-    grandeurs: grandeurs,
 )[
     $ integral.triple_V div va(A) dd(V) = integral.surf_S va(A) dprod va(dd(S)) $
 ]
@@ -262,7 +261,6 @@ Le rotationnel est un opérateur s'appliquant aux champs vectoriels et renvoyant
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
         [$S$ est une surface s'appuyant sur la courbe fermée $cal(C)$, orientée par la règle de la main droite selon le sens de parcours de $cal(C)$.],
     ),
-    grandeurs: grandeurs,
 )[
     $ integral.double_S rot va(A) dprod va(dd(S)) = integral.cont_cal(C) va(A) dprod va(dd(l)) $
 ]
@@ -284,7 +282,6 @@ Un champ irrotationnel peut s'écrire comme un gradient.
     hypothèses: (
         [$va(A)$ est une fonction de $RR^3$ dérivable.],
     ),
-    grandeurs: grandeurs,
 )[
     $ rot va(A) = va(0) arrow.l.r.double exists f | va(A) = grad f $
 ]
@@ -306,6 +303,23 @@ Un champ irrotationnel peut s'écrire comme un gradient.
     $va(E)=-grad V$ est-il compatible avec les équations de Maxwell en régime stationnaire ? L'est-il en régime variable ?
 ]
 
+== Divergence d'un rotationnel
+
+La divergence d'un rotationnel est toujours nulle.
+
+#encadré(
+    titre: "Divergence d'un rotationnel",
+    connaitre: true,
+    savoir-faire: true,
+    hypothèses: (
+        [$va(A)$ est une fonction de $RR^3$ dérivable.],
+    ),
+)[
+    $ div(rot va(A)) = 0 $
+]
+
+
+
 == Divergence d'un produit vectoriel
 
 #encadré(
@@ -315,7 +329,6 @@ Un champ irrotationnel peut s'écrire comme un gradient.
     hypothèses: (
         [$va(A)$ et $va(B)$ sont des fonctions de $RR^3$ dérivables.],
     ),
-    grandeurs: grandeurs,
 )[
     $ div(va(A) and va(B)) = ( rot va(A) ) dprod va(B) - va(A) dprod ( rot va(B) ) $
 ]

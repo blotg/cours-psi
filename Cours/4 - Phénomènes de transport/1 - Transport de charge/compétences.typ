@@ -3,6 +3,7 @@
 - Passer d’une description microscopique (porteurs de charges, vitesse des porteurs) aux grandeurs mésoscopiques $rho$ et $va(j)$.
 - Écrire l'intensité comme le flux du vecteur densité de courant électrique à travers une surface orientée.
 - Établir, en coordonnées cartésiennes, l’équation locale traduisant la conservation de la charge électrique.
+- Établir la compatibilité des équations de Maxwell avec la conservation de la charge.
 - Énoncer l’équation locale et en interpréter chacun des termes.
 - Définir une ligne de courant et un tube de courant.
 - Exploiter le caractère conservatif du vecteur densité de courant électrique en régime stationnaire et relier cette propriété à la loi des nœuds usuelle de l’électrocinétique.

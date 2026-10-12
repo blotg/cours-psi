@@ -20,6 +20,8 @@
         unité: unit("m"),
     ),
     "I_text(\"enlacé\")": (signification: "le courant électrique enlacé par la courbe d'Ampère", unité: unit("A")),
+    "va(dd(S))": (signification: "l'élément de surface de $S$, orienté vers l'extérieur", unité: unit("m^2")),
+    i_k: (signification: "l'intensité du courant dans la $k$-ième branche reliée au nœud", unité: unit("A")),
     Phi: (signification: "le flux du champ magnétique", unité: unit("T m^2")),
     e: (signification: "la force électromotrice", unité: unit("V")),
     B_0: (signification: "l'amplitude du champ magnétique extérieur", unité: unit("T")),
@@ -43,7 +45,10 @@
     w: (signification: "la densité volumique d'énergie magnétique", unité: unit("J/m^3")),
     "Phi_1": (signification: "le flux magnétique total à travers la bobine 1", unité: unit("T m^2")),
     "Phi_(1 arrow 1)": (signification: "le flux propre de la bobine 1", unité: unit("T m^2")),
-    "Phi_(2 arrow 1)": (signification: "le flux mutuel, créé par la bobine 2 à travers la bobine 1", unité: unit("T m^2")),
+    "Phi_(2 arrow 1)": (
+        signification: "le flux mutuel, créé par la bobine 2 à travers la bobine 1",
+        unité: unit("T m^2"),
+    ),
     L_1: (signification: "l'inductance propre de la bobine 1", unité: unit("H")),
     L_2: (signification: "l'inductance propre de la bobine 2", unité: unit("H")),
     M: (signification: "l'inductance mutuelle entre la bobine 1 et la bobine 2", unité: unit("H")),
@@ -52,27 +57,6 @@
 )
 
 = ARQS magnétique
-== Conservation de la charge
-
-Les équations de Maxwell permettent d'obtenir l'équation locale de conservation de la charge.
-
-#encadré(
-    titre: "Équation locale de conservation de la charge",
-    connaitre: true,
-    savoir-faire: true,
-    grandeurs: sub-dictionary(grandeurs, ("va(j)", "rho", "t")),
-)[
-    $ div va(j)+ pdv(rho, t)=0 $
-]
-
-#flashcard(
-    recto: [Équation locale de conservation de la charge],
-    verso: [$ div va(j) + pdv(rho, t)=0 $],
-)
-#question-de-colle(
-    [Énoncer les 4 équations de Maxwell et établir l'équation locale de conservation de la charge.],
-)
-
 == Courants de déplacement
 
 Le terme $epsilon_0 pdv(va(E), t)$ se nomme la densité de courant de déplacement#footnote[Il est parfois appelé simplement courant de déplacement par abus de langage.]. Son unité est $unit("A/m^2")$.
@@ -89,6 +73,10 @@ L'ARQS#footnote[approximation des régimes quasi-stationnaires] magnétique cons
     $ rot va(E)=-pdv(va(B), t) $
     $ div va(B)=0 $
     $ rot va(B) = mu_0 va(j) $
+]
+
+#application[
+    Jusqu'à quelle fréquence un circuit électronique réalisé sur platine d'essai reste-t-il dans le cadre de l'ARQS magnétique ?
 ]
 
 #flashcard(
@@ -159,18 +147,22 @@ Dans l'ARQS, les courants créent des champs magnétiques (qu'on peut détermine
     ),
 )
 
-== Conservation de la charge dans l'ARQS
+== ARQS et loi des nœuds
 
-Dans l'ARQS, l'équation locale de conservation de la charge peut être simplifiée.
+Dans l'ARQS, le vecteur densité volumique de courant électrique est à flux conservatif. Il s'agit d'une autre formulation de la loi des nœuds.
 
 #encadré(
-    titre: [Équation locale de conservation de la charge dans l'ARQS],
+    titre: [Loi des nœuds],
     connaitre: true,
     savoir-faire: true,
-    hypothèses: ("Dans l'ARQS magnétique",),
-    grandeurs: sub-dictionary(grandeurs, ("va(j)",)),
+    hypothèses: (
+        "Dans l'ARQS magnétique",
+        [La surface fermée $S$ entoure le nœud et est orientée vers l'extérieur.],
+        [Les intensités $i_k$ des branches sont comptées positivement lorsqu'elles sortent du nœud.],
+    ),
+    grandeurs: sub-dictionary(grandeurs, ("va(j)", "va(dd(S))", "i_k")),
 )[
-    $ div va(j) = 0 $
+    $ integral.surf_S va(j) dot va(dd(S)) = sum_k i_k = 0 $
 ]
 
 
