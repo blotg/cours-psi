@@ -40,25 +40,29 @@
 \element{EM2.CourbeAmpere}{
   \begin{questionmult}{courbeAmpere}\bareme{haut=2,p=0}
     Dans l'exemple ci-dessous, la courbe d'Ampère, orientée dans le sens conventionnel par rapport à $I$
-
+\begin{center}
     \begin{tikzpicture}
       \draw[->, >=latex] (0,0) -- (0,1) node[right] {$I$};
       \draw (0,1) -- (0,2);
-      \draw[->] (1,1) -- (2,1) node[below] {$\vv{e_r}$};
+      % \draw[->] (1,1) -- (2,1) node[below] {$\vv{e_r}$};
       \draw[->] (1,1) -- (1,2) node[right] {$\vv{e_z}$};
-      \draw[fill=white] (1,1) circle (0.1);
-      \draw (1,1) ++(45:0.1) --++(-135:0.2);
-      \draw (1,1) ++(-45:0.1) --++(135:0.2);
-      \draw (1,1) node[below left] {$\vv{e_\theta}$};
+      % \draw[fill=white] (1,1) circle (0.1);
+      % \draw (1,1) ++(45:0.1) --++(-135:0.2);
+      % \draw (1,1) ++(-45:0.1) --++(135:0.2);
+      % \draw (1,1) node[below left] {$\vv{e_\theta}$};
     \end{tikzpicture}
+\end{center}
     \begin{multicols}{2}
       \begin{reponses}
         \bonne{est fermée.}
         \bonne{est orientée selon $\vv{e_\theta}$.}
-        \bonne{enlace le courant $I$.}
+        \bonne{enlace un courant $I$.}
         \bonne{est un cercle.}
         \mauvaise{est orientée selon $\vv{e_r}$.}
         \mauvaise{est orientée selon $\vv{e_z}$.}
+        \mauvaise{est orientée selon $-\vv{e_r}$.}
+        \mauvaise{est orientée selon $-\vv{e_z}$.}
+        \mauvaise{est orientée selon $-\vv{e_\theta}$.}
         \mauvaise{est un rectangle.}
         \mauvaise{est une sphère.}
       \end{reponses}

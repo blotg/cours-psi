@@ -128,3 +128,82 @@
   \end{questionmult}
 }
 \setgroupmode{coordonnees.4}{cyclic}
+
+% Schémas des vecteurs de base, en perspective cavalière comme ceux du cours.
+% Un seul vecteur est tracé depuis M, toujours étiqueté \vv{e_\theta} :
+% #1 désigne son extrémité (er, et, -et, ez en cylindriques ;
+% er, et, -et, ephi en sphériques), #2 place l'étiquette.
+\newcommand{\schemaBaseCylindrique}[2]{%
+  \begin{tikzpicture}[x={(-0.45cm,-0.45cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, >=latex, font=\small, baseline=(current bounding box.center)]
+    \pgfmathsetmacro{\cosT}{cos(45)}
+    \pgfmathsetmacro{\sinT}{sin(45)}
+    \draw[->] (0,0,0) -- (1.4,0,0) node[left] {$x$};
+    \draw[->] (0,0,0) -- (0,2.3,0) node[below] {$y$};
+    \draw[->] (0,0,0) -- (0,0,2) node[left] {$z$};
+    \coordinate (M) at ({1.5*\cosT},{1.5*\sinT},1.1);
+    \draw[dashed] (0,0,1.1) -- (M) -- ({1.5*\cosT},{1.5*\sinT},0) -- (0,0,0);
+    \draw[dashed] (0,0,0) -- (M);
+    % \draw[dotted, domain=0:90, variable=\a, smooth] plot ({1.5*cos(\a)},{1.5*sin(\a)},1.1);
+    % \draw[->, domain=0:45, variable=\a, smooth] plot ({0.6*cos(\a)},{0.6*sin(\a)},0);
+    % \node at ({1.05*cos(22.5)},{1.05*sin(22.5)},0) {$\theta$};
+    \coordinate (er) at ({2.3*\cosT},{2.3*\sinT},1.1);
+    \coordinate (et) at ({1.5*\cosT-0.8*\sinT},{1.5*\sinT+0.8*\cosT},1.1);
+    \coordinate (-et) at ({1.5*\cosT+0.8*\sinT},{1.5*\sinT-0.8*\cosT},1.1);
+    \coordinate (ez) at ({1.5*\cosT},{1.5*\sinT},1.9);
+    \draw[->, thick] (M) -- (#1) node[#2] {$\vv{e_\theta}$};
+    \fill (M) circle (1.2pt) node[above right] {$M$};
+  \end{tikzpicture}%
+}
+\newcommand{\schemaBaseSpherique}[2]{%
+  \begin{tikzpicture}[x={(-0.45cm,-0.45cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, >=latex, font=\small, baseline=(current bounding box.center)]
+    \pgfmathsetmacro{\cosT}{cos(40)}
+    \pgfmathsetmacro{\sinT}{sin(40)}
+    \pgfmathsetmacro{\cosP}{cos(45)}
+    \pgfmathsetmacro{\sinP}{sin(45)}
+    \draw[->] (0,0,0) -- (1.4,0,0) node[left] {$x$};
+    \draw[->] (0,0,0) -- (0,2.3,0) node[below] {$y$};
+    \draw[->] (0,0,0) -- (0,0,2.4) node[left] {$z$};
+    \coordinate (M) at ({2*\sinT*\cosP},{2*\sinT*\sinP},{2*\cosT});
+    \draw[dashed] (0,0,0) -- (M) -- ({2*\sinT*\cosP},{2*\sinT*\sinP},0) -- (0,0,0);
+    % \draw[dotted, domain=15:75, variable=\a, smooth] plot ({2*sin(\a)*\cosP},{2*sin(\a)*\sinP},{2*cos(\a)});
+    % \draw[dotted, domain=5:90, variable=\a, smooth] plot ({2*\sinT*cos(\a)},{2*\sinT*sin(\a)},{2*\cosT});
+    % \draw[->, domain=0:45, variable=\a, smooth] plot ({0.6*cos(\a)},{0.6*sin(\a)},0);
+    % \node at ({1.05*cos(22.5)},{1.05*sin(22.5)},0) {$\varphi$};
+    % \draw[->, domain=0:40, variable=\a, smooth] plot ({0.5*sin(\a)*\cosP},{0.5*sin(\a)*\sinP},{0.5*cos(\a)});
+    % \node at ({0.75*sin(20)*\cosP},{0.75*sin(20)*\sinP},{0.75*cos(20)}) {$\theta$};
+    \coordinate (er) at ({2.8*\sinT*\cosP},{2.8*\sinT*\sinP},{2.8*\cosT});
+    \coordinate (et) at ({2*\sinT*\cosP+0.8*\cosT*\cosP},{2*\sinT*\sinP+0.8*\cosT*\sinP},{2*\cosT-0.8*\sinT});
+    \coordinate (-et) at ({2*\sinT*\cosP-0.8*\cosT*\cosP},{2*\sinT*\sinP-0.8*\cosT*\sinP},{2*\cosT+0.8*\sinT});
+    \coordinate (ephi) at ({2*\sinT*\cosP-0.8*\sinP},{2*\sinT*\sinP+0.8*\cosP},{2*\cosT});
+    \draw[->, thick] (M) -- (#1) node[#2] {$\vv{e_\theta}$};
+    \fill (M) circle (1.2pt) node[above left] {$M$};
+  \end{tikzpicture}%
+}
+
+\element{coordonnees.5}{
+  \begin{question}{eThetaCylindriques}\bareme{1}
+    En coordonnées cylindriques, le vecteur $\vv{e_\theta}$ au point $M$ est correctement représenté sur le schéma
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\schemaBaseCylindrique{et}{right}}
+        \mauvaise{\schemaBaseCylindrique{-et}{below}}
+        \mauvaise{\schemaBaseCylindrique{er}{below}}
+        \mauvaise{\schemaBaseCylindrique{ez}{right}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\element{coordonnees.5}{
+  \begin{question}{eThetaSpheriques}\bareme{1}
+    En coordonnées sphériques, le vecteur $\vv{e_\theta}$ au point $M$ est correctement représenté sur le schéma
+    \begin{multicols}{2}
+      \begin{reponses}
+        \bonne{\schemaBaseSpherique{et}{right}}
+        \mauvaise{\schemaBaseSpherique{-et}{right}}
+        \mauvaise{\schemaBaseSpherique{er}{right}}
+        \mauvaise{\schemaBaseSpherique{ephi}{right}}
+      \end{reponses}
+    \end{multicols}
+  \end{question}
+}
+\setgroupmode{coordonnees.5}{cyclic}
