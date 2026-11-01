@@ -37,6 +37,13 @@
         html.elem("menclose", attrs: (notation: "updiagonalstrike"), html.elem("mrow", it.body))
     } else { it }
 
+    // Le Markdown d'un notebook ne colore pas le code en ligne. Coloré par
+    // typst (l'aide-mémoire Python, `cheatsheet-python`), il arriverait en
+    // autant de morceaux que de couleurs, que pandoc écrit chacun entre
+    // accents graves : « `I ``=`` ``trapezoid``(…) ». Sans langue, il reste
+    // d'un seul tenant.
+    show raw.where(block: false): it => if it.lang == none { it } else { raw(it.text) }
+
     // Ni corrigé, ni coup de pouce : le notebook est celui de l'élève. Les
     // coups de pouce ne s'impriment déjà pas ; leur métadonnée, émise juste
     // après l'énoncé de la question, sert de repère de fin.

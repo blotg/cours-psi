@@ -15,6 +15,8 @@ abréviations:
 imports-from:
   scipy.optimize:
     - curve_fit
+  scipy.integrate:
+    - trapezoid
 
 # Commandes. Clé = nom canonique complet (module.fonction).
 #   exemple     : une chaîne, ou une liste de chaînes (un ou plusieurs exemples).
@@ -106,3 +108,7 @@ commandes:
       - "curve_fit(f: fonction, xdata: array, ydata: array) -> tuple"
       - "popt, pcov = curve_fit(f: fonction, xdata: array, ydata: array, p0: list, bounds=(0, np.inf): tuple)"
     commentaire: "ajuste les paramètres de `f` (dont le premier argument est l'abscisse) aux données ; `popt` : paramètres optimaux, `p0` : estimation initiale des valeurs des paramètres (facultatif), `bounds` : bornes sur les paramètres (facultatif)"
+
+  scipy.integrate.trapezoid:
+    exemple: "I = trapezoid(y: array, x: array) -> float"
+    commentaire: "valeur approchée de $integral y thin upright(d) x$ par la méthode des trapèzes, $I = sum_k (x_(k+1) - x_k) (y_k + y_(k+1)) slash 2$ ; les points sont pris dans l'ordre des tableaux, `x` n'a donc pas besoin d'être croissant"

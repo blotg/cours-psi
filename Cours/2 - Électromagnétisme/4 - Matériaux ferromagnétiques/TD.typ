@@ -8,3 +8,4 @@
 #include "exercices/Disque dur.typ";
 #include "exercices/Boussole.typ";
 // #include "exercices/Mesure d'un cycle d'hystérésis.typ"
+#include "exercices/Pertes dans une tôle de transformateur.typ"
