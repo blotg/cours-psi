@@ -12,12 +12,11 @@ import { contours, grille, polylignes, ronde } from '#animations/carte.js';
 import { Graphe, échantillons } from '#animations/graphe.js';
 import { COULEURS } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
-import { Plan, chemin, disque, flèche, pointe } from '#animations/plan.js';
+import { Plan, chemin, conducteur, disque, flèche, lignesDeChamp } from '#animations/plan.js';
 import { Réglages } from '#animations/reglages.js';
 import { champDesFils, champDesSpires, champSurLAxe, fluxDesSpires, potentielDesFils } from './champ.js';
 
 const COULEUR = {
-    fil: COULEURS.noir,
     ligne: COULEURS.noir,
     sonde: COULEURS.violet,
     règle: COULEURS.gris,
@@ -30,9 +29,6 @@ const RÈGLE = 5;
 /** Le champ, en teslas, où la flèche en M a pris la moitié de sa longueur —
  *  celui de la Terre, à peu près. */
 const CHAMP_DE_RÉFÉRENCE = 50e-6;
-
-/** L'écart, en pixels, entre deux pointes le long d'une ligne de champ. */
-const ENTRE_POINTES = 110;
 
 const format = new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3, useGrouping: false });
 /** Un nombre, écrit à la française et lisible par KaTeX. */
@@ -52,58 +48,6 @@ function mesure(valeur) {
 }
 
 // -- Ce qui se dessine ---------------------------------------------------------
-
-/**
- * Un fil vu en coupe, comme sur les figures du cours : un point si le
- * courant vient vers nous (⊙), une croix s'il s'en éloigne (⊗), rien s'il
- * est nul. Trop petit pour porter un signe, il n'est plus qu'un point noir.
- */
-function dessineFil(c, [px, py], I, rayon) {
-    if (rayon < 3.5) {
-        disque(c, [px, py], rayon, { couleur: COULEUR.fil });
-        return;
-    }
-    disque(c, [px, py], rayon, { couleur: '#fff', bord: COULEUR.fil, épaisseur: 1.6 });
-    if (I > 0) disque(c, [px, py], rayon * 0.3, { couleur: COULEUR.fil });
-    if (I < 0) {
-        const d = rayon / Math.SQRT2;
-        chemin(c, [[px - d, py - d], [px + d, py + d]], { couleur: COULEUR.fil, épaisseur: 1.6 });
-        chemin(c, [[px - d, py + d], [px + d, py - d]], { couleur: COULEUR.fil, épaisseur: 1.6 });
-    }
-}
-
-/**
- * Des lignes de champ, fléchées à distance régulière dans le sens du champ :
- * `champ(x, y)` le donne en coordonnées de l'écran, et une pointe prend le
- * sens de la ligne qui s'accorde avec lui. La première pointe d'une ligne est
- * à mi-distance de son début : une ligne courte, fermée sur un fil, en a
- * encore une.
- */
-function dessineLignes(c, plan, lignes, champ, { couleur = COULEUR.ligne, épaisseur = 1.4 } = {}) {
-    for (const ligne of lignes) {
-        const points = ligne.map(([x, y]) => plan.vers(x, y));
-        chemin(c, points, { couleur, épaisseur });
-        let prochaine = ENTRE_POINTES / 2;
-        let parcouru = 0;
-        for (let i = 0; i + 1 < points.length; i++) {
-            const [a, b] = [points[i], points[i + 1]];
-            const tangente = [b[0] - a[0], b[1] - a[1]];
-            const longueur = Math.hypot(...tangente);
-            while (longueur && parcouru + longueur >= prochaine) {
-                const t = (prochaine - parcouru) / longueur;
-                const [x, y] = [ligne[i][0] + t * (ligne[i + 1][0] - ligne[i][0]), ligne[i][1] + t * (ligne[i + 1][1] - ligne[i][1])];
-                const [bx, by] = champ(x, y);
-                // L'écran compte y vers le bas.
-                const sens = Math.sign(tangente[0] * bx - tangente[1] * by) || 1;
-                pointe(c, [a[0] + t * tangente[0], a[1] + t * tangente[1]], [sens * tangente[0], sens * tangente[1]], {
-                    couleur,
-                });
-                prochaine += ENTRE_POINTES;
-            }
-            parcouru += longueur;
-        }
-    }
-}
 
 /** L'échelle de la carte : une règle posée en bas à gauche. */
 function dessineÉchelle(c, plan, nom) {
@@ -226,7 +170,7 @@ function carteDesFils(section) {
         // les lignes — et pour celle qui passe par M.
         const potentiel = grille((x, y) => potentielDesFils(fils, x, y), vueDuPlan, 220);
         if (état.montre.lignes && fils.some((f) => f.I)) {
-            dessineLignes(c, plan, polylignes(contours(potentiel, niveauxDesFils(potentiel, fils, pas))), champÉcran);
+            lignesDeChamp(c, plan, polylignes(contours(potentiel, niveauxDesFils(potentiel, fils, pas))), champÉcran);
         }
 
         // Le champ en M : la ligne de champ qui y passe, et une flèche qui
@@ -238,7 +182,7 @@ function carteDesFils(section) {
         if (état.montre.sonde) {
             if (norme > 1e-12) {
                 const niveau = potentielDesFils(fils, ...état.M);
-                dessineLignes(c, plan, polylignes(contours(potentiel, [niveau])), champÉcran, {
+                lignesDeChamp(c, plan, polylignes(contours(potentiel, [niveau])), champÉcran, {
                     couleur: COULEUR.sonde,
                     épaisseur: 2,
                 });
@@ -251,7 +195,7 @@ function carteDesFils(section) {
             if (norme > 1e-12) nomB.place(...état.M, [(bx / norme) * bout, (-by / norme) * bout]);
         }
 
-        for (const fil of fils) dessineFil(c, plan.vers(fil.x, fil.y), fil.I, 9);
+        for (const fil of fils) conducteur(c, plan.vers(fil.x, fil.y), fil.I, 9);
         dessineÉchelle(c, plan, nomRègle);
 
         mesures.écrit(`\\lVert\\vec{B}\\rVert = ${mesure(norme)}`);
@@ -396,14 +340,14 @@ function solénoïde(section) {
         const z = coteDuProfil();
         chemin(c, [plan.vers(z, 0), plan.vers(z, y1)], { couleur: COULEUR.axe, épaisseur: 1, pointillés: [4, 4] });
 
-        dessineLignes(c, plan, lignes, champÉcran);
+        lignesDeChamp(c, plan, lignes, champÉcran);
 
         // Les spires coupées par le plan : le courant sort de l'écran en
         // haut et y entre en bas, et le champ intérieur va vers la droite.
         const rayon = Math.min(7, 0.42 * plan.long(ÉCART));
         for (const cote of cotes) {
-            dessineFil(c, plan.vers(cote, RAYON), 1, rayon);
-            dessineFil(c, plan.vers(cote, -RAYON), -1, rayon);
+            conducteur(c, plan.vers(cote, RAYON), 1, rayon);
+            conducteur(c, plan.vers(cote, -RAYON), -1, rayon);
         }
     });
 

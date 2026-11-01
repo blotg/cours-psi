@@ -22,7 +22,7 @@ export class Plan {
      * @param aide       le mode d'emploi, dans la barre sous la vue
      */
     constructor(conteneur, { rapport = 4 / 3, étendue = 10, centre = [0, 0], aide = '' } = {}) {
-        Object.assign(this, { rapport, étendue, centre, poignées: [], attrapée: null });
+        Object.assign(this, { rapport, étendue, centre, poignées: [], attrapée: null, prise: [0, 0] });
 
         const vue = créé('div', 'scène');
         this.toile = créé('canvas');
@@ -189,9 +189,14 @@ export class Plan {
      * Un point que l'on attrape et que l'on déplace : `auDéplacement(x, y)`
      * reçoit sa nouvelle position, à la charge de l'animation de la retenir
      * (et de la borner). `rayon` est la portée de la prise, en pixels.
+     *
+     * Un objet étendu (un barreau, une plaque) se prend n'importe où :
+     * `contient(x, y)` dit si le point du problème est dessus. Sa position
+     * suit alors le pointeur à l'écart où on l'a pris : il ne saute pas sous
+     * le doigt.
      */
-    poignée({ position, rayon = 16, auDéplacement, auRelâchement } = {}) {
-        const poignée = { position, rayon, auDéplacement, auRelâchement };
+    poignée({ position, rayon = 16, contient = null, auDéplacement, auRelâchement } = {}) {
+        const poignée = { position, rayon, contient, auDéplacement, auRelâchement };
         this.poignées.push(poignée);
         return poignée;
     }
@@ -203,21 +208,24 @@ export class Plan {
         const py = e.clientY - cadre.top;
         let trouvée = null;
         let meilleure = Infinity;
+        const point = this.depuis(px, py);
         for (const poignée of this.poignées) {
             const [x, y] = this.vers(...poignée.position());
-            const distance = Math.hypot(px - x, py - y);
+            const distance = poignée.contient?.(...point) ? 0 : Math.hypot(px - x, py - y);
             if (distance < poignée.rayon && distance < meilleure) {
                 meilleure = distance;
                 trouvée = poignée;
             }
         }
-        return { poignée: trouvée, point: this.depuis(px, py) };
+        return { poignée: trouvée, point };
     }
 
     attrape(e) {
-        const { poignée } = this.sous(e);
+        const { poignée, point } = this.sous(e);
         if (!poignée) return;
         this.attrapée = poignée;
+        const [x, y] = poignée.position();
+        this.prise = poignée.contient ? [x - point[0], y - point[1]] : [0, 0];
         // Suivre le pointeur même s'il sort de la vue ; un navigateur refuse
         // la prise s'il ne connaît plus ce pointeur, et ce n'est pas grave.
         try {
@@ -232,7 +240,7 @@ export class Plan {
     déplace(e) {
         const { poignée, point } = this.sous(e);
         if (this.attrapée) {
-            this.attrapée.auDéplacement?.(...point);
+            this.attrapée.auDéplacement?.(point[0] + this.prise[0], point[1] + this.prise[1]);
             this.redessine();
             e.preventDefault();
             return;
@@ -338,4 +346,90 @@ export function aplat(c, points, couleur) {
     c.fillStyle = couleur;
     c.fill();
     c.restore();
+}
+
+/**
+ * Un conducteur vu en coupe, comme sur les figures du cours : un point si le
+ * courant vient vers nous (⊙), une croix s'il s'en éloigne (⊗), rien s'il
+ * est nul. Trop petit pour porter un signe, il n'est plus qu'un point noir.
+ */
+export function conducteur(c, [px, py], I, rayon, { couleur = '#000' } = {}) {
+    if (rayon < 3.5) {
+        disque(c, [px, py], rayon, { couleur });
+        return;
+    }
+    disque(c, [px, py], rayon, { couleur: '#fff', bord: couleur, épaisseur: 1.6 });
+    if (I > 0) disque(c, [px, py], rayon * 0.3, { couleur });
+    if (I < 0) {
+        const d = rayon / Math.SQRT2;
+        chemin(c, [[px - d, py - d], [px + d, py + d]], { couleur, épaisseur: 1.6 });
+        chemin(c, [[px - d, py + d], [px + d, py - d]], { couleur, épaisseur: 1.6 });
+    }
+}
+
+/**
+ * Des lignes de champ, données aux coordonnées du problème (des lignes
+ * brisées, cf. `polylignes` dans carte.js) et fléchées dans le sens du champ :
+ * `champ(x, y)` le donne, et une pointe prend le sens de la ligne qui
+ * s'accorde avec lui.
+ *
+ * Les pointes sont posées tous les `entre` pixels le long de chaque ligne, la
+ * première à mi-distance de son début : une ligne courte, fermée sur un fil,
+ * en a encore une. Ou bien, comme dans les figures du poly, là où les lignes
+ * traversent la droite horizontale `traversée` = { y, écart } : une rangée
+ * de pointes alignées, à `écart` pixels au moins l'une de l'autre — de quoi
+ * flécher des lignes qui se resserrent sans les couvrir de pointes.
+ */
+export function lignesDeChamp(
+    c,
+    plan,
+    lignes,
+    champ,
+    { couleur = '#000', épaisseur = 1.4, entre = 110, pointillés = null, traversée = null } = {},
+) {
+    const pointes = [];
+    for (const ligne of lignes) {
+        const points = ligne.map(([x, y]) => plan.vers(x, y));
+        chemin(c, points, { couleur, épaisseur, pointillés });
+        let prochaine = entre / 2;
+        let parcouru = 0;
+        for (let i = 0; i + 1 < points.length; i++) {
+            const [a, b] = [points[i], points[i + 1]];
+            const tangente = [b[0] - a[0], b[1] - a[1]];
+            const longueur = Math.hypot(...tangente);
+            const pose = (t) => {
+                const [x, y] = [ligne[i][0] + t * (ligne[i + 1][0] - ligne[i][0]), ligne[i][1] + t * (ligne[i + 1][1] - ligne[i][1])];
+                const [bx, by] = champ(x, y);
+                // L'écran compte y vers le bas.
+                const sens = Math.sign(tangente[0] * bx - tangente[1] * by) || 1;
+                pointes.push([[a[0] + t * tangente[0], a[1] + t * tangente[1]], [sens * tangente[0], sens * tangente[1]]]);
+            };
+            if (traversée) {
+                const [ya, yb] = [ligne[i][1] - traversée.y, ligne[i + 1][1] - traversée.y];
+                if (ya * yb < 0 || (ya === 0 && yb !== 0)) pose(ya / (ya - yb));
+                continue;
+            }
+            while (longueur && parcouru + longueur >= prochaine) {
+                pose((prochaine - parcouru) / longueur);
+                prochaine += entre;
+            }
+            parcouru += longueur;
+        }
+        // Les pointes d'une ligne, sur elle, sous la ligne suivante.
+        if (!traversée) {
+            for (const [point, direction] of pointes) pointe(c, point, direction, { couleur });
+            pointes.length = 0;
+        }
+    }
+    if (traversée) {
+        // De gauche à droite, en sautant celles qui tomberaient trop près de
+        // la dernière posée.
+        pointes.sort((p, q) => p[0][0] - q[0][0]);
+        let dernière = -Infinity;
+        for (const [point, direction] of pointes) {
+            if (point[0] - dernière < traversée.écart) continue;
+            dernière = point[0];
+            pointe(c, point, direction, { couleur });
+        }
+    }
 }

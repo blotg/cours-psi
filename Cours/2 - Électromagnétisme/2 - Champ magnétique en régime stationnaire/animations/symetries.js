@@ -36,7 +36,7 @@ import {
     uneSpire,
     unTore,
 } from '#animations/distributions.js';
-import { champDUneSpire } from './champ.js';
+import { champDUneSpire } from '#animations/spires.js';
 
 const RAYON_SOLÉNOÏDE = 1.6;
 const TORE = { rayon: 2.4, tube: 0.75 };

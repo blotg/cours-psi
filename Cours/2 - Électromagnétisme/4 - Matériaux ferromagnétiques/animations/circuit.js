@@ -1,0 +1,380 @@
+// Le champ magnétique d'un circuit ferromagnétique bobiné, en deux dimensions :
+// les mêmes circuits, et le même calcul, que les figures du poly
+// (Simulations/lib.py).
+//
+// Tout est invariant selon z, les courants vont selon z : le champ dérive du
+// potentiel vecteur A_z (B = rot(A_z e_z)), solution de
+//
+//     div( (1/μ_r) grad A_z ) = −μ₀ j_z,
+//
+// et les lignes de champ sont ses lignes de niveau. Le flux qui passe entre
+// deux d'entre elles, par mètre de circuit selon z, est l'écart de A_z : des
+// niveaux régulièrement espacés font une carte à flux constant.
+//
+// Les longueurs sont en mètres, les courants en ampères, A_z en webers par
+// mètre et le champ en teslas.
+//
+// Le calcul se fait par volumes finis sur une grille de cellules, où le
+// courant d'un fil se répartit au prorata de l'aire qu'il couvre. Chaque
+// face entre deux cellules voisines laisse passer le « flux » k (A_p − A_q) :
+// c'est ce qui assure la continuité de H tangentiel à la surface du fer.
+// Deux choses changent par rapport au poly, pour que l'on puisse manipuler
+// le circuit sans attendre :
+//
+//   - la grille est fine (1 mm) dans la vue seulement, et ses pas grandissent
+//     au-delà, jusqu'au bord lointain où A_z = 0 : deux fois moins
+//     d'inconnues pour le même résultat dans la vue ;
+//   - le fer n'est pas pris cellule par cellule : le coefficient d'une face se
+//     calcule exactement sur le fer qu'elle traverse, comme un empilement de
+//     couches (cf. `coefficient`). Un entrefer d'un dixième de millimètre de
+//     plus ou de moins change donc le champ d'autant, quel que soit le pas de
+//     la grille — un curseur ne fait pas de marches.
+//
+// Le système est résolu par la méthode du gradient conjugué, préconditionnée
+// par une factorisation de Cholesky incomplète modifiée (MIC(0)) : une
+// soixantaine d'itérations, quelle que soit la perméabilité du fer. Avec
+// μ_r = 10⁵, le fer et l'air diffèrent de cinq ordres de grandeur, et un
+// préconditionnement par la seule diagonale en demanderait plus de sept cents.
+
+export const MU0 = 4e-7 * Math.PI;
+
+// -- Les circuits ---------------------------------------------------------------
+//
+// Un circuit se décrit par ses rectangles de fer [x₁, x₂, y₁, y₂], disjoints,
+// et ses fils [x, y, rayon, I], I > 0 pour un courant qui vient vers nous.
+// Ce sont ceux de Simulations/lib.py.
+
+/** n fils de rayon r, régulièrement espacés de `début` à `fin`, parcourus
+ *  chacun par I. */
+function rangée([xa, ya], [xb, yb], n, r, I) {
+    return Array.from({ length: n }, (_, k) => [xa + ((xb - xa) * k) / (n - 1), ya + ((yb - ya) * k) / (n - 1), r, I]);
+}
+
+/** Le bobinage : N_fils fils de rayon 2 mm de chaque côté du fer, à 2 mm de
+ *  lui, pour N i ampères-tours en tout. */
+const BOBINAGE = { fils: 10, rayon: 2e-3, écart: 2e-3 };
+
+/**
+ * Un circuit rectangulaire centré sur l'origine, de largeur a, de hauteur b,
+ * de branches de largeur d, avec un entrefer d'épaisseur e au milieu de la
+ * branche de droite (e = 0 : sans entrefer). Le bobinage entoure la branche
+ * de gauche sur une hauteur `bobine`.
+ */
+export function circuit({ a = 0.1, b = 0.12, d = 0.02, e = 0, Ni = 500, bobine = 0.06 } = {}) {
+    const fer = [
+        [-a / 2, a / 2, b / 2 - d, b / 2],
+        [-a / 2, a / 2, -b / 2, -b / 2 + d],
+        [-a / 2, -a / 2 + d, -b / 2 + d, b / 2 - d],
+    ];
+    if (e > 0) {
+        fer.push([a / 2 - d, a / 2, e / 2, b / 2 - d], [a / 2 - d, a / 2, -b / 2 + d, -e / 2]);
+    } else {
+        fer.push([a / 2 - d, a / 2, -b / 2 + d, b / 2 - d]);
+    }
+    const { fils: n, rayon: r, écart: g } = BOBINAGE;
+    const dehors = -a / 2 - g - r;
+    const dedans = -a / 2 + d + g + r;
+    const fils = [
+        ...rangée([dehors, -bobine / 2], [dehors, bobine / 2], n, r, Ni / n),
+        ...rangée([dedans, -bobine / 2], [dedans, bobine / 2], n, r, -Ni / n),
+    ];
+    return { fer, fils, sonde: [a / 2 - d / 2, 0], Ni, l: 2 * (a - d) + 2 * (b - d) - e };
+}
+
+/**
+ * Un électroaimant : une pièce en U retournée, de largeur a, de hauteur b et
+ * de branches de largeur d, le bas de ses branches en y = 0, bobinée sur sa
+ * branche horizontale ; en face, un barreau de largeur a et d'épaisseur d,
+ * centré en `barreau` = [x, y].
+ */
+export function électroaimant({ a = 0.1, b = 0.08, d = 0.02, Ni = 500, bobine = 0.05, barreau = [0, -0.015] } = {}) {
+    const [xb, yb] = barreau;
+    const fer = [
+        [-a / 2, a / 2, b - d, b],
+        [-a / 2, -a / 2 + d, 0, b - d],
+        [a / 2 - d, a / 2, 0, b - d],
+        [xb - a / 2, xb + a / 2, yb - d / 2, yb + d / 2],
+    ];
+    const { fils: n, rayon: r, écart: g } = BOBINAGE;
+    const dessus = b + g + r;
+    const dessous = b - d - g - r;
+    const fils = [
+        ...rangée([-bobine / 2, dessus], [bobine / 2, dessus], n, r, Ni / n),
+        ...rangée([-bobine / 2, dessous], [bobine / 2, dessous], n, r, -Ni / n),
+    ];
+    // L'entrefer, sous la branche de gauche du U : le champ se mesure en son
+    // milieu.
+    const e = -(yb + d / 2);
+    return { fer, fils, sonde: [-a / 2 + d / 2, -e / 2], Ni, e };
+}
+
+// -- La grille ------------------------------------------------------------------
+
+/**
+ * Les abscisses des faces des cellules le long d'un axe : un pas h sur
+ * [a, b] — la vue, où les lignes se tracent —, puis des pas qui grandissent
+ * d'un facteur q de part et d'autre, jusqu'à la distance `marge`. Au-delà,
+ * A_z = 0 : c'est le bord lointain du calcul.
+ */
+function faces(a, b, h, marge, q = 1.3) {
+    const n = Math.max(1, Math.round((b - a) / h));
+    const pas = (b - a) / n;
+    const dedans = Array.from({ length: n + 1 }, (_, k) => a + k * pas);
+    const bas = [];
+    const haut = [];
+    for (let p = pas, d = 0; d < marge; ) {
+        p *= q;
+        d += p;
+        bas.push(a - d);
+        haut.push(b + d);
+    }
+    return { faces: Float64Array.from([...bas.reverse(), ...dedans, ...haut]), premier: bas.length, n };
+}
+
+/** L'indice de la cellule qui contient v, parmi les faces f (bornée). */
+function cellule(f, v) {
+    let bas = 0;
+    let haut = f.length - 1;
+    while (haut - bas > 1) {
+        const milieu = (bas + haut) >> 1;
+        if (f[milieu] <= v) bas = milieu;
+        else haut = milieu;
+    }
+    return bas;
+}
+
+/**
+ * Le coefficient de la face entre deux cellules voisines : la face s'étend
+ * de t₁ à t₂ en travers, et l'on va d'un centre à l'autre de l₁ à l₂.
+ *
+ * Le fer que l'on traverse ne change qu'aux bords des rectangles : entre
+ * deux bords, chaque fibre de la face va de l₁ à l₂ à travers une longueur L
+ * de fer, et c'est une association en série — 1/μ_r se moyenne en
+ * harmonique le long de la fibre. Les fibres, elles, sont en parallèle.
+ * `verticale` dit si la face est verticale (on la traverse selon x) ou
+ * horizontale.
+ */
+function coefficient(fer, μr, t1, t2, l1, l2, verticale) {
+    const bords = [t1, t2];
+    for (const r of fer) {
+        const [ta, tb] = verticale ? [r[2], r[3]] : [r[0], r[1]];
+        if (ta > t1 && ta < t2) bords.push(ta);
+        if (tb > t1 && tb < t2) bords.push(tb);
+    }
+    if (bords.length > 2) bords.sort((u, v) => u - v);
+    let k = 0;
+    for (let m = 0; m + 1 < bords.length; m++) {
+        const [a, b] = [bords[m], bords[m + 1]];
+        if (b <= a) continue;
+        const t = (a + b) / 2;
+        let L = 0;
+        for (const r of fer) {
+            const [ta, tb, la, lb] = verticale ? [r[2], r[3], r[0], r[1]] : [r[0], r[1], r[2], r[3]];
+            if (t >= ta && t < tb) L += Math.max(0, Math.min(lb, l2) - Math.max(la, l1));
+        }
+        k += (b - a) / (l2 - l1 + (μr - 1) * L);
+    }
+    return k;
+}
+
+/**
+ * Le calcul sur une grille : fine de pas `h` dans le rectangle `vue`
+ * ({ x0, x1, y0, y1 }), élargie jusqu'à `marge` au-delà. Les tableaux sont
+ * bordés d'une rangée de cellules fantômes où A_z = 0 : les boucles n'ont
+ * pas à se soucier du bord.
+ */
+export class Grille {
+    constructor(vue, h, marge = 0.06) {
+        const x = faces(vue.x0, vue.x1, h, marge);
+        const y = faces(vue.y0, vue.y1, h, marge);
+        Object.assign(this, { fx: x.faces, fy: y.faces, vue: { x, y } });
+        const nx = (this.nx = this.fx.length - 1);
+        const ny = (this.ny = this.fy.length - 1);
+        const s = (this.s = nx + 2);
+        const N = (this.N = s * (ny + 2));
+        // Les centres des cellules ; ceux des fantômes sont sur le bord.
+        this.xc = new Float64Array(nx + 2);
+        this.yc = new Float64Array(ny + 2);
+        for (let i = 0; i < nx; i++) this.xc[i + 1] = (this.fx[i] + this.fx[i + 1]) / 2;
+        for (let j = 0; j < ny; j++) this.yc[j + 1] = (this.fy[j] + this.fy[j + 1]) / 2;
+        [this.xc[0], this.xc[nx + 1], this.yc[0], this.yc[ny + 1]] = [this.fx[0], this.fx[nx], this.fy[0], this.fy[ny]];
+        // Les coefficients des faces ouest (O) et sud (S) de chaque cellule,
+        // la diagonale, le second membre, la factorisation, et A_z.
+        for (const nom of ['O', 'S', 'D', 'b', 'd', 'A', 'r', 'z', 'p', 'q']) this[nom] = new Float64Array(N);
+    }
+
+    /** Les coefficients et le second membre d'un circuit. */
+    remplit({ fer, fils }, μr) {
+        const { fx, fy, nx, ny, s, xc, yc, O, S, D, b } = this;
+        // De l'air partout, puis le fer là où un rectangle touche la face.
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1; i <= nx + 1; i++) O[j * s + i] = (fy[j] - fy[j - 1]) / (xc[i] - xc[i - 1]);
+        }
+        for (let j = 1; j <= ny + 1; j++) {
+            for (let i = 1; i <= nx; i++) S[j * s + i] = (fx[i] - fx[i - 1]) / (yc[j] - yc[j - 1]);
+        }
+        for (const r of fer) {
+            const [i1, i2] = [Math.max(1, cellule(fx, r[0])), Math.min(nx + 1, cellule(fx, r[1]) + 2)];
+            const [j1, j2] = [Math.max(1, cellule(fy, r[2])), Math.min(ny + 1, cellule(fy, r[3]) + 2)];
+            for (let j = j1; j <= j2; j++) {
+                for (let i = i1; i <= i2; i++) {
+                    const p = j * s + i;
+                    if (j <= ny) O[p] = coefficient(fer, μr, fy[j - 1], fy[j], xc[i - 1], xc[i], true);
+                    if (i <= nx) S[p] = coefficient(fer, μr, fx[i - 1], fx[i], yc[j - 1], yc[j], false);
+                }
+            }
+        }
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, p = j * s + 1; i <= nx; i++, p++) D[p] = O[p] + O[p + 1] + S[p] + S[p + s];
+        }
+
+        // Le courant de chaque fil, réparti au prorata de l'aire qu'il couvre
+        // dans chaque cellule (4 × 4 points par cellule) : son intensité est
+        // exacte quel que soit le pas.
+        b.fill(0);
+        for (const [x0, y0, r, I] of fils) {
+            const parts = [];
+            let total = 0;
+            for (let j = cellule(fy, y0 - r); j <= cellule(fy, y0 + r); j++) {
+                for (let i = cellule(fx, x0 - r); i <= cellule(fx, x0 + r); i++) {
+                    const [dx, dy] = [fx[i + 1] - fx[i], fy[j + 1] - fy[j]];
+                    let aire = 0;
+                    for (let u = 0; u < 4; u++) {
+                        for (let v = 0; v < 4; v++) {
+                            const x = fx[i] + ((u + 0.5) / 4) * dx;
+                            const y = fy[j] + ((v + 0.5) / 4) * dy;
+                            if ((x - x0) ** 2 + (y - y0) ** 2 < r * r) aire += dx * dy;
+                        }
+                    }
+                    if (aire) {
+                        parts.push([(j + 1) * s + i + 1, aire]);
+                        total += aire;
+                    }
+                }
+            }
+            for (const [p, aire] of parts) b[p] += (MU0 * I * aire) / total;
+        }
+        this.factorise();
+    }
+
+    /**
+     * La factorisation de Cholesky incomplète modifiée : celle de la
+     * matrice, aux termes près qu'elle ne garde pas — ajoutés à la diagonale,
+     * pour que chaque ligne garde sa somme. C'est ce qui la rend efficace sur
+     * une équation de diffusion.
+     */
+    factorise() {
+        const { nx, ny, s, O, S, D, d } = this;
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, p = j * s + 1; i <= nx; i++, p++) {
+                let v = D[p];
+                if (i > 1) v -= (O[p] * (O[p] + S[p - 1 + s])) / d[p - 1];
+                if (j > 1) v -= (S[p] * (S[p] + O[p - s + 1])) / d[p - s];
+                d[p] = v;
+            }
+        }
+    }
+
+    /** y = M x, la matrice du système. */
+    produit(x, y) {
+        const { nx, ny, s, O, S, D } = this;
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, k = j * s + 1; i <= nx; i++, k++) {
+                y[k] = D[k] * x[k] - O[k] * x[k - 1] - O[k + 1] * x[k + 1] - S[k] * x[k - s] - S[k + s] * x[k + s];
+            }
+        }
+    }
+
+    /** z = P⁻¹ r, P la factorisation incomplète : une descente, une remontée. */
+    préconditionne(r, z) {
+        const { nx, ny, s, O, S, d } = this;
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, k = j * s + 1; i <= nx; i++, k++) z[k] = (r[k] + O[k] * z[k - 1] + S[k] * z[k - s]) / d[k];
+        }
+        for (let j = ny; j >= 1; j--) {
+            for (let i = nx, k = j * s + nx; i >= 1; i--, k--) z[k] += (O[k + 1] * z[k + 1] + S[k + s] * z[k + s]) / d[k];
+        }
+    }
+
+    /**
+     * A_z, par le gradient conjugué, en partant de la solution précédente.
+     * Une précision de 10⁻³ sur le résidu suffit largement au dessin : l'écart
+     * à la solution exacte y est de quelques 10⁻⁵ de A_z.
+     */
+    résout(tolérance = 1e-3, maximum = 1000) {
+        const { N, A, b, r, z, p, q } = this;
+        this.produit(A, q);
+        let nb = 0;
+        let nr = 0;
+        for (let k = 0; k < N; k++) {
+            r[k] = this.D[k] ? b[k] - q[k] : 0;
+            nb += b[k] * b[k];
+            nr += r[k] * r[k];
+        }
+        this.préconditionne(r, z);
+        p.set(z);
+        let rz = 0;
+        for (let k = 0; k < N; k++) rz += r[k] * z[k];
+        const seuil = tolérance * tolérance * nb;
+        let itérations = 0;
+        while (itérations < maximum && nr > seuil) {
+            this.produit(p, q);
+            let pq = 0;
+            for (let k = 0; k < N; k++) pq += p[k] * q[k];
+            const α = rz / pq;
+            nr = 0;
+            for (let k = 0; k < N; k++) {
+                A[k] += α * p[k];
+                r[k] -= α * q[k];
+                nr += r[k] * r[k];
+            }
+            this.préconditionne(r, z);
+            let rz2 = 0;
+            for (let k = 0; k < N; k++) rz2 += r[k] * z[k];
+            const β = rz2 / rz;
+            rz = rz2;
+            for (let k = 0; k < N; k++) p[k] = z[k] + β * p[k];
+            itérations++;
+        }
+        return itérations;
+    }
+
+    /**
+     * A_z dans la vue, aux centres des cellules : une grille au sens de
+     * carte.js, de quoi en tracer les lignes de niveau.
+     */
+    carte() {
+        const { x, y } = this.vue;
+        const [colonnes, lignes] = [x.n, y.n];
+        const valeurs = new Float64Array(colonnes * lignes);
+        for (let j = 0; j < lignes; j++) {
+            const ligne = (j + y.premier + 1) * this.s + x.premier + 1;
+            valeurs.set(this.A.subarray(ligne, ligne + colonnes), j * colonnes);
+        }
+        const cadre = {
+            x0: this.xc[x.premier + 1],
+            x1: this.xc[x.premier + colonnes],
+            y0: this.yc[y.premier + 1],
+            y1: this.yc[y.premier + lignes],
+        };
+        return { colonnes, lignes, cadre, valeurs };
+    }
+}
+
+/**
+ * Le champ en (x, y), tiré d'une carte de A_z : B = (∂A/∂y, −∂A/∂x), le
+ * gradient étant celui de l'interpolation bilinéaire dans la maille.
+ */
+export function champ({ colonnes, lignes, cadre, valeurs }, x, y) {
+    const hx = (cadre.x1 - cadre.x0) / (colonnes - 1);
+    const hy = (cadre.y1 - cadre.y0) / (lignes - 1);
+    const i = Math.min(Math.max(Math.floor((x - cadre.x0) / hx), 0), colonnes - 2);
+    const j = Math.min(Math.max(Math.floor((y - cadre.y0) / hy), 0), lignes - 2);
+    const u = Math.min(Math.max((x - cadre.x0) / hx - i, 0), 1);
+    const v = Math.min(Math.max((y - cadre.y0) / hy - j, 0), 1);
+    const k = j * colonnes + i;
+    const [a00, a10, a01, a11] = [valeurs[k], valeurs[k + 1], valeurs[k + colonnes], valeurs[k + colonnes + 1]];
+    const dAdx = ((1 - v) * (a10 - a00) + v * (a11 - a01)) / hx;
+    const dAdy = ((1 - u) * (a01 - a00) + u * (a11 - a10)) / hy;
+    return [dAdy, -dAdx];
+}
