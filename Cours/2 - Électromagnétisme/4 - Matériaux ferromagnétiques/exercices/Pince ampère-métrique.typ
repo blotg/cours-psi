@@ -4,7 +4,7 @@
     titre: "Pince ampère-métrique",
 )[
 
-    Une pince ampère-métrique sert à mesurer l'intensité d'un courant sans ouvrir le circuit. Elle est schématiquement constituée d'un tore ferromagnétique à base carrée, de côté $a$, milieu doux, non saturé, linéaire de perméabilité $mu$, sur lequel sont enroulées $N$ spires jointives. La figure montre une coupe transversale du dispositif.
+    Une pince ampère-métrique sert à mesurer l'intensité d'un courant sans ouvrir le circuit. Elle est schématiquement constituée d'un tore ferromagnétique à section carrée, de côté $a$ et de rayon intérieur $b$, milieu doux, non saturé, linéaire de perméabilité $mu$, sur lequel sont enroulées $N$ spires jointives. La figure montre une coupe transversale du dispositif.
 
     Les spires sont électriquement branchées aux bornes d'une résistance $R$, de valeur très supérieure à celle du bobinage. On note $u(t)$ la tension aux bornes de $R$ et $i(t)$ le courant circulant dans le bobinage et $R$. Le tore est centré sur le fil infiniment long dont on mesure l'intensité $I(t)$.
 
@@ -52,7 +52,7 @@
         "Effectuer les 4 étapes : analyse des invariances, des symétries, choix de la courbe d'Ampère et théorème d'Ampère (dans un milieu magnétique).",
         "Sur quelle surface doit-on intégrer B ? Cette surface est-elle dans le tore ou en dehors ?",
         "Quelle relation existe-t-il entre $B$ et $H$ dans un matériau doux ?",
-        "La surface d'une spire est orientée selon $va(e)_theta$.",
+        "La surface d'une spire est orientée selon $va(e_theta)$.",
     ))[
         Déterminer le champ $va(H)_I$ créé dans tout l'espace par $I(t)$. En déduire le flux magnétique $Phi_I$ reçu par le bobinage.
     ][
@@ -140,7 +140,11 @@
         D'où la fonction de transfert :
         $ H(p) = (U(p))/(I(p)) = (-(mu a N)/(2 pi) ln(1+a/b)p)/(1+(a N^2 mu)/(2 pi R) ln(1+a/b)p ) $
 
-        Pour que $u$ soit proportionnel à $I$, il faut que la fonction de transfert soit indépendante de $p$, i.e. que $1 << (a N^2 mu)/(2 pi R) ln(1+a/b)p$ soit $a N^2 mu ln(1+a/b) omega >> 2 pi R$.
+        Pour que $u$ soit proportionnel à $I$, il faut que la fonction de transfert soit indépendante de $p$, c'est-à-dire, en régime sinusoïdal de pulsation $omega$ ($p = j omega$), que $1 << (a N^2 mu)/(2 pi R) ln(1+a/b) omega$, soit $a N^2 mu ln(1+a/b) omega >> 2 pi R$.
+
+        Le terme $1$ est alors négligeable au dénominateur, et
+        $ H(p) approx -R/N $ soit $ u(t) approx -R/N I(t) $
+        La tension mesurée est proportionnelle à l'intensité, avec un coefficient qui ne dépend que de $R$ et de $N$ : ni de la perméabilité $mu$, ni des dimensions du tore.
     ]
 
 ]

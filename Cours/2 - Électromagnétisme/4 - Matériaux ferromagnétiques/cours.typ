@@ -4,36 +4,52 @@
 #show: cours.with(infos: infos)
 
 #let grandeurs = (
-    "cal(M)": (signification: "le moment magnétique", unité: unit("A m^2")),
-    "va(S)": (signification: "la surface orientée", unité: unit("m^2")),
-    i: (signification: "le courant électrique", unité: unit("A")),
-    "B": (signification: "le champ magnétique", unité: unit("T")),
+    "va(cal(M))": (signification: "le moment magnétique", unité: unit("A m^2")),
+    "cal(M)": (signification: "la norme du moment magnétique", unité: unit("A m^2")),
+    "va(S)": (signification: "la surface orientée de la spire", unité: unit("m^2")),
+    i: (signification: "l'intensité du courant électrique", unité: unit("A")),
+    "va(B)": (signification: "le champ magnétique", unité: unit("T")),
     "mu_0": (signification: "la perméabilité magnétique du vide", unité: unit("H/m")),
+    r: (signification: "la distance au dipôle", unité: unit("m")),
+    theta: (signification: "l'angle entre le moment magnétique et la direction du point considéré", unité: unit("rad")),
+    phi: (signification: "l'angle azimutal", unité: unit("rad")),
+    K: (signification: "une constante propre à chaque ligne de champ", unité: unit("m")),
+    "K'": (signification: "une constante propre à chaque ligne de champ", unité: unit("rad")),
     "cal(E)_p": (signification: "l'énergie potentielle d'interaction", unité: unit("J")),
     "va(B)_\"ext\"": (signification: "le champ magnétique extérieur", unité: unit("T")),
     "va(F)": (signification: "la force", unité: unit("N")),
     "va(Gamma)": (signification: "le couple", unité: unit("N m")),
+    n: (signification: "un entier naturel non nul", unité: "sans unité"),
     "mu_B": (signification: "$=(hbar e)/(2 m_e)$ le magnéton de Bohr", unité: unit("A m^2")),
-    "M": (signification: "l'aimantation", unité: unit("A/m")),
-    "H": (signification: "l'excitation magnétique", unité: unit("A/m")),
+    "va(M)": (signification: "l'aimantation", unité: unit("A/m")),
+    "delta va(cal(M))": (signification: "le moment magnétique contenu dans le volume $delta V$", unité: unit("A m^2")),
+    "delta V": (signification: "un volume mésoscopique de matériau", unité: unit("m^3")),
     "va(j)_\"lié\"": (signification: "le vecteur densité volumique de courant lié", unité: unit("A/m^2")),
+    "va(H)": (signification: "l'excitation magnétique", unité: unit("A/m")),
     "va(j)_\"libre\"": (signification: "le vecteur densité volumique de courant libre", unité: unit("A/m^2")),
-    "I_\"libre, enlacé\"": (signification: "le courant libre enlacé", unité: unit("A")),
+    "cal(C)": (signification: "une courbe fermée orientée"),
+    "va(dd(l))": (
+        signification: "l'élément de longueur de $cal(C)$, orienté dans son sens de parcours",
+        unité: unit("m"),
+    ),
+    "I_\"libre, enlacé\"": (signification: "le courant libre enlacé par $cal(C)$", unité: unit("A")),
     "mu": (signification: "$=mu_0 mu_r$ la perméabilité magnétique du matériau", unité: unit("H/m")),
+    "mu_r": (signification: "la perméabilité relative du matériau", unité: "sans unité"),
     "u": (signification: "la tension aux bornes de l'enroulement", unité: unit("V")),
     "N": (signification: "le nombre de spires", unité: "sans unité"),
+    "S": (signification: "la section du circuit magnétique", unité: unit("m^2")),
+    "B": (signification: "le champ magnétique dans le matériau", unité: unit("T")),
+    t: (signification: "le temps", unité: unit("s")),
+    "H": (signification: "l'excitation magnétique dans le matériau", unité: unit("A/m")),
     "l": (signification: "la longueur du circuit magnétique", unité: unit("m")),
     "L": (signification: "l'inductance propre", unité: unit("H")),
-    "S": (signification: "la section du circuit magnétique", unité: unit("m^2")),
     "w": (signification: "la densité volumique d'énergie magnétique", unité: unit("J/m^3")),
-    "mu_r": (signification: "la perméabilité relative du matériau", unité: "sans unité"),
-    "cal(P)_\"hystérésis\"": (signification: "la puissance dissipée par hystérésis", unité: unit("W")),
+    "mean(cal(P)_\"hystérésis\")": (signification: "la puissance moyenne dissipée par hystérésis", unité: unit("W")),
     "V": (signification: "le volume du matériau", unité: unit("m^3")),
     "f": (signification: "la fréquence", unité: unit("Hz")),
     "cal(A)": (signification: "l'aire du cycle d'hystérésis", unité: unit("T A/m")),
-    "e": (signification: "l'épaisseur de l'entrefer", unité: unit("m")),
     "B_\"entrefer\"": (signification: "le champ magnétique dans l'entrefer", unité: unit("T")),
-    "n": (signification: "un entier relatif", unité: "sans unité"),
+    "e": (signification: "l'épaisseur de l'entrefer", unité: unit("m")),
 )
 
 = Moment magnétique d'un aimant permanent
@@ -43,7 +59,7 @@ Une spire circulaire parcourue par un courant produit un champ magnétique carac
 #encadré(
     titre: "Moment magnétique d'une spire",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(cal(M))", "i", "va(S)")),
 )[
     $ va(cal(M))=i va(S) $
 ]
@@ -81,15 +97,15 @@ Le dipôle magnétique est un système ponctuel. Le dipôle magnétique est le p
     columns: 3,
     column-gutter: 1fr,
     figure(
-        image(width: 90%, "images/spire.svg"),
+        image(width: 90%, "Simulations/spire.svg"),
         caption: "Spire",
     ),
     figure(
-        image(width: 90%, "images/dipole.svg"),
+        image(width: 90%, "Simulations/dipole.svg"),
         caption: "Dipôle magnétique",
     ),
     figure(
-        image(width: 90%, "images/aimant.png"),
+        image(width: 90%, "Simulations/aimant.svg"),
         caption: "Aimant",
     ),
 )
@@ -98,7 +114,7 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 
 #encadré(
     titre: "Champ magnétique créé par un dipôle magnétique",
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(B)", "mu_0", "cal(M)", "r", "theta")),
     hypothèses: (
         [Le moment magnétique est orienté selon $va(e_z)$.],
         [Le système de coordonnées est sphérique.],
@@ -115,7 +131,7 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 
 #encadré(
     titre: "Équation des lignes de champ magnétique créées par un dipôle magnétique",
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("r", "theta", "phi", "K", "K'")),
     hypothèses: (
         [Le moment magnétique est orienté selon $va(e_z)$.],
         [Le système de coordonnées est sphérique.],
@@ -142,10 +158,10 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 #question-de-début-de-cours(
     "Quimper a pour coordonnées 47°59′ N, 4°05′ O. L'angle $theta$ des coordonnées sphériques y vaut",
     (
-        "42.02°",
-        "47.98°",
-        "47.59°",
-        "42.41°",
+        "42,02°",
+        "47,98°",
+        "47,59°",
+        "42,41°",
     ),
 )
 
@@ -160,7 +176,7 @@ Lorsqu'un système possédant un moment magnétique est placé dans un champ mag
 
 #encadré(
     titre: "Énergie potentielle d’interaction entre un système possédant un moment magnétique et un champ magnétique extérieur",
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(E)_p", "va(cal(M))", "va(B)_\"ext\"")),
 )[
     $ cal(E)_p = - va(cal(M)).va(B)_"ext" $
 ]
@@ -169,14 +185,14 @@ L'énergie potentielle est minimale lorsque le moment magnétique est aligné au
 
 #encadré(
     titre: "Force subie par un système possédant un moment magnétique",
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(F)", "cal(E)_p")),
 )[
     $ va(F) = - grad cal(E)_p $
 ]
 
 #encadré(
     titre: "Couple subi par un système possédant un moment magnétique",
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(Gamma)", "va(cal(M))", "va(B)_\"ext\"")),
 )[
     $ va(Gamma) = va(cal(M)) and va(B)_"ext" $
 ]
@@ -184,18 +200,18 @@ L'énergie potentielle est minimale lorsque le moment magnétique est aligné au
 On retrouve un couple nul lorsque le moment magnétique est aligné avec le champ magnétique.
 
 #application[
-    Déterminer la période d'oscillation d'une aiguille de boussole ($va(cal(M))=#quan[15 A m^2] va(e_r)$, $J=#quan[1e-4 kg m^2]$ selon $va(e_r)$) dans le champ magnétique terrestre. La liaison pivot entre l'aiguille et son support est supposée idéale.
+    Déterminer la période des petites oscillations d'une aiguille de boussole autour de sa position d'équilibre. L'aiguille a un moment magnétique de norme $cal(M)=#quan[0.2 A m^2]$ et un moment d'inertie $J=#quan[1e-6 kg m^2]$ par rapport à l'axe vertical de la liaison pivot, supposée idéale, qui la relie à son support. La composante horizontale du champ magnétique terrestre vaut $B_h=#quan[2e-5 T]$ à Quimper.
 ]
 
 #encadré(
     titre: "Quantification du moment magnétique atomique",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: grandeurs,
     hypothèses: (
         [L'électron décrit une trajectoire circulaire autour d'un noyau.],
         [L'électron a un moment cinétique quantifié $L=n hbar$ avec $n in NN^*$.],
     ),
+    grandeurs: sub-dictionary(grandeurs, ("cal(M)", "n", "mu_B")),
 )[
     $ cal(M)=n mu_B $
 ]
@@ -219,7 +235,7 @@ L'aimantation est le moment magnétique par unité de volume.
 #encadré(
     titre: "Définition de l'aimantation",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(M)", "delta va(cal(M))", "delta V")),
 )[
     $ va(M) = (delta va(cal(M)))/(delta V) $
 ]
@@ -229,36 +245,52 @@ L'aimantation est le moment magnétique par unité de volume.
     verso: [$va(M) = (delta va(cal(M)))/(delta V)$],
 )
 
-Il est possible de définir des courants fictifs $va(j)_"lié"$ qui, s'ils existaient, donneraient lieu à la même aimantation $va(M)$
+Il est possible de définir des courants fictifs $va(j)_"lié"$ qui, s'ils existaient, créeraient le même champ magnétique que l'aimantation $va(M)$.
 
 #encadré(
     titre: "Courants liés",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(j)_\"lié\"", "va(M)")),
 )[
     $ va(j)_"lié" = rot va(M) $
 ]
 
 #flashcard(
     recto: [Courants liés],
-    verso: [Courants qui, s'ils existaient, donneraient lieu à la même aimantation $ va(j)_"lié" = rot va(M) $],
+    verso: [Courants qui, s'ils existaient, créeraient le même champ magnétique que l'aimantation $ va(j)_"lié" = rot va(M) $],
 )
 
 == Vecteur excitation magnétique
-Les effets de l'aimantation sont pris en compte dans les équations de Maxwell à travers les courants liés.
+Les effets de l'aimantation sont pris en compte dans les équations de Maxwell à travers les courants liés. On les regroupe en définissant l'excitation magnétique.
+
+#encadré(
+    titre: "Définition de l'excitation magnétique",
+    connaitre: true,
+    grandeurs: sub-dictionary(grandeurs, ("va(H)", "va(B)", "mu_0", "va(M)")),
+)[
+    $ va(H)= (va(B))/(mu_0) - va(M) $
+]
+
+#flashcard(
+    recto: [Définition de l'excitation magnétique],
+    verso: [$va(H)= (va(B))/(mu_0) - va(M)$],
+)
 
 #encadré(
     titre: "Équation de Maxwell-Ampère dans un milieu magnétique",
     connaitre: true,
     savoir-faire: true,
-    grandeurs: grandeurs,
+    hypothèses: (
+        [Dans l'ARQS magnétique.],
+    ),
+    grandeurs: sub-dictionary(grandeurs, ("va(H)", "va(j)_\"libre\"")),
 )[
     $ rot va(H)=va(j)_"libre" $
 ]
 
 #flashcard(
     recto: [Équation de Maxwell-Ampère dans un milieu magnétique],
-    verso: [$rot va(H)=va(j)_"libre"$],
+    verso: [Dans l'ARQS magnétique, $rot va(H)=va(j)_"libre"$],
 )
 
 #question-de-début-de-cours(
@@ -269,10 +301,6 @@ Les effets de l'aimantation sont pris en compte dans les équations de Maxwell �
         "$rot va(H) = mu_0 va(j)_\"libre\"$",
         "$rot va(B) = mu_0 va(j)_\"libre\"$",
     ),
-)
-#flashcard(
-    recto: [Définition de l'excitation magnétique],
-    verso: [$va(H)= (va(B))/(mu_0) - va(M)$],
 )
 
 #question-de-colle(
@@ -295,7 +323,7 @@ Dans les milieux magnétiques, l'équation de Maxwell-Thomson est inchangée don
     hypothèses: (
         [Dans l'ARQS magnétique.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("cal(C)", "va(H)", "va(dd(l))", "I_\"libre, enlacé\"")),
 )[
     $ integral.cont_cal(C) va(H) dot va(dd(l)) = I_"libre, enlacé" $
 ]
@@ -307,21 +335,27 @@ Dans les milieux magnétiques, l'équation de Maxwell-Thomson est inchangée don
 
 = Milieux ferromagnétiques
 == Présentation
-Un matériau ferromagnétique est un matériau dans lequel les dipôles magnétiques (de spin, orbital, ...) ont tendance à s'aligner sur le champ magnétique extérieur. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croissent avec l'excitation magnétique $va(H)$.
+Un matériau ferromagnétique est un matériau dans lequel les moments magnétiques atomiques (de spin, orbitaux…) s'alignent spontanément entre eux, en dessous d'une température appelée température de Curie. Dans un milieu ferromagnétique, l'aimantation $va(M)$ et le champ magnétique $va(B)$ croissent avec l'excitation magnétique $va(H)$.
 
 Un matériau ferromagnétique canalise les lignes de champ magnétique. Lorsque des lignes de champ sortent d'un matériau ferromagnétique, elles sortent perpendiculairement à l'interface.
 
+// Largeurs proportionnelles à l'étendue de chaque simulation : les trois
+// circuits, larges de 10 cm, sont dessinés à la même échelle.
 #grid(
-    columns: (55%, 40%),
+    columns: (26%, 38%, 30%),
     column-gutter: 1fr,
     align: bottom + center,
     figure(
-        image(width: 100%, "images/ferromagnétique.png"),
-        caption: "Lignes de champ magnétique dans un circuit magnétique sans entrefer.",
+        image(width: 100%, "Simulations/sans entrefer.svg"),
+        caption: "Circuit magnétique sans entrefer.",
     ),
     figure(
-        image(width: 100%, "images/électroaimant.svg"),
-        caption: "Lignes de champ magnétique dans un circuit magnétique avec deux entrefers.",
+        image(width: 100%, "Simulations/entrefer.svg"),
+        caption: "Circuit magnétique avec un entrefer.",
+    ),
+    figure(
+        image(width: 100%, "Simulations/électroaimant.svg"),
+        caption: "Électroaimant à deux entrefers.",
     ),
 )
 
@@ -388,7 +422,7 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
 #encadré(
     titre: "Perméabilité magnétique",
     connaitre: true,
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("va(B)", "mu", "va(H)")),
     hypothèses: (
         [Pour un matériau ferromagnétique doux.],
         [Dans la zone de linéarité d'un matériau ferromagnétique doux.],
@@ -412,7 +446,7 @@ Les matériaux ferromagnétiques doux sont utilisés pour fabriquer les transfor
     ),
 )
 
-La perméabilité magnétique relative est de l'ordre de $mu_r tilde.op 10^5$.
+La perméabilité magnétique relative d'un matériau ferromagnétique doux est très grande : $mu_r$ va de $10^3$ à $10^5$ (de l'ordre de $10^3$ à $10^4$ pour le fer doux, jusqu'à $10^5$ pour le mu-métal).
 
 = Circuits ferromagnétiques
 == Circuit magnétique sans entrefer
@@ -432,7 +466,7 @@ Le matériau guide les lignes de champ, elles ont donc une forme similaire à ce
         [Le circuit magnétique ne comporte pas d'entrefer.],
         [Le champ magnétique est uniforme dans le matériau ferromagnétique.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("u", "N", "S", "B", "t")),
 )[
     $ u = N S dv(B, t) $
 ]
@@ -448,7 +482,7 @@ Cette relation est mise à profit pour mesurer le champ magnétique et tracer le
         [Le circuit magnétique ne comporte pas d'entrefer.],
         [L'excitation magnétique est uniforme dans le matériau ferromagnétique.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("H", "l", "N", "i")),
 )[
     $ H l = N i $
 ]
@@ -463,7 +497,7 @@ Cette relation est mise à profit pour mesurer l'excitation magnétique et trace
 #wrap-content(align: right)[
     #lien("https://upload.wikimedia.org/wikipedia/commons/8/81/Power_Transformer_Over-Excitation.gif")
 ][
-    Si la tension $u$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant a la même forme que la tension.
+    Si la tension $u$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant est également sinusoïdale : elle est proportionnelle à $B$, donc à une primitive de $u$.
 ]
 
 == Bobine à noyau ferromagnétique
@@ -481,7 +515,7 @@ Le circuit magnétique sans entrefer peut être utilisé pour réaliser une bobi
         [Le circuit magnétique ne comporte pas d'entrefer.],
         [Le circuit magnétique a une section constante.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("L", "N", "S", "mu", "l")),
 )[
     $ L = (N^2 S mu)/(l) $
 ]
@@ -499,7 +533,7 @@ Cette inductance propre est $mu_r >> 1$ fois plus grande que celle d'un tore san
         [Le matériau ferromagnétique est doux et hors saturation.],
         [La formule établie pour un circuit magnétique sans entrefer peut être généralisée.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("w", "B", "mu_0", "mu_r")),
 )[
     $ w = (1)/(2 mu_0 mu_r) B^2 $
 ]
@@ -520,7 +554,7 @@ La présence d'un milieu ferromagnétique au cœur de la bobine induit des perte
         [Le circuit magnétique a une section constante.],
         [Le circuit magnétique ne comporte pas d'entrefer.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("mean(cal(P)_\"hystérésis\")", "V", "f", "cal(A)")),
 )[
     $ mean( cal(P)_"hystérésis" ) = V f cal(A) $
 ]
@@ -531,9 +565,9 @@ La présence d'un milieu ferromagnétique au cœur de la bobine induit des perte
 
 Pour limiter les pertes par hystérésis, on utilise des matériaux ferromagnétiques doux.
 
-Le circuit magnétique étant un conducteur électrique placé dans un champ magnétique variable, des courants de Foucault y sont induits. Pour limiter les pertes par courant de Foucault, on utilise le feuilletage.
+Le circuit magnétique étant un conducteur électrique placé dans un champ magnétique variable, des courants de Foucault y sont induits. Pour limiter les pertes par courants de Foucault, on utilise le feuilletage.
 
-Pertes par courant de Foucault et pertes par hystérésis sont appelées les *pertes fer* car elles se produisent dans le matériau ferromagnétique.
+Pertes par courants de Foucault et pertes par hystérésis sont appelées les *pertes fer* car elles se produisent dans le matériau ferromagnétique.
 
 Des pertes par effet Joule se produisent également dans le bobinage, souvent réalisé en cuivre. Les pertes par effet Joule sont appelées pertes cuivre.
 
@@ -551,8 +585,9 @@ Un entrefer est une zone de l'espace vide#footnote[Vide de matériau ferromagné
         [Le circuit magnétique a une section constante.],
         [Les effets de bord sont négligés dans l'entrefer#footnote[Autrement dit, l'épaisseur de l'entrefer est très petite devant toutes les autres dimensions.].],
         [Le matériau ferromagnétique est doux et hors saturation.],
+        [La perméabilité du matériau est assez grande pour que $mu_r >> l/e$.],
     ),
-    grandeurs: grandeurs,
+    grandeurs: sub-dictionary(grandeurs, ("B_\"entrefer\"", "mu_0", "N", "i", "e", "mu_r", "l")),
 )[
     $ B_"entrefer"=(mu_0 N i)/e $
 ]
