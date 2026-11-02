@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modèle d’Ising</title>
+<meta name="description" content="domaines, cycle d’hystérésis, température de Curie">
+  <script type="module" crossorigin src="./assets/ising-AhZH-Y9T.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/reglages-CHyZY6v_.js">
+  <link rel="modulepreload" crossorigin href="./assets/plan-DQ5i5zG6.js">
+  <link rel="modulepreload" crossorigin href="./assets/graphe-CvAsu7Gl.js">
+  <link rel="stylesheet" crossorigin href="./assets/reglages-B20IF8g0.css">
+</head>
+<body>
+<nav class="fil"><a href="../../index.html">Accueil</a><span class="sep">›</span><a href="../../chapitres.html">Chapitres</a><span class="sep">›</span><a href="../index.html">Électromagnétisme 4 : Matériaux ferromagnétiques</a><span class="sep">›</span><span class="ici">Modèle d’Ising</span></nav>
+<h1>Modèle d’Ising</h1>
+<p>Le plus simple des modèles du ferromagnétisme. Chaque case du réseau porte un moment magnétique, qui ne peut pointer que vers le haut (case rouge) ou vers le bas (case bleue) ; l’excitation H est verticale, vers le haut quand elle est positive.</p>
+<ul>
+<li>Deux moments voisins ont une énergie plus basse quand ils sont alignés : c’est l’interaction d’échange, qui fait le ferromagnétisme.</li>
+<li>Un moment a aussi une énergie plus basse quand il est dans le sens de l’excitation.</li>
+<li>L’agitation thermique retourne des moments au hasard, même quand cela augmente l’énergie, et d’autant plus souvent que la température est élevée. On tire un moment au hasard : s’il abaisse l’énergie en se retournant, il se retourne ; sinon, il ne le fait qu’avec la probabilité e<sup>−ΔE/k<sub>B</sub>T</sup>.</li>
+</ul>
+<p>Au-dessous de la température de Curie T<sub>C</sub>, l’interaction d’échange l’emporte : les moments s’alignent par domaines, et le matériau garde une aimantation sans excitation. Au-dessus, l’agitation thermique l’emporte.</p>
+
+<section class="animation">
+<h2>Domaines et cycle d’hystérésis</h2>
+<p>L’aimantation M est la moyenne des moments ; le point la place, en fonction de H, sur le cycle d’hystérésis.</p>
+</section>
+<footer><span>Cours de PSI — lycée Brizeux</span><a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a></footer>
+</body>
+</html>
