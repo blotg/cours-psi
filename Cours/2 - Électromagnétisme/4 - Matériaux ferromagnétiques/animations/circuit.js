@@ -18,17 +18,25 @@
 // courant d'un fil se répartit au prorata de l'aire qu'il couvre. Chaque
 // face entre deux cellules voisines laisse passer le « flux » k (A_p − A_q) :
 // c'est ce qui assure la continuité de H tangentiel à la surface du fer.
-// Deux choses changent par rapport au poly, pour que l'on puisse manipuler
-// le circuit sans attendre :
+// Trois choses changent par rapport au poly, pour que l'on puisse manipuler
+// le circuit, et sa vue, sans attendre :
 //
-//   - la grille est fine (1 mm) dans la vue seulement, et ses pas grandissent
-//     au-delà, jusqu'au bord lointain où A_z = 0 : deux fois moins
-//     d'inconnues pour le même résultat dans la vue ;
-//   - le fer n'est pas pris cellule par cellule : le coefficient d'une face se
-//     calcule exactement sur le fer qu'elle traverse, comme un empilement de
-//     couches (cf. `coefficient`). Un entrefer d'un dixième de millimètre de
-//     plus ou de moins change donc le champ d'autant, quel que soit le pas de
-//     la grille — un curseur ne fait pas de marches.
+//   - la grille est fine dans la vue seulement, d'un pas proportionnel à sa
+//     largeur (le calcul coûte autant à tout zoom), et ses pas grandissent
+//     au-delà, jusqu'au bord lointain où A_z = 0 ;
+//   - elle épouse le fer : une face de cellule tombe sur chaque bord de
+//     rectangle, la plus proche déplacée jusqu'à lui, ou une de plus. Une
+//     cellule n'est jamais à cheval sur le fer et l'air. Une cellule à cheval
+//     perdait l'air qu'elle contenait, car le flux tourne en elle : avec un
+//     quart de millimètre d'air dans une cellule de 1 mm, l'entrefer de 5 mm
+//     de l'électroaimant en paraissait 4,75, et le champ y était trop fort
+//     de 5 % ;
+//   - le coefficient d'une face se calcule sur le fer qu'elle traverse,
+//     comme un empilement de couches (cf. `coefficient`), ce qui sert encore
+//     loin de la vue, où les rectangles ne sont pas tous épousés.
+//
+// Un entrefer d'un dixième de millimètre de plus ou de moins change donc le
+// champ d'autant, quel que soit le pas : un curseur ne fait pas de marches.
 //
 // Le système est résolu par la méthode du gradient conjugué, préconditionnée
 // par une factorisation de Cholesky incomplète modifiée (MIC(0)) : une
@@ -103,9 +111,12 @@ export function électroaimant({ a = 0.1, b = 0.08, d = 0.02, Ni = 500, bobine =
         ...rangée([-bobine / 2, dessous], [bobine / 2, dessous], n, r, -Ni / n),
     ];
     // L'entrefer, sous la branche de gauche du U : le champ se mesure en son
-    // milieu.
+    // milieu — au milieu de ce que la branche a en face d'elle, quand le
+    // barreau est décalé sur le côté.
     const e = -(yb + d / 2);
-    return { fer, fils, sonde: [-a / 2 + d / 2, -e / 2], Ni, e };
+    const [gauche, droite] = [Math.max(-a / 2, xb - a / 2), Math.min(-a / 2 + d, xb + a / 2)];
+    const x = gauche < droite ? (gauche + droite) / 2 : -a / 2 + d / 2;
+    return { fer, fils, sonde: [x, -e / 2], Ni, e };
 }
 
 // -- La grille ------------------------------------------------------------------
@@ -113,22 +124,47 @@ export function électroaimant({ a = 0.1, b = 0.08, d = 0.02, Ni = 500, bobine =
 /**
  * Les abscisses des faces des cellules le long d'un axe : un pas h sur
  * [a, b] — la vue, où les lignes se tracent —, puis des pas qui grandissent
- * d'un facteur q de part et d'autre, jusqu'à la distance `marge`. Au-delà,
+ * d'un facteur q de part et d'autre, jusqu'à dépasser `bas` et `haut`. Au-delà,
  * A_z = 0 : c'est le bord lointain du calcul.
+ *
+ * Puis chaque bord du fer devient une face : la plus proche s'y déplace si
+ * elle n'en est pas à plus de 30 % du pas, et elle y reste ; sinon, on en
+ * ajoute une. Un bord à moins de 5 % du pas d'une face déjà placée sur un
+ * autre bord se confond avec elle : deux bords presque confondus feraient
+ * une cellule minuscule, qui ralentirait la résolution.
  */
-function faces(a, b, h, marge, q = 1.3) {
+function faces(a, b, h, bas, haut, bords, q = 1.3) {
     const n = Math.max(1, Math.round((b - a) / h));
     const pas = (b - a) / n;
     const dedans = Array.from({ length: n + 1 }, (_, k) => a + k * pas);
-    const bas = [];
-    const haut = [];
-    for (let p = pas, d = 0; d < marge; ) {
+    const dessous = [];
+    const dessus = [];
+    for (let p = pas, v = a; v > bas; ) {
         p *= q;
-        d += p;
-        bas.push(a - d);
-        haut.push(b + d);
+        dessous.push((v -= p));
     }
-    return { faces: Float64Array.from([...bas.reverse(), ...dedans, ...haut]), premier: bas.length, n };
+    for (let p = pas, v = b; v < haut; ) {
+        p *= q;
+        dessus.push((v += p));
+    }
+    const f = [...dessous.reverse(), ...dedans, ...dessus];
+    const placée = f.map(() => false);
+    for (const bord of [...new Set(bords)].sort((u, v) => u - v)) {
+        if (bord <= f[0] || bord >= f.at(-1)) continue;
+        const k = cellule(f, bord);
+        const proche = bord - f[k] < f[k + 1] - bord ? k : k + 1;
+        const local = Math.min(f[k + 1] - f[k], proche > 0 ? f[proche] - f[proche - 1] : Infinity, proche < f.length - 1 ? f[proche + 1] - f[proche] : Infinity);
+        const écart = Math.abs(f[proche] - bord);
+        if (placée[proche] && écart < 0.05 * local) continue;
+        if (!placée[proche] && proche > 0 && proche < f.length - 1 && écart <= 0.3 * local) {
+            f[proche] = bord;
+            placée[proche] = true;
+        } else {
+            f.splice(k + 1, 0, bord);
+            placée.splice(k + 1, 0, true);
+        }
+    }
+    return Float64Array.from(f);
 }
 
 /** L'indice de la cellule qui contient v, parmi les faces f (bornée). */
@@ -178,29 +214,43 @@ function coefficient(fer, μr, t1, t2, l1, l2, verticale) {
 }
 
 /**
- * Le calcul sur une grille : fine de pas `h` dans le rectangle `vue`
- * ({ x0, x1, y0, y1 }), élargie jusqu'à `marge` au-delà. Les tableaux sont
- * bordés d'une rangée de cellules fantômes où A_z = 0 : les boucles n'ont
- * pas à se soucier du bord.
+ * Le calcul sur une grille, refaite à chaque fois que le fer ou la vue
+ * bougent (cf. `maille`). Les tableaux sont bordés d'une rangée de cellules
+ * fantômes où A_z = 0 : les boucles n'ont pas à se soucier du bord.
  */
 export class Grille {
-    constructor(vue, h, marge = 0.06) {
-        const x = faces(vue.x0, vue.x1, h, marge);
-        const y = faces(vue.y0, vue.y1, h, marge);
-        Object.assign(this, { fx: x.faces, fy: y.faces, vue: { x, y } });
+    /**
+     * La grille : fine de pas `h` dans le rectangle `vue` ({ x0, x1, y0, y1 }),
+     * élargie jusqu'au bord du rectangle `domaine`, qui la contient — la vue
+     * et le circuit tout entier, avec de la marge : quand on zoome sur un
+     * coin, le reste du circuit compte encore. Ses faces épousent les bords
+     * des rectangles de `fer`.
+     *
+     * Les tableaux ne changent que si le nombre de cellules change : A_z y
+     * reste, et le calcul part de la solution précédente, faite sur une grille
+     * voisine — c'est encore un bon point de départ.
+     */
+    maille(vue, h, domaine, fer) {
+        this.fx = faces(vue.x0, vue.x1, h, domaine.x0, domaine.x1, fer.flatMap((r) => [r[0], r[1]]));
+        this.fy = faces(vue.y0, vue.y1, h, domaine.y0, domaine.y1, fer.flatMap((r) => [r[2], r[3]]));
         const nx = (this.nx = this.fx.length - 1);
         const ny = (this.ny = this.fy.length - 1);
-        const s = (this.s = nx + 2);
-        const N = (this.N = s * (ny + 2));
+        const s = nx + 2;
+        const N = s * (ny + 2);
+        if (s !== this.s || N !== this.N) {
+            // Les coefficients des faces ouest (O) et sud (S) de chaque
+            // cellule, la diagonale, le second membre, la factorisation, A_z,
+            // et les vecteurs du gradient conjugué.
+            for (const nom of ['O', 'S', 'D', 'b', 'd', 'A', 'r', 'z', 'p', 'q']) this[nom] = new Float64Array(N);
+            Object.assign(this, { s, N });
+        }
         // Les centres des cellules ; ceux des fantômes sont sur le bord.
         this.xc = new Float64Array(nx + 2);
         this.yc = new Float64Array(ny + 2);
         for (let i = 0; i < nx; i++) this.xc[i + 1] = (this.fx[i] + this.fx[i + 1]) / 2;
         for (let j = 0; j < ny; j++) this.yc[j + 1] = (this.fy[j] + this.fy[j + 1]) / 2;
         [this.xc[0], this.xc[nx + 1], this.yc[0], this.yc[ny + 1]] = [this.fx[0], this.fx[nx], this.fy[0], this.fy[ny]];
-        // Les coefficients des faces ouest (O) et sud (S) de chaque cellule,
-        // la diagonale, le second membre, la factorisation, et A_z.
-        for (const nom of ['O', 'S', 'D', 'b', 'd', 'A', 'r', 'z', 'p', 'q']) this[nom] = new Float64Array(N);
+        return this;
     }
 
     /** Les coefficients et le second membre d'un circuit. */
@@ -252,6 +302,10 @@ export class Grille {
                     }
                 }
             }
+            // Un fil plus fin que la maille (loin de la vue, où les mailles
+            // grandissent) peut tomber entre les points : tout son courant
+            // va alors à la cellule de son centre.
+            if (!total) parts.push([(cellule(fy, y0) + 1) * s + cellule(fx, x0) + 1, (total = 1)]);
             for (const [p, aire] of parts) b[p] += (MU0 * I * aire) / total;
         }
         this.factorise();
@@ -340,24 +394,58 @@ export class Grille {
     }
 
     /**
-     * A_z dans la vue, aux centres des cellules : une grille au sens de
-     * carte.js, de quoi en tracer les lignes de niveau.
+     * A_z sur une grille régulière du rectangle `cadre`, de `colonnes`
+     * points de large : une grille au sens de carte.js, de quoi en tracer les
+     * lignes de niveau. On l'interpole entre les centres des cellules, qui ne
+     * sont plus régulièrement espacés.
      */
-    carte() {
-        const { x, y } = this.vue;
-        const [colonnes, lignes] = [x.n, y.n];
-        const valeurs = new Float64Array(colonnes * lignes);
-        for (let j = 0; j < lignes; j++) {
-            const ligne = (j + y.premier + 1) * this.s + x.premier + 1;
-            valeurs.set(this.A.subarray(ligne, ligne + colonnes), j * colonnes);
-        }
-        const cadre = {
-            x0: this.xc[x.premier + 1],
-            x1: this.xc[x.premier + colonnes],
-            y0: this.yc[y.premier + 1],
-            y1: this.yc[y.premier + lignes],
+    carte(cadre, colonnes) {
+        const lignes = Math.max(2, Math.round((colonnes * (cadre.y1 - cadre.y0)) / (cadre.x1 - cadre.x0)));
+        // Pour chaque colonne et chaque ligne de la carte : la cellule dont
+        // le centre la précède, et la part de la suivante.
+        const repère = (centres, a, b, n) => {
+            const indices = new Int32Array(n);
+            const parts = new Float64Array(n);
+            for (let m = 0, k = 0; m < n; m++) {
+                const v = a + ((b - a) * m) / (n - 1);
+                while (k < centres.length - 2 && centres[k + 1] <= v) k++;
+                indices[m] = k;
+                parts[m] = Math.min(Math.max((v - centres[k]) / (centres[k + 1] - centres[k]), 0), 1);
+            }
+            return [indices, parts];
         };
-        return { colonnes, lignes, cadre, valeurs };
+        const [is, us] = repère(this.xc, cadre.x0, cadre.x1, colonnes);
+        const [js, vs] = repère(this.yc, cadre.y0, cadre.y1, lignes);
+        const { A, s } = this;
+        const valeurs = new Float64Array(colonnes * lignes);
+        for (let m = 0; m < lignes; m++) {
+            const [j, v] = [js[m], vs[m]];
+            for (let n = 0; n < colonnes; n++) {
+                const [i, u] = [is[n], us[n]];
+                const k = j * s + i;
+                valeurs[m * colonnes + n] =
+                    (1 - v) * ((1 - u) * A[k] + u * A[k + 1]) + v * ((1 - u) * A[k + s] + u * A[k + s + 1]);
+            }
+        }
+        return { colonnes, lignes, cadre: { ...cadre }, valeurs };
+    }
+
+    /**
+     * Le champ en (x, y), tiré de la grille du calcul elle-même : B =
+     * (∂A/∂y, −∂A/∂x), le gradient étant celui de l'interpolation bilinéaire
+     * entre les centres des cellules. Une carte rééchantillonnée, plus
+     * grossière que l'entrefer, mêlerait le fer et l'air.
+     */
+    champ(x, y) {
+        const { xc, yc, A, s } = this;
+        const i = Math.min(Math.max(cellule(xc, x), 0), xc.length - 2);
+        const j = Math.min(Math.max(cellule(yc, y), 0), yc.length - 2);
+        const [hx, hy] = [xc[i + 1] - xc[i], yc[j + 1] - yc[j]];
+        const [u, v] = [(x - xc[i]) / hx, (y - yc[j]) / hy];
+        const k = j * s + i;
+        const dAdx = ((1 - v) * (A[k + 1] - A[k]) + v * (A[k + s + 1] - A[k + s])) / hx;
+        const dAdy = ((1 - u) * (A[k + s] - A[k]) + u * (A[k + s + 1] - A[k + 1])) / hy;
+        return [dAdy, -dAdx];
     }
 }
 

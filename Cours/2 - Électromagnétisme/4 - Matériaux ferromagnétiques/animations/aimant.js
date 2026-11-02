@@ -25,7 +25,8 @@ export const niveaux = (n) => Array.from({ length: n }, (_, k) => (k + 1) / 12);
 /** F d'un dipôle de moment 1 selon +y, placé en O. */
 export function fluxDuDipôle(x, y) {
     const r2 = x * x + y * y;
-    return (x * x) / (r2 * Math.sqrt(r2));
+    // En O même, F diverge : un point de la grille peut y tomber.
+    return r2 ? (x * x) / (r2 * Math.sqrt(r2)) : 1e9;
 }
 
 /**
@@ -39,42 +40,36 @@ export function fluxDeLaSpire(x, y) {
 /**
  * F d'un aimant cylindrique d'aimantation uniforme M selon +y, centré en O :
  * il équivaut à une nappe de courant M sur sa surface latérale, découpée ici
- * en `n` spires régulièrement espacées. M vaut 1/(πR²L), pour un moment égal
- * à 1.
+ * en spires régulièrement espacées. M vaut 1/(πR²L), pour un moment égal à 1.
  *
- * Il faut que les spires soient plus serrées que la grille n'approche la
- * nappe : à 64, la carte ondulait le long du flanc, et faisait des lacets à
- * ses lignes les plus proches. À 200, on n'y voit plus que le champ.
+ * Il faut que les spires soient plus serrées que la distance du point à la
+ * nappe : à 64 spires, la carte ondulait le long du flanc, et faisait des
+ * lacets à ses lignes les plus proches. Mais deux cents spires partout
+ * coûteraient trop dès que l'on dézoome : leur nombre suit donc la distance
+ * à la nappe, de deux cents tout contre elle à douze au loin, où l'écart
+ * entre deux spires reste six fois plus petit que la distance.
  */
-export function fluxDeLAimant(n = 200) {
+export function fluxDeLAimant() {
     const { rayon: R, hauteur: L } = AIMANT;
     const M = 1 / (Math.PI * R * R * L);
-    // Le courant de chaque spire, M L/n, fois μ₀ = 4π.
-    const μ0I = (4 * Math.PI * M * L) / n;
-    const cotes = Array.from({ length: n }, (_, k) => -L / 2 + ((k + 0.5) * L) / n);
+    const découpages = [
+        [0.1, 200],
+        [0.3, 64],
+        [1, 24],
+        [Infinity, 12],
+    ].map(([jusquÀ, n]) => ({
+        jusquÀ,
+        // Le courant de chaque spire, M L/n, fois μ₀ = 4π.
+        μ0I: (4 * Math.PI * M * L) / n,
+        cotes: Array.from({ length: n }, (_, k) => -L / 2 + ((k + 0.5) * L) / n),
+    }));
     return (x, y) => {
+        const r = Math.abs(x);
+        // La distance au flanc, segment r = R, |y| ≤ L/2 du plan de coupe.
+        const distance = Math.hypot(r - R, Math.max(Math.abs(y) - L / 2, 0));
+        const { μ0I, cotes } = découpages.find((d) => distance < d.jusquÀ);
         let F = 0;
-        for (const cote of cotes) F += fluxDUneSpire(R, Math.abs(x), y - cote);
+        for (const cote of cotes) F += fluxDUneSpire(R, r, y - cote);
         return μ0I * F;
     };
-}
-
-/**
- * F sur une grille du cadre, au sens de carte.js. F est paire en x et en y :
- * on n'en calcule qu'un quart, le reste s'en déduit.
- */
-export function grilleDeFlux(F, cadre, colonnes) {
-    const lignes = Math.round((colonnes * (cadre.y1 - cadre.y0)) / (cadre.x1 - cadre.x0));
-    const valeurs = new Float64Array(colonnes * lignes);
-    for (let j = 0; j < Math.ceil(lignes / 2); j++) {
-        const y = cadre.y0 + ((cadre.y1 - cadre.y0) * j) / (lignes - 1);
-        for (let i = 0; i < Math.ceil(colonnes / 2); i++) {
-            const x = cadre.x0 + ((cadre.x1 - cadre.x0) * i) / (colonnes - 1);
-            const v = F(x, y);
-            for (const jj of [j, lignes - 1 - j]) {
-                for (const ii of [i, colonnes - 1 - i]) valeurs[jj * colonnes + ii] = v;
-            }
-        }
-    }
-    return { colonnes, lignes, cadre, valeurs };
 }

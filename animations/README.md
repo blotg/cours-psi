@@ -111,7 +111,7 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `page.js`, `page.css` | la mise en page : celle du site (`gabarits/site.css`), élargie ; `cadre` et `lance` |
 | `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt, poignées que l'on déplace dans l'espace |
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
-| `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace (un point, ou un objet étendu que l'on prend n'importe où) ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`), dont un conducteur vu en coupe (`conducteur`, ⊙ ou ⊗) et des lignes de champ fléchées (`lignesDeChamp`), de loin en loin ou là où elles traversent une droite, comme dans les figures du poly |
+| `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace (un point, ou un objet étendu que l'on prend n'importe où) ; une vue que l'on peut rendre navigable (glisser, molette, pincement, « Vue de départ », comme une scène) ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`), dont un conducteur vu en coupe (`conducteur`, ⊙ ou ⊗) et des lignes de champ fléchées (`lignesDeChamp`), de loin en loin ou là où elles traversent une droite, comme dans les figures du poly |
 | `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
 | `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, mises bout à bout en lignes brisées (`polylignes`), l'écart rond entre deux niveaux |
 | `spires.js` | le champ d'une spire circulaire et le flux qui la traverse (intégrales elliptiques) : des spires au solénoïde, et l'aimant droit, nappe de courant sur sa surface latérale |
@@ -379,31 +379,47 @@ courant découpée en deux cents spires régulièrement espacées : à soixante-
 quatre (nœuds de Gauss), la carte faisait des lacets le long de son flanc.
 Puis les circuits magnétiques, sans entrefer, avec un entrefer que l'on règle
 et l'électroaimant dont on déplace le barreau. Leur champ se calcule à chaque
-réglage (`circuit.js`), comme dans `Simulations/lib.py` — A_z par volumes
-finis, μ_r = 10⁵ —, avec trois différences qui le rendent assez rapide pour
-suivre la main :
+réglage, et à chaque mouvement de la vue (`circuit.js`), comme dans
+`Simulations/lib.py` — A_z par volumes finis, μ_r = 10⁵ —, avec quelques
+différences qui le rendent assez rapide pour suivre la main :
 
-- la grille n'est fine (1 mm) que dans la vue, et ses pas grandissent au-delà
-  jusqu'au bord lointain où A_z = 0 ;
-- le coefficient d'une face se calcule exactement sur le fer qu'elle
-  traverse (couches en série le long de la fibre, fibres en parallèle) : le
-  champ varie continûment avec l'entrefer, quel que soit le pas ;
+- la grille n'est fine que dans la vue, d'un pas proportionnel à sa largeur
+  (deux cents mailles : 1 mm dans la vue de départ du cadre, et le même coût
+  à tout zoom), et ses pas grandissent au-delà jusqu'au bord lointain où
+  A_z = 0, qui englobe tout le circuit même quand on zoome sur un coin ;
+- elle **épouse le fer** : chaque bord de rectangle devient une face de
+  cellule (la plus proche s'y déplace, ou l'on en ajoute une). Une cellule à
+  cheval sur le fer et l'air perdait l'air qu'elle contenait, parce que le
+  flux tourne en elle : selon que la grille tombait ou non sur les bords,
+  le champ de l'électroaimant variait de 5 % (13 % une fois dézoomé). Le
+  champ dans l'entrefer ne dépend plus du pas ni du cadrage. Les lignes se
+  tracent sur une grille régulière rééchantillonnée, le champ se lit sur
+  celle du calcul ;
+- le coefficient d'une face se calcule sur le fer qu'elle traverse (couches
+  en série le long de la fibre, fibres en parallèle), ce qui vaut encore
+  pour un rectangle qu'une grille ne pourrait pas épouser ;
 - le système se résout par gradient conjugué préconditionné par une
   factorisation de Cholesky incomplète **modifiée** : une soixantaine
   d'itérations quelle que soit μ_r, contre plus de sept cents avec la seule
   diagonale. Sans la modification (MIC(0) avec ω = 1), il en faut deux à
   trois fois plus.
 
-Tant que l'on manipule, le calcul se fait sur une grille de 2 mm (une
-vingtaine de millisecondes) ; un quart de seconde après, sur celle de 1 mm
-(une centaine). L'écart de flux entre deux lignes est fixé pour chaque
+Tant que l'on manipule, le calcul se fait sur une grille de cent mailles
+(une vingtaine de millisecondes) ; un quart de seconde après, sur celle de
+deux cents (une centaine). Les deux cartes de la page sont navigables
+(rapprochées deux fois, éloignées quatre fois) : on voit au loin les lignes
+de l'aimant rejoindre celles du dipôle. Pour l'aimant, le nombre de spires
+suit la distance du point à la nappe — deux cents tout contre, douze au
+loin —, sans quoi une vue dézoomée coûterait plusieurs secondes. L'écart de flux entre deux lignes est fixé pour chaque
 circuit : quand l'entrefer s'ouvre, les lignes se raréfient. On ne trace ni
 la ligne A_z = 0, qui file vers le bord du calcul, ni celles qui frôlent un
 extrême de A_z, qui ne font qu'un lacet le long d'une rangée de fils. Les
 pointes sont posées là où les lignes traversent l'entrefer, comme dans le
 poly. Le panneau compare le champ au milieu de l'entrefer à μ₀Ni/e (μ₀Ni/2e
 pour les deux entrefers de l'électroaimant) : l'écart grandit avec
-l'entrefer.
+l'entrefer. Sous un barreau décalé sur le côté, on le mesure au milieu de
+ce que la branche a en face d'elle. La règle prend à peu près le cinquième
+de la vue, d'une longueur ronde.
 
 `ising.js` simule le modèle d'Ising à deux dimensions (réseau de 128 × 128,
 dynamique de Metropolis, 240 pas de Monte-Carlo par seconde). Les moments

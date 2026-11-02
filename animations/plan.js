@@ -20,9 +20,14 @@ export class Plan {
      * @param étendue    la largeur visible, en unités du problème
      * @param centre     le point du problème au centre de la vue
      * @param aide       le mode d'emploi, dans la barre sous la vue
+     * @param navigable  si on le donne, { rapproche, éloigne } : la vue se
+     *                   déplace en la glissant, et se zoome à la molette ou
+     *                   en pinçant, jusqu'à `rapproche` fois plus près et
+     *                   `éloigne` fois plus loin que la vue de départ
      */
-    constructor(conteneur, { rapport = 4 / 3, étendue = 10, centre = [0, 0], aide = '' } = {}) {
+    constructor(conteneur, { rapport = 4 / 3, étendue = 10, centre = [0, 0], aide = '', navigable = null } = {}) {
         Object.assign(this, { rapport, étendue, centre, poignées: [], attrapée: null, prise: [0, 0] });
+        Object.assign(this, { navigable, départ: { étendue, centre: [...centre] }, pointeurs: new Map(), geste: null });
 
         const vue = créé('div', 'scène');
         this.toile = créé('canvas');
@@ -32,13 +37,18 @@ export class Plan {
         vue.append(this.toile, this.calque);
 
         this.barre = créé('div', 'barre');
+        if (navigable) aide ||= 'Glisser pour déplacer la vue, molette ou pincement pour zoomer.';
         if (aide) this.barre.append(créé('span', 'aide', aide));
         conteneur.append(vue, this.barre);
         this.conteneur = vue;
+        if (navigable) this.bouton('Vue de départ', () => this.vueDeDépart());
 
         this.toile.addEventListener('pointerdown', (e) => this.attrape(e));
         this.toile.addEventListener('pointermove', (e) => this.déplace(e));
         for (const fin of ['pointerup', 'pointercancel']) this.toile.addEventListener(fin, (e) => this.lâche(e));
+        // La molette zoome autour du pointeur, au lieu de faire défiler la
+        // page : comme dans une scène en trois dimensions.
+        if (navigable) this.toile.addEventListener('wheel', (e) => this.molette(e), { passive: false });
 
         new ResizeObserver(() => this.redimensionne()).observe(vue);
         new IntersectionObserver(([entrée]) => {
@@ -95,6 +105,121 @@ export class Plan {
         const haut = demi / this.rapport;
         const [cx, cy] = this.centre;
         return { x0: cx - demi, x1: cx + demi, y0: cy - haut, y1: cy + haut };
+    }
+
+    // -- Navigation -----------------------------------------------------------
+    //
+    // Une vue navigable se déplace et se zoome ; l'animation, qui calcule
+    // souvent son champ sur ce qu'elle montre, en est prévenue par
+    // `àChaqueVue`. Les poignées passent avant : un glissé qui part d'une
+    // poignée la déplace, un glissé qui part d'ailleurs déplace la vue.
+
+    /** `rappel()` à chaque fois que la vue bouge. */
+    àChaqueVue(rappel) {
+        this.auChangementDeVue = rappel;
+        return this;
+    }
+
+    /** Revient à la vue de départ — ou à `nouvelle`, qui le devient : une
+     *  animation qui montre autre chose se cadre autrement. */
+    vueDeDépart(nouvelle) {
+        if (nouvelle) this.départ = { ...this.départ, ...nouvelle };
+        this.vise(this.départ);
+    }
+
+    /**
+     * Montre `étendue` autour de `centre`, dans les limites de la navigation :
+     * on ne s'éloigne pas au point de perdre de vue ce que montrait la vue de
+     * départ.
+     */
+    vise({ étendue = this.étendue, centre = this.centre }) {
+        const { rapproche = 1, éloigne = 1 } = this.navigable ?? {};
+        const départ = this.départ;
+        this.étendue = Math.min(Math.max(étendue, départ.étendue / rapproche), départ.étendue * éloigne);
+        const [dx, dy] = [(départ.étendue * éloigne) / 2, (départ.étendue * éloigne) / 2 / this.rapport];
+        this.centre = [
+            Math.min(Math.max(centre[0], départ.centre[0] - dx), départ.centre[0] + dx),
+            Math.min(Math.max(centre[1], départ.centre[1] - dy), départ.centre[1] + dy),
+        ];
+        if (this.largeur) this.échelle = this.largeur / this.étendue;
+        this.redessine();
+        this.auChangementDeVue?.();
+    }
+
+    /** Montre `étendue`, en gardant immobile le point du problème qui est
+     *  sous le pixel (px, py). */
+    zoomeAutour(px, py, étendue) {
+        const [x, y] = this.depuis(px, py);
+        const { rapproche = 1, éloigne = 1 } = this.navigable;
+        étendue = Math.min(Math.max(étendue, this.départ.étendue / rapproche), this.départ.étendue * éloigne);
+        const échelle = this.largeur / étendue;
+        this.vise({ étendue, centre: [x - (px - this.largeur / 2) / échelle, y + (py - this.hauteur / 2) / échelle] });
+    }
+
+    molette(e) {
+        e.preventDefault();
+        // Une molette à crans compte en lignes, un pavé tactile en pixels.
+        const pixels = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);
+        const [px, py] = this.pixel(e);
+        this.zoomeAutour(px, py, this.étendue * Math.exp(pixels * 0.0015));
+    }
+
+    /** Le pixel de la vue sous le pointeur. */
+    pixel(e) {
+        const cadre = this.toile.getBoundingClientRect();
+        return [e.clientX - cadre.left, e.clientY - cadre.top];
+    }
+
+    /**
+     * Le geste en cours, d'après les pointeurs posés sur la vue : un seul la
+     * fait glisser, deux la pincent. On le reprend à chaque doigt posé ou
+     * levé, pour que la vue ne saute pas quand on passe de l'un à l'autre.
+     */
+    commenceUnGeste() {
+        const pixels = [...this.pointeurs.values()];
+        if (pixels.length === 0) {
+            this.geste = null;
+        } else if (pixels.length === 1) {
+            this.geste = { pixel: pixels[0], centre: [...this.centre] };
+        } else {
+            const [a, b] = pixels;
+            const milieu = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+            this.geste = {
+                écart: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1,
+                étendue: this.étendue,
+                point: this.depuis(...milieu),
+            };
+        }
+        this.toile.style.cursor = this.geste ? 'grabbing' : '';
+    }
+
+    poursuitLeGeste() {
+        const pixels = [...this.pointeurs.values()];
+        const geste = this.geste;
+        if (!geste) return;
+        if (pixels.length === 1) {
+            const [px, py] = pixels[0];
+            this.vise({
+                centre: [
+                    geste.centre[0] - (px - geste.pixel[0]) / this.échelle,
+                    geste.centre[1] + (py - geste.pixel[1]) / this.échelle,
+                ],
+            });
+            return;
+        }
+        const [a, b] = pixels;
+        const milieu = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+        const étendue = (geste.étendue * geste.écart) / (Math.hypot(a[0] - b[0], a[1] - b[1]) || 1);
+        const { rapproche, éloigne } = this.navigable;
+        const bornée = Math.min(Math.max(étendue, this.départ.étendue / rapproche), this.départ.étendue * éloigne);
+        const échelle = this.largeur / bornée;
+        this.vise({
+            étendue: bornée,
+            centre: [
+                geste.point[0] - (milieu[0] - this.largeur / 2) / échelle,
+                geste.point[1] + (milieu[1] - this.hauteur / 2) / échelle,
+            ],
+        });
     }
 
     // -- Dessin ---------------------------------------------------------------
@@ -222,7 +347,18 @@ export class Plan {
 
     attrape(e) {
         const { poignée, point } = this.sous(e);
-        if (!poignée) return;
+        if (!poignée || this.pointeurs.size) {
+            if (!this.navigable || this.attrapée) return;
+            this.pointeurs.set(e.pointerId, this.pixel(e));
+            try {
+                this.toile.setPointerCapture(e.pointerId);
+            } catch {
+                /* on continue sans capture */
+            }
+            this.commenceUnGeste();
+            e.preventDefault();
+            return;
+        }
         this.attrapée = poignée;
         const [x, y] = poignée.position();
         this.prise = poignée.contient ? [x - point[0], y - point[1]] : [0, 0];
@@ -238,6 +374,12 @@ export class Plan {
     }
 
     déplace(e) {
+        if (this.pointeurs.has(e.pointerId)) {
+            this.pointeurs.set(e.pointerId, this.pixel(e));
+            this.poursuitLeGeste();
+            e.preventDefault();
+            return;
+        }
         const { poignée, point } = this.sous(e);
         if (this.attrapée) {
             this.attrapée.auDéplacement?.(point[0] + this.prise[0], point[1] + this.prise[1]);
@@ -249,6 +391,10 @@ export class Plan {
     }
 
     lâche(e) {
+        if (this.pointeurs.delete(e.pointerId)) {
+            this.commenceUnGeste();
+            return;
+        }
         if (!this.attrapée) return;
         this.attrapée.auRelâchement?.();
         this.attrapée = null;
