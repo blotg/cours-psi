@@ -137,7 +137,7 @@ function ising(section) {
     côteÀCôte.append(gauche);
     vue.append(côteÀCôte);
 
-    const plan = new Plan(gauche, { rapport: 1, étendue: 1, aide: 'Rouge : moment vers le haut ; bleu : vers le bas.' });
+    const plan = new Plan(gauche, { rapport: 1, étendue: 1, aide: 'Orange : moment vers le haut ; bleu : vers le bas.' });
     const image = new OffscreenCanvas(L, L);
     const contexte = image.getContext('2d');
     const pixels = contexte.createImageData(L, L);
