@@ -49,8 +49,11 @@ export class Réglages {
      * colle dès qu'il en approche de moins d'`attraction`. Un curseur au pas
      * assez fin pour varier continûment garde ainsi ses valeurs rondes à
      * portée de doigt.
+     *
+     * `formate` écrit la valeur affichée, à la place du format par défaut :
+     * un curseur logarithmique, qui règle un exposant, affiche la puissance.
      */
-    curseur({ tex, min, max, pas = 1, valeur, unité = '', couleur, aimants = [], attraction = 3 * pas, auChangement }) {
+    curseur({ tex, min, max, pas = 1, valeur, unité = '', couleur, aimants = [], attraction = 3 * pas, formate, auChangement }) {
         const ligne = créé('label', 'curseur');
         const nom = écritTex(créé('span', 'nom'), tex);
         if (couleur) nom.style.color = couleur;
@@ -61,7 +64,8 @@ export class Réglages {
             minimumFractionDigits: décimales(pas),
             maximumFractionDigits: décimales(pas),
         });
-        const affiche = () => (sortie.textContent = format.format(Number(entrée.value)) + unité);
+        const affiche = () =>
+            (sortie.textContent = formate ? formate(Number(entrée.value)) : format.format(Number(entrée.value)) + unité);
         entrée.addEventListener('input', () => {
             // Le curseur repart de la position du pointeur à chaque
             // mouvement : le replacer sur l'aimant ne l'empêche pas de s'en

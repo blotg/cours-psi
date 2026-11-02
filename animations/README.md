@@ -116,7 +116,7 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, mises bout à bout en lignes brisées (`polylignes`), l'écart rond entre deux niveaux |
 | `spires.js` | le champ d'une spire circulaire et le flux qui la traverse (intégrales elliptiques) : des spires au solénoïde, et l'aimant droit, nappe de courant sur sa surface latérale |
 | `distributions.js` | les scènes « Invariances » et « Plans de symétrie » des chapitres d'électromagnétisme : formes d'une distribution de charges ou de courants, symétries calculées, systèmes de coordonnées |
-| `reglages.js` | `Réglages` : curseurs (avec leurs aimants), cases, choix et formules, nommés en LaTeX |
+| `reglages.js` | `Réglages` : curseurs (avec leurs aimants, et un affichage au choix pour un curseur logarithmique), cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
 
 `Plan` reprend les partis pris de `Scène` : rendu à la demande, rien hors de
@@ -421,6 +421,25 @@ l'entrefer. Sous un barreau décalé sur le côté, on le mesure au milieu de
 ce que la branche a en face d'elle. La règle prend à peu près le cinquième
 de la vue, d'une longueur ronde.
 
+La troisième section règle μ_r de 1 à 10⁵ (curseur sur l'exposant, deux
+cents positions, aimanté sur les puissances de dix) dans trois situations :
+un noyau droit dans sa bobine (le clou de la situation déclenchante), le
+circuit fermé, et un blindage — un tube carré dans un champ uniforme, imposé
+au bord du calcul par les cellules fantômes (A_z = B₀ y), avec une marge de
+30 cm pour que le tube le dérange à peine. Autour d'une bobine, douze lignes
+entre les extrêmes de A_z quel que soit μ_r : on voit le chemin du flux, pas
+sa quantité ; dans le champ uniforme, un écart de flux fixe, à mi-chemin
+des multiples du pas (pas de ligne sur l'axe, qui traverserait le blindage).
+Le panneau donne B/B(μ_r = 1) au centre de la bobine ou du blindage, le
+calcul sans fer étant refait sur la même grille, seulement quand elle
+change : environ 10 pour le noyau droit dès μ_r ≈ 10³ (la forme limite le
+gain), 0,28 μ_r pour le circuit fermé, 17/μ_r pour le blindage. Le
+champ dans le blindage n'étant qu'une petite part du champ extérieur, ce
+calcul se résout à 10⁻⁵ au lieu de 10⁻³ (à 10⁻³, il était faux d'un quart).
+Le fer est d'autant plus soutenu que μ_r est grand, et les pointes de lignes
+que le fer resserre sont écartées d'au moins 24 px (`lignesDeChamp`,
+option `écart`).
+
 `ising.js` simule le modèle d'Ising à deux dimensions (réseau de 128 × 128,
 dynamique de Metropolis, 240 pas de Monte-Carlo par seconde). Les moments
 sont vermillon vers le haut, bleus vers le bas, éclaircis pour de grands
@@ -433,10 +452,12 @@ désaimanter par une excitation d'amplitude décroissante : un réseau d'Ising
 sans désordre n'a qu'un champ coercitif, et resterait figé à ±M_s dès que
 l'amplitude passe dessous ; chauffer au-delà de T_C, en revanche, marche.
 
-`transformateur.js` reprend la construction de l'animation de Wikimedia
-Commons citée dans le cours : la tension imposée et le champ B(t) à gauche,
-le cycle au milieu, le courant i(t) dessous, le temps défilant à partir du
-cycle, et les projections d'un graphique à l'autre. Ce sont trois `Graphe`
+`bobine.js` (bobine avec cœur magnétique, à tension sinusoïdale imposée ;
+la page ne parle ni de transformateur ni de tension du secteur) reprend la
+construction de l'animation de Wikimedia Commons citée dans le cours : la
+tension imposée et le champ B(t) à gauche, le cycle au milieu, le courant
+i(t) dessous, le temps défilant à partir du cycle, et les projections d'un
+graphique à l'autre. Ce sont trois `Graphe`
 de même taille dans une grille sans espace, pour que les échelles communes
 coïncident. Les cycles (`noyau.js`) suivent le modèle de Takács — des
 tangentes hyperboliques décalées de ±H_c, relevées pour que le cycle se
@@ -445,7 +466,9 @@ trouve H. Quatre matériaux : linéaire, saturable sans hystérésis, doux, dur,
 avec une approche lente de la saturation comme celle d'une tôle de fer au
 silicium. L'échelle du courant suit son maximum, de valeur ronde en valeur
 ronde ; sur un écran étroit, les graduations se réduisent aux extrêmes et
-les légendes reprennent la taille du panneau.
+les légendes reprennent la taille du panneau. Le curseur règle l'amplitude
+U_max de u (0 à 150 V, 130 V au départ) ; avec N = 200, S = 14 cm²,
+f = 50 Hz, elle mène B_max de 0 à 1,7 T, au-delà du coude de saturation.
 
 **Analyse vectorielle** — `operateurs.js` applique les opérateurs à des
 champs plans (`champs.js`) : le gradient et le laplacien à un champ scalaire,

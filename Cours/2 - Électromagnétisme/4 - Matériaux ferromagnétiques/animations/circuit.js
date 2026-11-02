@@ -50,7 +50,9 @@ export const MU0 = 4e-7 * Math.PI;
 //
 // Un circuit se décrit par ses rectangles de fer [x₁, x₂, y₁, y₂], disjoints,
 // et ses fils [x, y, rayon, I], I > 0 pour un courant qui vient vers nous.
-// Ce sont ceux de Simulations/lib.py.
+// Ce sont ceux de Simulations/lib.py. S'y ajoute parfois un champ uniforme
+// `fond` = [B_x, B_y], imposé au loin, et un point `centre` où l'on compare
+// le champ avec et sans fer.
 
 /** n fils de rayon r, régulièrement espacés de `début` à `fin`, parcourus
  *  chacun par I. */
@@ -86,7 +88,36 @@ export function circuit({ a = 0.1, b = 0.12, d = 0.02, e = 0, Ni = 500, bobine =
         ...rangée([dehors, -bobine / 2], [dehors, bobine / 2], n, r, Ni / n),
         ...rangée([dedans, -bobine / 2], [dedans, bobine / 2], n, r, -Ni / n),
     ];
-    return { fer, fils, sonde: [a / 2 - d / 2, 0], Ni, l: 2 * (a - d) + 2 * (b - d) - e };
+    return { fer, fils, sonde: [a / 2 - d / 2, 0], centre: [-a / 2 + d / 2, 0], Ni, l: 2 * (a - d) + 2 * (b - d) - e };
+}
+
+/**
+ * Un noyau droit, comme le clou de la situation déclenchante : un barreau de
+ * longueur L et d'épaisseur d, centré sur l'origine, dans une bobine plus
+ * courte que lui.
+ */
+export function noyauDroit({ L = 0.14, d = 0.012, Ni = 500, bobine = 0.06 } = {}) {
+    const { fils: n, rayon: r, écart: g } = BOBINAGE;
+    const y = d / 2 + g + r;
+    const fils = [
+        ...rangée([-bobine / 2, y], [bobine / 2, y], n, r, Ni / n),
+        ...rangée([-bobine / 2, -y], [bobine / 2, -y], n, r, -Ni / n),
+    ];
+    return { fer: [[-L / 2, L / 2, -d / 2, d / 2]], fils, centre: [0, 0], Ni };
+}
+
+/**
+ * Un blindage : un tube de section carrée, de côté a et de paroi d, dans un
+ * champ uniforme B₀ selon x, imposé au loin.
+ */
+export function blindage({ a = 0.1, d = 0.008, B0 = 1e-3 } = {}) {
+    const fer = [
+        [-a / 2, a / 2, a / 2 - d, a / 2],
+        [-a / 2, a / 2, -a / 2, -a / 2 + d],
+        [-a / 2, -a / 2 + d, -a / 2 + d, a / 2 - d],
+        [a / 2 - d, a / 2, -a / 2 + d, a / 2 - d],
+    ];
+    return { fer, fils: [], fond: [B0, 0], centre: [0, 0] };
 }
 
 /**
@@ -216,7 +247,8 @@ function coefficient(fer, μr, t1, t2, l1, l2, verticale) {
 /**
  * Le calcul sur une grille, refaite à chaque fois que le fer ou la vue
  * bougent (cf. `maille`). Les tableaux sont bordés d'une rangée de cellules
- * fantômes où A_z = 0 : les boucles n'ont pas à se soucier du bord.
+ * fantômes, où A_z garde la valeur imposée au bord — 0, ou celle d'un champ
+ * uniforme : les boucles n'ont pas à se soucier du bord.
  */
 export class Grille {
     /**
@@ -253,9 +285,9 @@ export class Grille {
         return this;
     }
 
-    /** Les coefficients et le second membre d'un circuit. */
-    remplit({ fer, fils }, μr) {
-        const { fx, fy, nx, ny, s, xc, yc, O, S, D, b } = this;
+    /** Les coefficients, le second membre et le bord d'un circuit. */
+    remplit({ fer, fils, fond = [0, 0] }, μr) {
+        const { fx, fy, nx, ny, s, xc, yc, O, S, D, b, A } = this;
         // De l'air partout, puis le fer là où un rectangle touche la face.
         for (let j = 1; j <= ny; j++) {
             for (let i = 1; i <= nx + 1; i++) O[j * s + i] = (fy[j] - fy[j - 1]) / (xc[i] - xc[i - 1]);
@@ -308,7 +340,45 @@ export class Grille {
             if (!total) parts.push([(cellule(fy, y0) + 1) * s + cellule(fx, x0) + 1, (total = 1)]);
             for (const [p, aire] of parts) b[p] += (MU0 * I * aire) / total;
         }
+
+        // Le bord : A_z = B_x y − B_y x dans les fantômes, ceux d'un champ
+        // uniforme (B_x, B_y), nul sans champ imposé. Il agit sur les
+        // cellules voisines comme un second membre : c'est avec lui que l'on
+        // juge de la convergence, quand il n'y a pas de courant.
+        const [Bx, By] = fond;
+        const bord = (i, j) => {
+            A[j * s + i] = Bx * yc[j] - By * xc[i];
+        };
+        for (let i = 0; i <= nx + 1; i++) {
+            bord(i, 0);
+            bord(i, ny + 1);
+        }
+        for (let j = 1; j <= ny; j++) {
+            bord(0, j);
+            bord(nx + 1, j);
+        }
+        this.forçage = 0;
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, p = j * s + 1; i <= nx; i++, p++) {
+                let v = b[p];
+                if (i === 1) v += O[p] * A[p - 1];
+                if (i === nx) v += O[p + 1] * A[p + 1];
+                if (j === 1) v += S[p] * A[p - s];
+                if (j === ny) v += S[p + s] * A[p + s];
+                this.forçage += v * v;
+            }
+        }
         this.factorise();
+    }
+
+    /** Les valeurs extrêmes de A_z sur toute la grille. */
+    extrêmes() {
+        const { nx, ny, s, A } = this;
+        let [bas, haut] = [Infinity, -Infinity];
+        for (let j = 1; j <= ny; j++) {
+            for (let i = 1, p = j * s + 1; i <= nx; i++, p++) [bas, haut] = [Math.min(bas, A[p]), Math.max(haut, A[p])];
+        }
+        return [bas, haut];
     }
 
     /**
@@ -358,18 +428,16 @@ export class Grille {
     résout(tolérance = 1e-3, maximum = 1000) {
         const { N, A, b, r, z, p, q } = this;
         this.produit(A, q);
-        let nb = 0;
         let nr = 0;
         for (let k = 0; k < N; k++) {
             r[k] = this.D[k] ? b[k] - q[k] : 0;
-            nb += b[k] * b[k];
             nr += r[k] * r[k];
         }
         this.préconditionne(r, z);
         p.set(z);
         let rz = 0;
         for (let k = 0; k < N; k++) rz += r[k] * z[k];
-        const seuil = tolérance * tolérance * nb;
+        const seuil = tolérance * tolérance * this.forçage;
         let itérations = 0;
         while (itérations < maximum && nr > seuil) {
             this.produit(p, q);

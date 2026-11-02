@@ -525,15 +525,21 @@ export function conducteur(c, [px, py], I, rayon, { couleur = '#000' } = {}) {
  * traversent la droite horizontale `traversée` = { y, écart } : une rangée
  * de pointes alignées, à `écart` pixels au moins l'une de l'autre — de quoi
  * flécher des lignes qui se resserrent sans les couvrir de pointes.
+ *
+ * Hors d'une traversée, `écart` sépare de même les pointes de lignes
+ * différentes : celle qui tomberait à moins d'`écart` pixels d'une pointe
+ * déjà posée est sautée. Là où le fer resserre les lignes, elles ne
+ * s'empilent plus.
  */
 export function lignesDeChamp(
     c,
     plan,
     lignes,
     champ,
-    { couleur = '#000', épaisseur = 1.4, entre = 110, pointillés = null, traversée = null } = {},
+    { couleur = '#000', épaisseur = 1.4, entre = 110, pointillés = null, traversée = null, écart = 0 } = {},
 ) {
     const pointes = [];
+    const posées = [];
     for (const ligne of lignes) {
         const points = ligne.map(([x, y]) => plan.vers(x, y));
         chemin(c, points, { couleur, épaisseur, pointillés });
@@ -563,7 +569,13 @@ export function lignesDeChamp(
         }
         // Les pointes d'une ligne, sur elle, sous la ligne suivante.
         if (!traversée) {
-            for (const [point, direction] of pointes) pointe(c, point, direction, { couleur });
+            for (const [point, direction] of pointes) {
+                if (écart) {
+                    if (posées.some(([x, y]) => Math.hypot(point[0] - x, point[1] - y) < écart)) continue;
+                    posées.push(point);
+                }
+                pointe(c, point, direction, { couleur });
+            }
             pointes.length = 0;
         }
     }

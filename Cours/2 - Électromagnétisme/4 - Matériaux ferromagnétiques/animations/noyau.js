@@ -1,9 +1,10 @@
-// Le noyau d'un transformateur à vide : son cycle d'hystérésis B(H), et le
+// Le cœur magnétique d'une bobine : son cycle d'hystérésis B(H), et le
 // courant qu'il faut pour y imposer un champ sinusoïdal.
 //
-// Le réseau impose la tension, et u = N S dB/dt : le champ dans le noyau est
-// sinusoïdal, quel que soit le matériau. C'est l'excitation qui ne l'est pas,
-// et le courant avec elle, puisque H l = N i.
+// La tension imposée aux bornes de la bobine est sinusoïdale, et
+// u = N S dB/dt : le champ dans le cœur l'est aussi, quel que soit le
+// matériau. C'est l'excitation qui ne l'est pas, et le courant avec elle,
+// puisque H l = N i.
 //
 // Les cycles suivent le modèle de Takács : chaque branche est une somme de
 // tangentes hyperboliques, décalées de ±H_c, et relevées juste assez pour que

@@ -1,6 +1,6 @@
-// Le courant d'un transformateur à vide : la tension du réseau impose un champ
-// sinusoïdal dans le noyau, et le cycle d'hystérésis dit quel courant il faut
-// pour cela.
+// Le courant dans une bobine avec cœur magnétique : la tension sinusoïdale
+// imposée à ses bornes impose un champ sinusoïdal dans le cœur, et le cycle
+// d'hystérésis dit quel courant il faut pour cela.
 //
 // La construction est celle de l'animation « Power Transformer
 // Over-Excitation » de Wikimedia Commons, citée dans le cours : le champ B(t)
@@ -19,10 +19,10 @@ import { cadre, lance } from '#animations/page.js';
 import { Réglages } from '#animations/reglages.js';
 import { MATÉRIAUX, période } from './noyau.js';
 
-/** L'enroulement primaire et le noyau : N spires sur une section S, une
- *  ligne moyenne de longueur l ; le réseau à 50 Hz. Avec N/l = 2 000 m⁻¹,
- *  1 A correspond à 2 000 A/m. */
-const N = 500;
+/** La bobine et son cœur : N spires sur une section S, une ligne moyenne de
+ *  longueur l, une tension de fréquence f. Avec N/l = 800 m⁻¹, 1 A correspond
+ *  à 800 A/m. */
+const N = 200;
 const S = 14e-4;
 const l = 0.25;
 const f = 50;
@@ -30,8 +30,8 @@ const f = 50;
 /** Le champ maximal, en teslas, que dessinent les graphiques. */
 const B_AXE = 1.9;
 
-/** La durée à l'écran d'une période du réseau, en secondes : un ralenti de
- *  deux cents fois. Et le nombre de périodes que garde l'historique. */
+/** La durée à l'écran d'une période, en secondes : un ralenti de deux cents
+ *  fois. Et le nombre de périodes que garde l'historique. */
 const DURÉE = 4;
 const HISTOIRE = 2;
 
@@ -50,9 +50,9 @@ function rondeAuDessus(x) {
     return décade * [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((m) => m * décade >= x * (1 - 1e-9));
 }
 
-function transformateur(section) {
+function bobine(section) {
     const { vue, réglages: panneau } = cadre(section);
-    const état = { matériau: 'doux', U: 230, temps: 0, pause: false };
+    const état = { matériau: 'doux', Um: 130, temps: 0, pause: false };
 
     // -- Les trois graphiques -------------------------------------------------
 
@@ -152,7 +152,7 @@ function transformateur(section) {
     let régime = null;
     function recalcule() {
         const ω = 2 * Math.PI * f;
-        const Bm = (état.U * Math.SQRT2) / (N * S * ω);
+        const Bm = état.Um / (N * S * ω);
         const p = période(MATÉRIAUX[état.matériau], Bm);
         const î = (p.Hm * l) / N;
         // L'échelle du courant suit son maximum, de valeur ronde en valeur
@@ -250,7 +250,7 @@ function transformateur(section) {
     // -- Réglages -------------------------------------------------------------
 
     const réglages = new Réglages(panneau);
-    réglages.groupe('Matériau du noyau');
+    réglages.groupe('Matériau du cœur');
     réglages.choix({
         options: [
             ['linéaire', '\\text{linéaire}'],
@@ -267,25 +267,26 @@ function transformateur(section) {
     const note = réglages.texte('Linéaire : ni saturation ni hystérésis. Saturable : sans hystérésis.');
     note.className = 'note';
 
-    réglages.groupe('Tension du réseau');
+    réglages.groupe('Tension imposée');
     réglages.curseur({
-        tex: 'U',
+        tex: 'U_{\\max}',
         min: 0,
-        max: 260,
+        max: 150,
         pas: 1,
-        valeur: état.U,
+        valeur: état.Um,
         unité: ' V',
-        aimants: [230],
         auChangement: (v) => {
-            état.U = v;
+            état.Um = v;
             recalcule();
         },
     });
     const caractéristiques = réglages.texte();
     caractéristiques.className = 'note';
     caractéristiques.append(
-        'Valeur efficace, à 50 Hz. ',
-        écritTex(document.createElement('span'), 'N = 500,\\ S = 14\\,\\mathrm{cm^2},\\ l = 25\\,\\mathrm{cm}'),
+        écritTex(
+            document.createElement('span'),
+            'f = 50\\,\\mathrm{Hz},\\ N = 200,\\ S = 14\\,\\mathrm{cm^2},\\ l = 25\\,\\mathrm{cm}',
+        ),
         '.',
     );
 
@@ -299,4 +300,4 @@ function transformateur(section) {
     recalcule();
 }
 
-lance('section.animation', transformateur);
+lance('section.animation', bobine);
