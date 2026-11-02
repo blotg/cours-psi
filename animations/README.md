@@ -111,9 +111,10 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `page.js`, `page.css` | la mise en page : celle du site (`gabarits/site.css`), élargie ; `cadre` et `lance` |
 | `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt, poignées que l'on déplace dans l'espace |
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
-| `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`) |
+| `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace (un point, ou un objet étendu que l'on prend n'importe où) ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`), dont un conducteur vu en coupe (`conducteur`, ⊙ ou ⊗) et des lignes de champ fléchées (`lignesDeChamp`), de loin en loin ou là où elles traversent une droite, comme dans les figures du poly |
 | `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
 | `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, mises bout à bout en lignes brisées (`polylignes`), l'écart rond entre deux niveaux |
+| `spires.js` | le champ d'une spire circulaire et le flux qui la traverse (intégrales elliptiques) : des spires au solénoïde, et l'aimant droit, nappe de courant sur sa surface latérale |
 | `distributions.js` | les scènes « Invariances » et « Plans de symétrie » des chapitres d'électromagnétisme : formes d'une distribution de charges ou de courants, symétries calculées, systèmes de coordonnées |
 | `reglages.js` | `Réglages` : curseurs (avec leurs aimants), cases, choix et formules, nommés en LaTeX |
 | `vite.config.js` | la construction d'un chapitre, l'habillage des pages |
@@ -195,6 +196,11 @@ Quelques partis pris :
   `OrbitControls` écoute sur le canevas. Les poignées de `Scène` écoutent
   donc sur le cadre, **en capture**, et arrêtent l'événement avant qu'il
   n'atteigne le canevas quand le pointeur en tient une.
+- **`contours` veut des niveaux régulièrement espacés** : une maille en
+  déduit par un calcul ceux qu'elle traverse. Retirer un niveau de la liste
+  (A_z = 0, par exemple) décale les suivants : des lignes manquent, sans
+  que rien ne le signale. Une carte qui saute un niveau se trace en deux
+  passes (cf. `cartes-de-champ.js` d'Électromagnétisme 4).
 - `THREE.Clock` est déprécié : `Scène` emploie `THREE.Timer`, qu'il faut
   mettre à jour (`update()`) à chaque image.
 
@@ -362,6 +368,68 @@ une carcasse qui pointe dans le même sens (symétrie) ou à l'opposé
 (antisymétrie). Une case, décochée au départ, montre le champ en M et son
 reflet dans le plan : dans un plan de symétrie, le reflet est l'opposé du
 champ — c'est le pseudo-vecteur.
+
+**Électromagnétisme 4** — trois pages, toutes planes.
+
+`cartes-de-champ.js` reprend les figures du poly (`Simulations/`), aux mêmes
+dimensions et aux mêmes niveaux. D'abord l'aimant droit, la spire et le
+dipôle de même moment (`aimant.js`), dont on peut superposer les lignes à
+celles du dipôle : loin d'eux, elles se confondent. L'aimant est une nappe de
+courant découpée en deux cents spires régulièrement espacées : à soixante-
+quatre (nœuds de Gauss), la carte faisait des lacets le long de son flanc.
+Puis les circuits magnétiques, sans entrefer, avec un entrefer que l'on règle
+et l'électroaimant dont on déplace le barreau. Leur champ se calcule à chaque
+réglage (`circuit.js`), comme dans `Simulations/lib.py` — A_z par volumes
+finis, μ_r = 10⁵ —, avec trois différences qui le rendent assez rapide pour
+suivre la main :
+
+- la grille n'est fine (1 mm) que dans la vue, et ses pas grandissent au-delà
+  jusqu'au bord lointain où A_z = 0 ;
+- le coefficient d'une face se calcule exactement sur le fer qu'elle
+  traverse (couches en série le long de la fibre, fibres en parallèle) : le
+  champ varie continûment avec l'entrefer, quel que soit le pas ;
+- le système se résout par gradient conjugué préconditionné par une
+  factorisation de Cholesky incomplète **modifiée** : une soixantaine
+  d'itérations quelle que soit μ_r, contre plus de sept cents avec la seule
+  diagonale. Sans la modification (MIC(0) avec ω = 1), il en faut deux à
+  trois fois plus.
+
+Tant que l'on manipule, le calcul se fait sur une grille de 2 mm (une
+vingtaine de millisecondes) ; un quart de seconde après, sur celle de 1 mm
+(une centaine). L'écart de flux entre deux lignes est fixé pour chaque
+circuit : quand l'entrefer s'ouvre, les lignes se raréfient. On ne trace ni
+la ligne A_z = 0, qui file vers le bord du calcul, ni celles qui frôlent un
+extrême de A_z, qui ne font qu'un lacet le long d'une rangée de fils. Les
+pointes sont posées là où les lignes traversent l'entrefer, comme dans le
+poly. Le panneau compare le champ au milieu de l'entrefer à μ₀Ni/e (μ₀Ni/2e
+pour les deux entrefers de l'électroaimant) : l'écart grandit avec
+l'entrefer.
+
+`ising.js` simule le modèle d'Ising à deux dimensions (réseau de 128 × 128,
+dynamique de Metropolis, 240 pas de Monte-Carlo par seconde). Les moments
+sont vermillon vers le haut, bleus vers le bas, éclaircis pour de grands
+aplats. Le point (H, M) se place sur le graphique du cycle, avec une trace
+au choix ; l'excitation alternative est une sinusoïde de 2 400 pas par
+période. Le cycle dépend de cette vitesse — le retournement attend la
+naissance d'un domaine — : à 2 400 pas, H_c ≈ 1 à 0,5 T_C, 0,35 à 0,9 T_C,
+et le cycle se referme au-dessus de T_C. Il n'y a pas de bouton pour
+désaimanter par une excitation d'amplitude décroissante : un réseau d'Ising
+sans désordre n'a qu'un champ coercitif, et resterait figé à ±M_s dès que
+l'amplitude passe dessous ; chauffer au-delà de T_C, en revanche, marche.
+
+`transformateur.js` reprend la construction de l'animation de Wikimedia
+Commons citée dans le cours : la tension imposée et le champ B(t) à gauche,
+le cycle au milieu, le courant i(t) dessous, le temps défilant à partir du
+cycle, et les projections d'un graphique à l'autre. Ce sont trois `Graphe`
+de même taille dans une grille sans espace, pour que les échelles communes
+coïncident. Les cycles (`noyau.js`) suivent le modèle de Takács — des
+tangentes hyperboliques décalées de ±H_c, relevées pour que le cycle se
+ferme à toute amplitude —, dont chaque branche se renverse : à B donné, on
+trouve H. Quatre matériaux : linéaire, saturable sans hystérésis, doux, dur,
+avec une approche lente de la saturation comme celle d'une tôle de fer au
+silicium. L'échelle du courant suit son maximum, de valeur ronde en valeur
+ronde ; sur un écran étroit, les graduations se réduisent aux extrêmes et
+les légendes reprennent la taille du panneau.
 
 **Analyse vectorielle** — `operateurs.js` applique les opérateurs à des
 champs plans (`champs.js`) : le gradient et le laplacien à un champ scalaire,

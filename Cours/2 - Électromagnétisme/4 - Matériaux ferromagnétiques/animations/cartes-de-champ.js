@@ -73,7 +73,7 @@ function aimantSpireDipôle(section) {
     const nomSud = plan.étiquette('\\mathbf{S}', { taille: '0.95rem' });
 
     // Les lignes de chaque objet ne se calculent qu'une fois, à la demande :
-    // celles de l'aimant demandent soixante-quatre spires par point.
+    // celles de l'aimant demandent deux cents spires par point.
     const flux = { spire: fluxDeLaSpire, dipôle: fluxDuDipôle, aimant: null };
     const cartes = {};
     function carte(objet, n) {
@@ -244,12 +244,21 @@ function circuitsMagnétiques(section) {
         const { pas } = CIRCUITS[état.circuit];
         // Dix lignes entre les extrêmes, ou une tous les `pas`. Pas de ligne
         // à moins d'un demi-écart d'un extrême : elle ne ferait qu'un lacet
-        // autour du sommet de A_z, le long d'une rangée de fils.
-        const [premier, dernier] = pas ? [Math.ceil(bas / pas + 0.5), Math.floor(haut / pas - 0.5)] : [1, 10];
-        const niveaux = Array.from({ length: Math.max(0, dernier - premier + 1) }, (_, k) =>
-            pas ? (premier + k) * pas : bas + ((haut - bas) * (premier + k)) / 11,
-        );
-        résultat = { objet, carte, lignes: polylignes(contours(carte, niveaux)), B: Math.hypot(...champ(carte, ...objet.sonde)) };
+        // autour du sommet de A_z, le long d'une rangée de fils. Ni de ligne
+        // A_z = 0, qui file vers le bord lointain du calcul.
+        //
+        // `contours` veut des niveaux régulièrement espacés : ceux d'en
+        // dessous de zéro, puis ceux d'au-dessus, en deux passes.
+        const suite = (premier, dernier, niveau) =>
+            Array.from({ length: Math.max(0, dernier - premier + 1) }, (_, k) => niveau(premier + k));
+        const passes = pas
+            ? [
+                  suite(Math.ceil(bas / pas + 0.5), -1, (k) => k * pas),
+                  suite(1, Math.floor(haut / pas - 0.5), (k) => k * pas),
+              ]
+            : [suite(1, 10, (k) => bas + ((haut - bas) * k) / 11)];
+        const segments = passes.flatMap((niveaux) => contours(carte, niveaux));
+        résultat = { objet, carte, lignes: polylignes(segments), B: Math.hypot(...champ(carte, ...objet.sonde)) };
         écritLesMesures();
         plan.redessine();
     }
@@ -382,10 +391,9 @@ function circuitsMagnétiques(section) {
         // Deux entrefers en série pour l'électroaimant.
         const deux = état.circuit === 'électroaimant';
         const e = deux ? objet.e : état.e;
+        const cours = (MU0 * objet.Ni) / ((deux ? 2 : 1) * e);
         simulé.écrit(`B = ${nombre(B * 1e3)}\\,\\mathrm{mT}`);
-        attendu.écrit(
-            `\\frac{\\mu_0 N i}{${deux ? '2e' : 'e'}} = ${nombre(((MU0 * objet.Ni) / ((deux ? 2 : 1) * e)) * 1e3)}\\,\\mathrm{mT}`,
-        );
+        attendu.écrit(`\\frac{\\mu_0 N i}{${deux ? '2e' : 'e'}} = ${nombre(cours * 1e3)}\\,\\mathrm{mT}`);
     }
 
     montreLesRéglages();

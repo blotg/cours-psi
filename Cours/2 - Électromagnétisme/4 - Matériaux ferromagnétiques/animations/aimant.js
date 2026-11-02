@@ -37,46 +37,25 @@ export function fluxDeLaSpire(x, y) {
 }
 
 /**
- * Les n nœuds et poids de la méthode de Gauss-Legendre sur [−1, 1] : les
- * racines du polynôme de Legendre P_n, par la méthode de Newton.
- */
-function gaussLegendre(n) {
-    const nœuds = [];
-    const poids = [];
-    for (let i = 1; i <= n; i++) {
-        let x = Math.cos((Math.PI * (i - 0.25)) / (n + 0.5));
-        let dérivée = 1;
-        for (let itération = 0; itération < 100; itération++) {
-            // P_n(x) et P_{n−1}(x) par la relation de récurrence.
-            let [p0, p1] = [1, x];
-            for (let k = 2; k <= n; k++) [p0, p1] = [p1, ((2 * k - 1) * x * p1 - (k - 1) * p0) / k];
-            dérivée = (n * (x * p1 - p0)) / (x * x - 1);
-            const pas = p1 / dérivée;
-            x -= pas;
-            if (Math.abs(pas) < 1e-15) break;
-        }
-        nœuds.push(x);
-        poids.push(2 / ((1 - x * x) * dérivée * dérivée));
-    }
-    return { nœuds, poids };
-}
-
-/**
  * F d'un aimant cylindrique d'aimantation uniforme M selon +y, centré en O :
  * il équivaut à une nappe de courant M sur sa surface latérale, découpée ici
- * en `n` spires placées aux nœuds de Gauss-Legendre. M vaut 1/(πR²L), pour un
- * moment égal à 1.
+ * en `n` spires régulièrement espacées. M vaut 1/(πR²L), pour un moment égal
+ * à 1.
+ *
+ * Il faut que les spires soient plus serrées que la grille n'approche la
+ * nappe : à 64, la carte ondulait le long du flanc, et faisait des lacets à
+ * ses lignes les plus proches. À 200, on n'y voit plus que le champ.
  */
-export function fluxDeLAimant(n = 64) {
+export function fluxDeLAimant(n = 200) {
     const { rayon: R, hauteur: L } = AIMANT;
     const M = 1 / (Math.PI * R * R * L);
-    const { nœuds, poids } = gaussLegendre(n);
-    // Le courant de chaque spire, et μ₀ = 4π.
-    const spires = nœuds.map((z, k) => [(z * L) / 2, 4 * Math.PI * ((M * L) / 2) * poids[k]]);
+    // Le courant de chaque spire, M L/n, fois μ₀ = 4π.
+    const μ0I = (4 * Math.PI * M * L) / n;
+    const cotes = Array.from({ length: n }, (_, k) => -L / 2 + ((k + 0.5) * L) / n);
     return (x, y) => {
         let F = 0;
-        for (const [cote, μ0I] of spires) F += μ0I * fluxDUneSpire(R, Math.abs(x), y - cote);
-        return F;
+        for (const cote of cotes) F += fluxDUneSpire(R, Math.abs(x), y - cote);
+        return μ0I * F;
     };
 }
 
