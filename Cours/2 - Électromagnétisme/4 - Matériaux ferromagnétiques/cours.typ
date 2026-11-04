@@ -220,7 +220,7 @@ On retrouve un couple nul lorsque le moment magnétique est aligné avec le cham
 
 #flashcard(
     recto: [Quantification du moment magnétique atomique],
-    verso: [$cal(M)=n mu_B$],
+    verso: [$cal(M)=k mu_B$],
 )
 
 #question-de-colle(

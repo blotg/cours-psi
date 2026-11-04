@@ -378,8 +378,8 @@
 // -- Schéma --------------------------------------------------------------
 
 #let _quadrillage = tiling(size: (0.5cm, 0.5cm))[
-    #place(line(start: (0%, 0%), end: (100%, 0%), stroke: 1pt + luma(20%)))
-    #place(line(start: (0%, 0%), end: (0%, 100%), stroke: 1pt + luma(20%)))
+    #place(line(start: (0%, 0%), end: (100%, 0%), stroke: 1pt + luma(80%)))
+    #place(line(start: (0%, 0%), end: (0%, 100%), stroke: 1pt + luma(80%)))
 ]
 
 #let schéma(titre: "", quadrillage: auto, hauteur: auto, ..contenu) = {
