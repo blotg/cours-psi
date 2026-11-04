@@ -19,7 +19,8 @@
     "va(B)_\"ext\"": (signification: "le champ magnétique extérieur", unité: unit("T")),
     "va(F)": (signification: "la force", unité: unit("N")),
     "va(Gamma)": (signification: "le couple", unité: unit("N m")),
-    n: (signification: "un entier naturel non nul", unité: "sans unité"),
+    "n": (signification: "un entier naturel non nul", unité: "sans unité"),
+    "k": (signification: "un entier relatif", unité: "sans unité"),
     "mu_B": (signification: "$=(hbar e)/(2 m_e)$ le magnéton de Bohr", unité: unit("A m^2")),
     "va(M)": (signification: "l'aimantation", unité: unit("A/m")),
     "delta va(cal(M))": (signification: "le moment magnétique contenu dans le volume $delta V$", unité: unit("A m^2")),
@@ -132,6 +133,7 @@ Les champs magnétiques créés par une spire, un dipôle magnétique et un aima
 #encadré(
     titre: "Équation des lignes de champ magnétique créées par un dipôle magnétique",
     grandeurs: sub-dictionary(grandeurs, ("r", "theta", "phi", "K", "K'")),
+    savoir-faire: true,
     hypothèses: (
         [Le moment magnétique est orienté selon $va(e_z)$.],
         [Le système de coordonnées est sphérique.],
@@ -211,9 +213,9 @@ On retrouve un couple nul lorsque le moment magnétique est aligné avec le cham
         [L'électron décrit une trajectoire circulaire autour d'un noyau.],
         [L'électron a un moment cinétique quantifié $L=n hbar$ avec $n in NN^*$.],
     ),
-    grandeurs: sub-dictionary(grandeurs, ("cal(M)", "n", "mu_B")),
+    grandeurs: sub-dictionary(grandeurs, ("cal(M)", "n", "mu_B", "k")),
 )[
-    $ cal(M)=n mu_B $
+    $ cal(M)=k mu_B $
 ]
 
 #flashcard(
@@ -556,7 +558,7 @@ La présence d'un milieu ferromagnétique au cœur de la bobine induit des perte
     ),
     grandeurs: sub-dictionary(grandeurs, ("mean(cal(P)_\"hystérésis\")", "V", "f", "cal(A)")),
 )[
-    $ mean( cal(P)_"hystérésis" ) = V f cal(A) $
+    $ mean(cal(P)_"hystérésis") = V f cal(A) $
 ]
 
 #question-de-colle(
