@@ -145,7 +145,7 @@ La détection d'enveloppe utilise le montage ci-dessous, appelé détecteur d'en
 Le signal à transmettre est désormais le signal délivré par le microphone.
 
 #manipulation()[
-    Remplacer le GBF qui délivrait le signal triangulaire par le microphone. Brancher l'amplificateur et le haut-parleur à la sortie du montage effectuant la démodulation. En fonction du microphone choisi, une pré-amplification, entre le microphone et le montage de modulation, peut être nécessaire.
+    Remplacer le GBF qui délivrait le signal triangulaire par le microphone. Brancher l'amplificateur et le haut-parleur à la sortie du montage effectuant la démodulation. Une pré-amplification, entre le microphone et le montage de modulation, est nécessaire. Son gain sera réglé de sorte à ne pas saturer le montage. Une amplification sera également nécessaire après la démodulation, avant d'envoyer le signal au haut parleur, pour obtenir un signal audible. Le gain sera réglé au minimum puis augmenté progressivement jusqu'à obtenir un signal audible.
 ]
 
 
