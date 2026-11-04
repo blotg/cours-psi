@@ -25,7 +25,7 @@ L'objectif de ce TP est de réaliser et d'étudier un comparateur à hystérési
 
 = Cycle d'hystérésis
 
-Le montage comparateur à hystérésis positif sera réalisé avec une résistance de $R_1=#quan[1 kΩ]$.
+Le montage comparateur à hystérésis négatif sera réalisé avec une résistance de $R_1=#quan[1 kΩ]$.
 
 #application()[
     Le GBF peut délivrer une amplitude maximale de #quan[20 V] crête à crête. Choisir une valeur de $R_2$ de sorte qu'une commutation du comparateur à hystérésis soit possible.
