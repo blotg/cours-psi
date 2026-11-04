@@ -495,12 +495,7 @@ Cette relation est mise à profit pour mesurer le champ magnétique et tracer le
 
 Cette relation est mise à profit pour mesurer l'excitation magnétique et tracer le cycle d'hystérésis.
 
-#import "@preview/wrap-it:0.1.1": wrap-content
-#wrap-content(align: right)[
-    #lien("https://upload.wikimedia.org/wikipedia/commons/8/81/Power_Transformer_Over-Excitation.gif")
-][
-    Si la tension $u$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant est également sinusoïdale : elle est proportionnelle à $B$, donc à une primitive de $u$.
-]
+Si la tension $u$ aux bornes de l'enroulement est sinusoïdale, cela n'implique pas que l'intensité du courant $i$ le soit également. Si le matériau ferromagnétique est doux et hors saturation, alors l'intensité du courant est également sinusoïdale : elle est proportionnelle à $B$, donc à une primitive de $u$.
 
 == Bobine à noyau ferromagnétique
 Le circuit magnétique sans entrefer peut être utilisé pour réaliser une bobine. Pour cela, on utilise un matériau ferromagnétique doux hors saturation.
