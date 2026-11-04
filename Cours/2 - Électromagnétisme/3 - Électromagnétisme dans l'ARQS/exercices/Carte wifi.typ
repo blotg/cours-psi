@@ -33,6 +33,6 @@ La carte wifi d'un ordinateur portable, au format M.2 2230, est un circuit impri
 
     Dans les pistes, le signal se propage à $v approx c \/ 2$ : il traverse la carte en $lambda \/ v = #quan[0.2 ns]$. C'est la moitié de la période à #quan[2.4 GHz] ($1 \/ f = #quan[0.42 ns]$), et autant que la période à #quan[5 GHz] (#quan[0.2 ns]). La condition est encore moins bien vérifiée qu'avec $c$.
 
-    En prenant un facteur 10 pour traduire « très petit devant », l'ARQS est vérifiée si $lambda \/ v <= tau \/ 10$, soit
-    $ f <= v / (10 lambda) = #quan[500 MHz] $
+    En prenant un facteur 10 pour traduire « très petit devant », l'ARQS est vérifiée si $lambda \/ c <= tau \/ 10$, soit
+    $ f <= c / (10 lambda) = #quan[500 MHz] $
 ]

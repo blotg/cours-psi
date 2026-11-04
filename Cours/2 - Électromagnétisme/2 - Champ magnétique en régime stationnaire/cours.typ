@@ -136,16 +136,15 @@ Une particule chargée est animée d'une vitesse.
 #flashcard(recto: [Force de Lorentz], verso: [$ va(F) = q va(E) + q va(v) and va(B) $])
 
 #application[
-    Une particule de charge $q$ et de masse $m$ plongée dans un champ magnétique uniforme et stationnaire $va(B) = B va(e_z)$ a une trajectoire circulaire dans un plan orthogonal à $va(B)$. Exprimer sa vitesse angulaire.
+    Une particule de charge $q$ et de masse $m$ plongée dans un champ magnétique uniforme et stationnaire $va(B) = B va(e_z)$ a une trajectoire circulaire dans un plan orthogonal à $va(B)$. Les effets de la pesanteur sont négligés. Exprimer sa vitesse angulaire.
 ]
 
 === Description linéique
 Un fil infiniment fin est parcouru par un courant électrique.
 
 #encadré(
-    titre: "Force de Laplace",
+    titre: [Force de Laplace#footnote[Cette relation sera démontré dans le chapitre transport de charge.]],
     connaitre: true,
-    savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("va(dd(F))", "I", "va(dd(l))", "va(B)")),
 )[
     $ va(dd(F)) = I va(dd(l)) and va(B) $
@@ -161,7 +160,7 @@ Un fil infiniment fin est parcouru par un courant électrique.
 Le déplacement des charges est décrit par le vecteur densité volumique de courant.
 
 #encadré(
-    titre: "Force de Laplace volumique",
+    titre: [Force de Laplace volumique#footnote[Cette relation sera démontré dans le chapitre transport de charge.]],
     connaitre: true,
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("va(dd(F))", "va(j)", "dd(V)", "va(B)")),

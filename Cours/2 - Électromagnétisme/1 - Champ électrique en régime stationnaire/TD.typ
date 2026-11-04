@@ -8,4 +8,5 @@
 #include "exercices/Dipôle électrostatique numérique.typ"
 #include "exercices/Condensateur cylindrique.typ"
 #include "exercices/Condensateur sphérique.typ"
+#include "exercices/Écran tactile.typ"
 #include "exercices/Total Recall.typ"
