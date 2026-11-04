@@ -279,10 +279,9 @@ Les courants de Foucault ont la même direction et le même sens que le champ é
 )
 
 #application[
-    Une casserole en aluminium ($gamma_ce("Al")=#quan[3.5e7 S/m]$) a un fond de rayon #quan[9 cm] et d'épaisseur #quan[3 mm]. Elle est posée sur une plaque à induction qui crée, au niveau du fond, un champ magnétique oscillant de fréquence #quan[25 kHz] et d'amplitude de l'ordre de #quan[10 mT]. Une plaque domestique fournit au plus quelques kilowatts.
-    + Calculer la puissance dissipée que prévoit le modèle du cours. Commenter.
-    + Le champ créé au centre du fond par les courants de Foucault vaut environ $mu_0 gamma omega B_0 a h \/ 4$. Le comparer à $B_0$. Le modèle est-il valable ?
-    + D'après la loi de Lenz, ce champ s'oppose au champ créé par la plaque. Conclure sur la possibilité d'utiliser des ustensiles en aluminium sur une plaque à induction.
+    En 1984, pour fixer les limites du chauffage de tumeurs par induction, des volontaires ont été placés dans une bobine d'une spire, de #quan[30 cm] de long, entourant le torse. Elle crée un champ magnétique oscillant de fréquence #quan[13.56 MHz] et d'amplitude #quan[45 uT]. La conductivité des tissus est de l'ordre de #quan[0.6 S/m].
+    
+    Estimer la puissance dissipée par les courants de Foucault dans le torse.
 ]
 
 == Intérêt du feuilletage

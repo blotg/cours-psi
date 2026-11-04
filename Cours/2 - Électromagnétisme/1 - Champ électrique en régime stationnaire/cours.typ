@@ -570,6 +570,35 @@ $])
 #question-de-colle([Déterminer le champ gravitationnel créé par une boule de masse volumique uniforme $mu$.])
 
 = Condensateur plan
+
+Un condensateur plan est constitué de deux armatures planes parallèles, séparées par un isolant (ou le vide). Il permet de stocker de l'énergie électrique sous forme de champ électrique entre ses armatures.
+
+#let _commons(fichier, texte) = link("https://commons.wikimedia.org/wiki/File:" + fichier, texte)
+#figure(
+    grid(
+        columns: (1fr,) * 5,
+        column-gutter: 0.5em,
+        ..(
+            ("multicouche", [céramique multicouche], "condensateur céramique multicouche jaune à deux pattes"),
+            ("pastille", [céramique pastille], "condensateur céramique en forme de disque, marqué 473Z"),
+            ("cms", [céramique pour montage en surface], "petits condensateurs céramiques soudés sur un circuit imprimé"),
+            ("electrolytique", [électrolytique], "quatre condensateurs électrolytiques cylindriques de tailles croissantes"),
+            ("polyester", [film polyester], "condensateur à film polyester en boîtier rouge"),
+        ).map(((fichier, nom, alt)) => stack(
+            spacing: 0.4em,
+            image("images/condensateur-" + fichier + ".jpg", width: 100%, alt: alt),
+            text(size: 0.85em, nom),
+        )),
+    ),
+    caption: [
+        Différents types de condensateurs.
+        #footnote[#text(size:0.7em)[
+            Photos : WizardTim, #link("https://creativecommons.org/licenses/by/4.0/deed.fr")[CC BY 4.0], via Wikimedia Commons (#_commons("Selection_of_capacitors.jpg")[multicouche], recadrée et retouchée ; #_commons("Smd_chip.jpg")[CMS], recadrée ; #_commons("Multicomp-pro-assorted-capacitors-1.jpg")[électrolytiques] ; #_commons("Capacitor_class_x_example_2.jpg")[polyester]) ; #box[Evan-Amos], domaine public, via Wikimedia Commons (#_commons("Electronic-Component-Ceramic-Capacitor.jpg")[pastille]).
+        ]]
+    ],
+)
+
+
 == Champ électrique
 #encadré(
     titre: "Champ électrique dans un condensateur plan",
@@ -620,6 +649,7 @@ Lorsque l'espace entre les armatures est occupé par un isolant, il faut prendre
 #question-de-colle(
     [Établir le champ électrique entre les armatures d'un condensateur plan. En déduire la capacité. Généraliser au cas où l'isolant entre les armatures n'est pas du vide.],
 )
+
 
 #application[
     #grid(
