@@ -372,14 +372,14 @@ Le champ électrique a été construit de sorte à être lié simplement à la f
     connaitre: true,
     savoir-faire: true,
     grandeurs: sub-dictionary(grandeurs, ("E_p", "q", "V")),
-    hypothèses: "En régime stationnaire."
+    hypothèses: "En régime stationnaire.",
 )[
     $ E_p = q V $
 ]
 
 #flashcard(
     recto: "Énergie potentielle électrostatique",
-    verso: "$ E_p = q V $"
+    verso: "$ E_p = q V $",
 )
 
 Cette expression peut être utilisée pour déterminer la vitesse d'une particule chargée après traversée d'une zone de champ.
@@ -492,12 +492,16 @@ Un champ est invariant par une transformation si celle-ci le laisse inchangé. L
 #application[
     Déterminer le champ électrique créé par une particule ponctuelle de charge $q$.
 ]
-#question-de-colle([Déterminer le champ électrique créé par une particule ponctuelle de charge $q$. En déduire l'expression du potentiel électrique.])
+#question-de-colle(
+    [Déterminer le champ électrique créé par une particule ponctuelle de charge $q$. En déduire l'expression du potentiel électrique.],
+)
 
 #application[
     Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$. En déduire l'expression du potentiel électrique.
 ]
-#question-de-colle([Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$. En déduire l'expression du potentiel électrique.])
+#question-de-colle(
+    [Déterminer le champ électrique créé par une boule de rayon $R$ uniformément chargée de densité volumique $rho$. En déduire l'expression du potentiel électrique.],
+)
 
 #application[
     Déterminer le champ électrique créé par un cylindre plein de rayon $R$, infiniment long, uniformément chargé de densité volumique $rho$. En déduire l'expression du potentiel électrique.
@@ -618,7 +622,12 @@ Lorsque l'espace entre les armatures est occupé par un isolant, il faut prendre
 )
 
 #application[
-    Un condensateur céramique de capacité $#quan[470 pF]$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $#quan[1 um]$. Déterminer le diamètre des armatures.
+    #grid(
+        columns: 2,
+        gutter: 0.5cm,
+        [Un condensateur céramique de capacité $#quan[470 pF]$ comporte un diélectrique de permittivité relative $epsilon_r = 20$ et d'épaisseur $#quan[1 um]$. Déterminer le diamètre des armatures.],
+        image("images/condensateur.jpg", width: 1cm),
+    )
 ]
 
 == Aspect énergétique
