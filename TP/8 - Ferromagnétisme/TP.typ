@@ -2,6 +2,8 @@
 
 #show: TP.with(
     titre: "Ferromagnétisme",
+    taille: 10.5pt,
+    compact: true,
 )
 
 #préparatoire()[
@@ -299,7 +301,7 @@ Toutes les manipulations réalisées pour le fer peuvent être reproduites pour 
 La maquette comporte deux matériaux ferromagnétiques toriques (fer et ferrite) sur lesquels des bobinages sont enroulés.
 
 #figure(
-    image("images/maquette.svg", width: 100%),
+    image("images/maquette.svg", width: 70%),
     caption: [Maquette d'étude des matériaux ferromagnétiques],
 )
 
@@ -318,6 +320,7 @@ Le générateur de rampe, le multiplieur et le filtre passe-bas ne seront pas ut
 = Fonctions Python utiles dans ce TP<annexe-fonctions-python>
 
 #cheatsheet-python(
+    colonnes: 2,
     (
         "np.loadtxt",
         "plt.clf",

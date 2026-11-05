@@ -54,7 +54,9 @@
     eval(s, mode: "markup")
 }
 
-#let cheatsheet-python(..noms) = {
+// `colonnes` : nombre de colonnes, remplies l'une après l'autre (la première
+// reçoit les entrées en surnombre).
+#let cheatsheet-python(colonnes: 1, ..noms) = {
     let abrév = _données.at("abréviations", default: (:))
     let imports-from = _données.at("imports-from", default: (:))
     let commandes = _données.at("commandes", default: (:))
@@ -95,11 +97,17 @@
         ))
     }
 
+    let entrées = cellules.chunks(2)
+    let par-colonne = calc.max(1, calc.ceil(entrées.len() / colonnes))
     grid(
-        columns: (auto, 1fr),
-        column-gutter: 1.4em,
-        row-gutter: 0.9em,
-        ..cellules,
+        columns: (1fr,) * colonnes,
+        column-gutter: 1.6em,
+        ..entrées.chunks(par-colonne).map(morceau => grid(
+            columns: (auto, 1fr),
+            column-gutter: if colonnes > 1 { 0.8em } else { 1.4em },
+            row-gutter: 0.9em,
+            ..morceau.flatten(),
+        )),
     )
 
     if imports-vus.len() > 0 {

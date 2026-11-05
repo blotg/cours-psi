@@ -393,7 +393,11 @@
     doc
 }
 
-#let TP(numéro: none, titre: none, date: datetime.today(), liste-élèves: none, doc) = {
+// `taille` : corps du texte, pour faire tenir un sujet dans un nombre de pages
+// donné. `compact` : le titre remonte à côté du logotype et le nom de l'élève
+// passe en haut à droite, dans la marge que le logotype occupe déjà — à
+// réserver aux titres assez courts pour tenir entre les deux.
+#let TP(numéro: none, titre: none, date: datetime.today(), liste-élèves: none, taille: 11pt, compact: false, doc) = {
     // Inclus en annexe de la fiche de notation (`--input inclus=1`, cf.
     // `cours-en-annexe`), le sujet ne met pas la page en place : la fiche n'y
     // lit que ses évaluations, et garde sa propre page et son titre. La
@@ -412,17 +416,25 @@
         titre-doc = titre-doc + [ #sym.dash #markup(titre)]
     }
     show: init-document.with(titre: titre)
+    set text(size: taille)
     show: it => {
         set heading(numbering: "1.")
         it
     }
-    if "élève" in sys.inputs [
-        #set align(right)
+    let nom = if "élève" in sys.inputs [
         *#sys.inputs.at("élève")*
         #if "binôme" in sys.inputs [
             (avec #sys.inputs.at("binôme"))
         ]
     ]
+    if compact {
+        // Le bloc du logotype réserve 10 mm sous la marge haute : le nom s'y
+        // loge à droite, et le titre remonte à hauteur du logotype.
+        if nom != none { place(top + right, dy: -9mm, nom) }
+        v(-9mm)
+    } else if nom != none {
+        align(right, nom)
+    }
 
     titre-document(titre-doc)
     doc
