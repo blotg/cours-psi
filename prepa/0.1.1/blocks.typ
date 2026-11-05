@@ -60,6 +60,7 @@
     "exemple",
     "manipulation",
     "préparatoire",
+    "compte-rendu",
     "matériel",
 )
 // Ces figures n'ont ni légende ni mise en page propre : elles ne servent
@@ -71,6 +72,12 @@
 // init-document) : une règle `show` au niveau module ne se propage pas
 // à travers `import`, d'où cette fonction.
 #let styles-blocs(doc) = {
+    // Une figure ne se coupe jamais au saut de page, quel que soit le block
+    // qu'elle contient. Pour ces genres, on lève ce verrou : c'est alors le
+    // block de _boite (argument `sécable`) qui décide. La règle ne peut pas
+    // être posée dans _boite : la fonction rendrait un « styled » et le label
+    // d'un appel `#application(...)[...] <app>` ne serait plus référençable.
+    show figure.where(kind: "application").or(figure.where(kind: "manipulation")): set block(breakable: true)
     show figure: it => if type(it.kind) == str and it.kind in _genres-blocs {
         // align() est une mise en page : à l'export HTML, typst ne sait pas la
         // représenter et emporte le contenu de la boîte avec elle — un cours
@@ -161,9 +168,11 @@
     genre: none,
     supplement: none,
     classe: auto,
+    sécable: true,
 ) = _boite(
     _bandeau(intitulé, titre: titre, marqueur: marqueur, noir: noir),
     corps,
+    breakable: sécable,
     noir: noir,
     fond-corps: fond-corps,
     genre: genre,
@@ -416,10 +425,13 @@
 
 // -- Blocs d'activité ---------------------------------------------------
 
-#let application(titre: "", contenu) = _bloc(
+// `sécable: false` interdit de couper l'encadré au saut de page (idem pour
+// manipulation).
+#let application(titre: "", sécable: true, contenu) = _bloc(
     [Application #_numéro-bloc("application")],
     contenu,
     titre: titre,
+    sécable: sécable,
     marqueur: demo(),
     genre: "application",
     supplement: "application",
@@ -441,13 +453,14 @@
 // `#manipulation(...)[...] <ma-manip>` se collerait à cette séquence — @ma-manip
 // échouait alors sur « cannot reference sequence ». Dans le corps, la fonction
 // rend la seule figure, référençable comme les autres blocs.
-#let manipulation(titre: "", matériel: (), contenu) = _bloc(
+#let manipulation(titre: "", matériel: (), sécable: true, contenu) = _bloc(
     [Manipulation #_numéro-bloc("manipulation")],
     {
         [#metadata((titre: titre, matériel: matériel)) <manipulation>]
         contenu
     },
     titre: titre,
+    sécable: sécable,
     marqueur: text(font: "Noto Emoji", emoji.hands.raised),
     genre: "manipulation",
     supplement: "manipulation",
@@ -462,6 +475,27 @@
     genre: "préparatoire",
     supplement: "travail préparatoire",
 )
+
+// Consignes de rédaction du compte rendu, à appeler au début de chaque TP.
+// Un contenu facultatif (`#compte-rendu[...]`) s'ajoute après la liste pour
+// les consignes propres au TP.
+#let compte-rendu(..args) = {
+    assert(args.named().len() == 0 and args.pos().len() <= 1, message: "compte-rendu n'accepte qu'un contenu facultatif.")
+    _bloc(
+        "Compte rendu",
+        [
+            Un compte rendu est rédigé au fil de la séance. Pour *chaque manipulation*, il comporte nécessairement :
+            - une *description complète* de ce qui a été fait (montage, réglages, protocole) ;
+            - les *résultats bruts* des mesures, éventuellement déposés sur le réseau (le nom du fichier est alors indiqué) ;
+            - les *calculs effectués*, éventuellement sous la forme d'un script Python déposé sur le réseau ;
+            - une *conclusion* répondant à la question posée.
+            #args.pos().at(0, default: none)
+        ],
+        noir: true,
+        genre: "compte-rendu",
+        supplement: "compte rendu",
+    )
+}
 
 // Lien vers une ressource extérieure : QR code à gauche, URL à côté, le tout
 // cliquable et posé dans un liseré pleine largeur.

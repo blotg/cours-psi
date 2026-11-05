@@ -51,6 +51,14 @@ commandes:
     exemple: "z = np.zeros(n: int) -> array"
     commentaire: tableau de `n` zéros ; passer un tuple `(lignes, colonnes)` pour un tableau 2D
 
+  numpy.loadtxt:
+    exemple: "data = np.loadtxt(nom_fichier: str, skiprows: int, delimiter: str) -> array"
+    commentaire: "importe un fichier texte en tableau 2D ; `skiprows` : nombre de lignes d'en-tête à ignorer, `delimiter` : séparateur entre les colonnes (`\";\"` pour Latis-Pro). La colonne `i` s'obtient par `data[:, i]`"
+
+  numpy.max:
+    exemple: "m = np.max(x: array) -> float"
+    commentaire: plus grande valeur du tableau (`np.min` pour la plus petite)
+
   numpy.abs:
     exemple: "m = np.abs(x: array) -> array"
     commentaire: valeur absolue terme à terme (module si `x` est complexe)
@@ -111,4 +119,4 @@ commandes:
 
   scipy.integrate.trapezoid:
     exemple: "I = trapezoid(y: array, x: array) -> float"
-    commentaire: "valeur approchée de $integral y thin upright(d) x$ par la méthode des trapèzes, $I = sum_k (x_(k+1) - x_k) (y_k + y_(k+1)) slash 2$ ; les points sont pris dans l'ordre des tableaux, `x` n'a donc pas besoin d'être croissant"
+    commentaire: "valeur approchée de $integral y thin upright(d) x$ par la méthode des trapèzes, $I = sum_k (x_(k+1) - x_k) (y_k + y_(k+1)) slash 2$ ; les points sont pris dans l'ordre des tableaux, `x` n'a donc pas besoin d'être croissant. Dans les anciennes versions de scipy (avant 1.6), cette fonction s'appelait `trapz`"
