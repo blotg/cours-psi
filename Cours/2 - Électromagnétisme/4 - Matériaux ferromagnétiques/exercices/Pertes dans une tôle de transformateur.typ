@@ -3,6 +3,7 @@
 #show: exercice.with(
     titre: "Pertes par hystérésis dans une tôle de transformateur",
     numérique: true,
+    capytale: "280e-12571000",
 )
 
 Le circuit magnétique d'un transformateur est un empilement de tôles minces d'acier au silicium à grains orientés : leurs cristaux sont alignés dans le sens du laminage, ce qui réduit les pertes. Dans le cadre d'un projet européen de métrologie, l'institut italien de métrologie (INRIM) a mesuré le cycle d'hystérésis d'une telle tôle, d'épaisseur #quan[0.30 mm], à la fréquence $f = #quan[50 Hz]$. La mesure est faite sur un cadre d'Epstein, banc normalisé qui fonctionne comme un transformateur à vide dont le circuit magnétique, sans entrefer, est fait des tôles à étudier. Le champ magnétique y est imposé sinusoïdal, d'amplitude #quan[1.7 T].

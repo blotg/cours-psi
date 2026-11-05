@@ -372,6 +372,8 @@ L'aimantation rémanente et le champ magnétique rémanent sont l'aimantation et
 
 L'excitation coercitive est l'excitation qu'il faut appliquer pour que le champ magnétique et l'aimantation soient nuls#footnote[En toute rigueur, l'excitation magnétique qu'il faut pour avoir $B=0$ n'est pas exactement celle qu'il faut appliquer pour avoir $M=0$, mais elles sont très proches.].
 
+== Matériaux ferromagnétiques durs
+
 Un matériau ferromagnétique dur est un matériau ferromagnétique dont le cycle d'hystérésis est large.
 
 #schéma(titre: "Cycle d'hystérésis d'un matériau ferromagnétique dur", hauteur: 3cm)
