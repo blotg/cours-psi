@@ -430,7 +430,18 @@
     if compact {
         // Le bloc du logotype réserve 10 mm sous la marge haute : le nom s'y
         // loge à droite, et le titre remonte à hauteur du logotype.
-        if nom != none { place(top + right, dy: -9mm, nom) }
+        //
+        // Le nom est placé par rapport au haut de la zone de texte, et non à
+        // sa place dans le flux. Son haut s'aligne sur le dessin du logotype :
+        // celui-ci monte de 8 mm dans la marge, moins le blanc de son SVG (85
+        // unités sur 969,344 pour 30 mm de large, cf. init-document). Placé
+        // plus haut, à 1 mm du bord, l'imprimante le rognait.
+        if nom != none {
+            place(top + right, dy: -8mm + 30mm * 85 / 969.344, {
+                set text(top-edge: "bounds")
+                nom
+            })
+        }
         v(-9mm)
     } else if nom != none {
         align(right, nom)
