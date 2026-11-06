@@ -42,7 +42,10 @@ python3 -m outils animations --serveur "Cours/Systèmes de coordonnées"  # serv
 
 Il faut [Node.js](https://nodejs.org) 20.19 ou plus (celui de vite 8), `node`
 et `npm` dans le PATH. La première construction installe les dépendances
-(`npm ci`), et les réinstalle quand le verrou change.
+(`npm ci`), et les réinstalle quand le verrou change. vite se lance par
+`node node_modules/vite/bin/vite.js`, jamais par `node_modules/.bin/vite` :
+c'est un lien symbolique, et le NAS monté en sshfs ne laisse pas lire les
+liens.
 
 Le **serveur de développement** recharge la page à chaque enregistrement ; il
 indique son adresse en démarrant, et sert à la racine le sommaire des
@@ -112,7 +115,7 @@ markup typst** dans le sommaire : ni `_`, ni `*`, ni `#`, ni `$`.
 | `scene.js` | `Scène` : rendu WebGL, étiquettes, caméra à la souris ou au doigt, poignées que l'on déplace dans l'espace |
 | `objets.js` | ce qui se dessine dans l'espace : `Étiquette` (LaTeX), `Flèche`, `Trait`, `Arc`, `repère`, `quadrillage`, la palette `COULEURS` |
 | `plan.js` | `Plan` : la même chose à deux dimensions — un canevas aux coordonnées du problème, des étiquettes, des poignées que l'on déplace (un point, ou un objet étendu que l'on prend n'importe où) ; une vue que l'on peut rendre navigable (glisser, molette, pincement, « Vue de départ », comme une scène) ; et de quoi dessiner (`chemin`, `disque`, `flèche`, `pointe`, `aplat`), dont un conducteur vu en coupe (`conducteur`, ⊙ ou ⊗) et des lignes de champ fléchées (`lignesDeChamp`), de loin en loin ou là où elles traversent une droite, comme dans les figures du poly |
-| `graphe.js` | `Graphe` : un graphique en SVG — axes, graduations mobiles, courbes, spectres en raies ou en aires, zones, cotes |
+| `graphe.js` | `Graphe` : un graphique en SVG — axes (colorés comme leur courbe, pour deux grandeurs à deux échelles), graduations mobiles, courbes, spectres en raies ou en aires, aires hachurées, zones, cotes |
 | `carte.js` | la carte d'un champ scalaire : ses valeurs sur une grille, ses lignes de niveau par carrés marchants, mises bout à bout en lignes brisées (`polylignes`), l'écart rond entre deux niveaux |
 | `spires.js` | le champ d'une spire circulaire et le flux qui la traverse (intégrales elliptiques) : des spires au solénoïde, et l'aimant droit, nappe de courant sur sa surface latérale |
 | `distributions.js` | les scènes « Invariances » et « Plans de symétrie » des chapitres d'électromagnétisme : formes d'une distribution de charges ou de courants, symétries calculées, systèmes de coordonnées |
@@ -520,6 +523,23 @@ sous deux couches, on ne le voyait plus. Chaque volume a sa vue de départ
 (`Scène.vueDeDépart(vue)`) : la boule, centrée en O, ne tient pas dans celle
 de l'élément. Les figures du poly suivent les mêmes couleurs
 (`schemas/couleurs.typ`).
+
+**Conversion 1** — `puissance.js` règle l'impédance Z = R + jX d'un dipôle
+sous une tension imposée, u = U cos ωt avec U_eff = 230 V : deux curseurs, ou
+la pointe de Z que l'on tire dans le diagramme de Fresnel (un `Plan`), où R,
+X et l'angle φ = arg Z sont dessinés — X est la réactance, comme dans le
+cours, Y y étant l'admittance. À côté, u et i sur un même graphique, chacun à
+son échelle et dans sa couleur (u à gauche, i à droite), avec la cote φ/ω du
+retard de i sur u ; dessous, p = u i, hachurée sur une période — « / »
+au-dessus de l'axe, « \ » dessous, deux aires que le dipôle purement réactif
+rend égales — et sa moyenne P en pointillés. Le temps se compte en périodes,
+rien ne défile. R et X ont un aimant sur 0 (4 Ω, au curseur comme à la
+pointe de Z). Les échelles de i et de p sont fixes, choisies par
+l'utilisateur : ±40 A et ±5 kW, comme ±400 V pour u. Elles ne couvrent pas
+les plus petits |Z| (i sort sous 7 Ω, p sous 9 à 18 Ω selon φ) : les deux
+graphiques sont construits avec `coupe: true`, qui arrête courbes et aires
+au cadre, et le nom de P se cache quand sa droite en sort. cos φ se calcule comme R/|Z|, exactement nul quand R = 0. Z = 0 est un court-circuit : le
+courant et la puissance ne sont pas tracés.
 
 **Conversion 3** — `machine.js` dessine la machine synchrone diphasée et
 bipolaire, coupée en son milieu ; `machine-synchrone.js` la fait tourner. Les

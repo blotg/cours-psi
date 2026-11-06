@@ -54,13 +54,19 @@ const ANCRES = {
 const disque = (x, y, r) => `M ${x} ${y} m ${-r} 0 a ${r} ${r} 0 1 0 ${2 * r} 0 a ${r} ${r} 0 1 0 ${-2 * r} 0`;
 
 const CHEMIN_VIDE = 'M 0 0';
+/** Les motifs de hachures et les cadres de découpe portent un identifiant,
+ *  unique dans la page. */
+let motifs = 0;
+let découpes = 0;
 const GRIS_GRILLE = '#e3e3e3';
 const GRIS_AXE = '#555';
 
 /**
  * Un graphique : x de `x.min` à `x.max`, y de `y.min` à `y.max`, chaque axe
  * avec son nom (`nom`, en LaTeX) et ses graduations (`graduations`, des
- * couples [valeur, tex] ou des nombres).
+ * couples [valeur, tex] ou des nombres). La `couleur` d'un axe est celle de
+ * ses graduations et de son nom : celle de sa courbe, quand deux grandeurs
+ * partagent le graphique avec chacune son échelle.
  *
  *     const g = new Graphe({
  *         x: { min: 0, max: 360, nom: '\\theta', graduations: [0, 180, 360] },
@@ -73,9 +79,14 @@ const GRIS_AXE = '#555';
  * valent le pixel quand le graphique s'affiche à sa taille naturelle — celle
  * du panneau de réglages. `grand` agrandit les légendes, pour un graphique
  * qui tient la place d'une scène.
+ *
+ * `coupe` arrête les courbes et les aires au cadre, x et y compris entre
+ * leurs bornes : pour une échelle fixe que certains réglages dépassent,
+ * comme l'écran d'un oscilloscope. Sans elle, ce qui sort du cadre passe
+ * sur les graduations.
  */
 export class Graphe {
-    constructor({ x, y, largeur = 272, hauteur = 140, marges = {}, grand = false }) {
+    constructor({ x, y, largeur = 272, hauteur = 140, marges = {}, grand = false, coupe = false }) {
         const marge = { gauche: 44, droite: 14, haut: 22, bas: 20, ...marges };
         Object.assign(this, { largeur, hauteur, marge, domaine: { x, y } });
 
@@ -91,6 +102,14 @@ export class Graphe {
         this.X = (v) => marge.gauche + ((v - x.min) / (x.max - x.min)) * dedans.largeur;
         this.Y = (v) => marge.haut + ((y.max - v) / (y.max - y.min)) * dedans.hauteur;
 
+        if (coupe) {
+            this.définitions ??= svg('defs', {}, this.racine);
+            const id = `cadre-${++découpes}`;
+            const cadre = svg('clipPath', { id }, this.définitions);
+            svg('rect', { x: marge.gauche, y: marge.haut, width: dedans.largeur, height: dedans.hauteur }, cadre);
+            for (const nom of ['fond', 'tracés']) this.couches[nom].setAttribute('clip-path', `url(#${id})`);
+        }
+
         this.grilleX = this._grille('x');
         this.grilleY = this._grille('y');
         this.grilleX.place(x.graduations ?? []);
@@ -104,7 +123,7 @@ export class Graphe {
         if (x.nom) this._légende(x.nom, largeur - 2, this.Y(zéro) - 8, 'droite');
         // Le nom de l'ordonnée au-dessus de ses graduations : le haut du
         // graphique reste libre pour les légendes des courbes.
-        if (y.nom) this._légende(y.nom, marge.gauche - 5, 9, 'droite', COULEURS.noir);
+        if (y.nom) this._légende(y.nom, marge.gauche - 5, 9, 'droite', y.couleur ?? COULEURS.noir);
     }
 
     // -- Repères et légendes --------------------------------------------------
@@ -181,7 +200,7 @@ export class Graphe {
                     const horizontal = axe === 'x';
                     pool.push({
                         trait: this._trait(0, 0, 0, 0, {}, this.couches.grille),
-                        légende: this._légende('', 0, 0, horizontal ? 'centre' : 'droite'),
+                        légende: this._légende('', 0, 0, horizontal ? 'centre' : 'droite', this.domaine[axe].couleur ?? ''),
                     });
                 }
                 pool.forEach(({ trait, légende }, i) => {
@@ -339,13 +358,18 @@ export class Graphe {
     /**
      * Une aire sous une courbe, fermée sur l'axe : le spectre continu d'un
      * signal qui ne se répète pas, une énergie, une bande de fréquences.
+     *
+     * `hachures` la hachure au lieu de la remplir : { angle, écart,
+     * épaisseur, opacité }, l'angle en degrés (45 : « / », −45 : « \ »),
+     * l'écart et l'épaisseur en unités du dessin. Deux aires hachurées en
+     * sens contraires se distinguent sans changer de couleur.
      */
-    aire({ couleur = COULEURS.noir, opacité = 0.25, bord = true, visible = true } = {}) {
+    aire({ couleur = COULEURS.noir, opacité = 0.25, bord = true, hachures = null, visible = true } = {}) {
         const forme = svg(
             'polygon',
             {
-                fill: couleur,
-                'fill-opacity': opacité,
+                fill: hachures ? `url(#${this._hachures(couleur, hachures)})` : couleur,
+                'fill-opacity': hachures ? 1 : opacité,
                 stroke: bord ? couleur : 'none',
                 'stroke-width': 1.5,
                 'stroke-linejoin': 'round',
@@ -375,6 +399,38 @@ export class Graphe {
             },
         };
         return aire.montre(visible);
+    }
+
+    /** Un motif de hachures, dans les définitions du dessin ; son identifiant. */
+    _hachures(couleur, { angle = 45, écart = 5, épaisseur = 1, opacité = 0.7 } = {}) {
+        this.définitions ??= svg('defs', {}, this.racine);
+        const id = `hachures-${++motifs}`;
+        // Des traits verticaux, que le motif tourne : à 45°, « / ».
+        const motif = svg(
+            'pattern',
+            {
+                id,
+                patternUnits: 'userSpaceOnUse',
+                width: écart,
+                height: écart,
+                patternTransform: `rotate(${angle})`,
+            },
+            this.définitions,
+        );
+        svg(
+            'line',
+            {
+                x1: écart / 2,
+                y1: 0,
+                x2: écart / 2,
+                y2: écart,
+                stroke: couleur,
+                'stroke-width': épaisseur,
+                'stroke-opacity': opacité,
+            },
+            motif,
+        );
+        return id;
     }
 
     /** Un aplat rectangulaire, derrière la grille : une zone remarquable. */

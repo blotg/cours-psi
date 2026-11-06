@@ -27,6 +27,24 @@ const U_AXE = 400;
 const R_MAX = 100;
 const X_MAX = 100;
 
+/** R = 0 (purement réactif) et X = 0 (résistif) retiennent la main, au
+ *  curseur comme à la pointe de Z : un pas de 1 Ω ne s'y pose pas tout seul. */
+const ATTRACTION = 4;
+const colle = (v) => (Math.abs(v) <= ATTRACTION ? 0 : v);
+
+/**
+ * Les échelles de i et de p sont fixes : ±40 A et ±5 kW aux graduations
+ * extrêmes, comme ±400 V pour u, et le cadre monte un peu au-delà (AIR).
+ * Elles ne couvrent pas les plus petits |Z| : i sort du cadre sous 7 Ω, et
+ * p, qui culmine à U I = U²/|Z| pour un dipôle résistif et oscille entre
+ * ±U I/2 pour un dipôle purement réactif, sous 18 Ω dans le premier cas et
+ * 9 Ω dans le second. Le cadre coupe alors les courbes.
+ */
+const I_AXE = 40;
+const P_AXE = 5;
+/** Le haut du cadre, rapporté à la graduation extrême. */
+const AIR = 1.15;
+
 const COULEUR = {
     u: COULEURS.vert,
     i: COULEURS.vermillon,
@@ -56,13 +74,6 @@ function nombre(x, format = TROIS) {
         .replace('−', '-')
         .replace(',', '{,}')
         .replace(/[\u202f\u00a0 ]/g, '\\,');
-}
-
-/** La plus petite valeur ronde qui dépasse x, et dont la moitié se lit
- *  aussi (cf. bobine.js, Électromagnétisme 4). */
-function rondeAuDessus(x) {
-    const décade = 10 ** Math.floor(Math.log10(x));
-    return décade * [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((m) => m * décade >= x * (1 - 1e-9));
 }
 
 /**
@@ -105,16 +116,17 @@ function puissance(section) {
     const NIVEAUX = [-1, -0.5, 0, 0.5, 1];
 
     // u et i : l'ordonnée est rapportée au haut de chaque échelle, U_AXE pour
-    // u, une valeur ronde au-dessus de I pour i.
+    // u, I_AXE pour i.
     const ui = new Graphe({
         largeur: 560,
         hauteur: 235,
         grand: true,
+        coupe: true,
         marges,
         x: temps,
         y: {
-            min: -1.15,
-            max: 1.15,
+            min: -AIR,
+            max: AIR,
             nom: 'u\\ (\\mathrm{V})',
             couleur: COULEUR.u,
             graduations: NIVEAUX.map((v) => [v, nombre(v * U_AXE)]),
@@ -122,24 +134,29 @@ function puissance(section) {
     });
     // L'échelle de i, à droite ; le zéro est commun.
     const à_droite = { ancre: 'gauche', couleur: COULEUR.i, décalage: [5, 0] };
-    ui.légende('i\\ (\\mathrm{A})', { ...à_droite, x: temps.max, y: 1.15, décalage: [5, 9 - marges.haut] });
-    const graduationsI = NIVEAUX.filter((v) => v !== 0).map((v) => [v, ui.légende('', { ...à_droite, x: temps.max, y: v })]);
+    ui.légende('i\\ (\\mathrm{A})', { ...à_droite, x: temps.max, y: AIR, décalage: [5, 9 - marges.haut] });
+    for (const v of NIVEAUX.filter((v) => v !== 0)) ui.légende(nombre(v * I_AXE), { ...à_droite, x: temps.max, y: v });
     const courbeU = ui.courbe({ couleur: COULEUR.u, épaisseur: 2.2 });
     const courbeI = ui.courbe({ couleur: COULEUR.i, épaisseur: 2.2 });
     // Le retard du courant sur la tension, d'un maximum à l'autre : φ/ω.
     const retard = ui.cote('\\varphi/\\omega', { couleur: COULEURS.gris });
 
-    // p : l'ordonnée est rapportée à une valeur ronde au-dessus de U I, qui
-    // borne p par le haut ; par le bas, p ne descend pas sous −U I/2.
+    // p, en kW, gradué comme u.
     const gp = new Graphe({
         largeur: 560,
         hauteur: 235,
         grand: true,
+        coupe: true,
         marges,
         x: { ...temps, nom: '' },
-        y: { min: -0.62, max: 1.12, couleur: COULEUR.p },
+        y: {
+            min: -AIR * P_AXE,
+            max: AIR * P_AXE,
+            nom: 'p\\ (\\mathrm{kW})',
+            couleur: COULEUR.p,
+            graduations: NIVEAUX.map((v) => [v * P_AXE, nombre(v * P_AXE)]),
+        },
     });
-    const nomP = gp.légende('', { x: 0, y: 1.12, ancre: 'droite', couleur: COULEUR.p, décalage: [-5, 9 - marges.haut] });
     const aires = [
         gp.aire({ couleur: COULEUR.p, bord: false, hachures: { angle: 45 } }),
         gp.aire({ couleur: COULEUR.p, bord: false, hachures: { angle: -45 } }),
@@ -180,8 +197,8 @@ function puissance(section) {
         position: () => [état.R, état.X],
         rayon: 18,
         auDéplacement: (x, y) => {
-            état.R = Math.min(Math.max(Math.round(x), 0), R_MAX);
-            état.X = Math.min(Math.max(Math.round(y), -X_MAX), X_MAX);
+            état.R = colle(Math.min(Math.max(Math.round(x), 0), R_MAX));
+            état.X = colle(Math.min(Math.max(Math.round(y), -X_MAX), X_MAX));
             curseurs.R.valeur = état.R;
             curseurs.X.valeur = état.X;
             recalcule();
@@ -297,6 +314,8 @@ function puissance(section) {
             valeur: état.R,
             unité: ' Ω',
             couleur: COULEUR.R,
+            aimants: [0],
+            attraction: ATTRACTION,
             auChangement: (v) => {
                 état.R = v;
                 recalcule();
@@ -310,6 +329,8 @@ function puissance(section) {
             valeur: état.X,
             unité: ' Ω',
             couleur: COULEUR.X,
+            aimants: [0],
+            attraction: ATTRACTION,
             auChangement: (v) => {
                 état.X = v;
                 recalcule();
@@ -339,7 +360,6 @@ function puissance(section) {
 
         courbeU.place(τ.map((t) => [t, (U / U_AXE) * Math.cos(2 * Math.PI * t)]));
         for (const tracé of [courbeI, courbeP, moyenne, ...aires]) tracé.montre(!court);
-        for (const [, légende] of graduationsI) légende.montre(!court);
         nomMoyenne.montre(!court);
         retard.montre(!court && Math.abs(φ) > 0.06);
 
@@ -349,25 +369,17 @@ function puissance(section) {
             mesures.I.écrit('I_\\text{eff} \\to \\infty');
             mesures.cos.écrit('');
             mesures.P.écrit('');
-            gp.grilleY.place([]);
-            nomP.écrit('');
             fresnel.redessine();
             return;
         }
 
         // Le courant, sur son échelle.
         const I = U / Z;
-        const iAxe = rondeAuDessus(1.3 * I);
-        courbeI.place(τ.map((t) => [t, (I / iAxe) * Math.cos(2 * Math.PI * t - φ)]));
-        for (const [v, légende] of graduationsI) légende.écrit(nombre(v * iAxe));
+        courbeI.place(τ.map((t) => [t, (I / I_AXE) * Math.cos(2 * Math.PI * t - φ)]));
         if (Math.abs(φ) > 0.06) retard.place(1, 1 + φ / (2 * Math.PI), 1);
 
-        // La puissance instantanée, en W ou en kW.
-        const pAxe = rondeAuDessus(U * I);
-        const [unité, k] = pAxe >= 1e4 ? ['kW', 1e3] : ['W', 1];
-        nomP.écrit(`p\\ (\\mathrm{${unité}})`);
-        gp.grilleY.place([-0.5, 0, 0.5, 1].map((v) => [v, nombre((v * pAxe) / k)]));
-        const p = (t) => (U * I * Math.cos(2 * Math.PI * t) * Math.cos(2 * Math.PI * t - φ)) / pAxe;
+        // La puissance instantanée, en kW.
+        const p = (t) => (U * I * Math.cos(2 * Math.PI * t) * Math.cos(2 * Math.PI * t - φ)) / 1e3;
         courbeP.place(τ.map((t) => [t, p(t)]));
         const sur1 = unePériode.map((t) => [t, p(t)]);
         aires[0].place(part(sur1, 1));
@@ -379,10 +391,12 @@ function puissance(section) {
         const cosφ = R / Z;
         const P = U_EFF * Ieff * cosφ;
         moyenne.place([
-            [0, P / pAxe],
-            [2, P / pAxe],
+            [0, P / 1e3],
+            [2, P / 1e3],
         ]);
-        nomMoyenne.place(2, P / pAxe);
+        nomMoyenne.place(2, P / 1e3);
+        // Son nom, écrit hors du dessin, ne suit pas la droite hors du cadre.
+        nomMoyenne.montre(P / 1e3 <= AIR * P_AXE);
 
         formuleZ.écrit(
             `|\\underline{Z}| = ${nombre(Z, TROIS_EXACTS)}\\,\\Omega,\\quad \\varphi = ${nombre((φ * 180) / Math.PI, décimales(1))}^\\circ`,
