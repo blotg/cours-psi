@@ -48,7 +48,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 ][
     Quel que soit le mode, le dipôle global est inductif. Le courant sera donc en retard sur la tension.
 
-    Plus $R$ est grand, moins de courant y passe dont plus l'amplitude du courant est faible.
+    Plus $R$ est grand, moins de courant y passe donc plus l'amplitude du courant est faible.
 
     Difficile de justifier les phases pour l'instant, on le fera plus tard dans l'exercice.
     #figure(
@@ -146,7 +146,7 @@ Le circuit d'alimentation d'un séchoir électrique est composé d'une résistan
 
 #question(
     coups-de-pouce: (
-        "Exprimer $tan phi$ dans les modes II et F et utiliser $L omega^2 + r^2 = 102r$.",
+        "Exprimer $tan phi$ dans les modes II et F et utiliser $(L omega)^2 + r^2 = 102r$.",
     ),
 )[
     Calculer $phi_"F"$ puis $phi_"I"$.

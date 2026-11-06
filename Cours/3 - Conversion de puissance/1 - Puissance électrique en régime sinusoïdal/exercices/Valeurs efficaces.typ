@@ -1,20 +1,20 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Computing effective values",
+    titre: "Computing RMS values",
     difficulté: 0,
     numérique: true,
     capytale: "80f6-11678454",
 )
 
-With the help of Python, calculate the effective (RMS) values of the following periodic signals.
+With the help of Python, calculate the RMS values of the following periodic signals.
 
 The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad", `quad`) from the `scipy.integrate` module may be useful for performing the necessary integrations. It takes as arguments a function, a lower bound, and an upper bound, and returns the value of the integral over that interval.
 
 #question(
     coups-de-pouce: (
         "What is the period of the signal?",
-        "Set up the integral for the effective value calculation.",
+        "Set up the integral for the RMS value calculation.",
         "Use the `quad` function to compute the integral.",
     ),
 )[
@@ -31,6 +31,7 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
     rms_value = np.sqrt(integral / T)
     print("RMS value of s1:", rms_value)
     ```
+    The result is #num("7.07"), that is $10 / sqrt(2)$: as expected, the RMS value of a sinusoidal signal of amplitude $S$ and zero mean is $S / sqrt(2)$.
 ]
 
 #question(
@@ -38,17 +39,18 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
 )[
     $s_2(t) = cos^2( pi t)$. Compare your result with the known formula for a sinusoidal signal.
 ][
-    The period is $T = #quan[2 s]$.
+    Since $cos^2(pi t) = 1/2 + 1/2 cos(2 pi t)$, the period is $T = #quan[1 s]$.
     ```python
     from scipy.integrate import quad
     import numpy as np
     def s2_squared(t):
         return np.cos(np.pi * t)**4
-    T = 2  # period
+    T = 1  # period
     integral, _ = quad(s2_squared, 0, T) # quad returns a tuple (value, error)
     rms_value = np.sqrt(integral / T)
     print("RMS value of s2:", rms_value)
     ```
+    The result is #num("0.612"), that is $sqrt(3/8)$. The formula $S / sqrt(2)$ does not apply: $s_2$ is a sinusoidal signal of amplitude $1/2$ added to a non-zero mean value $1/2$, and $S / sqrt(2)$ would give #num("0.354").
 ]
 
 #question(
@@ -58,7 +60,7 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
 ][
     The half-period is #quan[1 ms].
 
-    Between #quan[0 ms] and #quan[1 ms], the signal rises linearly from #quan[-5 V] to #quan[5 V], with a slope of $#quan[10 V/ms] = #quan[10000 V/s]$ and a y-intercept#footnote["Ordonnée à l'origine" in french] of #quan[-5 V].
+    Between #quan[0 ms] and #quan[1 ms], the signal rises linearly from #quan[-5 V] to #quan[5 V], with a slope of $#quan[10 V/ms] = #quan[10000 V/s]$ and a y-intercept#footnote["Ordonnée à l'origine" in French] of #quan[-5 V].
 
     Between #quan[1 ms] and #quan[2 ms], the signal falls linearly back to #quan[-5 V] with a slope of $#quan[-10 V/ms] = #quan[-10000 V/s]$ and a y-intercept of #quan[15 V].
     ```python
@@ -75,4 +77,5 @@ The function #link("https://docs.scipy.org/doc/scipy/reference/generated/scipy.i
     rms_value = np.sqrt(integral / T)
     print("RMS value of s3:", rms_value)
     ```
+    The result is #quan[2.89 V], that is $#quan[5 V] / sqrt(3)$.
 ]

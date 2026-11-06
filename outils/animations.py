@@ -117,25 +117,35 @@ def _condensé(chapitre: Chapitre, fil_json: str) -> str:
     return h.hexdigest()
 
 
-def _vite() -> Path:
-    """Le vite du dépôt, installé d'après `package-lock.json` s'il manque ou
-    si le verrou a changé depuis (`npm ci` réécrit `node_modules/`)."""
-    vite = RACINE / "node_modules" / ".bin" / "vite"
+def _vite() -> list[str]:
+    """La commande qui lance le vite du dépôt, installé d'après
+    `package-lock.json` s'il manque ou si le verrou a changé depuis (`npm ci`
+    réécrit `node_modules/`).
+
+    On donne son script à node plutôt que de passer par
+    `node_modules/.bin/vite` : c'est un lien symbolique, et le NAS monté en
+    sshfs ne laisse pas lire les liens (`readlink` refusé). vite y passait
+    pour absent, et chaque construction relançait `npm ci` avant d'échouer.
+    """
+    script = RACINE / "node_modules" / "vite" / "bin" / "vite.js"
     verrou = RACINE / "package-lock.json"
     # npm écrit ce double du verrou à la fin de chaque installation.
     installé = RACINE / "node_modules" / ".package-lock.json"
+    node = shutil.which("node")
+    if node is None:
+        raise NodeAbsent("Node.js introuvable : il faut node et npm dans le PATH (cf. animations/README.md)")
     with _verrou_npm:
-        if vite.is_file() and installé.is_file() and installé.stat().st_mtime >= verrou.stat().st_mtime:
-            return vite
+        if script.is_file() and installé.is_file() and installé.stat().st_mtime >= verrou.stat().st_mtime:
+            return [node, str(script)]
         npm = shutil.which("npm")
-        if npm is None or shutil.which("node") is None:
-            raise NodeAbsent("Node.js introuvable : il faut node et npm dans le PATH (cf. animations/README.md)")
+        if npm is None:
+            raise NodeAbsent("npm introuvable : il faut node et npm dans le PATH (cf. animations/README.md)")
         r = subprocess.run(
             [npm, "ci", "--no-audit", "--no-fund"], cwd=RACINE, capture_output=True, text=True
         )
         if r.returncode:
             raise ErreurAnimations(f"npm ci a échoué :\n{r.stderr or r.stdout}")
-    return vite
+    return [node, str(script)]
 
 
 def _environnement(chapitre: Chapitre, fil_json: str) -> dict[str, str]:
@@ -162,7 +172,7 @@ def construit(chapitre: Chapitre, forcer: bool = False) -> list[Path]:
     témoin = dossier / EMPREINTE
     if forcer or not (témoin.is_file() and témoin.read_text(encoding="utf-8") == condensé):
         r = subprocess.run(
-            [str(_vite()), "build", "--config", str(CONFIG)],
+            [*_vite(), "build", "--config", str(CONFIG)],
             cwd=RACINE,
             env=_environnement(chapitre, fil_json),
             capture_output=True,
@@ -190,7 +200,7 @@ def serveur(chapitre: Chapitre) -> int:
         raise ErreurAnimations(f"{chapitre.chemin} : pas de page dans {DOSSIER}/")
     fil_json = json.dumps(fil(chapitre), ensure_ascii=False)
     return subprocess.run(
-        [str(_vite()), "--config", str(CONFIG)],
+        [*_vite(), "--config", str(CONFIG)],
         cwd=RACINE,
         env=_environnement(chapitre, fil_json),
     ).returncode

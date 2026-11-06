@@ -34,12 +34,12 @@ Les grandeurs $i(t)$, $i_1(t)$ et $i_2(t)$ sont sinusoïdales de valeurs efficac
 ][
     $ i(t) = i_1(t) + i_2(t) $
     $
-        integral_0^T i^2(t) dd(t) &= integral_0^T i_1^2(t) dd(t) + integral_0^T i_2^2(t) dd(t) + 2integral_0^T i_1(t) i_2(t) dd(t)
+        1/T integral_0^T i^2(t) dd(t) &= 1/T integral_0^T i_1^2(t) dd(t) + 1/T integral_0^T i_2^2(t) dd(t) + 2/T integral_0^T i_1(t) i_2(t) dd(t)
     $
-    Les courants $i$, $i_1$ et $i_2$ sont sinusoïdaux : $i(t)=sqrt(2)I cos(omega t + phi)$, $i_1(t)=sqrt(2)I_1 cos(omega t + phi_1)$ et $i_2(t)=sqrt(2)I_2 cos(omega t)$ (pas de phase pour $i_2$ la $R in RR$).
+    Les courants $i$, $i_1$ et $i_2$ sont sinusoïdaux : $i(t)=sqrt(2)I cos(omega t + phi)$, $i_1(t)=sqrt(2)I_1 cos(omega t + phi_1)$ et $i_2(t)=sqrt(2)I_2 cos(omega t)$ (pas de phase pour $i_2$ car $R$ est réel, en prenant la tension comme origine des phases).
 
     $
-        I^2 & = I_(1)^2 + I_(2)^2 + 4I_(1)I_(2) integral (cos(2 omega t + phi_1) + cos(phi_1))/2 dd(t) \
+        I^2 & = I_(1)^2 + I_(2)^2 + (4I_(1)I_(2))/T integral_0^T (cos(2 omega t + phi_1) + cos(phi_1))/2 dd(t) \
             & = I_(1)^2 + I_(2)^2 + 2I_1 I_2cos(phi_1)
     $
     On a finalement :
@@ -50,7 +50,7 @@ Les grandeurs $i(t)$, $i_1(t)$ et $i_2(t)$ sont sinusoïdales de valeurs efficac
 #let I2 = 12
 #let I1 = 30
 
-Un abonné d'EDF dispose d'un radiateur électrique qui est parcouru par #qty(I2, "A") efficace quand il est branché seul et d'un moteur qui est parcouru par #qty(I, "A") efficace dans les mêmes conditions. Lorsqu'il branche les deux, le courant efficace total est #qty(I, "A").
+Un abonné d'EDF dispose d'un radiateur électrique qui est parcouru par #qty(I2, "A") efficace quand il est branché seul et d'un moteur qui est parcouru par #qty(I1, "A") efficace dans les mêmes conditions. Lorsqu'il branche les deux, le courant efficace total est #qty(I, "A").
 
 #question(
     coups-de-pouce: (),

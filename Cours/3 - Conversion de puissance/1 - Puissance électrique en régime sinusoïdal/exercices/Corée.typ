@@ -1,7 +1,7 @@
 #import "@local/prepa:0.1.1": *
 
 #show: exercice.with(
-    titre: "Compensateur de puissance réactive",
+    titre: "Appareil français branché en Corée",
     difficulté: 1,
     ouvert: true,
 )

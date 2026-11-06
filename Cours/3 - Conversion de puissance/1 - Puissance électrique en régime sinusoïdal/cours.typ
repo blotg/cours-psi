@@ -4,10 +4,10 @@
 
 #let grandeurs = (
     T: (signification: "la période", unité: unit("s")),
-    S: (signification: "l'amplitude", unité: "sans unité"),
+    S: (signification: "l'amplitude", unité: "unité du signal"),
     omega: (signification: "la pulsation", unité: unit("rad/s")),
     phi: (signification: "le déphasage $phi_u - phi_i$ entre la tension et le courant", unité: unit("rad")),
-    "S_\"eff\"": (signification: "la valeur efficace", unité: "sans unité"),
+    "S_\"eff\"": (signification: "la valeur efficace", unité: "unité du signal"),
     p_C: (signification: "la puissance instantanée reçue par un condensateur", unité: unit("W")),
     p_L: (signification: "la puissance instantanée reçue par une bobine", unité: unit("W")),
     p_R: (signification: "la puissance instantanée reçue par un résistor", unité: unit("W")),
@@ -49,7 +49,7 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
     hypothèses: (
         [$s$ est périodique],
     ),
-    grandeurs: sub-dictionary(grandeurs, "T"),
+    grandeurs: sub-dictionary(grandeurs, ("T",)),
 )[
     $ mean(s) = 1/T integral_0^T s(t) dd(t) $
 ]
@@ -112,7 +112,7 @@ En électricité, la valeur efficace d'une tension est la tension continue qui, 
 
 #application[Calculer la résistance d'un radiateur de #quan[1 kW].]
 
-En électricité, la valeur efficace d'un courant est le courant continu qui, s'il était appliqué aux bornes d'un résistor, y dissiperait la même puissance par effet Joule.
+En électricité, la valeur efficace d'un courant est le courant continu qui, s'il traversait un résistor, y dissiperait la même puissance par effet Joule.
 
 #application[Calculer le courant qui circule dans un radiateur de #quan[1 kW].]
 
@@ -213,7 +213,7 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 )
 
 = Puissance en régime sinusoïdal
-En électricité, on appelle régime sinusoïdal le régime dans lequel les tensions et les courants sont des fonctions sinusoïdales (sans valeurs moyennes) du temps : $u(t)=U cos(omega t+phi_u)$ et $i(t)=I cos(omega t + phi_i)$). La puissance $p(t)=u(t)i(t)$ peut comporter une valeur moyenne non nulle.
+En électricité, on appelle régime sinusoïdal le régime dans lequel les tensions et les courants sont des fonctions sinusoïdales (sans valeurs moyennes) du temps : $u(t)=U cos(omega t+phi_u)$ et $i(t)=I cos(omega t + phi_i)$. La puissance $p(t)=u(t)i(t)$ peut comporter une valeur moyenne non nulle.
 
 == Notations complexes
 Aux grandeurs sinusoïdales, on peut associer des grandeurs complexes permettant de faciliter les calculs. À $s(t)=S cos(omega t+phi)$, on associe $underline(s)(t)=S e^(j( omega t+phi))=underline(S)e^(j omega t)$. La grandeur $underline(S)=S e^(j phi)$ est appelée amplitude complexe.
@@ -271,6 +271,13 @@ Un dipôle de résistance nulle est dit purement réactif.
     $ P = U_"eff" I_"eff" cos phi $
 ]
 
+#flashcard(
+    recto: [Facteur de puissance],
+    verso: [$ cos phi = P / (U_"eff" I_"eff") $],
+)
+
+Sur un diagramme de Fresnel, $phi$ est l'angle entre les vecteurs qui représentent $u$ et $i$. Le facteur de puissance vaut $1$ quand ils sont colinéaires et de même sens (dipôle résistif) et $0$ quand ils sont orthogonaux (dipôle purement réactif).
+
 #application[
     Une habitation qu'on modélise par une impédance $underline(Z)$ est alimentée via des câbles de résistance $r$ par une source de tension. Exprimer le courant en fonction de la valeur efficace $U_"eff"$ aux bornes de l'habitation, de la puissance qu'elle consomme et de son facteur de puissance. En déduire la puissance moyenne perdue par effet Joule dans les câbles.
 ]
@@ -285,7 +292,7 @@ Afin de limiter les pertes par effet Joule lors du transport, on utilise une ten
 
 Le facteur de puissance a aussi un effet important car pour une même puissance et une même tension, le courant sera d'autant plus grand que le facteur de puissance est petit, ce qui entraine des pertes par effet Joule. Les fabricants cherchent à rapprocher le facteur de puissance de $1$.
 
-La vidéo du lien ci-dessous debunk un boitier censé améliorer le facteur de puissance dans les habitations.
+La vidéo du lien ci-dessous montre l'inefficacité d'un boitier censé améliorer le facteur de puissance dans les habitations.
 #lien("https://www.youtube.com/watch?v=1FLwy4XPBg0")
 
 #encadré(
@@ -327,5 +334,5 @@ La vidéo du lien ci-dessous debunk un boitier censé améliorer le facteur de p
 )
 
 #question-de-colle(
-    [En régime sinusoïdal, exprimer la puissance reçue par un dipôle d'impédance $Z$ en fonction de du facteur de puissance, puis de l'impédance et enfin de l'admittance.],
+    [En régime sinusoïdal, exprimer la puissance reçue par un dipôle d'impédance $Z$ en fonction du facteur de puissance, puis de l'impédance et enfin de l'admittance.],
 )

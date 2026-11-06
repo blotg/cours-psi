@@ -12,7 +12,7 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=#quan[
 #question(
     coups-de-pouce: (
         "Déterminer l'admittance de chaque machine  et des lampes, puis l'admittance totale.",
-        "Déterminer la partie réelle de l'admittance grâce à la puissance. Représenter l'admittance sur un diagramme de Fresnel et en déduire une relation entre $phi$, la partie réelle et la partie imaginaire de m'admittance.",
+        "Déterminer la partie réelle de l'admittance grâce à la puissance. Représenter l'admittance sur un diagramme de Fresnel et en déduire une relation entre $phi$, la partie réelle et la partie imaginaire de l'admittance.",
     ),
 )[
     Calculer le facteur de puissance et la valeur efficace du courant consommé par l'installation complète et commenter le résultat.
@@ -23,7 +23,7 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=#quan[
 
     Pour la machine 1, on a $P_1=U_"eff"^2 Re(underline(Y_1))$ donc $Re(underline(Y_1))=P_1/(U_"eff"^2)$.
 
-    De plus, $phi_1 = arccos(cos(phi_1))$. Connaissant la partie réelle de $underline(Y_1)$ et son argument, on le donc connait complètement :
+    De plus, $phi_1 = arccos(cos(phi_1))$. Connaissant la partie réelle de $underline(Y_1)$ et son argument, on la connait donc complètement :
     $
         underline(Y_1) = Re(underline(Y_1)) + j Im(underline(Y_1)) &= Re(underline(Y_1)) - j Re(underline(Y_1)) tan(phi_1)\
         &= P_1/(U_"eff"^2) - j P_1/(U_"eff"^2) tan(arccos(cos(phi_1)))\
@@ -32,16 +32,18 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=#quan[
 
     De même, on trouve $underline(Y_2) = 57 - 58j unit("mS")$.
 
-    On peut en déduire l'admittance totale : $underline(Y_"tot") = underline(Y_1) + underline(Y_2) + underline(Y_L) = #(38 + 57 + 38) - #(50 + 58) j unit("mS")$, puis le déphasage totale :
-    $ phi_"tot" = arctan(Im(underline(Y_"tot"))/Re(underline(Y_"tot"))) = arctan(-#(50 + 58)/#(38 + 57 + 38)) = #quan[39 °] $
+    On peut en déduire l'admittance totale : $underline(Y_"tot") = underline(Y_1) + underline(Y_2) + underline(Y_L) = #(38 + 57 + 38) - #(50 + 58) j unit("mS")$, puis le déphasage total, avec la même convention que pour $phi_1$ :
+    $ phi_"tot" = -arctan(Im(underline(Y_"tot"))/Re(underline(Y_"tot"))) = -arctan(-#(50 + 58)/#(38 + 57 + 38)) = #quan[39 °] $
     et le facteur de puissance $cos(phi_"tot") = num("0.77")$.
 
-    Ce facteur de puissance est assez faible, ce qui signifie que l'installation consomme beaucoup de puissance réactive, engendrant des pertes en lignes importantes.
+    La valeur efficace du courant consommé est $I_"eff" = U_"eff" |underline(Y_"tot")| = #quan[230 V] times sqrt(#(38 + 57 + 38)^2 + #(50 + 58)^2) unit("mS") = #qty(int(calc.round(230 * calc.sqrt(calc.pow(38 + 57 + 38, 2) + calc.pow(50 + 58, 2)) * 1e-3)), "A")$.
+
+    Ce facteur de puissance est assez faible : avec un facteur de puissance de $1$, la même puissance ne demanderait que $(P_1 + P_2 + P_L)/U_"eff" = #qty(int(calc.round(7000 / 230)), "A")$. Cela signifie que l'installation consomme beaucoup de puissance réactive, engendrant des pertes en lignes importantes.
 ]
 
 #question(
     coups-de-pouce: (
-        "Il faut que les machines continuent à fonctionner normalement, donc que la tension à leur bornes ne soit pas modifiée par l'ajout du condensateur.",
+        "Il faut que les machines continuent à fonctionner normalement, donc que la tension à leurs bornes ne soit pas modifiée par l'ajout du condensateur.",
     ),
 )[
     Pour réduire les pertes en lignes, on ajoute un condensateur à l'installation. Doit-on l'ajouter en parallèle ou en série ?
@@ -60,5 +62,5 @@ La tension aux bornes de l'installation est sinusoïdale de fréquence $f=#quan[
 
     On veut $cos(phi_"global") = 1$, c'est-à-dire $phi_"global" = 0$ autrement dit $Im(underline(Y_"global")) = 0$.
 
-    On a donc $ 0 = Im(underline(Y_"tot")) + omega C $ d'où $ C = -Im(underline(Y_"tot"))/omega = (#(50 + 58) unit("mS"))/(2 pi #(50) ) = #quan[258 uF] $
+    On a donc $ 0 = Im(underline(Y_"tot")) + omega C $ d'où $ C = -Im(underline(Y_"tot"))/omega = (#(50 + 58) unit("mS"))/(2 pi #(50) ) = #qty(int(calc.round((50 + 58) / (2 * calc.pi * 50) * 1e3)), "uF") $
 ]
