@@ -1,6 +1,6 @@
 #import "@local/prepa:0.1.1": *
 #show: exercice.with(
-    titre: "Etude graphique d'un cycle d'hystérésis",
+    titre: "Étude graphique d'un cycle d'hystérésis",
 )
 
 Un matériau ferromagnétique est destiné à réaliser la carcasse d'un transformateur. On se propose de visualiser le cycle d'hystérésis de ce matériau sur un écran d'oscilloscope c'est-à-dire la courbe $B(H)$ où $B$ et $H$ représentent les valeurs algébriques de $va(B)$ et $va(H)$. Pour cela, on réalise le montage suivant.
@@ -40,7 +40,7 @@ La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$
 #question(
     coups-de-pouce: (
         "Prendre sous les yeux la simulation des lignes de champ dans un circuit magnétique sans entrefer (chapitre électromagnétisme 4).",
-        "A quels endroits ont lieu les fuites de ligne de champ ?",
+        "À quels endroits ont lieu les fuites de ligne de champ ?",
     ),
 )[
     Pourquoi est-il judicieux de choisir un tore ?
@@ -51,7 +51,7 @@ La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$
 #question(
     coups-de-pouce: (
         "Exprimer la fonction de transfert du filtre RC.",
-        "A quelle condition la fonction de transfert du filtre RC correspond-elle à un intégrateur ?",
+        "À quelle condition la fonction de transfert du filtre RC correspond-elle à un intégrateur ?",
     ),
 )[
     Dans ce montage, le circuit $R C$ (entrée $u_2$, sortie $v_y$) fonctionne en intégrateur. Quelle condition la capacité $C$ doit-elle satisfaire pour cela ? Quelle(s) valeur(s) peut-on choisir pour $C$ parmi les valeurs usuelles suivantes : $#quan[10 nF], #quan[47 nF], #quan[100 nF], #quan[1 uF]$ et $#quan[4.7 uF]$ ?
@@ -69,19 +69,19 @@ La résistance $R = #qty(R, "O", chiffres: 2)$ est telle que le produit $n_2i_2$
     Exprimer $H$ en fonction de $v_x$.
 ][
     $ v_x = R_0 i_1 $
-    Le théorème d'Ampère appliqué sur une ligne de champ moyenne dans le tore donne : $integral.cont va(H) dprod va(dd(l)) = n_1 i_1 = n_2 i_2$ soit $H l = n_1 i_1$ donc $ H = n_1 i_1 / l = n_1 / (R_0 l) v_x $
+    Le théorème d'Ampère appliqué sur une ligne de champ moyenne dans le tore donne : $integral.cont va(H) dprod va(dd(l)) = n_1 i_1 + n_2 i_2 approx n_1 i_1$ soit $H l = n_1 i_1$ donc $ H = n_1 i_1 / l = n_1 / (R_0 l) v_x $
 ]
 
 #question(
     coups-de-pouce: (
-        "Énoncer la loi de Lens-Faraday pour l'enroulement secondaire.",
+        "Énoncer la loi de Lenz-Faraday pour l'enroulement secondaire.",
     ),
 )[
     Exprimer $B$ en fonction de $v_y$ et expliquer pourquoi le montage permet de visualiser le cycle d'hystérésis.
 ][
     $ u_2 = dv(Phi, t) = n_2 S dv(B, t) $
     Or la tension $y$ à la sortie de l'intégrateur s'écrit
-    $v_y = 1/(R C) integral_0^t u_2(x) dd(x) = (n_2 S)/(R C)$
+    $v_y = 1/(R C) integral_0^t u_2(x) dd(x) = (n_2 S)/(R C) B$
     $ B=(R C)/(n_2 S) v_y $
 
     $v_x$ est proportionnel à $H$ et $v_y$ est proportionnel à $B$, le montage permet donc de visualiser le cycle d'hystérésis $B(H)$ sur l'oscilloscope en se plaçant en mode XY.
@@ -109,7 +109,7 @@ Dans toute la suite, on prendra $l = #quan[50 cm]$, $S = #quan[20 cm^2]$, $C = #
     $(R C)/(n_2 S) = #qty(CB, "T/V", chiffres: 1)$
 ]
 
-On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représente #quan[2 V]). $v_y$ est en abscisse (1 graduation représente #quan[1 V]).
+On obtient l'oscillogramme suivant. $v_x$ est en abscisse (1 graduation représente #quan[2 V]). $v_y$ est en ordonnée (1 graduation représente #quan[1 V]).
 
 #figure(image("../figures/hysteresis.png", width: 10cm))
 
@@ -126,7 +126,7 @@ On obtient l'oscillogramme suivant. $v_x$ est en ordonnée (1 graduation représ
 
     L'excitation coercitive est à #num("0.5") carreaux, soit $v_x = #quan[1 V]$ et donc $H_c = #qty(CH * 1, "A/m", chiffres: 2)$.
 
-    $M = B/mu_0 - H$ d'où $M_r = B/mu_0 = #qty(CB * 1.3 / mu0, "A/m", chiffres: 1)$
+    $M = B/mu_0 - H$ d'où, pour $H = 0$, $M_r = B_r/mu_0 = #qty(CB * 1.3 / mu0, "A/m", chiffres: 1)$
 ]
 
 Dans le schéma du montage, on peut raisonnablement négliger la puissance dissipée par effet Joule dans les enroulements primaire et secondaire. Pour simplifier, on suppose également négligeables les pertes dues aux courants de Foucault dans le tore. Dans ces conditions, la puissance $p_H = u_1i_1$ dissipée est uniquement due aux propriétés ferromagnétiques du noyau.
@@ -152,7 +152,9 @@ Dans le schéma du montage, on peut raisonnablement négliger la puissance dissi
 
     #quan[1 V^2] correspond à une aire $(R C)/(n_2 S) n_1/(l R_0)$.
 
-    Finalement, $cal(A) = 6 times 2 times #num(CH, chiffres: 2) times #num(CB, chiffres: 2) = #qty(12 * CH * CB, "A/m T", chiffres: 1)$.
+    Finalement, $cal(A) = 6 times 2 times #num(CH, chiffres: 2) times #num(CB, chiffres: 2) = #qty(12 * CH * CB, "J/m^3", chiffres: 2)$.
+
+    Le volume du tore est $V = l S$, d'où $P_H = l S f cal(A) approx #qty(l * S * fréquence * 12 * CH * CB, "W", chiffres: 2)$.
 ]
 
 #question(
@@ -160,7 +162,7 @@ Dans le schéma du montage, on peut raisonnablement négliger la puissance dissi
         "L'aire du cycle d'hystérésis doit-elle être faible ou importante pour réduire les pertes ?",
     ),
 )[
-    A-t-on intérêt pour la fabrication des transformateurs à utiliser un matériau ferromagnétique ayant un champ coercitif important ou faible au contraire ? Justifier
+    A-t-on intérêt, pour la fabrication des transformateurs, à utiliser un matériau ferromagnétique ayant un champ coercitif important ou faible au contraire ? Justifier.
 ][
     On veut une aire la plus petite possible, donc un matériau doux.
 ]

@@ -63,6 +63,18 @@ commandes:
     exemple: "m = np.abs(x: array) -> array"
     commentaire: valeur absolue terme à terme (module si `x` est complexe)
 
+  numpy.mean:
+    exemple: "moyenne = np.mean(x: array) -> float"
+    commentaire: valeur moyenne des éléments du tableau
+
+  numpy.clip:
+    exemple: "y = np.clip(x: array, mini: float, maxi: float) -> array"
+    commentaire: "écrête le tableau terme à terme ; les valeurs inférieures à `mini` sont remplacées par `mini`, celles supérieures à `maxi` par `maxi`"
+
+  numpy.interp:
+    exemple: "y = np.interp(x: array, xp: array, fp: array) -> array"
+    commentaire: "interpolation linéaire ; valeurs en `x` de la fonction connue par ses points de coordonnées (`xp`, `fp`), `xp` devant être croissant"
+
   numpy.fft.rfft:
     exemple: "tf = np.fft.rfft(signal: array) -> array"
     commentaire: transformée de Fourier d'un signal réel ; renvoie des amplitudes complexes

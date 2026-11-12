@@ -8,4 +8,4 @@
 #include "exercices/Calcul pertes cuivre.typ"
 #include "exercices/Calcul pertes cuivre 2.typ"
 #include "exercices/Explique.typ"
-// TODO : ajouter exercice numérique
+#include "exercices/Courant magnétisant et saturation.typ"

@@ -46,7 +46,7 @@ Dans le modèle du transformateur idéal,
 
 #flashcard(
     recto: [Hypothèses du transformateur idéal],
-    verso: [Pertes cuivres et fer négligées, matériaux doux, hors saturation, de perméabilité infinie, lignes de champ parfaitement canalisées, champ magnétique de norme uniforme.],
+    verso: [Pertes cuivre et fer négligées, matériaux doux, hors saturation, de perméabilité infinie, lignes de champ parfaitement canalisées, champ magnétique de norme uniforme.],
 )
 
 #question-de-début-de-cours(
@@ -210,14 +210,14 @@ Les courants sont multipliés par $1/m$.],
 
     Les tensions sont divisées par $m$.
 
-    Les courants sont divisés par $1/m$.
+    Les courants sont multipliés par $m$.
 ]
 
 #flashcard(
     recto: [Ramener le secondaire au primaire],
     verso: [Les impédances sont divisées par $m^2$.
 Les tensions sont divisées par $m$.
-Les courants sont divisés par $1/m$.],
+Les courants sont multipliés par $m$.],
 )
 
 #question-de-début-de-cours(
@@ -251,7 +251,7 @@ Les courants sont divisés par $1/m$.],
 ]
 
 = Le transformateur réel
-Un transformateur réel comporte des pertes cuivres dues à l'effet Joule dans les fils qui constituent les enroulements primaire et secondaire. Pour limiter les pertes cuivre, on utilise un bon conducteur électrique (quasiment toujours du cuivre), de section suffisamment grande et aussi courts que possible.
+Un transformateur réel comporte des pertes cuivre dues à l'effet Joule dans les fils qui constituent les enroulements primaire et secondaire. Pour limiter les pertes cuivre, on utilise un bon conducteur électrique (quasiment toujours du cuivre), de section suffisamment grande et aussi court que possible.
 
 Un transformateur réel comporte des pertes par hystérésis. Pour les limiter, les transformateurs sont réalisés avec des matériaux ferromagnétiques doux.
 
@@ -259,7 +259,7 @@ Un transformateur réel comporte des pertes par courants de Foucault. Pour les l
 
 #schéma(titre: "Feuilletage du transformateur réel", hauteur: 3cm)
 
-Pertes par hystérésis et pertes par courant de Foucault sont regroupées sous le terme "pertes fer".
+Pertes par hystérésis et pertes par courants de Foucault sont regroupées sous le terme "pertes fer".
 
 #question-de-colle([Citer les types de pertes existantes dans un transformateur réel et des moyens pour les limiter.])
 
@@ -278,4 +278,3 @@ Afin de limiter les pertes par effet Joule lors du transport, on utilise une ten
 
 #exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #quan[400 kV].]
 
-#application[Par combien divise-t-on les pertes par effet Joule dans les câbles en utilisant une tension de #quan[20 kV] (ligne moyenne tension) plutôt que de #quan[230 V] ?]

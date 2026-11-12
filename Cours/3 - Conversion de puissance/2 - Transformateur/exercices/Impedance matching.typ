@@ -4,7 +4,7 @@
     difficulté: 2,
 )
 
-A voltage generator gives a sinusoidal voltage $e$ to the primary of a transformer through a resistor $R_1$.
+A voltage generator delivers a sinusoidal voltage $e$ to the primary of a transformer through a resistor $R_1$.
 
 #figure[
     #circuit({
@@ -27,11 +27,11 @@ A voltage generator gives a sinusoidal voltage $e$ to the primary of a transform
 
 #question(
     coups-de-pouce: (
-        "Quelle est la tension aux bornes de $R_2$ (en fonction de $R_1$, $R_2$, $m$ et $e$) ?",
-        "Ramener le primaire au secondaire puis effectuer un pont diviseur de tension.",
+        "What is the voltage across $R_2$ (as a function of $R_1$, $R_2$, $m$ and $e$)?",
+        "Refer the primary side to the secondary side, then use a voltage divider.",
     ),
 )[
-    At which condition on the transformation ratio $m$ is the power dissipated by the resistor $R_2$ maximal ?
+    Under which condition on the transformation ratio $m$ is the power dissipated by the resistor $R_2$ maximal?
 ][
     The circuit is equivalent to the following one (primary side brought to the secondary side):
     #figure[
