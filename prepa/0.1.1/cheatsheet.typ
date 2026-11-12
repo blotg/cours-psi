@@ -15,7 +15,8 @@
 // nom (abrégé ou complet) -> (canonique, court, stmt)
 //   abrév       : module -> alias        (import module as alias  ->  alias.fonction)
 //   imports-from : module -> (noms…)     (from module import nom   ->  nom)
-#let _résout(nom, abrév, imports-from) = {
+//   imports      : (modules…)            (import module          ->  module.fonction)
+#let _résout(nom, abrév, imports-from, imports: ()) = {
     let canonique = nom
     for (module, alias) in abrév {
         if nom == alias or nom.starts-with(alias + ".") {
@@ -41,6 +42,11 @@
             }
         }
     }
+    for module in imports {
+        if canonique.starts-with(module + ".") {
+            return (canonique: canonique, court: canonique, stmt: "import " + module)
+        }
+    }
     (canonique: canonique, court: canonique, stmt: none)
 }
 
@@ -59,6 +65,7 @@
 #let cheatsheet-python(colonnes: 1, ..noms) = {
     let abrév = _données.at("abréviations", default: (:))
     let imports-from = _données.at("imports-from", default: (:))
+    let imports = _données.at("imports", default: ())
     let commandes = _données.at("commandes", default: (:))
 
     // Accepte aussi bien cheatsheet-python("a", "b") que cheatsheet-python(("a", "b")).
@@ -69,7 +76,7 @@
     let cellules = ()
 
     for nom in liste {
-        let r = _résout(nom, abrév, imports-from)
+        let r = _résout(nom, abrév, imports-from, imports: imports)
         assert(
             r.canonique in commandes,
             message: "cheatsheet-python : commande « " + nom + " » inconnue (résolue en « "

@@ -4,6 +4,7 @@
     titre: "Courant magnétisant et saturation d'un transformateur",
     numérique: true,
     difficulté: 1,
+    capytale: "0232-12768370",
 )
 
 On étudie un transformateur torique #quan[230 V] / #quan[12 V] de #quan[100 V A], du type de ceux qui alimentent un éclairage basse tension. Son circuit magnétique est un tore de section $S = #quan[6 cm^2]$ et de longueur moyenne $l = #quan[20 cm]$ constitué d'acier au silicium, sur lequel sont enroulées $N_1 = 1000$ spires au primaire et $N_2 = 52$ spires au secondaire. Le primaire est branché sur le réseau : $v_1(t) = V_1 sqrt(2) cos(omega t)$, avec $V_1 = #quan[230 V]$ et $f = #quan[50 Hz]$. Le secondaire alimente une résistance $R$.

@@ -17,6 +17,14 @@ imports-from:
     - curve_fit
   scipy.integrate:
     - trapezoid
+  machine:
+    - ADC
+    - DAC
+
+# Modules importés tels quels (import <module>) : la commande s'affiche sous
+# sa forme complète « module.fonction », suivie d'un appel de note.
+imports:
+  - time
 
 # Commandes. Clé = nom canonique complet (module.fonction).
 #   exemple     : une chaîne, ou une liste de chaînes (un ou plusieurs exemples).
@@ -132,3 +140,20 @@ commandes:
   scipy.integrate.trapezoid:
     exemple: "I = trapezoid(y: array, x: array) -> float"
     commentaire: "valeur approchée de $integral y thin upright(d) x$ par la méthode des trapèzes, $I = sum_k (x_(k+1) - x_k) (y_k + y_(k+1)) slash 2$ ; les points sont pris dans l'ordre des tableaux, `x` n'a donc pas besoin d'être croissant. Dans les anciennes versions de scipy (avant 1.6), cette fonction s'appelait `trapz`"
+
+  # MicroPython (ESP32)
+  machine.ADC:
+    exemple:
+      - "adc = ADC(pin, atten=ADC.ATTN_11DB)"
+      - "val = adc.read_uv() -> int"
+    commentaire: règle la broche `pin` comme une entrée analogique pouvant fonctionner entre 0 et 3,3 V ; `adc.read_uv()` lit la tension (en µV)
+
+  machine.DAC:
+    exemple:
+      - "dac = DAC(pin)"
+      - "dac.write(valeur: int)"
+    commentaire: initialise la sortie analogique sur la broche `pin` ; `dac.write(valeur)` règle la tension de sortie à `valeur` × 3,3/255 V
+
+  time.sleep_us:
+    exemple: "time.sleep_us(valeur: int)"
+    commentaire: attend `valeur` microsecondes
