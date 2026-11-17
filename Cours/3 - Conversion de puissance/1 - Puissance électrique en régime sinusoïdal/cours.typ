@@ -103,18 +103,24 @@ La valeur moyenne est définie pour les signaux périodiques. La valeur moyenne 
 
 #flashcard(
     recto: [Valeur efficace],
-    verso: [$ S_"eff" = sqrt( mean(s^2(t)) ) $],
+    verso: [$ S_"eff" = sqrt(mean(s^2(t))) $],
 )
 
 La valeur efficace de la tension délivrée aux foyers par Enedis est #quan[230 V].
 
 En électricité, la valeur efficace d'une tension est la tension continue qui, si elle était appliquée aux bornes d'un résistor, y dissiperait la même puissance par effet Joule.
 
-#application[Calculer la résistance d'un radiateur de #quan[1 kW].]
+#application[
+    #grid(
+        columns: (1fr,5cm),
+        align: (left, right),
+        [Calculer la résistance d'un radiateur de #quan[1 kW].], image("images/radiateur.jpg", width: 100%),
+    )
+]
 
 En électricité, la valeur efficace d'un courant est le courant continu qui, s'il traversait un résistor, y dissiperait la même puissance par effet Joule.
 
-#application[Calculer le courant qui circule dans un radiateur de #quan[1 kW].]
+#application[Calculer le courant efficace qui circule dans un radiateur de #quan[1 kW].]
 
 #encadré(
     titre: "Valeur efficace d'un signal sinusoïdal",
@@ -144,13 +150,15 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 
 == Puissance moyenne reçue par un dipôle purement réactif
 
+Les dipôles purement réactifs (les condensateurs et les bobines) ne consomment pas de puissance en moyenne.
+
 #encadré(
     titre: "Puissance moyenne reçue par un condensateur",
     connaitre: true,
     savoir-faire: true,
     hypothèses: (
         [En régime périodique],
-        [Pour un condensateur],
+        [Pour un condensateur idéal],
     ),
     grandeurs: sub-dictionary(grandeurs, ("p_C",)),
 )[
@@ -168,7 +176,7 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
     savoir-faire: true,
     hypothèses: (
         [En régime périodique],
-        [Pour une bobine],
+        [Pour une bobine idéale],
     ),
     grandeurs: sub-dictionary(grandeurs, ("p_L",)),
 )[
@@ -181,6 +189,9 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 )
 
 == Puissance moyenne reçue par un dipôle purement résistif
+
+Pour les dipôles purement résistifs, la puissance moyenne reçue peut être exprimée simplement en fonction de la valeur efficace de la tension ou du courant.
+
 #encadré(
     titre: "Puissance moyenne reçue par un résistor",
     connaitre: true,
@@ -193,6 +204,8 @@ La puissance instantanée reçue par un dipôle est $p(t)=u(t) i(t)$ en conventi
 )[
     $ mean(p_R) = R I_"eff"^2 = U_"eff"^2 / R $
 ]
+
+Ceci justifie la définition faite précédemment : "la tension efficace est la tension continue qui, si elle était appliquée au borne d'un résistor, y dissiperait la même puissance" et "le courant efficace est le courant continu qui, s'il traversait un résistor, y dissiperait la même puissance".
 
 #application[
     #grid(
@@ -279,12 +292,14 @@ Un dipôle de résistance nulle est dit purement réactif.
 Sur un diagramme de Fresnel, $phi$ est l'angle entre les vecteurs qui représentent $u$ et $i$. Le facteur de puissance vaut $1$ quand ils sont colinéaires et de même sens (dipôle résistif) et $0$ quand ils sont orthogonaux (dipôle purement réactif).
 
 #application[
-    Une habitation qu'on modélise par une impédance $underline(Z)$ est alimentée via des câbles de résistance $r$ par une source de tension. Exprimer le courant en fonction de la valeur efficace $U_"eff"$ aux bornes de l'habitation, de la puissance qu'elle consomme et de son facteur de puissance. En déduire la puissance moyenne perdue par effet Joule dans les câbles.
+    Une habitation qu'on modélise par une impédance $underline(Z)$ est alimentée via des câbles de résistance $r$ par une source de tension. Exprimer le courant efficace en fonction de la valeur efficace $U_"eff"$ aux bornes de l'habitation, de la puissance qu'elle consomme et de son facteur de puissance. En déduire la puissance moyenne perdue par effet Joule dans les câbles.
 ]
 
 Afin de limiter les pertes par effet Joule lors du transport, on utilise une tension aussi élevée que possible.
 
-#question-de-colle([Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.])
+#question-de-colle(
+    [Démontrer l'expression de la puissance perdue lors du transport du courant (pertes en ligne) et expliquer comment les réduire.],
+)
 
 #exemple[Le réseau Très Haute Tension qui transporte le courant sur de longues distances a une tension de #quan[400 kV].]
 
