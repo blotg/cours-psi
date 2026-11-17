@@ -141,7 +141,7 @@ On souhaite maintenant réaliser un filtre passe bas d'ordre 1 de fonction de tr
 $ underline(H) = underline(s)/underline(e) = 1/(1+j omega/(2 pi f_c)) $
 avec une fréquence de coupure $f_c = #quan[30 Hz]$.
 
-Pour cela, on utilise la méthode d'Euler pour calculer de proche en proche les valeurs de $s$.
+Pour cela, on utilise la méthode d'Euler pour calculer de proche en proche les valeurs de $s$. On utilisera un pas de temps $Delta t = #quan[500 us]$.
 
 #application(titre: "Méthode d'Euler")[
     Établir une équation différentielle reliant $s(t)$ et $e(t)$.
