@@ -167,7 +167,7 @@ Lorsqu'on utilise un filtre, seul le régime établi est étudié. La valeur ini
 
 Thonny est un environnement de développement intégré (IDE) pour le langage Python. On peut l'utiliser pour écrire et exécuter du code Python sur l'ordinateur sur lequel il est installé (comme Spyder par exemple) mais aussi sur un microcontrôleur sur lequel MicroPython est installé.
 
-Pour utiliser Thonny avec l'ESP32, il faut d'abord connecter le microcontrôleur à l'ordinateur via un câble USB. Ensuite, dans Thonny, ouvrir Tools #sym.arrow Options #sym.arrow Interpreter et sélectionner "MicroPython (ESP32)" comme interpréteur. Il faut également choisir le port série correspondant à l'ESP32. Après validation, la console affiche la version de MicroPython installée sur le microcontrôleur.
+Pour utiliser Thonny avec l'ESP32, il faut d'abord connecter le microcontrôleur à l'ordinateur via un câble USB. Ensuite, dans Thonny, ouvrir Tools #sym.arrow Options #sym.arrow Interpreter et sélectionner "MicroPython (ESP32)" comme interpréteur. Il faut également choisir le port série correspondant à l'ESP32 ("UART Bridge Controller"). Après validation, la console affiche la version de MicroPython installée sur le microcontrôleur.
 
 = Fonctions MicroPython utiles dans ce TP<annexe-fonctions-python>
 
