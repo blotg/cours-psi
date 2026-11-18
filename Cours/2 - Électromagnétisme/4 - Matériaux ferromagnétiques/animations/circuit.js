@@ -43,13 +43,27 @@
 // soixantaine d'itérations, quelle que soit la perméabilité du fer. Avec
 // μ_r = 10⁵, le fer et l'air diffèrent de cinq ordres de grandeur, et un
 // préconditionnement par la seule diagonale en demanderait plus de sept cents.
+//
+// Le bord d'un anneau, lui, coupe la grille en biais, et la factorisation
+// modifiée s'y perd : plus de mille itérations pour un tore à μ_r = 10⁵.
+// Elle n'est donc modifiée qu'aux trois centièmes près dans les cellules qui
+// bordent un cercle (cf. `RELÂCHE`) : cent trente itérations.
 
 export const MU0 = 4e-7 * Math.PI;
+
+/** La part des termes négligés que la factorisation reporte sur la
+ *  diagonale, dans les cellules à moins d'un pas du bord d'un anneau ;
+ *  partout ailleurs, elle les reporte tous. Essayé sur le tore, à
+ *  μ_r = 10⁵ : 0,9 demande 170 itérations, 0,97 en demande 130, 0,99 150, 1
+ *  plus de 1 000. */
+const RELÂCHE = 0.97;
 
 // -- Les circuits ---------------------------------------------------------------
 //
 // Un circuit se décrit par ses rectangles de fer [x₁, x₂, y₁, y₂], disjoints,
-// et ses fils [x, y, rayon, I], I > 0 pour un courant qui vient vers nous.
+// parfois des anneaux de fer [x, y, R₁, R₂] (centre, rayons intérieur et
+// extérieur), et ses fils [x, y, rayon, I], I > 0 pour un courant qui vient
+// vers nous.
 // Ce sont ceux de Simulations/lib.py. S'y ajoute parfois un champ uniforme
 // `fond` = [B_x, B_y], imposé au loin, et un point `centre` où l'on compare
 // le champ avec et sans fer.
@@ -118,6 +132,25 @@ export function blindage({ a = 0.1, d = 0.008, B0 = 1e-3 } = {}) {
         [a / 2 - d, a / 2, -a / 2 + d, a / 2 - d],
     ];
     return { fer, fils: [], fond: [B0, 0], centre: [0, 0] };
+}
+
+/**
+ * Un tore, bobiné tout autour : en coupe, un anneau de fer de rayons R₁ et
+ * R₂, centré sur l'origine, avec n fils en dedans (⊙) et n au dehors (⊗),
+ * régulièrement répartis. Le calcul étant plan, c'est en vérité un tube de fer
+ * infiniment long selon z, bobiné sur sa longueur ; mais le théorème d'Ampère
+ * y donne la même excitation que dans un tore, H = N i/(2π r), quel que soit
+ * le fer. Le champ se compare au milieu de la section du fer.
+ */
+export function tore({ R1 = 0.03, R2 = 0.05, Ni = 500, n = 24 } = {}) {
+    const { rayon: r, écart: g } = BOBINAGE;
+    const fils = [];
+    for (let k = 0; k < n; k++) {
+        const θ = (2 * Math.PI * (k + 0.5)) / n;
+        const [c, s] = [Math.cos(θ), Math.sin(θ)];
+        fils.push([(R1 - g - r) * c, (R1 - g - r) * s, r, Ni / n], [(R2 + g + r) * c, (R2 + g + r) * s, r, -Ni / n]);
+    }
+    return { fer: [], anneaux: [[0, 0, R1, R2]], fils, centre: [(R1 + R2) / 2, 0], Ni };
 }
 
 /**
@@ -210,6 +243,19 @@ function cellule(f, v) {
     return bas;
 }
 
+/** La longueur du segment [l₁, l₂] de la fibre t dans le disque de centre
+ *  (t_c, l_c) et de rayon R. */
+function dansLeDisque(t, l1, l2, tc, lc, R) {
+    const d = R * R - (t - tc) ** 2;
+    if (d <= 0) return 0;
+    const c = Math.sqrt(d);
+    return Math.max(0, Math.min(lc + c, l2) - Math.max(lc - c, l1));
+}
+
+/** Le nombre de fibres d'une face qui touche un anneau : la longueur de fer
+ *  y varie continûment en travers de la face. */
+const FIBRES = 8;
+
 /**
  * Le coefficient de la face entre deux cellules voisines : la face s'étend
  * de t₁ à t₂ en travers, et l'on va d'un centre à l'autre de l₁ à l₂.
@@ -218,15 +264,22 @@ function cellule(f, v) {
  * deux bords, chaque fibre de la face va de l₁ à l₂ à travers une longueur L
  * de fer, et c'est une association en série — 1/μ_r se moyenne en
  * harmonique le long de la fibre. Les fibres, elles, sont en parallèle.
- * `verticale` dit si la face est verticale (on la traverse selon x) ou
- * horizontale.
+ * Près d'un anneau, dont la grille n'épouse pas les bords, la face se
+ * découpe en `FIBRES` fibres égales. `verticale` dit si la face est
+ * verticale (on la traverse selon x) ou horizontale.
  */
-function coefficient(fer, μr, t1, t2, l1, l2, verticale) {
+function coefficient(fer, anneaux, μr, t1, t2, l1, l2, verticale) {
     const bords = [t1, t2];
     for (const r of fer) {
         const [ta, tb] = verticale ? [r[2], r[3]] : [r[0], r[1]];
         if (ta > t1 && ta < t2) bords.push(ta);
         if (tb > t1 && tb < t2) bords.push(tb);
+    }
+    for (const [cx, cy, , R] of anneaux) {
+        const [tc, lc] = verticale ? [cy, cx] : [cx, cy];
+        if (t2 <= tc - R || t1 >= tc + R || l2 <= lc - R || l1 >= lc + R) continue;
+        for (let m = 1; m < FIBRES; m++) bords.push(t1 + ((t2 - t1) * m) / FIBRES);
+        break;
     }
     if (bords.length > 2) bords.sort((u, v) => u - v);
     let k = 0;
@@ -238,6 +291,10 @@ function coefficient(fer, μr, t1, t2, l1, l2, verticale) {
         for (const r of fer) {
             const [ta, tb, la, lb] = verticale ? [r[2], r[3], r[0], r[1]] : [r[0], r[1], r[2], r[3]];
             if (t >= ta && t < tb) L += Math.max(0, Math.min(lb, l2) - Math.max(la, l1));
+        }
+        for (const [cx, cy, R1, R2] of anneaux) {
+            const [tc, lc] = verticale ? [cy, cx] : [cx, cy];
+            L += dansLeDisque(t, l1, l2, tc, lc, R2) - dansLeDisque(t, l1, l2, tc, lc, R1);
         }
         k += (b - a) / (l2 - l1 + (μr - 1) * L);
     }
@@ -286,7 +343,7 @@ export class Grille {
     }
 
     /** Les coefficients, le second membre et le bord d'un circuit. */
-    remplit({ fer, fils, fond = [0, 0] }, μr) {
+    remplit({ fer, anneaux = [], fils, fond = [0, 0] }, μr) {
         const { fx, fy, nx, ny, s, xc, yc, O, S, D, b, A } = this;
         // De l'air partout, puis le fer là où un rectangle touche la face.
         for (let j = 1; j <= ny; j++) {
@@ -295,14 +352,15 @@ export class Grille {
         for (let j = 1; j <= ny + 1; j++) {
             for (let i = 1; i <= nx; i++) S[j * s + i] = (fx[i] - fx[i - 1]) / (yc[j] - yc[j - 1]);
         }
-        for (const r of fer) {
+        const boîtes = [...fer, ...anneaux.map(([x, y, , R]) => [x - R, x + R, y - R, y + R])];
+        for (const r of boîtes) {
             const [i1, i2] = [Math.max(1, cellule(fx, r[0])), Math.min(nx + 1, cellule(fx, r[1]) + 2)];
             const [j1, j2] = [Math.max(1, cellule(fy, r[2])), Math.min(ny + 1, cellule(fy, r[3]) + 2)];
             for (let j = j1; j <= j2; j++) {
                 for (let i = i1; i <= i2; i++) {
                     const p = j * s + i;
-                    if (j <= ny) O[p] = coefficient(fer, μr, fy[j - 1], fy[j], xc[i - 1], xc[i], true);
-                    if (i <= nx) S[p] = coefficient(fer, μr, fx[i - 1], fx[i], yc[j - 1], yc[j], false);
+                    if (j <= ny) O[p] = coefficient(fer, anneaux, μr, fy[j - 1], fy[j], xc[i - 1], xc[i], true);
+                    if (i <= nx) S[p] = coefficient(fer, anneaux, μr, fx[i - 1], fx[i], yc[j - 1], yc[j], false);
                 }
             }
         }
@@ -368,6 +426,18 @@ export class Grille {
                 this.forçage += v * v;
             }
         }
+        // Les cellules qui bordent un cercle, où la factorisation se relâche.
+        if (!this.relâche || this.relâche.length !== this.N) this.relâche = new Uint8Array(this.N);
+        this.relâche.fill(0);
+        for (const [cx, cy, R1, R2] of anneaux) {
+            for (let j = 1; j <= ny; j++) {
+                for (let i = 1; i <= nx; i++) {
+                    const h = Math.max(fx[i] - fx[i - 1], fy[j] - fy[j - 1]);
+                    const r = Math.hypot(xc[i] - cx, yc[j] - cy);
+                    if (Math.abs(r - R1) < h || Math.abs(r - R2) < h) this.relâche[j * s + i] = 1;
+                }
+            }
+        }
         this.factorise();
     }
 
@@ -385,15 +455,17 @@ export class Grille {
      * La factorisation de Cholesky incomplète modifiée : celle de la
      * matrice, aux termes près qu'elle ne garde pas — ajoutés à la diagonale,
      * pour que chaque ligne garde sa somme. C'est ce qui la rend efficace sur
-     * une équation de diffusion.
+     * une équation de diffusion. Au bord d'un anneau, elle n'en reporte
+     * qu'une part `RELÂCHE`.
      */
     factorise() {
-        const { nx, ny, s, O, S, D, d } = this;
+        const { nx, ny, s, O, S, D, d, relâche } = this;
         for (let j = 1; j <= ny; j++) {
             for (let i = 1, p = j * s + 1; i <= nx; i++, p++) {
+                const ω = relâche[p] ? RELÂCHE : 1;
                 let v = D[p];
-                if (i > 1) v -= (O[p] * (O[p] + S[p - 1 + s])) / d[p - 1];
-                if (j > 1) v -= (S[p] * (S[p] + O[p - s + 1])) / d[p - s];
+                if (i > 1) v -= (O[p] * (O[p] + ω * S[p - 1 + s])) / d[p - 1];
+                if (j > 1) v -= (S[p] * (S[p] + ω * O[p - s + 1])) / d[p - s];
                 d[p] = v;
             }
         }

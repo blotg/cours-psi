@@ -9,8 +9,8 @@
 //     est calculé par différences finies à chaque réglage (circuit.js).
 //   - Le même calcul, à la perméabilité du fer près, que l'on règle de l'air
 //     au mu-métal : un noyau droit dans sa bobine, comme le clou de la
-//     situation déclenchante, le circuit fermé, et un blindage dans un champ
-//     uniforme. Le fer canalise les lignes de champ.
+//     situation déclenchante, le circuit fermé, un tore bobiné tout autour, et
+//     un blindage dans un champ uniforme. Le fer canalise les lignes de champ.
 //
 // Dans les deux cas, les lignes de champ sont les lignes de niveau d'une
 // fonction dont l'écart entre deux lignes est le flux qu'elles encadrent :
@@ -26,7 +26,7 @@ import { cadre, lance } from '#animations/page.js';
 import { Plan, chemin, conducteur, disque, flèche, lignesDeChamp } from '#animations/plan.js';
 import { Réglages } from '#animations/reglages.js';
 import { AIMANT, DIPÔLE, fluxDeLAimant, fluxDeLaSpire, fluxDuDipôle, niveaux } from './aimant.js';
-import { Grille, MU0, blindage, champ, circuit, noyauDroit, électroaimant } from './circuit.js';
+import { Grille, MU0, blindage, champ, circuit, noyauDroit, tore, électroaimant } from './circuit.js';
 
 /** Les couleurs des figures du poly (Simulations/lib.py) : le fer en gris
  *  clair, les pôles d'un aimant en rose et en vert. */
@@ -54,6 +54,24 @@ function rectangles(c, plan, liste, couleur) {
     }
     c.fillStyle = couleur;
     c.fill();
+    c.restore();
+}
+
+/** Le fer d'un objet : ses rectangles, et ses anneaux [x, y, R₁, R₂]. */
+function fer(c, plan, objet, couleur) {
+    rectangles(c, plan, objet.fer, couleur);
+    if (!objet.anneaux) return;
+    c.save();
+    c.beginPath();
+    for (const [x, y, R1, R2] of objet.anneaux) {
+        const [px, py] = plan.vers(x, y);
+        c.moveTo(px + plan.long(R2), py);
+        c.arc(px, py, plan.long(R2), 0, 2 * Math.PI);
+        c.moveTo(px + plan.long(R1), py);
+        c.arc(px, py, plan.long(R1), 0, 2 * Math.PI);
+    }
+    c.fillStyle = couleur;
+    c.fill('evenodd');
     c.restore();
 }
 
@@ -459,13 +477,21 @@ function circuitsMagnétiques(section) {
  * Les situations où l'on règle la perméabilité du fer : un noyau droit dans
  * sa bobine, comme le clou de la situation déclenchante — le champ y
  * plafonne vite, faute de circuit fermé —, le circuit fermé, où il suit
- * μ_r, et un blindage, dont le fer détourne les lignes d'un champ uniforme.
+ * μ_r, un tore bobiné tout autour, où il lui est exactement proportionnel —
+ * H = N i/(2π r) n'y dépend pas du fer —, et un blindage, dont le fer
+ * détourne les lignes d'un champ uniforme.
+ *
+ * Dans le tore, le rapport des champs vaut μ_r ; le calcul le donne à un
+ * pour cent près — le bord du fer, circulaire, se fait en escalier sur la
+ * grille —, et `arrondi` l'écrit avec aussi peu de chiffres que cet écart le
+ * permet : 100, et non 99,4.
  * `où` nomme le point où l'on compare le champ à celui que l'on aurait sans
  * fer.
  */
 const SITUATIONS = {
     noyau: { objet: () => noyauDroit(), vue: { étendue: 0.24, centre: [0, 0] }, où: 'Au centre de la bobine' },
     fermé: { objet: () => circuit({ e: 0 }), vue: VUES.cadre, où: 'Au centre de la bobine' },
+    tore: { objet: () => tore(), vue: { étendue: 0.18, centre: [0, 0] }, où: 'Dans le tore', arrondi: 0.02 },
     blindage: { objet: () => blindage(), vue: { étendue: 0.24, centre: [0, 0] }, où: 'Au centre du blindage' },
 };
 
@@ -491,11 +517,22 @@ const TOLÉRANCE = { bobine: 1e-3, fond: 1e-5 };
 
 const puissance = new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 2 });
 
+/** x avec le moins de chiffres significatifs (trois au plus) qui l'écrivent
+ *  à `précision` près, en valeur relative. */
+function arrondi(x, précision) {
+    for (let chiffres = 1; chiffres < 3; chiffres++) {
+        const y = Number(x.toPrecision(chiffres));
+        if (Math.abs(y - x) <= précision * x) return y;
+    }
+    return x;
+}
+
 /** Un rapport, en écriture scientifique hors de [0,01 ; 10 000[. */
 function rapport(x) {
     if (x >= 0.01 && x < 1e4) return nombre(x);
     const n = Math.floor(Math.log10(x));
-    return `${nombre(x / 10 ** n)} \\times 10^{${n}}`;
+    const mantisse = nombre(x / 10 ** n);
+    return mantisse === '1' ? `10^{${n}}` : `${mantisse} \\times 10^{${n}}`;
 }
 
 function perméabilité(section) {
@@ -548,7 +585,9 @@ function perméabilité(section) {
         }
         résultat = { objet, μr, carte, lignes: polylignes(contours(carte, niveaux)) };
         const B = Math.hypot(...g.champ(...objet.centre));
-        gain.écrit(`\\dfrac{B}{B_{\\mu_r = 1}} = ${rapport(B / vide.B)}`);
+        const { arrondi: àPrès } = SITUATIONS[état.situation];
+        const r = àPrès ? arrondi(B / vide.B, àPrès) : B / vide.B;
+        gain.écrit(`\\dfrac{B}{B_{\\mu_r = 1}} ${àPrès ? '\\approx' : '='} ${rapport(r)}`);
         plan.redessine();
     });
 
@@ -560,7 +599,7 @@ function perméabilité(section) {
         // μ_r = 1, ce n'est plus que la place qu'il occupe.
         c.save();
         c.globalAlpha = 0.25 + (0.75 * Math.log10(μr)) / EXPOSANT.max;
-        rectangles(c, plan, objet.fer, COULEUR.fer);
+        fer(c, plan, objet, COULEUR.fer);
         c.restore();
         lignesDeChamp(c, plan, lignes, sens, { écart: ENTRE_POINTES.perméabilité });
         for (const [x, y, r, I] of objet.fils) conducteur(c, plan.vers(x, y), I, plan.long(r));
@@ -575,6 +614,7 @@ function perméabilité(section) {
         options: [
             ['noyau', '\\text{noyau droit}'],
             ['fermé', '\\text{circuit fermé}'],
+            ['tore', '\\text{tore}'],
             ['blindage', '\\text{blindage}'],
         ],
         valeur: état.situation,
