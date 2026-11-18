@@ -98,6 +98,19 @@
     show math.cancel: it => context if target() == "html" {
         html.elem("mrow", attrs: (class: "barré"), it.body)
     } else { it }
+    // zero pose une `box()` vide devant le « ⋅ » de la notation scientifique,
+    // pour que typst traite ce point comme un opérateur binaire. En MathML,
+    // elle sort en `<span style="display: inline-block">` au milieu de la
+    // formule, et le navigateur coupe la ligne à cet endroit : « 7,7 » restait
+    // en fin de ligne, et « ⋅10⁻¹ » partait seul sur la suivante. L'export
+    // MathML écrit déjà les espaces autour du point en `<mspace>` : la boite
+    // ne sert à rien. On retire donc toute boite vide d'une formule. Les
+    // boites qui contiennent quelque chose, comme les formules chimiques,
+    // restent en place.
+    show math.equation: it => context if target() == "html" {
+        show box: b => if b.body == none { none } else { b }
+        it
+    } else { it }
     doc
 }
 
