@@ -24,7 +24,10 @@ pour toutes puis de tout replacer à chaque réglage, mêmes couleurs, mêmes
   son `cours.typ`. Chaque page HTML y est une animation, et un lien du
   sommaire : son `<title>` en donne l'intitulé, sa
   `<meta name="description">` la mention grise en regard — à garder courte,
-  « point, volume, surfaces ». Les liens suivent l'ordre des noms de fichiers.
+  « point, volume, surfaces ». Les liens suivent l'ordre des noms de fichiers,
+  sauf si la page donne `<meta name="ordre" content="1">` : les pages
+  numérotées passent alors devant, dans l'ordre de leurs numéros (renommer une
+  page changerait son adresse, déjà imprimée dans les polys).
 - **Ici, à la racine** : la bibliothèque commune, la mise en page et la
   configuration de vite. Les chapitres l'importent par `#animations/…`, que le
   champ `imports` du `package.json` de la racine fait pointer ici.

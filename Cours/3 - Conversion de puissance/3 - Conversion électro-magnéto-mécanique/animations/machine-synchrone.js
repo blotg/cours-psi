@@ -56,7 +56,7 @@ const ÉCHANTILLONS = 720;
 const N_DÉPART = 5;
 
 const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
-const VUE_DE_TROIS_QUARTS = { position: [9, -14, 26], cible: [0, -0.3, -1.5] };
+const VUE_DE_TROIS_QUARTS = { position: [9, 14, 26], cible: [0, 0.3, -1.5] };
 
 /**
  * Le champ dans l'entrefer en θ, créé par des conducteurs parcourus par

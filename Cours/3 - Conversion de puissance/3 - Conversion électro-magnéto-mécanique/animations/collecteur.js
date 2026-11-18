@@ -66,7 +66,7 @@ const LONGUEUR_MAX = 0.85;
 const M_DÉPART = 4;
 
 const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
-const VUE_DE_TROIS_QUARTS = { position: [11, -12, 22], cible: [0, 0, -0.8] };
+const VUE_DE_TROIS_QUARTS = { position: [11, 12, 22], cible: [0, 0, -0.8] };
 
 /**
  * Le champ statorique dans l'entrefer, rapporté à sa valeur sous les pôles :

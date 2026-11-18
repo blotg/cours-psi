@@ -71,15 +71,25 @@ def sortie(chapitre: Chapitre) -> Path:
     return chapitre.sortie / DOSSIER
 
 
+def _rang(fichier: Path) -> tuple[float, str]:
+    """Clé de tri d'une page : son `<meta name="ordre">`, puis son nom."""
+    ordre = re.search(
+        r'<meta\s+name="ordre"\s+content="([^"]*)"', fichier.read_text(encoding="utf-8")
+    )
+    return (float(ordre.group(1)) if ordre else float("inf"), fichier.name)
+
+
 def pages(chapitre: Chapitre) -> list[Page]:
     """Les animations du chapitre, lues dans leurs sources : titre (`<title>`)
-    et description (`<meta name="description">`). Dans l'ordre des noms de
-    fichiers, qui est celui du sommaire."""
+    et description (`<meta name="description">`). Dans l'ordre du sommaire :
+    celui de `<meta name="ordre" content="1">` s'il est donné, celui des noms
+    de fichiers sinon (les pages sans ordre viennent après les autres). Renommer
+    une page changerait son adresse, déjà imprimée dans les polys."""
     dossier = source(chapitre)
     if dossier is None:
         return []
     trouvées = []
-    for fichier in sorted(dossier.glob("*.html")):
+    for fichier in sorted(dossier.glob("*.html"), key=_rang):
         html = fichier.read_text(encoding="utf-8")
         titre = re.search(r"<title>([^<]*)</title>", html)
         description = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', html)
