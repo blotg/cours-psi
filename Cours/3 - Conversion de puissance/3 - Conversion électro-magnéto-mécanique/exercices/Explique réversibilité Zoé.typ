@@ -14,7 +14,7 @@ Dans une voiture électrique, lors du freinage, une partie de l'énergie est ré
 ][
     Dans un moteur de voiture, il y a deux parties :
     - une partie qui tourne (le rotor) avec un champ magnétique fixe, tel que celui créé par un aimant.
-    - une partie fixe (le stator) avec des fils dans lesquels passent un courant électrique.
+    - une partie fixe (le stator) avec des fils dans lesquels passe un courant électrique.
 
     Lorsque le moteur fonctionne en mode "moteur", le courant dans les fils du stator crée un champ magnétique tournant qui entraine le rotor en rotation, comme une aiguille de boussole qui s'aligne sur un champ magnétique.
 

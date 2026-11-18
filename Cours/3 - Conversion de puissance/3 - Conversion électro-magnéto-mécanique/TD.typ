@@ -14,4 +14,3 @@
 #include "exercices/Rendement plaque.typ"
 #include "exercices/Pertes fer plaque.typ"
 #include "exercices/Reddit.typ"
-// TODO ajouter exercice numérique simu MCC ?

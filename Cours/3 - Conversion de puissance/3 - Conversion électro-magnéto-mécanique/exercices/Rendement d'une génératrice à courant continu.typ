@@ -4,7 +4,7 @@
     titre: "Rendement d'une génératrice à courant continu",
 )
 
-Une génératrice à courant continu de constante de couplage $phi_0=#quan[0.12 Wb]$, de résistance interne $r=#quan[0.45 Ω]$, d'inductance propre $L=#quan[20 mH]$ et dont les valeurs nominales de tension et courant sont $U_n=#quan[40 V]$ et $I_n=#quan[6 A]$, est utilisée pour alimenter une charge électrique symbolisée par une résistance $R_c=#quan[3 Ω]$.
+Une génératrice à courant continu de constante de couplage $Phi_0=#quan[0.12 Wb]$, de résistance interne $r=#quan[0.45 Ω]$, d'inductance propre $L=#quan[20 mH]$ et dont les valeurs nominales de tension et courant sont $U_n=#quan[40 V]$ et $I_n=#quan[6 A]$, est utilisée pour alimenter une charge électrique symbolisée par une résistance $R_c=#quan[3 Ω]$.
 
 On néglige les pertes mécaniques.
 
@@ -29,7 +29,9 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
             wire((3, 0), (0, 0))
         }),
     )
-    La vitesse angulaire étant constante, la somme des couples s'exerçant sur le rotor est nulle donc $Gamma_"t" = Phi_0 i$.
+    En convention générateur, le couple électromagnétique qui s'exerce sur le rotor est $Gamma_"ém" = -Phi_0 i$ : il s'oppose à la rotation quand la machine débite ($i > 0$).
+
+    La vitesse angulaire étant constante, la somme des couples s'exerçant sur le rotor est nulle : $Gamma_"t" + Gamma_"ém" = 0$, donc $Gamma_"t" = Phi_0 i$.
 ]
 
 #question(
@@ -62,7 +64,7 @@ La machine est entrainée par une turbine qui exerce sur son rotor un couple de 
         "Calculer la tension aux bornes du moteur. Est-elle égale à la tension nominale ?",
     ),
 )[
-    Définir puis calculer le rendement de conversion de la machine? La machine fonctionne-t-elle dans les conditions nominales ?
+    Définir puis calculer le rendement de conversion de la machine. La machine fonctionne-t-elle dans les conditions nominales ?
 ][
     #let Rc = 3
     #let r = 0.45

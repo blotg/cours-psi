@@ -12,35 +12,31 @@ La plaque signalétique d'un moteur à courant continu indique les caractéristi
     image("../images/plaque MCC.jpg"),
 )
 
+La résistance de l'induit vaut $R = #quan[0.60 Ω]$.
+
 #question(
     coups-de-pouce: (
-        "Que vaut la constante de couplage du moteur ?",
-        "Que vaut la résistance de l'induit ?",
-        "Quelles sont les pertes cuivre dans les conditions nominales ?",
-        "Faire un bilan de puissance sur l'induit."
+        "Quelles sont les pertes cuivre dans les conditions nominales ? Ne pas oublier l'inducteur.",
+        "Faire un bilan de puissance sur l'induit.",
+        "Les pertes mécaniques et les pertes fer ne peuvent pas être distinguées par ce bilan.",
     ),
 )[
     Montrer que les pertes fer sont négligeables devant les pertes cuivre dans les conditions nominales.
 ][
-    La constante de couplage s'écrit $Phi_0 = Gamma/I$ avec $Gamma = P_"mécanique" / Omega$
-    $ Phi_0 = P_"mécanique"/(I Omega) $
-
-    La loi des mailles donne $U = E + R I = Phi_0 Omega + R I$ d'où
-    $ R = (U - Phi_0 Omega)/I = (U - P_"mécanique"/Gamma)/I $
-
     #let Pméca = 36.3e3
-    #let O = 1150/60*2*calc.pi
     #let I = 95.5
+    #let U = 440
     #let Ue = 360
     #let Ie = 3
-    #let G = Pméca/O
-    #let U = 440
-    #let Phi0 = Pméca/(I*O)
-    #let R = (U - Phi0*O)/I
-    #let Pcu = R*calc.pow(I,2) + Ue*Ie
-    Les pertes cuivre sont donc, pour les circuits rotoriques et statorique, $P_ce("Cu") = (U - P_"mécanique"/Gamma) I  + U_e I_e = #qty(Pcu, "W", chiffres: 2)$
+    #let R = 0.60
+    #let PcuInduit = R * calc.pow(I, 2)
+    #let Pcu = PcuInduit + Ue * Ie
+    #let Pfe = U * I - Pméca - PcuInduit
+    Les pertes cuivre sont celles de l'induit et de l'inducteur, qui est à excitation séparée :
+    $ P_ce("Cu") = R I^2 + U_e I_e = #qty(PcuInduit, "W", chiffres: 2) + #qty(Ue * Ie, "W", chiffres: 2) = #qty(Pcu, "W", chiffres: 2) $
 
-    Un bilan de puissance sur l'induit donne $U I = P_"mécanique" + P_ce("Cu") + P_ce("Fe")$, soit
-    $ P_ce("Fe") = U I - P_"mécanique" - P_ce("Cu") = #qty(U*I - Pméca - R*calc.pow(I,2), "W", chiffres: 2) approx 0 $
+    Un bilan de puissance sur l'induit donne $U I = P_"mécanique" + R I^2 + P_ce("Fe") + P_"frottements"$, soit
+    $ P_ce("Fe") + P_"frottements" = U I - P_"mécanique" - R I^2 = #qty(Pfe, "W", chiffres: 2) $
 
+    Les pertes fer, qui sont au plus de cet ordre, représentent donc au plus #qty(100 * Pfe / Pcu, "%", chiffres: 1) des pertes cuivre : elles sont négligeables.
 ]

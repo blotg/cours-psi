@@ -1,6 +1,6 @@
 \element{CONV3.MSconstitution}{
   \begin{question}{MSconstitutionRotor}\bareme{1}
-    Combien de circuits distinct sont enroulés sur le rotor d'une machine synchrone diphasée ?:
+    Combien de circuits distincts sont enroulés sur le rotor d'une machine synchrone diphasée ?
     \begin{multicols}{2}
       \begin{reponses}
         \bonne{$1$}
@@ -13,7 +13,7 @@
 }
 \element{CONV3.MSconstitution}{
   \begin{question}{MSconstitutionStator}\bareme{1}
-    Combien de circuits distinct sont enroulés sur le stator d'une machine synchrone diphasée ?:
+    Combien de circuits distincts sont enroulés sur le stator d'une machine synchrone diphasée ?
     \begin{multicols}{2}
       \begin{reponses}
         \bonne{$2$}
@@ -28,11 +28,11 @@
 
 \element{CONV3.synchronisme}{
   \begin{question}{synchronisme1}\bareme{1}
-    La condition de synchronisme stipule que que si la pulsation du champ glissant et la vitesse angulaire sont différents,
+    La condition de synchronisme stipule que, si la pulsation du champ glissant et la vitesse angulaire sont différentes,
     % \begin{multicols}{2}
       \begin{reponses}
         \bonne{le couple exercé sur le rotor par le champ magnétique est en moyenne nul.}
-        \mauvaise{le couple exercé sur le rotor par le champ magnétique est en nul à chaque instant.}
+        \mauvaise{le couple exercé sur le rotor par le champ magnétique est nul à chaque instant.}
         \mauvaise{la machine synchrone se comporte comme un générateur (alternateur).}
         \mauvaise{le rotor est immobile.}
       \end{reponses}
@@ -46,9 +46,9 @@
     En fonctionnement alternateur, la loi des mailles sur une phase s'écrit
     \begin{multicols}{2}
       \begin{reponses}
-        \bonne{$\underline{E_\text{em}} = R\underline{I}+L\omega\underline{I}+\underline{U}$}
+        \bonne{$\underline{E_\text{em}} = R\underline{I}+jL\omega\underline{I}+\underline{U}$}
         \mauvaise{$E_\text{cem,eff} = RI_\text{eff}+L\omega I_\text{eff}+U_\text{eff}$}
-        \mauvaise{$\underline{E_\text{cem}} = R\underline{I}+L\omega\underline{I}+\underline{U}$}
+        \mauvaise{$\underline{E_\text{cem}} = R\underline{I}+jL\omega\underline{I}+\underline{U}$}
         \mauvaise{$E_\text{em,eff} = RI_\text{eff}+L\omega I_\text{eff}+U_\text{eff}$}
       \end{reponses}
     \end{multicols}
@@ -59,9 +59,9 @@
     En fonctionnement moteur, la loi des mailles sur une phase s'écrit
     \begin{multicols}{2}
       \begin{reponses}
-        \bonne{$\underline{U} = R\underline{I}+L\omega\underline{I}+\underline{E_\text{cem}}$}
+        \bonne{$\underline{U} = R\underline{I}+jL\omega\underline{I}+\underline{E_\text{cem}}$}
         \mauvaise{$U_\text{eff} = RI_\text{eff}+L\omega I_\text{eff}+E_\text{cem,eff}$}
-        \mauvaise{$\underline{U} = R\underline{I}+L\omega\underline{I}+\underline{E_\text{em}}$}
+        \mauvaise{$\underline{U} = R\underline{I}+jL\omega\underline{I}+\underline{E_\text{em}}$}
         \mauvaise{$U_\text{eff} = RI_\text{eff}+L\omega I_\text{eff}+E_\text{em,eff}$}
       \end{reponses}
     \end{multicols}
@@ -102,20 +102,21 @@
     % \begin{multicols}{2}
       \begin{reponses}
         \bonne{la condition de synchronisme est toujours vérifiée.}
-        \bonne{il y a une unique circuit statorique.}
-        \mauvaise{Les circuit magnétiques sont faits avec des matériaux ferromagnétiques durs.}
+        \bonne{il y a un unique circuit statorique.}
+        \mauvaise{les circuits magnétiques sont faits avec des matériaux ferromagnétiques durs.}
       \end{reponses}
     % \end{multicols}
   \end{questionmult}
 }
 \element{CONV3.constContinu}{
-  \begin{questionmult}{ballaisColl}\bareme{haut=2,p=0}
-    Le système balais-collecteurs
+  \begin{questionmult}{balaisColl}\bareme{haut=2,p=0}
+    Le système balais-collecteurs permet de
     % \begin{multicols}{2}
       \begin{reponses}
         \bonne{assurer la condition de synchronisme.}
-        \bonne{alimenter le circuit rotorique formant un angle de $\pi/2$ par rapport au champ statorique.}
+        \bonne{alimenter le circuit rotorique formant un angle de $\pi/2$ avec le champ statorique.}
         \bonne{maximiser le couple électromagnétique.}
+        \mauvaise{limiter les pertes et augmenter le rendement.}
       \end{reponses}
     % \end{multicols}
   \end{questionmult}

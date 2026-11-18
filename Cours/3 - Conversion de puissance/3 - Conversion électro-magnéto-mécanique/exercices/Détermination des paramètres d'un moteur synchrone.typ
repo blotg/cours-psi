@@ -2,11 +2,11 @@
 
 #show: exercice.with(titre: "Détermination des paramètres d'un moteur synchrone")
 
-On étudie un moteur synchrone diphasé, monopolaire, dont on cherche à déterminer les principaux paramètres.
+On étudie un moteur synchrone diphasé, bipolaire, dont on cherche à déterminer les principaux paramètres.
 
 Le circuit rotorique est parcouru par le courant d'excitation continu d'intensité $I_e$ maintenu constant pendant tous les essais.
 
-Le circuit diphasé statorique est parcouru par deux courants sinusoïdaux de pulsation $omega$, déphasé de $pi/2$, de valeurs efficaces identiques égales à $I$.
+Le circuit diphasé statorique est parcouru par deux courants sinusoïdaux de pulsation $omega$, déphasés de $pi/2$, de valeurs efficaces identiques égales à $I$.
 
 #question(
     coups-de-pouce: (

@@ -6,13 +6,13 @@
     capytale: "531c-11678456",
 )
 
-En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.
+En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.
 
-À l'aide de Python, déterminer la tension efficace aux bornes d'un moteur synchrone diphasé dipolaire dans chacun des cas suivants. On sommera les amplitudes complexes résultant de la loi des mailles.
+À l'aide de Python, déterminer la tension efficace aux bornes d'un moteur synchrone diphasé bipolaire dans chacun des cas suivants. On sommera les amplitudes complexes résultant de la loi des mailles.
 
 #question(
     coups-de-pouce: (
-        "Quelles amplitudes complexes sont en fait réelles si on prend $i$ commet origine des phases ?",
+        "Quelles amplitudes complexes sont en fait réelles si on prend $i$ comme origine des phases ?",
         "Écrire la loi des mailles en utilisant les amplitudes complexes.",
     ),
 )[
@@ -29,8 +29,8 @@ En Python, le nombre complexe $i$ s'écrit `1j`. L'exponentielle complexe est la
     print(abs(U))
     ```
     #let U = calc.sqrt(calc.pow(250,2) + calc.pow(2 * calc.pi * (3000/60) * 0.1 * 10,2))
-    A la main, le théorème de Pythagore donne :
-    $ U = sqrt(E^2 + (L omega I)^2) = #qty(U, "V", chiffres: 2)$
+    À la main, le théorème de Pythagore donne :
+    $ U = sqrt(E^2 + (L omega I)^2) = #qty(U, "V", chiffres: 2) $
 ]
 
 #question(

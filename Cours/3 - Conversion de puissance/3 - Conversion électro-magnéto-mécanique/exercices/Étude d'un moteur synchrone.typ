@@ -13,33 +13,36 @@ Afin de simplifier l'étude, les pertes mécaniques ainsi que les pertes fer du 
 
 Toutes les valeurs de tension et courant données le sont en valeur efficace.
 
-L'inducteur du moteur synchrone est à aimants permanents et possède 8 pôles, soir 4 paires de pôles. En régime permanent de vitesse, la condition de synchronisme pour un moteur possédant $p$ paires de pôles s'écrit $w=p Omega$, où $Omega$ désigne la vitesse de rotation du rotor en #unit("rad/s").
+L'inducteur du moteur synchrone est à aimants permanents et possède 8 pôles, soit 4 paires de pôles. En régime permanent de vitesse, la condition de synchronisme pour un moteur possédant $p$ paires de pôles s'écrit $omega=p Omega$, où $Omega$ désigne la vitesse de rotation du rotor en #unit("rad/s").
 
 Chaque bobinage du stator possède une résistance $R=#quan[0.03 Ω]$. L'intensité nominale du courant dans un enroulement du stator est $I_N=#quan[155 A]$. Pendant une durée limitée, elle peut atteindre la valeur maximale $I_M=#quan[185 A]$. La machine est étudiée en convention récepteur. Le modèle équivalent à une phase de l'induit est représenté ci-contre. Les tensions et courants sont sinusoïdaux de pulsation $omega=2 pi f$ constante.
 #let R = 0.03
 
-Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
+Afin de déterminer les paramètres du modèle, divers essais sont effectués :
 / essai n°1: sur un banc d'essai, on entraine la machine synchrone à vide par l'intermédiaire d'un moteur auxiliaire à la vitesse $n=#quan[1500 tr/min]$. Aux bornes d'une phase, on a mesuré une tension de #quan[57 V].
 / essai n°2: avec une alimentation électrique appropriée, on effectue un essai de la machine en moteur à #quan[1500 tr/min], pour lequel l'angle de pilotage vaut $Psi=0$, $I=I_M$ et $V=#quan[72 V]$.
-#let pulsation = (1500 / 60) * 2 * calc.pi
+// Ω, la vitesse angulaire du rotor ; ω = p Ω, la pulsation des courants.
+#let vitesse-angulaire = (1500 / 60) * 2 * calc.pi
+#let pulsation = 4 * vitesse-angulaire
 #let V = 72
 #let E = 57
-#let I = 155
+#let IM = 185
+#let IN = 155
 
 #question(
     coups-de-pouce: (
-        "Écrire la condition de synchrone (donnée dans l'énoncé). Attention aux unités.",
+        "Écrire la condition de synchronisme (donnée dans l'énoncé). Attention aux unités.",
     ),
 )[
-    Déterminer la fréquence des tension statoriques quand $n=#quan[1500 tr/min]$.
+    Déterminer la fréquence des tensions statoriques quand $n=#quan[1500 tr/min]$.
 ][
-    Comme le moteur possède 4 paires de pôles, en utilisant la condition de synchronisme $omega=p Omega$, on trouve une fréquence $f=(1500 / 60)times 4 = qty(#(1500 / 60 * 4), "Hz")$.
+    Comme le moteur possède 4 paires de pôles, en utilisant la condition de synchronisme $omega=p Omega$, on trouve une fréquence $f=(1500 / 60)times 4 = #qty(1500 / 60 * 4, "Hz")$.
 ]
-#let L = calc.sqrt(calc.pow(V, 2) - calc.pow(E + R * I, 2)) / (pulsation * I)
+#let L = calc.sqrt(calc.pow(V, 2) - calc.pow(E + R * IM, 2)) / (pulsation * IM)
 #question(
     coups-de-pouce: (
         "Que vaut le courant dans l'essai n°1 ? Écrire la loi des mailles pour l'essai n°1 et en déduire la force contre-électromotrice.",
-        "Écrire la loi des mailles pour l'essai n°2 en utilisant la valeur de $Phi$ donnée.",
+        "Écrire la loi des mailles pour l'essai n°2, la force contre-électromotrice étant celle de l'essai n°1.",
         "Écrire le théorème de Pythagore dans le triangle apparaissant sur le diagramme de Fresnel.",
     ),
 )[
@@ -49,7 +52,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 
     La vitesse angulaire est la même dans l'essai 2 que l'essai 1, la force contre-électromotrice induite est donc la même : $E=#quan[57 V]$.
 
-    L'angle de pilotage $Psi$ est nul, donc le courant est en phase avec la tension $V$.
+    L'angle de pilotage $Psi$ est nul, donc le courant est en phase avec la force contre-électromotrice $E$.
 
     La loi des mailles s'écrit $V=E + R I + j L omega I$.
     #figure(
@@ -66,15 +69,15 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
         }),
     )
     En utilisant le théorème de Pythagore, on obtient :
-    $ V^2 = (E + R I)^2 + (L omega I)^2 $
+    $ V^2 = (E + R I_M)^2 + (L omega I_M)^2 $ avec $omega = p Omega = #qty(pulsation, "rad/s", chiffres: 3)$.
     D'où :
     $
-        L = sqrt(V^2 - (E + R I)^2)/(omega I)
+        L = sqrt(V^2 - (E + R I_M)^2)/(omega I_M)
         = #qty(L, "H", chiffres: 2)
     $
 ]
 
-#let A = E / pulsation
+#let A = E / vitesse-angulaire
 #question(
     coups-de-pouce: (
         "Utiliser la condition de synchronisme.",
@@ -86,7 +89,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 
     En utilisant la condition de synchronisme $omega=p Omega$, on a :
     $ E = Phi_0 omega = Phi_0 p Omega = A Omega $ d'où
-    $ A = E/Omega = #qty(A, "Wb", chiffres: 2) $
+    $ A = p Phi_0 = E/Omega = #qty(A, "Wb", chiffres: 2) $
 ]
 
 
@@ -116,7 +119,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
             content("V.mid", $underline(V)$, anchor: "south-east", padding: .1em)
             content("I.mid", [#set text(red); $underline(I)$], anchor: "north", padding: .5em)
             content("phi.mid", $phi$, anchor: "west", padding: .5em)
-            content("psi.mid", $psi$, anchor: "west", padding: .5em)
+            content("psi.mid", $Psi$, anchor: "west", padding: .5em)
         }),
     )
     En projetant sur l'axe des abscisses, on obtient la relation :
@@ -126,7 +129,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 #question(
     coups-de-pouce: (
         "Attention, il y a deux phases à prendre en compte.",
-        "Rappel des hypothèses : pertes Joules négligeables.",
+        "Rappel des hypothèses : pertes Joule négligeables.",
     ),
 )[
     Déterminer l'expression de la puissance électrique $P_a$ absorbée par le moteur en fonction de $V$, $I$ et $phi$, puis en fonction de $E$, $I$ et $Psi$. Quelle relation existe-t-il entre cette puissance électrique $P_a$ et la puissance mécanique électromagnétique $P_m$ reçue par le rotor ?
@@ -138,7 +141,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     En utilisant la relation obtenue dans la question précédente, on a aussi :
     $ P_a = 2 E I cos(Psi) $
 
-    En négligeant les pertes Joules, la puissance électrique absorbée par le stator est entièrement convertie en puissance mécanique électromagnétique reçue par le rotor. On a donc :
+    En négligeant les pertes Joule, la puissance électrique absorbée par le stator est entièrement convertie en puissance mécanique électromagnétique reçue par le rotor. On a donc :
     $ P_a = P_m $
 ]
 
@@ -148,7 +151,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
         "Pour quelle valeur de $Psi$ le couple est-il maximal ?",
     ),
 )[
-    Exprimer le couple électromécanique $C$ développé par le moteur en fonction de $A$, $I$ et $Psi$. Pour une intensité efficace $I$ donnée, que doit-on faire pour maximiser le couple développé par la machine ? De quelle unique variable le couple dépend-il alors ? À quelle autre moteur ce fonctionnement fait-il penser ?
+    Exprimer le couple électromécanique $C$ développé par le moteur en fonction de $A$, $I$ et $Psi$. Pour une intensité efficace $I$ donnée, que doit-on faire pour maximiser le couple développé par la machine ? De quelle unique variable le couple dépend-il alors ? À quel autre moteur ce fonctionnement fait-il penser ?
 ][
     La puissance mécanique électromagnétique reçue par le rotor s'écrit :
     $ P_m = C Omega $
@@ -163,11 +166,11 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
 
     Dans ce cas, le couple dépend uniquement de l'intensité efficace $I$.
 
-    Ce fonctionnement fait penser à celui d'un moteur à courant continu où le couple est proportionnel à l'intensité dans l'induit lorsque la force contre-électromotrice est négligée.
+    Ce fonctionnement fait penser à celui d'un moteur à courant continu, dont le couple est proportionnel à l'intensité dans l'induit.
 ]
 
 
-#let déphasage = calc.atan((L * pulsation * I) / E)
+#let déphasage = calc.atan((L * pulsation * IN) / E)
 #question(
     coups-de-pouce: (
         "Représenter le diagramme de Fresnel et utiliser la trigonométrie pour déterminer $phi$ puis $V$.",
@@ -178,7 +181,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     Le couple développé par le moteur vaut :
     $
         C = 2 A I_N cos(0) = 2 A I_N
-        = #qty(2 * A * I, "N m", chiffres: 2)
+        = #qty(2 * A * IN, "N m", chiffres: 3)
     $
 
     #figure(
@@ -205,8 +208,8 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectuées :
     En divisant la deuxième équation par la première, on obtient :
     $ tan(phi) = (L omega I_N) / E $
     D'où :
-    $ phi = arctan((L omega I_N) / E) = #quan[33 °] $
+    $ phi = arctan((L omega I_N) / E) = #str(int(calc.round(déphasage.deg())))° $
 
     En remplaçant $phi$ dans la première équation, on trouve :
-    $ V = E / cos(phi) = #qty(E / calc.cos(calc.atan((L * pulsation * I) / E)), "V", chiffres: 2) $
+    $ V = E / cos(phi) = #qty(E / calc.cos(déphasage), "V", chiffres: 2) $
 ]

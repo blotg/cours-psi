@@ -1,10 +1,8 @@
 #import "@local/prepa:0.1.1": *
 
-// TODO sûrement des erreurs de calculs
-
 #show: exercice.with(titre: "Alternateur d'une centrale hydroélectrique")
 
-Une machine turbine hydraulique est accouplé à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau.
+Une turbine hydraulique est accouplée à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau.
 
 Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 - puissance apparente nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#quan[65 MV A]$
@@ -18,15 +16,15 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 #let R = 0.01
 #let Sn = 65e6
 #let Vn = 10e3
-#let In = Sn / Vn
+#let In = Sn / (2 * Vn)
 #question(
     coups-de-pouce: (
-        "Exprimer la puissance apparente nominale en fonction de la tension nominale et du courant nominal.",
+        "Exprimer la puissance apparente nominale en fonction de la tension nominale et du courant nominal. Attention, l'alternateur est diphasé : il a deux phases.",
     ),
 )[
     Calculer l'intensité du courant d'induit nominal.
 ][
-    $S_n = I_n V_n$ donc $ I_n = S_n / V_n = #qty(In, "A", chiffres: 2) $
+    Chacune des deux phases reçoit la puissance apparente $V_n I_n$, donc $S_n = 2 V_n I_n$ et $ I_n = S_n / (2 V_n) = #qty(In, "A", chiffres: 2) $
 ]
 
 
@@ -39,7 +37,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
         "Utiliser le théorème de Pythagore.",
     ),
 )[
-    Calculer la résistance synchrone $X=L omega$ de chaque enroulement.
+    Calculer la réactance synchrone $X=L omega$ de chaque enroulement.
 ][
     En court-circuit, la loi des mailles s'écrit $underline(E) = R underline(I) + j L omega underline(I)$.
 
@@ -67,7 +65,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 #question(
     coups-de-pouce: (),
 )[
-    Fonctionnement en charge. L'intensité du courant d'excitation vaut $I_e=#quan[44 A]$, la tension efficace aux bornes d'une phase est #quan[8.64 kV] et le facteur de puissance du réseau vaut $cos(phi)=0.9$ arrière (charge inductive). Représenter le schéma électrique d'une phase en négligeant la résistance $R$.
+    Fonctionnement en charge. L'intensité du courant d'excitation vaut $I_e=#quan[35 A]$, la tension efficace aux bornes d'une phase est #quan[8.64 kV] et le facteur de puissance du réseau vaut $cos(phi)=#num(0.9)$ arrière (charge inductive). Représenter le schéma électrique d'une phase en négligeant la résistance $R$.
 ][
     #figure(
         circuit({
@@ -88,16 +86,14 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
     En noir : un circuit statorique de l'alternateur. En rouge : la charge.
 ]
 
-#let E = k * 44
+#let E = k * 35
 #let V = 8.64e3
 #let angle = calc.acos(0.9)
-#let I = calc.sqrt(
-    (calc.sqrt(calc.pow(E, 2) - calc.pow(V * calc.cos(angle), 2)) - V * calc.sin(angle)) / X
-)
+#let I = (calc.sqrt(calc.pow(E, 2) - calc.pow(V * calc.cos(angle), 2)) - V * calc.sin(angle)) / X
 #question(
     coups-de-pouce: (
         "Placer l'angle $phi$ sur le diagramme.",
-        "Projeter $j X underline(X)$ verticalement et horizontalement.",
+        "Projeter $j X underline(I)$ verticalement et horizontalement.",
     ),
 )[
     Représenter la loi des mailles sur un diagramme de Fresnel. Montrer que $(V cos(phi))^2+(V sin(phi)+I X)^2=E^2$. En déduire l'intensité efficace du courant dans une phase statorique.
@@ -125,22 +121,23 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
     $
         E^2 = (V cos(phi))^2 + (V sin(phi) + X I)^2
     $
-    On en déduit, avec $phi = arccos(0.9)$,
+    On en déduit, avec $E = k I_e = #qty(E, "V", chiffres: 3)$ et $phi = arccos(#num(0.9))$,
     $
-        I = sqrt((sqrt(E^2 - (V cos(phi))^2) - V sin(phi)) / X)
+        I = (sqrt(E^2 - (V cos(phi))^2) - V sin(phi)) / X
         = #qty(I, "A", chiffres: 2)
     $
+    C'est un peu moins que le courant nominal : l'alternateur fonctionne près de son régime nominal.
 ]
 
 #question(
     coups-de-pouce: (
         "Exprimer la puissance fournie au réseau par l'alternateur en fonction de $V$, $I$ et $cos(phi)$. Attention, on étudie un alternateur diphasé.",
-        "Comment s'exprimer les pertes joules statoriques ?",
+        "Comment s'expriment les pertes Joule statoriques ?",
     ),
 )[
     Calculer la puissance fournie au réseau et le rendement de l'alternateur sachant que l'ensemble des pertes mécaniques, ferromagnétiques et d'excitation valent $P_p=#quan[2.4 MW]$.
 ][
-    La puissance fournie au réseau est $P_"utile" = 2V I cos(phi)$, le facteur 2 venant du fait que l'alternateur est diphasé.
+    La puissance fournie au réseau est $P_"utile" = 2V I cos(phi) = #qty(2 * V * I * calc.cos(angle), "W", chiffres: 2)$, le facteur 2 venant du fait que l'alternateur est diphasé. Les pertes Joule statoriques valent $P_"Joule" = 2 R I^2 = #qty(2 * R * calc.pow(I, 2), "W", chiffres: 2)$.
 
     Le rendement s'écrit
     $

@@ -76,16 +76,16 @@
 
 = Contacteur électromagnétique en translation
 == Présentation
-Le contacteur électromécanique en translation est composé de deux parties ferromagnétiques. Une partie est fixe, l'autre partie est mobile. Les deux parties sont séparées par deux entrefers.
+Le contacteur électromagnétique en translation est composé de deux parties ferromagnétiques. Une partie est fixe, l'autre partie est mobile. Les deux parties sont séparées par deux entrefers.
 
-#figure(image("images/relais.png", height: 5cm), caption: "Contacteur électromécanique en translation")
+#figure(image("images/relais.png", height: 5cm), caption: "Contacteur électromagnétique en translation")
 
 
-#schéma(titre: "Contacteur électromécanique en translation", hauteur: 3cm)
+#schéma(titre: "Contacteur électromagnétique en translation", hauteur: 3cm)
 
 Le courant électrique crée un champ magnétique qui fait se déplacer la partie mobile.
 
-Le contacteur électromécanique en translation est utilisé pour fabriquer un relais. Un relais est un interrupteur commandé par un courant électrique.
+Le contacteur électromagnétique en translation est utilisé pour fabriquer un relais. Un relais est un interrupteur commandé par un courant électrique.
 
 == Inductance
 
@@ -231,8 +231,8 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
 )[
     $
         va(B_(s 1))(theta)= cases(
-            (mu_0 i)/(2e) va(e)_r "si" theta in \]-pi/2 \, pi/2 \[,
-            -(mu_0 i)/(2e) va(e)_r "si" theta in \]pi/2 \, (3pi)/2 \[,
+            (mu_0 i)/(2e) er "si" theta in \]-pi/2 \, pi/2 \[,
+            -(mu_0 i)/(2e) er "si" theta in \]pi/2 \, (3pi)/2 \[,
         )
     $
 ]
@@ -241,11 +241,13 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
     [Décrire la structure d'une machine synchrone et établir l'expression du champ magnétique créé dans l'entrefer par une spire d'un circuit électrique statorique.],
 )
 
-Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) va(e)_r$.
+Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) er$.
 
 #schéma(titre: [Champ statorique créé par 3 spires d'*un* circuit statorique], hauteur: 4cm)
 
-Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I sqrt(2) cos(omega t)$ et $i_2=I sqrt(2) cos(omega t+pi/2)$.
+Le circuit $cal(C)_2$ est identique au circuit $cal(C)_1$, tourné de $-pi/2$ : son axe est en $theta = -pi/2$ et il crée le champ $va(B_(s 2))=(2 mu_0 N_s)/(pi e) i_2 cos(theta + pi/2) va(e_r)$.
+
+Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$.
 
 #encadré(
     titre: [Champ glissant statorique],
@@ -258,7 +260,7 @@ Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de m�
     ),
     grandeurs: sub-dictionary(grandeurs, ("B_s", "mu_0", "N_s", "I_s", "e", "omega", "t", "theta")),
 )[
-    $ va(B_s)=(2 mu_0 N_s)/(pi e) I_s sqrt(2) cos(omega t - theta) va(e)_r $
+    $ va(B_s)=(2 mu_0 N_s)/(pi e) I_s sqrt(2) cos(omega t - theta) er $
 ]
 
 Ce champ magnétique est appelé champ glissant car il tourne#footnote[Pour être précis, la position du maximum de $B_s$ tourne.] à la pulsation $omega$ dans le sens trigonométrique.
@@ -292,7 +294,7 @@ Le circuit rotorique est parcouru par un courant continu $I_e$ appelé courant e
     ),
     grandeurs: sub-dictionary(grandeurs, ("B_r", "mu_0", "N_r", "I_e", "e", "theta", "theta_r")),
 )[
-    $ va(B_r) (theta)=(2 mu_0 N_r)/(pi e) I_e cos(theta - theta_r) va(e)_r $
+    $ va(B_r) (theta)=(2 mu_0 N_r)/(pi e) I_e cos(theta - theta_r) e $
 ]
 
 == Énergie et couple
@@ -332,7 +334,7 @@ Connaissant le champ magnétique dans l'entrefer, il est possible d'en déduire 
     )),
 )[
     $
-        Gamma_"ém"= (4 sqrt(2) mu_0 N_r N_s R h)/( pi e^2) I_s I_e sin(omega t - theta_r)
+        Gamma_"ém"= (4 sqrt(2) mu_0 N_r N_s R h)/(pi e) I_s I_e sin(omega t - theta_r)
     $
 ]
 
@@ -369,13 +371,13 @@ On s'intéresse au régime permanent, dans lequel le rotor tourne à une vitesse
     $
         mean(Gamma_"ém") = cases(
             0 "si" Omega != omega,
-            (4 sqrt(2) mu_0 N_r N_s R h)/(pi e^2) I_s I_e sin(alpha) "si" Omega = omega,
+            (4 sqrt(2) mu_0 N_r N_s R h)/(pi e) I_s I_e sin(alpha) "si" Omega = omega,
         )
     $
 ]
 
 #question-de-colle(
-    [Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) va(e)_r$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) va(e)_r$ et la formule $Gamma_"ém"=lr(pdv(cal(E),theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.],
+    [Le champ statorique glissant $va(B_s)(theta)=k_s I_s sqrt(2) cos(omega t-theta) er$, le champ rotorique $va(B_r)(theta)=k_r I_e cos(theta- theta_r) er$ et la formule $Gamma_"ém"=lr(pdv(cal(E),theta_r)\))_i$ étant fournis, déterminer l'expression du couple électromagnétique moyen subi par le rotor.],
 )
 
 La condition $Omega = omega$ est appelée condition de synchronisme. Dans une machine synchrone, pour avoir un couple non nul, il est indispensable que la rotation du rotor soit synchrone avec la rotation du champ glissant.
@@ -407,7 +409,7 @@ Pour $alpha in ]-pi/2, pi/2[$, le système est stable : si le couple résistant 
 
 Pour $alpha > pi/2$, le système est instable : si le couple résistant augmente, le rotor ralentit, augmentant ainsi l'angle $alpha$ entre rotor et champ tournant ; le couple moteur diminue alors, ce qui empire encore la situation.
 
-Si le couple résistant dépasse $(4 sqrt(2) mu_0 N_r N_s R h)/(pi e^2) I_s I_e$, le moteur décroche et le couple moyen devient alors nul.
+Si le couple résistant dépasse $(4 sqrt(2) mu_0 N_r N_s R h)/(pi e) I_s I_e$, le moteur décroche et le couple moyen devient alors nul.
 
 == Démarrage
 La condition de synchronisme exige que la vitesse angulaire du rotor $Omega$ soit égale à la pulsation du courant statorique $omega$ pour avoir un couple non nul. Mais alors, comment faire démarrer un moteur synchrone initialement à l'arrêt ($Omega=0$) ? Il est possible de transformer le moteur synchrone en moteur asynchrone le temps du démarrage ou d'utiliser un système d'auto-pilotage qui asservit $alpha$ à une valeur voulue pour augmenter progressivement la vitesse angulaire du rotor.
@@ -453,7 +455,7 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
 )
 
 #encadré(
-    titre: "Flux induit du rotor sur le stator",
+    titre: "Flux créé par le rotor à travers le stator",
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
@@ -558,7 +560,7 @@ La machine à courant continu est constituée d'un stator, aussi appelé inducte
 )
 
 #exemple[
-    Les machines à courant continu sont utilisées pour les petits équipements de voiture (essuie-glaces, vitres, rétroviseurs, ...), dans la plupart des appareils électroménagers et comme dynamo sur les anciennes bicyclettes.
+    Les machines à courant continu sont utilisées pour les petits équipements de voiture (essuie-glaces, vitres, rétroviseurs, ...), dans la plupart des appareils électroménagers et dans les jouets.
 ]
 
 Les enroulements rotorique et statorique sont parcourus par des courants continus $I_r$ et $I_e$ respectivement.
@@ -781,7 +783,7 @@ Le moteur à courant continu n'a pas besoin d'aide pour démarrer, c'est même l
 La machine à courant continu peut être utilisée en fonctionnement générateur, on parle alors de dynamo. En fonctionnement générateur, le champ statorique induit une tension dans l'enroulement rotorique.
 
 #exemple[
-    Les dynamos étaient utilisées pour générer l'électricité dans les voitures jusqu'aux années 60 et dans les bicyclettes jusqu'aux années 1990. Les dynamos ne sont quasiment plus utilisées en raison de leur mauvais rendement comparé aux alternateurs.
+    Les dynamos étaient utilisées pour générer l'électricité dans les voitures jusqu'aux années 60#footnote[La « dynamo » de bicyclette n'en est pas une : c'est un alternateur à aimants permanents, qui produit un courant alternatif.]. Les dynamos ne sont quasiment plus utilisées en raison de leur mauvais rendement comparé aux alternateurs.
 ]
 
 En fonctionnement générateur, on adopte préférentiellement la convention générateur, en posant $E_"cém" = -E_"ém"$.
