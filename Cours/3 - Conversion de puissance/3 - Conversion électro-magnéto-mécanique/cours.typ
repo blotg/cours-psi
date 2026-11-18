@@ -265,6 +265,10 @@ Ce champ magnétique est appelé champ glissant car il tourne#footnote[Pour êtr
 
 #schéma(titre: "Champ glissant", hauteur: 3cm)
 
+L'animation ci-dessous montre le champ créé par chacun des circuits statoriques, le champ glissant qui en est la somme et le champ rotorique, ainsi que le couple qui en résulte selon l'angle $alpha$.
+
+#lien("https://blotg.github.io/cours-psi/conversion-3/animations/machine-synchrone.html")
+
 
 #question-de-début-de-cours(
     "Le champ statorique total est nommé « champ glissant » car",
@@ -597,7 +601,11 @@ Pour faire en sorte que la condition de synchronisme soit toujours vérifiée et
 
 Le système balais-collecteurs est constitué de collecteurs solidaires du rotor et reliés à chacun des enroulements rotoriques et de balais#footnote[Les balais sont aussi appelés charbon car ils sont souvent constitués de graphite.] qui sont solidaires avec le stator. Les balais frottent sur les collecteurs et connectent celui qui correspond au bon enroulement rotorique.
 
-Le lien ci-dessous mène à une animation illustrant le fonctionnement du système balais-collecteurs.
+L'animation ci-dessous montre le système balais-collecteurs en fonctionnement : seule la bobine rotorique dont les lames touchent les balais est parcourue par le courant, et l'angle $alpha$ reste proche de $pi/2$.
+
+#lien("https://blotg.github.io/cours-psi/conversion-3/animations/collecteur.html")
+
+La vidéo ci-dessous en illustre aussi le fonctionnement.
 
 #lien("https://youtu.be/LAtPHANEfQo?feature=shared")
 

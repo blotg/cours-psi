@@ -39,12 +39,12 @@ const RAYON_FIL = { stator: 0.15, rotor: 0.12 };
  *  bordure sombre, à la mesure de l'encoche. */
 const isolant = (l) => Math.min(0.035, 0.15 * l);
 
-const polaire = (r, a) => new THREE.Vector2(r * Math.cos(a), r * Math.sin(a));
+export const polaire = (r, a) => new THREE.Vector2(r * Math.cos(a), r * Math.sin(a));
 /** Le point à la distance r de l'axe, décalé de s de côté par rapport à la
  *  direction a. */
-const local = (a, r, s) => polaire(r, a).add(polaire(s, a + Math.PI / 2));
+export const local = (a, r, s) => polaire(r, a).add(polaire(s, a + Math.PI / 2));
 /** Un angle ramené dans ]−π, π]. */
-const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, 2 * Math.PI) - Math.PI;
+export const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, 2 * Math.PI) - Math.PI;
 const tourPositif = (a) => THREE.MathUtils.euclideanModulo(a, 2 * Math.PI);
 
 // -- Les conducteurs ------------------------------------------------------------
@@ -103,6 +103,61 @@ function répartis(conducteurs, N) {
     return conducteurs;
 }
 
+// -- Le sens des courants : ⊙ et ⊗ --------------------------------------------
+
+/** Le symbole d'un courant qui sort du plan (⊙) ou y entre (⊗), sur un disque
+ *  blanc qui le détache du fil. */
+function textureCourant(sortant, couleur) {
+    const toile = document.createElement('canvas');
+    toile.width = toile.height = 128;
+    const c = toile.getContext('2d');
+    c.fillStyle = '#fff';
+    c.beginPath();
+    c.arc(64, 64, 62, 0, 2 * Math.PI);
+    c.fill();
+    c.strokeStyle = c.fillStyle = couleur;
+    c.lineWidth = 9;
+    c.beginPath();
+    c.arc(64, 64, 50, 0, 2 * Math.PI);
+    c.stroke();
+    if (sortant) {
+        c.beginPath();
+        c.arc(64, 64, 15, 0, 2 * Math.PI);
+        c.fill();
+    } else {
+        c.lineWidth = 10;
+        c.beginPath();
+        c.moveTo(34, 34);
+        c.lineTo(94, 94);
+        c.moveTo(94, 34);
+        c.lineTo(34, 94);
+        c.stroke();
+    }
+    const texture = new THREE.CanvasTexture(toile);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+}
+
+const texturesCourant = new Map();
+
+/** Le sens du courant dans un conducteur, posé sur sa section. */
+export class Courant extends THREE.Mesh {
+    constructor(couleur, disque) {
+        if (!texturesCourant.has(couleur)) {
+            texturesCourant.set(couleur, [textureCourant(true, couleur), textureCourant(false, couleur)]);
+        }
+        super(disque, new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false }));
+        [this.sortant, this.entrant] = texturesCourant.get(couleur);
+    }
+
+    /** `i` entre −1 et 1 : le symbole pâlit avec l'intensité. */
+    montre(i) {
+        this.material.map = i >= 0 ? this.sortant : this.entrant;
+        this.material.opacity = Math.min(1, Math.abs(i));
+        return this;
+    }
+}
+
 // -- Matériaux ----------------------------------------------------------------
 
 /** Sur les flancs, les tôles se groupent en paquets, séparés par les canaux
@@ -123,7 +178,7 @@ function textureTôles() {
     return texture;
 }
 
-const MATÉRIAUX = {
+export const MATÉRIAUX = {
     // Le plan de coupe, plus clair que les flancs : on lit la section.
     coupe: new THREE.MeshStandardMaterial({ color: '#868c93', metalness: 0.3, roughness: 0.5 }),
     flanc: new THREE.MeshStandardMaterial({
@@ -141,7 +196,7 @@ const MATÉRIAUX = {
 
 /** Un profil extrudé de `z0` à `z1`, coupe et flancs chacun leur matériau.
  *  Ses arcs sont découpés en `segments` morceaux chacun. */
-function extrude(forme, z0, z1, flanc, coupe = flanc, segments = 10) {
+export function extrude(forme, z0, z1, flanc, coupe = flanc, segments = 10) {
     const géométrie = new THREE.ExtrudeGeometry(forme, { depth: z1 - z0, bevelEnabled: false, curveSegments: segments });
     géométrie.translate(0, 0, z0);
     return new THREE.Mesh(géométrie, [coupe, flanc]);
@@ -150,7 +205,7 @@ function extrude(forme, z0, z1, flanc, coupe = flanc, segments = 10) {
 // -- Profils --------------------------------------------------------------------
 
 /** Un rectangle d'axe `a`, entre les distances r0 et r1 à l'axe, de largeur l. */
-function barreau(a, r0, r1, l) {
+export function barreau(a, r0, r1, l) {
     return new THREE.Shape([local(a, r0, -l / 2), local(a, r1, -l / 2), local(a, r1, l / 2), local(a, r0, l / 2)]);
 }
 
@@ -159,12 +214,12 @@ function barreau(a, r0, r1, l) {
  * conducteur, du matériau `fil`, qui dépasse de `dépassement` derrière le
  * paquet de tôles, et l'isolant qui l'entoure.
  */
-function encoche(a, r0, r1, l, fil, dépassement) {
+export function encoche(a, r0, r1, l, fil, dépassement, longueur = LONGUEUR) {
     const e = isolant(l);
     const cuivre = barreau(a, r0 + e, r1 - e, l - 2 * e);
     const gaine = barreau(a, r0, r1, l);
     gaine.holes.push(cuivre);
-    return [extrude(cuivre, -LONGUEUR - dépassement, 0, fil), extrude(gaine, -LONGUEUR, 0, MATÉRIAUX.isolant)];
+    return [extrude(cuivre, -longueur - dépassement, 0, fil), extrude(gaine, -longueur, 0, MATÉRIAUX.isolant)];
 }
 
 /**
@@ -172,7 +227,7 @@ function encoche(a, r0, r1, l, fil, dépassement) {
  * largeur `l` aux angles des conducteurs, jusqu'à la distance `fond` de
  * l'axe : vers l'extérieur pour le stator, vers l'axe pour le rotor.
  */
-function contourEncoché(chemin, conducteurs, r, fond, l) {
+export function contourEncoché(chemin, conducteurs, r, fond, l) {
     const angles = conducteurs.map((c) => tourPositif(c.angle)).sort((a, b) => a - b);
     const δ = Math.asin(l / 2 / r);
     const bord = Math.sqrt(r * r - (l * l) / 4);
@@ -192,7 +247,7 @@ function contourEncoché(chemin, conducteurs, r, fond, l) {
  * d'angle `a` à son symétrique par rapport à `via`, en passant par `via`, en
  * s'écartant de la machine de `hauteur` et de l'axe de `écart`.
  */
-function têteDeBobine(a, via, { r, z, hauteur, écart, épaisseur, matériau }) {
+export function têteDeBobine(a, via, { r, z, hauteur, écart, épaisseur, matériau }) {
     // L'écart angulaire à `via`, ramené dans ]−π, π].
     const d = angleSigné(a - via);
     // Une bobine plus large déborde davantage : les têtes s'emboîtent.

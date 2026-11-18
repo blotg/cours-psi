@@ -56,6 +56,22 @@ section.animation > p { margin: 0 0 0.75rem; }
 .groupe { padding: 0.55rem 0 0.7rem; border-top: 1px solid var(--filet-clair); }
 .groupe:first-child { border-top: none; padding-top: 0; }
 .groupe > .intitulé { margin-bottom: 0.35rem; color: var(--gris); font-size: 0.85rem; }
+/* Un groupe rétractable : son intitulé, cliquable, porte un chevron qui
+   tourne quand il s'ouvre. */
+details.groupe > summary.intitulé { cursor: pointer; list-style: none; user-select: none; }
+details.groupe > summary.intitulé::-webkit-details-marker { display: none; }
+details.groupe > summary.intitulé::before {
+    content: "▸";
+    display: inline-block;
+    width: 0.9em;
+    font-size: 0.85em;
+    transform-origin: 0.3em 55%;
+    transition: transform 0.15s;
+}
+details.groupe[open] > summary.intitulé::before { transform: rotate(90deg); }
+details.groupe > summary.intitulé:hover { color: var(--texte); }
+details.groupe:not([open]) { padding-bottom: 0.4rem; }
+details.groupe:not([open]) > summary.intitulé { margin-bottom: 0; }
 
 .curseur {
     display: grid;

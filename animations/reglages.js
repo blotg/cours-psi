@@ -13,20 +13,31 @@ const créé = (balise, classe = '', texte = '') =>
 const décimales = (pas) => (String(pas).split('.')[1] ?? '').length;
 
 export class Réglages {
-    constructor(conteneur) {
+    /**
+     * `rétractables` : chaque groupe à intitulé se replie d'un clic sur
+     * celui-ci — pour un panneau plus haut que l'écran, dont on veut voir
+     * ensemble les parties qui servent.
+     */
+    constructor(conteneur, { rétractables = false } = {}) {
         this.conteneur = conteneur;
+        this.rétractables = rétractables;
         this.groupe();
     }
 
     /**
      * Ouvre un nouveau groupe de contrôles, sous un intitulé facultatif.
      * L'objet renvoyé permet de le réécrire — un groupe dont le contenu
-     * change de nom avec un réglage.
+     * change de nom avec un réglage. Dans un panneau à groupes rétractables,
+     * `ouvert` dit s'il l'est au départ.
      */
-    groupe(intitulé = '') {
-        const élément = créé('div', 'groupe');
-        const titre = créé('div', 'intitulé', intitulé);
+    groupe(intitulé = '', { ouvert = true } = {}) {
+        // Un groupe rétractable est un `details` : le navigateur en fait un
+        // bouton, au clavier comme à la souris.
+        const rétractable = this.rétractables && intitulé;
+        const élément = créé(rétractable ? 'details' : 'div', 'groupe');
+        const titre = créé(rétractable ? 'summary' : 'div', 'intitulé', intitulé);
         titre.hidden = !intitulé;
+        if (rétractable) élément.open = ouvert;
         élément.append(titre);
         this.conteneur.append(élément);
         this.courant = élément;
