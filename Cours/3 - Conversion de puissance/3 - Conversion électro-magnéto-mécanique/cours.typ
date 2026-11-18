@@ -89,28 +89,32 @@ Le contacteur électromagnétique en translation est utilisé pour fabriquer un 
 
 == Inductance
 
+Le théorème d'Ampère appliqué à une ligne de champ qui parcourt tout le circuit magnétique, à travers les deux entrefers, donne le champ magnétique.
+
 #encadré(
     titre: "Champ magnétique dans l'entrefer",
     savoir-faire: true,
     hypothèses: (
-        "Le matériau ferromagnétique est doux, hors saturation.",
-        $mu_r >> 1$,
-        "La section du circuit magnétique est constante.",
-        "Les effets de bord sont négligés dans l'entrefer.",
+        [Le matériau ferromagnétique est doux, hors saturation.],
+        [Le champ magnétique et l'excitation magnétique sont uniformes dans chaque partie du circuit magnétique.],
+        [La section du circuit magnétique est constante.],
+        [Les effets de bord sont négligés dans l'entrefer.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("B", "mu_0", "mu_r", "N", "i", "l_\"fixe\"", "l_\"mobile\"", "x")),
 )[
     $ B=(mu_0 N i)/((l_"fixe" + l_"mobile")/ mu_r+2x) $
 ]
 
+L'inductance du bobinage dépend de l'épaisseur de l'entrefer et donc de la position de la partie mobile.
+
 #encadré(
     titre: "Inductance propre",
     savoir-faire: true,
     hypothèses: (
-        "Le matériau ferromagnétique est doux, hors saturation.",
-        $mu_r >> 1$,
-        "La section du circuit magnétique est constante.",
-        "Les effets de bord sont négligés dans l'entrefer.",
+        [Le matériau ferromagnétique est doux, hors saturation.],
+        [Le champ magnétique et l'excitation magnétique sont uniformes dans chaque partie du circuit magnétique.],
+        [La section du circuit magnétique est constante.],
+        [Les effets de bord sont négligés dans l'entrefer.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("L", "mu_0", "mu_r", "N", "l_\"fixe\"", "l_\"mobile\"", "x", "S")),
 )[
@@ -119,6 +123,8 @@ Le contacteur électromagnétique en translation est utilisé pour fabriquer un 
 
 == Énergie et forces électromagnétiques
 
+La force subie par la partie mobile est liée à l'énergie magnétique stockée. La force tend à augmenter cette énergie.
+
 #encadré(
     titre: "Force électromagnétique",
     grandeurs: sub-dictionary(grandeurs, ("F_\"ém\"", "cal(E)", "x", "i")),
@@ -126,14 +132,16 @@ Le contacteur électromagnétique en translation est utilisé pour fabriquer un 
     $ F_"ém"= lr(pdv(cal(E), x) \))_i $
 ]
 
+L'énergie $cal(E) = 1/2 L(x) i^2$ permet d'exprimer la force subie par la partie mobile.
+
 #encadré(
     titre: "Force sur la partie mobile",
     savoir-faire: true,
     hypothèses: (
-        "Le matériau ferromagnétique est doux, hors saturation.",
-        $mu_r >> 1$,
-        "La section du circuit magnétique est constante.",
-        "Les effets de bord sont négligés dans l'entrefer.",
+        [Le matériau ferromagnétique est doux, hors saturation.],
+        [Le champ magnétique et l'excitation magnétique sont uniformes dans chaque partie du circuit magnétique.],
+        [La section du circuit magnétique est constante.],
+        [Les effets de bord sont négligés dans l'entrefer.],
     ),
     grandeurs: sub-dictionary(grandeurs, (
         "F_\"ém\"",
@@ -162,7 +170,7 @@ La force électromagnétique est toujours attractive. La force électromagnétiq
 )
 
 #application[
-    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=#quan[5 um]$. On donne $i=#quan[20 mA]$, $mu_r=num("1e5")$, $N=num("2000")$, $S=#quan[4 cm^2]$, $l_"fixe"+l_"mobile"=#quan[30 cm]$.
+    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=#quan[5 um]$. On donne $i=#quan[7.5 mA]$, $mu_r=#num("1e5")$, $N=#num("2000")$, $S=#quan[16 cm^2]$, $l_"fixe"+l_"mobile"=#quan[30 cm]$.
 ]
 
 = Machine synchrone
@@ -200,9 +208,9 @@ La machine synchrone est constituée d'une partie fixe, appelée stator et d'une
     ),
 )
 
-Sur le rotor, un circuit électrique est enroulé orthogonalement à l'axe de rotation.
+Sur le rotor, un circuit électrique est enroulé parallèlement à l'axe de rotation.
 
-Sur le stator, plusieurs circuits électriques sont enroulés orthogonalement à l'axe de rotation. Sur une machine diphasée, il y a deux enroulements tournés de #quan[90 °] l'un par rapport à l'autre.
+Sur le stator, plusieurs circuits électriques sont enroulés parallèlement à l'axe de rotation. Sur une machine diphasée, il y a deux enroulements tournés de #quan[90 °] l'un par rapport à l'autre.
 
 Les circuits électriques peuvent donner naissance à plusieurs paires de pôles. Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
@@ -213,7 +221,7 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
 #grid(
     columns: (1fr, 1fr),
     column-gutter: 10pt,
-    figure(image("images/zoe.jpg", height: 5cm), caption: "Stator du moteur synchrone d’une Renault Zoé."),
+    figure(image("images/zoe.jpg", height: 5cm), caption: "Rotor bobiné du moteur synchrone d’une Renault Zoé : les bobines de l’inducteur entourent des pôles saillants."),
     figure(image("images/centrale.jpg", height: 5cm), caption: "Stator d’un alternateur de centrale nucléaire."),
 )
 
@@ -223,9 +231,9 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
     titre: "Champ créé par une spire verticale dans l'entrefer",
     savoir-faire: true,
     hypothèses: (
-        "L'entrefer a une épaisseur constante.",
-        "Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.",
-        "La machine est diphasée et bipolaire.",
+        [L'entrefer a une épaisseur constante.],
+        [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
+        [La machine est diphasée et bipolaire.],
     ),
     grandeurs: sub-dictionary(grandeurs, ("B_(s 1)", "mu_0", "i", "e", "theta")),
 )[
@@ -241,13 +249,11 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
     [Décrire la structure d'une machine synchrone et établir l'expression du champ magnétique créé dans l'entrefer par une spire d'un circuit électrique statorique.],
 )
 
-Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) er$.
+Un circuit statorique est constitué de plusieurs spires décalées dans l'espace. Ces spires sont placées de sorte que le champ créé soit sinusoïdal. Dans ces conditions, le champ magnétique créé par le circuit $cal(C)_1$ est $va(B_(s 1))=(2 mu_0 N_s)/(pi e) i_1 cos(theta) er$. Le circuit $cal(C)_2$ est identique au circuit $cal(C)_1$, tourné de $-pi/2$ : son axe est en $theta = -pi/2$ et il crée le champ $va(B_(s 2))=(2 mu_0 N_s)/(pi e) i_2 cos(theta + pi/2) er$.
 
 #schéma(titre: [Champ statorique créé par 3 spires d'*un* circuit statorique], hauteur: 4cm)
 
-Le circuit $cal(C)_2$ est identique au circuit $cal(C)_1$, tourné de $-pi/2$ : son axe est en $theta = -pi/2$ et il crée le champ $va(B_(s 2))=(2 mu_0 N_s)/(pi e) i_2 cos(theta + pi/2) va(e_r)$.
-
-Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$.
+Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de même amplitude en quadrature de phase $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$. Le champ statorique total est la somme $va(B_s) = va(B_(s 1)) + va(B_(s 2))$, et la formule $cos(a)cos(b) + sin(a)sin(b) = cos(a-b)$ donne :
 
 #encadré(
     titre: [Champ glissant statorique],
@@ -294,12 +300,12 @@ Le circuit rotorique est parcouru par un courant continu $I_e$ appelé courant e
     ),
     grandeurs: sub-dictionary(grandeurs, ("B_r", "mu_0", "N_r", "I_e", "e", "theta", "theta_r")),
 )[
-    $ va(B_r) (theta)=(2 mu_0 N_r)/(pi e) I_e cos(theta - theta_r) e $
+    $ va(B_r) (theta)=(2 mu_0 N_r)/(pi e) I_e cos(theta - theta_r) er $
 ]
 
 == Énergie et couple
 
-Connaissant le champ magnétique dans l'entrefer, il est possible d'en déduire l'énergie magnétique qui y est stockée et le couple électromagnétique exercé sur le rotor.
+Connaissant le champ magnétique dans l'entrefer, il est possible d'en déduire l'énergie magnétique qui y est stockée et le couple électromagnétique exercé sur le rotor. Comme pour le contacteur, l'action mécanique s'obtient en dérivant l'énergie à courant constant, cette fois par rapport à l'angle $theta_r$ qui repère le rotor.
 
 #encadré(
     titre: "Moment électromagnétique",
@@ -307,6 +313,8 @@ Connaissant le champ magnétique dans l'entrefer, il est possible d'en déduire 
 )[
     $ Gamma_"ém"= lr(pdv(cal(E), theta_r)\))_i $
 ]
+
+L'énergie magnétique est stockée dans l'entrefer, de volume $2 pi R h e$, où règne le champ total $va(B_s) + va(B_r)$.
 
 #encadré(
     titre: "Moment électromagnétique pour la machine synchrone",
@@ -418,7 +426,7 @@ La condition de synchronisme exige que la vitesse angulaire du rotor $Omega$ soi
 L'enroulement rotorique est parcouru par un courant continu. Il n'est le siège d'aucun phénomène d'induction. La relation tension-courant s'écrit simplement $U_e=R_e I_e$ où $R_e$ est la résistance des fils.
 
 == Modèle électrique de l'induit
-Les enroulements statoriques sont le siège d'un phénomène d'induction.
+Les enroulements statoriques sont le siège d'un phénomène d'induction. Chacun est traversé par son propre flux, d'où une inductance propre $L$, et par le flux du champ rotorique, qui varie puisque le rotor tourne. D'après la loi de Faraday, ce second flux fait apparaitre une force contre-électromotrice dans chaque phase.
 
 #encadré(
     titre: "Modèle électrique des enroulements statoriques",
@@ -437,7 +445,9 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
     $ u_2(t)=R_s i_2 + L dv(i_2, t) + E_2 $
 ]
 
-#schéma(titre: "Schéma équivalent de l'induit", hauteur: 4cm)
+#encadré(titre: "Schéma équivalent de l'induit", connaitre: true)[
+    #carreaux(4cm)
+]
 
 #flashcard(
     recto: [Modèle électrique équivalent d'un moteur synchrone.],
@@ -453,6 +463,8 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
         "$underline(U) = R_s underline(I) + L dv(underline(I), t) + underline(E)$",
     ),
 )
+
+La variation du flux magnétique à travers les spires du stator induit une force contre-électromotrice $E_1 = dv(Phi_1, t)$.
 
 #encadré(
     titre: "Flux créé par le rotor à travers le stator",
@@ -484,7 +496,7 @@ Les enroulements statoriques sont le siège d'un phénomène d'induction.
     $
 ]
 
-L'angle de pilotage est $Psi=pi/2 - alpha$.
+Le flux $Phi_1$ est en retard de $alpha$ sur le courant $i_1$, et la force contre-électromotrice $E_1 = dv(Phi_1, t)$ est en avance de $pi/2$ sur $Phi_1$. La force contre-électromotrice est donc en avance de $Psi = pi/2 - alpha$ sur le courant : c'est l'angle de pilotage.
 
 #flashcard(
     recto: [Angle de pilotage],
@@ -499,7 +511,7 @@ La loi des mailles peut être représentée sur un diagramme de Fresnel#footnote
 
 == Rendement et puissance
 
-Le moteur synchrone reçoit de la puissance sous forme électrique. Une partie est dissipée par effet Joule, le reste est transformé en puissance électromagnétique puis en puissance mécanique.
+Le moteur synchrone reçoit de la puissance sous forme électrique. Une partie est dissipée par effet Joule, le reste est transformé en puissance électromagnétique puis en puissance mécanique. La puissance électromagnétique est celle que reçoivent les forces contre-électromotrices des deux phases, soit $P_"ém" = 2 E_"eff" I_s cos(Psi)$, où $E_"eff"$ est la valeur efficace de $E_1$ et $E_2$.
 
 #encadré(
     titre: "Transfert de puissance électrique - mécanique",
@@ -529,7 +541,7 @@ Lorsqu'une machine synchrone fonctionne en alternateur, un système extérieur m
 
 En fonctionnement alternateur, le rotor "entraine" le champ glissant. En fonctionnement alternateur, le couple subi par le rotor est négatif donc $alpha<0$.
 
-Si les courants dans les deux circuits induits sont identiques, on dit que l'alternateur est équilibré.
+Si les courants dans les deux circuits induits ont la même valeur efficace et sont en quadrature de phase, on dit que l'alternateur est équilibré.
 
 Si l'alternateur est équilibré, les relations vues précédemment sont valables en fonctionnement alternateur comme en fonctionnement moteur.
 
@@ -601,7 +613,7 @@ Par analogie avec la machine synchrone, l'interaction entre le champ induit et l
 
 Pour faire en sorte que la condition de synchronisme soit toujours vérifiée et pour maximiser le couple électromagnétique, le système balais-collecteurs est utilisé. Parmi tous les enroulements rotoriques, le système balais-collecteurs fait passer du courant dans celui qui forme un angle $alpha=pi/2$ avec le stator.
 
-Le système balais-collecteurs est constitué de collecteurs solidaires du rotor et reliés à chacun des enroulements rotoriques et de balais#footnote[Les balais sont aussi appelés charbon car ils sont souvent constitués de graphite.] qui sont solidaires avec le stator. Les balais frottent sur les collecteurs et connectent celui qui correspond au bon enroulement rotorique.
+Le système balais-collecteurs est constitué de collecteurs solidaires du rotor et reliés à chacun des enroulements rotoriques et de balais#footnote[Les balais sont aussi appelés charbons car ils sont souvent constitués de graphite.] qui sont solidaires avec le stator. Les balais frottent sur les collecteurs et connectent celui qui correspond au bon enroulement rotorique.
 
 L'animation ci-dessous montre le système balais-collecteurs en fonctionnement : seule la bobine rotorique dont les lames touchent les balais est parcourue par le courant, et l'angle $alpha$ reste proche de $pi/2$.
 
@@ -657,7 +669,7 @@ Le frottement des balais sur les collecteurs dégrade le rendement de la machine
 
 == Relations entre grandeurs électriques et grandeurs mécaniques
 
-Par analogie avec la machine synchrone, le couple électromagnétique subi par le rotor est proportionnel au courant rotorique.
+Par analogie avec la machine synchrone, le couple électromagnétique subi par le rotor est proportionnel au courant rotorique. Le système balais-collecteurs maintient $alpha = pi/2$, donc $sin(alpha) = 1$, et le courant inducteur $I_e$ est constant : on regroupe $K I_e$ en une seule constante $Phi_0$, homogène à un flux.
 
 #encadré(
     titre: "Couple électromagnétique d'une machine à courant continu",
@@ -696,7 +708,7 @@ Par analogie avec la machine synchrone, le couple électromagnétique subi par l
     Pour réaliser un treuil, on utilise un moteur à courant continu de constante de couplage #quan[0.11 Wb] pour faire tourner un réducteur de rapport de transmission $1/100$ qui fait à son tour tourner une poulie de rayon #quan[3 cm] sur lequel est enroulé un câble. Sachant que le moteur à courant continu a un courant maximum de #quan[6 A], quelle masse maximale le treuil peut-il soulever ?
 ]
 
-La conservation de l'énergie dans une machine sans perte permet d'en déduire le lien entre force contre-électromotrice et vitesse angulaire.
+La conservation de l'énergie dans une machine sans perte permet d'en déduire le lien entre force contre-électromotrice et vitesse angulaire : la puissance électrique $E_"cém" I_r$ reçue par la force contre-électromotrice est intégralement convertie en puissance mécanique $Gamma_"ém" Omega = Phi_0 I_r Omega$.
 
 #encadré(
     titre: "Force contre-électromotrice d'une machine à courant continu",
@@ -733,15 +745,6 @@ La conservation de l'énergie dans une machine sans perte permet d'en déduire l
     Le moteur de treuil de l'application précédente a une tension d'alimentation de #quan[12 V]. À quelle vitesse maximale le câble s'enroule-t-il ?
 ]
 
-== Pertes
-Les bilans énergétiques aux différentes étapes de conversion peuvent être représentés sur un schéma.
-
-#schéma(titre: "Pertes aux différentes étapes de conversion en régime stationnaire", hauteur: 4cm)
-
-#question-de-colle(
-    [Énoncer la relation couple-courant pour une machine à courant continu. Établir la relation vitesse angulaire-tension pour une machine sans pertes. Présenter la chaine énergétique pour un moteur à courant continu, en faisant apparaitre tous les types de pertes.],
-)
-
 == Modèle électrique
 Comme pour la machine synchrone, le modèle électrique de l'inducteur ne se compose que d'une résistance parcourue par un courant constant.
 
@@ -761,7 +764,7 @@ Le modèle équivalent de l'induit est le même que pour la machine synchrone, m
 Il est possible de déduire de ce modèle la caractéristique couple-vitesse angulaire lorsque la tension d'alimentation du moteur est constante.
 
 #application[
-    Déterminer la relation entre le couple $Gamma$ et la vitesse angulaire $Omega$ en régime stationnaire. Tracer $Omega$ en fonction de $Gamma$.
+    Le moteur est alimenté par une tension continue $U$. Déterminer la relation entre le couple $Gamma$ et la vitesse angulaire $Omega$ en régime stationnaire. Tracer $Omega$ en fonction de $Gamma$.
 ]
 
 #question-de-colle(
@@ -772,7 +775,7 @@ Il est possible de déduire de ce modèle la caractéristique couple-vitesse ang
 Le moteur à courant continu n'a pas besoin d'aide pour démarrer, c'est même là que son couple est le plus important. En revanche, ce couple important se traduit aussi par un courant important, qu'il peut être souhaitable de limiter.
 
 #application[
-    On considère un moteur dont le rotor est lié à une hélice de bateau subissant un frottement fluide de couple $-f Omega$ mais pas de frottements solides. On note $J$ le moment d'inertie du système {rotor + hélice}. Déterminer 4 relations liant les grandeurs électriques ($E_"cém"$ et $I_r$) et mécaniques ($Gamma$ et $Omega$).
+    On considère un moteur dont le rotor est lié à une hélice de bateau subissant un frottement fluide de couple $-f Omega$ mais pas de frottements solides. On note $J$ le moment d'inertie du système {rotor + hélice}. Le moteur est alimenté par une tension $u(t)$. Déterminer 4 relations liant les grandeurs électriques ($E_"cém"$ et $I_r$) et mécaniques ($Gamma$ et $Omega$).
 ]
 
 #application[
@@ -780,12 +783,21 @@ Le moteur à courant continu n'a pas besoin d'aide pour démarrer, c'est même l
 ]
 
 == Fonctionnement générateur
-La machine à courant continu peut être utilisée en fonctionnement générateur, on parle alors de dynamo. En fonctionnement générateur, le champ statorique induit une tension dans l'enroulement rotorique.
+La machine à courant continu peut être utilisée en fonctionnement générateur, on parle alors de dynamo. En fonctionnement générateur, le rotor est entrainé par un système extérieur : sa rotation dans le champ statorique induit une force électromotrice dans l'enroulement rotorique.
 
 #exemple[
     Les dynamos étaient utilisées pour générer l'électricité dans les voitures jusqu'aux années 60#footnote[La « dynamo » de bicyclette n'en est pas une : c'est un alternateur à aimants permanents, qui produit un courant alternatif.]. Les dynamos ne sont quasiment plus utilisées en raison de leur mauvais rendement comparé aux alternateurs.
 ]
 
-En fonctionnement générateur, on adopte préférentiellement la convention générateur, en posant $E_"cém" = -E_"ém"$.
+En fonctionnement générateur, on adopte préférentiellement la convention générateur : on garde l'orientation des tensions et on oriente le courant dans l'autre sens, $i = -I_r$. La force contre-électromotrice, désormais orientée dans le sens du courant, devient la force électromotrice $E = Phi_0 Omega$ de la génératrice. La loi des mailles s'écrit $u = E - R i - L dv(i, t)$ et le couple électromagnétique $Gamma_"ém" = Phi_0 I_r = -Phi_0 i$ s'oppose à la rotation quand la génératrice débite ($i > 0$).
 
 #schéma(titre: "Schéma équivalent en fonctionnement générateur", hauteur: 4cm)
+
+== Pertes
+Les bilans énergétiques aux différentes étapes de conversion peuvent être représentés sur un schéma.
+
+#schéma(titre: "Pertes aux différentes étapes de conversion en régime stationnaire", hauteur: 4cm)
+
+#question-de-colle(
+    [Énoncer la relation couple-courant pour une machine à courant continu. Établir la relation vitesse angulaire-tension pour une machine sans pertes. Présenter la chaine énergétique pour un moteur à courant continu, en faisant apparaitre tous les types de pertes.],
+)

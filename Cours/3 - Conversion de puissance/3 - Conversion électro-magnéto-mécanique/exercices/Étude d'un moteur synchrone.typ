@@ -6,7 +6,50 @@
 )
 
 #figure(
-    image("../figures/2.png", width: 14cm),
+    grid(
+        columns: (1fr, 1fr),
+        align: horizon,
+        circuit({
+            import zap: *
+            import cetz.draw: *
+            node("A", (0, 3), fill: true)
+            node("B", (0, 0), fill: true)
+            fil((0, 3), (1, 3), i: $underline(I)$)
+            resistor("R", (1, 3), (3, 3), label: $R$)
+            inductor("L", (3, 3), (5, 3), label: $L$, variant: "ieee")
+            wire((5, 3), (6, 3))
+            vsource("E", (6, 0), (6, 3), u: $underline(E)$)
+            wire((6, 0), (0, 0))
+            line((0, 0.3), (0, 2.7), mark: (end: ">>", fill: black), name: "V")
+            content("V.mid", $underline(V)$, anchor: "east", padding: 4pt)
+        }),
+        canvas({
+            import cetz.draw: *
+            let psi = 30deg
+            let E = 4
+            let RI = 0.7
+            let XI = 2.2
+            let Ee = (E * calc.cos(psi), E * calc.sin(psi))
+            let Ve = (Ee.at(0) + RI, Ee.at(1) + XI)
+            let ang-phi = calc.atan2(Ve.at(0), Ve.at(1))
+            line((0, 0), (2.6, 0), mark: (end: ">>", fill: red), stroke: red, name: "I")
+            line((0, 0), Ee, mark: (end: ">>", fill: black), name: "E")
+            line(Ee, (rel: (RI, 0)), mark: (end: ">>", fill: black), name: "RI")
+            line("RI.end", Ve, mark: (end: ">>", fill: black), name: "XI")
+            line((0, 0), Ve, mark: (end: ">>", fill: black), name: "V")
+            arc((1.2, 0), radius: 1.2, start: 0deg, stop: psi, mark: (end: ">>", fill: black), name: "psi")
+            arc((1.9, 0), radius: 1.9, start: 0deg, stop: ang-phi, mark: (end: ">>", fill: black), name: "phi")
+            arc((0, 0), anchor: "origin", radius: 3, start: psi, stop: ang-phi, mark: (end: ">>", fill: black), name: "delta")
+            content("I.end", text(red, $underline(I)$), anchor: "west", padding: 3pt)
+            content((0.75 * Ee.at(0), 0.75 * Ee.at(1)), $underline(E)$, anchor: "north-west", padding: 3pt)
+            content("V.mid", $underline(V)$, anchor: "south-east", padding: 3pt)
+            content("RI.mid", $R underline(I)$, anchor: "north", padding: 3pt)
+            content("XI.mid", $j L omega underline(I)$, anchor: "west", padding: 3pt)
+            content((15deg, 1.45), $Psi$)
+            content((37deg, 2.4), $phi$)
+            content((ang-phi / 2 + psi / 2, 3.3), $delta$)
+        }),
+    ),
 )
 
 Afin de simplifier l'étude, les pertes mécaniques ainsi que les pertes fer du moteur seront négligées. Le moteur est une machine synchrone diphasée dont les deux enroulements statoriques sont identiques.
@@ -15,7 +58,7 @@ Toutes les valeurs de tension et courant données le sont en valeur efficace.
 
 L'inducteur du moteur synchrone est à aimants permanents et possède 8 pôles, soit 4 paires de pôles. En régime permanent de vitesse, la condition de synchronisme pour un moteur possédant $p$ paires de pôles s'écrit $omega=p Omega$, où $Omega$ désigne la vitesse de rotation du rotor en #unit("rad/s").
 
-Chaque bobinage du stator possède une résistance $R=#quan[0.03 Ω]$. L'intensité nominale du courant dans un enroulement du stator est $I_N=#quan[155 A]$. Pendant une durée limitée, elle peut atteindre la valeur maximale $I_M=#quan[185 A]$. La machine est étudiée en convention récepteur. Le modèle équivalent à une phase de l'induit est représenté ci-contre. Les tensions et courants sont sinusoïdaux de pulsation $omega=2 pi f$ constante.
+Chaque bobinage du stator possède une résistance $R=#quan[0.03 Ω]$. L'intensité nominale du courant dans un enroulement du stator est $I_N=#quan[155 A]$. Pendant une durée limitée, elle peut atteindre la valeur maximale $I_M=#quan[185 A]$. La machine est étudiée en convention récepteur. Le modèle équivalent à une phase de l'induit et le diagramme de Fresnel associé sont représentés ci-dessus. Le courant $underline(I)$ y est pris comme origine des phases : $phi$ est le déphasage de $underline(V)$ par rapport à $underline(I)$ et $Psi$, l'angle de pilotage, celui de $underline(E)$ par rapport à $underline(I)$. Les tensions et courants sont sinusoïdaux de pulsation $omega=2 pi f$ constante.
 #let R = 0.03
 
 Afin de déterminer les paramètres du modèle, divers essais sont effectués :
@@ -62,7 +105,9 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
             line((4, 0), (5, 0), mark: (end: ">>", fill: black), name: "RI")
             line((5, 0), (5, 3), mark: (end: ">>", fill: black), name: "LwI")
             line((0, 0), (5, 3), mark: (end: ">>", fill: black), name: "V")
-            content("E.mid", $underline(E)$, anchor: "north", padding: .5em)
+            line((0, -0.6), (2, -0.6), mark: (end: ">>", fill: red), stroke: red, name: "I")
+            content("I.end", [#set text(red); $underline(I)$], anchor: "west", padding: .3em)
+            content("E.mid", $underline(E)$, anchor: "south", padding: .3em)
             content("RI.mid", $R underline(I)$, anchor: "north", padding: .5em)
             content("LwI.mid", $j L omega underline(I)$, anchor: "west", padding: .5em)
             content("V.mid", $underline(V)$, anchor: "south-east", padding: .5em)
@@ -132,7 +177,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
         "Rappel des hypothèses : pertes Joule négligeables.",
     ),
 )[
-    Déterminer l'expression de la puissance électrique $P_a$ absorbée par le moteur en fonction de $V$, $I$ et $phi$, puis en fonction de $E$, $I$ et $Psi$. Quelle relation existe-t-il entre cette puissance électrique $P_a$ et la puissance mécanique électromagnétique $P_m$ reçue par le rotor ?
+    Déterminer l'expression de la puissance électrique moyenne $P_a$ absorbée par le moteur en fonction de $V$, $I$ et $phi$, puis en fonction de $E$, $I$ et $Psi$. Quelle relation existe-t-il entre cette puissance électrique $P_a$ et la puissance mécanique électromagnétique $P_m$ reçue par le rotor ?
 ][
     La puissance électrique absorbée par le moteur s'écrit :
     $ P_a = 2 V I cos(phi) $

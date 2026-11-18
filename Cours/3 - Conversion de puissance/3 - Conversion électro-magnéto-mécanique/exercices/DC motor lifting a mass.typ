@@ -5,7 +5,33 @@
     difficulté: 2,
 )
 
-#figure(image("../figures/3.png", width: 8cm))
+#figure(
+    circuit({
+        import zap: *
+        import cetz.draw: *
+        vsource("E0", (0, 0), (0, 2), u: $E_0$)
+        resistor("r0", (0, 2), (0, 4), label: $r_0$)
+        fil((0, 4), (2.5, 4), i: $i$)
+        node("A", (2.5, 4), fill: true)
+        node("B", (2.5, 0), fill: true)
+        wire((2.5, 4), (3.5, 4))
+        dcmotor("M", (3.5, 4), (3.5, 0))
+        wire((3.5, 0), (0, 0))
+        line((2.3, 0.3), (2.3, 3.7), mark: (end: ">>", fill: black), name: "U")
+        content("U.mid", $U$, anchor: "east", padding: 3pt)
+        // arbre, poulie, fil et masse
+        line((4.05, 2), (6.2, 2), stroke: 1.2pt)
+        circle((6.2, 2), radius: (0.45, 1.3))
+        circle((6.2, 2), radius: 0.06, fill: black)
+        content((6.42, 2.25), $a$)
+        line((6.2, 2), (6.65, 2), stroke: (dash: "dashed"))
+        line((6.65, 2), (6.65, 0.4))
+        rect((6.15, 0), (7.15, 0.4), fill: luma(80%), name: "M")
+        content((7.2, 0.6), $M$, anchor: "south-west")
+        line((5.6, 0), (7.8, 0))
+        rect((5.6, -0.25), (7.8, 0), fill: hachure(5pt), stroke: none)
+    }),
+)
 
 A DC machine of coupling constant $Phi_0$, of internal resistance $r$ and of inductance $L$ is used to lift a mass $M$. The axis of the rotor is connected to a pulley of radius $a$. On the pulley is fixed a string on which the mass is attached. The machine is supplied by a generator of electromotive force $E_0$ and internal resistance $r_0$.
 

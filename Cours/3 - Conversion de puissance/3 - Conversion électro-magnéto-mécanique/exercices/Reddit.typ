@@ -2,7 +2,7 @@
 
 #show: exercice.with(
     titre: "DIY motor isn't working, what is the problem with it?",
-    ouvert: true,
+    explique: true,
 )
 
 A question was posted on Reddit about a DIY#footnote[Do it yourself.] motor that isn't functioning properly. The user provides a photo of the motor.

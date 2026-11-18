@@ -135,7 +135,7 @@ Les caractéristiques de la machine synchrone diphasée sont les suivantes :
         "Comment s'expriment les pertes Joule statoriques ?",
     ),
 )[
-    Calculer la puissance fournie au réseau et le rendement de l'alternateur sachant que l'ensemble des pertes mécaniques, ferromagnétiques et d'excitation valent $P_p=#quan[2.4 MW]$.
+    Calculer la puissance moyenne fournie au réseau et le rendement de l'alternateur sachant que l'ensemble des pertes mécaniques, ferromagnétiques et d'excitation valent $P_p=#quan[2.4 MW]$.
 ][
     La puissance fournie au réseau est $P_"utile" = 2V I cos(phi) = #qty(2 * V * I * calc.cos(angle), "W", chiffres: 2)$, le facteur 2 venant du fait que l'alternateur est diphasé. Les pertes Joule statoriques valent $P_"Joule" = 2 R I^2 = #qty(2 * R * calc.pow(I, 2), "W", chiffres: 2)$.
 

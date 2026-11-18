@@ -37,6 +37,19 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
             line((0, -2.8), (0, -0.2), mark: (end: ">>", fill: black), name: "U")
             content("U.mid", $underline(U)$, anchor: "east", padding: 10pt)
         }),
+        caption: [Fonctionnement moteur, en convention récepteur.],
+    )
+    #figure(
+        circuit({
+            import zap: *
+            import cetz.draw: *
+            inductor("L", (3, 0), (0, 0), variant: "ieee", label: $L$, i: $underline(I)$)
+            vsource("E", (3, -3), (3, 0), u: $underline(E)$)
+            wire((0, -3), (3, -3))
+            line((0, -2.8), (0, -0.2), mark: (end: ">>", fill: black), name: "U")
+            content("U.mid", $underline(U)$, anchor: "east", padding: 10pt)
+        }),
+        caption: [Fonctionnement générateur, en convention générateur : le courant est orienté dans l'autre sens et $underline(E) = j L omega underline(I) + underline(U)$.],
     )
 ]
 
