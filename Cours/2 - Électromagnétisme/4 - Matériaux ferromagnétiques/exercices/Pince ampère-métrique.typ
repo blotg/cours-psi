@@ -126,7 +126,7 @@
             })
         ]
         On peut en déduire que $u(t) = R i(t)$ et que $u(t) = -dv(Phi,t) = -dv(Phi_i+Phi_I,t)$ d'où l'équation différentielle :
-        $ u(t) = - (mu N^2 a)/(2 pi R) ln(1+a/b) dv(u(t), t) - (mu N a)/(2 pi) ln(1+a/b) dv(I(t), t) $
+        $ u(t) = - (mu N^2 a)/(2 pi R) ln(1+a/b) dv(i(t), t) - (mu N a)/(2 pi) ln(1+a/b) dv(I(t), t) $
     ]
 
     #question(coups-de-pouce: (
