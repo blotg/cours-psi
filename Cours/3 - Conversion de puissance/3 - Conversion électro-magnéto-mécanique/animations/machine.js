@@ -22,6 +22,9 @@ import * as THREE from 'three';
 // -- Dimensions (unités arbitraires) ------------------------------------------
 
 export const R_ARBRE = 0.55;
+/** L'encoche de l'arbre, dans l'axe du rotor : sans elle, rien ne dit qu'il
+ *  tourne. Elle ne court que sur `longueur`, depuis le plan de coupe. */
+const RAINURE = { largeur: 0.2, profondeur: 0.17, longueur: 0.5 };
 export const R_ROTOR = 2.9;
 export const R_ALÉSAGE = 3.02; // l'alésage du stator : l'entrefer est très étroit
 export const R_STATOR = 5;
@@ -29,8 +32,8 @@ export const R_ENTREFER = (R_ROTOR + R_ALÉSAGE) / 2;
 /** Longueur de la demi-machine visible, derrière le plan de coupe. */
 export const LONGUEUR = 3.2;
 
-const R_FOND = 4; // le fond des encoches du stator
-const PROFONDEUR_ROTOR = 0.72; // la profondeur des encoches du rotor
+const R_FOND = 3.62; // le fond des encoches du stator
+const PROFONDEUR_ROTOR = 0.48; // la profondeur des encoches du rotor
 const LARGEUR_MAX = { stator: 0.34, rotor: 0.3 };
 /** Le rayon des fils des têtes de bobines pour N = 1 : ils s'affinent en 1/N,
  *  et leur faisceau garde la même largeur. */
@@ -189,6 +192,8 @@ export const MATÉRIAUX = {
         bumpScale: 3,
     }),
     arbre: new THREE.MeshStandardMaterial({ color: '#a4a9ae', metalness: 0.9, roughness: 0.3 }),
+    // Le fond de l'encoche de l'arbre : dans l'ombre, pour qu'elle se voie de face.
+    ombre: new THREE.MeshStandardMaterial({ color: '#1f2225', metalness: 0, roughness: 1 }),
     bague: new THREE.MeshStandardMaterial({ color: '#c9a150', metalness: 1, roughness: 0.28 }),
     balai: new THREE.MeshStandardMaterial({ color: '#2e2e30', metalness: 0.1, roughness: 0.85 }),
     isolant: new THREE.MeshStandardMaterial({ color: '#33383d', metalness: 0, roughness: 0.8 }),
@@ -277,8 +282,11 @@ export function têteDeBobine(a, via, { r, z, hauteur, écart, épaisseur, maté
  * Renvoie le `stator`, fixe (avec les balais), le `rotor`, à faire tourner
  * autour de (O z) — son axe est en θ = 0 quand sa rotation est nulle —, les
  * conducteurs de chacun (cf. `circuits`, complétés de la distance `rayon` de
- * leur milieu à l'axe), le rayon des symboles de courant qui tiennent sur
- * leur section, et `libère()`, qui rend la mémoire de la carte graphique.
+ * leur milieu à l'axe), leurs `enroulements` — le groupe de tout ce qui
+ * remplit les encoches du stator, et celui du rotor —, le rayon des symboles
+ * de courant qui tiennent sur leur section, `montreLesConducteurs(oui)`, qui
+ * les cache avec leurs encoches — il reste un stator et un rotor lisses —, et
+ * `libère()`, qui rend la mémoire de la carte graphique.
  */
 export function machine(N, couleurs) {
     const { stator: conducteursStator, rotor: conducteursRotor } = circuits(N);
@@ -292,21 +300,35 @@ export function machine(N, couleurs) {
     // Le stator : les tôles, et dans chaque encoche le conducteur, qui
     // dépasse du paquet vers les têtes de bobines.
     const stator = new THREE.Group();
+    const enroulements = { stator: new THREE.Group(), rotor: new THREE.Group() };
+    stator.add(enroulements.stator);
     // Les encoches occupent 70 % de l'écart entre les deux plus proches,
     // √2/N radian (cf. `répartis`).
     const lStator = Math.min(LARGEUR_MAX.stator, (0.7 * R_ALÉSAGE * Math.SQRT2) / N);
-    const tôles = new THREE.Shape(Array.from({ length: 192 }, (_, k) => polaire(R_STATOR, (2 * Math.PI * k) / 192)));
-    tôles.holes.push(contourEncoché(new THREE.Path(), conducteursStator, R_ALÉSAGE, R_FOND, lStator));
-    stator.add(extrude(tôles, -LONGUEUR, 0, MATÉRIAUX.flanc, MATÉRIAUX.coupe));
+    // Les tôles, avec leurs encoches et sans : on montre les unes ou les
+    // autres, selon qu'on voit les conducteurs.
+    const cercle = (rayon) => Array.from({ length: 192 }, (_, k) => polaire(rayon, (2 * Math.PI * k) / 192));
+    const tôles = (profil, trou, segments) => {
+        profil.holes.push(trou);
+        return extrude(profil, -LONGUEUR, 0, MATÉRIAUX.flanc, MATÉRIAUX.coupe, segments);
+    };
+    const encochées = {};
+    const lisses = {};
+    encochées.stator = tôles(
+        new THREE.Shape(cercle(R_STATOR)),
+        contourEncoché(new THREE.Path(), conducteursStator, R_ALÉSAGE, R_FOND, lStator),
+    );
+    lisses.stator = tôles(new THREE.Shape(cercle(R_STATOR)), new THREE.Path(cercle(R_ALÉSAGE)));
+    stator.add(encochées.stator, lisses.stator);
     const rStator = (R_ALÉSAGE + R_FOND) / 2;
     // Les têtes des deux circuits se croisent : celles du circuit 2 passent
     // plus en arrière et plus au large.
     const têtes = { 1: { hauteur: 0.45, écart: 0.1 }, 2: { hauteur: 0.8, écart: 0.45 } };
     for (const c of conducteursStator) {
         c.rayon = rStator;
-        stator.add(...encoche(c.angle, R_ALÉSAGE, R_FOND, lStator, fils[c.circuit], 0.25));
+        enroulements.stator.add(...encoche(c.angle, R_ALÉSAGE, R_FOND, lStator, fils[c.circuit], 0.25));
         if (c.via === undefined) continue;
-        stator.add(
+        enroulements.stator.add(
             têteDeBobine(c.angle, c.via, {
                 r: rStator,
                 z: -LONGUEUR - 0.25,
@@ -325,22 +347,24 @@ export function machine(N, couleurs) {
 
     // Le rotor : ses tôles, creusées d'encoches ouvertes sur l'entrefer.
     const rotor = new THREE.Group();
+    rotor.add(enroulements.rotor);
     const fond = R_ROTOR - PROFONDEUR_ROTOR;
     // Au rotor, deux conducteurs voisins sont à 2/N radian au moins (cf.
     // `positions`). Les dents s'amincissent vers l'axe : c'est au fond des
     // encoches qu'on mesure leur écart.
     const lRotor = Math.min(LARGEUR_MAX.rotor, (0.7 * fond * 2) / N);
-    const profil = contourEncoché(new THREE.Shape(), conducteursRotor, R_ROTOR, fond, lRotor);
-    profil.holes.push(new THREE.Path().absarc(0, 0, R_ARBRE, 0, 2 * Math.PI, true));
     // Les pôles couvrent jusqu'à 90° d'un seul arc : il leur faut plus de
     // segments.
-    rotor.add(extrude(profil, -LONGUEUR, 0, MATÉRIAUX.flanc, MATÉRIAUX.coupe, 40));
+    const alésage = () => new THREE.Path().absarc(0, 0, R_ARBRE, 0, 2 * Math.PI, true);
+    encochées.rotor = tôles(contourEncoché(new THREE.Shape(), conducteursRotor, R_ROTOR, fond, lRotor), alésage(), 40);
+    lisses.rotor = tôles(new THREE.Shape(cercle(R_ROTOR)), alésage(), 40);
+    rotor.add(encochées.rotor, lisses.rotor);
     const rRotor = (R_ROTOR + fond) / 2;
     for (const c of conducteursRotor) {
         c.rayon = rRotor;
-        rotor.add(...encoche(c.angle, fond, R_ROTOR, lRotor, fils.rotor, 0.2));
+        enroulements.rotor.add(...encoche(c.angle, fond, R_ROTOR, lRotor, fils.rotor, 0.2));
         if (c.via === undefined) continue;
-        rotor.add(
+        enroulements.rotor.add(
             têteDeBobine(c.angle, c.via, {
                 r: rRotor - 0.05,
                 z: -LONGUEUR - 0.2,
@@ -351,11 +375,17 @@ export function machine(N, couleurs) {
             }),
         );
     }
-    // L'arbre, et les deux bagues qui amènent le courant d'excitation.
-    const arbre = new THREE.Mesh(new THREE.CylinderGeometry(R_ARBRE, R_ARBRE, LONGUEUR + 3.4, 40), MATÉRIAUX.arbre);
+    // L'arbre, et les deux bagues qui amènent le courant d'excitation. Son
+    // bout, au plan de coupe, porte une encoche dans l'axe du rotor, au fond
+    // sombre.
+    const queue = LONGUEUR + 3.4 - RAINURE.longueur;
+    const arbre = new THREE.Mesh(new THREE.CylinderGeometry(R_ARBRE, R_ARBRE, queue, 40), MATÉRIAUX.arbre);
     arbre.rotation.x = Math.PI / 2;
-    arbre.position.z = -(LONGUEUR + 3.4) / 2;
-    rotor.add(arbre);
+    arbre.position.z = -RAINURE.longueur - queue / 2;
+    const creux = R_ARBRE - RAINURE.profondeur;
+    const bout = contourEncoché(new THREE.Shape(), [{ angle: 0 }], R_ARBRE, creux, RAINURE.largeur);
+    const ombre = extrude(barreau(0, creux, R_ARBRE, RAINURE.largeur), -RAINURE.longueur, 0.02 - RAINURE.longueur, MATÉRIAUX.ombre);
+    rotor.add(arbre, extrude(bout, -RAINURE.longueur, 0, MATÉRIAUX.arbre, MATÉRIAUX.arbre, 64), ombre);
     for (const z of [-LONGUEUR - 1.6, -LONGUEUR - 2.3]) {
         const bague = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 0.35, 48), MATÉRIAUX.bague);
         bague.rotation.x = Math.PI / 2;
@@ -367,7 +397,14 @@ export function machine(N, couleurs) {
         stator,
         rotor,
         conducteurs: { stator: conducteursStator, rotor: conducteursRotor },
+        enroulements,
         symboles: { stator: Math.min(0.13, 0.42 * lStator), rotor: Math.min(0.13, 0.42 * lRotor) },
+        montreLesConducteurs(oui = true) {
+            for (const partie of ['stator', 'rotor']) {
+                enroulements[partie].visible = encochées[partie].visible = oui;
+                lisses[partie].visible = !oui;
+            }
+        },
         libère() {
             for (const groupe of [stator, rotor]) groupe.traverse((objet) => objet.geometry?.dispose());
             for (const fil of Object.values(fils)) fil.dispose();

@@ -182,9 +182,10 @@ export class Flèche extends THREE.Group {
  * Un trait, plein ou en pointillés, d'une épaisseur en pixels — WebGL ne sait
  * tracer ses lignes qu'à un pixel. `trace` le refait sur place : recréer ses
  * tampons à chaque réglage les laisserait s'accumuler dans la carte graphique.
+ * `opacité` le rend translucide : il laisse voir ce qu'il traverse.
  */
 export class Trait extends Line2 {
-    constructor({ couleur = COULEURS.noir, épaisseur = 2, pointillés = false, tiret = 0.12 } = {}) {
+    constructor({ couleur = COULEURS.noir, épaisseur = 2, pointillés = false, tiret = 0.12, opacité = 1 } = {}) {
         super(
             new LineGeometry(),
             new LineMaterial({
@@ -199,6 +200,13 @@ export class Trait extends Line2 {
                 // le rendu l'écarterait. Un trait n'a pas d'envers.
                 side: THREE.DoubleSide,
                 toneMapped: false,
+                transparent: opacité < 1,
+                opacity: opacité,
+                // Les segments d'un trait se recouvrent à chaque sommet :
+                // translucides, ils s'y peindraient deux fois, et le trait
+                // serait un chapelet de points sombres. On ne peint donc
+                // qu'une fois chaque pixel, à profondeur égale.
+                depthFunc: opacité < 1 ? THREE.LessDepth : THREE.LessEqualDepth,
             }),
         );
     }

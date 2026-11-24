@@ -45,7 +45,7 @@
     "theta_r": (signification: "l'inclinaison du rotor", unité: unit("rad")),
     "N_r": (signification: "le nombre de spires de l'enroulement rotorique", unité: "sans unité"),
     "N_s": (signification: "le nombre de spires de l'enroulement statorique", unité: "sans unité"),
-    "R": (signification: "le rayon moyen de la machine", unité: unit("m")),
+    "R": (signification: "le rayon du rotor", unité: unit("m")),
     "h": (signification: "la hauteur de la machine", unité: unit("m")),
     "Gamma_\"ém\"": (signification: "le moment électromagnétique exercé sur le rotor", unité: unit("N m")),
     "Omega": (signification: "la vitesse angulaire du rotor", unité: unit("rad/s")),
@@ -170,7 +170,7 @@ La force électromagnétique est toujours attractive. La force électromagnétiq
 )
 
 #application[
-    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=#quan[5 um]$. On donne $i=#quan[7.5 mA]$, $mu_r=#num("1e5")$, $N=#num("2000")$, $S=#quan[16 cm^2]$, $l_"fixe"+l_"mobile"=#quan[30 cm]$.
+    Déterminer la force nécessaire pour forcer un portail fermé par un verrou magnétique. Les deux parties ne se touchent jamais parfaitement : il subsiste un entrefer résiduel $x=#quan[40 um]$. On donne $i=#quan[0.25 A]$, $mu_r=#num("2000")$, $N=#num("600")$, $S=#quan[16 cm^2]$, $l_"fixe"+l_"mobile"=#quan[10 cm]$.
 ]
 
 = Machine synchrone
@@ -214,7 +214,7 @@ Sur le stator, plusieurs circuits électriques sont enroulés parallèlement à 
 
 Les circuits électriques peuvent donner naissance à plusieurs paires de pôles. Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
-Les circuits électriques se trouvent dans des encoches sur le matériau ferromagnétique. L'entrefer est très étroit.
+Les circuits électriques se trouvent dans des encoches sur le matériau ferromagnétique. L'entrefer est très étroit : son épaisseur $e$ est très petite devant le rayon $R$ du rotor.
 
 #schéma(titre: "Structure d'une machine synchrone diphasée et bipolaire", hauteur: 4cm)
 
@@ -232,6 +232,7 @@ Les circuits électriques se trouvent dans des encoches sur le matériau ferroma
     savoir-faire: true,
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
     ),
@@ -260,6 +261,7 @@ Les deux circuits statoriques sont parcourus par des courants sinusoïdaux de m�
     savoir-faire: true,
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
         [Les deux circuits statoriques sont parcourus par des courants $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$.],
@@ -294,6 +296,7 @@ Le circuit rotorique est parcouru par un courant continu $I_e$ appelé courant e
     savoir-faire: true,
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
         [Le circuit rotorique est alimenté par un courant $I_e$.],
@@ -314,13 +317,14 @@ Connaissant le champ magnétique dans l'entrefer, il est possible d'en déduire 
     $ Gamma_"ém"= lr(pdv(cal(E), theta_r)\))_i $
 ]
 
-L'énergie magnétique est stockée dans l'entrefer, de volume $2 pi R h e$, où règne le champ total $va(B_s) + va(B_r)$.
+L'énergie magnétique est stockée dans l'entrefer, de volume $2 pi R h e$ puisque $e << R$, où règne le champ total $va(B_s) + va(B_r)$.
 
 #encadré(
     titre: "Moment électromagnétique pour la machine synchrone",
     savoir-faire: true,
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
         [Les deux circuits statoriques sont parcourus par des courants $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$.],
@@ -355,6 +359,7 @@ On s'intéresse au régime permanent, dans lequel le rotor tourne à une vitesse
     savoir-faire: true,
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
         [Les deux circuits statoriques sont parcourus par des courants $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+pi/2)$.],
@@ -470,6 +475,7 @@ La variation du flux magnétique à travers les spires du stator induit une forc
     titre: "Flux créé par le rotor à travers le stator",
     hypothèses: (
         [L'entrefer a une épaisseur constante.],
+        [L'épaisseur $e$ de l'entrefer est très petite devant le rayon $R$ du rotor : $e << R$.],
         [Les matériaux ferromagnétiques sont doux, hors saturation et de perméabilité magnétique infinie.],
         [La machine est diphasée et bipolaire.],
         [Les deux circuits statoriques sont parcourus par des courants $i_1=I_s sqrt(2) cos(omega t)$ et $i_2=I_s sqrt(2) cos(omega t+ pi/2)$.],

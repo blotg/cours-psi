@@ -18,7 +18,7 @@ Le circuit diphasé statorique est parcouru par deux courants sinusoïdaux de pu
     Le couple moteur est non nul seulement si la condition de synchronisme $Omega = omega$ est vérifiée.
 ]
 
-On désigne par $L$ l'inductance d'une phase et on néglige la résistance des enroulements. En régime permanent de rotation, on note $underline(U)$ la représentation complexe de la tension d'alimentation de la phase, $underline(I)$ celle de l'intensité du courant et $underline(E)$ celle de la force contre-électromotrice.
+On désigne par $L$ l'inductance d'une phase et on néglige la résistance des enroulements. En régime permanent de rotation, on note $underline(U)$ la représentation complexe de la tension d'alimentation de la phase, $underline(I)$ celle de l'intensité du courant et $underline(E)$ celle de la force contre-électromotrice, de sorte. Les sens de $underline(U)$ et $underline(I)$ sont choisis en convention récepteur.
 
 #question(
     coups-de-pouce: (
@@ -43,11 +43,11 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
         circuit({
             import zap: *
             import cetz.draw: *
-            inductor("L", (3, 0), (0, 0), variant: "ieee", label: $L$, i: $underline(I)$)
-            vsource("E", (3, -3), (3, 0), u: $underline(E)$)
-            wire((0, -3), (3, -3))
-            line((0, -2.8), (0, -0.2), mark: (end: ">>", fill: black), name: "U")
-            content("U.mid", $underline(U)$, anchor: "east", padding: 10pt)
+            inductor("L", (3, 0), (6, 0), variant: "ieee", label: $L$, i: $underline(I)$)
+            vsource("E", (3, -3), (3, 0), u: $-underline(E)$)
+            wire((6, -3), (3, -3))
+            line((6, -2.8), (6, -0.2), mark: (end: ">>", fill: black), name: "U")
+            content("U.mid", $underline(U_G) = -underline(U)$, anchor: "west", padding: 10pt)
         }),
         caption: [Fonctionnement générateur, en convention générateur : le courant est orienté dans l'autre sens et $underline(E) = j L omega underline(I) + underline(U)$.],
     )

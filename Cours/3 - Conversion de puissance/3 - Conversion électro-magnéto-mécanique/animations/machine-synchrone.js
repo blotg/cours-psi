@@ -7,6 +7,7 @@
 // d'autre de son axe : ses champs sont en marches — le théorème d'Ampère les
 // fait sauter d'un cran à chaque conducteur. Quand N → ∞, ils tendent vers
 // ceux du cours : B_s ∝ cos(ωt − θ), le champ glissant, et B_r ∝ cos(θ − θ_r).
+// Le curseur de N finit sur cette limite.
 //
 // Le rotor tourne au synchronisme : θ_r = ωt − α, l'angle α entre le maximum
 // du champ glissant et l'axe du rotor reste constant, et le couple vaut
@@ -30,8 +31,6 @@ const COULEUR = {
     Bs: COULEURS.violet,
     Br: COULEURS.orange,
 };
-/** Les champs des deux circuits statoriques, dont B_s est la somme. */
-const CIRCUITS = [1, 2];
 
 const deg = THREE.MathUtils.degToRad;
 /** Une graduation en degrés, et celles d'un tour. */
@@ -44,7 +43,8 @@ const direction = (a) => vecteur(Math.cos(a), Math.sin(a), 0);
  *  étiquettes qui ne se lisent que devant lui. */
 const Z_SCHÉMA = 0.03;
 const DEVANT = vecteur(0, 0, 1);
-/** Des flèches de champ tous les 10° ; celles de B_r entre celles de B_s. */
+/** Des flèches de champ tous les 10° pour chaque champ, celles des uns
+ *  entre celles des autres : aucune ne tombe sur une autre. */
 const FLÈCHES = 36;
 /** L'amplitude de la limite sinusoïdale de chaque champ, celle de B_s pour
  *  unité. Rien ne lie les deux : B_s suit I_s, B_r suit I_e. */
@@ -54,6 +54,9 @@ const LONGUEUR_MAX = 0.85;
 /** Les points du contour qui relie les pointes des flèches. */
 const ÉCHANTILLONS = 720;
 const N_DÉPART = 5;
+/** Le plus grand nombre d'encoches dessinées ; le cran suivant du curseur est
+ *  la limite N → ∞. */
+const N_MAX = 20;
 
 const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
 const VUE_DE_TROIS_QUARTS = { position: [9, 14, 26], cible: [0, 0.3, -1.5] };
@@ -107,47 +110,50 @@ function machineSynchrone(section) {
         α: 45,
         f: 0.15,
         pause: false,
-        courants: true,
-        limites: false,
-        circuits: false,
+        conducteurs: true,
     };
 
     // La machine, reconstruite quand N change, et le sens des courants sur
     // la section de ses conducteurs.
     let modèle = null;
     let symboles = [];
+    // Le nombre d'encoches dessinées : N, ou N_MAX à la limite N → ∞.
+    let encoches = 0;
     function construis() {
         if (modèle) {
             scène.scène.remove(modèle.stator, modèle.rotor);
             modèle.libère();
             for (const { symbole } of symboles) symbole.material.dispose();
         }
-        modèle = machine(état.N, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
+        encoches = Math.min(état.N, N_MAX);
+        modèle = machine(encoches, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
         symboles = [];
         for (const partie of ['stator', 'rotor']) {
             const disque = new THREE.CircleGeometry(modèle.symboles[partie], 32);
             for (const c of modèle.conducteurs[partie]) {
                 const symbole = new Courant(COULEUR[c.circuit], disque);
                 symbole.position.copy(direction(c.angle).multiplyScalar(c.rayon)).setZ(0.01);
-                symbole.visible = état.courants;
-                modèle[partie].add(symbole);
+                modèle.enroulements[partie].add(symbole);
                 symboles.push({ symbole, c });
             }
         }
+        modèle.montreLesConducteurs(état.conducteurs);
         scène.ajoute(modèle.stator, modèle.rotor);
     }
     construis();
 
     // Le nom des bandes de conducteurs des circuits statoriques, et les pôles
     // du rotor, qui tournent avec lui.
-    const bandes = [
-        ['1', 90, 1],
-        ["1'", 270, 1],
-        ['2', 0, 2],
-        ["2'", 180, 2],
-    ].map(([tex, a, circuit]) =>
-        new Étiquette(tex, { couleur: COULEUR[circuit], face: DEVANT }).place(
-            direction(deg(a)).multiplyScalar(R_STATOR + 0.55),
+    const bandes = new THREE.Group().add(
+        ...[
+            ['1', 90, 1],
+            ["1'", 270, 1],
+            ['2', 0, 2],
+            ["2'", 180, 2],
+        ].map(([tex, a, circuit]) =>
+            new Étiquette(tex, { couleur: COULEUR[circuit], face: DEVANT }).place(
+                direction(deg(a)).multiplyScalar(R_STATOR + 0.55),
+            ),
         ),
     );
     const pôles = new THREE.Group().add(
@@ -155,38 +161,26 @@ function machineSynchrone(section) {
         new Étiquette('\\mathrm{S}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(-1.55, 0, Z_SCHÉMA)),
     );
 
-    // Les champs dans l'entrefer : des flèches, le contour qui relie leurs
-    // pointes, et en pointillés la limite sinusoïdale.
+    // Les champs dans l'entrefer : des flèches, et le contour qui relie
+    // leurs pointes. Chaque champ a les siennes, décalées d'un quart de pas
+    // de celles du suivant.
     const flèches = (couleur, décalage) =>
         Array.from({ length: FLÈCHES }, (_, k) => ({
             θ: (DEUX_PI * (k + décalage)) / FLÈCHES,
             flèche: new Flèche({ couleur, rayon: 0.026, tête: 0.18, largeur: 0.07 }),
         }));
     const champs = {
-        Bs: { flèches: flèches(COULEUR.Bs, 0), contour: new Trait({ couleur: COULEUR.Bs, épaisseur: 2 }) },
-        Br: { flèches: flèches(COULEUR.Br, 0.5), contour: new Trait({ couleur: COULEUR.Br, épaisseur: 2 }) },
+        Bs: { flèches: flèches(COULEUR.Bs, 0), visible: true },
+        1: { flèches: flèches(COULEUR[1], 0.25), visible: false },
+        2: { flèches: flèches(COULEUR[2], 0.75), visible: false },
+        Br: { flèches: flèches(COULEUR.Br, 0.5), visible: true },
     };
-    const limites = {
-        Bs: new Trait({ couleur: COULEUR.Bs, épaisseur: 1.5, pointillés: true, tiret: 0.1 }),
-        Br: new Trait({ couleur: COULEUR.Br, épaisseur: 1.5, pointillés: true, tiret: 0.1 }),
-    };
-    const groupeBs = new THREE.Group().add(...champs.Bs.flèches.map((f) => f.flèche), champs.Bs.contour);
-    const groupeBr = new THREE.Group().add(...champs.Br.flèches.map((f) => f.flèche), champs.Br.contour);
-    const groupeLimites = new THREE.Group().add(limites.Bs, limites.Br);
-    // Le champ de chaque circuit statorique, seul : son contour, sans
-    // flèches — elles tomberaient sur celles de B_s.
-    const parCircuit = Object.fromEntries(
-        CIRCUITS.map((n) => [
-            n,
-            {
-                contour: new Trait({ couleur: COULEUR[n], épaisseur: 2 }),
-                limite: new Trait({ couleur: COULEUR[n], épaisseur: 1.5, pointillés: true, tiret: 0.1 }),
-            },
-        ]),
-    );
-    const groupeCircuits = new THREE.Group().add(...CIRCUITS.map((n) => parCircuit[n].contour));
-    const groupeLimitesCircuits = new THREE.Group().add(...CIRCUITS.map((n) => parCircuit[n].limite));
-    groupeCircuits.visible = groupeLimitesCircuits.visible = false;
+    for (const [nom, champ] of Object.entries(champs)) {
+        // Le contour, fin et translucide : ce sont les flèches qu'on lit.
+        champ.contour = new Trait({ couleur: COULEUR[nom], épaisseur: 1.2, opacité: 0.5 });
+        champ.groupe = new THREE.Group().add(...champ.flèches.map((f) => f.flèche), champ.contour);
+        champ.groupe.visible = champ.visible;
+    }
 
     // L'angle α, du rotor au maximum du champ glissant, et le couple.
     const schéma = new THREE.Group();
@@ -195,13 +189,41 @@ function machineSynchrone(section) {
     const arcα = new Arc('\\alpha', { face: DEVANT });
     const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
     schéma.add(axeRotor, maximumBs, arcα, arcΓ, pôles);
-    scène.ajoute(...bandes, groupeBs, groupeBr, groupeLimites, groupeCircuits, groupeLimitesCircuits, schéma);
+    scène.ajoute(bandes, ...Object.values(champs).map((champ) => champ.groupe), schéma);
 
     // -- Réglages --------------------------------------------------------------
 
     // Le panneau est plus haut que la scène : ses groupes se replient, et
     // ceux qui ne servent qu'à l'occasion le sont au départ.
     const réglages = new Réglages(panneau, { rétractables: true });
+
+    réglages.groupe('Courants statoriques');
+    const courants = new Graphe({
+        x: { min: 0, max: 360, nom: '\\omega t', graduations: TOUR },
+        y: {
+            min: -1.15,
+            max: 1.15,
+            nom: `{\\color{${COULEUR[1]}} i_1}, {\\color{${COULEUR[2]}} i_2}`,
+            graduations: [
+                [1, 'I'],
+                [-1, '-I'],
+            ],
+        },
+    });
+    courants.trace((x) => Math.cos(deg(x)), { couleur: COULEUR[1] });
+    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), { couleur: COULEUR[2] });
+    const curseurTemps = courants.verticale();
+    const points = [1, 2].map((circuit) => courants.point({ couleur: COULEUR[circuit] }));
+    réglages.ajoute(courants.élément);
+    réglages.formule(
+        `\\begin{gathered} {\\color{${COULEUR[1]}} i_1 = I\\cos(\\omega t)} \\\\ ` +
+            `{\\color{${COULEUR[2]}} i_2 = I\\cos(\\omega t + \\pi/2)} \\end{gathered}`,
+    );
+    réglages.texte(
+        'Dans les encoches, ⊙ : le courant sort du plan de coupe, ⊗ : il y entre ; le symbole pâlit avec ' +
+            'l’intensité. En vert le circuit statorique 1 (conducteurs 1 et 1′), en bleu le circuit 2 (2 et 2′), ' +
+            'en rouge le circuit rotorique, parcouru par le courant continu Iₑ.',
+    ).className = 'note';
 
     réglages.groupe('Fonctionnement');
     réglages.curseur({
@@ -222,32 +244,28 @@ function machineSynchrone(section) {
         unité: ' Hz',
         auChangement: (v) => (état.f = v),
     });
-    réglages.texte('La fréquence des courants, très ralentie. Le rotor tourne au synchronisme : Ω = ω.').className =
-        'note';
     const pause = réglages.bouton('Pause', () => {
         état.pause = !état.pause;
         pause.textContent = état.pause ? 'Reprendre' : 'Pause';
     });
 
     réglages.groupe('Enroulements');
+    // Le dernier cran du curseur est la limite N → ∞ : les champs y sont
+    // sinusoïdaux, la machine garde ses N_MAX encoches.
     réglages.curseur({
         tex: 'N',
         min: 1,
-        max: 20,
+        max: N_MAX + 1,
         pas: 1,
         valeur: état.N,
+        formate: (v) => (v > N_MAX ? '∞' : String(v)),
         auChangement: (v) => {
-            état.N = v;
-            construis();
+            état.N = v > N_MAX ? Infinity : v;
+            if (Math.min(état.N, N_MAX) !== encoches) construis();
         },
     });
-    réglages.texte(
-        'Encoches de chaque côté de chaque circuit. Le champ saute d’un cran à chaque conducteur : ' +
-            'il est en marches, qui tendent vers le champ sinusoïdal du cours quand N → ∞.',
-    ).className = 'note';
 
-    // Le graphique des champs, en fonction de θ : la case « Limite
-    // sinusoïdale » en montre aussi les pointillés.
+    // Le graphique des champs, en fonction de θ : ceux qui sont cochés.
     const champsEnθ = new Graphe({
         x: { min: 0, max: 360, nom: '\\theta', graduations: TOUR },
         y: {
@@ -265,67 +283,49 @@ function machineSynchrone(section) {
         },
         hauteur: 170,
     });
-    const courbesLimites = {
-        Bs: champsEnθ.courbe({ couleur: COULEUR.Bs, épaisseur: 1.2, pointillés: true, visible: false }),
-        Br: champsEnθ.courbe({ couleur: COULEUR.Br, épaisseur: 1.2, pointillés: true, visible: false }),
-    };
-    const courbesCircuits = Object.fromEntries(
-        CIRCUITS.map((n) => [
-            n,
-            {
-                champ: champsEnθ.courbe({ couleur: COULEUR[n], épaisseur: 1.2, visible: false }),
-                limite: champsEnθ.courbe({ couleur: COULEUR[n], épaisseur: 1, pointillés: true, visible: false }),
-            },
-        ]),
-    );
-    const courbesChamps = {
-        Bs: champsEnθ.courbe({ couleur: COULEUR.Bs }),
-        Br: champsEnθ.courbe({ couleur: COULEUR.Br }),
-    };
-    // Ce qui se montre des champs des circuits : leur contour, et leur
-    // limite si celle des champs totaux se montre aussi.
-    const montreCircuits = () => {
-        groupeCircuits.visible = état.circuits;
-        groupeLimitesCircuits.visible = état.circuits && état.limites;
-        for (const n of CIRCUITS) {
-            courbesCircuits[n].champ.montre(état.circuits);
-            courbesCircuits[n].limite.montre(état.circuits && état.limites);
-        }
-        scène.redessine();
-    };
+    // Les champs des circuits sous les champs totaux, en trait plus fin.
+    for (const nom of [1, 2, 'Bs', 'Br']) {
+        const total = typeof nom === 'string';
+        champs[nom].courbe = champsEnθ.courbe({
+            couleur: COULEUR[nom],
+            épaisseur: total ? 2 : 1.2,
+            visible: champs[nom].visible,
+        });
+    }
 
     réglages.groupe('Afficher');
     const montre = (objets) => (visible) => {
         objets.forEach((o) => (o.visible = visible));
         scène.redessine();
     };
-    réglages.case({ texte: 'Champ statorique ', tex: 'B_s', couleur: COULEUR.Bs, auChangement: montre([groupeBs]) });
+    // Un champ décoché quitte la scène et le graphique.
+    for (const [nom, texte, tex] of [
+        ['Bs', 'Champ statorique ', 'B_s'],
+        [1, 'Champ du circuit 1 ', 'B_{s1}'],
+        [2, 'Champ du circuit 2 ', 'B_{s2}'],
+        ['Br', 'Champ rotorique ', 'B_r'],
+    ]) {
+        const champ = champs[nom];
+        réglages.case({
+            texte,
+            tex,
+            couleur: COULEUR[nom],
+            valeur: champ.visible,
+            auChangement: (visible) => {
+                champ.visible = champ.groupe.visible = visible;
+                champ.courbe.montre(visible);
+                scène.redessine();
+            },
+        });
+    }
+    // Sans ses conducteurs — ni leurs encoches, ni le sens de leurs
+    // courants, ni leurs noms —, la machine laisse voir les champs seuls.
     réglages.case({
-        texte: 'Champs des circuits 1 et 2 ',
-        tex: `{\\color{${COULEUR[1]}} B_{s1}}, {\\color{${COULEUR[2]}} B_{s2}}`,
-        valeur: false,
+        texte: 'Conducteurs',
         auChangement: (visible) => {
-            état.circuits = visible;
-            montreCircuits();
-        },
-    });
-    réglages.case({ texte: 'Champ rotorique ', tex: 'B_r', couleur: COULEUR.Br, auChangement: montre([groupeBr]) });
-    groupeLimites.visible = false;
-    réglages.case({
-        texte: 'Limite sinusoïdale (N → ∞)',
-        valeur: false,
-        auChangement: (visible) => {
-            état.limites = visible;
-            for (const courbe of Object.values(courbesLimites)) courbe.montre(visible);
-            montre([groupeLimites])(visible);
-            montreCircuits();
-        },
-    });
-    réglages.case({
-        texte: 'Sens des courants',
-        auChangement: (visible) => {
-            état.courants = visible;
-            montre(symboles.map((s) => s.symbole))(visible);
+            état.conducteurs = visible;
+            modèle.montreLesConducteurs(visible);
+            montre([bandes])(visible);
         },
     });
     réglages.case({ texte: 'Angle α et couple', auChangement: montre([schéma]) });
@@ -373,34 +373,6 @@ function machineSynchrone(section) {
     réglages.ajoute(couple.élément);
     const bilan = réglages.texte();
 
-    réglages.groupe('Courants statoriques', { ouvert: false });
-    const courants = new Graphe({
-        x: { min: 0, max: 360, nom: '\\omega t', graduations: TOUR },
-        y: {
-            min: -1.15,
-            max: 1.15,
-            nom: `{\\color{${COULEUR[1]}} i_1}, {\\color{${COULEUR[2]}} i_2}`,
-            graduations: [
-                [1, 'I'],
-                [-1, '-I'],
-            ],
-        },
-    });
-    courants.trace((x) => Math.cos(deg(x)), { couleur: COULEUR[1] });
-    courants.trace((x) => Math.cos(deg(x) + Math.PI / 2), { couleur: COULEUR[2] });
-    const curseurTemps = courants.verticale();
-    const points = [1, 2].map((circuit) => courants.point({ couleur: COULEUR[circuit] }));
-    réglages.ajoute(courants.élément);
-    réglages.formule(
-        `\\begin{gathered} {\\color{${COULEUR[1]}} i_1 = I\\cos(\\omega t)} \\\\ ` +
-            `{\\color{${COULEUR[2]}} i_2 = I\\cos(\\omega t + \\pi/2)} \\end{gathered}`,
-    );
-    réglages.texte(
-        'Dans les encoches, ⊙ : le courant sort du plan de coupe, ⊗ : il y entre ; le symbole pâlit avec ' +
-            'l’intensité. En vert le circuit statorique 1 (conducteurs 1 et 1′), en bleu le circuit 2 (2 et 2′), ' +
-            'en rouge le circuit rotorique, parcouru par le courant continu Iₑ.',
-    ).className = 'note';
-
     // -- À chaque image ----------------------------------------------------------
 
     scène.àChaqueImage((dt) => {
@@ -416,41 +388,43 @@ function machineSynchrone(section) {
 
         // Chaque conducteur porte 2/N du courant de son circuit : la limite
         // sinusoïdale a pour amplitude 1, quel que soit N.
-        const poids = 2 / état.N;
+        const poids = 2 / encoches;
         const { stator, rotor } = modèle.conducteurs;
         const courantStator = (c) => poids * AMPLITUDE.Bs * c.sens * i[c.circuit];
         const courantRotor = (c) => poids * AMPLITUDE.Br * c.sens;
-        const limiteBs = (θ) => AMPLITUDE.Bs * Math.cos(ωt - θ);
-        const limiteBr = (θ) => AMPLITUDE.Br * Math.cos(θ - θr);
-        dessineChamp(champs.Bs, (θ) => champEnMarches(stator, courantStator, θ), limites.Bs, limiteBs);
-        dessineChamp(champs.Br, (θ) => champEnMarches(rotor, courantRotor, θ, θr), limites.Br, limiteBr);
-
+        const duCircuit = (n) => stator.filter((c) => c.circuit === n);
+        // Ce qui crée chaque champ : ses conducteurs, leur courant, et l'angle
+        // dont ils ont tourné.
+        const sources = {
+            Bs: [stator, courantStator, 0],
+            1: [duCircuit(1), courantStator, 0],
+            2: [duCircuit(2), courantStator, 0],
+            Br: [rotor, courantRotor, θr],
+        };
+        // Leur limite quand N → ∞, celle du cours. Chaque circuit seul donne
+        // B_s1 ∝ i₁ cos θ et B_s2 ∝ i₂ cos(θ + π/2), son axe étant en
+        // θ = −90° ; leur somme est le champ glissant.
+        const sinusoïdes = {
+            Bs: (θ) => AMPLITUDE.Bs * Math.cos(ωt - θ),
+            1: (θ) => AMPLITUDE.Bs * i[1] * Math.cos(θ),
+            2: (θ) => AMPLITUDE.Bs * i[2] * Math.cos(θ + Math.PI / 2),
+            Br: (θ) => AMPLITUDE.Br * Math.cos(θ - θr),
+        };
+        const infini = état.N === Infinity;
         // Les mêmes champs sur le graphique, θ en degrés.
         const enDegrés = (points) => points.map(([θ, B]) => [THREE.MathUtils.radToDeg(θ), B]);
-        courbesChamps.Bs.place(enDegrés(marches(stator, courantStator)));
-        courbesChamps.Br.place(enDegrés(marches(rotor, courantRotor, θr)));
-        const θs = échantillons(0, DEUX_PI, 120);
-        if (état.limites) {
-            courbesLimites.Bs.place(enDegrés(θs.map((θ) => [θ, limiteBs(θ)])));
-            courbesLimites.Br.place(enDegrés(θs.map((θ) => [θ, limiteBr(θ)])));
-        }
-        // Chaque circuit seul : B_s1 ∝ i₁ cos θ, et B_s2 ∝ i₂ cos(θ + π/2),
-        // son axe étant en θ = −90°. Leur somme est le champ glissant.
-        if (état.circuits) {
-            const limitesCircuits = {
-                1: (θ) => AMPLITUDE.Bs * i[1] * Math.cos(θ),
-                2: (θ) => AMPLITUDE.Bs * i[2] * Math.cos(θ + Math.PI / 2),
-            };
-            for (const n of CIRCUITS) {
-                const siens = stator.filter((c) => c.circuit === n);
-                const { contour, limite } = parCircuit[n];
-                contour.trace(autour((θ) => champEnMarches(siens, courantStator, θ)));
-                courbesCircuits[n].champ.place(enDegrés(marches(siens, courantStator)));
-                if (état.limites) {
-                    limite.trace(autour(limitesCircuits[n]));
-                    courbesCircuits[n].limite.place(enDegrés(θs.map((θ) => [θ, limitesCircuits[n](θ)])));
-                }
-            }
+        for (const [nom, champ] of Object.entries(champs)) {
+            if (!champ.visible) continue;
+            const [conducteurs, courant, décalage] = sources[nom];
+            const B = infini ? sinusoïdes[nom] : (θ) => champEnMarches(conducteurs, courant, θ, décalage);
+            dessineChamp(champ, B);
+            champ.courbe.place(
+                enDegrés(
+                    infini
+                        ? échantillons(0, DEUX_PI, 120).map((θ) => [θ, B(θ)])
+                        : marches(conducteurs, courant, décalage),
+                ),
+            );
         }
 
         const centre = vecteur(0, 0, Z_SCHÉMA);
@@ -475,10 +449,10 @@ function machineSynchrone(section) {
 
 /**
  * Un champ dans l'entrefer : ses flèches, radiales, vers l'extérieur s'il est
- * positif, partant du milieu de l'entrefer ; le contour qui relie leurs
- * pointes, et la limite sinusoïdale `limite(θ)`.
+ * positif, partant du milieu de l'entrefer, et le contour qui relie leurs
+ * pointes.
  */
-function dessineChamp({ flèches, contour }, champ, pointillés, limite) {
+function dessineChamp({ flèches, contour }, champ) {
     for (const { θ, flèche } of flèches) {
         const valeur = champ(θ);
         const e = direction(θ);
@@ -486,7 +460,6 @@ function dessineChamp({ flèches, contour }, champ, pointillés, limite) {
         flèche.place(origine, e.multiplyScalar(Math.sign(valeur) || 1), LONGUEUR_MAX * Math.abs(valeur));
     }
     contour.trace(autour(champ));
-    pointillés.trace(autour(limite));
 }
 
 /** Le contour d'un champ `f(θ)` dans l'entrefer : la courbe qui relie les

@@ -2,7 +2,7 @@
 
 #show: exercice.with(titre: "Alternateur d'une centrale hydroélectrique")
 
-Une turbine hydraulique est accouplée à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau.
+Une turbine hydraulique est accouplée à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau. L'alternateur est utilisé de façon équilibrée.
 
 Les caractéristiques de la machine synchrone diphasée sont les suivantes :
 - puissance apparente nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#quan[65 MV A]$

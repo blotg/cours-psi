@@ -27,7 +27,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from .chapitre import GABARITS, RACINE, Chapitre
-from .pdf import fascicule
+from .pdf import dédoublonne, fascicule
 from .typst import compile_avec_annexe, compile_fichier
 
 
@@ -173,8 +173,13 @@ class TP:
 
         Les copies individuelles (A4 et A3) sont produites dans un dossier
         temporaire, supprimé en fin de traitement : seul le PDF final est
-        écrit sur disque.
+        écrit sur disque. Elles se compilent en parallèle, un processus typst
+        par copie ; puis les objets que toutes partagent — photos, profils
+        colorimétriques… — ne sont gardés qu'en un exemplaire dans le PDF final.
         """
+        from concurrent.futures import ThreadPoolExecutor
+        from os import cpu_count
+
         from pypdf import PdfReader, PdfWriter
 
         if destination is None:
@@ -182,13 +187,16 @@ class TP:
 
         final = PdfWriter()
         with TemporaryDirectory() as dossier:
-            copies = []
+            tâches = []
             for binôme in self.binômes():
                 for élève in binôme.membres:
                     nom = f"{binôme.numéro_copie:02d} - {élève.nom_complet}"
-                    a4 = join(dossier, f"{nom} - A4.pdf")
-                    self.compile_élève(binôme, élève, a4)
-                    copies.append((nom, a4))
+                    tâches.append((nom, binôme, élève, join(dossier, f"{nom} - A4.pdf")))
+            # typst n'occupe guère plus d'un cœur par compilation : autant de
+            # processus que de cœurs. `map` lève la première erreur rencontrée.
+            with ThreadPoolExecutor(max_workers=cpu_count() or 1) as exécuteur:
+                list(exécuteur.map(lambda t: self.compile_élève(*t[1:]), tâches))
+            copies = [(nom, a4) for nom, _, _, a4 in tâches]
 
             # Le mode d'impression vaut pour tout le paquet : il ne mélange pas
             # des feuilles A3 et des A4. Les variantes d'un même sujet font en
@@ -221,6 +229,10 @@ class TP:
                 if not recto_seul and len(faces.pages) % 2:
                     boite = faces.pages[0].mediabox
                     final.add_blank_page(width=float(boite.width), height=float(boite.height))
+
+        for face in final.pages:
+            face.compress_content_streams()
+        dédoublonne(final)
 
         makedirs(dirname(destination) or ".", exist_ok=True)
         with open(destination, "wb") as f:

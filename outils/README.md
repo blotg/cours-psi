@@ -151,6 +151,8 @@ personnalisé par élève et les impose tous en un seul PDF à imprimer. Un suje
 de **deux pages ou moins** n'est pas mis en livret : il reste en A4
 recto-verso, sans feuille A3 ni pliage — et s'il tient sur **une seule page**,
 les copies se suivent sans page blanche, pour une impression en recto simple.
+Les copies se compilent en parallèle (un processus typst par cœur), et les
+photos, communes à toutes, ne sont stockées qu'une fois dans le PDF final.
 Les binômes sont affichés au passage ; `-b` (`--binômes`) s'arrête là, sans
 rien compiler, pour les consulter (ou les projeter en début de séance) sans
 attendre une compilation par élève. Le sujet n'a alors pas besoin d'exister :
