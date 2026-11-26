@@ -8,7 +8,8 @@
 //
 // Le courant ne se devine pas sur un schéma : `courant` repasse en couleur la
 // maille qu'il parcourt et y fait avancer des pointes, d'autant plus vite
-// qu'il est fort.
+// qu'il est fort — sans à-coup là où il continue de passer quand les
+// interrupteurs commutent.
 
 import { chemin, disque, flèche, pointe } from '#animations/plan.js';
 
@@ -83,11 +84,16 @@ export function bobine(c, plan, A, B, { longueur = 1.3, côté = 1 } = {}) {
     c.restore();
 }
 
-/** Une source de tension : un cercle, comme sur les schémas du poly. Sa
- *  tension se flèche à côté (cf. `tension`). */
-export function source(c, plan, A, B, { rayon = 0.42 } = {}) {
+/**
+ * Une source idéale : un cercle, que barre un trait comme sur les schémas du
+ * poly — le long du fil pour une source de `tension` continue, en travers
+ * pour une source de `courant` —, ou qui porte une sinusoïde pour une source
+ * de tension `alternative`. Sa tension se flèche à côté (cf. `tension`).
+ */
+export function source(c, plan, A, B, { rayon = 0.42, genre = 'tension' } = {}) {
     const { a, b, u, m } = axe(plan, A, B);
     const r = plan.long(rayon);
+    const n = [-u[1], u[0]];
     chemin(c, [a, le(m, u, -r)], { épaisseur: TRAIT });
     chemin(c, [le(m, u, r), b], { épaisseur: TRAIT });
     c.save();
@@ -96,6 +102,16 @@ export function source(c, plan, A, B, { rayon = 0.42 } = {}) {
     Object.assign(c, { strokeStyle: NOIR, lineWidth: TRAIT });
     c.stroke();
     c.restore();
+    if (genre === 'tension') chemin(c, [le(m, u, -r), le(m, u, r)], { épaisseur: TRAIT });
+    else if (genre === 'courant') chemin(c, [le(m, n, -r), le(m, n, r)], { épaisseur: TRAIT });
+    else {
+        // Une période de sinusoïde, toujours à l'horizontale.
+        const points = Array.from({ length: 25 }, (_, k) => {
+            const x = k / 24 - 0.5;
+            return [m[0] + 1.15 * r * x, m[1] - 0.3 * r * Math.sin(2 * Math.PI * x)];
+        });
+        chemin(c, points, { épaisseur: TRAIT });
+    }
 }
 
 /** La flèche d'une tension, de A vers B : elle pointe vers le potentiel
@@ -113,12 +129,19 @@ export function sens(c, plan, P, [dx, dy], { couleur = NOIR } = {}) {
 
 /**
  * Le courant qui parcourt une maille : la maille (une ligne fermée, donnée
- * par ses sommets) repassée en couleur, et des pointes tous les `pas`
- * pixels, décalées de `décalage` pixels le long d'elle. `sens` (±1) dit si
+ * par ses sommets) repassée en couleur, et des pointes régulièrement
+ * espacées, décalées de `décalage` pixels le long d'elle. `sens` (±1) dit si
  * le courant suit l'ordre des sommets ou le remonte : les pointes se
  * retournent, sans changer de place.
+ *
+ * `pas` est l'écart des pointes, dans l'unité du problème ; il s'arrondit
+ * pour qu'elles tiennent en nombre entier sur le tour. Quand une commutation
+ * fait passer le courant d'une maille à une autre, il continue de circuler
+ * dans leur branche commune, et ses pointes ne doivent pas y sauter : il
+ * suffit que les deux mailles partent du même point de cette branche, la
+ * parcourent dans le même sens, et que `pas` divise leurs deux longueurs.
  */
-export function courant(c, plan, sommets, { décalage = 0, sens = 1, couleur = NOIR, pas = 44 } = {}) {
+export function courant(c, plan, sommets, { décalage = 0, sens = 1, couleur = NOIR, pas = 1 } = {}) {
     const points = vers(plan, [...sommets, sommets[0]]);
     c.save();
     c.globalAlpha = 0.3;
@@ -126,9 +149,7 @@ export function courant(c, plan, sommets, { décalage = 0, sens = 1, couleur = N
     c.restore();
     const longueurs = points.slice(1).map((p, k) => Math.hypot(p[0] - points[k][0], p[1] - points[k][1]));
     const total = longueurs.reduce((s, l) => s + l, 0);
-    // Un nombre entier de pointes sur le tour : elles restent équidistantes
-    // au passage du point de départ.
-    const n = Math.max(1, Math.round(total / pas));
+    const n = Math.max(1, Math.round(total / plan.long(pas)));
     const écart = total / n;
     let s = ((décalage % écart) + écart) % écart;
     let k = 0;

@@ -42,10 +42,11 @@ export function tourne(état, dt, { J, Γr, couple, avance }) {
  * Le chronogramme d'une grandeur sur un graphique dont l'abscisse va de
  * −durée à 0 : ses dernières secondes, qui défilent. Le graphique se
  * construit avec `coupe: true`, pour que la courbe s'arrête à son bord.
+ * `options` sont celles de sa courbe (cf. `Graphe.courbe`).
  */
-export function chronogramme(graphe, { couleur = COULEURS.noir } = {}) {
+export function chronogramme(graphe, options = {}) {
     const durée = -graphe.domaine.x.min;
-    const courbe = graphe.courbe({ couleur });
+    const courbe = graphe.courbe(options);
     const points = [];
     let t = 0;
     return {

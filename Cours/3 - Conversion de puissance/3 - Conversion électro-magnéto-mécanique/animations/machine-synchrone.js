@@ -526,29 +526,36 @@ function régime(α) {
 
 /**
  * Le moteur entraîne une charge qui lui oppose le couple Γ_r. Les courants
- * statoriques gardent leur pulsation ω : le champ glissant tourne à ω, quoi
- * que fasse le rotor. Celui-ci, de moment d'inertie J, suit le théorème du
- * moment cinétique,
+ * statoriques ont la pulsation ω, que l'on règle : le champ statorique tourne
+ * à ω, quoi que fasse le rotor. Celui-ci, de moment d'inertie J, suit le
+ * théorème du moment cinétique,
  *     J dΩ/dt = Γ_max sin α − Γ_r,    avec dα/dt = ω − Ω.
- * Les couples se comptent en Γ_max.
+ * Les couples se comptent en Γ_max, les pulsations en rad/s. La machine est
+ * celle du cours, à la limite N → ∞ : champs sinusoïdaux, conducteurs cachés.
  */
 const CHARGE = {
-    /** Un tour de champ glissant par seconde : l'œil le suit. */
-    ω: DEUX_PI,
-    /** La pulsation des petites oscillations de α, √(Γ_max/J₀), rapportée à
-     *  ω. Elle doit rester sous 0,5 pour tout J proposé : au-delà, un rotor
-     *  arrêté s'accrocherait de lui-même au champ glissant, et le moteur
-     *  démarrerait seul. */
-    propre: 0.3,
+    /** La pulsation des courants au départ — près d'un tour de champ par
+     *  seconde : l'œil le suit — et la plus grande que propose le curseur. */
+    ω: 6,
+    ωMax: 10,
+    /** La pulsation √(Γ_max/J) des petites oscillations de α. Elle fixe ce
+     *  que le rotor peut suivre : à vide, il n'accélère pas de plus de
+     *  `propre`² rad/s², et, arrêté, il ne s'accroche de lui-même au champ
+     *  statorique que si ω est assez petite (sous 3 rad/s environ pour
+     *  Γ_r = 0,3 Γ_max). Au-delà, le couple change de signe avant que le
+     *  rotor ait pris de la vitesse : il vibre sur place. On démarre donc le
+     *  moteur en partant d'une petite ω, que l'on monte peu à peu. */
+    propre: 1.9,
     /** Sans amortissement, α oscillerait sans fin autour de son équilibre.
      *  Une machine réelle a des amortisseurs — une cage dans le rotor —, qui
      *  exercent un couple proportionnel au glissement ω − Ω près du
-     *  synchronisme : `ζ` est le taux d'amortissement qu'ils donnent pour
-     *  J = J₀. Loin du synchronisme, leur couple s'efface : au-delà du
-     *  glissement `fenêtre` (rapporté à ω), il est nul, et le rotor décroché
-     *  ne repart pas. */
+     *  synchronisme : `ζ` est le taux d'amortissement qu'ils donnent. Loin
+     *  du synchronisme, leur couple s'efface : au-delà du glissement
+     *  `fenêtre`, il est nul, et le rotor décroché ne repart pas. */
     ζ: 0.5,
-    fenêtre: 0.5,
+    fenêtre: 3,
+    /** Sous ce glissement, tenu deux secondes, le rotor est accroché. */
+    synchrone: 0.05,
     /** Ce que retient le chronogramme, en secondes. */
     durée: 20,
     /** La longueur de l'arc d'un couple égal à Γ_max, en radians. */
@@ -558,23 +565,22 @@ const CHARGE = {
 function décrochage(section) {
     const { vue, réglages: panneau } = cadre(section);
     const scène = scèneDeMachine(vue, VUE);
-    const { ω } = CHARGE;
-    const ω0 = CHARGE.propre * ω;
+    const ω0 = CHARGE.propre;
 
-    const état = { Γr: 0.3, J: 1, ωt: 0, θr: 0, Ω: ω, pause: false, décroché: false, calme: 0 };
+    const état = { Γr: 0.3, ω: CHARGE.ω, ωt: 0, θr: 0, Ω: 0, pause: false, décroché: false, calme: 0 };
     /** Le rotor au synchronisme, à l'angle α d'équilibre — s'il y en a un. */
     function synchronise() {
         état.ωt = THREE.MathUtils.euclideanModulo(état.ωt, DEUX_PI);
         état.θr = état.ωt - Math.asin(Math.min(état.Γr, 1));
-        état.Ω = ω;
+        état.Ω = état.ω;
         état.décroché = false;
     }
     synchronise();
 
-    // La machine de l'animation précédente, telle qu'elle s'y présente au
-    // départ. Le couple reste celui du cours, Γ_max sin α.
-    const { modèle, symboles } = monte(scène, N_DÉPART);
-    const poids = 2 / N_DÉPART;
+    // La machine sans ses conducteurs : un stator et un rotor lisses, et les
+    // deux champs.
+    const modèle = machine(1, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
+    modèle.montreLesConducteurs(false);
     const pôles = nomsDesPôles();
     const champs = { Bs: champDEntrefer(COULEUR.Bs, 0), Br: champDEntrefer(COULEUR.Br, 0.5) };
     const angle = angleInterne();
@@ -582,13 +588,13 @@ function décrochage(section) {
     // sens de rotation, celui de la charge en face, dans l'autre sens.
     const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
     const arcΓr = new Arc('\\Gamma_r', { couleur: COULEUR_CHARGE, face: DEVANT });
-    scène.ajoute(nomsDesBandes(), champs.Bs.groupe, champs.Br.groupe, ...angle.objets, arcΓ, arcΓr, pôles);
+    scène.ajoute(modèle.stator, modèle.rotor, champs.Bs.groupe, champs.Br.groupe, ...angle.objets, arcΓ, arcΓr, pôles);
 
     // -- Réglages --------------------------------------------------------------
 
     const réglages = new Réglages(panneau);
 
-    réglages.groupe('Charge');
+    réglages.groupe('Fonctionnement');
     fraction(
         réglages.curseur({
             tex: '\\dfrac{\\Gamma_r}{\\Gamma_{\\max}}',
@@ -600,16 +606,16 @@ function décrochage(section) {
             auChangement: (v) => (état.Γr = v),
         }),
     );
-    fraction(
-        réglages.curseur({
-            tex: '\\dfrac{J}{J_0}',
-            min: 0.5,
-            max: 4,
-            pas: 0.05,
-            valeur: état.J,
-            auChangement: (v) => (état.J = v),
-        }),
-    );
+    réglages.curseur({
+        tex: '\\omega',
+        couleur: COULEUR.Bs,
+        min: 0,
+        max: CHARGE.ωMax,
+        pas: 0.1,
+        valeur: état.ω,
+        unité: ' rad/s',
+        auChangement: (v) => (état.ω = v),
+    });
     const pause = réglages.bouton('Pause', () => {
         état.pause = !état.pause;
         pause.textContent = état.pause ? 'Reprendre' : 'Pause';
@@ -642,14 +648,22 @@ function décrochage(section) {
     const valeurs = réglages.formule();
     const bilan = réglages.texte();
 
-    réglages.groupe('Vitesse du rotor');
+    // La vitesse du rotor, et en pointillés celle du champ statorique, qu'il
+    // suit ou non.
+    réglages.groupe('Vitesses du champ statorique et du rotor');
     const vitesse = new Graphe({
         x: { min: -CHARGE.durée, max: 0, nom: 't', graduations: [-20, -10, 0].map((t) => [t, t ? `${t}\\,\\text{s}` : '0']) },
-        y: { min: -0.25, max: 1.25, nom: '\\Omega', graduations: [[1, '\\omega']] },
-        hauteur: 120,
+        y: {
+            min: -1,
+            max: CHARGE.ωMax + 2,
+            nom: `{\\color{${COULEUR.Bs}} \\omega}, \\Omega`,
+            // En rad/s, comme le curseur de ω.
+            graduations: [5, 10],
+        },
+        hauteur: 130,
         coupe: true,
     });
-    const chrono = chronogramme(vitesse);
+    const chrono = { Ω: chronogramme(vitesse), ω: chronogramme(vitesse, { couleur: COULEUR.Bs, pointillés: true }) };
     réglages.ajoute(vitesse.élément);
     réglages.texte('Un amortissement, absent du modèle du cours, calme les oscillations de α.').className = 'note';
 
@@ -657,15 +671,16 @@ function décrochage(section) {
 
     /** Le couple des amortisseurs, pour le glissement Δ = ω − Ω. */
     const amortisseurs = (Δ) => {
-        const x = Δ / (CHARGE.fenêtre * ω);
+        const x = Δ / CHARGE.fenêtre;
         return Math.abs(x) < 1 ? ((2 * CHARGE.ζ) / ω0) * Δ * (1 - x * x) ** 2 : 0;
     };
     let couples = { Γm: 0, Γcharge: 0 };
 
     scène.àChaqueImage((dt) => {
+        const { ω } = état;
         if (!état.pause) {
             couples = tourne(état, dt, {
-                J: état.J / ω0 ** 2,
+                J: 1 / ω0 ** 2,
                 Γr: état.Γr,
                 couple: () => Math.sin(état.ωt - état.θr) + amortisseurs(ω - état.Ω),
                 avance: (h) => {
@@ -673,12 +688,14 @@ function décrochage(section) {
                     état.ωt += ω * h;
                 },
             });
-            chrono.ajoute(dt, état.Ω / ω);
-            // Le rotor a décroché quand le champ glissant a pris sur lui un
-            // demi-tour d'avance ; il n'est de nouveau accroché que s'il
-            // tourne un moment à la vitesse du champ.
-            if (état.ωt - état.θr > Math.PI) état.décroché = true;
-            état.calme = Math.abs(ω - état.Ω) < 0.02 * ω ? état.calme + dt : 0;
+            chrono.Ω.ajoute(dt, état.Ω);
+            chrono.ω.ajoute(dt, ω);
+            // Le rotor a décroché quand le champ statorique a pris sur lui un
+            // demi-tour d'avance — ou de retard, si ω a baissé d'un coup ; il
+            // n'est de nouveau accroché que s'il tourne un moment à la
+            // vitesse du champ.
+            if (Math.abs(état.ωt - état.θr) > Math.PI) état.décroché = true;
+            état.calme = Math.abs(ω - état.Ω) < CHARGE.synchrone ? état.calme + dt : 0;
             if (état.décroché && état.calme > 2) {
                 état.ωt -= DEUX_PI * Math.round((état.ωt - état.θr) / DEUX_PI);
                 état.décroché = false;
@@ -686,16 +703,11 @@ function décrochage(section) {
         }
         const { ωt, θr } = état;
         const α = angleSigné(ωt - θr);
-        const i = { 1: Math.cos(ωt), 2: Math.cos(ωt + Math.PI / 2), rotor: 1 };
 
         modèle.rotor.rotation.z = θr;
         pôles.rotation.z = θr;
-        for (const { symbole, c } of symboles) symbole.montre(c.sens * i[c.circuit]);
-        const { stator, rotor } = modèle.conducteurs;
-        dessineChamp(champs.Bs, (θ) =>
-            champEnMarches(stator, (c) => poids * AMPLITUDE.Bs * c.sens * i[c.circuit], θ),
-        );
-        dessineChamp(champs.Br, (θ) => champEnMarches(rotor, (c) => poids * AMPLITUDE.Br * c.sens, θ, θr));
+        dessineChamp(champs.Bs, (θ) => AMPLITUDE.Bs * Math.cos(ωt - θ));
+        dessineChamp(champs.Br, (θ) => AMPLITUDE.Br * Math.cos(θ - θr));
         angle.place(θr, ωt);
 
         const centre = vecteur(0, 0, Z_SCHÉMA);
@@ -709,7 +721,7 @@ function décrochage(section) {
         nomDuNiveau.place(-180, état.Γr);
         pointCouple.place(THREE.MathUtils.radToDeg(α), Math.sin(α));
         valeurs.écrit(
-            `\\alpha = ${Math.round(THREE.MathUtils.radToDeg(α))}^\\circ \\qquad \\Omega = ${virgule(état.Ω / ω)}\\,\\omega`,
+            `\\alpha = ${Math.round(THREE.MathUtils.radToDeg(α))}^\\circ \\qquad \\Omega = ${virgule(état.Ω, 1)}\\,\\text{rad/s}`,
         );
         const texte = !état.décroché ? '' : état.Ω === 0 ? 'Le moteur a décroché : il est à l’arrêt.' : 'Le moteur a décroché.';
         if (bilan.textContent !== texte) bilan.textContent = texte;

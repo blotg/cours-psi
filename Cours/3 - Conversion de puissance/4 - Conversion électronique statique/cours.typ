@@ -552,7 +552,7 @@ Dans le lien suivant, on peut entendre le bruit causé par l'ondulation du coura
 
 Afin de réduire l'ondulation du courant, on travaille avec des fréquences élevées. On peut aussi ajouter une bobine en série avec le moteur afin de lisser le courant.
 
-L'animation ci-dessous montre le hacheur série alimentant un moteur à courant continu et ses chronogrammes : on y règle le rapport cyclique, la fréquence, l'inductance et le courant moyen, et l'on y lit l'ondulation du courant. Lorsque le courant moyen est trop faible, le courant s'annule pendant une partie de la période : la conduction est discontinue, et les résultats de cette partie ne s'appliquent plus.
+L'animation ci-dessous montre le hacheur série alimentant un moteur à courant continu et ses chronogrammes : on y règle le rapport cyclique, la fréquence, l'inductance et le couple résistant, qui fixe le courant moyen, et l'on y lit l'ondulation du courant. Lorsque le courant moyen est trop faible, le courant s'annule pendant une partie de la période : la conduction est discontinue, et les résultats de cette partie ne s'appliquent plus. La charge peut aussi y être une source de courant idéale ou un dipôle R-L.
 
 #lien("https://blotg.github.io/cours-psi/conversion-4/animations/hacheur.html")
 
@@ -620,6 +620,6 @@ Pour obtenir un courant de sortie quasi sinusoïdal de période $T$, on utilise 
 
 Si $T_"MLI"$ est aussi très petite devant la constante de temps $L / R$ de la charge, l'inductance lisse le courant : il ne suit que la valeur moyenne de la tension sur une période de MLI, et il est quasi sinusoïdal. Cette commande est étudiée dans l'exercice « Onduleur alimentant une charge inductive ».
 
-L'animation ci-dessous montre la séquence de commutation de l'onduleur et le courant dans une charge R-L, avec un rapport cyclique $alpha = 1/2$ puis avec une MLI.
+L'animation ci-dessous montre la séquence de commutation de l'onduleur et le courant dans une charge R-L, avec un rapport cyclique $alpha = 1/2$ puis avec une MLI. La charge peut aussi y être une source de courant idéale ou un moteur synchrone.
 
 #lien("https://blotg.github.io/cours-psi/conversion-4/animations/onduleur.html")

@@ -590,60 +590,91 @@ chronogramme de la vitesse). Le couple résistant Γ_r est celui d'un frein : il
 s'oppose au mouvement, et à l'arrêt il retient l'arbre tant que le moteur ne
 le dépasse pas — il ne fait jamais tourner le rotor à l'envers.
 
-- **Machine synchrone** : le champ glissant tourne à ω, imposée (un tour par
-  seconde), et J dΩ/dt = Γ_max sin α − Γ_r avec dα/dt = ω − Ω. α s'ajuste à
-  la charge ; au-delà de Γ_max, le rotor décroche et s'arrête, et il ne repart
-  pas quand on allège la charge — d'où le bouton « Relancer au
-  synchronisme ». Deux choix sans lesquels rien de cela ne se verrait. Un
-  **amortissement** (les amortisseurs d'une machine réelle, absents du cours),
-  couple proportionnel au glissement près du synchronisme, sans quoi α
-  oscillerait sans fin ; il s'annule au-delà d'un glissement de 50 %, sans
-  quoi il ferait redémarrer seul le rotor arrêté, en moteur asynchrone. Et la
-  pulsation propre √(Γ_max/J) des oscillations de α reste **sous ω/2** pour
-  tout J proposé : au-delà, un rotor à l'arrêt s'accroche de lui-même au champ
-  glissant. Un saut brutal de la charge peut faire décrocher le moteur un peu
-  avant Γ_max (α dépasse son équilibre) : c'est physique, et laissé.
+- **Machine synchrone** : le champ statorique tourne à ω, que règle un curseur
+  (en rad/s, 6 au départ), et J dΩ/dt = Γ_max sin α − Γ_r avec dα/dt = ω − Ω.
+  La machine est celle de la limite N → ∞, sans ses conducteurs : stator et
+  rotor lisses, champs sinusoïdaux. α s'ajuste à la charge ; au-delà de Γ_max,
+  le rotor décroche et s'arrête, et il ne repart pas quand on allège la
+  charge. On le relance par le bouton « Relancer au synchronisme », ou comme
+  on démarre un vrai moteur : en ramenant ω sous 3 rad/s environ, où le rotor
+  arrêté s'accroche seul, puis en la remontant peu à peu (le rotor suit
+  jusqu'à 3 rad/s² ; un saut de ω de plus de 3 rad/s le fait décrocher). Le
+  chronogramme trace Ω et, en pointillés, ω. Deux choix sans lesquels rien de
+  cela ne se verrait. Un **amortissement** (les amortisseurs d'une machine
+  réelle, absents du cours), couple proportionnel au glissement près du
+  synchronisme, sans quoi α oscillerait sans fin ; il s'annule au-delà d'un
+  glissement de 3 rad/s, sans quoi il ferait redémarrer seul le rotor arrêté,
+  en moteur asynchrone, à toute pulsation. Et la pulsation propre √(Γ_max/J)
+  des oscillations de α, 1,9 rad/s, est **sous ω/2** au départ : au-delà, un
+  rotor à l'arrêt s'accroche de lui-même au champ statorique. L'inertie n'est
+  pas réglable. Un saut brutal de la charge peut faire décrocher le moteur un
+  peu avant Γ_max (α dépasse son équilibre) : c'est physique, et laissé.
 - **Machine à courant continu** : tension U constante, inductance négligée,
-  donc J dΩ/dt = Γ_d (1 − Ω/Ω₀) − Γ_r avec Ω₀ = U/Φ₀ et Γ_d = Φ₀U/R. Le point
-  de fonctionnement glisse le long de la caractéristique couple-vitesse ; le
-  moteur s'arrête si Γ_r dépasse Γ_d, et repart seul quand on allège la
-  charge, à la différence du moteur synchrone.
+  donc J dΩ/dt = Γ_max (1 − Ω/Ω₀) − Γ_r avec Ω₀ = U/Φ₀ et Γ_max = Φ₀U/R, le
+  couple de démarrage. La machine est dessinée sans encoches ni courants
+  (`rotor(M, { lisse: true })`) : on voit tourner le collecteur. Le point de
+  fonctionnement glisse le long de la caractéristique couple-vitesse ; le
+  moteur s'arrête si Γ_r dépasse Γ_max, et repart seul quand on allège la
+  charge, à la différence du moteur synchrone. L'inertie n'est pas réglable.
 
 **Conversion 4** — deux pages planes, bâties de la même façon : à gauche le
 schéma du montage (un `Plan`), à droite les chronogrammes (trois `Graphe`
 empilés), que parcourt le même instant. Elles sont **à l'échelle 1**, à la
 demande de l'utilisateur : la fréquence affichée est celle à laquelle les
-interrupteurs commutent à l'écran, de l'ordre du hertz ou moins, et le temps
-se compte en secondes sur une fenêtre fixe. Il n'y a pas de ralenti à
-deviner ; en contrepartie les inductances se comptent en henrys, pour que
-L f et L/(R T) gardent des valeurs ordinaires. Monter la fréquence du
-hacheur resserre les périodes, les pentes du courant restant les mêmes.
-`schema.js`
-dessine les schémas comme ceux du poly — fils, interrupteurs ouverts ou
-fermés, résistor, bobine, source — et le courant : la maille qu'il parcourt
-est repassée en couleur, et des pointes y avancent d'autant plus vite qu'il
-est fort. Rien ne s'intègre pas à pas, les deux régimes périodiques
-s'écrivent.
+interrupteurs commutent à l'écran, de l'ordre du hertz ou moins. Il n'y a
+pas de ralenti à deviner ; en contrepartie les inductances se comptent en
+henrys, pour que L f et L/(R T) gardent des valeurs ordinaires. Les
+chronogrammes couvrent un nombre entier de périodes (trois pour le hacheur,
+deux pour l'onduleur) : l'instant revient au début sans que rien ne saute,
+quelle que soit la fréquence. Leurs abscisses se comptent donc en périodes,
+mais **l'axe reste gradué en secondes**, à la demande de l'utilisateur :
+`temps.js` pose les secondes rondes, qui glissent sous les courbes quand la
+fréquence change — c'est là qu'elle se voit —, et une cote marque T sur le
+chronogramme de la tension. Rien ne s'intègre pas à pas, les
+régimes périodiques s'écrivent ; `rl.js` donne le courant d'un dipôle R-L
+sous tension constante (exponentiel, affine sans résistance) et son
+intégrale.
 
-`hacheur.js` est le hacheur série du cours alimentant un moteur à courant
-continu : une inductance L et sa force contre-électromotrice, sans
-résistance. Le courant moyen ⟨i_s⟩ est une donnée (le couple résistant), et
-la force contre-électromotrice s'en déduit : αE en conduction continue, où
-l'on retrouve Δi_s = α(1 − α)E/(Lf) ; davantage en conduction discontinue,
-quand ⟨i_s⟩ passe sous la demi-ondulation — le courant s'annule, les deux
-interrupteurs sont ouverts et u_s = E_cém jusqu'à la fin de la période.
-La fenêtre est de dix secondes ; une cote marque la période tant qu'elle a
-la place de s'écrire. E = 18 V (la perceuse de la situation déclenchante) ;
-les bornes des curseurs (L de 5 à 50 H, f de 0,2 à 2 Hz, ⟨i_s⟩ ≤ 4 A)
-gardent i_s sous 6,25 A, dans une échelle fixe.
+`schema.js` dessine les schémas comme ceux du poly — fils, interrupteurs
+ouverts ou fermés, résistor, bobine, sources (de tension, de courant,
+alternative) — et le courant : la maille qu'il parcourt est repassée en
+couleur, et des pointes y avancent d'autant plus vite qu'il est fort. **Les
+pointes ne doivent pas sauter à la commutation** là où le courant continue
+de passer (remarque de l'utilisateur) : les mailles d'une page partent
+toutes du même point, commencent par la charge, et le pas des pointes divise
+leurs longueurs (20 et 14 pour le hacheur, 22,8 deux fois pour l'onduleur,
+au pas de 1,2). Leur avance suit le courant de la charge, pas celui de la
+source.
 
-`onduleur.js` est le pont du cours sur une charge R-L (E = 100 V, R = 10 Ω,
-T = 4 s, L de 0 à 20 H), commandé avec α = 1/2 ou par la MLI de
-l'exercice « Onduleur alimentant une charge inductive » : N périodes de MLI
-par période, le rapport cyclique (1 + cos(2πk/N))/2 pris au début de la
-k-ième, comme dans le code de l'exercice. Entre deux commutations, le courant
-relaxe vers ±E/R ; le régime périodique est le point fixe de l'application
-affine i(0) ↦ i(T). Les pointes du schéma sont orientées comme i_e : après
-une commutation, elles remontent la source, tant que la bobine rend son
-énergie. En MLI, une case trace ce que la commande vise : E cos(2πt/T), et
-le courant sinusoïdal que cette tension ferait passer dans la charge.
+Dans les deux pages, la charge se choisit : source de courant idéale, dipôle
+R-L, moteur. **Un moteur se règle par son couple résistant**, pas par son
+courant : l'utilisateur trouvait bizarre de régler ⟨i_s⟩, qui est une
+conséquence.
+
+`hacheur.js` est le hacheur série du cours (E = 18 V, la perceuse de la
+situation déclenchante). Le moteur à courant continu est une inductance L,
+sa force contre-électromotrice et une résistance R, nulle au départ et alors
+absente du schéma. Le couple résistant fixe ⟨i_s⟩ = Γ_r/Φ₀ (Φ₀ = 10 mWb),
+et E_cém = αE − R⟨i_s⟩ donne la vitesse. Conduction discontinue quand le
+courant devrait s'annuler — les deux interrupteurs sont ouverts et
+u_s = E_cém jusqu'à la fin de la période ; E_cém se calcule sans
+résistance, se cherche par dichotomie sinon. Moteur à l'arrêt si
+αE ≤ R Γ_r/Φ₀ : il ne reste que R et L. Les bornes des curseurs gardent
+i_s sous 6 A environ, dans une échelle fixe.
+
+`onduleur.js` est le pont du cours (E = 100 V, f de 0,1 à 1 Hz), commandé
+avec α = 1/2 ou par la MLI de l'exercice « Onduleur alimentant une charge
+inductive » : N périodes de MLI par période, le rapport cyclique
+(1 + cos(2πk/N))/2 pris au début de la k-ième, comme dans le code de
+l'exercice. La source de courant est sinusoïdale, en retard de φ sur le
+fondamental de u. Le moteur synchrone est une phase R, L, e, où e est
+sinusoïdale, d'amplitude Φ_max ω (Φ_max = 18 Wb, pour qu'elle tienne dans
+l'échelle de u jusqu'à 1 Hz) ; le courant est la somme
+de la réponse de R-L à u et de sa réponse à −e. Le couple résistant fixe le
+retard δ de e sur le fondamental de u (amplitude U), par
+Γ_r = Φ_max (U cos(φ − δ) − Φ_max ω cos φ)/Z pour deux phases, sur la
+branche stable. Au-delà du couple maximal le moteur décrocherait : on le
+laisse à cette limite et une note le dit, car **e doit toujours rester
+visible** (demande de l'utilisateur). En MLI, une case trace ce que la commande vise :
+E cos(2πt/T), et le courant sinusoïdal que cette tension ferait passer dans
+la charge.

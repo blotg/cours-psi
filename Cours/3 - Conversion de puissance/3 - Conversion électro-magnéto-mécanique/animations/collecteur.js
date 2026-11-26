@@ -182,9 +182,10 @@ function stator() {
  * Le rotor à M bobines, dans son propre repère : le conducteur j (de 0 à
  * 2M − 1) est en π/2 + jπ/M, et la lame j du collecteur au même angle ; la
  * bobine k relie les conducteurs k et k + M. Chaque bobine a son matériau,
- * que l'animation teinte quand elle conduit.
+ * que l'animation teinte quand elle conduit. `lisse`, il n'a ni encoches ni
+ * bobines : il ne reste que les tôles, l'arbre et le collecteur.
  */
-function rotor(M) {
+function rotor(M, { lisse = false } = {}) {
     const groupe = new THREE.Group();
     const conducteurs = Array.from({ length: 2 * M }, (_, j) => ({ j, angle: Math.PI / 2 + (j * Math.PI) / M }));
     const matériaux = Array.from(
@@ -195,14 +196,16 @@ function rotor(M) {
 
     // Les tôles et leurs encoches ; un conducteur par encoche.
     const l = Math.min(0.34, (0.7 * FOND * Math.PI) / M);
-    const profil = contourEncoché(new THREE.Shape(), conducteurs, R_ROTOR, FOND, l);
+    const profil = lisse
+        ? new THREE.Shape(Array.from({ length: 192 }, (_, k) => polaire(R_ROTOR, (DEUX_PI * k) / 192)))
+        : contourEncoché(new THREE.Shape(), conducteurs, R_ROTOR, FOND, l);
     profil.holes.push(new THREE.Path().absarc(0, 0, R_ARBRE, 0, DEUX_PI, true));
     groupe.add(extrude(profil, -LONGUEUR, 0, MATÉRIAUX.flanc, MATÉRIAUX.coupe, 40));
-    for (const c of conducteurs) groupe.add(...encoche(c.angle, FOND, R_ROTOR, l, bobine(c.j), 0.2));
+    if (!lisse) for (const c of conducteurs) groupe.add(...encoche(c.angle, FOND, R_ROTOR, l, bobine(c.j), 0.2));
 
     // Derrière, la tête de chaque bobine relie ses deux conducteurs ; les
     // têtes s'étagent pour ne pas se traverser.
-    for (let k = 0; k < M; k++) {
+    for (let k = 0; k < M && !lisse; k++) {
         groupe.add(
             têteDeBobine(conducteurs[k].angle, conducteurs[k].angle + Math.PI / 2, {
                 r: R_CONDUCTEUR,
@@ -237,6 +240,7 @@ function rotor(M) {
         lame.absarc(0, 0, r1, c.angle - demi, c.angle + demi, false);
         lame.absarc(0, 0, r0, c.angle + demi, c.angle - demi, true);
         groupe.add(extrude(lame, z0, z1, MATÉRIAUX.bague, MATÉRIAUX.bague, 16));
+        if (lisse) continue;
         const barre = new THREE.LineCurve3(
             direction(c.angle).multiplyScalar(r1 - 0.04).setZ(z0 + 0.1),
             direction(c.angle).multiplyScalar(FOND + 0.02).setZ(0.06),
@@ -488,18 +492,19 @@ function balaisCollecteurs(section) {
  * lui oppose le couple Γ_r. L'inductance de l'induit est négligée : la loi
  * des mailles U = R I_r + Φ₀ Ω donne le courant, donc le couple
  * Γ_ém = Φ₀ I_r, à chaque instant, et le rotor, de moment d'inertie J, suit
- *     J dΩ/dt = Γ_ém − Γ_r = Γ_d (1 − Ω/Ω₀) − Γ_r,
- * où Ω₀ = U/Φ₀ est la vitesse à vide et Γ_d = Φ₀ U/R le couple de démarrage.
- * Les vitesses se comptent en Ω₀, les couples en Γ_d.
+ *     J dΩ/dt = Γ_ém − Γ_r = Γ_max (1 − Ω/Ω₀) − Γ_r,
+ * où Ω₀ = U/Φ₀ est la vitesse à vide et Γ_max = Φ₀ U/R le couple de démarrage,
+ * le plus grand que donne le moteur. Les vitesses se comptent en Ω₀, les
+ * couples en Γ_max. La machine est dessinée sans encoches ni courants.
  */
 const CHARGE = {
     /** À vide, un tour par seconde : on voit encore les balais commuter. */
     Ω0: DEUX_PI,
-    /** La constante de temps J₀ R/Φ₀² de la mise en vitesse, en secondes. */
+    /** La constante de temps J R/Φ₀² de la mise en vitesse, en secondes. */
     τ: 1.5,
     /** Ce que retient le chronogramme, en secondes. */
     durée: 20,
-    /** La longueur de l'arc d'un couple égal à Γ_d, en radians. */
+    /** La longueur de l'arc d'un couple égal à Γ_max, en radians. */
     arc: 1.7,
 };
 
@@ -508,10 +513,14 @@ function charge(section) {
     const scène = scèneDeMachine(vue, VUE);
     const { Ω0 } = CHARGE;
 
-    const état = { Γr: 0.3, J: 1, θr: deg(10), Ω: 0.7 * Ω0, pause: false };
+    const état = { Γr: 0.3, θr: deg(10), Ω: 0.7 * Ω0, pause: false };
 
-    scène.ajoute(stator().groupe, ...nomsDesPôlesEtDesBalais());
-    const rotorique = induit(scène, M_DÉPART);
+    // Ni encoches ni courants : un rotor lisse, dont on voit tourner le
+    // collecteur, et un inducteur sans le sens de son courant.
+    const fixe = stator();
+    for (const symbole of fixe.symboles) symbole.visible = false;
+    const tournant = rotor(M_DÉPART, { lisse: true }).groupe;
+    scène.ajoute(fixe.groupe, tournant, ...nomsDesPôlesEtDesBalais());
 
     // Les deux couples, en arcs devant le collecteur : celui du moteur dans
     // le sens de rotation, celui de la charge en face, dans l'autre sens.
@@ -527,23 +536,13 @@ function charge(section) {
     réglages.groupe('Charge');
     fraction(
         réglages.curseur({
-            tex: '\\dfrac{\\Gamma_r}{\\Gamma_d}',
+            tex: '\\dfrac{\\Gamma_r}{\\Gamma_{\\max}}',
             couleur: COULEUR_CHARGE,
             min: 0,
             max: 1.3,
             pas: 0.01,
             valeur: état.Γr,
             auChangement: (v) => (état.Γr = v),
-        }),
-    );
-    fraction(
-        réglages.curseur({
-            tex: '\\dfrac{J}{J_0}',
-            min: 0.5,
-            max: 4,
-            pas: 0.05,
-            valeur: état.J,
-            auChangement: (v) => (état.J = v),
         }),
     );
     const pause = réglages.bouton('Pause', () => {
@@ -557,7 +556,7 @@ function charge(section) {
             'U = R\\,I_r + \\Phi_0\\,\\Omega \\end{gathered}',
     );
     const caractéristique = new Graphe({
-        x: { min: 0, max: 1.4, nom: '\\Gamma_{\\text{ém}}', graduations: [0, [1, '\\Gamma_d']] },
+        x: { min: 0, max: 1.4, nom: '\\Gamma_{\\text{ém}}', graduations: [0, [1, '\\Gamma_{\\max}']] },
         y: { min: 0, max: 1.2, nom: '\\Omega', graduations: [[1, '\\Omega_0']] },
         hauteur: 170,
     });
@@ -569,7 +568,7 @@ function charge(section) {
     const nomDuNiveau = caractéristique.légende('\\Gamma_r', { couleur: COULEUR_CHARGE, décalage: [0, -7] });
     const pointDeFonctionnement = caractéristique.point({ couleur: COULEURS.noir });
     réglages.ajoute(caractéristique.élément);
-    réglages.formule('\\Omega_0 = \\frac{U}{\\Phi_0} \\qquad \\Gamma_d = \\frac{\\Phi_0 U}{R}');
+    réglages.formule('\\Omega_0 = \\frac{U}{\\Phi_0} \\qquad \\Gamma_{\\max} = \\frac{\\Phi_0 U}{R}');
     const valeurs = réglages.formule();
 
     réglages.groupe('Vitesse du rotor');
@@ -589,15 +588,15 @@ function charge(section) {
     scène.àChaqueImage((dt) => {
         if (!état.pause) {
             couples = tourne(état, dt, {
-                // En unités de Γ_d : J₀ Ω₀ / Γ_d = τ.
-                J: (état.J * CHARGE.τ) / Ω0,
+                // En unités de Γ_max : J Ω₀ / Γ_max = τ.
+                J: CHARGE.τ / Ω0,
                 Γr: état.Γr,
                 couple: () => 1 - état.Ω / Ω0,
                 avance: (h) => (état.θr += état.Ω * h),
             });
             chrono.ajoute(dt, état.Ω / Ω0);
         }
-        rotorique.tourne(état.θr);
+        tournant.rotation.z = état.θr;
 
         const Γ = 1 - état.Ω / Ω0;
         arcΓ.place(centre, direction(deg(200)), direction(deg(290)), CHARGE.arc * Γ, 1.5);
