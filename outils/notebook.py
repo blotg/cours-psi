@@ -1,4 +1,9 @@
-"""Notebook Jupyter d'un exercice numérique, pour Capytale.
+"""Notebook Jupyter d'un exercice numérique ou d'une simulation du cours, pour
+Capytale.
+
+Une simulation du cours (`simulation` dans prepa) vit dans son propre fichier,
+`<chapitre>/simulations/<nom>.typ`, que le cours inclut ; elle est traitée
+comme un exercice sans question : son titre, son texte, ses blocs de code.
 
 L'exercice n'est pas réécrit : il est compilé en HTML par typst, comme pour le
 site, à travers `gabarits/notebook.typ` qui en retire corrigés, coups de pouce
@@ -374,6 +379,34 @@ def exercices(chapitre: Chapitre) -> list[Path]:
     return [source for source, _ in Site.exercices(chapitre) if est_numérique(source)]
 
 
+#: Le dossier des simulations d'un chapitre.
+SIMULATIONS = "simulations"
+
+
+def est_simulation(source: Path) -> bool:
+    return source.parent.name == SIMULATIONS
+
+
+def simulations(chapitre: Chapitre) -> list[Path]:
+    """Les simulations que le cours inclut, dans son ordre. Comme pour le TD,
+    on lit les `#include` : une simulation mise en commentaire ne part pas."""
+    cours = chapitre.chemin / "cours.typ"
+    if not cours.is_file():
+        return []
+    trouvées = []
+    for ligne in cours.read_text(encoding="utf-8").splitlines():
+        trouvé = re.match(r'\s*#include\s+"(' + SIMULATIONS + r'/[^"]+\.typ)"', ligne)
+        if trouvé and (chapitre.chemin / trouvé.group(1)).is_file():
+            trouvées.append(chapitre.chemin / trouvé.group(1))
+    return trouvées
+
+
+def sources(chapitre: Chapitre) -> list[Path]:
+    """Tout ce qui donne un notebook : exercices numériques du TD, puis
+    simulations du cours."""
+    return exercices(chapitre) + simulations(chapitre)
+
+
 def cible(chapitre: Chapitre, exercice: Path) -> Path:
     """`build/notebook - <fichier de l'exercice>.ipynb`.
 
@@ -391,5 +424,6 @@ def écrit(chapitre: Chapitre, exercice: Path) -> Path:
 
 
 def notebooks(chapitre: Chapitre) -> list[Path]:
-    """Les notebooks de tous les exercices numériques du chapitre."""
-    return [écrit(chapitre, exercice) for exercice in exercices(chapitre)]
+    """Les notebooks de tous les exercices numériques et de toutes les
+    simulations du chapitre."""
+    return [écrit(chapitre, source) for source in sources(chapitre)]

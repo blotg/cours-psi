@@ -248,15 +248,15 @@ def _cibles_capytale(chemins: list[Path]) -> list[tuple[Path, list[Path] | None]
     """(chapitre, exercices) pour chaque chemin donné.
 
     Un dossier est un chapitre, dont on prend tous les exercices numériques
-    du TD (None) ; un fichier est un exercice, pris tel quel, même hors TD :
-    on l'a nommé.
+    du TD et toutes les simulations du cours (None) ; un fichier est un
+    exercice ou une simulation, pris tel quel, même hors TD : on l'a nommé.
     """
     cibles: dict[Path, list[Path] | None] = {}
     for chemin in chemins:
         if chemin.is_dir():
             cibles[chemin] = None
         else:
-            # <chapitre>/exercices/<exercice>.typ
+            # <chapitre>/exercices/<exercice>.typ, <chapitre>/simulations/<simulation>.typ
             chapitre = chemin.parent.parent
             if cibles.get(chapitre, []) is not None:
                 cibles.setdefault(chapitre, []).append(chemin)
@@ -278,7 +278,7 @@ def _capytale(args) -> int:
         chapitre = Chapitre(dossier)
         try:
             if not args.depuis_build:
-                for exercice in exercices if exercices is not None else notebook.exercices(chapitre):
+                for exercice in exercices if exercices is not None else notebook.sources(chapitre):
                     notebook.écrit(chapitre, exercice)
             return [f"  capytale      {ligne}" for ligne in envoie_chapitre(capytale, chapitre, exercices)], []
         except (ErreurCapytale, notebook.ErreurNotebook) as e:
@@ -340,19 +340,19 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_étapes("diapo"))
 
-    p = sous.add_parser("notebooks", help="notebooks Jupyter des exercices numériques du TD")
+    p = sous.add_parser("notebooks", help="notebooks Jupyter des exercices numériques du TD et des simulations du cours")
     p.add_argument("chapitres", nargs="+", type=Path)
     p.set_defaults(fonction=_étapes("notebooks"))
 
     p = sous.add_parser(
         "capytale",
-        help="notebooks des exercices numériques, créés ou mis à jour sur Capytale",
+        help="notebooks des exercices numériques et des simulations, créés ou mis à jour sur Capytale",
     )
     p.add_argument(
         "chemins",
         nargs="+",
         type=Path,
-        help="chapitres (tous les exercices numériques de leur TD) ou fichiers d'exercices",
+        help="chapitres (exercices numériques du TD, simulations du cours) ou fichiers d'exercices ou de simulations",
     )
     p.add_argument(
         "-n",

@@ -199,6 +199,20 @@ Capytale, et écrit le notebook ; `notebook.py` découpe les cellules entre les
 deux et retouche ce que pandoc rend mal (virgule décimale, `\text{}` vides,
 soulignés, tableaux sans en-tête, schémas en SVG passés en image `data:`).
 
+Une **simulation du cours** donne aussi un notebook. Elle s'écrit dans son
+propre fichier, `<chapitre>/simulations/<nom>.typ`, ouvert comme un exercice :
+
+```typst
+#show: simulation.with(titre: "Onduleur en MLI", capytale: "c90e-2976695")
+```
+
+puis du texte et des blocs ```` ```python ````. Le cours l'inclut là où elle doit
+paraitre (`#include "simulations/<nom>.typ"`) : dans le poly et sur le site,
+c'est un encadré « Simulation numérique », code compris, terminé par le QR code
+de l'activité. Le notebook en reprend le titre, le texte et le code, sans
+l'encadré. Seules partent les simulations que le cours inclut, comme seuls
+partent les exercices que le TD inclut.
+
 `capytale` envoie ces notebooks sur Capytale. Une activité est créée pour un
 exercice qui n'en a pas, et son code de partage écrit dans l'exercice :
 `capytale: "2253-2586522"`, que `exercice()` affiche sous le titre. Un exercice
@@ -209,7 +223,8 @@ manifeste ne connaît pas encore (faite à la main, ou manifeste effacé)
 sauvegarde d'abord son contenu dans `.capytale-sauvegardes/`.
 
 Une activité qui part est rangée dans le dossier **PSI/TD** de Capytale
-(`DOSSIER`, dans `capytale.py`). Un dossier y est un mot-clé, et l'y ranger
+(`DOSSIER`, dans `capytale.py`), celle d'une simulation dans **PSI**
+(`DOSSIER_SIMULATIONS`). Un dossier y est un mot-clé, et l'y ranger
 remplace ceux de l'activité, comme le fait un déplacement dans l'interface :
 elle ne reste pas là où elle était. Le dossier doit exister — l'outil n'en crée
 pas —, et une activité dont le notebook n'a pas changé ne repart pas, donc

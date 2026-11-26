@@ -4,6 +4,7 @@
     titre: "Simulation d'un moteur à courant continu",
     numérique: true,
     difficulté: 2,
+    capytale: "d022-13145357",
 )
 
 On étudie le moteur à courant continu Maxon RE 40, d'une puissance de #quan[150 W]. Son constructeur#footnote[#link("https://www.maxongroup.com/maxon/view/product/148867")] donne la constante de couplage $Phi_0 = #quan[30.2 mWb]$, la résistance de l'induit $R = #quan[0.299 Ω]$, son inductance $L = #quan[0.082 mH]$ et le moment d'inertie du rotor $J = #quan[1.42e-5 kg m^2]$.

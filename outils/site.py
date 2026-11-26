@@ -183,12 +183,13 @@ def _fil(entrées) -> str:
 def bornes_arguments(texte: str, appel: bool = True) -> tuple[int, int] | None:
     """Où commencent et finissent, dans la source, les arguments de
     `#show: exercice.with(…)` ou, avec `appel`, de `#exercice(…)[…]` —
-    parenthèses exclues.
+    parenthèses exclues. Ceux de `#show: simulation.with(…)` aussi : une
+    simulation du cours porte son titre et son code Capytale comme un exercice.
 
     Un compteur de parenthèses, mais qui saute les chaines : un titre peut
     contenir une parenthèse, et le décompte naïf s'arrêtait dessus.
     """
-    motif = r"#show:\s*exercice\.with\(" + (r"|#exercice\(" if appel else "")
+    motif = r"#show:\s*(?:exercice|simulation)\.with\(" + (r"|#exercice\(" if appel else "")
     début = re.search(motif, texte)
     if not début:
         return None

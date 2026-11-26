@@ -605,10 +605,6 @@ L'onduleur peut être utilisé pour alimenter un dipôle inductif modélisé par
     Pour chaque demi-période, déterminer une équation différentielle vérifiée par le courant de sortie de l'onduleur.
 ]
 
-Le notebook Capytale ci-dessous permet de simuler numériquement le courant dans la charge.
-
-#lien("https://capytale2.ac-paris.fr/web/c/c90e-2976695")
-
 == Modulation de largeur d'impulsion
 Avec un rapport cyclique $alpha = 1/2$, la tension de sortie est un créneau et le courant dans la charge R-L est loin d'être sinusoïdal.
 
@@ -623,3 +619,5 @@ Si $T_"MLI"$ est aussi très petite devant la constante de temps $L / R$ de la c
 L'animation ci-dessous montre la séquence de commutation de l'onduleur et le courant dans une charge R-L, avec un rapport cyclique $alpha = 1/2$ puis avec une MLI. La charge peut aussi y être une source de courant idéale ou un moteur synchrone.
 
 #lien("https://blotg.github.io/cours-psi/conversion-4/animations/onduleur.html")
+
+#include "simulations/Onduleur MLI.typ"

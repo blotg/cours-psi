@@ -51,6 +51,13 @@
     show <coups-de-pouce>: _repère("fin-question")
     // Le notebook pointerait sur lui-même.
     show <lien-capytale>: none
+    // Une simulation du cours (`simulation`, dans prepa) : ni encadré ni lien,
+    // son titre devient celui du notebook, comme celui d'un exercice.
+    show <bloc-simulation>: none
+    show <simulation>: it => {
+        heading(depth: 1, markup(it.value.titre))
+        it.value.corps
+    }
 
     // Le début d'une question se repère sur son numéro, et à défaut sur son
     // énoncé : un exercice « ouvert » ou « explique » ne numérote pas ses

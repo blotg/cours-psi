@@ -32,7 +32,8 @@ envoi vers une activité que le manifeste ne connaît pas encore — une activit
 faite à la main, avant cet outil — sauvegarde d'abord son contenu dans
 .capytale-sauvegardes/.
 
-**Rangement.** Une activité déposée va dans le dossier PSI/TD de Capytale.
+**Rangement.** Une activité déposée va dans le dossier PSI/TD de Capytale,
+celle d'une simulation du cours dans le dossier PSI.
 Un dossier y est un mot-clé ; un déplacement remplace ceux de l'activité, qui
 ne reste donc pas là où elle était. Le dossier doit exister : cet outil n'en
 crée pas. Une activité dont le notebook n'a pas changé n'est pas renvoyée, donc
@@ -70,6 +71,8 @@ TYPE_ACTIVITÉ = "notebook.python3"
 #: Le dossier de Capytale où ranger les activités, sous « Mes activités »,
 #: dossier après sous-dossier.
 DOSSIER = ("PSI", "TD")
+#: Celui des simulations du cours (`<chapitre>/simulations/`).
+DOSSIER_SIMULATIONS = ("PSI",)
 
 MANIFESTE = RACINE / ".capytale-manifeste.json"
 SAUVEGARDES = RACINE / ".capytale-sauvegardes"
@@ -437,7 +440,7 @@ class Capytale:
         self.indexer = indexer
         self._session = session
         self._verrou = threading.RLock()
-        self._tid: int | None = None
+        self._tids: dict[tuple[str, ...], int] = {}
         self._rangements: dict[int, list[int]] | None = None
         try:
             self._manifeste: dict[str, dict] = json.loads(MANIFESTE.read_text(encoding="utf-8"))
@@ -467,27 +470,27 @@ class Capytale:
             détail = "".join(f"\n    {r}" for r in refus)
             raise ErreurCapytale(f"aucune session Capytale valable : se connecter à Capytale dans le navigateur{détail}")
 
-    def _dossier(self) -> int:
-        """Le numéro du dossier où vont les activités, demandé une fois."""
+    def _dossier(self, chemin: tuple[str, ...]) -> int:
+        """Le numéro d'un dossier de Capytale, demandé une fois."""
         with self._verrou:
-            if self._tid is None:
-                self._tid = self.session.dossier(DOSSIER)
-            return self._tid
+            if chemin not in self._tids:
+                self._tids[chemin] = self.session.dossier(chemin)
+            return self._tids[chemin]
 
-    def _range(self, nid: int) -> str:
+    def _range(self, nid: int, chemin: tuple[str, ...]) -> str:
         """Range l'activité si elle n'est pas déjà dans le dossier, et dit ce
         qui a été fait — rien, le plus souvent : c'est là qu'elle est née."""
-        tid = self._dossier()
+        tid = self._dossier(chemin)
         with self._verrou:
             if self._rangements is None:
                 self._rangements = self.session.rangements()
             if self._rangements.get(nid) == [tid]:
                 return ""
             if self.simulation:
-                return f", à ranger dans {'/'.join(DOSSIER)}"
+                return f", à ranger dans {'/'.join(chemin)}"
             self.session.range(nid, tid)
             self._rangements[nid] = [tid]
-        return f", rangée dans {'/'.join(DOSSIER)}"
+        return f", rangée dans {'/'.join(chemin)}"
 
     def _note(self, exercice: Path, nid: int, empreinte: str) -> None:
         with self._verrou:
@@ -519,21 +522,23 @@ class Capytale:
             return ", lien écrit mais PAS indexé (modifications non indexées) : git add à faire"
 
     def envoie(self, exercice: Path, texte: str) -> str:
-        """Crée ou met à jour l'activité d'un exercice. Renvoie ce qui a été fait."""
+        """Crée ou met à jour l'activité d'un exercice ou d'une simulation du
+        cours. Renvoie ce qui a été fait."""
+        dossier = DOSSIER_SIMULATIONS if notebook.est_simulation(exercice) else DOSSIER
         empreinte = _empreinte(texte)
         code = code_de(exercice.read_text(encoding="utf-8"))
         note = self._manifeste.get(_clé(exercice))
 
         if code is None:
             if self.simulation:
-                self._dossier()  # le dossier doit exister : autant le dire tout de suite
-                return f"créerait l'activité dans {'/'.join(DOSSIER)} et écrirait son code dans l'exercice"
+                self._dossier(dossier)  # le dossier doit exister : autant le dire tout de suite
+                return f"créerait l'activité dans {'/'.join(dossier)} et écrirait son code dans la source"
             titre = _infos_exercice(exercice, appel=True)["titre"]
             nid = self.session.crée(titre)
             self.session.dépose(nid, texte)
             code = self.session.code(nid)
             self._note(exercice, nid, empreinte)
-            return f"activité créée : {code}{self._range(nid)}{self._écrit_code(exercice, code)}"
+            return f"activité créée : {code}{self._range(nid, dossier)}{self._écrit_code(exercice, code)}"
 
         nid = numéro(code)
         connue = note is not None and note.get("nid") == nid
@@ -543,24 +548,25 @@ class Capytale:
             return (
                 f"mettrait à jour {code}"
                 + ("" if connue else ", après avoir sauvegardé son contenu actuel")
-                + self._range(nid)
+                + self._range(nid, dossier)
             )
         sauvegarde = None if connue else self._sauvegarde(exercice, nid)
         self.session.dépose(nid, texte)
         self._note(exercice, nid, empreinte)
-        return f"mis à jour : {code}{self._range(nid)}" + (
+        return f"mis à jour : {code}{self._range(nid, dossier)}" + (
             f", ancien contenu dans {sauvegarde.parent.name}/{sauvegarde.name}" if sauvegarde else ""
         )
 
 
 def envoie_chapitre(capytale: Capytale, chapitre: Chapitre, exercices: list[Path] | None = None) -> list[str]:
-    """Envoie les notebooks des exercices numériques d'un chapitre.
+    """Envoie les notebooks des exercices numériques et des simulations d'un
+    chapitre.
 
     Les notebooks sont ceux de `build/` : l'étape `notebooks` les produit juste
     avant, dans la même file.
     """
     lignes = []
-    for exercice in exercices if exercices is not None else notebook.exercices(chapitre):
+    for exercice in exercices if exercices is not None else notebook.sources(chapitre):
         fichier = notebook.cible(chapitre, exercice)
         if not fichier.is_file():
             raise ErreurCapytale(f"{fichier} manque : produire d'abord les notebooks")

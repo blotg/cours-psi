@@ -537,6 +537,31 @@
     }
 }
 
+// Simulation numérique du cours, dont le notebook part sur Capytale comme
+// celui d'un exercice numérique (cf. outils/README.md, « Notebooks et
+// Capytale »). Elle s'écrit dans son propre fichier,
+// `<chapitre>/simulations/<nom>.typ`, ouvert par `#show: simulation.with(…)`,
+// que le cours inclut là où elle doit paraitre.
+//
+// `capytale` : code de partage de l'activité, écrit par `outils capytale` à
+// sa création. Le lien suit le corps de l'encadré.
+//
+// Le notebook n'a que faire de l'encadré : `gabarits/notebook.typ` masque
+// <bloc-simulation> et rend à la place le titre et le corps que porte la
+// métadonnée <simulation>.
+#let simulation(titre: "", capytale: none, contenu) = {
+    [#metadata((titre: titre, corps: contenu)) <simulation>]
+    [#_bloc(
+        "Simulation numérique",
+        {
+            contenu
+            if capytale != none { lien("https://capytale2.ac-paris.fr/web/c/" + capytale) }
+        },
+        titre: titre,
+        marqueur: text(font: "Noto Emoji", emoji.computer),
+    ) <bloc-simulation>]
+}
+
 #let matériel(groupe: (), classe: ()) = {
     let catégories = ()
     if groupe.len() > 0 { catégories.push(("Par groupe", groupe)) }

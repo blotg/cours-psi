@@ -18,7 +18,8 @@
 #   revisions/) n'en tire que ses flashcards.
 # - Un TP y gagne sa fiche de notation (`outils notation`), si la liste des
 #   eleves est connue : git config hooks.eleves <CSV>.
-# - Les notebooks des exercices numeriques du TD en font partie. Leur envoi
+# - Les notebooks des exercices numeriques du TD et des simulations du cours
+#   (<chapitre>/simulations/) en font partie. Leur envoi
 #   sur Capytale est desactive par defaut (git config hooks.capytale true).
 # - Les animations (<chapitre>/animations/, cf. animations/README.md) se
 #   construisent avec vite, dans <chapitre>/build/animations/, des qu'une de
