@@ -4,15 +4,20 @@
 <meta charset="utf-8">
 <title>Machine synchrone</title>
 <meta name="ordre" content="1">
-<meta name="description" content="champ glissant, couple">
+<meta name="description" content="champ glissant, couple, décrochage">
 <script type="module" src="./machine-synchrone.js"></script>
 </head>
 <body>
 <h1>Machine synchrone</h1>
 
-<section class="animation">
+<section class="animation" data-animation="champs">
 <h2>Champ glissant et champ rotorique</h2>
 <p>Une machine diphasée et bipolaire, coupée en son milieu. Le rotor tourne au synchronisme : Ω = ω.</p>
+</section>
+
+<section class="animation" data-animation="charge" id="charge">
+<h2>Couple résistant et décrochage</h2>
+<p>Le moteur entraine une charge qui lui oppose un couple résistant Γᵣ. Le rotor a un moment d’inertie J : l’angle α n’est plus imposé, il s’ajuste à la charge.</p>
 </section>
 </body>
 </html>

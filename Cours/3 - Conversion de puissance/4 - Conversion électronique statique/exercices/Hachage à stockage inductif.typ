@@ -35,7 +35,7 @@ Dans le convertisseur ci-dessus, l'entrée est la source de tension $U$ et la so
 
 #question(
     coups-de-pouce: (
-        "Lorsque $K_1$ est ouvert, quel est le signe de $u_1$. Quand il est fermé, quel est le signe de $i_1$. Même question pour $K_2$.",
+        "Lorsque $K_1$ est ouvert, quel est le signe de $u_1$ ? Quand il est fermé, quel est le signe de $i_1$ ? Mêmes questions pour $K_2$.",
     ),
 )[
     Identifier les interrupteurs à utiliser en traçant leur caractéristique courant-tension.
@@ -111,7 +111,7 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
 #question(
     coups-de-pouce: (
         "Déterminer l'équation différentielle vérifiée par $i_L$ entre $0$ et $alpha T$ et entre $alpha T$ et $T$.",
-        "Résoudre cette équation différentielle sans cherche à exprimer la constante.",
+        "Résoudre cette équation différentielle sans chercher à exprimer la constante.",
         "Relier $i$ et $i'$ à $i_L$ entre $0$ et $alpha T$ et entre $alpha T$ et $T$.",
     ),
 )[
@@ -163,7 +163,7 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
                 plot.plot(
                     axis-style: "school-book",
                     x-label: $t$,
-                    y-label: $i_L$,
+                    y-label: $i'$,
                     x-ticks: ((0.3, $alpha T$), (1, $T$)),
                     y-ticks: ((0.3, $I_"min"$), (1, $I_"max"$)),
                     x-tick-step: none,
@@ -199,7 +199,7 @@ Dans toute la suite, l'interrupteur commandé est fermé sur $[0,alpha T]$ et ou
     En déduire l'expression du rapport $I'/I$ en fonction de $alpha$. Que dire du cas $alpha=1$ ?
 ][
     $ I'/I = (1-alpha)/alpha $
-    Pour $alpha = 1$, on a $ I' = 0 $
+    Pour $alpha = 1$, $K_2$ ne conduit jamais : $i' = 0$, et la source $U$ reste en permanence aux bornes de la bobine. Le courant $i_L$ croît alors indéfiniment ($dv(i_L, t) = U/L$) : il n'y a plus de régime périodique, et les relations précédentes ne s'appliquent plus (la relation $alpha U = (1-alpha) U'$ donnerait d'ailleurs $U' -> +oo$).
 ]
 
 #question(

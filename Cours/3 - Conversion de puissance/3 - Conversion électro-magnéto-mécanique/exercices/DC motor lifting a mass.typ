@@ -33,17 +33,17 @@
     }),
 )
 
-A DC machine of coupling constant $Phi_0$, of internal resistance $r$ and of inductance $L$ is used to lift a mass $M$. The axis of the rotor is connected to a pulley of radius $a$. On the pulley is fixed a string on which the mass is attached. The machine is supplied by a generator of electromotive force $E_0$ and internal resistance $r_0$.
+A DC machine with coupling constant $Phi_0$, internal resistance $r$ and inductance $L$ is used to lift a mass $M$. The axis of the rotor is connected to a pulley of radius $a$. A string wound around the pulley carries the mass. The machine is supplied by a generator of electromotive force $E_0$ and internal resistance $r_0$.
 
-A friction torque $Gamma_f=-f Omega$ applies on the rotor. The moment of inertia of the system {rotor + pulley} is $J$. Hysteresis and eddy currents are neglected.
+A friction torque $Gamma_f=-f Omega$ acts on the rotor. The moment of inertia of the system {rotor + pulley} is $J$. Hysteresis and eddy currents are neglected.
 
 The mass is lifted at a constant speed $v_0$.
 
 #question(
     coups-de-pouce: (
         "Write an electrical equation and a mechanical equation, and use the relations between the electrical and mechanical quantities of a DC machine.",
-        "For the electrical equation, apply the mesh law to the equivalent circuit of the armature.",
-        "For the mechanical equation, apply the theorem of angular momentum to the system {mass + string + pulley + rotor}.",
+        "For the electrical equation, apply Kirchhoff's voltage law to the equivalent circuit of the armature.",
+        "For the mechanical equation, apply the angular momentum theorem to the system {mass + string + pulley + rotor}.",
     ),
 )[
     Determine the current $i$ and the electromotive force $E_0$ of the generator as a function of $M$, $g$, $a$, $Phi_0$, $f$, $r$, $r_0$ and $v_0$.
@@ -55,21 +55,21 @@ The mass is lifted at a constant speed $v_0$.
             import zap: *
             import cetz.draw: *
             vsource("E0", (0, 0), (0, 2), u: $E_0$)
-            resistor("r", (0, 2), (0, 4), label: $r_0$)
+            resistor("r0", (0, 2), (0, 4), label: $r_0$)
             fil((0, 4), (2, 4), i: $i$)
             resistor("r", (2, 4), (2, 2), label: $r$)
             vsource("E", (2, 0), (2, 2), u: $E$)
             wire((0, 0), (2, 0))
         }),
     )
-    The electrical equation is obtained by applying the mesh law to the electrical circuit:
+    The electrical equation is obtained by applying Kirchhoff's voltage law to the electrical circuit:
     $ E_0 = E + r i + r_0 i $
 
     Moreover $E=Phi_0 Omega$.
 
     The pulley of radius $a$ is linked to the rotor, so $v_0 = a Omega$, that is $Omega = v_0 / a$.
 
-    The mechanical equation is obtained by applying the theorem of angular momentum to the system {pulley + rotor}, the string pulling with the weight $M g$ of the mass, which moves at constant speed:
+    The mechanical equation is obtained by applying the angular momentum theorem to the system {pulley + rotor}, the string pulling with the weight $M g$ of the mass, which moves at constant speed:
     $ 0 = J dv(Omega, t) = Phi_0 i - f Omega - M g a $
 
     Hence the current:

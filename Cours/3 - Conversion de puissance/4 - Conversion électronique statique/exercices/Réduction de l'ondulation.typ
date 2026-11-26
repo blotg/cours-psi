@@ -45,14 +45,14 @@ On commande un moteur à courant continu d'inductance propre #quan[10 mH] et de 
     $ alpha E = E' $
     En remplaçant, on obtient alors
     $ Delta i = E alpha(1-alpha)/L T $
-    Cette ondulation est maximale pour $alpha = 0.5$ où elle vaut
+    Cette ondulation est maximale pour $alpha = 1/2$ où elle vaut
     $ Delta i_"max" = E/(4 L) T $
     L'inductance totale doit donc être égale au moins à
     $ L = E/(4 Delta i) T $
 
     #let L = E / (4 * ondulation-max) * T
     #let Lajout = L - Lmoteur
-    L'inductance à ajouter est donc $ L_"ajout" = E alpha(1-alpha)/(Delta i) T - L_"moteur" = #qty(Lajout, "H", chiffres: 2) $
+    L'inductance à ajouter est donc $ L_"ajout" = (E T)/(4 Delta i) - L_"moteur" = #qty(Lajout, "H", chiffres: 2) $
 
     Remarque : on a utilisé le fait que deux inductances en série s'additionnent. Pour le montrer, on peut écrire la loi des mailles :
     $ u_L = u_(L 1) + u_(L 2) = L_1 dv(i, t) + L_2 dv(i, t) = (L_1 + L_2) dv(i, t) $

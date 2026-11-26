@@ -278,7 +278,7 @@ La source d'entrée présente une tension $E>0$ constante, celle de sortie est p
                 x-label: $t$,
                 y-label: $i_e$,
                 x-ticks: ((0.3, $alpha T$), (1, $T$)),
-                y-ticks: ((-0.7, $I$), (0.7, $I$)),
+                y-ticks: ((-0.7, $-I$), (0.7, $I$)),
                 x-tick-step: none,
                 y-tick-step: none,
                 size: (6, 3),

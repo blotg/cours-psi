@@ -9,6 +9,6 @@
 #include "exercices/Onduleur triphasé.typ"
 #include "exercices/Interrupteur bidirectionnel.typ"
 #include "exercices/Réduction de l'ondulation.typ"
-// #include "exercices/Improvement of the yield of a continuous voltage source.typ" // LA QUESTION 2 NE MARCHE PAS À REVOIR
+#include "exercices/Improving the efficiency of a DC voltage source.typ"
 #include "exercices/Redresseur triphasé.typ"
 #include "exercices/Onduleur.typ"

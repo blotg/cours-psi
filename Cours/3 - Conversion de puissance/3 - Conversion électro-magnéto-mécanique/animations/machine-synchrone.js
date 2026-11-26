@@ -12,15 +12,18 @@
 // Le rotor tourne au synchronisme : θ_r = ωt − α, l'angle α entre le maximum
 // du champ glissant et l'axe du rotor reste constant, et le couple vaut
 // Γ_ém = Γ_max sin α.
+//
+// Une seconde animation donne au rotor son inertie et une charge à entraîner :
+// α n'est plus un réglage, il s'ajuste au couple résistant — jusqu'à ce que
+// celui-ci dépasse Γ_max, et que le moteur décroche.
 
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { Graphe, échantillons } from '#animations/graphe.js';
 import { Arc, COULEURS, Étiquette, Flèche, Trait, vecteur } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
 import { Réglages } from '#animations/reglages.js';
-import { Scène } from '#animations/scene.js';
-import { Courant, R_ARBRE, R_ENTREFER, R_ROTOR, R_STATOR, machine } from './machine.js';
+import { COULEUR_CHARGE, chronogramme, fraction, tourne, virgule } from './charge.js';
+import { Courant, R_ARBRE, R_ENTREFER, R_ROTOR, R_STATOR, angleSigné, machine, scèneDeMachine } from './machine.js';
 
 /** Une couleur par circuit — celle de ses fils, de son courant, et du champ
  *  qu'il crée seul —, et une par champ total. */
@@ -58,8 +61,7 @@ const N_DÉPART = 5;
  *  la limite N → ∞. */
 const N_MAX = 20;
 
-const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
-const VUE_DE_TROIS_QUARTS = { position: [9, 14, 26], cible: [0, 0.3, -1.5] };
+const VUE = { taille: 12.6, troisQuarts: { position: [9, 14, 26], cible: [0, 0.3, -1.5] } };
 
 /**
  * Le champ dans l'entrefer en θ, créé par des conducteurs parcourus par
@@ -90,19 +92,102 @@ function marches(conducteurs, courant, décalage = 0) {
     });
 }
 
-// -- L'animation -------------------------------------------------------------------
+// -- Ce que les deux animations dessinent ----------------------------------------
+
+/**
+ * Monte dans la scène la machine à `encoches` encoches par côté de chaque
+ * circuit, et le sens des courants sur la section de ses conducteurs.
+ * `démonte` l'en retire et rend sa mémoire.
+ */
+function monte(scène, encoches) {
+    const modèle = machine(encoches, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
+    const symboles = [];
+    for (const partie of ['stator', 'rotor']) {
+        const disque = new THREE.CircleGeometry(modèle.symboles[partie], 32);
+        for (const c of modèle.conducteurs[partie]) {
+            const symbole = new Courant(COULEUR[c.circuit], disque);
+            symbole.position.copy(direction(c.angle).multiplyScalar(c.rayon)).setZ(0.01);
+            modèle.enroulements[partie].add(symbole);
+            symboles.push({ symbole, c });
+        }
+    }
+    scène.ajoute(modèle.stator, modèle.rotor);
+    return {
+        modèle,
+        symboles,
+        démonte() {
+            scène.scène.remove(modèle.stator, modèle.rotor);
+            modèle.libère();
+            for (const { symbole } of symboles) symbole.material.dispose();
+        },
+    };
+}
+
+/** Le nom des bandes de conducteurs des circuits statoriques. */
+function nomsDesBandes() {
+    return new THREE.Group().add(
+        ...[
+            ['1', 90, 1],
+            ["1'", 270, 1],
+            ['2', 0, 2],
+            ["2'", 180, 2],
+        ].map(([tex, a, circuit]) =>
+            new Étiquette(tex, { couleur: COULEUR[circuit], face: DEVANT }).place(
+                direction(deg(a)).multiplyScalar(R_STATOR + 0.55),
+            ),
+        ),
+    );
+}
+
+/** Les pôles du rotor, à faire tourner avec lui. */
+function nomsDesPôles() {
+    return new THREE.Group().add(
+        new Étiquette('\\mathrm{N}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(1.55, 0, Z_SCHÉMA)),
+        new Étiquette('\\mathrm{S}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(-1.55, 0, Z_SCHÉMA)),
+    );
+}
+
+/**
+ * Un champ dans l'entrefer : ses flèches, tous les 10°, décalées de
+ * `décalage` pas pour ne pas tomber sur celles d'un autre champ, et le
+ * contour qui relie leurs pointes — fin et translucide : ce sont les flèches
+ * qu'on lit. `dessineChamp` le met à jour.
+ */
+function champDEntrefer(couleur, décalage, visible = true) {
+    const flèches = Array.from({ length: FLÈCHES }, (_, k) => ({
+        θ: (DEUX_PI * (k + décalage)) / FLÈCHES,
+        flèche: new Flèche({ couleur, rayon: 0.026, tête: 0.18, largeur: 0.07 }),
+    }));
+    const contour = new Trait({ couleur, épaisseur: 1.2, opacité: 0.5 });
+    const groupe = new THREE.Group().add(...flèches.map((f) => f.flèche), contour);
+    groupe.visible = visible;
+    return { flèches, contour, groupe, visible };
+}
+
+/** Les deux rayons en pointillés — l'axe du rotor et le maximum du champ
+ *  glissant —, et l'arc de l'angle α qui va de l'un à l'autre. */
+function angleInterne() {
+    const axeRotor = new Trait({ couleur: COULEUR.rotor, épaisseur: 2, pointillés: true, tiret: 0.15 });
+    const maximumBs = new Trait({ couleur: COULEUR.Bs, épaisseur: 2, pointillés: true, tiret: 0.15 });
+    const arc = new Arc('\\alpha', { face: DEVANT });
+    const rayon = (a) => [R_ARBRE + 0.15, R_ROTOR - 0.1].map((r) => direction(a).multiplyScalar(r).setZ(Z_SCHÉMA));
+    return {
+        objets: [axeRotor, maximumBs, arc],
+        /** Le rotor en θr, le maximum du champ glissant en ωt : α va de l'un
+         *  à l'autre, par le plus court si on ne le donne pas. */
+        place(θr, ωt, α = angleSigné(ωt - θr)) {
+            axeRotor.trace(rayon(θr));
+            maximumBs.trace(rayon(ωt));
+            arc.place(vecteur(0, 0, Z_SCHÉMA), direction(θr), direction(θr + Math.PI / 2), α, 2.05);
+        },
+    };
+}
+
+// -- Champ glissant et champ rotorique ---------------------------------------------
 
 function machineSynchrone(section) {
     const { vue, réglages: panneau } = cadre(section);
-    const scène = new Scène(vue, { rapport: 1.12, taille: 12.6, haut: [0, 1, 0], ...VUE_DE_FACE, éclairage: 0.45 });
-    scène.bouton('Vue de trois quarts', () => scène.regarde(VUE_DE_TROIS_QUARTS));
-    // Un rendu photographique pour la machine : des reflets pour les métaux —
-    // une pièce éclairée, que les tôles, les fils et l'arbre renvoient —, et
-    // une exposition qui ne brûle pas les faces claires.
-    const pmrem = new THREE.PMREMGenerator(scène.rendu);
-    scène.scène.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scène.scène.environmentIntensity = 0.35;
-    scène.rendu.toneMapping = THREE.NeutralToneMapping;
+    const scène = scèneDeMachine(vue, VUE);
 
     const état = {
         N: N_DÉPART,
@@ -115,80 +200,39 @@ function machineSynchrone(section) {
 
     // La machine, reconstruite quand N change, et le sens des courants sur
     // la section de ses conducteurs.
+    let montage = null;
     let modèle = null;
     let symboles = [];
     // Le nombre d'encoches dessinées : N, ou N_MAX à la limite N → ∞.
     let encoches = 0;
     function construis() {
-        if (modèle) {
-            scène.scène.remove(modèle.stator, modèle.rotor);
-            modèle.libère();
-            for (const { symbole } of symboles) symbole.material.dispose();
-        }
+        montage?.démonte();
         encoches = Math.min(état.N, N_MAX);
-        modèle = machine(encoches, { 1: COULEUR[1], 2: COULEUR[2], rotor: COULEUR.rotor });
-        symboles = [];
-        for (const partie of ['stator', 'rotor']) {
-            const disque = new THREE.CircleGeometry(modèle.symboles[partie], 32);
-            for (const c of modèle.conducteurs[partie]) {
-                const symbole = new Courant(COULEUR[c.circuit], disque);
-                symbole.position.copy(direction(c.angle).multiplyScalar(c.rayon)).setZ(0.01);
-                modèle.enroulements[partie].add(symbole);
-                symboles.push({ symbole, c });
-            }
-        }
+        montage = monte(scène, encoches);
+        ({ modèle, symboles } = montage);
         modèle.montreLesConducteurs(état.conducteurs);
-        scène.ajoute(modèle.stator, modèle.rotor);
     }
     construis();
 
     // Le nom des bandes de conducteurs des circuits statoriques, et les pôles
     // du rotor, qui tournent avec lui.
-    const bandes = new THREE.Group().add(
-        ...[
-            ['1', 90, 1],
-            ["1'", 270, 1],
-            ['2', 0, 2],
-            ["2'", 180, 2],
-        ].map(([tex, a, circuit]) =>
-            new Étiquette(tex, { couleur: COULEUR[circuit], face: DEVANT }).place(
-                direction(deg(a)).multiplyScalar(R_STATOR + 0.55),
-            ),
-        ),
-    );
-    const pôles = new THREE.Group().add(
-        new Étiquette('\\mathrm{N}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(1.55, 0, Z_SCHÉMA)),
-        new Étiquette('\\mathrm{S}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(-1.55, 0, Z_SCHÉMA)),
-    );
+    const bandes = nomsDesBandes();
+    const pôles = nomsDesPôles();
 
-    // Les champs dans l'entrefer : des flèches, et le contour qui relie
-    // leurs pointes. Chaque champ a les siennes, décalées d'un quart de pas
-    // de celles du suivant.
-    const flèches = (couleur, décalage) =>
-        Array.from({ length: FLÈCHES }, (_, k) => ({
-            θ: (DEUX_PI * (k + décalage)) / FLÈCHES,
-            flèche: new Flèche({ couleur, rayon: 0.026, tête: 0.18, largeur: 0.07 }),
-        }));
+    // Les champs dans l'entrefer. Chaque champ a ses flèches, décalées d'un
+    // quart de pas de celles du suivant.
     const champs = {
-        Bs: { flèches: flèches(COULEUR.Bs, 0), visible: true },
-        1: { flèches: flèches(COULEUR[1], 0.25), visible: false },
-        2: { flèches: flèches(COULEUR[2], 0.75), visible: false },
-        Br: { flèches: flèches(COULEUR.Br, 0.5), visible: true },
+        Bs: champDEntrefer(COULEUR.Bs, 0),
+        1: champDEntrefer(COULEUR[1], 0.25, false),
+        2: champDEntrefer(COULEUR[2], 0.75, false),
+        Br: champDEntrefer(COULEUR.Br, 0.5),
     };
-    for (const [nom, champ] of Object.entries(champs)) {
-        // Le contour, fin et translucide : ce sont les flèches qu'on lit.
-        champ.contour = new Trait({ couleur: COULEUR[nom], épaisseur: 1.2, opacité: 0.5 });
-        champ.groupe = new THREE.Group().add(...champ.flèches.map((f) => f.flèche), champ.contour);
-        champ.groupe.visible = champ.visible;
-    }
 
     // L'angle α, du rotor au maximum du champ glissant, et le couple.
     const schéma = new THREE.Group();
-    const axeRotor = new Trait({ couleur: COULEUR.rotor, épaisseur: 2, pointillés: true, tiret: 0.15 });
-    const maximumBs = new Trait({ couleur: COULEUR.Bs, épaisseur: 2, pointillés: true, tiret: 0.15 });
-    const arcα = new Arc('\\alpha', { face: DEVANT });
+    const angle = angleInterne();
     const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
-    schéma.add(axeRotor, maximumBs, arcα, arcΓ, pôles);
+    schéma.add(...angle.objets, arcΓ, pôles);
     scène.ajoute(bandes, ...Object.values(champs).map((champ) => champ.groupe), schéma);
 
     // -- Réglages --------------------------------------------------------------
@@ -427,16 +471,11 @@ function machineSynchrone(section) {
             );
         }
 
-        const centre = vecteur(0, 0, Z_SCHÉMA);
-        const rayon = (a) => [R_ARBRE + 0.15, R_ROTOR - 0.1].map((r) => direction(a).multiplyScalar(r).setZ(Z_SCHÉMA));
-        axeRotor.trace(rayon(θr));
-        maximumBs.trace(rayon(ωt));
-        const α = deg(état.α);
-        arcα.place(centre, direction(θr), direction(θr + Math.PI / 2), α, 2.05);
+        angle.place(θr, ωt, deg(état.α));
         // Le couple, en arc autour de l'arbre : dans le sens de rotation
         // quand il entraîne le rotor.
-        const Γ = Math.sin(α);
-        arcΓ.place(centre, direction(θr + Math.PI), direction(θr + (3 * Math.PI) / 2), 1.7 * Γ, 1.05);
+        const Γ = Math.sin(deg(état.α));
+        arcΓ.place(vecteur(0, 0, Z_SCHÉMA), direction(θr + Math.PI), direction(θr + (3 * Math.PI) / 2), 1.7 * Γ, 1.05);
 
         pointCouple.place(état.α, Γ);
         const t = THREE.MathUtils.radToDeg(THREE.MathUtils.euclideanModulo(ωt, DEUX_PI));
@@ -483,4 +522,200 @@ function régime(α) {
     return `${sens} ; ${stabilité}`;
 }
 
-lance('section.animation', machineSynchrone);
+// -- Le moteur en charge -------------------------------------------------------------
+
+/**
+ * Le moteur entraîne une charge qui lui oppose le couple Γ_r. Les courants
+ * statoriques gardent leur pulsation ω : le champ glissant tourne à ω, quoi
+ * que fasse le rotor. Celui-ci, de moment d'inertie J, suit le théorème du
+ * moment cinétique,
+ *     J dΩ/dt = Γ_max sin α − Γ_r,    avec dα/dt = ω − Ω.
+ * Les couples se comptent en Γ_max.
+ */
+const CHARGE = {
+    /** Un tour de champ glissant par seconde : l'œil le suit. */
+    ω: DEUX_PI,
+    /** La pulsation des petites oscillations de α, √(Γ_max/J₀), rapportée à
+     *  ω. Elle doit rester sous 0,5 pour tout J proposé : au-delà, un rotor
+     *  arrêté s'accrocherait de lui-même au champ glissant, et le moteur
+     *  démarrerait seul. */
+    propre: 0.3,
+    /** Sans amortissement, α oscillerait sans fin autour de son équilibre.
+     *  Une machine réelle a des amortisseurs — une cage dans le rotor —, qui
+     *  exercent un couple proportionnel au glissement ω − Ω près du
+     *  synchronisme : `ζ` est le taux d'amortissement qu'ils donnent pour
+     *  J = J₀. Loin du synchronisme, leur couple s'efface : au-delà du
+     *  glissement `fenêtre` (rapporté à ω), il est nul, et le rotor décroché
+     *  ne repart pas. */
+    ζ: 0.5,
+    fenêtre: 0.5,
+    /** Ce que retient le chronogramme, en secondes. */
+    durée: 20,
+    /** La longueur de l'arc d'un couple égal à Γ_max, en radians. */
+    arc: 1.7,
+};
+
+function décrochage(section) {
+    const { vue, réglages: panneau } = cadre(section);
+    const scène = scèneDeMachine(vue, VUE);
+    const { ω } = CHARGE;
+    const ω0 = CHARGE.propre * ω;
+
+    const état = { Γr: 0.3, J: 1, ωt: 0, θr: 0, Ω: ω, pause: false, décroché: false, calme: 0 };
+    /** Le rotor au synchronisme, à l'angle α d'équilibre — s'il y en a un. */
+    function synchronise() {
+        état.ωt = THREE.MathUtils.euclideanModulo(état.ωt, DEUX_PI);
+        état.θr = état.ωt - Math.asin(Math.min(état.Γr, 1));
+        état.Ω = ω;
+        état.décroché = false;
+    }
+    synchronise();
+
+    // La machine de l'animation précédente, telle qu'elle s'y présente au
+    // départ. Le couple reste celui du cours, Γ_max sin α.
+    const { modèle, symboles } = monte(scène, N_DÉPART);
+    const poids = 2 / N_DÉPART;
+    const pôles = nomsDesPôles();
+    const champs = { Bs: champDEntrefer(COULEUR.Bs, 0), Br: champDEntrefer(COULEUR.Br, 0.5) };
+    const angle = angleInterne();
+    // Les deux couples, en arcs autour de l'arbre : celui du moteur dans le
+    // sens de rotation, celui de la charge en face, dans l'autre sens.
+    const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
+    const arcΓr = new Arc('\\Gamma_r', { couleur: COULEUR_CHARGE, face: DEVANT });
+    scène.ajoute(nomsDesBandes(), champs.Bs.groupe, champs.Br.groupe, ...angle.objets, arcΓ, arcΓr, pôles);
+
+    // -- Réglages --------------------------------------------------------------
+
+    const réglages = new Réglages(panneau);
+
+    réglages.groupe('Charge');
+    fraction(
+        réglages.curseur({
+            tex: '\\dfrac{\\Gamma_r}{\\Gamma_{\\max}}',
+            couleur: COULEUR_CHARGE,
+            min: 0,
+            max: 1.5,
+            pas: 0.01,
+            valeur: état.Γr,
+            auChangement: (v) => (état.Γr = v),
+        }),
+    );
+    fraction(
+        réglages.curseur({
+            tex: '\\dfrac{J}{J_0}',
+            min: 0.5,
+            max: 4,
+            pas: 0.05,
+            valeur: état.J,
+            auChangement: (v) => (état.J = v),
+        }),
+    );
+    const pause = réglages.bouton('Pause', () => {
+        état.pause = !état.pause;
+        pause.textContent = état.pause ? 'Reprendre' : 'Pause';
+    });
+    const relance = réglages.bouton('Relancer au synchronisme', synchronise);
+    relance.style.marginLeft = '0.4rem';
+
+    réglages.groupe('Couple');
+    réglages.formule('J\\,\\frac{\\mathrm{d}\\Omega}{\\mathrm{d}t} = \\Gamma_{\\max}\\sin\\alpha - \\Gamma_r');
+    const couple = new Graphe({
+        x: { min: -180, max: 180, nom: '\\alpha', graduations: [-180, -90, 0, 90, 180].map(degrés) },
+        y: {
+            min: -1.15,
+            max: 1.7,
+            nom: '\\Gamma_{\\text{ém}}',
+            graduations: [
+                [1, '\\Gamma_{\\max}'],
+                [-1, '-\\Gamma_{\\max}'],
+            ],
+        },
+        hauteur: 170,
+    });
+    // La zone stable, |α| < 90° : le couple y croît avec α.
+    couple.zone().place(-90, 90);
+    couple.trace((α) => Math.sin(deg(α)), { couleur: COULEURS.noir });
+    const niveau = couple.courbe({ couleur: COULEUR_CHARGE, pointillés: true });
+    const nomDuNiveau = couple.légende('\\Gamma_r', { couleur: COULEUR_CHARGE, ancre: 'gauche', décalage: [3, -7] });
+    const pointCouple = couple.point({ couleur: COULEURS.noir });
+    réglages.ajoute(couple.élément);
+    const valeurs = réglages.formule();
+    const bilan = réglages.texte();
+
+    réglages.groupe('Vitesse du rotor');
+    const vitesse = new Graphe({
+        x: { min: -CHARGE.durée, max: 0, nom: 't', graduations: [-20, -10, 0].map((t) => [t, t ? `${t}\\,\\text{s}` : '0']) },
+        y: { min: -0.25, max: 1.25, nom: '\\Omega', graduations: [[1, '\\omega']] },
+        hauteur: 120,
+        coupe: true,
+    });
+    const chrono = chronogramme(vitesse);
+    réglages.ajoute(vitesse.élément);
+    réglages.texte('Un amortissement, absent du modèle du cours, calme les oscillations de α.').className = 'note';
+
+    // -- À chaque image ----------------------------------------------------------
+
+    /** Le couple des amortisseurs, pour le glissement Δ = ω − Ω. */
+    const amortisseurs = (Δ) => {
+        const x = Δ / (CHARGE.fenêtre * ω);
+        return Math.abs(x) < 1 ? ((2 * CHARGE.ζ) / ω0) * Δ * (1 - x * x) ** 2 : 0;
+    };
+    let couples = { Γm: 0, Γcharge: 0 };
+
+    scène.àChaqueImage((dt) => {
+        if (!état.pause) {
+            couples = tourne(état, dt, {
+                J: état.J / ω0 ** 2,
+                Γr: état.Γr,
+                couple: () => Math.sin(état.ωt - état.θr) + amortisseurs(ω - état.Ω),
+                avance: (h) => {
+                    état.θr += état.Ω * h;
+                    état.ωt += ω * h;
+                },
+            });
+            chrono.ajoute(dt, état.Ω / ω);
+            // Le rotor a décroché quand le champ glissant a pris sur lui un
+            // demi-tour d'avance ; il n'est de nouveau accroché que s'il
+            // tourne un moment à la vitesse du champ.
+            if (état.ωt - état.θr > Math.PI) état.décroché = true;
+            état.calme = Math.abs(ω - état.Ω) < 0.02 * ω ? état.calme + dt : 0;
+            if (état.décroché && état.calme > 2) {
+                état.ωt -= DEUX_PI * Math.round((état.ωt - état.θr) / DEUX_PI);
+                état.décroché = false;
+            }
+        }
+        const { ωt, θr } = état;
+        const α = angleSigné(ωt - θr);
+        const i = { 1: Math.cos(ωt), 2: Math.cos(ωt + Math.PI / 2), rotor: 1 };
+
+        modèle.rotor.rotation.z = θr;
+        pôles.rotation.z = θr;
+        for (const { symbole, c } of symboles) symbole.montre(c.sens * i[c.circuit]);
+        const { stator, rotor } = modèle.conducteurs;
+        dessineChamp(champs.Bs, (θ) =>
+            champEnMarches(stator, (c) => poids * AMPLITUDE.Bs * c.sens * i[c.circuit], θ),
+        );
+        dessineChamp(champs.Br, (θ) => champEnMarches(rotor, (c) => poids * AMPLITUDE.Br * c.sens, θ, θr));
+        angle.place(θr, ωt);
+
+        const centre = vecteur(0, 0, Z_SCHÉMA);
+        arcΓ.place(centre, direction(deg(200)), direction(deg(290)), CHARGE.arc * Math.sin(α), 1.05);
+        arcΓr.place(centre, direction(deg(20)), direction(deg(110)), -CHARGE.arc * couples.Γcharge, 1.45);
+
+        niveau.place([
+            [-180, état.Γr],
+            [180, état.Γr],
+        ]);
+        nomDuNiveau.place(-180, état.Γr);
+        pointCouple.place(THREE.MathUtils.radToDeg(α), Math.sin(α));
+        valeurs.écrit(
+            `\\alpha = ${Math.round(THREE.MathUtils.radToDeg(α))}^\\circ \\qquad \\Omega = ${virgule(état.Ω / ω)}\\,\\omega`,
+        );
+        const texte = !état.décroché ? '' : état.Ω === 0 ? 'Le moteur a décroché : il est à l’arrêt.' : 'Le moteur a décroché.';
+        if (bilan.textContent !== texte) bilan.textContent = texte;
+    });
+}
+
+const ANIMATIONS = { champs: machineSynchrone, charge: décrochage };
+
+lance('section.animation', (section) => ANIMATIONS[section.dataset.animation](section));

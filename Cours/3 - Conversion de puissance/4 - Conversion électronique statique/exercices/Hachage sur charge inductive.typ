@@ -19,8 +19,8 @@
 
 Le hacheur ci-dessus sert à transférer de la puissance électrique depuis un générateur de tension $E$ continu vers un récepteur inductif de résistance $r$ et d'inductance $L$.
 
-Le fonctionnement est périodique de fréquence $f=#quan[2.0 kHz]$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=0.3$. On précise $E=#quan[100 V]$ et $r=#quan[10 Ω]$.
-#let RC = 0.3
+Le fonctionnement est périodique de fréquence $f=#quan[2.0 kHz]$. L'interrupteur commandé est fermé sur $[0,alpha T[$, ouvert sur $[alpha T,T[$, avec $alpha=#num(0.3)$. On précise $E=#quan[100 V]$ et $r=#quan[10 Ω]$.
+#let rapport-cyclique = 0.3
 #let E = 100
 #let r = 10
 
@@ -108,6 +108,6 @@ Le fonctionnement est périodique de fréquence $f=#quan[2.0 kHz]$. L'interrupte
 ][
     La loi des mailles donne $u_s = u_r + u_L$, soit en valeur moyenne 
     $alpha E = r mean(i_s) + 0$ d'où
-    #let ism = (RC * E) / r
+    #let ism = (rapport-cyclique * E) / r
     $ mean(i_s) = (alpha E)/r = #qty(ism, "A", chiffres: 2) $
 ]

@@ -14,14 +14,28 @@
 //
 // Le collecteur est dessiné devant le rotor, comme si l'on regardait la
 // machine par le côté du collecteur, dont on aurait ôté le flasque.
+//
+// Une seconde animation alimente le moteur sous tension constante et lui
+// donne une charge à entraîner : sa vitesse baisse quand le couple résistant
+// augmente, jusqu'à l'arrêt.
 
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { Graphe } from '#animations/graphe.js';
 import { Arc, COULEURS, Étiquette, Flèche, Trait, vecteur } from '#animations/objets.js';
 import { cadre, lance } from '#animations/page.js';
 import { Réglages } from '#animations/reglages.js';
-import { Scène } from '#animations/scene.js';
-import { Courant, LONGUEUR, MATÉRIAUX, angleSigné, contourEncoché, encoche, extrude, têteDeBobine } from './machine.js';
+import { COULEUR_CHARGE, chronogramme, fraction, tourne, virgule } from './charge.js';
+import {
+    Courant,
+    LONGUEUR,
+    MATÉRIAUX,
+    angleSigné,
+    contourEncoché,
+    encoche,
+    extrude,
+    scèneDeMachine,
+    têteDeBobine,
+} from './machine.js';
 
 const COULEUR = {
     inducteur: '#1e9a3c',
@@ -65,8 +79,11 @@ const FLÈCHES = 36;
 const LONGUEUR_MAX = 0.85;
 const M_DÉPART = 4;
 
-const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
-const VUE_DE_TROIS_QUARTS = { position: [11, 12, 22], cible: [0, 0, -0.8] };
+/** Les axes des champs et les arcs des couples se dessinent devant le
+ *  collecteur. */
+const Z_AXES = 1.3;
+
+const VUE = { taille: 10.8, troisQuarts: { position: [11, 12, 22], cible: [0, 0, -0.8] } };
 
 /**
  * Le champ statorique dans l'entrefer, rapporté à sa valeur sous les pôles :
@@ -239,52 +256,97 @@ function rotor(M) {
     };
 }
 
-// -- L'animation -------------------------------------------------------------------
+// -- Ce que les deux animations dessinent ----------------------------------------
 
-function balaisCollecteurs(section) {
-    const { vue, réglages: panneau } = cadre(section);
-    const scène = new Scène(vue, { rapport: 1.12, taille: 10.8, haut: [0, 1, 0], ...VUE_DE_FACE, éclairage: 0.45 });
-    scène.bouton('Vue de trois quarts', () => scène.regarde(VUE_DE_TROIS_QUARTS));
-    const pmrem = new THREE.PMREMGenerator(scène.rendu);
-    scène.scène.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scène.scène.environmentIntensity = 0.35;
-    scène.rendu.toneMapping = THREE.NeutralToneMapping;
-
-    const état = { M: M_DÉPART, θr: deg(10), n: 0.1, pause: false, courants: true, active: null };
-
-    const fixe = stator();
-    scène.ajoute(fixe.groupe);
-
-    // Le rotor, reconstruit quand M change, et le sens du courant dans ses
-    // conducteurs — dans ceux de la bobine qui conduit seulement.
+/**
+ * L'induit dans une scène : le rotor à M bobines, que `construis` refait
+ * quand M change, et le sens du courant dans ses conducteurs — dans ceux de
+ * la bobine qui conduit seulement.
+ */
+function induit(scène, M) {
     let modèle = null;
     let symboles = [];
-    function construis() {
-        if (modèle) {
-            scène.scène.remove(modèle.groupe);
-            modèle.libère();
-            for (const { symbole } of symboles) symbole.material.dispose();
-        }
-        modèle = rotor(état.M);
-        const disque = new THREE.CircleGeometry(modèle.symbole, 32);
-        symboles = modèle.conducteurs.map((c) => {
-            const symbole = new Courant(COULEUR.active, disque);
-            symbole.position.copy(direction(c.angle).multiplyScalar(R_CONDUCTEUR)).setZ(0.01);
-            modèle.groupe.add(symbole);
-            return { symbole, c };
-        });
-        état.active = null;
-        scène.ajoute(modèle.groupe);
-    }
-    construis();
+    // La lame sous le balai + à la dernière image, et si l'on montre le sens
+    // des courants : on ne reteint les bobines que lorsque l'un des deux change.
+    let active = null;
+    let courants = true;
+    const soi = {
+        /** Les conducteurs du rotor, dans son repère (cf. `rotor`). */
+        get conducteurs() {
+            return modèle.conducteurs;
+        },
+        construis(M) {
+            if (modèle) {
+                scène.scène.remove(modèle.groupe);
+                modèle.libère();
+                for (const { symbole } of symboles) symbole.material.dispose();
+            }
+            modèle = rotor(M);
+            const disque = new THREE.CircleGeometry(modèle.symbole, 32);
+            symboles = modèle.conducteurs.map((c) => {
+                const symbole = new Courant(COULEUR.active, disque);
+                symbole.position.copy(direction(c.angle).multiplyScalar(R_CONDUCTEUR)).setZ(0.01);
+                modèle.groupe.add(symbole);
+                return { symbole, c };
+            });
+            active = null;
+            scène.ajoute(modèle.groupe);
+        },
+        montreLesCourants(oui) {
+            courants = oui;
+            active = null;
+        },
+        /**
+         * Tourne le rotor en θr et fait commuter les balais. Renvoie les deux
+         * conducteurs que le courant parcourt : `j`, dont la lame est sous le
+         * balai +, et son `partenaire`.
+         */
+        tourne(θr) {
+            modèle.groupe.rotation.z = θr;
+            const M = modèle.matériaux.length;
+            // La lame sous le balai + : la plus proche de θ = π.
+            const pas = Math.PI / M;
+            const j = THREE.MathUtils.euclideanModulo(Math.round((Math.PI - θr - Math.PI / 2) / pas), 2 * M);
+            const partenaire = (j + M) % (2 * M);
+            if (active !== j) {
+                active = j;
+                modèle.matériaux.forEach((m, k) => m.color.set(k === j % M ? COULEUR.active : COULEUR.éteinte));
+                // Le courant arrive du balai + par l'avant du conducteur j, et
+                // s'y enfonce (⊗) ; il ressort vers l'avant (⊙) par l'autre.
+                for (const { symbole, c } of symboles) {
+                    symbole.visible = courants && (c.j === j || c.j === partenaire);
+                    symbole.montre(c.j === j ? -1 : 1);
+                }
+            }
+            return { j, partenaire };
+        },
+    };
+    soi.construis(M);
+    return soi;
+}
 
-    // Le nom des pôles et des balais.
-    const étiquettes = [
+/** Le nom des pôles et des balais. */
+function nomsDesPôlesEtDesBalais() {
+    return [
         new Étiquette('\\mathrm{N}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(-3.6, 0, Z_SCHÉMA)),
         new Étiquette('\\mathrm{S}', { couleur: COULEURS.gris, face: DEVANT }).place(vecteur(3.6, 0, Z_SCHÉMA)),
         new Étiquette('+', { face: DEVANT, taille: '1.3rem' }).place(vecteur(-1.25, 0.5, 1)),
         new Étiquette('-', { face: DEVANT, taille: '1.3rem' }).place(vecteur(1.25, 0.5, 1)),
     ];
+}
+
+// -- Le système balais-collecteurs --------------------------------------------------
+
+function balaisCollecteurs(section) {
+    const { vue, réglages: panneau } = cadre(section);
+    const scène = scèneDeMachine(vue, VUE);
+
+    const état = { M: M_DÉPART, θr: deg(10), n: 0.1, pause: false };
+
+    const fixe = stator();
+    scène.ajoute(fixe.groupe);
+    const rotorique = induit(scène, état.M);
+    const étiquettes = nomsDesPôlesEtDesBalais();
 
     // Le champ statorique dans l'entrefer : des flèches et leur contour.
     const champ = Array.from({ length: FLÈCHES }, (_, k) => ({
@@ -311,7 +373,6 @@ function balaisCollecteurs(section) {
 
     // Les axes des deux champs, devant le collecteur, et l'angle α de B_r à
     // B_s.
-    const Z_AXES = 1.3;
     const centre = vecteur(0, 0, Z_AXES);
     const axeBs = new Flèche({ couleur: COULEUR.Bs, rayon: 0.04, tête: 0.3, largeur: 0.12, dessus: true }).place(
         centre,
@@ -355,7 +416,7 @@ function balaisCollecteurs(section) {
         valeur: état.M,
         auChangement: (v) => {
             état.M = v;
-            construis();
+            rotorique.construis(v);
             écritLames();
         },
     });
@@ -376,9 +437,8 @@ function balaisCollecteurs(section) {
     réglages.case({
         texte: 'Sens des courants',
         auChangement: (visible) => {
-            état.courants = visible;
+            rotorique.montreLesCourants(visible);
             fixe.symboles.forEach((s) => (s.visible = visible));
-            état.active = null;
             scène.redessine();
         },
     });
@@ -398,28 +458,13 @@ function balaisCollecteurs(section) {
 
     scène.àChaqueImage((dt) => {
         if (!état.pause) état.θr += DEUX_PI * état.n * dt;
-        const { M } = état;
         const θr = état.θr;
-        modèle.groupe.rotation.z = θr;
-
-        // La lame sous le balai + : la plus proche de θ = π.
-        const pas = Math.PI / M;
-        const j = THREE.MathUtils.euclideanModulo(Math.round((Math.PI - θr - Math.PI / 2) / pas), 2 * M);
-        const partenaire = (j + M) % (2 * M);
-        if (état.active !== j) {
-            état.active = j;
-            modèle.matériaux.forEach((m, k) => m.color.set(k === j % M ? COULEUR.active : COULEUR.éteinte));
-            // Le courant arrive du balai + par l'avant du conducteur j, et
-            // s'y enfonce (⊗) ; il ressort vers l'avant (⊙) par l'autre.
-            for (const { symbole, c } of symboles) {
-                symbole.visible = état.courants && (c.j === j || c.j === partenaire);
-                symbole.montre(c.j === j ? -1 : 1);
-            }
-        }
+        const { j, partenaire } = rotorique.tourne(θr);
+        const { conducteurs } = rotorique;
 
         // Les forces : I dl ∧ B, tangentielles, I dl étant selon ±z.
         for (const [k, jc] of [j, partenaire].entries()) {
-            const φ = θr + modèle.conducteurs[jc].angle;
+            const φ = θr + conducteurs[jc].angle;
             const s = jc === j ? -1 : 1;
             const f = s * champStatorique(φ);
             const origine = direction(φ).multiplyScalar(R_CONDUCTEUR).setZ(Z_SCHÉMA + 0.02);
@@ -427,7 +472,7 @@ function balaisCollecteurs(section) {
         }
 
         // L'axe de B_r : à 90° en arrière du conducteur où le courant sort.
-        const axe = θr + modèle.conducteurs[partenaire].angle - Math.PI / 2;
+        const axe = θr + conducteurs[partenaire].angle - Math.PI / 2;
         const α = angleSigné(-axe);
         axeBr.place(centre, direction(axe), 1.6);
         nomBr.place(direction(axe).multiplyScalar(1.95).setZ(Z_AXES));
@@ -436,4 +481,135 @@ function balaisCollecteurs(section) {
     });
 }
 
-lance('section.animation', balaisCollecteurs);
+// -- Le moteur en charge -------------------------------------------------------------
+
+/**
+ * Le moteur, alimenté sous la tension U constante, entraîne une charge qui
+ * lui oppose le couple Γ_r. L'inductance de l'induit est négligée : la loi
+ * des mailles U = R I_r + Φ₀ Ω donne le courant, donc le couple
+ * Γ_ém = Φ₀ I_r, à chaque instant, et le rotor, de moment d'inertie J, suit
+ *     J dΩ/dt = Γ_ém − Γ_r = Γ_d (1 − Ω/Ω₀) − Γ_r,
+ * où Ω₀ = U/Φ₀ est la vitesse à vide et Γ_d = Φ₀ U/R le couple de démarrage.
+ * Les vitesses se comptent en Ω₀, les couples en Γ_d.
+ */
+const CHARGE = {
+    /** À vide, un tour par seconde : on voit encore les balais commuter. */
+    Ω0: DEUX_PI,
+    /** La constante de temps J₀ R/Φ₀² de la mise en vitesse, en secondes. */
+    τ: 1.5,
+    /** Ce que retient le chronogramme, en secondes. */
+    durée: 20,
+    /** La longueur de l'arc d'un couple égal à Γ_d, en radians. */
+    arc: 1.7,
+};
+
+function charge(section) {
+    const { vue, réglages: panneau } = cadre(section);
+    const scène = scèneDeMachine(vue, VUE);
+    const { Ω0 } = CHARGE;
+
+    const état = { Γr: 0.3, J: 1, θr: deg(10), Ω: 0.7 * Ω0, pause: false };
+
+    scène.ajoute(stator().groupe, ...nomsDesPôlesEtDesBalais());
+    const rotorique = induit(scène, M_DÉPART);
+
+    // Les deux couples, en arcs devant le collecteur : celui du moteur dans
+    // le sens de rotation, celui de la charge en face, dans l'autre sens.
+    const centre = vecteur(0, 0, Z_AXES);
+    const arcΓ = new Arc('\\Gamma_{\\text{ém}}', { face: DEVANT });
+    const arcΓr = new Arc('\\Gamma_r', { couleur: COULEUR_CHARGE, face: DEVANT });
+    scène.ajoute(arcΓ, arcΓr);
+
+    // -- Réglages --------------------------------------------------------------
+
+    const réglages = new Réglages(panneau);
+
+    réglages.groupe('Charge');
+    fraction(
+        réglages.curseur({
+            tex: '\\dfrac{\\Gamma_r}{\\Gamma_d}',
+            couleur: COULEUR_CHARGE,
+            min: 0,
+            max: 1.3,
+            pas: 0.01,
+            valeur: état.Γr,
+            auChangement: (v) => (état.Γr = v),
+        }),
+    );
+    fraction(
+        réglages.curseur({
+            tex: '\\dfrac{J}{J_0}',
+            min: 0.5,
+            max: 4,
+            pas: 0.05,
+            valeur: état.J,
+            auChangement: (v) => (état.J = v),
+        }),
+    );
+    const pause = réglages.bouton('Pause', () => {
+        état.pause = !état.pause;
+        pause.textContent = état.pause ? 'Reprendre' : 'Pause';
+    });
+
+    réglages.groupe('Caractéristique couple-vitesse');
+    réglages.formule(
+        '\\begin{gathered} J\\,\\frac{\\mathrm{d}\\Omega}{\\mathrm{d}t} = \\Phi_0 I_r - \\Gamma_r \\\\ ' +
+            'U = R\\,I_r + \\Phi_0\\,\\Omega \\end{gathered}',
+    );
+    const caractéristique = new Graphe({
+        x: { min: 0, max: 1.4, nom: '\\Gamma_{\\text{ém}}', graduations: [0, [1, '\\Gamma_d']] },
+        y: { min: 0, max: 1.2, nom: '\\Omega', graduations: [[1, '\\Omega_0']] },
+        hauteur: 170,
+    });
+    caractéristique.courbe({ couleur: COULEURS.noir }).place([
+        [0, 1],
+        [1, 0],
+    ]);
+    const niveau = caractéristique.verticale({ couleur: COULEUR_CHARGE, épaisseur: 2 });
+    const nomDuNiveau = caractéristique.légende('\\Gamma_r', { couleur: COULEUR_CHARGE, décalage: [0, -7] });
+    const pointDeFonctionnement = caractéristique.point({ couleur: COULEURS.noir });
+    réglages.ajoute(caractéristique.élément);
+    réglages.formule('\\Omega_0 = \\frac{U}{\\Phi_0} \\qquad \\Gamma_d = \\frac{\\Phi_0 U}{R}');
+    const valeurs = réglages.formule();
+
+    réglages.groupe('Vitesse du rotor');
+    const vitesse = new Graphe({
+        x: { min: -CHARGE.durée, max: 0, nom: 't', graduations: [-20, -10, 0].map((t) => [t, t ? `${t}\\,\\text{s}` : '0']) },
+        y: { min: -0.1, max: 1.2, nom: '\\Omega', graduations: [[1, '\\Omega_0']] },
+        hauteur: 120,
+        coupe: true,
+    });
+    const chrono = chronogramme(vitesse);
+    réglages.ajoute(vitesse.élément);
+
+    // -- À chaque image ----------------------------------------------------------
+
+    let couples = { Γm: 0, Γcharge: 0 };
+
+    scène.àChaqueImage((dt) => {
+        if (!état.pause) {
+            couples = tourne(état, dt, {
+                // En unités de Γ_d : J₀ Ω₀ / Γ_d = τ.
+                J: (état.J * CHARGE.τ) / Ω0,
+                Γr: état.Γr,
+                couple: () => 1 - état.Ω / Ω0,
+                avance: (h) => (état.θr += état.Ω * h),
+            });
+            chrono.ajoute(dt, état.Ω / Ω0);
+        }
+        rotorique.tourne(état.θr);
+
+        const Γ = 1 - état.Ω / Ω0;
+        arcΓ.place(centre, direction(deg(200)), direction(deg(290)), CHARGE.arc * Γ, 1.5);
+        arcΓr.place(centre, direction(deg(20)), direction(deg(110)), -CHARGE.arc * couples.Γcharge, 1.9);
+
+        niveau.place(état.Γr);
+        nomDuNiveau.place(état.Γr, 1.2);
+        pointDeFonctionnement.place(Γ, état.Ω / Ω0);
+        valeurs.écrit(`\\Omega = ${virgule(état.Ω / Ω0)}\\,\\Omega_0 \\qquad I_r = ${virgule(Γ)}\\,\\frac{U}{R}`);
+    });
+}
+
+const ANIMATIONS = { collecteur: balaisCollecteurs, charge };
+
+lance('section.animation', (section) => ANIMATIONS[section.dataset.animation](section));

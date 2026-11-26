@@ -1,6 +1,7 @@
 // La machine synchrone du cours, en coupe : diphasée, bipolaire, à entrefer
-// constant (rotor lisse). Ce module ne fait que la dessiner ; la physique est
-// dans machine-synchrone.js.
+// constant (rotor lisse). Ce module ne fait que la dessiner, et monter la
+// scène où on la regarde ; la physique est dans machine-synchrone.js. La
+// machine à courant continu de collecteur.js lui emprunte ses pièces.
 //
 // On la voit coupée en son milieu, dans le plan z = 0 : la moitié avant est
 // ôtée, le plan de coupe montre les tôles, les encoches et la section des
@@ -18,6 +19,8 @@
 // glissant B_s ∝ cos(ωt − θ) du cours — à la limite N → ∞.
 
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { Scène } from '#animations/scene.js';
 
 // -- Dimensions (unités arbitraires) ------------------------------------------
 
@@ -49,6 +52,26 @@ export const local = (a, r, s) => polaire(r, a).add(polaire(s, a + Math.PI / 2))
 /** Un angle ramené dans ]−π, π]. */
 export const angleSigné = (a) => THREE.MathUtils.euclideanModulo(a + Math.PI, 2 * Math.PI) - Math.PI;
 const tourPositif = (a) => THREE.MathUtils.euclideanModulo(a, 2 * Math.PI);
+
+// -- La scène -------------------------------------------------------------------
+
+const VUE_DE_FACE = { position: [0, 0, 30], cible: [0, 0, 0] };
+
+/**
+ * La scène d'une machine vue en coupe, de face au départ, large de `taille` ;
+ * un bouton mène à la vue `troisQuarts`. Le rendu est photographique : des
+ * reflets pour les métaux — une pièce éclairée, que les tôles, les fils et
+ * l'arbre renvoient —, et une exposition qui ne brûle pas les faces claires.
+ */
+export function scèneDeMachine(vue, { taille, troisQuarts }) {
+    const scène = new Scène(vue, { rapport: 1.12, taille, haut: [0, 1, 0], ...VUE_DE_FACE, éclairage: 0.45 });
+    scène.bouton('Vue de trois quarts', () => scène.regarde(troisQuarts));
+    const pmrem = new THREE.PMREMGenerator(scène.rendu);
+    scène.scène.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scène.scène.environmentIntensity = 0.35;
+    scène.rendu.toneMapping = THREE.NeutralToneMapping;
+    return scène;
+}
 
 // -- Les conducteurs ------------------------------------------------------------
 

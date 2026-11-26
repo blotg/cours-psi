@@ -93,7 +93,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
 
     L'angle de pilotage $Psi$ est nul, donc le courant est en phase avec la force contre-électromotrice $E$.
 
-    La loi des mailles s'écrit $V=E + R I + j L omega I$.
+    La loi des mailles s'écrit $underline(V) = underline(E) + R underline(I) + j L omega underline(I)$.
     #figure(
         canvas({
             import cetz.draw: *
@@ -126,7 +126,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
 )[
     La valeur efficace de la force contre-électromotrice $E$ a pour expression $E=Phi_0 omega$. Quelle est l'unité de la constante $Phi_0$ dans le système SI ? Que représente-t-elle ? De quels paramètres de la machine dépend-elle ? Montrer que $E=A Omega$, où $A$ est une constante dont on précisera l'expression et la valeur numérique.
 ][
-    $Phi_0$ est un flux magnétique, son unité est donc le #unit("Wb") (weber). Il représente le flux magnétique créé par l'inducteur à aimants permanents à travers une spire de l'induit. Il dépend de la géométrie de la machine et de l'induction magnétique créée par les aimants permanents.
+    $Phi_0$ est un flux magnétique, son unité est donc le #unit("Wb") (weber). Il représente le flux magnétique créé par l'inducteur à aimants permanents à travers une phase de l'induit (valeur efficace). Il dépend de la géométrie de la machine et du champ magnétique créé par les aimants permanents.
 
     En utilisant la condition de synchronisme $omega=p Omega$, on a :
     $ E = Phi_0 omega = Phi_0 p Omega = A Omega $ d'où
@@ -173,7 +173,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
         "Rappel des hypothèses : pertes Joule négligeables.",
     ),
 )[
-    Déterminer l'expression de la puissance électrique moyenne $P_a$ absorbée par le moteur en fonction de $V$, $I$ et $phi$, puis en fonction de $E$, $I$ et $Psi$. Quelle relation existe-t-il entre cette puissance électrique $P_a$ et la puissance mécanique électromagnétique $P_m$ reçue par le rotor ?
+    Déterminer l'expression de la puissance électrique moyenne $P_a$ absorbée par le moteur en fonction de $V$, $I$ et $phi$, puis en fonction de $E$, $I$ et $Psi$. Quelle relation existe-t-il entre cette puissance électrique $P_a$ et la puissance électromagnétique $P_m$ reçue par le rotor ?
 ][
     La puissance électrique absorbée par le moteur s'écrit :
     $ P_a = 2 V I cos(phi) $
@@ -182,7 +182,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
     En utilisant la relation obtenue dans la question précédente, on a aussi :
     $ P_a = 2 E I cos(Psi) $
 
-    En négligeant les pertes Joule, la puissance électrique absorbée par le stator est entièrement convertie en puissance mécanique électromagnétique reçue par le rotor. On a donc :
+    En négligeant les pertes Joule, la puissance électrique absorbée par le stator est entièrement convertie en puissance électromagnétique reçue par le rotor. On a donc :
     $ P_a = P_m $
 ]
 
@@ -194,7 +194,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
 )[
     Exprimer le couple électromécanique $C$ développé par le moteur en fonction de $A$, $I$ et $Psi$. Pour une intensité efficace $I$ donnée, que doit-on faire pour maximiser le couple développé par la machine ? De quelle unique variable le couple dépend-il alors ? À quel autre moteur ce fonctionnement fait-il penser ?
 ][
-    La puissance mécanique électromagnétique reçue par le rotor s'écrit :
+    La puissance électromagnétique reçue par le rotor s'écrit :
     $ P_m = C Omega $
     En utilisant l'expression de la puissance électrique absorbée obtenue précédemment, on a :
     $ C Omega = 2 E I cos(Psi) $
@@ -217,7 +217,7 @@ Afin de déterminer les paramètres du modèle, divers essais sont effectués :
         "Représenter le diagramme de Fresnel et utiliser la trigonométrie pour déterminer $phi$ puis $V$.",
     ),
 )[
-    On se place sur un point de fonctionnement à $Psi=0$, $I=I_N$ et $n=#quan[1500 tr/min]$. Que vaut le moment du couple $C$ développé par le moteur ? Représenter le diagramme vectoriel représentatif du fonctionnement. Placer les vecteurs représentatifs des complexes $underline(E)$, $underline(V)$ et $underline(I)$. En déduire les expressions numériques de $V$ et $phi$. Calculer leurs valeurs numériques correspondantes.
+    On se place sur un point de fonctionnement à $Psi=0$, $I=I_N$ et $n=#quan[1500 tr/min]$. Que vaut le moment du couple $C$ développé par le moteur ? Représenter le diagramme vectoriel représentatif du fonctionnement. Placer les vecteurs représentatifs des complexes $underline(E)$, $underline(V)$ et $underline(I)$. En déduire les expressions littérales de $V$ et $phi$. Calculer leurs valeurs numériques.
 ][
     Le couple développé par le moteur vaut :
     $

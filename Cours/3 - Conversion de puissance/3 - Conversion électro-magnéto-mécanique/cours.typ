@@ -178,7 +178,7 @@ La force électromagnétique est toujours attractive. La force électromagnétiq
 La machine synchrone peut être utilisée comme un moteur ou comme un alternateur. La machine synchrone a un très bon rendement.
 
 #exemple[
-    Des machines synchrones sont utilisées dans les TGV, certaines voitures électriques et les centrales de production électriques (hors éoliennes).
+    Des machines synchrones sont utilisées dans les TGV, certaines voitures électriques, les centrales de production électriques et une partie des éoliennes.
 ]
 
 La machine synchrone est constituée d'une partie fixe, appelée stator et d'une partie mobile appelée rotor. Le stator est aussi appelé induit. Le rotor est aussi appelé inducteur.
@@ -401,7 +401,7 @@ La condition $Omega = omega$ est appelée condition de synchronisme. Dans une ma
 )
 
 #question-de-début-de-cours(
-    "La condition de synchronisme stipule que, si la pulsation du champ glissant et la vitesse angulaire diffèrent,",
+    "La condition de synchronisme stipule que, si la pulsation des courants statoriques et la vitesse angulaire du rotor diffèrent,",
     (
         "le couple exercé sur le rotor par le champ magnétique est en moyenne nul.",
         "le couple exercé sur le rotor par le champ magnétique est nul à chaque instant.",
@@ -423,6 +423,10 @@ Pour $alpha in ]-pi/2, pi/2[$, le système est stable : si le couple résistant 
 Pour $alpha > pi/2$, le système est instable : si le couple résistant augmente, le rotor ralentit, augmentant ainsi l'angle $alpha$ entre rotor et champ tournant ; le couple moteur diminue alors, ce qui empire encore la situation.
 
 Si le couple résistant dépasse $(4 sqrt(2) mu_0 N_r N_s R h)/(pi e) I_s I_e$, le moteur décroche et le couple moyen devient alors nul.
+
+L'animation ci-dessous montre un moteur synchrone qui entraine une charge, l'inertie du rotor étant prise en compte : quand le couple résistant augmente, l'angle $alpha$ augmente, puis le moteur décroche et s'arrête.
+
+#lien("https://blotg.github.io/cours-psi/conversion-3/animations/machine-synchrone.html#charge")
 
 == Démarrage
 La condition de synchronisme exige que la vitesse angulaire du rotor $Omega$ soit égale à la pulsation du courant statorique $omega$ pour avoir un couple non nul. Mais alors, comment faire démarrer un moteur synchrone initialement à l'arrêt ($Omega=0$) ? Il est possible de transformer le moteur synchrone en moteur asynchrone le temps du démarrage ou d'utiliser un système d'auto-pilotage qui asservit $alpha$ à une valeur voulue pour augmenter progressivement la vitesse angulaire du rotor.
@@ -506,7 +510,7 @@ Le flux $Phi_1$ est en retard de $alpha$ sur le courant $i_1$, et la force contr
 
 #flashcard(
     recto: [Angle de pilotage],
-    verso: [Angle $Psi=pi/2 - alpha$ où $alpha$ est l'angle entre le champ glissant et le champ rotorique.],
+    verso: [Angle $Psi=pi/2 - alpha$ où $alpha$ est l'angle entre le champ glissanr statorique et le champ rotorique.],
 )
 
 #schéma(titre: "Angle de pilotage", hauteur: 3cm)
@@ -551,7 +555,7 @@ Si les courants dans les deux circuits induits ont la même valeur efficace et s
 
 Si l'alternateur est équilibré, les relations vues précédemment sont valables en fonctionnement alternateur comme en fonctionnement moteur.
 
-On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-électromotrice.
+En fonctionnement alternateur, on adopte préférentiellement la convention générateur : on garde l'orientation des tensions et on oriente le courant dans l'autre sens. La force contre-électromotrice $E_1$, désormais orientée dans le sens du courant, devient la force électromotrice de l'alternateur.
 
 #schéma(titre: "Schéma équivalent et diagramme de Fresnel en fonctionnement générateur", hauteur: 4cm)
 
@@ -563,8 +567,8 @@ On définit la force électromotrice comme l'opposé $-E_1$ de la force contre-�
 #question-de-début-de-cours(
     "En fonctionnement alternateur",
     (
-        "le champ glissant est en retard sur le champ rotorique.",
-        "le champ glissant est en avance sur le champ rotorique.",
+        "le champ statorique est en retard sur le champ rotorique.",
+        "le champ statorique est en avance sur le champ rotorique.",
         "l'angle de pilotage est négatif.",
     ),
 )
@@ -578,7 +582,7 @@ La machine à courant continu est constituée d'un stator, aussi appelé inducte
 )
 
 #exemple[
-    Les machines à courant continu sont utilisées pour les petits équipements de voiture (essuie-glaces, vitres, rétroviseurs, ...), dans la plupart des appareils électroménagers et dans les jouets.
+    Les machines à courant continu sont utilisées pour les petits équipements de voiture (essuie-glaces, vitres, rétroviseurs, ...), dans l'outillage sans fil, dans les jouets et, sous la forme voisine du moteur universel, dans les appareils électroménagers (mixeur, aspirateur).
 ]
 
 Les enroulements rotorique et statorique sont parcourus par des courants continus $I_r$ et $I_e$ respectivement.
@@ -592,11 +596,11 @@ Les enroulements rotorique et statorique sont parcourus par des courants continu
     caption: "Photographies de machines à courant continu dont on a retiré le capot.",
 )
 
-#schéma(titre: "Schéma en couple d'une machine à courant continu", hauteur: 3cm)
+#schéma(titre: "Schéma en coupe d'une machine à courant continu", hauteur: 3cm)
 
 Dans une machine bipolaire, chaque enroulement donne naissance à une seule paire de pôles.
 
-Dans une machine à excitation séparée, les circuits rotoriques et statoriques sont séparés.
+Dans une machine à excitation séparée, les circuits rotoriques et statoriques sont alimentés séparément.
 
 Par analogie avec la machine synchrone, l'interaction entre le champ induit et le champ inducteur donne lieu à un couple électromagnétique subi par le rotor si la condition de synchronisme est vérifiée.
 
@@ -654,7 +658,7 @@ La vidéo ci-dessous en illustre aussi le fonctionnement.
     (
         "limiter les pertes et augmenter le rendement.",
         "assurer la condition de synchronisme.",
-        "alimenter le circuit rotorique en formant un angle de $pi/2$ avec le champ statorique.",
+        "alimenter le circuit rotorique qui forme un angle de $pi/2$ avec le champ statorique.",
         "maximiser le couple électromagnétique.",
     ),
 )
@@ -711,7 +715,7 @@ Par analogie avec la machine synchrone, le couple électromagnétique subi par l
 ]
 
 #application[
-    Pour réaliser un treuil, on utilise un moteur à courant continu de constante de couplage #quan[0.11 Wb] pour faire tourner un réducteur de rapport de transmission $1/100$ qui fait à son tour tourner une poulie de rayon #quan[3 cm] sur lequel est enroulé un câble. Sachant que le moteur à courant continu a un courant maximum de #quan[6 A], quelle masse maximale le treuil peut-il soulever ?
+    Pour réaliser un treuil, on utilise un moteur à courant continu de constante de couplage #quan[0.11 Wb] pour faire tourner un réducteur de rapport de transmission $1/100$ qui fait à son tour tourner une poulie de rayon #quan[3 cm] sur laquelle est enroulé un câble. Sachant que le moteur à courant continu a un courant maximum de #quan[6 A], quelle masse maximale le treuil peut-il soulever ?
 ]
 
 La conservation de l'énergie dans une machine sans perte permet d'en déduire le lien entre force contre-électromotrice et vitesse angulaire : la puissance électrique $E_"cém" I_r$ reçue par la force contre-électromotrice est intégralement convertie en puissance mécanique $Gamma_"ém" Omega = Phi_0 I_r Omega$.
@@ -772,6 +776,10 @@ Il est possible de déduire de ce modèle la caractéristique couple-vitesse ang
 #application[
     Le moteur est alimenté par une tension continue $U$. Déterminer la relation entre le couple $Gamma$ et la vitesse angulaire $Omega$ en régime stationnaire. Tracer $Omega$ en fonction de $Gamma$.
 ]
+
+L'animation ci-dessous montre un moteur à courant continu, alimenté sous tension constante, qui entraine une charge : quand le couple résistant augmente, le moteur ralentit le long de sa caractéristique, jusqu'à s'arrêter si ce couple dépasse le couple de démarrage.
+
+#lien("https://blotg.github.io/cours-psi/conversion-3/animations/collecteur.html#charge")
 
 #question-de-colle(
     [Présenter le modèle équivalent de l'induit d'un moteur à courant continu. En déduire la caractéristique $(Omega, Gamma)$ en régime stationnaire.],

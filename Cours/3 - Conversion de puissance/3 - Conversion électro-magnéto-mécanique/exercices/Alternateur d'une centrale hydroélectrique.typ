@@ -5,7 +5,7 @@
 Une turbine hydraulique est accouplée à une machine synchrone qui fonctionne en alternateur, le groupe turbine-alternateur fournit de l'énergie au réseau. L'alternateur est utilisé de façon équilibrée.
 
 Les caractéristiques de la machine synchrone diphasée sont les suivantes :
-- puissance apparente nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#quan[65 MV A]$
+- puissance apparente#footnote[La puissance apparente est le produit des valeurs efficaces de la tension et du courant, soit $S = 2 V I$ pour les deux phases.] nominale#footnote[Les grandeurs nominales sont les grandeurs pour lesquelles la machine est conçue pour fonctionner de façon optimale.] $S_n=#quan[65 MV A]$
 - tension nominale aux bornes d'une phase $V_n=#quan[10 kV]$
 - fréquence des courants statoriques imposée par le réseau $f=#quan[50 Hz]$
 - résistance d'une phase statorique $R=#quan[0.01 Ω]$

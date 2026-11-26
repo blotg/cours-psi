@@ -68,7 +68,7 @@ Les états seront listés en s'inspirant du comptage binaire :
     Justifier que dans le $i$-ème état, l'interrupteur $K_1$ est ouvert si `i//2 % 2` vaut `0` et fermé sinon où `i//2` désigne le quotient de la division euclidienne de $i$ par 2.
 ][
     `i%2` donne le chiffre des unités en base 2 de $i$. Si ce chiffre est 0, l'interrupteur $K_0$ est ouvert, sinon il est fermé.
-    `i//2 % 2` donne le chiffre des deuxièmes positions en base 2 de $i$. Si ce chiffre est 0, l'interrupteur $K_1$ est ouvert, sinon il est fermé.
+    `i//2 % 2` donne le bit de rang 1 de $i$ (le deuxième chiffre de son écriture en base 2, en partant de la droite). Si ce chiffre est 0, l'interrupteur $K_1$ est ouvert, sinon il est fermé.
 ]
 
 #question(

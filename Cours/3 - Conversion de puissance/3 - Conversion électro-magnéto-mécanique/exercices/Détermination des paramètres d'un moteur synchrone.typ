@@ -18,7 +18,7 @@ Le circuit diphasé statorique est parcouru par deux courants sinusoïdaux de pu
     Le couple moteur est non nul seulement si la condition de synchronisme $Omega = omega$ est vérifiée.
 ]
 
-On désigne par $L$ l'inductance d'une phase et on néglige la résistance des enroulements. En régime permanent de rotation, on note $underline(U)$ la représentation complexe de la tension d'alimentation de la phase, $underline(I)$ celle de l'intensité du courant et $underline(E)$ celle de la force contre-électromotrice, de sorte. Les sens de $underline(U)$ et $underline(I)$ sont choisis en convention récepteur.
+On désigne par $L$ l'inductance d'une phase et on néglige la résistance des enroulements. En régime permanent de rotation, on note $underline(U)$ la représentation complexe de la tension d'alimentation de la phase, $underline(I)$ celle de l'intensité du courant et $underline(E)$ celle de la force contre-électromotrice. Les sens de $underline(U)$ et $underline(I)$ sont choisis en convention récepteur.
 
 #question(
     coups-de-pouce: (
@@ -43,13 +43,13 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
         circuit({
             import zap: *
             import cetz.draw: *
-            inductor("L", (3, 0), (6, 0), variant: "ieee", label: $L$, i: $underline(I)$)
-            vsource("E", (3, -3), (3, 0), u: $-underline(E)$)
+            inductor("L", (3, 0), (6, 0), variant: "ieee", label: $L$, i: $underline(I_G)$)
+            vsource("E", (3, -3), (3, 0), u: $underline(E)$)
             wire((6, -3), (3, -3))
             line((6, -2.8), (6, -0.2), mark: (end: ">>", fill: black), name: "U")
-            content("U.mid", $underline(U_G) = -underline(U)$, anchor: "west", padding: 10pt)
+            content("U.mid", $underline(U)$, anchor: "west", padding: 10pt)
         }),
-        caption: [Fonctionnement générateur, en convention générateur : le courant est orienté dans l'autre sens et $underline(E) = j L omega underline(I) + underline(U)$.],
+        caption: [Fonctionnement générateur, en convention générateur : les tensions gardent leur orientation, le courant est orienté dans l'autre sens, $underline(I_G) = -underline(I)$, et $underline(E) = j L omega underline(I_G) + underline(U)$.],
     )
 ]
 
@@ -59,7 +59,7 @@ On désigne par $L$ l'inductance d'une phase et on néglige la résistance des e
 )[
     La valeur efficace de la force contre-électromotrice s'écrit sous la forme $E= Phi Omega$. Que représente la grandeur $Phi$ ? De quels paramètres dépend-elle ?
 ][
-    La grandeur $Phi$ représente le flux magnétique créé par le rotor dans une phase du stator. Elle dépend de l'intensité du courant d'excitation $I_e$ et de la géométrie de la machine.
+    La grandeur $Phi$ représente la valeur efficace du flux magnétique créé par le rotor à travers une phase du stator. Elle dépend de l'intensité du courant d'excitation $I_e$ et de la géométrie de la machine.
 ]
 
 #question(

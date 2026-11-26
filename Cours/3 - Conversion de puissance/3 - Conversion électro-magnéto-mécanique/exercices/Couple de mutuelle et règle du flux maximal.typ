@@ -54,7 +54,7 @@ Cette spire est située à l'intérieur d'un solénoïde de grande dimension, co
 )[
     On note $L$ et $L'$, les inductances propres respectives de la spire et du solénoïde. Donner l'énergie électromagnétique $cal(E)_"ém"$ stockée dans ces deux circuits.
 ][
-    L'énergie électromagnétique stockée dans un système de deux circuits inducteurs est donnée par la relation $cal(E)_"ém"= 1/2 L I^2 + 1/2 L' I'^2 + M I I'$.
+    L'énergie électromagnétique stockée dans un système de deux circuits couplés est donnée par la relation $cal(E)_"ém"= 1/2 L I^2 + 1/2 L' I'^2 + M I I'$.
 
     En remplaçant $M$ par sa valeur, on obtient
     $ cal(E)_"ém"= 1/2 L I^2 + 1/2 L' I'^2 + mu_0 n S cos(theta) I I' $

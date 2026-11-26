@@ -12,6 +12,10 @@
     "s_\"min\"": (signification: "la valeur minimale de $s(t)$"),
 )
 
+La gâchette d'une perceuse sans fil règle la vitesse de son moteur, alors que la batterie qui l'alimente délivre une tension fixe. On pourrait placer une résistance réglable en série avec le moteur : mais pour que le moteur ne reçoive que la moitié de la tension, cette résistance devrait dissiper autant de puissance que le moteur en reçoit. Le rendement serait de #quan[50 %], et la gâchette brulante. Or le variateur d'une perceuse a un rendement supérieur à #quan[95 %] et reste tiède.
+
+Comment réduire la puissance reçue par le moteur sans la gaspiller ?
+
 = L'énergie électrique
 L'énergie électrique peut se présenter sous plusieurs formes.
 
@@ -39,7 +43,7 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 ]
 
 #exemple[
-    Les voitures, électrolyseurs et certains TGV consomment de l'électricité en présentation continue.
+    Les voitures électriques, électrolyseurs et certains TGV consomment de l'électricité en présentation continue.
 ]
 
 
@@ -52,7 +56,7 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 #application[
     Associer les ordres de grandeurs de puissances et les émissions#footnote[Les émissions de gaz à effet de serre sont exprimées en équivalents #ce("CO2") et calculés sur l'ensemble du cycle de vie.] de #ce("CO2") aux systèmes de production suivants.
     #let puissances = (
-        quan[400 W],
+        quan[200 W],
         quan[2 MW],
         quan[100 MW],
         quan[100 MW],
@@ -68,9 +72,9 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
         [réacteur nucléaire],
     )
     #let CO2 = (
-        $< #num("10") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
-        $< #num("10") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
-        $< #num("10") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
+        $< #num("20") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
+        $< #num("20") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
+        $< #num("20") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
         $#num("55") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
         $#num("400") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
         $#num("1000") frac(" g"ce("CO2")_"éq", "kWh", style: "horizontal")$,
@@ -107,10 +111,10 @@ En présentation continue $mean(u(t)) != 0$ ou $mean(i(t)) != 0$.
 #question-de-début-de-cours(
     "La puissance délivrée par $#quan[1 m^2]$ de panneau photovoltaïque a pour ordre de grandeur",
     (
-        "$#quan[400 W]$",
-        "$#quan[400 mW]$",
-        "$#quan[400 kW]$",
-        "$#quan[400 GW]$",
+        "$#quan[200 W]$",
+        "$#quan[200 mW]$",
+        "$#quan[200 kW]$",
+        "$#quan[200 GW]$",
     ),
 )
 = Convertisseur électronique statique de puissance
@@ -141,7 +145,7 @@ On pourrait penser à utiliser un potentiomètre pour faire varier la tension. U
     Exprimer $u$ en fonction de $E$, $k$, $R$ et $r_0$. Quelles sont les valeurs maximales et minimales atteintes par $u$ ? Pour quelle valeur de $k$ sont-elles atteintes ?
 ]
 
-Ce système remplit son rôle mais il consomme de l'énergie.
+Ce système remplit son rôle mais il consomme de l'énergie : c'est la résistance réglable de la perceuse de l'introduction.
 
 === Deuxième idée : utiliser un composant ne recevant pas de puissance
 Afin d'avoir un bon rendement, on peut envisager d'utiliser un dipôle ne recevant pas de puissance ($u=0$ ou $i=0$).
@@ -399,7 +403,7 @@ Le *transistor* est un interrupteur *unidirectionnel* à commutation commandée 
     "Un transistor",
     (
         "a un courant et une tension de même signe.",
-        "est à commutation libre.",
+        "est à commutation spontanée.",
         "consomme une puissance importante.",
     ),
 )
@@ -424,7 +428,7 @@ Les deux interrupteurs ont un fonctionnement complémentaire et sont commandés 
 
 
 #question-de-début-de-cours(
-    "Un hacheur est composé",
+    "Un hacheur série est composé",
     (
         "d'une diode et d'un transistor.",
         "de 4 interrupteurs.",
@@ -434,7 +438,7 @@ Les deux interrupteurs ont un fonctionnement complémentaire et sont commandés 
 )
 
 #question-de-début-de-cours(
-    "Dans un hacheur",
+    "Dans un hacheur série",
     (
         "les interrupteurs ont un fonctionnement complémentaire.",
         "les interrupteurs s'ouvrent et se ferment en même temps.",
@@ -474,7 +478,7 @@ $K_1$ est un transistor. $K_2$ est une diode en convention inverse.
     ),
     grandeurs: sub-dictionary(grandeurs, ("cal(A)", "T", "s(t)")),
 )[
-    $ mean(s(t)) = cal("A") / T $
+    $ mean(s(t)) = cal(A) / T $
 ]
 
 #application[
@@ -548,10 +552,16 @@ Dans le lien suivant, on peut entendre le bruit causé par l'ondulation du coura
 
 Afin de réduire l'ondulation du courant, on travaille avec des fréquences élevées. On peut aussi ajouter une bobine en série avec le moteur afin de lisser le courant.
 
+L'animation ci-dessous montre le hacheur série alimentant un moteur à courant continu et ses chronogrammes : on y règle le rapport cyclique, la fréquence, l'inductance et le courant moyen, et l'on y lit l'ondulation du courant. Lorsque le courant moyen est trop faible, le courant s'annule pendant une partie de la période : la conduction est discontinue, et les résultats de cette partie ne s'appliquent plus.
+
+#lien("https://blotg.github.io/cours-psi/conversion-4/animations/hacheur.html")
+
 === Rendement
 #application[
     Déterminer le rendement du hacheur.
 ]
+
+C'est la réponse à la question posée en introduction : le variateur de la perceuse est un hacheur série. Ses interrupteurs ne reçoivent pas de puissance, et le rapport cyclique, que commande la gâchette, règle la vitesse du moteur. En pratique, les interrupteurs ne sont pas tout à fait idéaux et le rendement est un peu inférieur à 1.
 
 = Onduleur
 == Cahier des charges et architecture
@@ -595,5 +605,21 @@ L'onduleur peut être utilisé pour alimenter un dipôle inductif modélisé par
     Pour chaque demi-période, déterminer une équation différentielle vérifiée par le courant de sortie de l'onduleur.
 ]
 
+Le notebook Capytale ci-dessous permet de simuler numériquement le courant dans la charge.
+
 #lien("https://capytale2.ac-paris.fr/web/c/c90e-2976695")
-Pour obtenir un courant de sortie environ sinusoïdal, il est possible d'utiliser la MLI.
+
+== Modulation de largeur d'impulsion
+Avec un rapport cyclique $alpha = 1/2$, la tension de sortie est un créneau et le courant dans la charge R-L est loin d'être sinusoïdal.
+
+Pour obtenir un courant de sortie quasi sinusoïdal de période $T$, on utilise une modulation de largeur d'impulsion (MLI) : les interrupteurs commutent avec une période $T_"MLI"$ très petite devant $T$, et le rapport cyclique $alpha(t)$ varie lentement, avec la période $T$.
+
+#application[
+    Exprimer la valeur moyenne de la tension de sortie sur une période $T_"MLI"$ en fonction de $alpha$ et $E$. Quel rapport cyclique $alpha(t)$ faut-il choisir pour que cette valeur moyenne soit égale à $E cos((2 pi) / T t)$ ?
+]
+
+Si $T_"MLI"$ est aussi très petite devant la constante de temps $L / R$ de la charge, l'inductance lisse le courant : il ne suit que la valeur moyenne de la tension sur une période de MLI, et il est quasi sinusoïdal. Cette commande est étudiée dans l'exercice « Onduleur alimentant une charge inductive ».
+
+L'animation ci-dessous montre la séquence de commutation de l'onduleur et le courant dans une charge R-L, avec un rapport cyclique $alpha = 1/2$ puis avec une MLI.
+
+#lien("https://blotg.github.io/cours-psi/conversion-4/animations/onduleur.html")

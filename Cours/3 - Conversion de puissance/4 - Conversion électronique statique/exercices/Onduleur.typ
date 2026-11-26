@@ -85,7 +85,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#quan[10 
             "Fermé", "Fermé", "Ouvert", "Ouvert",
         ),
     )
-    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et $u=0$. La puissance reçue et la puissance délivrée sont nulles. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
+    Si $K_1$ et $K_2$ sont fermés et $K_3$ et $K_4$ sont ouverts, $i_e=0$ et la tension aux bornes de la charge est nulle. La puissance reçue et la puissance délivrée sont nulles. Idem si $K_1$ et $K_2$ sont ouverts et $K_3$ et $K_4$ sont fermés. Ces deux états ne permettent pas de transférer de la puissance entre l'entrée et la sortie. Ils ne sont donc pas retenus.
 
     Les deux états retenus sont donc
     #figure(
@@ -119,7 +119,7 @@ On s'intéresse à un onduleur alimentant une charge inductive avec $R=#quan[10 
     On se place entre $t_2$ et $t_3$, avec $K_1$ et $K_3$ ouverts et $K_2$ et $K_4$ fermés. Quelle est l'équation différentielle vérifiée par le courant $i(t)$ dans la charge ? Quelle est sa solution ? On l'exprimera en fonction de $i(t_2)$.
 ][
     La loi des mailles s'écrit $-E = R i + L dv(i, t)$, soit
-    $ dv(i, t) + R/L i = E/L $
+    $ dv(i, t) + R/L i = -E/L $
     Ses solutions sont de la forme $i(t) = B e^(-R/L t) - E/R$. Or $i(t_2) = B e^(-R/L t_2) - E/R$ d'où
     $ i(t) = (i(t_2) + E/R) e^(-R/L (t - t_2)) - E/R $
 ]
@@ -137,7 +137,13 @@ On prendra $T = #quan[1 s]$ et $T_"MLI" = #quan[10 ms]$.
 ][
     Le rôle d'un onduleur est de fournir un courant alternatif en sortie. Le rapport cyclique est variable entre $0$ et $1$ de façon sinusoïdale pour obtenir un courant de sortie sinusoïdal.
 
-    La période $T_"MLI"$ est petite devant la période $T$ du signal de sortie pour que le courant de sortie soit le plus proche possible d'un signal sinusoïdal.
+    En effet, sur une période de MLI, la tension aux bornes de la charge vaut $E$ pendant $alpha T_"MLI"$ puis $-E$ pendant $(1-alpha) T_"MLI"$. Sa valeur moyenne sur cette période est donc
+    $ alpha E - (1 - alpha) E = (2 alpha - 1) E = E cos((2 pi) / T t) $
+    Le courant suit cette moyenne, et est donc quasi sinusoïdal de période $T$, à deux conditions.
+    - $T_"MLI" << T$ : le rapport cyclique varie peu pendant une période de MLI.
+    - $T_"MLI" << L \/ R$ : la charge n'a pas le temps de suivre les créneaux de tension, l'inductance lisse le courant à l'échelle d'une période de MLI.
+
+    Ici, $T_"MLI" = T \/ 100$ mais $L \/ R = #quan[10 ms] = T_"MLI"$ : la seconde condition n'est pas vérifiée, et la simulation montrera un courant d'allure sinusoïdale, d'amplitude voisine de $E \/ R = #quan[10 A]$, auquel se superpose une ondulation de près de #quan[5 A] crête à crête. Il faudrait une période de MLI plus courte pour la réduire.
 ]
 
 #question(
@@ -230,10 +236,12 @@ On prendra $T = #quan[1 s]$ et $T_"MLI" = #quan[10 ms]$.
 #question(
     coups-de-pouce: (
         "Quel signe peut avoir le courant $i_1$ ?",
-        "Le courant dans un interrupteur peut-il changer de signe ? Même question pour une diode.",
+        "Le courant dans un transistor peut-il changer de signe ? Même question pour une diode.",
     ),
 )[
     Est-il possible de choisir des diodes ou des transistors pour les interrupteurs $K_1$, $K_2$, $K_3$ et $K_4$ ?
 ][
-    Le courant dans les interrupteurs peut être positif ou négatif. Ni la diode ni le transistor ne permet ceci.
+    Le courant dans la charge change de signe au cours de la période $T$ : le courant dans un interrupteur fermé peut donc être positif ou négatif. Ni la diode ni le transistor, qui sont unidirectionnels, ne le permettent.
+
+    Il faut des interrupteurs bidirectionnels en courant : chacun est l'association d'un transistor et d'une diode montés tête-bêche en parallèle (cf. l'exercice « Interrupteur bidirectionnel »).
 ]

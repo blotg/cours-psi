@@ -25,7 +25,7 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
 )[
     Lorsque le transistor est bloqué, tracer la caractéristique de l'interrupteur bidirectionnel.
 ][
-    Lorsque le transistor est bloqué, $i_T = 0$. L'interrupteur bidirectionnel se comporte comme une diode idéale en convention inverse. Sa caractéristique est donc :
+    Lorsque le transistor est bloqué, $i_T = 0$ et $u >= 0$ : il ne reste que la diode, et $i = -i_D$. Si elle est bloquée, $i = 0$ et $u >= 0$ ; si elle est passante, $u = 0$ et $i = -i_D <= 0$. L'interrupteur bidirectionnel se comporte comme une diode idéale en convention inverse. Sa caractéristique est donc :
     #figure(
             canvas({
                 import cetz.draw: *
@@ -33,7 +33,7 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
                 content((), $u$, anchor: "north", padding: 0.4em)
                 line((0, -1), (0, 1), mark: (end: ">>", fill: black))
                 content((), $i$, anchor: "east", padding: 0.4em)
-                line( (-1,0), (0,0), (0,-1), stroke: (paint: red,thickness: 3pt))
+                line((1, 0), (0, 0), (0, -1), stroke: (paint: red, thickness: 3pt))
             }),
         )
 ]
@@ -41,14 +41,12 @@ On étudie un interrupteur bidirectionnel constitué d'une diode et d'un transis
 #question(
     coups-de-pouce: (
         "Quelles valeurs peuvent prendre $i_T$ lorsque le transistor est passant ? Même question pour $i_D$.",
-        "Quelles valeurs peuvent prendre $u$ lorsque le transistor est passant ? Même question pour la diode.",
+        "Que vaut $u$ lorsque le transistor est passant ? Exprimer $i$ en fonction de $i_T$ et $i_D$.",
     ),
 )[
     Lorsque le transistor est passant, tracer la caractéristique de l'interrupteur bidirectionnel.
 ][
-    Lorsque le transistor est passant, un courant $i_T>=0$ peut y circuler. Un courant $i_D<=0$ peut également circuler dans la diode.
-    
-    La caractéristique d'un transistor passant impose $u>=0$, alors que celle d'une diode en convention inverse impose $u<=0$. Il s'ensuit que $u=0$.
+    Le transistor passant impose $u = 0$. Un courant $i_T >= 0$ peut alors y circuler, et un courant $i_D >= 0$ peut circuler dans la diode, dont la tension est nulle elle aussi. Le courant $i = i_T - i_D$ est donc de signe quelconque.
 
     L'interrupteur bidirectionnel se comporte alors comme un fil. Sa caractéristique est donc :
     #figure(

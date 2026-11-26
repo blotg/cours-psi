@@ -67,7 +67,7 @@ $
 #question(
     coups-de-pouce: ()
 )[
-    Définir une fonction Python `v(t)` qui calcule la tension de sortie $v(t)$ en fonction du temps $t$, de la pulsation $omega$ et de la valeur efficace $U$.
+    Définir une fonction Python `v(t)` qui renvoie la tension de sortie $v(t)$ à l'instant $t$. La pulsation $omega$ et la valeur efficace $U$ sont lues dans deux variables globales `omega` et `U`, qui seront définies à la question suivante.
 ][
     La tension $v(t) = V_+ - V_-$ est donc la différence entre la tension maximale et la tension minimale parmi les trois tensions d'entrée.
 
@@ -137,4 +137,9 @@ $
 
     print("Valeur efficace : ", V_eff, " V")
     ```
+    On obtient $V_"eff" approx #quan[538 V]$.
+
+    Remarque : la tension $v$ est, à chaque instant, la plus grande des tensions entre deux phases, d'amplitude $sqrt(6) U approx #quan[563 V]$. Elle oscille entre $(3 sqrt(2)) / 2 U approx #quan[488 V]$ et $sqrt(6) U$, et sa valeur moyenne est
+    $ mean(v) = (3 sqrt(6)) / pi U approx #quan[538 V] $
+    La valeur efficace et la valeur moyenne sont presque égales : l'ondulation est faible, la tension de sortie est presque continue.
 ]

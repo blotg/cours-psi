@@ -16,5 +16,5 @@ Lors du démarrage et du ralentissement de certains métros, on peut entendre un
 ][
     Pour faire tourner les moteurs électriques du métro à vitesse réduite, on pourrait avoir l'idée d'utiliser une tension plus faible. Il se trouve que faire ceci n'est pas facile et pose de nombreux problèmes. Il est plus facile de "hacher" la tension des moteurs : on va très rapidement les allumer et les éteindre, comme ils n'auront pas le temps d'accélérer et de décélérer, ils vont tourner à vitesse réduite.
 
-    Ce "hachage" fait qu'il va y avoir alternativement du courant qui passe puis qui ne passe plus. Cette variation du courant va induire des vibrations dans les parties métalliques et parfois dans les haut parleurs du métro, causant un bruit aigu.
+    Ce "hachage" fait qu'il va y avoir alternativement du courant qui passe puis qui ne passe plus. Cette variation du courant va induire des vibrations dans les parties métalliques et parfois dans les haut-parleurs du métro, causant un bruit aigu.
 ]

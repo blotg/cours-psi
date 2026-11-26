@@ -4,15 +4,20 @@
 <meta charset="utf-8">
 <title>Système balais-collecteurs</title>
 <meta name="ordre" content="2">
-<meta name="description" content="machine à courant continu, commutation">
+<meta name="description" content="machine à courant continu, commutation, couple résistant">
 <script type="module" src="./collecteur.js"></script>
 </head>
 <body>
 <h1>Système balais-collecteurs</h1>
 
-<section class="animation">
+<section class="animation" data-animation="collecteur">
 <h2>Machine à courant continu bipolaire</h2>
 <p>La machine vue du côté du collecteur. Chaque bobine de l’induit n’a qu’une spire, dont les deux conducteurs sont reliés chacun à une lame du collecteur : seule la bobine dont les lames touchent les balais est parcourue par le courant.</p>
+</section>
+
+<section class="animation" data-animation="charge" id="charge">
+<h2>Couple résistant</h2>
+<p>Le moteur, alimenté sous une tension U constante, entraine une charge qui lui oppose un couple résistant Γᵣ. Le rotor a un moment d’inertie J.</p>
 </section>
 </body>
 </html>

@@ -558,8 +558,8 @@ saute d'un cran à chaque conducteur et reste de moyenne nulle —, et sont donc
 en marches. Les spires sont placées pour que ces marches soient égales et
 épousent un cosinus (cos φ_k = 1 − (2k + 1)/N) : pour N = 1, c'est la spire
 unique du cours et son champ en créneau ; quand N → ∞, on retrouve le champ
-glissant B_s ∝ cos(ωt − θ) et B_r ∝ cos(θ − θ_r), que la case « Limite
-sinusoïdale » trace en pointillés. Le couple affiché reste celui du cours,
+glissant B_s ∝ cos(ωt − θ) et B_r ∝ cos(θ − θ_r) : c'est le dernier cran du
+curseur de N. Le couple affiché reste celui du cours,
 Γ_max sin α : avec des champs en marches, il ondule autour d'une moyenne
 proportionnelle à sin α.
 
@@ -579,3 +579,71 @@ différentes (B_r vaut 0,6 B_s) : rien ne les lie, B_s suit I, B_r suit I_e.
 Chaque circuit a sa couleur, celle de ses fils et de son courant : vert pour
 le circuit 1, bleu pour le 2, rouge pour le rotor ; les champs, violet (B_s)
 et orange (B_r). La caméra est orthographique, de face au départ.
+
+`collecteur.js` dessine une machine à courant continu bipolaire, vue du côté
+du collecteur, et fait commuter ses balais : seule la bobine dont les lames
+les touchent conduit.
+
+Chacune des deux pages a une seconde animation, où le moteur entraîne une
+charge (`charge.js` : l'arbre et son inertie, le couple résistant, le
+chronogramme de la vitesse). Le couple résistant Γ_r est celui d'un frein : il
+s'oppose au mouvement, et à l'arrêt il retient l'arbre tant que le moteur ne
+le dépasse pas — il ne fait jamais tourner le rotor à l'envers.
+
+- **Machine synchrone** : le champ glissant tourne à ω, imposée (un tour par
+  seconde), et J dΩ/dt = Γ_max sin α − Γ_r avec dα/dt = ω − Ω. α s'ajuste à
+  la charge ; au-delà de Γ_max, le rotor décroche et s'arrête, et il ne repart
+  pas quand on allège la charge — d'où le bouton « Relancer au
+  synchronisme ». Deux choix sans lesquels rien de cela ne se verrait. Un
+  **amortissement** (les amortisseurs d'une machine réelle, absents du cours),
+  couple proportionnel au glissement près du synchronisme, sans quoi α
+  oscillerait sans fin ; il s'annule au-delà d'un glissement de 50 %, sans
+  quoi il ferait redémarrer seul le rotor arrêté, en moteur asynchrone. Et la
+  pulsation propre √(Γ_max/J) des oscillations de α reste **sous ω/2** pour
+  tout J proposé : au-delà, un rotor à l'arrêt s'accroche de lui-même au champ
+  glissant. Un saut brutal de la charge peut faire décrocher le moteur un peu
+  avant Γ_max (α dépasse son équilibre) : c'est physique, et laissé.
+- **Machine à courant continu** : tension U constante, inductance négligée,
+  donc J dΩ/dt = Γ_d (1 − Ω/Ω₀) − Γ_r avec Ω₀ = U/Φ₀ et Γ_d = Φ₀U/R. Le point
+  de fonctionnement glisse le long de la caractéristique couple-vitesse ; le
+  moteur s'arrête si Γ_r dépasse Γ_d, et repart seul quand on allège la
+  charge, à la différence du moteur synchrone.
+
+**Conversion 4** — deux pages planes, bâties de la même façon : à gauche le
+schéma du montage (un `Plan`), à droite les chronogrammes (trois `Graphe`
+empilés), que parcourt le même instant. Elles sont **à l'échelle 1**, à la
+demande de l'utilisateur : la fréquence affichée est celle à laquelle les
+interrupteurs commutent à l'écran, de l'ordre du hertz ou moins, et le temps
+se compte en secondes sur une fenêtre fixe. Il n'y a pas de ralenti à
+deviner ; en contrepartie les inductances se comptent en henrys, pour que
+L f et L/(R T) gardent des valeurs ordinaires. Monter la fréquence du
+hacheur resserre les périodes, les pentes du courant restant les mêmes.
+`schema.js`
+dessine les schémas comme ceux du poly — fils, interrupteurs ouverts ou
+fermés, résistor, bobine, source — et le courant : la maille qu'il parcourt
+est repassée en couleur, et des pointes y avancent d'autant plus vite qu'il
+est fort. Rien ne s'intègre pas à pas, les deux régimes périodiques
+s'écrivent.
+
+`hacheur.js` est le hacheur série du cours alimentant un moteur à courant
+continu : une inductance L et sa force contre-électromotrice, sans
+résistance. Le courant moyen ⟨i_s⟩ est une donnée (le couple résistant), et
+la force contre-électromotrice s'en déduit : αE en conduction continue, où
+l'on retrouve Δi_s = α(1 − α)E/(Lf) ; davantage en conduction discontinue,
+quand ⟨i_s⟩ passe sous la demi-ondulation — le courant s'annule, les deux
+interrupteurs sont ouverts et u_s = E_cém jusqu'à la fin de la période.
+La fenêtre est de dix secondes ; une cote marque la période tant qu'elle a
+la place de s'écrire. E = 18 V (la perceuse de la situation déclenchante) ;
+les bornes des curseurs (L de 5 à 50 H, f de 0,2 à 2 Hz, ⟨i_s⟩ ≤ 4 A)
+gardent i_s sous 6,25 A, dans une échelle fixe.
+
+`onduleur.js` est le pont du cours sur une charge R-L (E = 100 V, R = 10 Ω,
+T = 4 s, L de 0 à 20 H), commandé avec α = 1/2 ou par la MLI de
+l'exercice « Onduleur alimentant une charge inductive » : N périodes de MLI
+par période, le rapport cyclique (1 + cos(2πk/N))/2 pris au début de la
+k-ième, comme dans le code de l'exercice. Entre deux commutations, le courant
+relaxe vers ±E/R ; le régime périodique est le point fixe de l'application
+affine i(0) ↦ i(T). Les pointes du schéma sont orientées comme i_e : après
+une commutation, elles remontent la source, tant que la bobine rend son
+énergie. En MLI, une case trace ce que la commande vise : E cos(2πt/T), et
+le courant sinusoïdal que cette tension ferait passer dans la charge.

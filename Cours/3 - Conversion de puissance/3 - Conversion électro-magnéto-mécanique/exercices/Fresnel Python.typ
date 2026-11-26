@@ -6,7 +6,7 @@
     capytale: "531c-11678456",
 )
 
-En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module est réalisé par la fonction `abs`.
+En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la fonction `exp` du module `cmath`. Le module s'obtient avec la fonction `abs`.
 
 À l'aide de Python, déterminer la tension efficace aux bornes d'un moteur synchrone diphasé bipolaire dans chacun des cas suivants. On sommera les amplitudes complexes résultant de la loi des mailles.
 
@@ -16,7 +16,7 @@ En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la
         "Écrire la loi des mailles en utilisant les amplitudes complexes.",
     ),
 )[
-    La force contre-électromotrice induite efficace est #quan[250 V], la résistance de l'induit est négligeable, l'inductance de l'induit est #quan[0.10 H], la fréquence de rotation est #quan[3000 tr/min] et le courant est #quan[10 A]. L'angle de pilotage est nul. Le calcul effectué par Python pourra être vérifié à la main de ce premier cas simple.
+    La force contre-électromotrice induite efficace est #quan[250 V], la résistance de l'induit est négligeable, l'inductance de l'induit est #quan[0.10 H], la fréquence de rotation est #quan[3000 tr/min] et le courant est #quan[10 A]. L'angle de pilotage est nul. Le calcul effectué par Python pourra être vérifié à la main dans ce premier cas simple.
 ][
     ```python
     from math import pi
@@ -50,6 +50,7 @@ En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la
     U = E + 1j * w * L * I
     print(abs(U))
     ```
+    Python affiche #quan[489.6 V] : la tension efficace vaut $U approx #quan[490 V]$.
 ]
 
 #question(
@@ -70,4 +71,5 @@ En Python, le nombre complexe $j$ s'écrit `1j`. L'exponentielle complexe est la
     U = E + R * I + 1j * w * L * I
     print(abs(U))
     ```
+    Python affiche #quan[490.1 V], soit encore $U approx #quan[490 V]$ : la résistance de l'induit ne change presque rien, la chute de tension $R I = #quan[1 V]$ étant très petite devant les autres tensions.
 ]
